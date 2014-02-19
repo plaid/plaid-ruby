@@ -1,4 +1,6 @@
-require 'plaidio/config.rb'
+require 'plaidio/config'
+require 'plaidio/call'
+require 'plaidio/customer'
 module Plaidio 
   class << self
     include Plaidio::Configure

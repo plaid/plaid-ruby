@@ -4,9 +4,9 @@ module Plaidio
     BASE_URL = 'https://tartan.plaid.com/'
     
     # This initializes our instance variables, and sets up a new Customer class. 
-    def initialize(options={})
+    def initialize
       Plaidio::Configure::KEYS.each do |key|
-        instance_variable_set(:"@#{key}", !options[key].nil? ? options[key] : Plaidio.instance_variable_get(:"@#{key}"))
+        instance_variable_set(:"@#{key}", Plaidio.instance_variable_get(:"@#{key}"))
       end
     end
    

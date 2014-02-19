@@ -11,7 +11,8 @@ describe Plaidio, "config" do
   
   # Tests the config
   it "returns the secret key and customer_id" do
-    Plaidio.call
+    fred = Plaidio.call.new
+    puts fred.inspect
   end
   
 end
