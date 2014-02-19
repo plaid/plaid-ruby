@@ -8,6 +8,6 @@ Gem::Specification.new do |s|
   s.email       = 'justin@guavatext.com'
   s.files       = ["lib/pladio.rb"]
   s.homepage    =
-    'http://rubygems.org/gems/hola'
+    'https://github.com/j4ustin/pladio'
   s.license       = 'MIT'
 end
