@@ -1,13 +1,13 @@
 Gem::Specification.new do |s|
-  s.name        = 'pladio'
+  s.name        = 'plaidio'
   s.version     = '0.0.0'
   s.date        = '2014-02-19'
-  s.summary     = "Plad.io api gem"
+  s.summary     = "Plaid.io api gem"
   s.description = "A simple to use ruby wrapper for Plaid.io API."
   s.authors     = ["Justin Crites"]
   s.email       = 'justin@guavatext.com'
   s.files       = ["lib/pladio.rb"]
   s.homepage    =
-    'https://github.com/j4ustin/pladio'
+    'https://github.com/j4ustin/plaidio'
   s.license       = 'MIT'
 end
