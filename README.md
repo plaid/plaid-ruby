@@ -8,7 +8,6 @@ Plaidio is available through [Rubygems](http://rubygems.org/gems/plaidio) and ca
 
 ```
 $ gem install plaidio
-
 ```
 
 or add it to your Gemfile like this:
