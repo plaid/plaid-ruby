@@ -1,4 +1,4 @@
 plaidio
 =======
 
-Wrapper for plaidio api
+Wrapper for Plaid.io api
