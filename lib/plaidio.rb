@@ -1,4 +1,4 @@
-module Pladio 
+module Plaidio 
   class << self
     include Plaidio::Configure
     
