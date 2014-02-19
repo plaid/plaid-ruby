@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.description = "A simple to use ruby wrapper for Plaid.io API."
   s.authors     = ["Justin Crites"]
   s.email       = 'justin@guavatext.com'
-  s.files       = ["lib/pladio.rb"]
+  s.files       = ["lib/plaidio.rb"]
   s.homepage    =
     'https://github.com/j4ustin/plaidio'
   s.license       = 'MIT'
