@@ -1,4 +1,2 @@
-source 'http://rubygems.org'
-ruby '2.0.0'
-
-gem 'rspec'
+source "https://rubygems.org"
+gemspec

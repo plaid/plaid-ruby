@@ -10,11 +10,11 @@ module Plaidio
     # If the bank requires MFA, take the options and try to connect
   end
   
-  def get_transactions()
+  def get_transactions(access_token)
     # Get transactions, and return as json
   end
   
-  def delete_account()
+  def delete_account(access_token)
     # Delete the account, and return a success item
   end
   

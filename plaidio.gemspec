@@ -10,4 +10,5 @@ Gem::Specification.new do |s|
   s.homepage    =
     'https://github.com/j4ustin/plaidio'
   s.license       = 'MIT'
+  s.add_development_dependency "rspec"
 end
