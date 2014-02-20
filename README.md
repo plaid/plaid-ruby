@@ -27,6 +27,8 @@ Plaidio.config do |config|
   config.secret = 'your secret code'
 end
 
+Add this into a YML file called keys.yml, and add it to your .gitignore.
+
 ## Requirements
 
 * Ruby 2.0.0 or higher

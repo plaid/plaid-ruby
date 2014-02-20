@@ -9,15 +9,12 @@ describe Plaidio, "config" do
     end
   end
   
-  # Tests the config
-  it "returns the secret key and customer_id" do
-    config = Plaidio.config do |c|
-      c.customer_id = '1234'
-      c.secret = 'password'
-    end
-
-    expect(config.instance_variable_get(:'@secret')).to eq('password')
-    expect(config.instance_variable_get(:'@customer_id')).to eq('1234')
+  it "returns a response code of 200" do 
+    type = "amex"
+    username = "plaid_test"
+    password = "plaid_good"
+    email = "test@gmail.com"
+    new_account = Plaidio.call.add_account(type,username,password,email)
+    expect(new_account.code).to eq(200)
   end
-  
 end
