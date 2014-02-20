@@ -22,12 +22,14 @@ gem 'plaidio'
 require 'plaidio'
 
 # Plaidio global configuration
+Pop this into your enviornment file.
+
 Plaidio.config do |config|
-  config.customer_id = 'your customer id'
-  config.secret = 'your secret code'
+  config.customer_id = keys[CUSTOMER_ID]
+  config.secret = keys[SECRET]
 end
 
-Add this into a YML file called keys.yml, and add it to your .gitignore.
+Then create a YML file that has your CUSTOMER_ID and your SECRET provided by plaid.io
 
 ## Requirements
 
