@@ -9,7 +9,7 @@ module Plaidio
         instance_variable_set(:"@#{key}", Plaidio.instance_variable_get(:"@#{key}"))
       end
     end
-   
+
     def add_account(type,username,password,email)
       # Add an account to the customer, and return the json response
     end
