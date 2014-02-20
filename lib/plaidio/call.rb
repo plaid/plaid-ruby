@@ -10,14 +10,15 @@ module Plaidio
       end
     end
 
-    def add_account(type,username,password,email)
-      # Add an account to the customer, and return the json response
+    def add_account(path,type,credentials,email)
+      post('/connect',type,credentials,email)
+      return parse_response(response)
     end
 
     protected
 
     def parse_response(response)
-      # After the method has returned some response, parse and return to the method
+      return "Success"
     end
 
     private

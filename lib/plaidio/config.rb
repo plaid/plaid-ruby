@@ -9,11 +9,5 @@ module Plaidio
       self
     end
 
-    private
-
-    def options
-      Plaidio::Configure::KEYS.inject({}) { |hash, key| hash[key] = instance_variable_get(:"@#{key}"); hash }
-    end
-
   end
 end
