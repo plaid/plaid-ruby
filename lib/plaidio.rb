@@ -6,12 +6,8 @@ module Plaidio
     include Plaidio::Configure
 
     # Defined when a user exists with a unique access_token. Ex: Plaidio.customer.get_transactions
-    def customer(access_token)
-      if !defined?(@access_token) || @access_token != access_token
-        @access_token = access_token
-        @customer = Plaidio::Customer.new(@access_token)
-      end
-      @customer
+    def customer
+      @customer = Plaidio::Customer.new
     end
 
     # Defined for generic calls without access_tokens required. Ex: Plaidio.call.add_accounts(username,password,type)
