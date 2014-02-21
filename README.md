@@ -30,20 +30,24 @@ Plaidio.config do |config|
 end
 ```
 
-Then create a YML file that has your CUSTOMER_ID and your SECRET provided by plaid.io
+Now create a YML file that has your CUSTOMER_ID and your SECRET provided by Plaid.io
 
-There are two different requests one can make to the platform. Call and Customer. 
-Call is anything that does not require an access_token, or a defined customer. 
-Customer is anything that does require an access_token. 
+There are two different requests one can make using the gem. Call and Customer. 
+Call is anything that does not require an access_token(or a defined user).
+Customer is anything that does require an access_token(or an already defined user).  
+
+## Call Methods
 
 ```ruby
+# add_account(type,username,password,email)
+# if(code == 200) {returns {[:code => 'x'],[:access_token => 'y'],[:accounts => 'z'],[:transactions => 'a']}
+# Note: 'x','y','z','a' are all formatted as json. For ease of use. 
 
-Example) 
-    new_account = Plaidio.call.add_account("amex","plaid_test","plaid_good","test@gmail.com") 
-    # new_account[:code] = "200"
-
-## Usage contd. 
-
+Ex)
+  new_account = Plaidio.call.add_account("amex","plaid_test","plaid_good","test@gmail.com") 
+  puts new_account[:code]
+  "200"
+```
 ## Requirements
 
 * Ruby 2.0.0 or higher
