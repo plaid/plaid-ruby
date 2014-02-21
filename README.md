@@ -2,6 +2,8 @@
 
 Ruby gem wrapper for Plaid.io API. 
 
+Be sure to read over the very well written Plaid.io documentation at https://plaid.io/v2/docs
+
 ## Installation
 
 Plaidio is available through [Rubygems](http://rubygems.org/gems/plaidio) and can be installed via:
@@ -33,12 +35,12 @@ end
 Now create a YML file that has your CUSTOMER_ID and your SECRET provided by Plaid.io
 
 There are two different requests one can make using the gem. Call and Customer. 
-Call is anything that does not require an access_token(or a defined user).
-Customer is anything that does require an access_token(or an already defined user).  
 
 ## Call Methods
 
-1) add_account(type,username,password,email) \n
+Call is anything that does not require an access_token.
+
+1) add_account( type , username , password , email ) <br>
     Returns a hash with keys: code, access_token, accounts, transactions all with embedded json from Plaid.
 ```ruby
 # if(code == 200) {returns {[:code => 'x'],[:access_token => 'y'],[:accounts => 'z'],[:transactions => 'a']}
@@ -49,16 +51,54 @@ Ex)
   puts new_account[:code]
   "200"
 ```
-2) get_place(id) \n
-     Returns a hash with keys: entity, location all with embedded json from Plaid. 
+2) get_place( id ) <br>
+     Returns a hash with keys: entity and location all with embedded json from Plaid. 
 ```ruby
 # if(code == 200) {returns {[:entity => 'x'],[:location => 'y']}
-# Note: 'x','y','z','a' are all formatted as json. 
+# Note: 'x','y' are formatted as json. 
 
 Ex)
   location_deets = Plaidio.call.location("52a77fea4a2eab775f004109") 
   puts new_account[:location]["address"]
   "125 Main St"
+```
+
+## Customer Methods
+
+Customer defines anything that requires an access_token.  
+
+1) mfa_step( access_token , code ) <br>
+    Returns a hash with keys: code, access_token, accounts, transactions all with embedded json from Plaid.
+```ruby
+# if(code == 200) {returns {[:code => 'x'],[:access_token => 'y'],[:accounts => 'z'],[:transactions => 'a']}
+# Note: 'x','y','z','a' are all formatted as json. 
+
+Ex)
+  new_account = Plaidio.customer.mfa("test","tomato") 
+  puts new_account[:code]
+  "200"
+```
+
+2) get_transactions( access_token ) <br>
+    Returns a hash with key transaction
+```ruby
+# if(code == 200) {returns {[:transaction => 'x']}
+# Note: 'x' is formatted as json. 
+
+Ex)
+  transactions = Plaidio.customer.transactions("test") 
+  puts transactions[:transactions][1]["amount"]
+  1334.99
+```
+
+3) delete_account( access_token ) <br>
+    Returns a hash with key code
+```ruby
+
+Ex)
+  message = Plaidio.customer.delete("test") 
+  puts message[:code]
+  "200"
 ```
 
 ## Requirements
