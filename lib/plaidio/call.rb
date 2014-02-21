@@ -3,8 +3,8 @@ module Plaidio
   class Call
 
     BASE_URL = 'https://tartan.plaid.com/'
-    
-    # This initializes our instance variables, and sets up a new Customer class. 
+
+    # This initializes our instance variables, and sets up a new Customer class.
     def initialize
       Plaidio::Configure::KEYS.each do |key|
         instance_variable_set(:"@#{key}", Plaidio.instance_variable_get(:"@#{key}"))
@@ -15,11 +15,15 @@ module Plaidio
       post('/connect',type,username,password,email)
       return parse_response(@response)
     end
-    
+
+    def get_place(id)
+      get('/entity',id)
+      return parse_response(@response)
+    end
     protected
 
     def parse_response(response)
-      case response.code 
+      case response.code
       when "200"
         @parsed_response = Hash.new
         @parsed_response[:code] = response.code
@@ -37,7 +41,7 @@ module Plaidio
         @parsed_response[:access_token] = response["access_token"]
         @parsed_response[:mfa_info] = response["mfa_info"]
         return @parsed_response
-      else 
+      else
         @parsed_response = Hash.new
         @parsed_response[:code] = response.code
         @parsed_response[:message] = response
@@ -52,6 +56,12 @@ module Plaidio
       @response = RestClient.post url, :client_id => self.instance_variable_get(:'@customer_id') ,:secret => self.instance_variable_get(:'@secret'), :type => type ,:credentials => {:username => username, :password => password} ,:email => email
       return @response
     end
-    
+
+    def get(path,id)
+      url = BASE_URL + path
+      @response = RestClient.get(url,:params => {:entity_id => id})
+      return @response
+    end
+
   end
 end

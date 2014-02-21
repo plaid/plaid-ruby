@@ -18,8 +18,8 @@ describe Plaidio, "Call" do
     response = Plaidio.call.add_account(type,username,password,email)
     expect(response[:code]).to eq(200)
   end
-  
-  it "returns a response code of 201" do 
+
+  it "returns a response code of 201" do
     type = "bofa"
     username = "plaid_test"
     password = "plaid_good"
@@ -27,7 +27,7 @@ describe Plaidio, "Call" do
     response = Plaidio.call.add_account(type,username,password,email)
     expect(response[:code]).to eq(201)
   end
-  
+
 end
 
 describe Plaidio, "Customer" do
@@ -38,20 +38,25 @@ describe Plaidio, "Customer" do
       p.secret = keys['SECRET']
     end
   end
-   
+
   it "calls get_transactions and returns a response code of 200" do
     transactions = Plaidio.customer.get_transactions("test")
     expect(transactions[:code]).to eq(200)
   end
-  
-  it "calls mfa_step and returns a response code of 200" do 
+
+  it "calls mfa_step and returns a response code of 200" do
     new_account = Plaidio.customer.mfa_step("test","tomato")
     expect(new_account[:code]).to eq(200)
   end
-  
-  it "calls delete_account and returns a resonse code of 200" do 
+
+  it "calls delete_account and returns a resonse code of 200" do
     message = Plaidio.customer.delete_account("test")
     expect(message[:code]).to eq(200)
   end
-  
+
+  it "calls get_place and returns a response code of 200" do
+    place = Plaidio.call.get_place('52a77fea4a2eab775f004109')
+    expect(place[:code]).to eq(200)
+  end
+
 end
