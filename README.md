@@ -1,4 +1,4 @@
-# Plaidio
+# ruby-plaidio
 
 Ruby gem wrapper for Plaid.io API. 
 
