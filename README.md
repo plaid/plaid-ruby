@@ -22,10 +22,10 @@ gem 'plaidio'
 
 ```ruby
 require 'plaidio'
-
-# Plaidio global configuration
+```
+## Plaidio global configuration
 Pop this into your enviornment file.
-
+```
 Plaidio.config do |config|
   config.customer_id = keys[CUSTOMER_ID]
   config.secret = keys[SECRET]
