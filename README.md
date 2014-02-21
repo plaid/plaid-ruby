@@ -39,16 +39,28 @@ Customer is anything that does require an access_token(or an already defined use
 ## Call Methods
 
 1. add_account(type,username,password,email)
-    Returns a hash with keys, and embedded json.
+    Returns a hash with keys: code, access_token, accounts, transactions all with embedded json from Plaid.
 ```ruby
 # if(code == 200) {returns {[:code => 'x'],[:access_token => 'y'],[:accounts => 'z'],[:transactions => 'a']}
-# Note: 'x','y','z','a' are all formatted as json. For ease of use. 
+# Note: 'x','y','z','a' are all formatted as json. 
 
 Ex)
   new_account = Plaidio.call.add_account("amex","plaid_test","plaid_good","test@gmail.com") 
   puts new_account[:code]
   "200"
 ```
+2. get_place(id)
+     Returns a hash with keys: entity, location all with embedded json from Plaid. 
+```ruby
+# if(code == 200) {returns {[:entity => 'x'],[:location => 'y']}
+# Note: 'x','y','z','a' are all formatted as json. 
+
+Ex)
+  location_deets = Plaidio.call.location("52a77fea4a2eab775f004109") 
+  puts new_account[:location]["address"]
+  "125 Main St"
+```
+
 ## Requirements
 
 * Ruby 2.0.0 or higher
