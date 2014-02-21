@@ -12,11 +12,12 @@ module Plaidio
       end
     end
 
-    def mfa_step(access_token,options={})
-      post("/connect/step", access_token, mfa: @mfa) 
-      return parse_response(response,1)
+    def mfa_step(access_token,code)
+      @mfa = code
+      post("/connect/step", access_token, mfa: @mfa)
+      return parse_response(@response,1)
     end
-    
+
     def get_transactions(access_token)
       get('/connect', access_token)
       return parse_response(@response,2)
@@ -32,7 +33,7 @@ module Plaidio
     def parse_response(response,method)
       case method
       when 1
-        case response.code 
+        case response.code
         when "200"
           @parsed_response = Hash.new
           @parsed_response[:code] = response.code
@@ -41,35 +42,35 @@ module Plaidio
           @parsed_response[:accounts] = response["accounts"]
           @parsed_response[:transactions] = response["transactions"]
           return @parsed_response
-        else 
+        else
           @parsed_response = Hash.new
           @parsed_response[:code] = response.code
           @parsed_response[:message] = response
           return @parsed_response
         end
-      when 2 
-        case response.code 
+      when 2
+        case response.code
         when "200"
           @parsed_response = Hash.new
           @parsed_response[:code] = response.code
           response = JSON.parse(response)
           @parsed_response[:transactions] = response["transactions"]
           return @parsed_response
-        else 
+        else
           @parsed_response = Hash.new
           @parsed_response[:code] = response.code
           @parsed_response[:message] = response
           return @parsed_response
         end
-      when 3 
-        case response.code 
+      when 3
+        case response.code
         when "200"
           @parsed_response = Hash.new
           @parsed_response[:code] = response.code
           response = JSON.parse(response)
           @parsed_response[:message] = response
           return @parsed_response
-        else 
+        else
           @parsed_response = Hash.new
           @parsed_response[:code] = response.code
           @parsed_response[:message] = response
@@ -88,7 +89,7 @@ module Plaidio
 
     def post(path,access_token,options={})
       url = BASE_URL + path
-      @response = RestClient.post(url,:params => {:client_id => self.instance_variable_get(:'@customer_id'), :secret => self.instance_variable_get(:'@secret'), :access_token => access_token, :mfa => @mfa})
+      @response = RestClient.post url, :client_id => self.instance_variable_get(:'@customer_id') ,:secret => self.instance_variable_get(:'@secret'), :access_token => access_token, :mfa => @mfa
       return @response
     end
 
