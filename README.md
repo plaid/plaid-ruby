@@ -39,8 +39,7 @@ Customer is anything that does require an access_token(or an already defined use
 ## Call Methods
 
 1. add_account(type,username,password,email)
-     Returns a hash with keys, and embedded json.
-
+    Returns a hash with keys, and embedded json.
 ```ruby
 # if(code == 200) {returns {[:code => 'x'],[:access_token => 'y'],[:accounts => 'z'],[:transactions => 'a']}
 # Note: 'x','y','z','a' are all formatted as json. For ease of use. 
