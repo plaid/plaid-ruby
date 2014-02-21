@@ -28,8 +28,21 @@ Plaidio.config do |config|
   config.customer_id = keys[CUSTOMER_ID]
   config.secret = keys[SECRET]
 end
+```
 
 Then create a YML file that has your CUSTOMER_ID and your SECRET provided by plaid.io
+
+There are two different requests one can make to the platform. Call and Customer. 
+Call is anything that does not require an access_token, or a defined customer. 
+Customer is anything that does require an access_token. 
+
+```ruby
+
+Example) 
+    new_account = Plaidio.call.add_account("amex","plaid_test","plaid_good","test@gmail.com") 
+    # new_account[:code] = "200"
+
+## Usage contd. 
 
 ## Requirements
 

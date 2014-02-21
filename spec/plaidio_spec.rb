@@ -11,20 +11,12 @@ describe Plaidio, "Call" do
   end
 
   it "returns a response code of 200" do
-    type = "amex"
-    username = "plaid_test"
-    password = "plaid_good"
-    email = "test@gmail.com"
-    response = Plaidio.call.add_account(type,username,password,email)
+    response = Plaidio.call.add_account("amex","plaid_test","plaid_good","test@gmail.com")
     expect(response[:code]).to eq(200)
   end
   
   it "returns a response code of 201" do 
-    type = "bofa"
-    username = "plaid_test"
-    password = "plaid_good"
-    email = "test@gmail.com"
-    response = Plaidio.call.add_account(type,username,password,email)
+    response = Plaidio.call.add_account("bofa","plaid_test","plaid_good","test@gmail.com")
     expect(response[:code]).to eq(201)
   end
   
