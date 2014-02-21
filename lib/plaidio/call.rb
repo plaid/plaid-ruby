@@ -18,7 +18,7 @@ module Plaidio
 
     def get_place(id)
       get('/entity',id)
-      return parse_response(@response)
+      return parse_place(@response)
     end
     protected
 
@@ -47,6 +47,18 @@ module Plaidio
         @parsed_response[:message] = response
         return @parsed_response
       end
+    end
+
+    def parse_place(response)
+      @parsed_response = Hash.new
+      @parsed_response[:code] = response.code
+      response = JSON.parse(response)["entity"]
+      @parsed_response[:category] = response["category"]
+      @parsed_response[:name] = response["name"]
+      @parsed_response[:id] = response["_id"]
+      @parsed_response[:phone] = response["meta"]["contact"]["telephone"]
+      @parsed_response[:location] = response["meta"]["location"]
+      return @parsed_response
     end
 
     private
