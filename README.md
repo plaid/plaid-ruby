@@ -38,7 +38,7 @@ Customer is anything that does require an access_token(or an already defined use
 
 ## Call Methods
 
-1. add_account(type,username,password,email)
+1) add_account(type,username,password,email)
     Returns a hash with keys: code, access_token, accounts, transactions all with embedded json from Plaid.
 ```ruby
 # if(code == 200) {returns {[:code => 'x'],[:access_token => 'y'],[:accounts => 'z'],[:transactions => 'a']}
@@ -49,7 +49,7 @@ Ex)
   puts new_account[:code]
   "200"
 ```
-2. get_place(id)
+2) get_place(id)
      Returns a hash with keys: entity, location all with embedded json from Plaid. 
 ```ruby
 # if(code == 200) {returns {[:entity => 'x'],[:location => 'y']}
