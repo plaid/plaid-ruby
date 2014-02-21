@@ -11,12 +11,13 @@ describe Plaidio, "Call" do
   end
 
   it "returns a response code of 200" do
-    type = "amex"
-    username = "plaid_test"
-    password = "plaid_good"
-    email = "test@gmail.com"
-    response = Plaidio.call.add_account(type,username,password,email)
+    response = Plaidio.call.add_account("amex","plaid_test","plaid_good","test@gmail.com")
     expect(response[:code]).to eq(200)
+  end
+
+  it "calls get_place and returns a response code of 200" do
+    place = Plaidio.call.get_place('52a77fea4a2eab775f004109')
+    expect(place[:code]).to eq(200)
   end
 
   it "returns a response code of 201" do
@@ -25,7 +26,6 @@ describe Plaidio, "Call" do
     password = "plaid_good"
     email = "test@gmail.com"
     response = Plaidio.call.add_account(type,username,password,email)
-    expect(response[:code]).to eq(201)
   end
 
 end
@@ -53,10 +53,4 @@ describe Plaidio, "Customer" do
     message = Plaidio.customer.delete_account("test")
     expect(message[:code]).to eq(200)
   end
-
-  it "calls get_place and returns a response code of 200" do
-    place = Plaidio.call.get_place('52a77fea4a2eab775f004109')
-    expect(place[:code]).to eq(200)
-  end
-
 end
