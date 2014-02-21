@@ -8,13 +8,19 @@ describe Plaidio, "config" do
       p.secret = keys['SECRET']
     end
   end
-  
-  it "returns a response code of 200" do 
+
+  it "returns a response code of 200" do
     type = "amex"
     username = "plaid_test"
     password = "plaid_good"
     email = "test@gmail.com"
     new_account = Plaidio.call.add_account(type,username,password,email)
     expect(new_account.code).to eq(200)
+  end
+
+  it "returns a response code of 200" do
+    access_token = "test"
+    transactions = Plaidio.customer(access_token).get_transactions
+    expect(transactions.code).to eq(200)
   end
 end

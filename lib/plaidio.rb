@@ -1,7 +1,7 @@
 require 'plaidio/config'
 require 'plaidio/call'
 require 'plaidio/customer'
-module Plaidio 
+module Plaidio
   class << self
     include Plaidio::Configure
 
@@ -9,7 +9,7 @@ module Plaidio
     def customer(access_token)
       if !defined?(@access_token) || @access_token != access_token
         @access_token = access_token
-        @customer = Plaidio::Customer.new(options.merge({access_token: access_token}))
+        @customer = Plaidio::Customer.new(@access_token)
       end
       @customer
     end
