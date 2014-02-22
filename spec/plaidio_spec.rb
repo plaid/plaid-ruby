@@ -17,7 +17,8 @@ describe Plaidio, "Call" do
   end
 
   it "calls get_place and returns a response code of 200" do
-    place = Plaidio.call.get_place('52a77fea4a2eab775f004109')
+    id = '52a77fea4a2eab775f004109'
+    place = Plaidio.call.get_place(id)
     expect(place[:code]).to eq(200)
   end
 
