@@ -1,5 +1,4 @@
 module Plaidio
-  require 'rest-client'
   class Call
 
     BASE_URL = 'https://tartan.plaid.com/'

@@ -1,6 +1,7 @@
 require "spec_helper.rb"
 require 'yaml'
 require 'json'
+require 'rest-client'
 describe Plaidio, "Call" do
   before :all do |c|
     keys = YAML::load(IO.read('./keys.yml'))

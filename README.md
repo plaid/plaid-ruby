@@ -38,11 +38,11 @@ Customer is anything that does require an access_token.
 
 ```ruby
 
+## Usage contd. 
+
 Example) 
     new_account = Plaidio.call.add_account("amex","plaid_test","plaid_good","test@gmail.com") 
     # new_account[:code] = "200"
-
-## Usage contd. 
 
 ## Requirements
 
