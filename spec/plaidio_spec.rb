@@ -1,7 +1,5 @@
 require "spec_helper.rb"
 require 'yaml'
-require 'json'
-require 'rest-client'
 describe Plaidio, "Call" do
   before :all do |c|
     keys = YAML::load(IO.read('./keys.yml'))
@@ -23,11 +21,7 @@ describe Plaidio, "Call" do
   end
 
   it "returns a response code of 201" do
-    type = "bofa"
-    username = "plaid_test"
-    password = "plaid_good"
-    email = "test@gmail.com"
-    response = Plaidio.call.add_account(type,username,password,email)
+    response = Plaidio.call.add_account("bofa","plaid_test","plaid_good","test@gmail.com")
   end
 
 end

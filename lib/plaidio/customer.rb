@@ -1,3 +1,5 @@
+require 'rest_client'
+
 module Plaidio
   # This is used when a customer needs to be defined by the plaid access token.
   # Abstracting as a class makes it easier since we wont have to redefine the access_token over and over.
@@ -34,7 +36,7 @@ module Plaidio
       case method
       when 1
         case response.code
-        when "200"
+        when 200
           @parsed_response = Hash.new
           @parsed_response[:code] = response.code
           response = JSON.parse(response)
@@ -50,7 +52,7 @@ module Plaidio
         end
       when 2
         case response.code
-        when "200"
+        when 200
           @parsed_response = Hash.new
           @parsed_response[:code] = response.code
           response = JSON.parse(response)
@@ -64,7 +66,7 @@ module Plaidio
         end
       when 3
         case response.code
-        when "200"
+        when 200
           @parsed_response = Hash.new
           @parsed_response[:code] = response.code
           response = JSON.parse(response)

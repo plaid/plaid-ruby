@@ -1,3 +1,5 @@
+require 'rest_client'
+
 module Plaidio
   class Call
 
@@ -23,7 +25,7 @@ module Plaidio
 
     def parse_response(response)
       case response.code
-      when "200"
+      when 200
         @parsed_response = Hash.new
         @parsed_response[:code] = response.code
         response = JSON.parse(response)
@@ -31,7 +33,7 @@ module Plaidio
         @parsed_response[:accounts] = response["accounts"]
         @parsed_response[:transactions] = response["transactions"]
         return @parsed_response
-      when "201"
+      when 201  
         @parsed_response = Hash.new
         @parsed_response[:code] = response.code
         response = JSON.parse(response)
