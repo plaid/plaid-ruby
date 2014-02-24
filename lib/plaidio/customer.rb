@@ -1,5 +1,3 @@
-require 'rest_client'
-
 module Plaidio
   # This is used when a customer needs to be defined by the plaid access token.
   # Abstracting as a class makes it easier since we wont have to redefine the access_token over and over.
