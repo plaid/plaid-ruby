@@ -83,19 +83,19 @@ module Plaidio
 
     def get(path,access_token,options={})
       url = BASE_URL + path
-      @response = RestClient.get(url,params: {client_id: self.instance_variable_get(:'@customer_id'), secret: self.instance_variable_get(:'@secret'), access_token: access_token})
+      @response = RestClient.get(url,:params => {:client_id => self.instance_variable_get(:'@customer_id'), :secret => self.instance_variable_get(:'@secret'), :access_token => access_token})
       return @response
     end
 
     def post(path,access_token,options={})
       url = BASE_URL + path
-      @response = RestClient.post url, client_id: self.instance_variable_get(:'@customer_id') ,secret: self.instance_variable_get(:'@secret'), access_token: access_token, mfa: @mfa
+      @response = RestClient.post url, :client_id => self.instance_variable_get(:'@customer_id') ,:secret => self.instance_variable_get(:'@secret'), :access_token => access_token, :mfa => @mfa
       return @response
     end
 
     def delete(path,access_token,options={})
       url = BASE_URL + path
-      @response = RestClient.delete(url,params:  {client_id:  self.instance_variable_get(:'@customer_id'), secret: self.instance_variable_get(:'@secret'), access_token: access_token})
+      @response = RestClient.delete(url,:params => {:client_id => self.instance_variable_get(:'@customer_id'), :secret => self.instance_variable_get(:'@secret'), :access_token => access_token})
       return @response
     end
   end
