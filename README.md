@@ -1,6 +1,6 @@
 # plaid-ruby
 
-Ruby gem wrapper for the Plaid API. For more details, please see the [full API documentation](https://plaid.com/docs)
+Ruby gem wrapper for the Plaid API. For more details, please see the [full API documentation](https://plaid.com/docs).
 
 ## Installation
 
