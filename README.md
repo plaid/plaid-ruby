@@ -1,12 +1,10 @@
-# ruby-plaidio
+# plaid-ruby
 
-Ruby gem wrapper for Plaid.io API. 
-
-Be sure to read over the very well written Plaid.io documentation at https://plaid.io/v2/docs
+Ruby gem wrapper for the Plaid API. For more details, please see the [full API documentation](https://plaid.com/docs).
 
 ## Installation
 
-Plaidio is available through [Rubygems](http://rubygems.org/gems/plaidio) and can be installed via:
+Plaid is available through [Rubygems](http://rubygems.org/gems/plaidio) and can be installed via:
 
 ```
 $ gem install plaidio
@@ -23,7 +21,7 @@ gem 'plaidio'
 ```ruby
 require 'plaidio'
 ```
-## Plaidio global configuration
+## Global Configuration
 Pop this into your enviornment file.
 ```
 Plaidio.config do |config|
@@ -32,9 +30,9 @@ Plaidio.config do |config|
 end
 ```
 
-Now create a YML file that has your CUSTOMER_ID and your SECRET provided by Plaid.io
+Now create a YML file that has your CUSTOMER_ID and your SECRET provided by Plaid.
 
-There are two different requests one can make using the gem. Call and Customer. 
+There are two different requests one can make using the gem: Call and Customer. 
 
 ## Call Methods
 
