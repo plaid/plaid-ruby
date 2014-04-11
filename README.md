@@ -24,7 +24,7 @@ require 'plaid'
 ## Global Configuration
 Pop this into your enviornment file.
 ```
-Plaidio.config do |config|
+Plaid.config do |config|
   config.customer_id = keys[CUSTOMER_ID]
   config.secret = keys[SECRET]
 end
@@ -45,7 +45,7 @@ Call is anything that does not require an access_token.
 # Note: 'x','y','z','a' are all formatted as json. 
 
 Ex)
-  new_account = Plaidio.call.add_account("amex","plaid_test","plaid_good","test@gmail.com") 
+  new_account = Plaid.call.add_account("amex","plaid_test","plaid_good","test@gmail.com") 
   puts new_account[:code]
   "200"
 ```
@@ -56,7 +56,7 @@ Ex)
 # Note: 'x','y' are formatted as json. 
 
 Ex)
-  location_deets = Plaidio.call.location("52a77fea4a2eab775f004109") 
+  location_deets = Plaid.call.location("52a77fea4a2eab775f004109") 
   puts new_account[:location]["address"]
   "125 Main St"
 ```
@@ -72,7 +72,7 @@ Customer defines anything that requires an access_token.
 # Note: 'x','y','z','a' are all formatted as json. 
 
 Ex)
-  new_account = Plaidio.customer.mfa("test","tomato") 
+  new_account = Plaid.customer.mfa("test","tomato") 
   puts new_account[:code]
   "200"
 ```
@@ -84,7 +84,7 @@ Ex)
 # Note: 'x' is formatted as json. 
 
 Ex)
-  transactions = Plaidio.customer.transactions("test") 
+  transactions = Plaid.customer.transactions("test") 
   puts transactions[:transactions][1]["amount"]
   1334.99
 ```
@@ -94,7 +94,7 @@ Ex)
 ```ruby
 
 Ex)
-  message = Plaidio.customer.delete("test") 
+  message = Plaid.customer.delete("test") 
   puts message[:code]
   "200"
 ```
