@@ -1,4 +1,4 @@
-module Plaidio
+module Plaid
   module Configure
     attr_writer :customer_id, :secret
 

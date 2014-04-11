@@ -1,4 +1,4 @@
-module Plaidio
+module Plaid
   # This is used when a customer needs to be defined by the plaid access token.
   # Abstracting as a class makes it easier since we wont have to redefine the access_token over and over.
   class Customer
@@ -7,8 +7,8 @@ module Plaidio
 
     # This initializes our instance variables, and sets up a new Customer class.
     def initialize
-      Plaidio::Configure::KEYS.each do |key|
-        instance_variable_set(:"@#{key}", Plaidio.instance_variable_get(:"@#{key}"))
+      Plaid::Configure::KEYS.each do |key|
+        instance_variable_set(:"@#{key}", Plaid.instance_variable_get(:"@#{key}"))
       end
     end
 
