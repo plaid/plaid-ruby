@@ -4,22 +4,22 @@ Ruby gem wrapper for the Plaid API. For more details, please see the [full API d
 
 ## Installation
 
-Plaid is available through [Rubygems](http://rubygems.org/gems/plaidio) and can be installed via:
+Plaid is available through [Rubygems](http://rubygems.org/gems/plaid) and can be installed via:
 
 ```
-$ gem install plaidio
+$ gem install plaid
 ```
 
 or add it to your Gemfile like this:
 
 ```
-gem 'plaidio'
+gem 'plaid'
 ```
 
 ## Usage
 
 ```ruby
-require 'plaidio'
+require 'plaid'
 ```
 ## Global Configuration
 Pop this into your enviornment file.
