@@ -12,9 +12,8 @@ module Plaid
       end
     end
 
-    def mfa_step(access_token,code)
-      @mfa = code
-      post("/connect/step", access_token, mfa: @mfa)
+    def mfa_step(access_token,code,type)
+      post("/connect/step", access_token, mfa: code, type: type)
       return parse_response(@response,1)
     end
 
@@ -89,7 +88,7 @@ module Plaid
 
     def post(path,access_token,options={})
       url = BASE_URL + path
-      @response = RestClient.post url, :client_id => self.instance_variable_get(:'@customer_id') ,:secret => self.instance_variable_get(:'@secret'), :access_token => access_token, :mfa => @mfa
+      @response = RestClient.post url, {:client_id => self.instance_variable_get(:'@customer_id') ,:secret => self.instance_variable_get(:'@secret'), :access_token => access_token}.merge(options)
       return @response
     end
 
