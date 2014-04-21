@@ -35,10 +35,9 @@ module Plaid
         @parsed_response = Hash.new
         @parsed_response[:code] = response.code
         response = JSON.parse(response)
-        @parsed_response = Hash.new
         @parsed_response[:type] = response["type"]
         @parsed_response[:access_token] = response["access_token"]
-        @parsed_response[:mfa_info] = response["mfa_info"]
+        @parsed_response[:mfa_info] = response["mfa"]
         return @parsed_response
       else
         @parsed_response = Hash.new
