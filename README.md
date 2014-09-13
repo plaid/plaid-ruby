@@ -56,7 +56,7 @@ Ex)
 # Note: 'x','y' are formatted as json. 
 
 Ex)
-  location_deets = Plaid.call.location("52a77fea4a2eab775f004109") 
+  location_deets = Plaid.call.get_place("52a77fea4a2eab775f004109") 
   puts new_account[:location]["address"]
   "125 Main St"
 ```
@@ -72,7 +72,7 @@ Customer defines anything that requires an access_token.
 # Note: 'x','y','z','a' are all formatted as json. 
 
 Ex)
-  new_account = Plaid.customer.mfa("test","tomato") 
+  new_account = Plaid.customer.mfa_step("test","tomato") 
   puts new_account[:code]
   "200"
 ```
@@ -84,7 +84,7 @@ Ex)
 # Note: 'x' is formatted as json. 
 
 Ex)
-  transactions = Plaid.customer.transactions("test") 
+  transactions = Plaid.customer.get_transactions("test") 
   puts transactions[:transactions][1]["amount"]
   1334.99
 ```
@@ -94,7 +94,7 @@ Ex)
 ```ruby
 
 Ex)
-  message = Plaid.customer.delete("test") 
+  message = Plaid.customer.delete_account("test") 
   puts message[:code]
   "200"
 ```
