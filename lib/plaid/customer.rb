@@ -91,10 +91,10 @@ module Plaid
 
     def get path, access_token, options={}
       url = BASE_URL + path
-      @response = RestClient.get url,
-                                 params: { client_id:    self.instance_variable_get(:'@customer_id'),
-                                           secret:       self.instance_variable_get(:'@secret'),
-                                           access_token: access_token}
+      params = { client_id:    self.instance_variable_get(:'@customer_id'),
+                 secret:       self.instance_variable_get(:'@secret'),
+                 access_token: access_token}
+      @response = RestClient.get url, params: params
     end
 
     def post path, access_token, options={}

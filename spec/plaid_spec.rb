@@ -1,5 +1,4 @@
 require "spec_helper.rb"
-require 'yaml'
 describe Plaid, "Call" do
   before :all do |c|
     Plaid.config do |p|
@@ -8,8 +7,21 @@ describe Plaid, "Call" do
     end
   end
 
-  it "returns a response code of 200" do
-    response = Plaid.call.add_account("amex","plaid_test","plaid_good","test@gmail.com")
+  it "adds the test account and returns 200" do
+    response = Plaid.call.add_account "amex",
+                                      "plaid_test",
+                                      "plaid_good",
+                                      "test@gmail.com"
+    expect(response[:code]).to eq(200)
+  end
+
+  it "retrieves test transactions sucessfully" do
+    Plaid.call.add_account "amex",
+                                      "plaid_test",
+                                      "plaid_good",
+                                      "test@gmail.com"
+
+    response = Plaid.customer.get_transactions 'test'
     expect(response[:code]).to eq(200)
   end
 
@@ -39,11 +51,15 @@ describe Plaid, "Customer" do
   end
 
   it "calls mfa_step and returns a response code of 200" do
+    response = Plaid.call.add_account "us",
+                                      "plaid_test",
+                                      "plaid_good",
+                                      "test@gmail.com"
     new_account = Plaid.customer.mfa_step("test","tomato")
     expect(new_account[:code]).to eq(200)
   end
 
-  it "calls delete_account and returns a resonse code of 200" do
+  it "calls delete_account and returns a response code of 200" do
     message = Plaid.customer.delete_account("test")
     expect(message[:code]).to eq(200)
   end
