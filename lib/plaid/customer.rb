@@ -12,7 +12,13 @@ module Plaid
       end
     end
 
-    def mfa_step(access_token,code)
+    def mfa_auth_step(access_token, code)
+      @mfa = code
+      post("/auth/step", access_token, mfa: @mfa)
+      return parse_response(@response, 0)
+    end
+
+    def mfa_connect_step(access_token,code)
       @mfa = code
       post("/connect/step", access_token, mfa: @mfa)
       return parse_response(@response,1)
@@ -32,6 +38,20 @@ module Plaid
 
     def parse_response(response,method)
       case method
+      when 0
+        case response.code
+          @parsed_response = Hash.new
+          @parsed_response[:code] = response.code
+          response = JSON.parse(response)
+          @parsed_response[:access_token] = response["access_token"]
+          @parsed_response[:accounts] = response["accounts"]
+          return @parsed_response
+        else
+          @parsed_response = Hash.new
+          @parsed_response[:code] = response.code
+          @parsed_response[:message] = response
+          return @parsed_response
+        end
       when 1
         case response.code
         when 200
@@ -89,7 +109,7 @@ module Plaid
 
     def post(path,access_token,options={})
       url = BASE_URL + path
-      @response = RestClient.post url, :client_id => self.instance_variable_get(:'@customer_id') ,:secret => self.instance_variable_get(:'@secret'), :access_token => access_token, :mfa => @mfa
+      @response = RestClient.post url, :client_id => self.instance_variable_get(:'@customer_id'), :secret => self.instance_variable_get(:'@secret'), :access_token => access_token, :mfa => @mfa
       return @response
     end
 

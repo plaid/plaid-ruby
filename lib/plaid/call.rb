@@ -9,10 +9,19 @@ module Plaid
         instance_variable_set(:"@#{key}", Plaid.instance_variable_get(:"@#{key}"))
       end
     end
-
-    def add_account(type,username,password,email)
+   
+    # This is a specific route for auth,
+    # it returns specific acct info
+    def add_account_auth(type, username, password, email)
+      post('/auth', type, username, password, email)
+      return parse_auth_response(@response)
+    end
+   
+    # This is a specific route for connect,
+    # it returns transaction information
+    def add_account_connect(type,username,password,email)
       post('/connect',type,username,password,email)
-      return parse_response(@response)
+      return parse_connect_response(@response)
     end
 
     def get_place(id)
@@ -21,7 +30,34 @@ module Plaid
     end
     protected
 
-    def parse_response(response)
+    # Specific parser for auth response
+    def parse_auth_response(response)
+      case response.code
+      when 200
+        @parsed_response = Hash.new
+        @parsed_response[:code] = response.code
+        response = JSON.parse(response)
+        @parsed_response[:access_token] = response["access_token"]
+        @parsed_response[:accounts] = response["accounts"]
+        return @parsed_response
+      when 201
+        @parsed_response = Hash.new
+        @parsed_response[:code] = response.code
+        response = JSON.parse(response)
+        @parsed_response = Hash.new
+        @parsed_response[:type] = response["type"]
+        @parsed_response[:access_token] = response["access_token"]
+        @parsed_response[:mfa_info] = response["mfa_info"]
+        return @parsed_response
+      else
+        @parsed_response = Hash.new
+        @parsed_response[:code] = response.code
+        @parsed_response[:message] = response
+        return @parsed_response
+      end
+    end
+
+    def parse_connect_response(response)
       case response.code
       when 200
         @parsed_response = Hash.new
