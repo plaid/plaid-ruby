@@ -10,6 +10,11 @@ module Plaid
       end
     end
 
+    def auth(type, username, password)
+      post('/auth', type, username, password)
+      parse_response(@response)
+    end
+
     def add_account(type,username,password,email)
       post('/connect',type,username,password,email)
       return parse_response(@response)
@@ -31,7 +36,7 @@ module Plaid
         @parsed_response[:accounts] = response["accounts"]
         @parsed_response[:transactions] = response["transactions"]
         return @parsed_response
-      when 201  
+      when 201
         @parsed_response = Hash.new
         @parsed_response[:code] = response.code
         response = JSON.parse(response)
@@ -62,9 +67,20 @@ module Plaid
 
     private
 
-    def post(path,type,username,password,email)
+    def post(path,type,username,password,email = nil)
       url = BASE_URL + path
-      @response = RestClient.post url, :client_id => self.instance_variable_get(:'@customer_id') ,:secret => self.instance_variable_get(:'@secret'), :type => type ,:credentials => {:username => username, :password => password} ,:email => email
+      payload = {
+          :client_id => self.instance_variable_get(:'@customer_id'),
+          :secret => self.instance_variable_get(:'@secret'),
+          :type => type,
+          :credentials => { :username => username, :password => password }
+      }
+
+      if email
+        payload[:email] = email
+      end
+
+      @response = RestClient.post url, payload
       return @response
     end
 
