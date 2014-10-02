@@ -1,7 +1,7 @@
 module Plaid
   class Call
 
-    BASE_URL = 'https://tartan.plaid.com'
+    ORIGIN = 'https://tartan.plaid.com'
 
     # This initializes our instance variables, and sets up a new Customer class.
     def initialize
@@ -25,51 +25,44 @@ module Plaid
     protected
 
     def parse_response raw_response
-      case raw_response.code
-      when 200
-        response                        = JSON.parse(raw_response)
-        @parsed_response                = Hash.new
+      code = raw_response.code
+      @parsed_response = {
+        code: raw_response.code,
+      }
 
-        @parsed_response[:code]         = raw_response.code
-        @parsed_response[:access_token] = response["access_token"]
-        @parsed_response[:accounts]     = response["accounts"]
-        @parsed_response[:transactions] = response["transactions"]
-        return @parsed_response
-      when 201
+      if code == 200
         response                        = JSON.parse(raw_response)
-        @parsed_response                = Hash.new
-
-        @parsed_response[:code]         = raw_response.code
-        @parsed_response[:type]         = response["type"]
-        @parsed_response[:access_token] = response["access_token"]
-        @parsed_response[:mfa_info]     = response["mfa_info"]
-        return @parsed_response
+        @parsed_response[:access_token] = response['access_token']
+        @parsed_response[:accounts]     = response['accounts']
+        @parsed_response[:transactions] = response['transactions']
+      elsif code == 201
+        response                        = JSON.parse(raw_response)
+        @parsed_response[:type]         = response['type']
+        @parsed_response[:access_token] = response['access_token']
+        @parsed_response[:mfa_info]     = response['mfa_info']
       else
-        @parsed_response                = Hash.new
-        @parsed_response[:code]         = raw_response.code
         @parsed_response[:message]      = raw_response
-        return @parsed_response
       end
+
+      @parsed_response
     end
 
     def parse_place raw_response
-      response                    = JSON.parse(raw_response)["entity"]
-      @parsed_response            = Hash.new
-
-      @parsed_response[:code]     = raw_response.code
-      @parsed_response[:category] = response["category"]
-      @parsed_response[:name]     = response["name"]
-      @parsed_response[:id]       = response["_id"]
-      @parsed_response[:phone]    = response["meta"]["contact"]["telephone"]
-      @parsed_response[:location] = response["meta"]["location"]
-
-      @parsed_response
+      response = JSON.parse(raw_response)['entity']
+      @parsed_response = {
+        code:      raw_response.code,
+        category:  response['category'],
+        name:      response['name'],
+        id:        response['_id'],
+        phone:     response['meta']['contact']['telephone'],
+        location:  response['meta']['location'],
+      }
     end
 
     private
 
     def post path, type, username, password, email, options = {}
-      url = BASE_URL + path
+      url = ORIGIN + path
       @response = RestClient.post url,
                                   client_id:   self.instance_variable_get(:'@customer_id'),
                                   secret:      self.instance_variable_get(:'@secret'),
@@ -81,7 +74,7 @@ module Plaid
     end
 
     def get path, id
-      url = BASE_URL + path
+      url = ORIGIN + path
       @response = RestClient.get url, params: {entity_id: id}
     end
 
