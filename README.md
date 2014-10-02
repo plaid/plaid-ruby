@@ -22,7 +22,7 @@ gem 'plaid'
 require 'plaid'
 ```
 ## Global Configuration
-Pop this into your enviornment file.
+Pop this into your environment file.
 ```
 Plaid.config do |config|
   config.customer_id = keys[CUSTOMER_ID]
