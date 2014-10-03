@@ -38,18 +38,28 @@ There are two different requests one can make using the gem: Call and Customer.
 
 Call is anything that does not require an access_token.
 
-1) add_account( type , username , password , email ) <br>
+1) add_account_auth( type, username, password, email) <br>
     Returns a hash with keys: code, access_token, accounts, transactions all with embedded json from Plaid.
+    The account information is detailed and has full account and routing numbers, however, you will
+    not receive transactions
+```ruby
+# if(code == 200) {returns {[:code => 'x'],[:access_token => 'y'],[:accounts => 'z']}
+# Note: 'x','y','z' are all formatted as json.
+
+
+2) add_account_connect( type , username , password , email ) <br>
+    Returns a hash with keys: code, access_token, accounts, transactions all with embedded json from Plaid.
+    The account information returned doesn't contain full account and routing numbers
 ```ruby
 # if(code == 200) {returns {[:code => 'x'],[:access_token => 'y'],[:accounts => 'z'],[:transactions => 'a']}
 # Note: 'x','y','z','a' are all formatted as json. 
 
 Ex)
-  new_account = Plaid.call.add_account("amex","plaid_test","plaid_good","test@gmail.com") 
+  new_account = Plaid.call.add_account_connect("amex","plaid_test","plaid_good","test@gmail.com") 
   puts new_account[:code]
   "200"
 ```
-2) get_place( id ) <br>
+3) get_place( id ) <br>
      Returns a hash with keys: entity and location all with embedded json from Plaid. 
 ```ruby
 # if(code == 200) {returns {[:entity => 'x'],[:location => 'y']}
@@ -65,7 +75,7 @@ Ex)
 
 Customer defines anything that requires an access_token.  
 
-1) mfa_step( access_token , code ) <br>
+1) mfa_auth_step( access_token , code ) <br>
     Returns a hash with keys: code, access_token, accounts, transactions all with embedded json from Plaid.
 ```ruby
 # if(code == 200) {returns {[:code => 'x'],[:access_token => 'y'],[:accounts => 'z'],[:transactions => 'a']}
@@ -77,7 +87,20 @@ Ex)
   "200"
 ```
 
-2) get_transactions( access_token ) <br>
+2) mfa_connect_step( access_token , code ) <br>
+    Returns a hash with keys: code, access_token, accounts, transactions all with embedded json from Plaid.
+```ruby
+# if(code == 200) {returns {[:code => 'x'],[:access_token => 'y'],[:accounts => 'z'],[:transactions => 'a']}
+# Note: 'x','y','z','a' are all formatted as json. 
+
+Ex)
+  new_account = Plaid.customer.mfa_auth_step("test","tomato") 
+  puts new_account[:code]
+  "200"
+```
+
+To attain transactions you have to use mfa_connect, and mfa_connect_step
+3) get_transactions( access_token ) <br>
     Returns a hash with key transaction
 ```ruby
 # if(code == 200) {returns {[:transaction => 'x']}
@@ -89,7 +112,7 @@ Ex)
   1334.99
 ```
 
-3) delete_account( access_token ) <br>
+4) delete_account( access_token ) <br>
     Returns a hash with key code
 ```ruby
 
