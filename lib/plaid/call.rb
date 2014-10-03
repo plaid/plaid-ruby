@@ -23,7 +23,7 @@ module Plaid
     end
 
     def get_place(id)
-      parse_place(get('/entities/',id))
+      parse_place(get('entities/',id))
     end
 
     protected
@@ -33,11 +33,11 @@ module Plaid
       parsed = JSON.parse(response)
       case response.code
       when 200
-        [code: response.code, access_token: parsed['access_token'], accounts: parsed['accounts']]
+        {code: response.code, access_token: parsed['access_token'], accounts: parsed['accounts']}
       when 201
-        [code: response.code, type: parsed['type'], access_token: parsed['access_token'], mfa_info: parsed['mfa_info']]
+        {code: response.code, type: parsed['type'], access_token: parsed['access_token'], mfa_info: parsed['mfa_info']}
       else
-        [code: response.code, message: parsed]
+        {code: response.code, message: parsed}
       end
     end
 
@@ -45,17 +45,17 @@ module Plaid
       parsed = JSON.parse(response)
       case response.code
       when 200
-        [code: response.code, access_token: parsed['access_token'], accounts: parsed['accounts'], transactions: parsed['transactions']]
+        {code: response.code, access_token: parsed['access_token'], accounts: parsed['accounts'], transactions: parsed['transactions']}
       when 201  
-        [code: response.code, type: parsed['type'], access_token: parsed['access_token'], mfa_info: parsed['mfa_info']]
+        {code: response.code, type: parsed['type'], access_token: parsed['access_token'], mfa_info: parsed['mfa_info']}
       else
-        [code: response.code, message: parsed]
+        {code: response.code, message: parsed}
       end
     end
 
     def parse_place(response)
-      parsed = JSON.parse(response)['entity']
-      [code: response.code, category: parsed['category'], name: parsed['name'], id: parsed['_id'], phone: parsed['meta']['contact']['telephone'], location: parsed['meta']['location']]
+      parsed = JSON.parse(response)
+      {code: response.code, category: parsed['category'], name: parsed['name'], id: parsed['_id'], phone: parsed['meta']['contact']['telephone'], location: parsed['meta']['location']}
     end
 
     private
@@ -66,8 +66,8 @@ module Plaid
     end
 
     def get(path,id)
-      url = BASE_URL + path
-      RestClient.get(url,params: {entity_id: id})
+      url = BASE_URL + path + id
+      RestClient.get(url)
     end
 
   end

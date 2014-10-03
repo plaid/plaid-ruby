@@ -19,7 +19,7 @@ describe Plaid, 'Call' do
   end
 
   it 'returns a response code of 201' do
-    Plaid.call.add_account_auth('bofa','plaid_test','plaid_good','test@plaid.com')
+    Plaid.call.add_account_auth('chase','plaid_test','plaid_good','test@plaid.com')
   end
 
 end
@@ -35,16 +35,16 @@ describe Plaid, 'Customer' do
 
   it 'calls get_transactions and returns a response code of 200' do
     transactions = Plaid.customer.get_transactions('test')
-    expect(transactions[:code]).to eq('200')
+    expect(transactions[:code]).to eq(200)
   end
 
   it 'calls mfa_step and returns a response code of 200' do
-    new_account = Plaid.customer.mfa_auth_step('test','tomato')
-    expect(new_account[:code]).to eq('200')
+    new_account = Plaid.customer.mfa_auth_step('test','again')
+    expect(new_account[:code]).to eq(200)
   end
 
   it 'calls delete_account and returns a response code of 200' do
     message = Plaid.customer.delete_account('test')
-    expect(message[:code]).to eq('200')
+    expect(message[:code]).to eq(200)
   end
 end
