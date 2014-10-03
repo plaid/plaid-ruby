@@ -39,7 +39,7 @@ describe Plaid, 'Customer' do
   end
 
   it 'calls mfa_step and returns a response code of 200' do
-    new_account = Plaid.customer.mfa_auth_step('test','again')
+    new_account = Plaid.customer.mfa_auth_step('test','again','chase')
     expect(new_account[:code]).to eq(200)
   end
 
