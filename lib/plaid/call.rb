@@ -13,20 +13,17 @@ module Plaid
     # This is a specific route for auth,
     # it returns specific acct info
     def add_account_auth(type, username, password, email)
-      post('/auth', type, username, password, email)
-      parse_auth_response(@response)
+      parse_auth_response(post('/auth', type, username, password, email))
     end
    
     # This is a specific route for connect,
     # it returns transaction information
     def add_account_connect(type,username,password,email)
-      post('/connect',type,username,password,email)
-      parse_connect_response(@response)
+      parse_connect_response(post('/connect',type,username,password,email))
     end
 
     def get_place(id)
-      get('/entity',id)
-      parse_place(@response)
+      parse_place(get('/entities/',id))
     end
 
     protected
@@ -65,12 +62,12 @@ module Plaid
 
     def post(path,type,username,password,email)
       url = BASE_URL + path
-      @response = RestClient.post url, client_id: self.instance_variable_get(:'@customer_id') ,secret: self.instance_variable_get(:'@secret'), type: type ,credentials: {username: username, password: password} ,email: email
+      RestClient.post url, client_id: self.instance_variable_get(:'@customer_id') ,secret: self.instance_variable_get(:'@secret'), type: type ,credentials: {username: username, password: password} ,email: email
     end
 
     def get(path,id)
       url = BASE_URL + path
-      @response = RestClient.get(url,params: {entity_id: id})
+      RestClient.get(url,params: {entity_id: id})
     end
 
   end

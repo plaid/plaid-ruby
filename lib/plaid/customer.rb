@@ -38,7 +38,7 @@ module Plaid
 
     def parse_response(response,method)
       parsed = JSON.parse(response)
-      if response.code == 200
+      if response.code == '200'
         case method
         when 0
           [code: response.code, access_token: parsed['access_token'], accounts: parsed['accounts']]
