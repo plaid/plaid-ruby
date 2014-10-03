@@ -14,88 +14,43 @@ module Plaid
 
     def mfa_auth_step(access_token, code)
       @mfa = code
-      post("/auth/step", access_token, mfa: @mfa)
-      return parse_response(@response, 0)
+      post('/auth/step', access_token, mfa: @mfa)
+      parse_response(@response, 0)
     end
 
     def mfa_connect_step(access_token,code)
       @mfa = code
-      post("/connect/step", access_token, mfa: @mfa)
-      return parse_response(@response,1)
+      post('/connect/step', access_token, mfa: @mfa)
+      parse_response(@response,1)
     end
 
     def get_transactions(access_token)
       get('/connect', access_token)
-      return parse_response(@response,2)
+      parse_response(@response,2)
     end
 
     def delete_account(access_token)
       delete('/connect', access_token)
-      return parse_response(@response,3)
+      parse_response(@response,3)
     end
 
     protected
 
     def parse_response(response,method)
-      case method
-      when 0
-        case response.code
-          @parsed_response = Hash.new
-          @parsed_response[:code] = response.code
-          response = JSON.parse(response)
-          @parsed_response[:access_token] = response["access_token"]
-          @parsed_response[:accounts] = response["accounts"]
-          return @parsed_response
+      parsed = JSON.parse(response)
+      if response.code == 200
+        case method
+        when 0
+          [code: response.code, access_token: parsed['access_token'], accounts: parsed['accounts']]
+        when 1
+          [code: response.code, access_token: parsed['access_token'], accounts: parsed['accounts'], transactions: parsed['transactions']]
+        when 2
+          [code: response.code, transactions: parsed['transactions']]
         else
-          @parsed_response = Hash.new
-          @parsed_response[:code] = response.code
-          @parsed_response[:message] = response
-          return @parsed_response
+          [code: response.code, message: parsed]
         end
-      when 1
-        case response.code
-        when 200
-          @parsed_response = Hash.new
-          @parsed_response[:code] = response.code
-          response = JSON.parse(response)
-          @parsed_response[:access_token] = response["access_token"]
-          @parsed_response[:accounts] = response["accounts"]
-          @parsed_response[:transactions] = response["transactions"]
-          return @parsed_response
-        else
-          @parsed_response = Hash.new
-          @parsed_response[:code] = response.code
-          @parsed_response[:message] = response
-          return @parsed_response
-        end
-      when 2
-        case response.code
-        when 200
-          @parsed_response = Hash.new
-          @parsed_response[:code] = response.code
-          response = JSON.parse(response)
-          @parsed_response[:transactions] = response["transactions"]
-          return @parsed_response
-        else
-          @parsed_response = Hash.new
-          @parsed_response[:code] = response.code
-          @parsed_response[:message] = response
-          return @parsed_response
-        end
-      when 3
-        case response.code
-        when 200
-          @parsed_response = Hash.new
-          @parsed_response[:code] = response.code
-          response = JSON.parse(response)
-          @parsed_response[:message] = response
-          return @parsed_response
-        else
-          @parsed_response = Hash.new
-          @parsed_response[:code] = response.code
-          @parsed_response[:message] = response
-          return @parsed_response
-        end
+      else
+        [code: response.code, message: parsed]
       end
     end
 
@@ -103,20 +58,17 @@ module Plaid
 
     def get(path,access_token,options={})
       url = BASE_URL + path
-      @response = RestClient.get(url,:params => {:client_id => self.instance_variable_get(:'@customer_id'), :secret => self.instance_variable_get(:'@secret'), :access_token => access_token})
-      return @response
+      @response = RestClient.get(url, params: {client_id: self.instance_variable_get(:'@customer_id'), secret: self.instance_variable_get(:'@secret'), access_token: access_token})
     end
 
     def post(path,access_token,options={})
       url = BASE_URL + path
-      @response = RestClient.post url, :client_id => self.instance_variable_get(:'@customer_id'), :secret => self.instance_variable_get(:'@secret'), :access_token => access_token, :mfa => @mfa
-      return @response
+      @response = RestClient.post url, client_id: self.instance_variable_get(:'@customer_id'), secret: self.instance_variable_get(:'@secret'), access_token: access_token, mfa: @mfa
     end
 
     def delete(path,access_token,options={})
       url = BASE_URL + path
-      @response = RestClient.delete(url,:params => {:client_id => self.instance_variable_get(:'@customer_id'), :secret => self.instance_variable_get(:'@secret'), :access_token => access_token})
-      return @response
+      @response = RestClient.delete(url, params: {client_id: self.instance_variable_get(:'@customer_id'), secret: self.instance_variable_get(:'@secret'), access_token: access_token})
     end
   end
 end
