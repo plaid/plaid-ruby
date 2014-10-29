@@ -24,7 +24,7 @@ describe Plaid, 'Call' do
 
   it 'calls get_institutions and returns a response code of 200' do
     institutions = Plaid.call.get_institutions
-    expect(institutions[:code]).to eq(200)
+    expect(institutions.any?).to eq(true)
   end
 
 end

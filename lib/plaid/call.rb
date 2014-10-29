@@ -27,7 +27,7 @@ module Plaid
     end
 
     def get_institutions
-      parse_institutions(get('/institutions'))
+      JSON.parse(get('/institutions'))
     end
 
     protected
