@@ -22,6 +22,11 @@ describe Plaid, 'Call' do
     Plaid.call.add_account_auth('chase','plaid_test','plaid_good','test@plaid.com')
   end
 
+  it 'calls get_institutions and returns a response code of 200' do
+    institutions = Plaid.call.get_institutions
+    expect(institutions.any?).to eq(true)
+  end
+
 end
 
 describe Plaid, 'Customer' do
