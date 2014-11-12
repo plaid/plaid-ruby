@@ -39,7 +39,7 @@ module Plaid
       when 200
         {code: response.code, access_token: parsed['access_token'], accounts: parsed['accounts']}
       when 201
-        {code: response.code, type: parsed['type'], access_token: parsed['access_token'], mfa_info: parsed['mfa_info']}
+        {code: response.code, type: parsed['type'], access_token: parsed['access_token'], mfa: parsed['mfa']}
       else
         {code: response.code, message: parsed}
       end
@@ -51,7 +51,7 @@ module Plaid
       when 200
         {code: response.code, access_token: parsed['access_token'], accounts: parsed['accounts'], transactions: parsed['transactions']}
       when 201  
-        {code: response.code, type: parsed['type'], access_token: parsed['access_token'], mfa_info: parsed['mfa_info']}
+        {code: response.code, type: parsed['type'], access_token: parsed['access_token'], mfa: parsed['mfa']}
       else
         {code: response.code, message: parsed}
       end
