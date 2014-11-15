@@ -64,7 +64,8 @@ module Plaid
 
     # deprecated
     def parse_place(response)
-      JSON.parse(response)
+      parsed = JSON.parse(response)
+      {code: response.code, place: parsed}
     end
 
     def parse_institutions(response)

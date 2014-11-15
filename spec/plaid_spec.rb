@@ -1,10 +1,10 @@
 require 'spec_helper.rb'
 describe Plaid, 'Call' do
   before(:all) do |_|
-    keys = YAML::load(IO.read('./keys.yml'))
+    # keys = YAML::load(IO.read('./keys.yml'))
     Plaid.config do |p|
-      p.customer_id = keys['CUSTOMER_ID']
-      p.secret = keys['SECRET']
+      p.customer_id = "test_id" # keys['CUSTOMER_ID']
+      p.secret = "test_secret" # keys['SECRET']
     end
   end
 
@@ -27,14 +27,18 @@ describe Plaid, 'Call' do
     expect(institutions.any?).to eq(true)
   end
 
+  it 'calls get_categories and returns a response code of 200' do
+    categories = Plaid.call.get_categories
+    expect(categories.any?).to eq(true)
+  end
 end
 
 describe Plaid, 'Customer' do
   before :all do |_|
-    keys = YAML::load(IO.read('./keys.yml'))
+    # keys = YAML::load(IO.read('./keys.yml'))
     Plaid.config do |p|
-      p.customer_id = keys['CUSTOMER_ID']
-      p.secret = keys['SECRET']
+      p.customer_id = "test_id" # keys['CUSTOMER_ID']
+      p.secret = "test_secret" # keys['SECRET']
     end
   end
 
