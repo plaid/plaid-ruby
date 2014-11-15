@@ -22,12 +22,17 @@ module Plaid
       parse_connect_response(post('/connect',type,username,password,email,options))
     end
 
+    #deprecated
     def get_place(id)
       parse_place(get('entities/',id))
     end
 
     def get_institutions
       JSON.parse(get('/institutions'))
+    end
+
+    def get_categories
+      parse_categories(get('/categories'))
     end
 
     protected
@@ -57,14 +62,19 @@ module Plaid
       end
     end
 
+    # deprecated
     def parse_place(response)
-      parsed = JSON.parse(response)
-      {code: response.code, category: parsed['category'], name: parsed['name'], id: parsed['_id'], phone: parsed['meta']['contact']['telephone'], location: parsed['meta']['location']}
+      JSON.parse(response)
     end
 
     def parse_institutions(response)
       parsed = JSON.parse(response)
       {code: response.code, institutions: parsed}
+    end
+
+    def parse_categories(response)
+      parsed = JSON.parse(response)
+      {code: response.code, categories: parsed}
     end
 
     private
