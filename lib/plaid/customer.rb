@@ -16,8 +16,8 @@ module Plaid
       parse_response(post('/auth/step', access_token, mfa: code, type: type), 0)
     end
 
-    def mfa_connect_step(access_token,code)
-      parse_response(post('/connect/step', access_token, mfa: code),1)
+    def mfa_connect_step(access_token, code, type)
+      parse_response(post('/connect/step', access_token, mfa: code, type: type), 0)
     end
 
     def get_transactions(access_token)
