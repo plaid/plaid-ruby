@@ -16,8 +16,8 @@ module Plaid
       parse_response(post('/auth/step', access_token, mfa: code, type: type), 0)
     end
 
-    def mfa_connect_step(access_token,code)
-      parse_response(post('/connect/step', access_token, mfa: code),1)
+    def mfa_connect_step(access_token, code, type)
+      parse_response(post('/connect/step', access_token, mfa: code, type: type), 1)
     end
 
     def get_transactions(access_token)
@@ -62,7 +62,7 @@ module Plaid
 
     def delete(path,access_token)
       url = BASE_URL + path
-      RestClient.delete(url, params: {client_id: self.instance_variable_get(:'@customer_id'), secret: self.instance_variable_get(:'@secret'), access_token: access_token})
+      RestClient.delete(url, params: {client_id: self.instance_variable_get(:'@customer_id'), secret: self.instance_variable_get(:'@secret'), access_token: access_token}) {|response, request, result| response }
     end
   end
 end
