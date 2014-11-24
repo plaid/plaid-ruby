@@ -62,7 +62,7 @@ module Plaid
 
     def delete(path,access_token)
       url = BASE_URL + path
-      RestClient.delete(url, params: {client_id: self.instance_variable_get(:'@customer_id'), secret: self.instance_variable_get(:'@secret'), access_token: access_token})
+      RestClient.delete(url, params: {client_id: self.instance_variable_get(:'@customer_id'), secret: self.instance_variable_get(:'@secret'), access_token: access_token}) {|response, request, result| response }
     end
   end
 end
