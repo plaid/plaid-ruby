@@ -23,7 +23,7 @@ require 'plaid'
 ```
 ## Global Configuration
 Pop this into your environment file.
-```
+```ruby
 Plaid.config do |config|
   config.customer_id = keys[CUSTOMER_ID]
   config.secret = keys[SECRET]
@@ -45,7 +45,7 @@ Call is anything that does not require an access_token.
 ```ruby
 # if(code == 200) {returns {[:code => 'x'],[:access_token => 'y'],[:accounts => 'z']}
 # Note: 'x','y','z' are all formatted as json.
-
+```
 
 2) add_account_connect( type , username , password , email ) <br>
     Returns a hash with keys: code, access_token, accounts, transactions all with embedded json from Plaid.
