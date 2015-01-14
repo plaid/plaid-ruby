@@ -8,10 +8,7 @@ require 'plaid/institution/institution'
 require 'plaid/category/category'
 
 module Plaid
-  # Define an instance of the gem thus responding with one customer at a time
   class << self
-    # Include the SDK methods
-
     # Configures the gem with the public, private, and environment vars
     include Plaid::Configure
 
@@ -22,21 +19,23 @@ module Plaid
     include Plaid::Auth
 
     # Builds the user object and returns on successful authentication
-    def user(res)
+    def user(res,api_level=nil)
       @user = Plaid::User.new
-      @user.new(res)
+      @user.new(res,api_level)
     end
 
     # Builds an institution object and returns when the institution details exist
-    def institution(res)
+    def institution(id=nil)
       @institution = Plaid::Institution.new
-      @institution.new(res)
+      res = self.get('institutions',id)
+      id.nil? ? @institution.instantiate_one_institution(res) : @institution.instantiate_all_institutions(res)
     end
 
     # Builds an institution object and returns when the category details exist
-    def category(res)
+    def category(id=nil)
       @category = Plaid::Category.new
-      @category.new(res)
+      res = self.get('categories',id)
+      id.nil? ? @category.instantiate_one_category(res) : @category.instantiate_all_categories(res)
     end
 
   end

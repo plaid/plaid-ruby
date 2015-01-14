@@ -2,32 +2,71 @@ require_relative 'account/account'
 require_relative 'transaction/transaction'
 require 'plaid/util'
 module Plaid
-  class User
+  class Plaid::User
     include Plaid::Util
 
     # Define user vars
-    attr_accessor(:accounts, :transactions, :access_token)
+    attr_accessor(:accounts, :transactions, :access_token, :permissions)
 
     def initialize
       self.accounts = []
       self.transactions = []
+      self.permissions = []
       self.access_token = ''
     end
 
     # Instantiate a new user with the results of the successful API call
     # Build an array of nested accounts, and return self if successful
-    def new(res)
+    def new(res,api_level=nil)
+      build_user(res,api_level)
+    end
+
+    def mfa_authentication(auth)
+      auth_path = self.permissions[0] + '/step'
+      res = Plaid.post(auth_path,{mfa:auth,access_token:self.access_token})
+      build_user(res)
+    end
+
+    def get_auth
+      if self.permissions.include? 'auth'
+        res = Plaid.post('auth/get',{access_token:self.access_token})
+        build_user(res)
+      else
+        false
+      end
+    end
+
+    def get_connect
+      if self.permissions.include? 'connect'
+        res = Plaid.post('connect/get',{access_token:self.access_token})
+        build_user(res)
+      else
+        false
+      end
+    end
+
+    def upgrade
+      upgrade_to = 'auth' unless self.permissions.include? 'auth'
+      upgrade_to = 'connect' unless self.permissions.include? 'connect'
+      res = Plaid.post('upgrade',{access_token:self.access_token,upgrade_to:upgrade_to})
+      build_user(res)
+    end
+
+    protected
+
+    def build_user(res,api_level=nil)
       begin
-        self.access_token = res['access_token']
-        if res['msg'].nil?
+        if res[:msg].nil?
           res['accounts'].each do |account|
             self.accounts << new_account(account)
           end if res['accounts']
           res['transactions'].each do |transaction|
             self.transactions << new_transaction(transaction)
           end if res['transactions']
+          self.permissions << api_level
+          self.access_token = res['access_token']
         else
-          self.accounts = res.msg, self.transactions = res.msg
+          self.accounts = res[:msg], self.transactions = res[:msg], self.permissions << api_level, self.access_token = res[:body]['access_token']
         end
       rescue => e
         error_handler(e)
@@ -35,8 +74,6 @@ module Plaid
         self
       end
     end
-
-    protected
 
     # Instantiate and build a new account object, return this to the accounts array
     def new_account(account)
