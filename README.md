@@ -46,7 +46,7 @@ or anything to increase overall quality.
 
 The rules for contributing are simple:
 
-1. No outside runtime libraries are allowed at runtime unless approved by the maintainer.
+1. No outside runtime libraries are allowed unless approved by the maintainer.
 2. Follow the workflow set up below. Bug fixes should be labeled as a hot-fix, features labeled as features
 3. Semantic versioning is strictly adhered to.
 4. If you build a new feature you must release an update to the wiki / readme with information about the feature before it is accepted and commited.
