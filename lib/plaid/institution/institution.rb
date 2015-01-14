@@ -3,33 +3,25 @@ module Plaid
   class Institution
     include Plaid::Util
 
-    attr_accessor(:id, :name, :type, :has_mfa, :mfa)
-
-    # Returns an instantiated category object, or an array of all categories
-    def new(id=nil)
-      res = get('institutions',id)
-      id.nil? ? cat = instantiate_all_institutions(res) : cat = instantiate_one_institution(res)
-      cat
-    end
+    attr_accessor(:id, :name, :type, :has_mfa, :mfa, :inst_array)
 
     def instantiate_all_institutions(res)
-      inst_array = []
-      res['institution'].each do |inst|
-        @institution = Institution.new
-        inst_array << @institution.build_institution(inst)
+      self.inst_array = []
+      res.each do |inst|
+        institution = Institution.new
+        inst_array << institution.build_institution(inst)
       end
-      inst_array
+      self.inst_array
     end
 
     def instantiate_one_institution(res)
-      @category = Institution.new
-      @category.build_institution(res)
+      self.build_institution(res)
     end
 
     protected
 
-    def build_institution(cat)
-      self.id = cat['id'], self.name = cat['name'], self.type = cat['type'], self.has_mfa = cat['has_mfa'], self.mfa = cat['mfa']
+    def build_institution(inst)
+      self.id = inst['id'], self.name = inst['name'], self.type = inst['type'], self.has_mfa =inst['has_mfa'], self.mfa = inst['mfa']
     end
 
   end

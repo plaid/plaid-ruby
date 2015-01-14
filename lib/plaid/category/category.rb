@@ -3,27 +3,19 @@ module Plaid
   class Category
     include Plaid::Util
 
-    attr_accessor(:type, :hierarchy, :id)
-
-    # Returns an instantiated category object, or an array of all categories
-    def new(id=nil)
-      res = get('categories',id)
-      id.nil? ? cat = instantiate_all_categories(res) : cat = instantiate_one_category(res)
-      cat
-    end
+    attr_accessor(:type, :hierarchy, :id, :cat_array)
 
     def instantiate_all_categories(res)
-      cat_array = []
-      res['category'].each do |cat|
-        @category = Category.new
-        cat_array << @category.build_category(cat)
+      self.cat_array = []
+      res.each do |cat|
+        category = Category.new
+        self.cat_array << category.build_category(cat)
       end
-      cat_array
+      self.cat_array
     end
 
     def instantiate_one_category(res)
-      @category = Category.new
-      @category.build_category(res)
+      self.build_category(res)
     end
 
     protected
