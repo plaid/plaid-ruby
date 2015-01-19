@@ -67,19 +67,19 @@ The result will either return a 'Requires further authentication' string or the 
 
 ## Vars
 
-User.accounts :; Array
+User.accounts | Array
 
 -- An array of account objects belonging to this user
 
-User.transactions :: Array
+User.transactions | Array
 
 -- An array of transaction objects belonging to this user
 
-User.permissions :: Array
+User.permissions | Array
 
 -- An array of the api permissions currently granted to this user
 
-User.access_token :: String
+User.access_token | String
 
 -- The access token used for back-end communication & identification with the Plaid API.
 
@@ -99,27 +99,27 @@ User.get_auth
 
 ## Account Vars
 
-Account.name :: String
+User::Account.name | String
 
 -- The name of the account
 
-Account.available_balance :: Float
+User::Account.available_balance | Float
 
 -- The available balance for this account
 
-Account.current_balance :: Float
+User::Account.current_balance | Float
 
 -- The current balance for this account
 
-Account.institution_type :: String
+User::Account.institution_type | String
 
 -- The type of account for this account
 
-Account.meta :: Hash
+User::Account.meta | Hash
 
 -- Various extra data sent by the institution for this account in the form of
 
-Account.numbers :: Hash
+User::Account.numbers | Hash
 
 -- Data sent from the Plaid Auth API which defines routing numbers and wire numbers. See https://plaid.com/docs/#auth for more information.
 
@@ -127,35 +127,35 @@ Account.numbers :: Hash
 
 ## Transaction Vars
 
-Transaction.id :: String
+User::Transaction.id | String
 
 -- The id for this transaction defined by Plaid.
 
-Transaction.account :: String
+User::Transaction.account | String
 
--- The account ID this transactionb belongs to
+-- The account ID this transaction belongs to
 
-Transaction.amount :: String
+User::Transaction.amount | String
 
 -- The amount this transaction was worth
 
-Transaction.name :: String
+User::Transaction.name | String
 
 -- The name attached to this transaction
 
-Transaction.meta :: Hash
+User::Transaction.meta | Hash
 
 -- Meta data returned from the institution
 
-Transaction.location :: String
+User::Transaction.location | String
 
 -- The location of the transaction
 
-Transaction.pending :: String
+User::Transaction.pending | String
 
 -- Defines if this transaction is pending clearance
 
-Transaction.category :: Hash
+User::Transaction.category | Hash
 
 -- The category information for this transaction determined by Plaid
 
@@ -177,15 +177,15 @@ Returns all categories defined by Plaid in an array of category objects
 
 ## Category vars
 
-Category.type :: String
+Category.type | String
 
 -- Returns the type of category
 
-Category.hierarchy :: Hash
+Category.hierarchy | Hash
 
 -- Returns the meta data for a category
 
-Category.id :: String
+Category.id | String
 
 -- Returns the id for a category defined by Plaid
 
@@ -207,23 +207,23 @@ Returns all institutions defined by Plaid in an array of category objects
 
 ## Institution vars
 
-Category.id :: String
+Institution.id | String
 
 -- Returns the id for this institution
 
-Category.name :: String
+Institution.name | String
 
 -- Returns the name for this institution
 
-Category.type
+Institution.type | String
 
 -- Returns the type of this institution as defined by Plaid
 
-Category.has_mfa
+Institution.has_mfa | String
 
 -- Returns whether this institution requires multi factor authentication
 
-Category.mfa
+Institution.mfa | Hash
 
 -- Returns details about the required MFA for this institution
 
