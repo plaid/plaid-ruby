@@ -28,7 +28,6 @@ module Plaid
     def institution(id=nil)
       @institution = Plaid::Institution.new
       res = self.get('institutions',id)
-      puts 'The id is', id
       id.nil? ? @institution.instantiate_all_institutions(res) : @institution.instantiate_one_institution(res)
     end
 

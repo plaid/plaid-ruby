@@ -36,7 +36,6 @@ Authenticate a user to your desired level of api access (auth / connect).
 
 ```ruby
     user = Plaid.auth('auth','plaid_test','plaid_good','wells')
-    puts user.accounts
 ```
 
 # Authentication Flow

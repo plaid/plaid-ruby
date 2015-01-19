@@ -191,10 +191,13 @@ describe Plaid do
   ########## Plaid instantiated user specs ##########
 
   describe '#User' do
-
-=begin
     # MFA specs - after user is instantiated,
     describe '#mfa_authentication' do
+      Plaid.config do |p|
+        p.customer_id = 'test_id'
+        p.secret = 'test_secret'
+        p.environment_location = 'https://tartan.plaid.com/'
+      end
       mfa_user = Plaid.auth('connect','plaid_selections', 'plaid_good','bofa')
 
       context 'has to enter another round of MFA credentials' do
@@ -212,7 +215,6 @@ describe Plaid do
         it { expect(mfa_user.mfa_authentication('bad')).to raise_error }
       end
     end
-=end
 
     # Auth specs
     describe '#get_auth' do

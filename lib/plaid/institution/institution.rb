@@ -7,7 +7,6 @@ module Plaid
 
     def instantiate_all_institutions(res)
       self.inst_array = []
-      puts 'Trying to build many institutions'
       res.each do |inst|
         institution = Institution.new
         inst_array << institution.build_institution(inst)
@@ -16,7 +15,6 @@ module Plaid
     end
 
     def instantiate_one_institution(res)
-      puts 'Trying to build one institution'
       self.build_institution(res)
     end
 
