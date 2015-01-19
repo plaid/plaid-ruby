@@ -2,6 +2,8 @@
 
 Ruby bindings for the Plaid API
 
+Warning: If you have been using any version < 1 please switch to the correct branch. 
+
 ## Installation
 
 Add this line to your application's Gemfile:
