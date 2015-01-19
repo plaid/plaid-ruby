@@ -193,25 +193,36 @@ describe Plaid do
   describe '#User' do
     # MFA specs - after user is instantiated,
     describe '#mfa_authentication' do
-      Plaid.config do |p|
-        p.customer_id = 'test_id'
-        p.secret = 'test_secret'
-        p.environment_location = 'https://tartan.plaid.com/'
-      end
-      mfa_user = Plaid.auth('connect','plaid_selections', 'plaid_good','bofa')
-
-      context 'has to enter another round of MFA credentials' do
-        new_user = Plaid.auth('connect','plaid_selections', 'plaid_good','chase')
-        new_user.mfa_authentication('again')
-        it { expect(mfa_user.accounts[0]).to eq 'Requires further authentication' }
-      end
 
       context 'enters correct credentials for MFA auth and authenticates' do
-        mfa_user.mfa_authentication('tomato')
+        Plaid.config do |p|
+          p.customer_id = 'test_id'
+          p.secret = 'test_secret'
+          p.environment_location = 'https://tartan.plaid.com/'
+        end
+        mfa_user = Plaid.auth('connect','plaid_selections', 'plaid_good','bofa')
+        mfa_user.mfa_authentication('tomato','bofa')
         it { expect(mfa_user.accounts).to be_truthy }
       end
 
+      context 'has to enter another round of MFA credentials' do
+        Plaid.config do |p|
+          p.customer_id = 'test_id'
+          p.secret = 'test_secret'
+          p.environment_location = 'https://tartan.plaid.com/'
+        end
+        new_user = Plaid.auth('connect','plaid_selections', 'plaid_good','bofa')
+        new_user.mfa_authentication('again','bofa')
+        it { expect(new_user.accounts[0]).to eq 'Requires further authentication' }
+      end
+
       context 'enters incorrect credentials for MFA auth' do
+        Plaid.config do |p|
+          p.customer_id = 'test_id'
+          p.secret = 'test_secret'
+          p.environment_location = 'https://tartan.plaid.com/'
+        end
+        mfa_user = Plaid.auth('connect','plaid_selections', 'plaid_good','bofa')
         it { expect(mfa_user.mfa_authentication('bad')).to raise_error }
       end
     end
