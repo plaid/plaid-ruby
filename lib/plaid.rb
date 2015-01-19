@@ -28,14 +28,15 @@ module Plaid
     def institution(id=nil)
       @institution = Plaid::Institution.new
       res = self.get('institutions',id)
-      id.nil? ? @institution.instantiate_one_institution(res) : @institution.instantiate_all_institutions(res)
+      puts 'The id is', id
+      id.nil? ? @institution.instantiate_all_institutions(res) : @institution.instantiate_one_institution(res)
     end
 
     # Builds an institution object and returns when the category details exist
     def category(id=nil)
       @category = Plaid::Category.new
       res = self.get('categories',id)
-      id.nil? ? @category.instantiate_one_category(res) : @category.instantiate_all_categories(res)
+      id.nil? ? @category.instantiate_all_categories(res) : @category.instantiate_one_category(res)
     end
 
   end
