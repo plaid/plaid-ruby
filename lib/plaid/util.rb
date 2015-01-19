@@ -55,7 +55,7 @@ module Plaid
         when '400'
           error_handler('Bad Request',res)
         when '401'
-          error_handler('Institution not supported',res) if body['code'] == 1180
+          error_handler('Institution not supported',res) if body['code'] == 1108
           error_handler('Corrupted token',res) if body['code'] == 1105
           error_handler('Unauthorized',res)
         when '402'

@@ -21,10 +21,11 @@ module Plaid
       build_user(res,api_level)
     end
 
-    def mfa_authentication(auth)
+    def mfa_authentication(auth,type)
       auth_path = self.permissions[0] + '/step'
-      res = Plaid.post(auth_path,{mfa:auth,access_token:self.access_token})
-      build_user(res)
+      res = Plaid.post(auth_path,{mfa:auth,access_token:self.access_token,type:type})
+      self.accounts = [], self.transactions = []
+      update_user(res)
     end
 
     def get_auth
@@ -68,6 +69,22 @@ module Plaid
         else
           self.accounts = res[:msg], self.transactions = res[:msg], self.permissions << api_level, self.access_token = res[:body]['access_token']
         end
+      rescue => e
+        error_handler(e)
+      else
+        self
+      end
+    end
+
+    def update_user(res,api_level=nil)
+      begin
+        res['accounts'].each do |account|
+          self.accounts << new_account(account)
+        end if res['accounts']
+        res['transactions'].each do |transaction|
+          self.transactions << new_transaction(transaction)
+        end if res['transactions']
+        self.permissions << api_level
       rescue => e
         error_handler(e)
       else

@@ -53,6 +53,16 @@ When a user is successfully authenticated you will receive a user object with fi
 
 # Multi-Factor Authentication
 
+Various institutions require multiple forms of authentication. If required to submit multiple (check the Institution for more information)
+
+To add extra forms of authentication use the method Plaid::User#mfa_authentication
+
+```ruby
+    mfa_user.mfa_authentication('tomato','bofa')
+```
+
+The result will either return a 'Requires further authentication' string or the payload requested from the API in the user object.
+
 # User Methods & Vars
 
 ## Vars
