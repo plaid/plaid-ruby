@@ -9,7 +9,7 @@ Warning: If you have been using any version < 1 please switch to the correct bra
 Add this line to your application's Gemfile:
 
 ```ruby
-  gem 'plaid'
+gem 'plaid'
 ```
 
 And install
@@ -37,7 +37,7 @@ end
 Authenticate a user to your desired level of api access (auth / connect).
 
 ```ruby
-    user = Plaid.auth('auth','plaid_test','plaid_good','wells')
+user = Plaid.auth('auth','plaid_test','plaid_good','wells')
 ```
 
 ## Learn More
