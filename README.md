@@ -62,8 +62,16 @@ New rubygems versions will be based on test coverage and passing tests, or time 
 
 Contribution rules:
 
-*Fork it ( https://github.com/plaid/plaid-ruby/fork ) 2a) Create your feature branch (git checkout -b feature/my-new-feature) 2b) Create your new hot-fix branch (git checkout -b hot-fix/my-new-hotfix)
+1)Fork it ( https://github.com/plaid/plaid-ruby/fork )
+
+2a) Create your feature branch (git checkout -b feature/my-new-feature)
+
+2b) Create your new hot-fix branch (git checkout -b hot-fix/my-new-hotfix)
+
 *Commit your changes
+
 *Push to the branch (git push origin feature/my-new-feature)
+
 *Create a new Pull Request
+
 *Wait for review and merge or notes to get merge accepted
