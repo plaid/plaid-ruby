@@ -9,7 +9,7 @@ Warning: If you have been using any version < 1 please switch to the correct bra
 Add this line to your application's Gemfile:
 
 ```ruby
-   gem 'plaid'
+  gem 'plaid'
 ```
 
 And install
