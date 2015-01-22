@@ -51,14 +51,19 @@ We highly encourage helping out with the gem. Either adding more tests, building
 The rules for contributing are simple:
 
 No outside runtime libraries are allowed unless approved by the maintainer.
+
 Follow the workflow set up below. Bug fixes should be labeled as a hot-fix, features labeled as features
+
 Semantic versioning is strictly adhered to.
-If you build a new feature you must release an update to the readme with information about the feature before it is accepted and commited.
+
+If you build a new feature you must release an update to the readme with information about the feature before it is accepted and committed.
+
 New rubygems versions will be based on test coverage and passing tests, or time span for smaller combined bug fixes.
+
 Contribution rules:
 
-Fork it ( https://github.com/plaid/plaid-ruby/fork ) 2a) Create your feature branch (git checkout -b feature/my-new-feature) 2b) Create your new hot-fix branch (git checkout -b hot-fix/my-new-hotfix)
-Commit your changes
-Push to the branch (git push origin feature/my-new-feature)
-Create a new Pull Request
-Wait for review and merge or notes to get merge accepted
+*Fork it ( https://github.com/plaid/plaid-ruby/fork ) 2a) Create your feature branch (git checkout -b feature/my-new-feature) 2b) Create your new hot-fix branch (git checkout -b hot-fix/my-new-hotfix)
+*Commit your changes
+*Push to the branch (git push origin feature/my-new-feature)
+*Create a new Pull Request
+*Wait for review and merge or notes to get merge accepted
