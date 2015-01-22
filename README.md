@@ -31,7 +31,7 @@ Plaid.config do |p|
     p.customer_id = ['test_id']
     p.secret = ['test_secret']
     p.environment_location = ['https://tartan.plaid.com/']
-   end
+end
 ```
 
 Authenticate a user to your desired level of api access (auth / connect).
