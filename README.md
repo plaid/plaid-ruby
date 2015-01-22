@@ -1,4 +1,4 @@
-# Plaid [![Build Status](https://travis-ci.org/plaid/plaid-ruby.svg?branch=version_2_first_release)](https://travis-ci.org/plaid/plaid-ruby)
+# Plaid [![Build Status](https://travis-ci.org/plaid/plaid-ruby.svg?branch=release_v_1.0.0)](https://travis-ci.org/plaid/plaid-ruby)
 
 Ruby bindings for the Plaid API
 
