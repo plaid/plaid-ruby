@@ -2,7 +2,13 @@
 
 Ruby bindings for the Plaid API
 
-Warning: If you have been using any version < 1 please switch to the correct branch. 
+## Notes
+
+Latest stable version: 1.0.0
+
+Last stable version: 0.1.6
+
+**Warning: If you have been using any version < 1 please switch to the correct branch (V0.1.6). Installing without specifying a version from RubyGems results in V1.0.0 build. **
 
 ## Installation
 
