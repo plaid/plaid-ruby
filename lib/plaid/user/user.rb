@@ -6,13 +6,14 @@ module Plaid
     include Plaid::Util
 
     # Define user vars
-    attr_accessor(:accounts, :transactions, :access_token, :permissions)
+    attr_accessor(:accounts, :transactions, :access_token, :permissions, :api_res, :pending_mfa_questions)
 
     def initialize
       self.accounts = []
       self.transactions = []
       self.permissions = []
       self.access_token = ''
+      self.api_res = ''
     end
 
     # Instantiate a new user with the results of the successful API call
@@ -66,8 +67,9 @@ module Plaid
           end if res['transactions']
           self.permissions << api_level
           self.access_token = res['access_token']
+          self.api_res = 'success'
         else
-          self.accounts = res[:msg], self.transactions = res[:msg], self.permissions << api_level, self.access_token = res[:body]['access_token']
+          self.pending_mfa_questions = res[:body], self.accounts = res[:msg], self.transactions = res[:msg], self.permissions << api_level, self.access_token = res[:body]['access_token'], self.api_res = res[:msg]
         end
       rescue => e
         error_handler(e)
@@ -78,13 +80,19 @@ module Plaid
 
     def update_user(res,api_level=nil)
       begin
-        res['accounts'].each do |account|
-          self.accounts << new_account(account)
-        end if res['accounts']
-        res['transactions'].each do |transaction|
-          self.transactions << new_transaction(transaction)
-        end if res['transactions']
-        self.permissions << api_level
+        if res[:msg].nil?
+          res['accounts'].each do |account|
+            self.accounts << new_account(account)
+          end if res['accounts']
+          res['transactions'].each do |transaction|
+            self.transactions << new_transaction(transaction)
+          end if res['transactions']
+          self.permissions << api_level
+          self.api_res = 'success'
+          self.pending_mfa_questions = ''
+        else
+          self.pending_mfa_questions = res[:body]
+        end
       rescue => e
         error_handler(e)
       else

@@ -16,6 +16,7 @@ module Plaid
 
     def instantiate_one_institution(res)
       self.build_institution(res)
+      self
     end
 
     protected

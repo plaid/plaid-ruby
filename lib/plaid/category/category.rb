@@ -16,6 +16,7 @@ module Plaid
 
     def instantiate_one_category(res)
       self.build_category(res)
+      self
     end
 
     protected
