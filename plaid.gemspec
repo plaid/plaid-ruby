@@ -11,6 +11,7 @@ Gem::Specification.new do |spec|
   spec.description   = 'Ruby gem wrapper for the Plaid API. Read more at the homepage, the wiki, or the plaid documentation.'
   spec.homepage      = 'https://github.com/plaid/plaid-ruby'
   spec.license       = 'MIT'
+  spec.required_ruby_version = '>= 2.1.3'
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
