@@ -34,9 +34,9 @@ Configure the gem with your customer id, secret key, and the environment path yo
 
 ```ruby
 Plaid.config do |p|
-    p.customer_id = 'Enter your Plaid provided customer ID here'
-    p.secret = 'Enter your Plaid provided secret key here'
-    p.environment_location = 'Enter the url for the development or production environment here. More info at Plaid.com/docs'
+    p.customer_id = 'Plaid provided customer ID here'
+    p.secret = 'Plaid provided secret key here'
+    p.environment_location = 'URL for the development or production environment'
 end
 ```
 
