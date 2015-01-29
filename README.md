@@ -4,7 +4,7 @@ Ruby bindings for the Plaid API
 
 ## Notes
 
-Latest stable version: **1.0.0**
+Latest stable version: **1.0.1**
 
 Last stable version: 0.1.6
 
