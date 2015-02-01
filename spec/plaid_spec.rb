@@ -2,6 +2,8 @@ require 'spec_helper.rb'
 ########## Plaid specs ##########
 describe Plaid do
 
+
+
   # Configuration specs - used in gem configuration
   describe '.config' do
     context 'has valid dev keys' do
@@ -10,7 +12,8 @@ describe Plaid do
         p.secret = 'test_secret'
         p.environment_location = 'https://tartan.plaid.com/'
       end
-      res = Plaid.auth('connect','plaid_test','plaid_good','wells')
+
+      res = Plaid.auth('connect', { username: 'plaid_test', password: 'plaid_good', type: 'wells' })
       it { expect(res).to be_instance_of Plaid::User }
     end
 
@@ -20,7 +23,8 @@ describe Plaid do
         p.secret = 'test_secret'
         p.environment_location = 'https://api.plaid.com/'
       end
-      res = Plaid.auth('connect','plaid_test','plaid_good','wells')
+
+      res = Plaid.auth('connect', { username: 'plaid_test', password: 'plaid_good', type: 'wells' })
       it { expect(res).to be_instance_of Plaid::User }
     end
 
@@ -30,7 +34,7 @@ describe Plaid do
         p.secret = 'test_bad'
         p.environment_location = 'https://tartan.plaid.com/'
       end
-      it { expect{Plaid.auth('connect','plaid_bad','plaid_bad','wells')}.to raise_error }
+      it { expect{Plaid.auth('connect', { username: 'plaid_test', password: 'plaid_good', type: 'wells' })}.to raise_error }
     end
 
     context 'has invalid production keys' do
@@ -39,7 +43,8 @@ describe Plaid do
         p.secret = 'test_bad'
         p.environment_location = 'https://api.plaid.com/'
       end
-      it { expect{Plaid.auth('connect','plaid_bad','plaid_bad','wells')}.to raise_error }
+
+      it { expect{Plaid.auth('connect', { username: 'plaid_test', password: 'plaid_good', type: 'wells' })}.to raise_error }
     end
   end
 
@@ -53,7 +58,8 @@ describe Plaid do
         p.secret = 'test_secret'
         p.environment_location = 'https://tartan.plaid.com/'
       end
-      user = Plaid.auth('connect','plaid_test','plaid_good','wells')
+
+      user = Plaid.auth('connect', { username: 'plaid_test', password: 'plaid_good', type: 'wells' })
       it { expect(user.accounts.empty?).to be_falsey }
     end
 
@@ -63,7 +69,8 @@ describe Plaid do
         p.secret = 'test_secret'
         p.environment_location = 'https://tartan.plaid.com/'
       end
-      user = Plaid.auth('auth','plaid_test','plaid_good','wells')
+
+      user = Plaid.auth('auth', { username: 'plaid_test', password: 'plaid_good', type: 'wells' })
       it { expect(user.accounts[0].numbers.nil?).to be_falsey }
     end
 
@@ -73,7 +80,8 @@ describe Plaid do
         p.secret = 'test_secret'
         p.environment_location = 'https://tartan.plaid.com/'
       end
-      it { expect{Plaid.auth('auth','plaid_test','plaid_bad','wells')}.to raise_error }
+      options = { username: 'plaid_test', password: 'bad', type: 'wells' }
+      it { expect{Plaid.auth('auth', options)}.to raise_error }
     end
 
     context 'has incorrect username under auth path' do
@@ -82,7 +90,8 @@ describe Plaid do
         p.secret = 'test_secret'
         p.environment_location = 'https://tartan.plaid.com/'
       end
-      it { expect{Plaid.auth('auth','plaid_bad','plaid_bad','wells')}.to raise_error }
+      options = { username: 'bad', password: 'plaid_good', type: 'wells' }
+      it { expect{Plaid.auth('auth', options)}.to raise_error }
     end
 
     context 'has correct username, but incorrect password for single factor auth under connect path' do
@@ -91,7 +100,8 @@ describe Plaid do
         p.secret = 'test_secret'
         p.environment_location = 'https://tartan.plaid.com/'
       end
-      it { expect{Plaid.auth('connect','plaid_test','plaid_bad','wells')}.to raise_error }
+      options = { username: 'plaid_test', password: 'bad', type: 'wells' }
+      it { expect{Plaid.auth('connect', options)}.to raise_error }
     end
 
     context 'has incorrect username under connect path' do
@@ -100,7 +110,8 @@ describe Plaid do
         p.secret = 'test_secret'
         p.environment_location = 'https://tartan.plaid.com/'
       end
-      it { expect{Plaid.auth('connect','plaid_bad','plaid_bad','wells')}.to raise_error }
+      options = { username: 'bad', password: 'plaid_good', type: 'wells' }
+      it { expect{Plaid.auth('connect', options)}.to raise_error }
     end
 
     context 'has to enter MFA credentials' do
@@ -109,7 +120,8 @@ describe Plaid do
         p.secret = 'test_secret'
         p.environment_location = 'https://tartan.plaid.com/'
       end
-      user = Plaid.auth('connect','plaid_selections', 'plaid_good','bofa')
+
+      user = Plaid.auth('connect',{ username: 'plaid_test', password: 'plaid_good', type: 'bofa' })
       it { expect(user.api_res).to eq 'Requires further authentication' }
     end
 
@@ -119,7 +131,8 @@ describe Plaid do
         p.secret = 'test_secret'
         p.environment_location = 'https://tartan.plaid.com/'
       end
-      user = Plaid.auth('connect','plaid_selections', 'plaid_locked','wells')
+      options = { username: 'plaid_test', password: 'plaid_locked', type: 'wells' }
+      user = Plaid.auth('connect',options)
       it { expect(user.api_res).to eq 'User account is locked' }
     end
   end
@@ -205,7 +218,8 @@ describe Plaid do
           p.secret = 'test_secret'
           p.environment_location = 'https://tartan.plaid.com/'
         end
-        new_mfa_user = Plaid.auth('connect','plaid_selections', 'plaid_good','bofa')
+  
+        new_mfa_user = Plaid.auth('connect',{ username: 'plaid_test', password: 'plaid_good', type: 'bofa' })
         new_mfa_user.mfa_authentication('tomato','bofa')
         it { expect(new_mfa_user.accounts).to be_truthy }
       end
@@ -216,7 +230,8 @@ describe Plaid do
           p.secret = 'test_secret'
           p.environment_location = 'https://tartan.plaid.com/'
         end
-        mfa_again = Plaid.auth('connect','plaid_selections', 'plaid_good','bofa')
+  
+        mfa_again = Plaid.auth('connect',{ username: 'plaid_test', password: 'plaid_good', type: 'bofa' })
         mfa_again.mfa_authentication('again','bofa')
         it { expect(mfa_again.api_res).to eq 'Requires further authentication' }
       end
@@ -227,17 +242,19 @@ describe Plaid do
           p.secret = 'test_secret'
           p.environment_location = 'https://tartan.plaid.com/'
         end
-        mfa_user = Plaid.auth('connect','plaid_selections', 'plaid_good','bofa')
+  
+        mfa_user = Plaid.auth('connect',{ username: 'plaid_test', password: 'plaid_good', type: 'bofa' })
         mfa_user.mfa_authentication('tomato','bofa')
-        mfa_user = Plaid.auth('connect','plaid_selections', 'plaid_good','bofa')
+        mfa_user = Plaid.auth('connect',{ username: 'plaid_test', password: 'plaid_good', type: 'bofa' })
         it { expect { mfa_user.mfa_authentication('bad','bofa') }.to raise_error }
       end
     end
 
     # Auth specs
     describe '#get_auth' do
-      auth_user = Plaid.auth('auth','plaid_test','plaid_good','wells')
-      connect_user = Plaid.auth('connect','plaid_test','plaid_good','wells')
+
+      auth_user = Plaid.auth('auth',{ username: 'plaid_test', password: 'plaid_good', type: 'wells' })
+      connect_user = Plaid.auth('connect',{ username: 'plaid_test', password: 'plaid_good', type: 'wells' })
 
       context 'has access and returns accounts' do
         it { expect(auth_user.permissions[0]).to eq('auth') }
@@ -250,8 +267,8 @@ describe Plaid do
 
     # Connect specs
     describe '#get_connect' do
-      auth_user = Plaid.auth('auth','plaid_test','plaid_good','wells')
-      connect_user = Plaid.auth('connect','plaid_test','plaid_good','wells')
+      auth_user = Plaid.auth('auth',{ username: 'plaid_test', password: 'plaid_good', type: 'wells' })
+      connect_user = Plaid.auth('connect',{ username: 'plaid_test', password: 'plaid_good', type: 'wells' })
 
       context 'has access and returns accounts' do
         it { expect(connect_user.permissions[0]).to eq('connect') }
@@ -265,8 +282,10 @@ describe Plaid do
     # Upgrade specs - either pass or fails
 =begin TODO: Write upgrade methods to pass without paying
     describe '#upgrade' do
-      auth_user = Plaid.auth('auth','plaid_test','plaid_good','wells')
-      connect_user = Plaid.auth('connect','plaid_test','plaid_good','wells')
+
+
+      auth_user = Plaid.auth('auth',{ username: 'plaid_test', password: 'plaid_good', type: 'wells' })
+      connect_user = Plaid.auth('connect',{ username: 'plaid_test', password: 'plaid_good', type: 'wells' })
 
       context 'auth upgrade is successful' do
         connect_user.upgrade
