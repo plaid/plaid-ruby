@@ -17,23 +17,8 @@ module Plaid
       JSON.parse(res)
     end
 
-    def error_handler(err,res=nil)
-      case err
-        when 'Bad Request'
-          raise 'The request was malformed. Did you check the API docs?'
-        when 'Unauthorized'
-          raise 'Access denied: Try using the correct credentials.'
-        when 'Request Failed'
-          raise 'Request Failed'
-        when 'Not Found'
-          raise 'Not Found'
-        when 'Institution not supported'
-          raise 'Institution not supported'
-        when 'Corrupted token'
-          raise 'It appears that the access_token has been corrupted'
-        else
-          raise err
-      end
+    def error_handler(err)
+      raise err
     end
 
     protected
@@ -47,25 +32,10 @@ module Plaid
 
     def parse_response(res)
       body = JSON.parse(res.body)
-      case res.code.delete('.').to_i
-        when 200
-          return body
-        when 201
-          return { msg: 'Requires further authentication', body: body}
-        when 400
-          error_handler('Bad Request',res)
-        when 401
-          error_handler('Institution not supported',res) if body['code'] == 1108
-          error_handler('Corrupted token',res) if body['code'] == 1105
-          error_handler('Not Found',res) if body['code'] == 1501
-          error_handler('Unauthorized',res)
-        when 402
-          return {msg: 'User account is locked', body: body} if body['code'] == 1205
-          error_handler('Request Failed', res)
-        when 404
-          error_handler('Not Found',res)
-        else
-          error_handler('Server Error',res)
+      unless body.nil?
+        return body.merge( 'response_code' => res.code.delete('.').to_i )
+      else
+        error_handler "No Response"
       end
     end
   end

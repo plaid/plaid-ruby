@@ -26,7 +26,7 @@ module Plaid
       auth_path = self.permissions[0] + '/step'
       res = Plaid.post(auth_path,{mfa:auth,access_token:self.access_token,type:type})
       self.accounts = [], self.transactions = []
-      update_user(res)
+      build_user(res)
     end
 
     def get_auth
@@ -58,19 +58,23 @@ module Plaid
 
     def build_user(res,api_level=nil)
       begin
-        if res[:msg].nil?
+        self.api_res = api_response(res)
+        self.permissions << api_level
+        self.access_token = res['access_token']   
+        
+        if self.api_res['response_code'] == 200
           res['accounts'].each do |account|
             self.accounts << new_account(account)
           end if res['accounts']
+
           res['transactions'].each do |transaction|
             self.transactions << new_transaction(transaction)
-          end if res['transactions']
-          self.permissions << api_level
-          self.access_token = res['access_token']
-          self.api_res = 'success'
-        else
-          self.pending_mfa_questions = res[:body], self.accounts = res[:msg], self.transactions = res[:msg], self.permissions << api_level, self.access_token = res[:body]['access_token'], self.api_res = res[:msg]
+          end if res['transactions']       
+        
+        elsif self.api_res['response_code'] == 201
+          self.pending_mfa_questions = res['mfa']                
         end
+      
       rescue => e
         error_handler(e)
       else
@@ -78,26 +82,13 @@ module Plaid
       end
     end
 
-    def update_user(res,api_level=nil)
-      begin
-        if res[:msg].nil?
-          res['accounts'].each do |account|
-            self.accounts << new_account(account)
-          end if res['accounts']
-          res['transactions'].each do |transaction|
-            self.transactions << new_transaction(transaction)
-          end if res['transactions']
-          self.permissions << api_level
-          self.api_res = 'success'
-          self.pending_mfa_questions = ''
-        else
-          self.pending_mfa_questions = res[:body]
-        end
-      rescue => e
-        error_handler(e)
-      else
-        self
-      end
+    def api_response(res)
+      {
+        'response_code' => res['response_code'], 
+        'error_code' => res['code'], 
+        'error_message' => res['message'],
+        'error_resolve' => res['resolve']
+      }
     end
 
     # Instantiate and build a new account object, return this to the accounts array
