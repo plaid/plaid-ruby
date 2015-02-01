@@ -31,6 +31,8 @@ module Plaid
           raise 'Institution not supported'
         when 'Corrupted token'
           raise 'It appears that the access_token has been corrupted'
+        when 'Invalid Credentials'
+          raise 'Username or password were invalid'
         else
           raise err
       end
@@ -61,6 +63,7 @@ module Plaid
           error_handler('Unauthorized',res)
         when 402
           return {msg: 'User account is locked', body: body} if body['code'] == 1205
+          error_handler('Invalid Credentials', res) if body['code'].between?(1200,1202)
           error_handler('Request Failed', res)
         when 404
           error_handler('Not Found',res)
