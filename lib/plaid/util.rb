@@ -32,10 +32,10 @@ module Plaid
 
     def parse_response(res)
       body = JSON.parse(res.body)
-      if body['code'].nil?
+      unless body.nil?
         return body.merge( 'response_code' => res.code.delete('.').to_i )
       else
-        error_handler "#{body['message']} (Plaid Error Code: #{body['code']}) - #{body['resolve']}"
+        error_handler "No Response"
       end
     end
   end
