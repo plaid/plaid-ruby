@@ -59,22 +59,20 @@ module Plaid
     def build_user(res,api_level=nil)
       begin
         self.api_res = res['response_code']
-
+        self.permissions << api_level
+        self.access_token = res['access_token']   
+        
         if self.api_res == 200
           res['accounts'].each do |account|
             self.accounts << new_account(account)
           end if res['accounts']
+
           res['transactions'].each do |transaction|
             self.transactions << new_transaction(transaction)
-          end if res['transactions']
-          self.permissions << api_level
-          self.access_token = res['access_token']          
+          end if res['transactions']       
         
         elsif self.api_res == 201
           self.pending_mfa_questions = res['mfa']
-          self.permissions << api_level
-          self.access_token = res['access_token']
-
         
         else
           raise "Unhandled Response"
@@ -90,15 +88,19 @@ module Plaid
     def update_user(res,api_level=nil)
       begin
         if res['response_code'] == 200
+          
           res['accounts'].each do |account|
             self.accounts << new_account(account)
           end if res['accounts']
+
           res['transactions'].each do |transaction|
             self.transactions << new_transaction(transaction)
           end if res['transactions']
+          
           self.permissions << api_level
-          self.api_res = 'success'
+          self.api_res = res['response_code']
           self.pending_mfa_questions = ''
+        
         else
           self.pending_mfa_questions = res
         end
