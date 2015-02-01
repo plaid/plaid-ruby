@@ -132,8 +132,7 @@ describe Plaid do
         p.environment_location = 'https://tartan.plaid.com/'
       end
       options = { username: 'plaid_test', password: 'plaid_locked', type: 'wells' }
-      user = Plaid.auth('connect',options)
-      it { expect(user.api_res).to eq 'User account is locked' }
+      it { expect{Plaid.auth('connect', options)}.to raise_error }
     end
   end
 

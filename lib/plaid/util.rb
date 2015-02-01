@@ -32,7 +32,7 @@ module Plaid
 
     def parse_response(res)
       body = JSON.parse(res.body)
-      if body['code'].nil? || body['code'] == 1205 ## Should move account lock to an error for logical consistency
+      if body['code'].nil?
         return body.merge( 'response_code' => res.code.delete('.').to_i )
       else
         error_handler "#{body['message']} (Plaid Error Code: #{body['code']}) - #{body['resolve']}"

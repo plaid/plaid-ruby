@@ -77,15 +77,6 @@ module Plaid
           self.accounts = "Requires further authentication"
           self.transactions = "Requires further authentication"
           self.api_res = "Requires further authentication"
-
-        elsif res['response_code'] == 402
-          ## if invalid credentials is an error, so should account lock be
-          self.pending_mfa_questions = res
-          self.permissions << api_level
-          self.access_token = res['access_token']
-          self.accounts = "User account is locked" 
-          self.transactions = "User account is locked"
-          self.api_res = "User account is locked"
         
         else
           raise "Unhandled Response"
