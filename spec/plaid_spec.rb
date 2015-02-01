@@ -122,7 +122,7 @@ describe Plaid do
       end
 
       user = Plaid.auth('connect',{ username: 'plaid_test', password: 'plaid_good', type: 'bofa' })
-      it { expect(user.api_res).to eq 'Requires further authentication' }
+      it { expect(user.api_res).to eq 201 }
     end
 
     context 'enters correct information with locked account' do
@@ -232,7 +232,7 @@ describe Plaid do
   
         mfa_again = Plaid.auth('connect',{ username: 'plaid_test', password: 'plaid_good', type: 'bofa' })
         mfa_again.mfa_authentication('again','bofa')
-        it { expect(mfa_again.api_res).to eq 'Requires further authentication' }
+        it { expect(mfa_again.api_res).to eq 201 }
       end
 
       context 'enters incorrect credentials for MFA auth' do

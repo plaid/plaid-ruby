@@ -58,7 +58,9 @@ module Plaid
 
     def build_user(res,api_level=nil)
       begin
-        if res['response_code'] == 200
+        self.api_res = res['response_code']
+
+        if self.api_res == 200
           res['accounts'].each do |account|
             self.accounts << new_account(account)
           end if res['accounts']
@@ -66,17 +68,13 @@ module Plaid
             self.transactions << new_transaction(transaction)
           end if res['transactions']
           self.permissions << api_level
-          self.access_token = res['access_token']
-          self.api_res = 'success'
-        elsif res['response_code'] == 201
-          self.pending_mfa_questions = res
+          self.access_token = res['access_token']          
+        
+        elsif self.api_res == 201
+          self.pending_mfa_questions = res['mfa']
           self.permissions << api_level
           self.access_token = res['access_token']
 
-          ## should remove this to clean up response
-          self.accounts = "Requires further authentication"
-          self.transactions = "Requires further authentication"
-          self.api_res = "Requires further authentication"
         
         else
           raise "Unhandled Response"
