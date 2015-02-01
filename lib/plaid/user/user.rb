@@ -58,7 +58,7 @@ module Plaid
 
     def build_user(res,api_level=nil)
       begin
-        if res[:msg].nil?
+        if res['response_code'] == 200
           res['accounts'].each do |account|
             self.accounts << new_account(account)
           end if res['accounts']
@@ -68,9 +68,29 @@ module Plaid
           self.permissions << api_level
           self.access_token = res['access_token']
           self.api_res = 'success'
+        elsif res['response_code'] == 201
+          self.pending_mfa_questions = res
+          self.permissions << api_level
+          self.access_token = res['access_token']
+
+          ## should remove this to clean up response
+          self.accounts = "Requires further authentication"
+          self.transactions = "Requires further authentication"
+          self.api_res = "Requires further authentication"
+
+        elsif res['response_code'] == 402
+          ## if invalid credentials is an error, so should account lock be
+          self.pending_mfa_questions = res
+          self.permissions << api_level
+          self.access_token = res['access_token']
+          self.accounts = "User account is locked" 
+          self.transactions = "User account is locked"
+          self.api_res = "User account is locked"
+        
         else
-          self.pending_mfa_questions = res[:body], self.accounts = res[:msg], self.transactions = res[:msg], self.permissions << api_level, self.access_token = res[:body]['access_token'], self.api_res = res[:msg]
+          raise "Unhandled Response"
         end
+      
       rescue => e
         error_handler(e)
       else
@@ -80,7 +100,7 @@ module Plaid
 
     def update_user(res,api_level=nil)
       begin
-        if res[:msg].nil?
+        if res['response_code'] == 200
           res['accounts'].each do |account|
             self.accounts << new_account(account)
           end if res['accounts']
@@ -91,7 +111,7 @@ module Plaid
           self.api_res = 'success'
           self.pending_mfa_questions = ''
         else
-          self.pending_mfa_questions = res[:body]
+          self.pending_mfa_questions = res
         end
       rescue => e
         error_handler(e)
