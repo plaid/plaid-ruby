@@ -2,7 +2,7 @@ require 'plaid/version'
 require 'plaid/config'
 require 'plaid/util'
 
-require 'plaid/auth'
+require 'plaid/add_user'
 require 'plaid/user/user'
 require 'plaid/institution/institution'
 require 'plaid/category/category'
@@ -16,7 +16,7 @@ module Plaid
     include Plaid::Util
 
     # Includes the method to authenticate the user. Defined in auth.rb
-    include Plaid::Auth
+    include Plaid::AddUser
 
     # Builds the user object and returns on successful authentication
     def user(res,api_level=nil)
