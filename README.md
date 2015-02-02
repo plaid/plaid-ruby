@@ -43,7 +43,7 @@ end
 Authenticate a user to your desired level of api access (auth / connect).
 
 ```ruby
-user = Plaid.auth('auth','plaid_test','plaid_good','wells')
+user = Plaid.add_user('auth','plaid_test','plaid_good','wells')
 ```
 
 ## Learn More

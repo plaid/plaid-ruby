@@ -30,7 +30,7 @@ module Plaid
         when 'Institution not supported'
           raise 'Institution not supported'
         when 'Corrupted token'
-          raise 'It appears that the access_token has been corrupted'
+          raise 'It appears that the access token has been corrupted'
         else
           raise err
       end
@@ -68,5 +68,6 @@ module Plaid
           error_handler('Server Error',res)
       end
     end
+
   end
 end
