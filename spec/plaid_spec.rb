@@ -141,6 +141,76 @@ describe Plaid do
       user = Plaid.add_user('connect','plaid_selections', 'plaid_locked','wells')
       it { expect(user.api_res).to eq 'User account is locked' }
     end
+
+    context 'enters webhook option as part of standard call' do
+      Plaid.config do |p|
+        p.customer_id = 'test_id'
+        p.secret = 'test_secret'
+        p.environment_location = 'https://tartan.plaid.com/'
+      end
+      user = Plaid.add_user('connect','plaid_test', 'plaid_good','wells',{login_only: true, webhook: 'test.com/test.endpoint.aspx'})
+      it { expect(user.accounts.empty?).to be_falsey }
+    end
+
+    context 'enters webhook option as part of mfa required institution authentication' do
+      Plaid.config do |p|
+        p.customer_id = 'test_id'
+        p.secret = 'test_secret'
+        p.environment_location = 'https://tartan.plaid.com/'
+      end
+      user = Plaid.add_user('connect','plaid_selections', 'plaid_good','bofa',{login_only: true, webhook: 'test.com/test.endpoint.aspx'})
+      it { expect(user.api_res).to eq 'Requires further authentication' }
+    end
+
+    context 'requests pending transactions from an institution' do
+      Plaid.config do |p|
+        p.customer_id = 'test_id'
+        p.secret = 'test_secret'
+        p.environment_location = 'https://tartan.plaid.com/'
+      end
+      user = Plaid.add_user('connect','plaid_selections', 'plaid_locked','wells',{pending: true})
+      it { expect(user.accounts.empty?).to be_falsey }
+    end
+
+    context 'sets the login only option to true' do
+      Plaid.config do |p|
+        p.customer_id = 'test_id'
+        p.secret = 'test_secret'
+        p.environment_location = 'https://tartan.plaid.com/'
+      end
+      user = Plaid.add_user('connect','plaid_selections', 'plaid_locked','wells',{login_only:true})
+      it { expect(user.accounts.empty?).to be_falsey }
+    end
+
+    context 'requests a list of options for code based MFA' do
+      Plaid.config do |p|
+        p.customer_id = 'test_id'
+        p.secret = 'test_secret'
+        p.environment_location = 'https://tartan.plaid.com/'
+      end
+      user = Plaid.add_user('connect','plaid_selections', 'plaid_locked','citi',{list: true})
+      it { expect(user.accounts.empty?).to be_falsey }
+    end
+
+    context 'sets a start date for transactions' do
+      Plaid.config do |p|
+        p.customer_id = 'test_id'
+        p.secret = 'test_secret'
+        p.environment_location = 'https://tartan.plaid.com/'
+      end
+      user = Plaid.add_user('connect','plaid_selections', 'plaid_locked','wells',{login_only:true, start_date:'10 days ago'})
+      it { expect(user.accounts.empty?).to be_falsey }
+    end
+
+    context 'sets an end date for transactions' do
+      Plaid.config do |p|
+        p.customer_id = 'test_id'
+        p.secret = 'test_secret'
+        p.environment_location = 'https://tartan.plaid.com/'
+      end
+      user = Plaid.add_user('connect','plaid_selections', 'plaid_locked','wells',{login_only:true, end_date: '10 days ago'})
+      it { expect(user.accounts.empty?).to be_falsey }
+    end
   end
 
   # Institution specs
