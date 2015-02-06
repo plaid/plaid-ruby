@@ -285,6 +285,30 @@ describe Plaid do
   ########## Plaid instantiated user specs ##########
 
   describe '#User' do
+
+    describe 'user vars' do
+
+      context 'valid user has accounts and accounts contain id attribute' do
+        Plaid.config do |p|
+          p.customer_id = 'test_id'
+          p.secret = 'test_secret'
+          p.environment_location = 'https://tartan.plaid.com/'
+        end
+        user = Plaid.add_user('connect','plaid_test','plaid_good','wells')
+        it { expect(user.accounts.first.id).to be_truthy }
+      end
+
+      context 'valid user has accounts and accounts contain type attribute' do
+        Plaid.config do |p|
+          p.customer_id = 'test_id'
+          p.secret = 'test_secret'
+          p.environment_location = 'https://tartan.plaid.com/'
+        end
+        user = Plaid.add_user('connect','plaid_test','plaid_good','wells')
+        it { expect(user.accounts.first.type).to eq('depository') }
+      end
+    end
+
     # MFA specs - after user is instantiated,
     describe '#mfa_authentication' do
 
