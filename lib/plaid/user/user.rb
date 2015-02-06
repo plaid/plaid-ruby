@@ -68,6 +68,7 @@ module Plaid
           self.permissions << api_level
           self.access_token = res['access_token']
           self.api_res = 'success'
+          clean_up_user(self)
         else
           self.pending_mfa_questions = res[:body], self.accounts = res[:msg], self.transactions = res[:msg], self.permissions << api_level, self.access_token = res[:body]['access_token'], self.api_res = res[:msg]
         end
@@ -110,6 +111,13 @@ module Plaid
     def new_transaction(transaction)
       @transaction = Transaction.new
       @transaction.new(transaction)
+    end
+
+    private
+
+    def clean_up_user(user)
+      user.accounts.reject! { |c| !c.instance_of? Plaid::Account }
+      user
     end
 
   end
