@@ -24,7 +24,7 @@ module Plaid
     end
 
     def mfa_authentication(auth,type)
-      auth_path = self.permissions[0] + '/step'
+      auth_path = self.permissions.last + '/step'
       res = Plaid.post(auth_path,{mfa:auth,access_token:self.access_token,type:type})
       self.accounts = [], self.transactions = []
       build_user(res)
@@ -107,13 +107,13 @@ module Plaid
               self.transactions << new_transaction(transaction)
             #end
           end if res['transactions']
-          self.permissions << api_level
+          self.permissions << api_level unless self.permissions.include? api_level
           self.api_res = 'success'
           self.pending_mfa_questions = ''
           clean_up_user(self)
         else
           self.access_token = res[:body]['access_token'] if self.access_token.nil?
-          self.pending_mfa_questions = res[:body], self.api_res = res[:msg]
+          self.pending_mfa_questions = res[:body], self.api_res = res[:msg], self.permissions << api_level
         end
       rescue => e
         error_handler(e)
