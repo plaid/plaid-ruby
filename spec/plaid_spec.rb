@@ -67,6 +67,16 @@ describe Plaid do
       it { expect(user.accounts[0].numbers.nil?).to be_falsey }
     end
 
+    context 'has correct credentials for single factor auth, authenticates to the info level of api access' do
+      Plaid.config do |p|
+        p.customer_id = 'test_id'
+        p.secret = 'test_secret'
+        p.environment_location = 'https://tartan.plaid.com/'
+      end
+      user = Plaid.add_user('info','plaid_test','plaid_good','wells')
+      it { expect(user.info).to be_truthy }
+    end
+
     context 'has correct username, but incorrect password for single factor auth under auth level of api access' do
       Plaid.config do |p|
         p.customer_id = 'test_id'
@@ -101,6 +111,24 @@ describe Plaid do
         p.environment_location = 'https://tartan.plaid.com/'
       end
       it { expect{Plaid.add_user('connect','plaid_bad','plaid_bad','wells')}.to raise_error }
+    end
+
+    context 'has correct username, but incorrect password for single factor auth under info level of api access' do
+      Plaid.config do |p|
+        p.customer_id = 'test_id'
+        p.secret = 'test_secret'
+        p.environment_location = 'https://tartan.plaid.com/'
+      end
+      it { expect{Plaid.add_user('info','plaid_test','plaid_bad','wells')}.to raise_error }
+    end
+
+    context 'has incorrect username under info level of api access' do
+      Plaid.config do |p|
+        p.customer_id = 'test_id'
+        p.secret = 'test_secret'
+        p.environment_location = 'https://tartan.plaid.com/'
+      end
+      it { expect{Plaid.add_user('info','plaid_bad','plaid_bad','wells')}.to raise_error }
     end
 
     context 'enters pin for extra parameter authentication required by certain institutions' do
@@ -372,6 +400,49 @@ describe Plaid do
 
       context 'does not have access to auth' do
         it{ expect(auth_user.permissions.include? 'connect' ).to be false }
+      end
+    end
+
+    # Get info specs
+    describe '#get_info' do
+      Plaid.config do |p|
+        p.customer_id = 'test_id'
+        p.secret = 'test_secret'
+        p.environment_location = 'https://tartan.plaid.com/'
+      end
+      info_user = Plaid.add_user('info','plaid_test','plaid_good','wells')
+      auth_user = Plaid.add_user('auth','plaid_test','plaid_good','wells')
+
+      context 'has access and returns user info' do
+        it { expect(info_user.permissions[0]).to eq('info') }
+      end
+
+      context 'does not have access to info' do
+        it{ expect(auth_user.permissions.include? 'info' ).to be false }
+      end
+    end
+
+=begin
+    describe '#update_info' do
+      info_user = Plaid.add_user('info','plaid_test','plaid_good','wells')
+
+      context 'updates information correctly' do
+        it { expect { info_user.update_info('info','plaid_test','plaid_new','wells') }.to be_truthy }
+      end
+    end
+=end
+
+    describe '#delete_user' do
+      Plaid.config do |p|
+        p.customer_id = 'test_id'
+        p.secret = 'test_secret'
+        p.environment_location = 'https://tartan.plaid.com/'
+      end
+      info_user = Plaid.add_user('info','plaid_test','plaid_good','wells')
+      info_user.delete_user
+
+      context 'updates information correctly' do
+        it { expect { info_user.get_info }.to raise_error }
       end
     end
 

@@ -6,7 +6,7 @@ module Plaid
     include Plaid::Util
 
     # Define user vars
-    attr_accessor(:accounts, :transactions, :access_token, :permissions, :api_res, :pending_mfa_questions)
+    attr_accessor(:accounts, :transactions, :access_token, :permissions, :api_res, :pending_mfa_questions, :info)
 
     def initialize
       self.accounts = []
@@ -14,6 +14,7 @@ module Plaid
       self.permissions = []
       self.access_token = ''
       self.api_res = ''
+      self.info = {}
     end
 
     # Instantiate a new user with the results of the successful API call
@@ -47,11 +48,35 @@ module Plaid
       end
     end
 
+    def get_info
+      if self.permissions.include? 'info'
+        res = Plaid.get('info',{access_token:self.access_token})
+        build_user(res)
+      else
+        false
+      end
+    end
+
+    def update_info(username,pass,pin=nil)
+      if self.permissions.include? 'info'
+        payload = {username:username,password:pass,access_token:self.access_token}
+        payload.merge!({pin:pin}) if pin
+        res = Plaid.patch('info',payload)
+        build_user(res)
+      else
+        false
+      end
+    end
+
     def upgrade
       upgrade_to = 'auth' unless self.permissions.include? 'auth'
       upgrade_to = 'connect' unless self.permissions.include? 'connect'
       res = Plaid.post('upgrade',{access_token:self.access_token,upgrade_to:upgrade_to})
       build_user(res)
+    end
+
+    def delete_user
+      Plaid.delete('info',{access_token:self.access_token})
     end
 
     protected
@@ -65,6 +90,7 @@ module Plaid
           res['transactions'].each do |transaction|
             self.transactions << new_transaction(transaction)
           end if res['transactions']
+          self.info = res['info'] if res['info']
           self.permissions << api_level
           self.access_token = res['access_token']
           self.api_res = 'success'

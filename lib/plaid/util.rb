@@ -17,6 +17,23 @@ module Plaid
       JSON.parse(res)
     end
 
+    def patch(path,options={})
+      uri = build_uri(path)
+      options.merge!({client_id: self.instance_variable_get(:'@customer_id') ,secret: self.instance_variable_get(:'@secret')})
+      res = Net::HTTP.patch(uri,options)
+      parse_response(res)
+    end
+
+    def delete(path,options={})
+      uri = build_uri(path)
+      options.merge!({client_id: self.instance_variable_get(:'@customer_id') ,secret: self.instance_variable_get(:'@secret')})
+      req = Net::HTTP::Delete.new(uri)
+      req.body = URI.encode_www_form(options) if options
+      req.content_type = 'multipart/form-data'
+      res = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') { |http| http.request(req) }
+      puts res
+    end
+
     def error_handler(err,res=nil)
       case err
         when 'Bad Request'
