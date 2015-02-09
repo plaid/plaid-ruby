@@ -68,10 +68,12 @@ module Plaid
       end
     end
 
-    def upgrade
-      upgrade_to = 'auth' unless self.permissions.include? 'auth'
-      upgrade_to = 'connect' unless self.permissions.include? 'connect'
-      res = Plaid.post('upgrade',{access_token:self.access_token,upgrade_to:upgrade_to})
+    def upgrade(api_level=nil)
+      if api_level.nil?
+        api_level = 'auth' unless self.permissions.include? 'auth'
+        api_level = 'connect' unless self.permissions.include? 'connect'
+      end
+      res = Plaid.post('upgrade',{access_token:self.access_token,upgrade_to:api_level})
       build_user(res)
     end
 
