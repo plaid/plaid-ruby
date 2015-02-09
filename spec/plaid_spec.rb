@@ -196,7 +196,7 @@ describe Plaid do
         p.secret = 'test_secret'
         p.environment_location = 'https://tartan.plaid.com/'
       end
-      user = Plaid.add_user('connect','plaid_selections', 'plaid_locked','wells',{pending: true})
+      user = Plaid.add_user('connect','plaid_selections', 'plaid_good','wells',{pending: true})
       it { expect(user.accounts.empty?).to be_falsey }
     end
 
@@ -206,7 +206,7 @@ describe Plaid do
         p.secret = 'test_secret'
         p.environment_location = 'https://tartan.plaid.com/'
       end
-      user = Plaid.add_user('connect','plaid_selections', 'plaid_locked','wells',{login_only:true})
+      user = Plaid.add_user('connect','plaid_selections', 'plaid_good','wells',{login_only:true})
       it { expect(user.accounts.empty?).to be_falsey }
     end
 
@@ -216,8 +216,8 @@ describe Plaid do
         p.secret = 'test_secret'
         p.environment_location = 'https://tartan.plaid.com/'
       end
-      user = Plaid.add_user('connect','plaid_selections', 'plaid_locked','citi',{list: true})
-      it { expect(user.accounts.empty?).to be_falsey }
+      user = Plaid.add_user('connect','plaid_selections', 'plaid_good','citi',{list: true})
+      it { expect(user.pending_mfa_questions.nil?).to be_falsey }
     end
 
     context 'sets a start date for transactions' do
@@ -226,7 +226,7 @@ describe Plaid do
         p.secret = 'test_secret'
         p.environment_location = 'https://tartan.plaid.com/'
       end
-      user = Plaid.add_user('connect','plaid_selections', 'plaid_locked','wells',{login_only:true, start_date:'10 days ago'})
+      user = Plaid.add_user('connect','plaid_selections', 'plaid_good','wells',{login_only:true, start_date:'10 days ago'})
       it { expect(user.accounts.empty?).to be_falsey }
     end
 
@@ -236,7 +236,7 @@ describe Plaid do
         p.secret = 'test_secret'
         p.environment_location = 'https://tartan.plaid.com/'
       end
-      user = Plaid.add_user('connect','plaid_selections', 'plaid_locked','wells',{login_only:true, end_date: '10 days ago'})
+      user = Plaid.add_user('connect','plaid_selections', 'plaid_good','wells',{login_only:true, end_date: '10 days ago'})
       it { expect(user.accounts.empty?).to be_falsey }
     end
   end
@@ -422,6 +422,27 @@ describe Plaid do
       end
     end
 
+    describe '#get_balance' do
+      Plaid.config do |p|
+        p.customer_id = 'test_id'
+        p.secret = 'test_secret'
+        p.environment_location = 'https://tartan.plaid.com/'
+      end
+
+      user = Plaid.add_user('info','plaid_test','plaid_good','wells')
+      user.update_balance
+      context 'updates user accounts' do
+        it { expect(user.accounts.empty?).to be_falsey }
+      end
+
+      context 'should not double up accounts or transactions' do
+        dup = user.accounts.select{|element| user.accounts.count(element) > 1}
+        dup = dup.length + user.transactions.select{|element| user.transactions.count(element) > 1}.length
+        it{ expect(dup).to eq(0) }
+      end
+
+    end
+
 =begin
     describe '#update_info' do
       info_user = Plaid.add_user('info','plaid_test','plaid_good','wells')
@@ -438,6 +459,7 @@ describe Plaid do
         p.secret = 'test_secret'
         p.environment_location = 'https://tartan.plaid.com/'
       end
+
       info_user = Plaid.add_user('info','plaid_test','plaid_good','wells')
       info_user.delete_user
 
