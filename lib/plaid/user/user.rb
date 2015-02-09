@@ -92,28 +92,31 @@ module Plaid
       begin
         if res[:msg].nil?
           res['accounts'].each do |account|
-            if self.accounts.any? { |h| h.id == account['_id'] }
-              owned_account = self.accounts.find { |h| h.id == account['_id'] }
+            if self.accounts.any? { |h| h == account['_id'] }
+              owned_account = self.accounts.find { |h| h == account['_id'] }
               owned_account.new(account)
             else
               self.accounts << new_account(account)
             end
           end if res['accounts']
           res['transactions'].each do |transaction|
-            #if self.transactions.any? { |h| h.id == transaction['_id'] }
-            # owned_transaction = self.transactions.find { |h| h.id == transaction['_id'] }
-            #  owned_transaction.new(transaction)
-            #else
+            if self.transactions.any? { |t| t == transaction['_id'] }
+              owned_transaction = self.transactions.find { |h| h == transaction['_id'] }
+              owned_transaction.new(transaction)
+            else
               self.transactions << new_transaction(transaction)
-            #end
+            end
           end if res['transactions']
           self.permissions << api_level unless self.permissions.include? api_level
           self.api_res = 'success'
           self.pending_mfa_questions = ''
+          self.access_token = res['access_token']
           clean_up_user(self)
         else
-          self.access_token = res[:body]['access_token'] if self.access_token.nil?
-          self.pending_mfa_questions = res[:body], self.api_res = res[:msg], self.permissions << api_level
+          self.access_token = res[:body]['access_token']
+          self.pending_mfa_questions = res[:body]
+          self.api_res = res[:msg]
+          self.permissions << api_level
         end
       rescue => e
         error_handler(e)
