@@ -4,6 +4,8 @@ Ruby bindings for the Plaid API
 
 ## Notes
 
+This version is a beta version that contains failing tests for the new 'info' endpoint. While these have been tested individually on real accounts the tests here will fail with the test accounts supplied. These will be updated soon with test credentials.
+
 Latest stable version: **1.1.1**
 
 Last stable version: 1.0.1
