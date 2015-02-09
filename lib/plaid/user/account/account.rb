@@ -19,5 +19,17 @@ module Plaid
       end
     end
 
+    def update_account(res)
+      begin
+        self.name = res['name'], self.available_balance = res['balance']['available'], self.current_balance = res['balance']['current'], self.institution_type = res['institution_type'], self.id = res['_id'], self.type = res['type']
+        self.meta = res['meta'] if res['meta']
+        res['numbers'] ? self.numbers = res['numbers'] : self.numbers = 'Upgrade user to access routing information for this account'
+      rescue => e
+        error_handler(e)
+      else
+        self
+      end
+    end
+
   end
 end
