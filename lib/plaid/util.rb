@@ -31,7 +31,6 @@ module Plaid
       req.body = URI.encode_www_form(options) if options
       req.content_type = 'multipart/form-data'
       res = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') { |http| http.request(req) }
-      puts res
     end
 
     def error_handler(err,res=nil)

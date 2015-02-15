@@ -373,6 +373,42 @@ describe Plaid do
         mfa_user = Plaid.add_user('connect','plaid_selections', 'plaid_good','bofa')
         it { expect { mfa_user.mfa_authentication('bad','bofa') }.to raise_error }
       end
+
+      context 'requests list of MFA credentials' do
+        Plaid.config do |p|
+          p.customer_id = 'test_id'
+          p.secret = 'test_secret'
+          p.environment_location = 'https://tartan.plaid.com/'
+        end
+
+        new_mfa_user = Plaid.add_user('auth','plaid_test','plaid_good','chase',nil,'{"list":true}')
+        it { expect(new_mfa_user.pending_mfa_questions).to eq({"type"=>"list", "mfa"=>[{"mask"=>"xxx-xxx-5309", "type"=>"phone"}, {"mask"=>"t..t@plaid.com", "type"=>"email"}], "access_token"=>"test"}) }
+      end
+
+      context 'selects MFA method and returns successful response' do
+        Plaid.config do |p|
+          p.customer_id = 'test_id'
+          p.secret = 'test_secret'
+          p.environment_location = 'https://tartan.plaid.com/'
+        end
+
+        new_mfa_user = Plaid.add_user('auth','plaid_test','plaid_good','chase',nil,'{"list":true}')
+        new_mfa_user.select_mfa_method({mask:'xxx-xxx-5309'},'chase')
+        it { expect(new_mfa_user.pending_mfa_questions).to eq({"type"=>"device", "mfa"=>{"message"=>"Code sent to xxx-xxx-5309"}, "access_token"=>"test"}) }
+      end
+
+      context 'selects MFA method, and delivers correct payload to authenticate user' do
+        Plaid.config do |p|
+          p.customer_id = 'test_id'
+          p.secret = 'test_secret'
+          p.environment_location = 'https://tartan.plaid.com/'
+        end
+
+        new_mfa_user = Plaid.add_user('auth','plaid_test','plaid_good','chase',nil,'{"list":true}')
+        new_mfa_user.select_mfa_method({mask:'xxx-xxx-5309'},'chase')
+        new_mfa_user.mfa_authentication(1234,'chase')
+        it { expect(new_mfa_user.accounts).to be_truthy }
+      end
     end
 
     # Auth specs
