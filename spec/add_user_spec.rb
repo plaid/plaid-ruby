@@ -100,4 +100,9 @@ describe '.add_user' do
     user = Plaid.add_user('connect','plaid_selections', 'plaid_good','wells',{login_only:true, end_date: '10 days ago'})
     it { expect(user.accounts.empty?).to be_falsey }
   end
+
+  context 'sets start and end dates for transactions' do
+    user = Plaid.add_user('connect','plaid_test','plaid_good','wells',"{'gte':'05/10/2014' , 'lte':'06/10/2014'}")
+    it{ expect(user.transactions).to be_truthy }
+  end
 end
