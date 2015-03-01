@@ -11,13 +11,7 @@ module Plaid
     attr_accessor(:accounts, :transactions, :access_token, :permissions, :api_res, :pending_mfa_questions, :info, :information)
 
     def initialize
-      self.accounts = []
-      self.transactions = []
-      self.permissions = []
-      self.access_token = ''
-      self.api_res = ''
-      self.info = {}
-      self.information = Information.new
+      self.accounts = [], self.transactions = [], self.permissions = [], self.access_token = '', self.api_res = '', self.info = {}, self.information = Information.new
     end
 
     # Instantiate a new user with the results of the successful API call
@@ -101,38 +95,10 @@ module Plaid
     def build_user(res,api_level=nil)
       begin
         if res[:msg].nil?
-          res['accounts'].each do |account|
-            if self.accounts.any? { |h| h == account['_id'] }
-              owned_account = self.accounts.find { |h| h == account['_id'] }
-              owned_account.new(account)
-            else
-              self.accounts << new_account(account)
-            end
-          end if res['accounts']
-          res['transactions'].each do |transaction|
-            if self.transactions.any? { |t| t == transaction['_id'] }
-              owned_transaction = self.transactions.find { |h| h == transaction['_id'] }
-              owned_transaction.new(transaction)
-            else
-              self.transactions << new_transaction(transaction)
-            end
-          end if res['transactions']
-          self.permissions << api_level unless self.permissions.include? api_level && api_level.nil?
-          self.api_res = 'success'
-          self.pending_mfa_questions = ''
-          self.information.update_info(res['info']) if res['info']
-
-          # TODO: Remove the following line when upgrading to V-2
-          self.info.merge!(res['info']) if res['info']
-          # End TODO
-
-          self.access_token = res['access_token']
+          populate_user(self,res,api_level)
           clean_up_user(self)
         else
-          self.access_token = res[:body]['access_token']
-          self.pending_mfa_questions = res[:body]
-          self.api_res = res[:msg]
-          self.permissions << api_level unless self.permissions.include? api_level && api_level.nil?
+          set_mfa_request(self,res,api_level)
         end
       rescue => e
         error_handler(e)
@@ -158,6 +124,43 @@ module Plaid
     def clean_up_user(user)
       user.accounts.reject! { |c| !c.instance_of? Plaid::Account }
       user
+    end
+
+    def set_mfa_request(user,res,api_level)
+      user.access_token = res[:body]['access_token']
+      user.pending_mfa_questions = res[:body]
+      user.api_res = res[:msg]
+      user.permissions << api_level unless self.permissions.include? api_level && api_level.nil?
+    end
+
+    def populate_user(user,res,api_level)
+      res['accounts'].each do |account|
+        if user.accounts.any? { |h| h == account['_id'] }
+          owned_account = user.accounts.find { |h| h == account['_id'] }
+          owned_account.new(account)
+        else
+          user.accounts << new_account(account)
+        end
+      end if res['accounts']
+
+      res['transactions'].each do |transaction|
+        if user.transactions.any? { |t| t == transaction['_id'] }
+          owned_transaction = user.transactions.find { |h| h == transaction['_id'] }
+          owned_transaction.new(transaction)
+        else
+          user.transactions << new_transaction(transaction)
+        end
+      end if res['transactions']
+
+      user.permissions << api_level unless user.permissions.include? api_level && api_level.nil?
+      user.pending_mfa_questions = ''
+      user.information.update_info(res['info']) if res['info']
+      user.api_res = 'success'
+
+      # TODO: Remove the following line when upgrading to V-2
+      user.info.merge!(res['info']) if res['info']
+      # End TODO
+      user.access_token = res['access_token']
     end
 
   end
