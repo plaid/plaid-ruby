@@ -1,5 +1,6 @@
 require_relative 'account/account'
 require_relative 'transaction/transaction'
+require_relative 'info/info'
 require 'plaid/util'
 require 'json'
 module Plaid
@@ -7,7 +8,7 @@ module Plaid
     include Plaid::Util
 
     # Define user vars
-    attr_accessor(:accounts, :transactions, :access_token, :permissions, :api_res, :pending_mfa_questions, :info)
+    attr_accessor(:accounts, :transactions, :access_token, :permissions, :api_res, :pending_mfa_questions, :info, :information)
 
     def initialize
       self.accounts = []
@@ -16,6 +17,7 @@ module Plaid
       self.access_token = ''
       self.api_res = ''
       self.info = {}
+      self.information = Information.new
     end
 
     # Instantiate a new user with the results of the successful API call
@@ -118,7 +120,12 @@ module Plaid
           self.permissions << api_level unless self.permissions.include? api_level && api_level.nil?
           self.api_res = 'success'
           self.pending_mfa_questions = ''
+          self.information.update_info(res['info']) if res['info']
+
+          # TODO: Remove the following line when upgrading to V-2
           self.info.merge!(res['info']) if res['info']
+          # End TODO
+
           self.access_token = res['access_token']
           clean_up_user(self)
         else
