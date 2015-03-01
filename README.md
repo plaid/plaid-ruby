@@ -6,7 +6,7 @@ Ruby bindings for the Plaid API
 
 This version is a beta version that contains failing tests for the new 'info' endpoint. While these have been tested individually on real accounts the tests here will fail with the test accounts supplied. These will be updated soon with test credentials.
 
-Latest stable version: **1.2.3**
+Latest stable version: **1.3.0**
 
 **Warning: If you have been using any version < 1 please switch to the correct branch (V0.1.6). Installing without specifying a version from RubyGems results in V1.1 build. **
 
