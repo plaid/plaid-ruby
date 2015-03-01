@@ -14,13 +14,16 @@ module Plaid
     def get(path,id=nil)
       uri = build_uri(path,id)
       res = Net::HTTP.get(uri)
-      JSON.parse(res)
+      parse_get_response(res)
     end
 
     def patch(path,options={})
       uri = build_uri(path)
       options.merge!({client_id: self.instance_variable_get(:'@customer_id') ,secret: self.instance_variable_get(:'@secret')})
-      res = Net::HTTP.patch(uri,options)
+      req = Net::HTTP::Patch.new(uri)
+      req.body = URI.encode_www_form(options) if options
+      req.content_type = 'multipart/form-data'
+      res = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') { |http| http.request(req) }
       parse_response(res)
     end
 
@@ -30,7 +33,7 @@ module Plaid
       req = Net::HTTP::Delete.new(uri)
       req.body = URI.encode_www_form(options) if options
       req.content_type = 'multipart/form-data'
-      res = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') { |http| http.request(req) }
+      Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') { |http| http.request(req) }
     end
 
     def error_handler(err,res=nil)
@@ -82,6 +85,23 @@ module Plaid
           error_handler('Not Found',res)
         else
           error_handler('Server Error',res)
+      end
+    end
+
+    def parse_get_response(res)
+      body = JSON.parse(res)
+      if body.class == Array
+        body
+      else
+        if body['code'].nil?
+          body
+        else
+          if body['code'] == 1401 || body['code'] == 1501 || body['code'] == 1601
+            error_handler('Not Found',body)
+          else
+            body
+          end
+        end
       end
     end
 
