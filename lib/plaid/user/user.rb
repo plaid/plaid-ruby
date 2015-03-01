@@ -42,9 +42,11 @@ module Plaid
       end
     end
 
-    def get_connect
+    def get_connect(options=nil)
       if self.permissions.include? 'connect'
-        res = Plaid.post('connect/get',{access_token:self.access_token})
+        payload = {access_token:self.access_token}
+        payload.merge!(options) if options
+        res = Plaid.post('connect/get',payload)
         build_user(res)
       else
         false
