@@ -3,7 +3,7 @@ require 'spec_helper.rb'
 describe '.add_user' do
 
   Plaid.config do |p|
-    p.customer_id = 'test_id'
+    p.client_id = 'test_id'
     p.secret = 'test_secret'
     p.environment_location = 'https://tartan.plaid.com/'
   end

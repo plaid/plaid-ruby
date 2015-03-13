@@ -30,11 +30,11 @@ Or install it system wide as:
 
 Please read the great documentation at http://plaid.com/docs/ for more information.
 
-Configure the gem with your customer id, secret key, and the environment path you would like to use.
+Configure the gem with your client id, secret key, and the environment path you would like to use.
 
 ```ruby
 Plaid.config do |p|
-    p.customer_id = 'Plaid provided customer ID here'
+    p.client_id = 'Plaid provided client ID here'
     p.secret = 'Plaid provided secret key here'
     p.environment_location = 'URL for the development or production environment'
 end

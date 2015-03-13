@@ -2,7 +2,7 @@
 describe '.config' do
   context 'has valid dev keys' do
     Plaid.config do |p|
-      p.customer_id = 'test_id'
+      p.client_id = 'test_id'
       p.secret = 'test_secret'
       p.environment_location = 'https://tartan.plaid.com/'
     end
@@ -12,7 +12,7 @@ describe '.config' do
 
   context 'has valid production keys' do
     Plaid.config do |p|
-      p.customer_id = 'test_id'
+      p.client_id = 'test_id'
       p.secret = 'test_secret'
       p.environment_location = 'https://api.plaid.com/'
     end
@@ -22,7 +22,7 @@ describe '.config' do
 
   context 'has invalid dev keys' do
     Plaid.config do |p|
-      p.customer_id = 'test_id'
+      p.client_id = 'test_id'
       p.secret = 'test_bad'
       p.environment_location = 'https://tartan.plaid.com/'
     end
@@ -31,7 +31,7 @@ describe '.config' do
 
   context 'has invalid production keys' do
     Plaid.config do |p|
-      p.customer_id = 'test_id'
+      p.client_id = 'test_id'
       p.secret = 'test_bad'
       p.environment_location = 'https://api.plaid.com/'
     end

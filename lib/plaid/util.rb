@@ -6,7 +6,7 @@ module Plaid
 
     def post(path,options={})
       uri = build_uri(path)
-      options.merge!({client_id: self.instance_variable_get(:'@customer_id') ,secret: self.instance_variable_get(:'@secret')})
+      options.merge!({client_id: self.instance_variable_get(:'@client_id') ,secret: self.instance_variable_get(:'@secret')})
       res = Net::HTTP.post_form(uri,options)
       parse_response(res)
     end
@@ -19,7 +19,7 @@ module Plaid
 
     def patch(path,options={})
       uri = build_uri(path)
-      options.merge!({client_id: self.instance_variable_get(:'@customer_id') ,secret: self.instance_variable_get(:'@secret')})
+      options.merge!({client_id: self.instance_variable_get(:'@client_id') ,secret: self.instance_variable_get(:'@secret')})
       req = Net::HTTP::Patch.new(uri)
       req.body = URI.encode_www_form(options) if options
       req.content_type = 'multipart/form-data'
@@ -29,7 +29,7 @@ module Plaid
 
     def delete(path,options={})
       uri = build_uri(path)
-      options.merge!({client_id: self.instance_variable_get(:'@customer_id') ,secret: self.instance_variable_get(:'@secret')})
+      options.merge!({client_id: self.instance_variable_get(:'@client_id') ,secret: self.instance_variable_get(:'@secret')})
       req = Net::HTTP::Delete.new(uri)
       req.body = URI.encode_www_form(options) if options
       req.content_type = 'multipart/form-data'
