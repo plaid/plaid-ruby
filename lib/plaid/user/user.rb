@@ -8,7 +8,7 @@ module Plaid
     include Plaid::Util
 
     # Define user vars
-    attr_accessor(:accounts, :transactions, :access_token, :permissions, :api_res, :pending_mfa_questions, :info, :information)
+    attr_accessor(:accounts, :transactions, :access_token, :type, :permissions, :api_res, :pending_mfa_questions, :info, :information)
 
     def initialize
       self.accounts = [], self.transactions = [], self.permissions = [], self.access_token = '', self.api_res = '', self.info = {}, self.information = Information.new
@@ -20,14 +20,16 @@ module Plaid
       build_user(res,api_level)
     end
 
-    def mfa_authentication(auth,type)
+    def mfa_authentication(auth,type=nil)
+      type = self.type if type.nil?
       auth_path = self.permissions.last + '/step'
       res = Plaid.post(auth_path,{mfa:auth,access_token:self.access_token,type:type})
       self.accounts = [], self.transactions = []
       build_user(res)
     end
 
-    def select_mfa_method(selection,type)
+    def select_mfa_method(selection,type=nil)
+      type = self.type if type.nil?
       auth_path = self.permissions.last + '/step'
       res = Plaid.post(auth_path,{options:{send_method: selection}.to_json, access_token:self.access_token,type:type})
       build_user(res,self.permissions.last)
@@ -162,7 +164,8 @@ module Plaid
       # TODO: Remove the following line when upgrading to V-2
       user.info.merge!(res['info']) if res['info']
       # End TODO
-      user.access_token = res['access_token']
+      user.access_token = res['access_token'].split[0]
+      user.type = res['access_token'].split[1]
     end
 
   end
