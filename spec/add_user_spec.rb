@@ -57,12 +57,12 @@ describe '.add_user' do
   end
 
   context 'has to enter MFA credentials' do
-    user = Plaid.add_user('connect','plaid_selections', 'plaid_good','bofa')
+    user = Plaid.add_user('connect','plaid_test', 'plaid_good','bofa')
     it { expect(user.api_res).to eq 'Requires further authentication' }
   end
 
   context 'enters correct information with locked account' do
-    user = Plaid.add_user('connect','plaid_selections', 'plaid_locked','wells')
+    user = Plaid.add_user('connect','plaid_test', 'plaid_locked','wells')
     it { expect(user.api_res).to eq 'User account is locked' }
   end
 
@@ -72,32 +72,32 @@ describe '.add_user' do
   end
 
   context 'enters webhook option as part of mfa required institution authentication' do
-    user = Plaid.add_user('connect','plaid_selections', 'plaid_good','bofa',{login_only: true, webhook: 'test.com/test.endpoint.aspx'})
+    user = Plaid.add_user('connect','plaid_test', 'plaid_good','bofa',{login_only: true, webhook: 'test.com/test.endpoint.aspx'})
     it { expect(user.api_res).to eq 'Requires further authentication' }
   end
 
   context 'requests pending transactions from an institution' do
-    user = Plaid.add_user('connect','plaid_selections', 'plaid_good','wells',{pending: true})
+    user = Plaid.add_user('connect','plaid_test', 'plaid_good','wells',{pending: true})
     it { expect(user.accounts.empty?).to be_falsey }
   end
 
   context 'sets the login only option to true' do
-    user = Plaid.add_user('connect','plaid_selections', 'plaid_good','wells',{login_only:true})
+    user = Plaid.add_user('connect','plaid_test', 'plaid_good','wells',{login_only:true})
     it { expect(user.accounts.empty?).to be_falsey }
   end
 
   context 'requests a list of options for code based MFA' do
-    user = Plaid.add_user('connect','plaid_selections', 'plaid_good','citi',{list: true})
+    user = Plaid.add_user('connect','plaid_test', 'plaid_good','citi',{list: true})
     it { expect(user.pending_mfa_questions.nil?).to be_falsey }
   end
 
   context 'sets a start date for transactions' do
-    user = Plaid.add_user('connect','plaid_selections', 'plaid_good','wells',{login_only:true, start_date:'10 days ago'})
+    user = Plaid.add_user('connect','plaid_test', 'plaid_good','wells',{login_only:true, start_date:'10 days ago'})
     it { expect(user.accounts.empty?).to be_falsey }
   end
 
   context 'sets an end date for transactions' do
-    user = Plaid.add_user('connect','plaid_selections', 'plaid_good','wells',{login_only:true, end_date: '10 days ago'})
+    user = Plaid.add_user('connect','plaid_test', 'plaid_good','wells',{login_only:true, end_date: '10 days ago'})
     it { expect(user.accounts.empty?).to be_falsey }
   end
 

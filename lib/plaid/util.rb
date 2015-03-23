@@ -96,7 +96,7 @@ module Plaid
         if body['code'].nil?
           body
         else
-          if body['code'] == 1401 || body['code'] == 1501 || body['code'] == 1601
+          if body['code'] == 1301 || body['code'] == 1401 || body['code'] == 1501 || body['code'] == 1601
             error_handler('Not Found',body)
           else
             body
