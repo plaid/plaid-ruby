@@ -105,4 +105,9 @@ describe '.add_user' do
     user = Plaid.add_user('connect','plaid_test','plaid_good','wells',"{'gte':'05/10/2014' , 'lte':'06/10/2014'}")
     it{ expect(user.transactions).to be_truthy }
   end
+
+  context 'sets a user with an existing access token' do
+    user = Plaid.set_user('test')
+    it{ expect(user.access_token).to eq('test')}
+  end
 end

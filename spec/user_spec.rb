@@ -19,6 +19,26 @@ describe '#User' do
       user = Plaid.add_user('connect','plaid_test','plaid_good','wells')
       it { expect(user.accounts.first.type).to eq('depository') }
     end
+
+    context 'gets a valid user with accounts and transactions' do
+      user = Plaid.set_user('test',['connect'])
+      it{ expect(user.transactions).to be_truthy}
+    end
+
+    context 'gets a valid user with accounts' do
+      user = Plaid.set_user('test',['auth'])
+      it{ expect(user.accounts).to be_truthy}
+    end
+
+    context 'gets a valid user with info' do
+      user = Plaid.set_user('test',['info'])
+      it{ expect(user.accounts).to be_truthy}
+    end
+
+    context 'gets a fully validated user with all access granted' do
+      user = Plaid.set_user('test',['connect','info','auth'])
+      it{ expect(user.transactions).to be_truthy}
+    end
   end
 
   # MFA specs - after user is instantiated,

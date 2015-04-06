@@ -11,5 +11,13 @@ module Plaid
           error_handler(e)
         end
       end
+
+    def set_user(token,api_level=[])
+      begin
+        self.existing_user(token,api_level)
+      rescue => e
+        error_handler(e)
+      end
+    end
   end
 end
