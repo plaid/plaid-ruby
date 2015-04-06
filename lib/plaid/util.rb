@@ -17,6 +17,16 @@ module Plaid
       parse_get_response(res)
     end
 
+    def secure_get(path,access_token,options={})
+      uri = build_uri(path)
+      options.merge!({access_token:access_token})
+      req = Net::HTTP::Get.new(uri)
+      req.body = URI.encode_www_form(options) if options
+      req.content_type = 'multipart/form-data'
+      res = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') { |http| http.request(req) }
+      parse_response(res)
+    end
+
     def patch(path,options={})
       uri = build_uri(path)
       options.merge!({client_id: self.instance_variable_get(:'@customer_id') ,secret: self.instance_variable_get(:'@secret')})
@@ -39,6 +49,7 @@ module Plaid
     def error_handler(err,res=nil)
       case err
         when 'Bad Request'
+          puts res.body
           raise 'The request was malformed. Did you check the API docs?'
         when 'Unauthorized'
           raise 'Access denied: Try using the correct credentials.'

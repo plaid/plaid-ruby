@@ -24,10 +24,11 @@ module Plaid
       @user.new(res,api_level)
     end
 
-    def existing_user(token,api_level=[])
+    def existing_user(token,api_level=[],type=nil)
       @user = Plaid::User.new
       @user.access_token = token
       api_level.each { |i|
+        @user.permissions << i
         @user.get_auth if i == 'auth'
         @user.get_connect if i == 'connect'
         @user.get_info if i == 'info'
