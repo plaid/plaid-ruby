@@ -12,7 +12,8 @@ module Plaid
         end
       end
 
-    def set_user(token,api_level=[])
+    def set_user(token,api_level=[],type=nil)
+      token = token + '_' + type unless type.nil?
       begin
         self.existing_user(token,api_level)
       rescue => e

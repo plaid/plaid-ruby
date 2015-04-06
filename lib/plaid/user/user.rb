@@ -57,7 +57,7 @@ module Plaid
 
     def get_info
       if self.permissions.include? 'info'
-        res = Plaid.get('info',{access_token:self.access_token})
+        res = Plaid.secure_get('info',self.access_token)
         build_user(res)
       else
         false
@@ -69,6 +69,7 @@ module Plaid
         payload = {username:username,password:pass,access_token:self.access_token}
         payload.merge!({pin:pin}) if pin
         res = Plaid.patch('info',payload)
+        puts res
         build_user(res)
       else
         false

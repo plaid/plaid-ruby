@@ -21,24 +21,29 @@ describe '#User' do
     end
 
     context 'gets a valid user with accounts and transactions' do
-      user = Plaid.set_user('test',['connect'])
+      user = Plaid.set_user('test_wells',['connect'])
       it{ expect(user.transactions).to be_truthy}
     end
 
     context 'gets a valid user with accounts' do
-      user = Plaid.set_user('test',['auth'])
+      user = Plaid.set_user('test_wells',['auth'])
       it{ expect(user.accounts).to be_truthy}
     end
 
+    #TODO: Fully vet the info api endpoint for the beta functions before adding this as a supported function.
+=begin
     context 'gets a valid user with info' do
-      user = Plaid.set_user('test',['info'])
+      user = Plaid.set_user('test_wells',['info'])
       it{ expect(user.accounts).to be_truthy}
     end
+
 
     context 'gets a fully validated user with all access granted' do
-      user = Plaid.set_user('test',['connect','info','auth'])
+      user = Plaid.set_user('test_wells',['connect','info','auth'])
       it{ expect(user.transactions).to be_truthy}
     end
+=end
+
   end
 
   # MFA specs - after user is instantiated,
