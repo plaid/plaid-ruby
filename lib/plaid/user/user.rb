@@ -113,15 +113,15 @@ module Plaid
     end
 
     # Instantiate and build a new account object, return this to the accounts array
-    def new_account(account)
-      @account = Account.new
-      @account.new(account)
+    def new_account(res)
+      account = Account.new
+      account.new(res)
     end
 
     # Instantiate and build a new account object, return this to the accounts array
-    def new_transaction(transaction)
-      @transaction = Transaction.new
-      @transaction.new(transaction)
+    def new_transaction(res)
+      transaction = Transaction.new
+      transaction.new(res)
     end
 
     private
