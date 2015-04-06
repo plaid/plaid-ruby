@@ -24,6 +24,17 @@ module Plaid
       @user.new(res,api_level)
     end
 
+    def existing_user(token,api_level=[])
+      @user = Plaid::User.new
+      @user.access_token = token
+      api_level.each { |i|
+        @user.get_auth if i == 'auth'
+        @user.get_connect if i == 'connect'
+        @user.get_info if i == 'info'
+      } unless api_level.empty?
+      @user
+    end
+
     # Builds an institution object and returns when the institution details exist
     def institution(id=nil)
       @institution = Plaid::Institution.new
