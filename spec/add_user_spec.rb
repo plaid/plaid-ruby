@@ -1,113 +1,178 @@
 require 'spec_helper.rb'
 # Authentication flow specs - returns Plaid::User
-describe '.add_user' do
-
+RSpec.describe Plaid do
   Plaid.config do |p|
     p.customer_id = 'test_id'
     p.secret = 'test_secret'
     p.environment_location = 'https://tartan.plaid.com/'
   end
 
-  context 'has correct credentials for single factor auth, authenticates to the connect level of api access' do
-    user = Plaid.add_user('connect','plaid_test','plaid_good','wells')
-    it { expect(user.accounts.empty?).to be_falsey }
+  describe '.add_user' do
+    let(:user) { Plaid.add_user api_level, username, password, type, pin, options }
+
+    let(:api_level) { raise "Define let(:api_level)" }
+    let(:username)  { raise "Define let(:username)" }
+    let(:password)  { raise "Define let(:password)" }
+    let(:type)      { raise "Define let(:type)" }
+    let(:pin)       { nil }
+    let(:options)   { nil }
+
+    context 'with correct credentials for single user auth' do
+      let(:username)  { 'plaid_test' }
+      let(:password)  { 'plaid_good' }
+      let(:type)      { 'wells' }
+
+      context 'and "connect" level of api access' do
+        let(:api_level) { 'connect' }
+
+        it { expect(user.accounts).not_to be_empty }
+
+        context 'with webhook' do
+          let(:options) { { login_only: true, webhook: 'test.com/test.endpoint.aspx' } }
+          it { expect(user.accounts).not_to be_empty }
+        end
+
+        context 'when account is locked' do
+          let(:password) { 'plaid_locked' }
+          it { expect(user.api_res).to eq 'User account is locked' }
+        end
+
+        context 'with connection options' do
+          context 'when requests pending transactions from an institution' do
+            let(:options) { { pending: true } }
+            it { expect(user.accounts).not_to be_empty }
+          end
+
+          context 'when login only is true' do
+            let(:options) { { login_only: true } }
+            it { expect(user.accounts).not_to be_empty }
+          end
+
+          context 'sets a start date for transactions' do
+            let(:options) { { login_only: true, start_date: '10 days ago'} }
+            it { expect(user.accounts).not_to be_empty }
+          end
+
+          context 'sets an end date for transactions' do
+            let(:options) { { login_only: true, end_date: '10 days ago'} }
+            it { expect(user.accounts).not_to be_empty }
+          end
+
+          context 'sets start and end dates for transactions' do
+            let(:options) { { gte: "05/10/2014" , lte: "06/10/2014" } }
+            it { expect(user.transactions).not_to be_nil }
+          end
+        end
+      end
+
+      context 'and "auth" level of api access' do
+        let(:api_level) { 'auth' }
+        it { expect(user.accounts.first.numbers).not_to be_empty }
+      end
+
+      context 'and "info" level of api access' do
+        let(:api_level) { 'info' }
+        it { expect(user.info).not_to be_empty }
+      end
+    end
+
+    context 'with incorrect credentials for single factor auth' do
+      # Set up correct credentials. Override with bad element
+      # within each context block
+      let(:username)  { 'plaid_test' }
+      let(:password)  { 'plaid_good' }
+      let(:type)      { 'wells' }
+
+      context 'at "auth" level api access' do
+        let(:api_level) { 'auth' }
+
+        context 'using incorrect password' do
+          let(:password) { 'plaid_bad' }
+          it { expect { user }.to raise_error }
+        end
+
+        context 'using incorrect username' do
+          let(:username) { 'plaid_bad' }
+          it { expect { user }.to raise_error }
+        end
+      end
+
+      context 'at "connect" level api access' do
+        let(:api_level) { 'connect' }
+
+        context 'using incorrect password' do
+          let(:password) { 'plaid_bad' }
+          it { expect { user }.to raise_error }
+        end
+
+        context 'using incorrect username' do
+          let(:username) { 'plaid_bad' }
+          it { expect { user }.to raise_error }
+        end
+      end
+
+      context 'at "info" level api access' do
+        let(:api_level) { 'info' }
+
+        context 'using incorrect password' do
+          let(:password) { 'plaid_bad' }
+          it { expect { user }.to raise_error }
+        end
+
+        context 'using incorrect username' do
+          let(:username) { 'plaid_bad' }
+          it { expect { user }.to raise_error }
+        end
+      end
+    end
+
+    context 'when institution requires PIN' do
+      let(:api_level) { 'connect' }
+      let(:username)  { 'plaid_test' }
+      let(:password)  { 'plaid_good' }
+      let(:type)      { 'usaa' }
+
+      context 'using correct PIN' do
+        let(:pin) { '1234' }
+        it { expect(user.api_res).to eq 'Requires further authentication' }
+      end
+
+      context 'using incorrect PIN' do
+        let(:pin) { '0000' }
+        it { expect { user }.to raise_error }
+      end
+    end
+
+    context 'when institution requires MFA' do
+      let(:api_level) { 'connect' }
+      let(:username)  { 'plaid_test' }
+      let(:password)  { 'plaid_good' }
+      let(:type)      { 'bofa' }
+
+      context 'with only standard credentials' do
+        it { expect(user.api_res).to eq 'Requires further authentication' }
+      end
+
+      context 'with options' do
+        context 'with webhook' do
+          let(:options) { { login_only: true, webhook: 'test.com/test.endpoint.aspx' } }
+          it { expect(user.api_res).to eq 'Requires further authentication' }
+        end
+
+        context 'requests a list of options for code based MFA' do
+          let(:type) { 'citi' }
+          let(:options) { { list: true } }
+
+          it { expect(user.pending_mfa_questions).not_to be_nil }
+        end
+      end
+    end
   end
 
-  context 'has correct credentials for single factor auth, authenticates to the auth level of api access' do
-    user = Plaid.add_user('auth','plaid_test','plaid_good','wells')
-    it { expect(user.accounts[0].numbers.nil?).to be_falsey }
-  end
+  describe '.set_user' do
+    subject { Plaid.set_user(access_token) }
+    let(:access_token) { 'test' }
 
-  context 'has correct credentials for single factor auth, authenticates to the info level of api access' do
-    user = Plaid.add_user('info','plaid_test','plaid_good','wells')
-    it { expect(user.info).to be_truthy }
-  end
-
-  context 'has correct username, but incorrect password for single factor auth under auth level of api access' do
-    it { expect{Plaid.add_user('auth','plaid_test','plaid_bad','wells')}.to raise_error }
-  end
-
-  context 'has incorrect username under auth level of api access' do
-    it { expect{Plaid.add_user('auth','plaid_bad','plaid_bad','wells')}.to raise_error }
-  end
-
-  context 'has correct username, but incorrect password for single factor auth under connect level of api access' do
-    it { expect{Plaid.add_user('connect','plaid_test','plaid_bad','wells')}.to raise_error }
-  end
-
-  context 'has incorrect username under connect level of api access' do
-    it { expect{Plaid.add_user('connect','plaid_bad','plaid_bad','wells')}.to raise_error }
-  end
-
-  context 'has correct username, but incorrect password for single factor auth under info level of api access' do
-    it { expect{Plaid.add_user('info','plaid_test','plaid_bad','wells')}.to raise_error }
-  end
-
-  context 'has incorrect username under info level of api access' do
-    it { expect{Plaid.add_user('info','plaid_bad','plaid_bad','wells')}.to raise_error }
-  end
-
-  context 'enters pin for extra parameter authentication required by certain institutions' do
-    user = Plaid.add_user('connect','plaid_test','plaid_good','usaa','1234')
-    it { expect(user.api_res).to eq 'Requires further authentication' }
-  end
-
-  context 'enters incorrect pin for extra parameter authentication required by certain institutions' do
-    it { expect{Plaid.add_user('connect','plaid_test','plaid_good','usaa','0000')}.to raise_error }
-  end
-
-  context 'has to enter MFA credentials' do
-    user = Plaid.add_user('connect','plaid_test', 'plaid_good','bofa')
-    it { expect(user.api_res).to eq 'Requires further authentication' }
-  end
-
-  context 'enters correct information with locked account' do
-    user = Plaid.add_user('connect','plaid_test', 'plaid_locked','wells')
-    it { expect(user.api_res).to eq 'User account is locked' }
-  end
-
-  context 'enters webhook option as part of standard call' do
-    user = Plaid.add_user('connect','plaid_test', 'plaid_good','wells',{login_only: true, webhook: 'test.com/test.endpoint.aspx'})
-    it { expect(user.accounts.empty?).to be_falsey }
-  end
-
-  context 'enters webhook option as part of mfa required institution authentication' do
-    user = Plaid.add_user('connect','plaid_test', 'plaid_good','bofa',{login_only: true, webhook: 'test.com/test.endpoint.aspx'})
-    it { expect(user.api_res).to eq 'Requires further authentication' }
-  end
-
-  context 'requests pending transactions from an institution' do
-    user = Plaid.add_user('connect','plaid_test', 'plaid_good','wells',{pending: true})
-    it { expect(user.accounts.empty?).to be_falsey }
-  end
-
-  context 'sets the login only option to true' do
-    user = Plaid.add_user('connect','plaid_test', 'plaid_good','wells',{login_only:true})
-    it { expect(user.accounts.empty?).to be_falsey }
-  end
-
-  context 'requests a list of options for code based MFA' do
-    user = Plaid.add_user('connect','plaid_test', 'plaid_good','citi',{list: true})
-    it { expect(user.pending_mfa_questions.nil?).to be_falsey }
-  end
-
-  context 'sets a start date for transactions' do
-    user = Plaid.add_user('connect','plaid_test', 'plaid_good','wells',{login_only:true, start_date:'10 days ago'})
-    it { expect(user.accounts.empty?).to be_falsey }
-  end
-
-  context 'sets an end date for transactions' do
-    user = Plaid.add_user('connect','plaid_test', 'plaid_good','wells',{login_only:true, end_date: '10 days ago'})
-    it { expect(user.accounts.empty?).to be_falsey }
-  end
-
-  context 'sets start and end dates for transactions' do
-    user = Plaid.add_user('connect','plaid_test','plaid_good','wells',"{'gte':'05/10/2014' , 'lte':'06/10/2014'}")
-    it{ expect(user.transactions).to be_truthy }
-  end
-
-  context 'sets a user with an existing access token' do
-    user = Plaid.set_user('test')
-    it{ expect(user.access_token).to eq('test')}
+    it { expect(subject.access_token).to eq(access_token)}
   end
 end
