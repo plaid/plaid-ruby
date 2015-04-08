@@ -1,7 +1,5 @@
-require 'plaid/util'
 module Plaid
   class Institution
-    include Plaid::Util
 
     attr_accessor(:id, :name, :type, :has_mfa, :mfa, :inst_array)
 

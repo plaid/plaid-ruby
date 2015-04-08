@@ -1,7 +1,5 @@
-require 'plaid/util'
 module Plaid
   class Account
-    include Plaid::Util
     attr_accessor :available_balance, :current_balance, :institution_type, :meta, :transactions, :numbers, :name, :id, :type
 
     # Instantiate a new account with the results of the successful API call
