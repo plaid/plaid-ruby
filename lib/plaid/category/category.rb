@@ -1,26 +1,22 @@
 module Plaid
   class Category
-    attr_accessor(:type, :hierarchy, :id, :cat_array)
+    attr_accessor :type, :hierarchy, :id
 
-    def instantiate_all_categories(res)
-      self.cat_array = []
-      res.each do |cat|
-        category = Category.new
-        self.cat_array << category.build_category(cat)
+    class << self
+      def all(res)
+        res.map { |cat| self.one(cat) }
       end
-      self.cat_array
-    end
 
-    def instantiate_one_category(res)
-      self.build_category(res)
-      self
+      def one(res)
+        self.new.build_category(res)
+      end
     end
-
-    protected
 
     def build_category(cat)
-      self.type = cat['type'], self.hierarchy = cat['hierarchy'], self.id = cat['id']
+      self.type = cat['type']
+      self.hierarchy = cat['hierarchy']
+      self.id = cat['id']
+      return self
     end
-
   end
 end
