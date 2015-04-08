@@ -32,9 +32,8 @@ module Plaid
 
     # Builds an institution object and returns when the institution details exist
     def institution(id = nil)
-      _institution = Plaid::Institution.new
       res = Plaid::Connection.get('institutions', id)
-      id.nil? ? _institution.instantiate_all_institutions(res) : _institution.instantiate_one_institution(res)
+      id.nil? ? Plaid::Institution.all(res) : Plaid::Institution.one(res)
     end
 
     # Builds an institution object and returns when the category details exist
