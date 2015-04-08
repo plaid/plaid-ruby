@@ -11,27 +11,34 @@ module Plaid
     attr_accessor(:accounts, :transactions, :access_token, :type, :permissions, :api_res, :pending_mfa_questions, :info, :information)
 
     def initialize
-      self.accounts = [], self.transactions = [], self.permissions = [], self.access_token = '', self.api_res = '', self.info = {}, self.information = Information.new
+      self.accounts = []
+      self.transactions = []
+      self.permissions = []
+      self.access_token = ''
+      self.api_res = ''
+      self.info = {}
+      self.information = Information.new
     end
 
     # Instantiate a new user with the results of the successful API call
     # Build an array of nested accounts, and return self if successful
-    def new(res,api_level=nil)
-      build_user(res,api_level)
+    def new(res, api_level = nil)
+      build_user(res, api_level)
     end
 
-    def mfa_authentication(auth,type=nil)
+    def mfa_authentication(auth, type = nil)
       type = self.type if type.nil?
       auth_path = self.permissions.last + '/step'
-      res = Plaid.post(auth_path,{mfa:auth,access_token:self.access_token,type:type})
-      self.accounts = [], self.transactions = []
+      res = Plaid.post(auth_path, { mfa: auth, access_token: self.access_token, type: type })
+      self.accounts = []
+      self.transactions = []
       build_user(res)
     end
 
     def select_mfa_method(selection,type=nil)
       type = self.type if type.nil?
       auth_path = self.permissions.last + '/step'
-      res = Plaid.post(auth_path,{options:{send_method: selection}.to_json, access_token:self.access_token,type:type})
+      res = Plaid.post(auth_path, { options: { send_method: selection }.to_json, access_token: self.access_token, type: type })
       build_user(res,self.permissions.last)
     end
 
