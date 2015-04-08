@@ -62,6 +62,8 @@ RSpec.describe Plaid do
             let(:options) { { gte: "05/10/2014" , lte: "06/10/2014" } }
             it { expect(user.transactions).not_to be_nil }
           end
+
+          pending 'with JSON-encoded string for options'
         end
       end
 
