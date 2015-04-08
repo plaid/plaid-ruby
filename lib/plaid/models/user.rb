@@ -1,6 +1,6 @@
-require_relative 'account/account'
-require_relative 'transaction/transaction'
-require_relative 'info/info'
+require_relative 'account'
+require_relative 'transaction'
+require_relative 'info'
 require 'json'
 
 module Plaid
