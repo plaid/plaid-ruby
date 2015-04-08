@@ -101,18 +101,15 @@ module Plaid
     protected
 
     def build_user(res,api_level=nil)
-      begin
-        if res[:msg].nil?
-          populate_user(self,res,api_level)
-          clean_up_user(self)
-        else
-          set_mfa_request(self,res,api_level)
-        end
-      rescue => e
-        error_handler(e)
+      if res[:msg].nil?
+        populate_user(self,res,api_level)
+        clean_up_user(self)
       else
-        self
+        set_mfa_request(self,res,api_level)
       end
+      return self
+    rescue => e
+      error_handler(e)
     end
 
     # Instantiate and build a new account object, return this to the accounts array
