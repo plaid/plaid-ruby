@@ -1,40 +1,53 @@
-# Configuration specs - used in gem configuration
-describe '.config' do
-  context 'has valid dev keys' do
+require 'spec_helper.rb'
+
+RSpec.describe 'Plaid.config' do
+  around(:each) do |example|
+    old_customer_id          = Plaid.instance_variable_get(:@customer_id)
+    old_secret               = Plaid.instance_variable_get(:@secret)
+    old_environment_location = Plaid.instance_variable_get(:@environment_location)
+
     Plaid.config do |p|
-      p.customer_id = 'test_id'
-      p.secret = 'test_secret'
-      p.environment_location = 'https://tartan.plaid.com/'
+      p.customer_id          = customer_id
+      p.secret               = secret
+      p.environment_location = environment_location
     end
-    res = Plaid.add_user('connect','plaid_test','plaid_good','wells')
-    it { expect(res).to be_instance_of Plaid::User }
+
+    example.run
+
+    Plaid.config do |p|
+      p.customer_id          = old_customer_id
+      p.secret               = old_secret
+      p.environment_location = old_environment_location
+    end
+  end
+
+  let(:customer_id) { 'test_id' }
+  let(:secret)      { 'test_secret' }
+  let(:dev_url)  { 'https://tartan.plaid.com/' }
+  let(:prod_url) { 'https://api.plaid.com/' }
+
+
+  let(:user) { Plaid.add_user('connect','plaid_test','plaid_good','wells') }
+
+  context 'has valid dev keys' do
+    let(:environment_location) { dev_url }
+    it { expect(user).to be_instance_of Plaid::User }
   end
 
   context 'has valid production keys' do
-    Plaid.config do |p|
-      p.customer_id = 'test_id'
-      p.secret = 'test_secret'
-      p.environment_location = 'https://api.plaid.com/'
-    end
-    res = Plaid.add_user('connect','plaid_test','plaid_good','wells')
-    it { expect(res).to be_instance_of Plaid::User }
+    let(:environment_location) { prod_url }
+    it { expect(user).to be_instance_of Plaid::User }
   end
 
   context 'has invalid dev keys' do
-    Plaid.config do |p|
-      p.customer_id = 'test_id'
-      p.secret = 'test_bad'
-      p.environment_location = 'https://tartan.plaid.com/'
-    end
-    it { expect{Plaid.add_user('connect','plaid_bad','plaid_bad','wells')}.to raise_error }
+    let(:secret) { 'test_bad' }
+    let(:environment_location) { dev_url }
+    it { expect { user }.to raise_error }
   end
 
   context 'has invalid production keys' do
-    Plaid.config do |p|
-      p.customer_id = 'test_id'
-      p.secret = 'test_bad'
-      p.environment_location = 'https://api.plaid.com/'
-    end
-    it { expect{Plaid.add_user('connect','plaid_bad','plaid_bad','wells')}.to raise_error }
+    let(:secret) { 'test_bad' }
+    let(:environment_location) { prod_url }
+    it { expect { user }.to raise_error }
   end
 end

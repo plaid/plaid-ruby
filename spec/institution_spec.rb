@@ -1,14 +1,6 @@
 require 'spec_helper.rb'
 
 RSpec.describe Plaid::Institution do
-  before :all do
-    Plaid.config do |p|
-      p.customer_id = 'test_id'
-      p.secret = 'test_secret'
-      p.environment_location = 'https://tartan.plaid.com/'
-    end
-  end
-
   context 'when a single institution is found' do
     let(:institution) { Plaid.institution('5301a93ac140de84910000e0') }
     it { expect(institution).to be_kind_of(Plaid::Institution) }

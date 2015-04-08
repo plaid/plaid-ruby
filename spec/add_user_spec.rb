@@ -1,12 +1,6 @@
 require 'spec_helper.rb'
 # Authentication flow specs - returns Plaid::User
 RSpec.describe Plaid do
-  Plaid.config do |p|
-    p.customer_id = 'test_id'
-    p.secret = 'test_secret'
-    p.environment_location = 'https://tartan.plaid.com/'
-  end
-
   describe '.add_user' do
     let(:user) { Plaid.add_user api_level, username, password, type, pin, options }
 

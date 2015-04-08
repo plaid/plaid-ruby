@@ -1,14 +1,6 @@
 require 'spec_helper.rb'
 
-Rspec.describe Plaid::Category do
-  before :all do
-    Plaid.config do |p|
-      p.customer_id = 'test_id'
-      p.secret = 'test_secret'
-      p.environment_location = 'https://tartan.plaid.com/'
-    end
-  end
-
+RSpec.describe Plaid::Category do
   context 'when a single category is found' do
     let(:category) { Plaid.category('17001013') }
     it { expect(category).to be_kind_of(Plaid::Category) }
