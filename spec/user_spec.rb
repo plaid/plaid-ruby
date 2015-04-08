@@ -1,13 +1,6 @@
 require 'spec_helper.rb'
-########## Plaid instantiated user specs ##########
+
 RSpec.describe '#User' do
-
-  Plaid.config do |p|
-    p.customer_id = 'test_id'
-    p.secret = 'test_secret'
-    p.environment_location = 'https://tartan.plaid.com/'
-  end
-
   let(:auth_user)    { Plaid.add_user('auth',   'plaid_test', 'plaid_good', 'wells') }
   let(:connect_user) { Plaid.add_user('connect','plaid_test', 'plaid_good', 'wells') }
   let(:info_user)    { Plaid.add_user('info',   'plaid_test', 'plaid_good', 'wells') }
