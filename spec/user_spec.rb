@@ -192,4 +192,8 @@ RSpec.describe '#User' do
     end
   end
 
+  # This stuff needs to be tested and rewritten. Have alredy
+  # surfaced up a bug in it
+  pending "#populate_user"
+
 end
