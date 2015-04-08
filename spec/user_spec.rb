@@ -1,6 +1,6 @@
 require 'spec_helper.rb'
 
-RSpec.describe '#User' do
+RSpec.describe Plaid::User do
   let(:auth_user)    { Plaid.add_user('auth',   'plaid_test', 'plaid_good', 'wells') }
   let(:connect_user) { Plaid.add_user('connect','plaid_test', 'plaid_good', 'wells') }
   let(:info_user)    { Plaid.add_user('info',   'plaid_test', 'plaid_good', 'wells') }
