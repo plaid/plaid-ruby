@@ -1,7 +1,5 @@
-require 'plaid/util'
 module Plaid
   class Transaction
-    include Plaid::Util
     attr_accessor :id, :account, :amount, :name, :meta, :location, :pending, :score, :type, :category, :category_id
 
     # Instantiate a new account with the results of the successful API call

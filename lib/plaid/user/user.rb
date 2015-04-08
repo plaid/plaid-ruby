@@ -1,11 +1,10 @@
 require_relative 'account/account'
 require_relative 'transaction/transaction'
 require_relative 'info/info'
-require 'plaid/util'
 require 'json'
+
 module Plaid
   class Plaid::User
-    include Plaid::Util
 
     # Define user vars
     attr_accessor(:accounts, :transactions, :access_token, :type, :permissions, :api_res, :pending_mfa_questions, :info, :information)
@@ -29,7 +28,7 @@ module Plaid
     def mfa_authentication(auth, type = nil)
       type = self.type if type.nil?
       auth_path = self.permissions.last + '/step'
-      res = Plaid.post(auth_path, { mfa: auth, access_token: self.access_token, type: type })
+      res = Plaid::Connection.post(auth_path, { mfa: auth, access_token: self.access_token, type: type })
       self.accounts = []
       self.transactions = []
       build_user(res)
@@ -38,7 +37,7 @@ module Plaid
     def select_mfa_method(selection,type=nil)
       type = self.type if type.nil?
       auth_path = self.permissions.last + '/step'
-      res = Plaid.post(auth_path, { options: { send_method: selection }.to_json, access_token: self.access_token, type: type })
+      res = Plaid::Connection.post(auth_path, { options: { send_method: selection }.to_json, access_token: self.access_token, type: type })
       build_user(res,self.permissions.last)
     end
 
@@ -56,12 +55,12 @@ module Plaid
       return false unless self.permit? auth_level
       case auth_level
       when 'auth'
-        build_user(Plaid.post('auth/get', access_token: self.access_token))
+        build_user(Plaid::Connection.post('auth/get', access_token: self.access_token))
       when 'connect'
         payload = { access_token: self.access_token }.merge(options)
-        build_user(Plaid.post('connect/get', payload))
+        build_user(Plaid::Connection.post('connect/get', payload))
       when 'info'
-        build_user(Plaid.secure_get('info', self.access_token))
+        build_user(Plaid::Connection.secure_get('info', self.access_token))
       else
         raise "Invalid auth level: #{auth_level}"
       end
@@ -92,7 +91,7 @@ module Plaid
     end
 
     def update_balance
-      res = Plaid.post('balance',{access_token:self.access_token})
+      res = Plaid::Connection.post('balance',{access_token:self.access_token})
       build_user(res)
     end
 
@@ -101,13 +100,13 @@ module Plaid
         api_level = 'auth' unless self.permissions.include? 'auth'
         api_level = 'connect' unless self.permissions.include? 'connect'
       end
-      res = Plaid.post('upgrade',{access_token:self.access_token,upgrade_to:api_level})
+      res = Plaid::Connection.post('upgrade', { access_token: self.access_token, upgrade_to: api_level})
       self.accounts = [], self.transactions = []
       build_user(res)
     end
 
     def delete_user
-      Plaid.delete('info',{access_token:self.access_token})
+      Plaid::Connection.delete('info', { access_token: self.access_token })
     end
 
     protected
@@ -123,8 +122,6 @@ module Plaid
       end
 
       return self
-    rescue => e
-      error_handler(e)
     end
 
     # Instantiate and build a new account object, return this to the accounts array

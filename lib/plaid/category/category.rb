@@ -1,8 +1,5 @@
-require 'plaid/util'
 module Plaid
   class Category
-    include Plaid::Util
-
     attr_accessor(:type, :hierarchy, :id, :cat_array)
 
     def instantiate_all_categories(res)
