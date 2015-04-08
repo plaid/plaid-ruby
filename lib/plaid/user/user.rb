@@ -35,33 +35,36 @@ module Plaid
       build_user(res,self.permissions.last)
     end
 
-    def get_auth
-      if self.permissions.include? 'auth'
-        res = Plaid.post('auth/get',{access_token:self.access_token})
-        build_user(res)
+    def permit?(auth_level)
+      self.permissions.include? auth_level
+    end
+
+    # TODO: (2.0) auth_level should be symbols instead of string
+    def get(auth_level, options = {})
+      return false unless self.permit? auth_level
+      case auth_level
+      when 'auth'
+        build_user(Plaid.post('auth/get', access_token: self.access_token))
+      when 'connect'
+        payload = { access_token: self.access_token }.merge(options)
+        build_user(Plaid.post('connect/get', payload))
+      when 'info'
+        build_user(Plaid.secure_get('info', self.access_token))
       else
-        false
+        raise "Invalid auth level: #{auth_level}"
       end
     end
 
-    def get_connect(options=nil)
-      if self.permissions.include? 'connect'
-        payload = {access_token:self.access_token}
-        payload.merge!(options) if options
-        res = Plaid.post('connect/get',payload)
-        build_user(res)
-      else
-        false
-      end
+    def get_auth
+      get('auth')
+    end
+
+    def get_connect(options={})
+      get('connect', options)
     end
 
     def get_info
-      if self.permissions.include? 'info'
-        res = Plaid.secure_get('info',self.access_token)
-        build_user(res)
-      else
-        false
-      end
+      get('info')
     end
 
     def update_info(username,pass,pin=nil)
@@ -157,7 +160,7 @@ module Plaid
         end
       end if res['transactions']
 
-      user.permissions << api_level unless user.permissions.include? api_level && api_level.nil?
+      user.permissions << api_level if !api_level.nil? && !user.permit?(api_level)
       user.pending_mfa_questions = ''
       user.information.update_info(res['info']) if res['info']
       user.api_res = 'success'

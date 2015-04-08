@@ -16,9 +16,9 @@ module Plaid
       error_handler e
     end
 
-    def set_user(token, api_level=[], type=nil)
+    def set_user(token, api_levels=[], type=nil)
       token = token + '_' + type unless type.nil?
-      self.existing_user(token,api_level)
+      self.existing_user(token, api_levels)
     rescue => e
       error_handler e
     end
