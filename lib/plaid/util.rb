@@ -78,17 +78,16 @@ module Plaid
     def parse_response(res)
       body = JSON.parse(res.body)
       case res.code.delete('.').to_i
-        when 200
-          return body
-        when 201
-          return { msg: 'Requires further authentication', body: body}
-        when 400
-          error_handler('Bad Request',res)
+        when 200 then body
+        when 201 then { msg: 'Requires further authentication', body: body}
+        when 400 then error_handler('Bad Request',res)
         when 401
-          error_handler('Institution not supported',res) if body['code'] == 1108
-          error_handler('Corrupted token',res) if body['code'] == 1105
-          error_handler('Not Found',res) if body['code'] == 1501
-          error_handler('Unauthorized',res)
+          case body['code']
+          when 1108 then error_handler('Institution not supported', res)
+          when 1105 then error_handler('Corrupted token', res)
+          when 1501 then error_handler('Not Found', res)
+          else error_handler('Unauthorized',res)
+          end
         when 402
           return {msg: 'User account is locked', body: body} if body['code'] == 1205
           error_handler('Request Failed', res)
