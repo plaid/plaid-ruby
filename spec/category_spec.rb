@@ -1,7 +1,6 @@
 require 'spec_helper.rb'
-# Category specs
-describe '#Category' do
 
+Rspec.describe Plaid::Category do
   before :all do
     Plaid.config do |p|
       p.customer_id = 'test_id'
@@ -11,12 +10,12 @@ describe '#Category' do
   end
 
   context 'when a single category is found' do
-    category = Plaid.category('17001013')
-    it { expect(category.class).to eq (Plaid::Category) }
+    let(:category) { Plaid.category('17001013') }
+    it { expect(category).to be_kind_of(Plaid::Category) }
   end
 
   context 'when all categories are found' do
-    category = Plaid.category
+    let(:category) { Plaid.category }
     it { expect(category).to be_kind_of(Array)}
   end
 
