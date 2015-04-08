@@ -48,6 +48,19 @@ Authenticate a user to your desired level of api access (auth / connect).
 user = Plaid.add_user('auth','plaid_test','plaid_good','wells')
 ```
 
+If the authentication requires a pin, you can pass it in as the fifth argument:
+
+```ruby
+user = Plaid.add_user('auth', 'plaid_test', 'plaid_good', 'usaa', '1234')
+```
+
+To add options such as `login_only` or `webhooks`, use the sixth argument:
+
+```ruby
+user = Plaid.add_user('auth','plaid_test','plaid_good','wells', pin, { login_only: true, webhooks: 'https://example.org/callbacks/plaid')
+```
+
+
 ## Learn More
 
 Learn about the full functionality of the library on our [Wiki](https://github.com/plaid/plaid-ruby/wiki)
