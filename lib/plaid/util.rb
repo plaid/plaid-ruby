@@ -100,18 +100,15 @@ module Plaid
 
     def parse_get_response(res)
       body = JSON.parse(res)
-      if body.class == Array
+      return body if body.kind_of?(Array)
+
+      case body['code']
+      when nil
         body
+      when 1301, 1401, 1501, 1601
+        error_handler('Not Found',body)
       else
-        if body['code'].nil?
-          body
-        else
-          if body['code'] == 1301 || body['code'] == 1401 || body['code'] == 1501 || body['code'] == 1601
-            error_handler('Not Found',body)
-          else
-            body
-          end
-        end
+        body
       end
     end
 
