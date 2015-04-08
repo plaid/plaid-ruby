@@ -39,6 +39,11 @@ module Plaid
       self.permissions.include? auth_level
     end
 
+    def permit!(api_level)
+      return if api_level.nil? || self.permit?(api_level)
+      self.permissions << api_level
+    end
+
     # TODO: (2.0) auth_level should be symbols instead of string
     def get(auth_level, options = {})
       return false unless self.permit? auth_level
@@ -100,13 +105,16 @@ module Plaid
 
     protected
 
-    def build_user(res,api_level=nil)
+    def build_user(res, api_level = nil)
+      self.permit! api_level
+
       if res[:msg].nil?
-        populate_user(self,res,api_level)
-        clean_up_user(self)
+        populate_user!(res)
+        clean_up_user!
       else
-        set_mfa_request(self,res,api_level)
+        set_mfa_request!(res)
       end
+
       return self
     rescue => e
       error_handler(e)
@@ -126,47 +134,44 @@ module Plaid
 
     private
 
-    def clean_up_user(user)
-      user.accounts.reject! { |c| !c.instance_of? Plaid::Account }
-      user
+    def clean_up_user!
+      self.accounts.select! { |c| c.instance_of? Plaid::Account }
     end
 
-    def set_mfa_request(user,res,api_level)
-      user.access_token = res[:body]['access_token']
-      user.pending_mfa_questions = res[:body]
-      user.api_res = res[:msg]
-      user.permissions << api_level unless self.permissions.include? api_level && api_level.nil?
+    def set_mfa_request!(res)
+      self.access_token = res[:body]['access_token']
+      self.pending_mfa_questions = res[:body]
+      self.api_res = res[:msg]
     end
 
-    def populate_user(user,res,api_level)
+    def populate_user!(res)
       res['accounts'].each do |account|
-        if user.accounts.any? { |h| h == account['_id'] }
-          owned_account = user.accounts.find { |h| h == account['_id'] }
+        if self.accounts.any? { |h| h == account['_id'] }
+          owned_account = self.accounts.find { |h| h == account['_id'] }
           owned_account.new(account)
         else
-          user.accounts << new_account(account)
+          self.accounts << new_account(account)
         end
       end if res['accounts']
 
       res['transactions'].each do |transaction|
-        if user.transactions.any? { |t| t == transaction['_id'] }
-          owned_transaction = user.transactions.find { |h| h == transaction['_id'] }
+        if self.transactions.any? { |t| t == transaction['_id'] }
+          owned_transaction = self.transactions.find { |h| h == transaction['_id'] }
           owned_transaction.new(transaction)
         else
-          user.transactions << new_transaction(transaction)
+          self.transactions << new_transaction(transaction)
         end
       end if res['transactions']
 
-      user.permissions << api_level if !api_level.nil? && !user.permit?(api_level)
-      user.pending_mfa_questions = ''
-      user.information.update_info(res['info']) if res['info']
-      user.api_res = 'success'
+      self.pending_mfa_questions = ''
+      self.information.update_info(res['info']) if res['info']
+      self.api_res = 'success'
 
       # TODO: Remove the following line when upgrading to V-2
-      user.info.merge!(res['info']) if res['info']
+      self.info.merge!(res['info']) if res['info']
       # End TODO
-      user.access_token = res['access_token'].split[0]
-      user.type = res['access_token'].split[1]
+      self.access_token = res['access_token'].split[0]
+      self.type = res['access_token'].split[1]
     end
 
   end
