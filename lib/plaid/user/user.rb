@@ -4,10 +4,8 @@ require_relative 'info/info'
 require 'json'
 
 module Plaid
-  class Plaid::User
-
-    # Define user vars
-    attr_accessor(:accounts, :transactions, :access_token, :type, :permissions, :api_res, :pending_mfa_questions, :info, :information)
+  class User
+    attr_accessor :accounts, :transactions, :access_token, :type, :permissions, :api_res, :pending_mfa_questions, :info, :information
 
     def initialize
       self.accounts = []
