@@ -19,9 +19,9 @@ module Plaid
     include Plaid::AddUser
 
     # Builds the user object and returns on successful authentication
-    def user(res,api_level=nil)
-      @user = Plaid::User.new
-      @user.new(res,api_level)
+    def user(res, api_level = nil)
+      _user = Plaid::User.new
+      _user.new(res,api_level)
     end
 
     def existing_user(token, api_levels = [])
@@ -33,17 +33,17 @@ module Plaid
     end
 
     # Builds an institution object and returns when the institution details exist
-    def institution(id=nil)
-      @institution = Plaid::Institution.new
+    def institution(id = nil)
+      _institution = Plaid::Institution.new
       res = self.get('institutions',id)
-      id.nil? ? @institution.instantiate_all_institutions(res) : @institution.instantiate_one_institution(res)
+      id.nil? ? _institution.instantiate_all_institutions(res) : _institution.instantiate_one_institution(res)
     end
 
     # Builds an institution object and returns when the category details exist
-    def category(id=nil)
-      @category = Plaid::Category.new
+    def category(id = nil)
+      _category = Plaid::Category.new
       res = self.get('categories',id)
-      id.nil? ? @category.instantiate_all_categories(res) : @category.instantiate_one_category(res)
+      id.nil? ? _category.instantiate_all_categories(res) : _category.instantiate_one_category(res)
     end
 
   end
