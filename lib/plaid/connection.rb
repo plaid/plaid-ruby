@@ -46,6 +46,7 @@ module Plaid
         Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') { |http| http.request(req) }
       end
 
+      # TODO: Refactor these to use symbols instead of strings
       def error_handler(err, res = nil)
         case err
         when 'Bad Request'
@@ -53,12 +54,6 @@ module Plaid
           raise 'The request was malformed. Did you check the API docs?'
         when 'Unauthorized'
           raise 'Access denied: Try using the correct credentials.'
-        when 'Request Failed'
-          raise 'Request Failed'
-        when 'Not Found'
-          raise 'Not Found'
-        when 'Institution not supported'
-          raise 'Institution not supported'
         when 'Corrupted token'
           raise 'It appears that the access token has been corrupted'
         else
