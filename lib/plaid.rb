@@ -2,9 +2,9 @@ require 'plaid/version'
 require 'plaid/config'
 
 require 'plaid/add_user'
-require 'plaid/user/user'
-require 'plaid/institution/institution'
-require 'plaid/category/category'
+require 'plaid/models/user'
+require 'plaid/models/institution'
+require 'plaid/models/category'
 
 module Plaid
   autoload :Connection, 'plaid/connection'
