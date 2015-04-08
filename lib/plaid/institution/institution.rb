@@ -1,26 +1,25 @@
 module Plaid
   class Institution
 
-    attr_accessor(:id, :name, :type, :has_mfa, :mfa, :inst_array)
+    attr_accessor :id, :name, :type, :has_mfa, :mfa
 
-    def instantiate_all_institutions(res)
-      self.inst_array = []
-      res.each do |inst|
-        institution = Institution.new
-        inst_array << institution.build_institution(inst)
+    class << self
+      def all(res)
+        res.map { |cat| self.one(cat) }
       end
-      self.inst_array
+
+      def one(res)
+        self.new.build(res)
+      end
     end
 
-    def instantiate_one_institution(res)
-      self.build_institution(res)
-      self
-    end
-
-    protected
-
-    def build_institution(inst)
-      self.id = inst['id'], self.name = inst['name'], self.type = inst['type'], self.has_mfa =inst['has_mfa'], self.mfa = inst['mfa']
+    def build(inst)
+      self.id = inst['id']
+      self.name = inst['name']
+      self.type = inst['type']
+      self.has_mfa = inst['has_mfa']
+      self.mfa = inst['mfa']
+      return self
     end
 
   end

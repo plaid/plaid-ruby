@@ -8,11 +8,11 @@ module Plaid
       end
 
       def one(res)
-        self.new.build_category(res)
+        self.new.build(res)
       end
     end
 
-    def build_category(cat)
+    def build(cat)
       self.type = cat['type']
       self.hierarchy = cat['hierarchy']
       self.id = cat['id']
