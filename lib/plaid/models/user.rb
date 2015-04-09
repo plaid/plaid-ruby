@@ -39,6 +39,8 @@ module Plaid
       return self
     end
 
+    # API: public
+    # Use this method to send back the MFA code or answer
     def mfa_authentication(auth, type = nil)
       type = self.type if type.nil?
       auth_path = self.permissions.last + '/step'
@@ -48,6 +50,8 @@ module Plaid
       update(res)
     end
 
+    # API: public
+    # Use this method to select the MFA method
     def select_mfa_method(selection, type=nil)
       type = self.type if type.nil?
       auth_path = self.permissions.last + '/step'
@@ -55,15 +59,21 @@ module Plaid
       update(res, self.permissions.last)
     end
 
+    # API: public
+    # Use this method to find out API levels available for this user
     def permit?(auth_level)
       self.permissions.include? auth_level
     end
 
+    # API: semi-private
+    # Internal helper method to set the available API levels
     def permit!(api_level)
       return if api_level.nil? || self.permit?(api_level)
       self.permissions << api_level
     end
 
+    # API: semi-private
+    # Gets auth, connect, or info of the user
     # TODO: (2.0) auth_level should be symbols instead of string
     def get(auth_level, options = {})
       return false unless self.permit? auth_level
@@ -80,18 +90,24 @@ module Plaid
       end
     end
 
+    # API: semi-private
     def get_auth
       get('auth')
     end
 
+    # API: semi-private
     def get_connect(options={})
       get('connect', options)
     end
 
+    # API: semi-private
     def get_info
       get('info')
     end
 
+    # API: semi-private
+    # Helper method to update user information
+    # Requires 'info' api level
     def update_info(username,pass,pin=nil)
       return false unless self.permit? 'info'
 
@@ -100,10 +116,14 @@ module Plaid
       update(Plaid.patch('info', payload))
     end
 
+    # API: semi-private
+    # Helper method to update user balance
     def update_balance
       update(Plaid::Connection.post('balance', { access_token: self.access_token }))
     end
 
+    # API: public
+    # Use this method to upgrade a user to another api level
     def upgrade(api_level=nil)
       if api_level.nil?
         api_level = 'auth' unless self.permit? 'auth'
@@ -117,6 +137,8 @@ module Plaid
       update(res)
     end
 
+    # API: public
+    # Use this method to delete a user from the Plaid API
     def delete_user
       Plaid::Connection.delete('info', { access_token: self.access_token })
     end
