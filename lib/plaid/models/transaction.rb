@@ -2,9 +2,9 @@ module Plaid
   class Transaction
     attr_accessor :id, :account, :amount, :name, :meta, :location, :pending, :score, :type, :category, :category_id
 
-    # Instantiate a new account with the results of the successful API call
-    # Build an array of nested transactions, and return self if successful
-    def new(res)
+    # API: semi-private
+    # This method updates Plaid::Account with the results returned from the API
+    def update(res)
       self.id       = res['_id']
       self.account  = res['_account']
       self.amount   = res['amount']
@@ -18,8 +18,15 @@ module Plaid
       self.category    = res['category']
       self.category_id = res['category_id']
       return self
-    rescue => e
-      error_handler(e)
+    end
+
+    class << self
+      # API: semi-private
+      # This class method instantiates a new Plaid::Account object and updates it with the results
+      # from the API
+      def build(res)
+        self.new.update(res)
+      end
     end
 
   end
