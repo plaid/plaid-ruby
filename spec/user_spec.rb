@@ -16,30 +16,6 @@ RSpec.describe Plaid::User do
       let(:user) { Plaid.add_user('connect','plaid_test','plaid_good','wells') }
       it { expect(user.accounts.first.type).to eq('depository') }
     end
-
-    context 'gets a valid user with accounts and transactions' do
-      let(:user) { Plaid.set_user('test_wells',['connect']) }
-      it { expect(user.transactions).not_to be_empty }
-    end
-
-    context 'gets a valid user with accounts' do
-      let(:user) { Plaid.set_user('test_wells',['auth']) }
-      it { expect(user.accounts).not_to be_empty }
-    end
-
-    #TODO: Fully vet the info api endpoint for the beta functions before adding this as a supported function.
-    pending 'need to vet the info api endpoint' do
-      context 'gets a valid user with info' do
-        let(:user) { Plaid.set_user('test_wells',['info']) }
-        it { expect(user.accounts).to be_truthy}
-      end
-
-      context 'gets a fully validated user with all access granted' do
-        let(:user) { Plaid.set_user('test_wells',['connect','info','auth']) }
-        it { expect(user.transactions).to be_truthy}
-      end
-    end
-
   end
 
   # MFA specs - after user is instantiated,
