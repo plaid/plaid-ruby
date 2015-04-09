@@ -7,6 +7,54 @@ module Plaid
   class User
     attr_accessor :accounts, :transactions, :access_token, :type, :permissions, :api_res, :pending_mfa_questions, :info, :information
 
+    # API: public
+    # Use this method to select the MFA method
+    def select_mfa_method(selection, type=nil)
+      type = self.type if type.nil?
+      auth_path = self.permissions.last + '/step'
+      res = Plaid::Connection.post(auth_path, { options: { send_method: selection }.to_json, access_token: self.access_token, type: type })
+      update(res, self.permissions.last)
+    end
+
+    # API: public
+    # Use this method to send back the MFA code or answer
+    def mfa_authentication(auth, type = nil)
+      type = self.type if type.nil?
+      auth_path = self.permissions.last + '/step'
+      res = Plaid::Connection.post(auth_path, { mfa: auth, access_token: self.access_token, type: type })
+      self.accounts = []
+      self.transactions = []
+      update(res)
+    end
+
+    # API: public
+    # Use this method to find out API levels available for this user
+    def permit?(auth_level)
+      self.permissions.include? auth_level
+    end
+
+    # API: public
+    # Use this method to upgrade a user to another api level
+    def upgrade(api_level=nil)
+      if api_level.nil?
+        api_level = 'auth' unless self.permit? 'auth'
+        api_level = 'connect' unless self.permit? 'connect'
+      end
+      res = Plaid::Connection.post('upgrade', { access_token: self.access_token, upgrade_to: api_level })
+
+      # Reset accounts and transaction
+      self.accounts = []
+      self.transactions = []
+      update(res)
+    end
+
+    # API: public
+    # Use this method to delete a user from the Plaid API
+    def delete_user
+      Plaid::Connection.delete('info', { access_token: self.access_token })
+    end
+
+    ### Internal build methods
     def initialize
       self.accounts = []
       self.transactions = []
@@ -39,31 +87,7 @@ module Plaid
       return self
     end
 
-    # API: public
-    # Use this method to send back the MFA code or answer
-    def mfa_authentication(auth, type = nil)
-      type = self.type if type.nil?
-      auth_path = self.permissions.last + '/step'
-      res = Plaid::Connection.post(auth_path, { mfa: auth, access_token: self.access_token, type: type })
-      self.accounts = []
-      self.transactions = []
-      update(res)
-    end
-
-    # API: public
-    # Use this method to select the MFA method
-    def select_mfa_method(selection, type=nil)
-      type = self.type if type.nil?
-      auth_path = self.permissions.last + '/step'
-      res = Plaid::Connection.post(auth_path, { options: { send_method: selection }.to_json, access_token: self.access_token, type: type })
-      update(res, self.permissions.last)
-    end
-
-    # API: public
-    # Use this method to find out API levels available for this user
-    def permit?(auth_level)
-      self.permissions.include? auth_level
-    end
+    # Internal helper methods
 
     # API: semi-private
     # Internal helper method to set the available API levels
@@ -120,27 +144,6 @@ module Plaid
     # Helper method to update user balance
     def update_balance
       update(Plaid::Connection.post('balance', { access_token: self.access_token }))
-    end
-
-    # API: public
-    # Use this method to upgrade a user to another api level
-    def upgrade(api_level=nil)
-      if api_level.nil?
-        api_level = 'auth' unless self.permit? 'auth'
-        api_level = 'connect' unless self.permit? 'connect'
-      end
-      res = Plaid::Connection.post('upgrade', { access_token: self.access_token, upgrade_to: api_level })
-
-      # Reset accounts and transaction
-      self.accounts = []
-      self.transactions = []
-      update(res)
-    end
-
-    # API: public
-    # Use this method to delete a user from the Plaid API
-    def delete_user
-      Plaid::Connection.delete('info', { access_token: self.access_token })
     end
 
     private
