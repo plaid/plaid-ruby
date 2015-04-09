@@ -30,14 +30,15 @@ module Plaid
       return _user
     end
 
+    # API: public
     # Builds an institution object and returns when the institution details exist
     def institution(id = nil)
       res = Plaid::Connection.get('institutions', id)
-      id.nil? ? Plaid::Institution.all(res) : Plaid::Institution.one(res)
+      id.nil? ? Plaid::Institution.all(res) : Plaid::Institution.build(res)
     end
 
     # API: public
-    # Builds an institution object and returns when the category details exist
+    # Builds an category object and returns when the category details exist
     def category(id = nil)
       res = Plaid::Connection.get('categories', id)
       id.nil? ? Plaid::Category.all(res) : Plaid::Category.build(res)
