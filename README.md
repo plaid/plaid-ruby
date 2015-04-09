@@ -32,6 +32,7 @@ Or install it system wide as:
 
 Please read the great documentation at http://plaid.com/docs/ for more information.
 
+### Configuring Plaid
 Configure the gem with your customer id, secret key, and the environment path you would like to use.
 
 ```ruby
@@ -42,6 +43,7 @@ Plaid.config do |p|
 end
 ```
 
+### Creating a new Plaid User
 Authenticate a user to your desired level of api access (auth / connect).
 
 ```ruby
@@ -60,6 +62,30 @@ To add options such as `login_only` or `webhooks`, use the sixth argument:
 user = Plaid.add_user('auth','plaid_test','plaid_good','wells', nil, { login_only: true, webhooks: 'https://example.org/callbacks/plaid')
 ```
 
+### Restoring a Plaid User using an access token
+
+```ruby
+user = Plaid.set_user('access_token')
+```
+
+```ruby
+user = Plaid.set_user('access_token', 'wells')
+```
+
+## Semantic Versioning
+
+Methods marked with `API: public` are officially supported by the gem maintainers. Since
+we are using semantic versioning (http://semver.org/spec/v2.0.0.html), the maintainers are
+commited to backwards-compatibility support for these API calls when we update the Minor
+version. So for example, going from version 1.4.x to 1.5.x will not change these public
+API calls.
+
+However, we may change these method signatures or even the gem architecture when updating
+the Major number. For example, we have some breaking changes in mind with version 2.0
+
+Methods marked with `API: semi-private` are used internally for consistency. While it is
+possible to monkey-patch against them for your own use, the maintainers make no gaurantees
+on backwards compatibility. 
 
 ## Learn More
 
