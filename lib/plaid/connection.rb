@@ -4,6 +4,7 @@ require 'uri'
 module Plaid
   class Connection
     class << self
+      # API: semi-private
       def post(path, options = {})
         uri = build_uri(path)
         options.merge!(client_id: Plaid.customer_id, secret: Plaid.secret)
@@ -11,12 +12,14 @@ module Plaid
         parse_response(res)
       end
 
+      # API: semi-private
       def get(path, id = nil)
         uri = build_uri(path,id)
         res = Net::HTTP.get(uri)
         parse_get_response(res)
       end
 
+      # API: semi-private
       def secure_get(path, access_token, options = {})
         uri = build_uri(path)
         options.merge!({access_token:access_token})
@@ -27,6 +30,7 @@ module Plaid
         parse_response(res)
       end
 
+      # API: semi-private
       def patch(path, options = {})
         uri = build_uri(path)
         options.merge!(client_id: Plaid.customer_id, secret: Plaid.secret)
@@ -37,6 +41,7 @@ module Plaid
         parse_response(res)
       end
 
+      # API: semi-private
       def delete(path, options = {})
         uri = build_uri(path)
         options.merge!(client_id: Plaid.customer_id, secret: Plaid.secret)
@@ -46,6 +51,7 @@ module Plaid
         Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') { |http| http.request(req) }
       end
 
+      # API: semi-private
       # TODO: Refactor these to use symbols instead of strings
       def error_handler(err, res = nil)
         case err
@@ -63,6 +69,7 @@ module Plaid
 
       protected
 
+      # API: semi-private
       def build_uri(path, option = nil)
         path = path + '/' + option unless option.nil?
         URI.parse(Plaid.environment_location + path)
