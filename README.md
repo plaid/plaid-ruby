@@ -57,7 +57,7 @@ user = Plaid.add_user('auth', 'plaid_test', 'plaid_good', 'usaa', '1234')
 To add options such as `login_only` or `webhooks`, use the sixth argument:
 
 ```ruby
-user = Plaid.add_user('auth','plaid_test','plaid_good','wells', pin, { login_only: true, webhooks: 'https://example.org/callbacks/plaid')
+user = Plaid.add_user('auth','plaid_test','plaid_good','wells', nil, { login_only: true, webhooks: 'https://example.org/callbacks/plaid')
 ```
 
 

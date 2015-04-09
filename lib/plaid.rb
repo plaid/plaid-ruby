@@ -1,53 +1,45 @@
 require 'plaid/version'
 require 'plaid/config'
-require 'plaid/util'
 
 require 'plaid/add_user'
-require 'plaid/user/user'
-require 'plaid/institution/institution'
-require 'plaid/category/category'
+require 'plaid/models/user'
+require 'plaid/models/institution'
+require 'plaid/models/category'
 
 module Plaid
+  autoload :Connection, 'plaid/connection'
+
   class << self
     # Configures the gem with the public, private, and environment vars
     include Plaid::Configure
-
-    # Include the utility classes used throughout the gem
-    include Plaid::Util
 
     # Includes the method to authenticate the user. Defined in auth.rb
     include Plaid::AddUser
 
     # Builds the user object and returns on successful authentication
-    def user(res,api_level=nil)
-      @user = Plaid::User.new
-      @user.new(res,api_level)
+    def user(res, api_level = nil)
+      _user = Plaid::User.new
+      _user.new(res,api_level)
     end
 
-    def existing_user(token,api_level=[],type=nil)
-      @user = Plaid::User.new
-      @user.access_token = token
-      api_level.each { |i|
-        @user.permissions << i
-        @user.get_auth if i == 'auth'
-        @user.get_connect if i == 'connect'
-        @user.get_info if i == 'info'
-      } unless api_level.empty?
-      @user
+    def existing_user(token, api_levels = [])
+      _user = Plaid::User.new
+      _user.access_token = token
+      _user.permissions = api_levels
+      api_levels.each { |l| _user.get(l) }
+      return _user
     end
 
     # Builds an institution object and returns when the institution details exist
-    def institution(id=nil)
-      @institution = Plaid::Institution.new
-      res = self.get('institutions',id)
-      id.nil? ? @institution.instantiate_all_institutions(res) : @institution.instantiate_one_institution(res)
+    def institution(id = nil)
+      res = Plaid::Connection.get('institutions', id)
+      id.nil? ? Plaid::Institution.all(res) : Plaid::Institution.one(res)
     end
 
     # Builds an institution object and returns when the category details exist
-    def category(id=nil)
-      @category = Plaid::Category.new
-      res = self.get('categories',id)
-      id.nil? ? @category.instantiate_all_categories(res) : @category.instantiate_one_category(res)
+    def category(id = nil)
+      res = Plaid::Connection.get('categories', id)
+      id.nil? ? Plaid::Category.all(res) : Plaid::Category.one(res)
     end
 
   end

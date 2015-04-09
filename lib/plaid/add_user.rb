@@ -10,17 +10,13 @@ module Plaid
       payload[:pin]     = pin if pin
       payload[:options] = options.is_a?(Hash) ? JSON.generate(options) : options if options
 
-      res = self.post(api_level, payload)
+      res = Plaid::Connection.post(api_level, payload)
       self.user(res, api_level)
-    rescue => e
-      error_handler e
     end
 
-    def set_user(token, api_level=[], type=nil)
+    def set_user(token, api_levels=[], type=nil)
       token = token + '_' + type unless type.nil?
-      self.existing_user(token,api_level)
-    rescue => e
-      error_handler e
+      self.existing_user(token, api_levels)
     end
   end
 end

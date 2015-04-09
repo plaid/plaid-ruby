@@ -1,6 +1,6 @@
 module Plaid
   module Configure
-    attr_writer :customer_id, :secret, :environment_location
+    attr_accessor :customer_id, :secret, :environment_location
 
     KEYS = [:customer_id, :secret, :environment_location]
 

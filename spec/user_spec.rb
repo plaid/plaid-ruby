@@ -1,6 +1,6 @@
 require 'spec_helper.rb'
 
-RSpec.describe '#User' do
+RSpec.describe Plaid::User do
   let(:auth_user)    { Plaid.add_user('auth',   'plaid_test', 'plaid_good', 'wells') }
   let(:connect_user) { Plaid.add_user('connect','plaid_test', 'plaid_good', 'wells') }
   let(:info_user)    { Plaid.add_user('info',   'plaid_test', 'plaid_good', 'wells') }
@@ -191,5 +191,9 @@ RSpec.describe '#User' do
       it { expect{ subject.get_connect }.to_not raise_error }
     end
   end
+
+  # This stuff needs to be tested and rewritten. Have alredy
+  # surfaced up a bug in it
+  pending "#populate_user"
 
 end

@@ -2,9 +2,9 @@ require 'spec_helper.rb'
 
 RSpec.describe 'Plaid.config' do
   around(:each) do |example|
-    old_customer_id          = Plaid.instance_variable_get(:@customer_id)
-    old_secret               = Plaid.instance_variable_get(:@secret)
-    old_environment_location = Plaid.instance_variable_get(:@environment_location)
+    old_customer_id          = Plaid.customer_id
+    old_secret               = Plaid.secret
+    old_environment_location = Plaid.environment_location
 
     Plaid.config do |p|
       p.customer_id          = customer_id

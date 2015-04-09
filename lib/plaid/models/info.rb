@@ -1,9 +1,6 @@
-require 'plaid/util'
 module Plaid
   class Information
-    include Plaid::Util
-    # Define vars for info
-    attr_accessor(:names, :emails, :phone_numbers, :addresses)
+    attr_accessor :names, :emails, :phone_numbers, :addresses
 
     def new
       self.names = []
