@@ -36,10 +36,11 @@ module Plaid
       id.nil? ? Plaid::Institution.all(res) : Plaid::Institution.one(res)
     end
 
+    # API: public
     # Builds an institution object and returns when the category details exist
     def category(id = nil)
       res = Plaid::Connection.get('categories', id)
-      id.nil? ? Plaid::Category.all(res) : Plaid::Category.one(res)
+      id.nil? ? Plaid::Category.all(res) : Plaid::Category.build(res)
     end
 
   end
