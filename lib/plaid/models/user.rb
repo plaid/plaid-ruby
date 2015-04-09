@@ -122,12 +122,6 @@ module Plaid
       return self
     end
 
-    # Instantiate and build a new account object, return this to the accounts array
-    def new_transaction(res)
-      transaction = Transaction.new
-      transaction.new(res)
-    end
-
     private
 
     def clean_up_user!
@@ -155,7 +149,7 @@ module Plaid
           owned_transaction = self.transactions.find { |h| h == transaction['_id'] }
           owned_transaction.new(transaction)
         else
-          self.transactions << new_transaction(transaction)
+          self.transactions << Plaid::Transaction.build(transaction)
         end
       end if res['transactions']
 
