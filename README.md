@@ -42,6 +42,16 @@ Plaid.config do |p|
 end
 ```
 
+Example configuration:
+
+```ruby
+Plaid.config do |p|
+    p.customer_id = 'CLIENT_ID_TOKEN'
+    p.secret = 'SECRET_TOKEN'
+    p.environment_location = 'https://tartan.plaid.com/'
+end
+```
+
 Authenticate a user to your desired level of api access (auth / connect).
 
 ```ruby
