@@ -17,10 +17,26 @@ module Plaid
       self.information = Information.new
     end
 
-    # Instantiate a new user with the results of the successful API call
-    # Build an array of nested accounts, and return self if successful
-    def new(res, api_level = nil)
-      build_user(res, api_level)
+    # API: semi-private
+    # This class method instantiates a new Plaid::Account object and updates it with the results
+    # from the API
+    def self.build(res, api_level = nil)
+      self.new.update(res, api_level)
+    end
+
+    # API: semi-private
+    # This method updates Plaid::Account with the results returned from the API
+    def update(res, api_level = nil)
+      self.permit! api_level
+
+      if res[:msg].nil?
+        populate_user!(res)
+        clean_up_user!
+      else
+        set_mfa_request!(res)
+      end
+
+      return self
     end
 
     def mfa_authentication(auth, type = nil)
@@ -29,14 +45,14 @@ module Plaid
       res = Plaid::Connection.post(auth_path, { mfa: auth, access_token: self.access_token, type: type })
       self.accounts = []
       self.transactions = []
-      build_user(res)
+      update(res)
     end
 
-    def select_mfa_method(selection,type=nil)
+    def select_mfa_method(selection, type=nil)
       type = self.type if type.nil?
       auth_path = self.permissions.last + '/step'
       res = Plaid::Connection.post(auth_path, { options: { send_method: selection }.to_json, access_token: self.access_token, type: type })
-      build_user(res,self.permissions.last)
+      update(res, self.permissions.last)
     end
 
     def permit?(auth_level)
@@ -53,12 +69,12 @@ module Plaid
       return false unless self.permit? auth_level
       case auth_level
       when 'auth'
-        build_user(Plaid::Connection.post('auth/get', access_token: self.access_token))
+        update(Plaid::Connection.post('auth/get', access_token: self.access_token))
       when 'connect'
         payload = { access_token: self.access_token }.merge(options)
-        build_user(Plaid::Connection.post('connect/get', payload))
+        update(Plaid::Connection.post('connect/get', payload))
       when 'info'
-        build_user(Plaid::Connection.secure_get('info', self.access_token))
+        update(Plaid::Connection.secure_get('info', self.access_token))
       else
         raise "Invalid auth level: #{auth_level}"
       end
@@ -77,49 +93,32 @@ module Plaid
     end
 
     def update_info(username,pass,pin=nil)
-      if self.permissions.include? 'info'
-        payload = {username:username,password:pass,access_token:self.access_token}
-        payload.merge!({pin:pin}) if pin
-        res = Plaid.patch('info',payload)
-        puts res
-        build_user(res)
-      else
-        false
-      end
+      return false unless self.permit? 'info'
+
+      payload = { username: username, password: pass, access_token: self.access_token }
+      payload.merge!(pin: pin) if pin
+      update(Plaid.patch('info', payload))
     end
 
     def update_balance
-      res = Plaid::Connection.post('balance',{access_token:self.access_token})
-      build_user(res)
+      update(Plaid::Connection.post('balance', { access_token: self.access_token }))
     end
 
     def upgrade(api_level=nil)
       if api_level.nil?
-        api_level = 'auth' unless self.permissions.include? 'auth'
-        api_level = 'connect' unless self.permissions.include? 'connect'
+        api_level = 'auth' unless self.permit? 'auth'
+        api_level = 'connect' unless self.permit? 'connect'
       end
-      res = Plaid::Connection.post('upgrade', { access_token: self.access_token, upgrade_to: api_level})
-      self.accounts = [], self.transactions = []
-      build_user(res)
+      res = Plaid::Connection.post('upgrade', { access_token: self.access_token, upgrade_to: api_level })
+
+      # Reset accounts and transaction
+      self.accounts = []
+      self.transactions = []
+      update(res)
     end
 
     def delete_user
       Plaid::Connection.delete('info', { access_token: self.access_token })
-    end
-
-    protected
-
-    def build_user(res, api_level = nil)
-      self.permit! api_level
-
-      if res[:msg].nil?
-        populate_user!(res)
-        clean_up_user!
-      else
-        set_mfa_request!(res)
-      end
-
-      return self
     end
 
     private
