@@ -160,12 +160,13 @@ module Plaid
       end if res['transactions']
 
       self.pending_mfa_questions = ''
-      self.information.update_info(res['info']) if res['info']
+      self.information.update(res['info']) if res['info']
       self.api_res = 'success'
 
       # TODO: Remove the following line when upgrading to V-2
       self.info.merge!(res['info']) if res['info']
       # End TODO
+
       self.access_token = res['access_token'].split[0]
       self.type = res['access_token'].split[1]
     end
