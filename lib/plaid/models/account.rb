@@ -2,9 +2,9 @@ module Plaid
   class Account
     attr_accessor :available_balance, :current_balance, :institution_type, :meta, :transactions, :numbers, :name, :id, :type
 
-    # Instantiate a new account with the results of the successful API call
-    # Build an array of nested transactions, and return self if successful
-    def new(res)
+    # API: semi-private
+    # This method updates Plaid::Account with the results returned from the API
+    def update(res)
       self.name = res['name']
       self.id   = res['_id']
       self.type = res['type']
@@ -19,14 +19,15 @@ module Plaid
 
       self.numbers = res['numbers'] ? res['numbers'] : 'Upgrade user to access routing information for this account'
       return self
-    rescue => e
-      error_handler(e)
     end
 
-    # This is really an aliased method. Keep it here for
-    # now until releasing for 2.0
-    def update_account(res)
-      new(res)
+    class << self
+      # API: semi-private
+      # This class method instantiates a new Plaid::Account object and updates it with the results
+      # from the API
+      def build(res)
+        self.new.update(res)
+      end
     end
   end
 end

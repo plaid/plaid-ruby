@@ -123,12 +123,6 @@ module Plaid
     end
 
     # Instantiate and build a new account object, return this to the accounts array
-    def new_account(res)
-      account = Account.new
-      account.new(res)
-    end
-
-    # Instantiate and build a new account object, return this to the accounts array
     def new_transaction(res)
       transaction = Transaction.new
       transaction.new(res)
@@ -152,7 +146,7 @@ module Plaid
           owned_account = self.accounts.find { |h| h == account['_id'] }
           owned_account.new(account)
         else
-          self.accounts << new_account(account)
+          self.accounts << Plaid::Account.build(account)
         end
       end if res['accounts']
 
