@@ -18,8 +18,7 @@ module Plaid
 
     # Builds the user object and returns on successful authentication
     def user(res, api_level = nil)
-      _user = Plaid::User.new
-      _user.new(res,api_level)
+      Plaid::User.build(res, api_level)
     end
 
     def existing_user(token, api_levels = [])
