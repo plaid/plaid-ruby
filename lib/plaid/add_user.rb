@@ -2,6 +2,8 @@ require 'json'
 
 module Plaid
   module AddUser
+    # API: public
+    # Use this to create a new Plaid user
     # Required parameters:
     #   api_level, username, password, type
     def add_user(api_level, username, password, type, pin = nil, options = nil)
@@ -14,6 +16,8 @@ module Plaid
       self.user(res, api_level)
     end
 
+    # API: public
+    # Use this to restore a user based upon the access token
     def set_user(token, api_levels=[], type=nil)
       token = token + '_' + type unless type.nil?
       self.existing_user(token, api_levels)
