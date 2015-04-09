@@ -6,6 +6,12 @@ module Plaid
 
     def config
       yield self
+
+      # Add trailing slash to api url if it is not present
+      if self.environment_location[-1] != '/'
+        self.environment_location += '/'
+      end
+
       self
     end
 

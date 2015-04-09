@@ -29,6 +29,22 @@ RSpec.describe 'Plaid.config' do
 
   let(:user) { Plaid.add_user('connect','plaid_test','plaid_good','wells') }
 
+  context ':environment_location' do
+    context 'with trailing slash' do
+      let(:environment_location) { 'http://example.org/' }
+      it 'should leave it as-is' do
+        expect(Plaid.environment_location).to eql(environment_location)
+      end
+    end
+
+    context 'without trailing slash' do
+      let(:environment_location) { 'http://example.org' }
+      it 'should add a trailing slash' do
+        expect(Plaid.environment_location).to eql(environment_location + '/')
+      end
+    end
+  end
+
   context 'has valid dev keys' do
     let(:environment_location) { dev_url }
     it { expect(user).to be_instance_of Plaid::User }
