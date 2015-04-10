@@ -222,5 +222,31 @@ RSpec.describe Plaid do
         expect(subject.transactions.map(&:account).uniq).to eql([account])
       end
     end
+
+    context 'when filtering by date' do
+      let(:options) { { gte: "2014-07-24", lte: "2014-07-25" } }
+
+      it 'should return a subset of transactions' do
+        expect(subject.transactions.size).to eql(1)
+      end
+
+      it 'should only return transactions from the requested date range' do
+        expect(subject.transactions.map(&:date).uniq).to eql(['2014-07-24'])
+      end
+    end
+
+    context 'when filtering by account and date' do
+      let(:options) { { account: account , gte: "2014-07-24", lte: "2014-07-25" } }
+      let(:account) { 'XARE85EJqKsjxLp6XR8ocg8VakrkXpTXmRdOo' }
+
+      it 'should return a subset of transactions' do
+        expect(subject.transactions.size).to eql(1)
+      end
+
+      it 'should only return transactions from the requested account and date range' do
+        expect(subject.transactions.map(&:date).uniq).to eql(['2014-07-24'])
+        expect(subject.transactions.map(&:account).uniq).to eql([account])
+      end
+    end
   end
 end
