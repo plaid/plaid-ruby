@@ -15,6 +15,7 @@ RSpec.describe Plaid::Transaction do
 
     with_results('_id'      =>  'ID')       do it { expect(subject.id).to       eql('ID') }       end
     with_results('_account' =>  'acct')     do it { expect(subject.account).to  eql('acct') }     end
+    with_results('date'     => '00/00/00')  do it { expect(subject.date).to     eql('00/00/00') } end
     with_results('amount'   => 100.00)      do it { expect(subject.amount).to   eql(100.00) }     end
     with_results('name'     =>  'Name')     do it { expect(subject.name).to     eql('Name') }     end
     with_results('meta'     => {} )         do it { expect(subject.meta).to     eql({}) }         end

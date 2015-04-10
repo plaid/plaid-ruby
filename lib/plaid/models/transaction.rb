@@ -1,12 +1,13 @@
 module Plaid
   class Transaction
-    attr_accessor :id, :account, :amount, :name, :meta, :location, :pending, :score, :type, :category, :category_id
+    attr_accessor :id, :account, :date, :amount, :name, :meta, :location, :pending, :score, :type, :category, :category_id
 
     # API: semi-private
     # This method updates Plaid::Account with the results returned from the API
     def update(res)
       self.id       = res['_id']
       self.account  = res['_account']
+      self.date     = res['date']
       self.amount   = res['amount']
       self.name     = res['name']
       self.meta     = res['meta']
