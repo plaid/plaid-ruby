@@ -5,6 +5,8 @@ require 'plaid/models/user'
 require 'plaid/models/institution'
 require 'plaid/models/category'
 
+require 'json'
+
 module Plaid
   autoload :Connection, 'plaid/connection'
 
@@ -35,6 +37,26 @@ module Plaid
       _user.access_token = fully_qualified_token(token, institution_type)
       _user.permissions = api_levels
       api_levels.each { |l| _user.get(l) }
+      return _user
+    end
+
+    # API: public
+    # Given an access code and query options, use this to get a dataset of
+    # transactions and accounts for # a given user. See /connect/get endpoint
+    #
+    # Returns a Plaid::User object with accounts and transactions within
+    # the date range given
+    # Examples:
+    #   Plaid.transactions 'test_wells', account: 'QPO8Jo8vdDHMepg41PBwckXm4KdK1yUdmXOwK'
+    def transactions(token, options = {})
+      _user = Plaid::User.new
+      _user.access_token = token
+      _user.permit! 'connect'
+
+      # TODO: For 2.0, submit all data as JSON
+      options = JSON.generate(options) if options.kind_of?(Hash)
+
+      _user.get_connect(options: options)
       return _user
     end
 

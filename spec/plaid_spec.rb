@@ -1,15 +1,15 @@
 require 'spec_helper.rb'
 # Authentication flow specs - returns Plaid::User
 RSpec.describe Plaid do
+  let(:api_level) { raise "Define let(:api_level)" }
+  let(:username)  { raise "Define let(:username)" }
+  let(:password)  { raise "Define let(:password)" }
+  let(:type)      { raise "Define let(:type)" }
+  let(:pin)       { nil }
+  let(:options)   { nil }
+
   describe '.add_user' do
     let(:user) { Plaid.add_user api_level, username, password, type, pin, options }
-
-    let(:api_level) { raise "Define let(:api_level)" }
-    let(:username)  { raise "Define let(:username)" }
-    let(:password)  { raise "Define let(:password)" }
-    let(:type)      { raise "Define let(:type)" }
-    let(:pin)       { nil }
-    let(:options)   { nil }
 
     context 'with correct credentials for single user auth' do
       let(:username)  { 'plaid_test' }
@@ -191,6 +191,61 @@ RSpec.describe Plaid do
       context 'gets a fully validated user with all access granted' do
         let(:user) { Plaid.set_user('test_wells',['connect','info','auth']) }
         it { expect(user.transactions).to be_truthy}
+      end
+    end
+  end
+
+  describe '.transactions' do
+    subject { Plaid.transactions(access_token, options) }
+    let(:access_token) { 'test_wells' }
+    let(:options)      { nil }
+
+    context 'without options' do
+      it 'should return all accounts' do
+        expect(subject.accounts).not_to be_empty
+      end
+
+      it 'should return all transactions' do
+        expect(subject.transactions).not_to be_empty
+      end
+    end
+
+    context 'when filering by account' do
+      let(:options) { { account: account } }
+      let(:account) { 'QPO8Jo8vdDHMepg41PBwckXm4KdK1yUdmXOwK' }
+
+      it 'should return a subset of transactions' do
+        expect(subject.transactions.size).to eql(2)
+      end
+
+      it 'should only return transactions from the requested account' do
+        expect(subject.transactions.map(&:account).uniq).to eql([account])
+      end
+    end
+
+    context 'when filtering by date' do
+      let(:options) { { gte: "2014-07-24", lte: "2014-07-25" } }
+
+      it 'should return a subset of transactions' do
+        expect(subject.transactions.size).to eql(1)
+      end
+
+      it 'should only return transactions from the requested date range' do
+        expect(subject.transactions.map(&:date).uniq).to eql(['2014-07-24'])
+      end
+    end
+
+    context 'when filtering by account and date' do
+      let(:options) { { account: account , gte: "2014-07-24", lte: "2014-07-25" } }
+      let(:account) { 'XARE85EJqKsjxLp6XR8ocg8VakrkXpTXmRdOo' }
+
+      it 'should return a subset of transactions' do
+        expect(subject.transactions.size).to eql(1)
+      end
+
+      it 'should only return transactions from the requested account and date range' do
+        expect(subject.transactions.map(&:date).uniq).to eql(['2014-07-24'])
+        expect(subject.transactions.map(&:account).uniq).to eql([account])
       end
     end
   end
