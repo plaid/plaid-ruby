@@ -1,6 +1,6 @@
 module Plaid
   class Account
-    attr_accessor :available_balance, :current_balance, :institution_type, :meta, :transactions, :numbers, :name, :id, :type
+    attr_accessor :available_balance, :current_balance, :institution_type, :meta, :transactions, :numbers, :name, :id, :type, :subtype
 
     # API: semi-private
     # This method updates Plaid::Account with the results returned from the API
@@ -8,6 +8,10 @@ module Plaid
       self.name = res['name']
       self.id   = res['_id']
       self.type = res['type']
+      # Depository account only, "checkings" or "savings"
+      # Available on live data, but not on the test data
+      self.subtype = res['subtype']
+
       self.meta = res['meta'] if res['meta']
 
       if res['balance']
