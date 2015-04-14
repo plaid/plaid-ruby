@@ -15,6 +15,7 @@ RSpec.describe Plaid::Account do
     with_results('name' => 'Name') do it { expect(subject.name).to eql('Name') } end
     with_results('_id' =>  'ID')   do it { expect(subject.id).to   eql('ID') }   end
     with_results('type' => 'Type') do it { expect(subject.type).to eql('Type') } end
+    with_results('type' => 'STyp') do it { expect(subject.type).to eql('STyp') } end
     with_results('meta' => nil)    do it { expect(subject.meta).to be_nil }      end
     with_results('meta' => {})     do it { expect(subject.meta).to eql({}) }     end
 
