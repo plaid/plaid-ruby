@@ -1,34 +1,23 @@
 module Plaid
   class Transaction
-    attr_accessor :id, :account, :date, :amount, :name, :meta, :location, :pending, :score, :type, :category, :category_id
+    attr_accessor :id, :account, :date, :amount, :name, :meta, :location, :pending, :score, :cat, :type, :category, :category_id
 
-    # API: semi-private
-    # This method updates Plaid::Account with the results returned from the API
-    def update(res)
-      self.id       = res['_id']
-      self.account  = res['_account']
-      self.date     = res['date']
-      self.amount   = res['amount']
-      self.name     = res['name']
-      self.meta     = res['meta']
-      self.location = res['location']
-      self.pending  = res['pending']
-      self.score    = res['score']
-      self.type     = res['type']
+    def initialize(fields = {})
+      @id = fields['_id']
+      @account = fields['_account']
+      @date = fields['date']
+      @amount = fields['amount']
+      @name = fields['name']
+      @location = fields['meta'].nil? ? {} : fields['meta']['location']
+      @pending = fields['pending']
+      @score = fields['score']
+      @cat = Category.new({ 'id' => fields['category_id'], 'hierarchy' => fields['category'], 'type' => fields['type'] })
 
-      self.category    = res['category']
-      self.category_id = res['category_id']
-      return self
+      # Here for backwards compatibility only.
+      @type = fields['type']
+      @category = fields['category']
+      @category_id = fields['category_id']
+      @meta = fields['meta']
     end
-
-    class << self
-      # API: semi-private
-      # This class method instantiates a new Plaid::Account object and updates it with the results
-      # from the API
-      def build(res)
-        self.new.update(res)
-      end
-    end
-
   end
 end

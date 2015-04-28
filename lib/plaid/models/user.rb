@@ -173,7 +173,7 @@ module Plaid
           owned_transaction = self.transactions.find { |h| h == transaction['_id'] }
           owned_transaction.new(transaction)
         else
-          self.transactions << Transaction.build(transaction)
+          self.transactions << Transaction.new(transaction)
         end
       end if res['transactions']
 

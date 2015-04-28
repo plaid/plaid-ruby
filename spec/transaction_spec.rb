@@ -4,7 +4,7 @@ RSpec.describe Plaid::Transaction do
   # API: semi-private
   describe '.build' do
     # The reason this looks weird is because it is. This will be refactored for 2.0
-    subject { Plaid::Transaction.build(results) }
+    subject { Plaid::Transaction.new(results) }
 
     def self.with_results(_results, &examples)
       context "with results #{_results}" do
