@@ -71,14 +71,14 @@ module Plaid
     # Builds an institution object and returns when the institution details exist
     def institution(id = nil)
       res = Connection.get('institutions', id)
-      id.nil? ? Institution.all(res) : Institution.build(res)
+      id.nil? ? Institution.all(res) : Institution.new(res)
     end
 
     # API: public
     # Builds an category object and returns when the category details exist
     def category(id = nil)
       res = Connection.get('categories', id)
-      id.nil? ? Category.all(res) : Category.build(res)
+      id.nil? ? Category.all(res) : Category.new(res)
     end
   end
 end
