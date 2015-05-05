@@ -19,7 +19,7 @@ RSpec.describe Plaid::Transaction do
     with_results('amount'   => 100.00)      do it { expect(subject.amount).to   eql(100.00) }     end
     with_results('name'     =>  'Name')     do it { expect(subject.name).to     eql('Name') }     end
     with_results('meta'     => {} )         do it { expect(subject.meta).to     eql({}) }         end
-    with_results('location' =>  'Location') do it { expect(subject.location).to eql('Location') } end
+    with_results('meta'     => {'location' => 'Location'}) do it { expect(subject.location).to eql('Location') } end
     with_results('pending'  =>  true)       do it { expect(subject.pending).to  eql(true) }       end
     with_results('score'    =>  200)        do it { expect(subject.score).to    eql(200) }        end
     with_results('type'     =>  'Type')     do it { expect(subject.type).to     eql('Type') }     end
