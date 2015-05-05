@@ -163,7 +163,7 @@ module Plaid
           owned_account = self.accounts.find { |h| h == account['_id'] }
           owned_account.new(account)
         else
-          self.accounts << Account.build(account)
+          self.accounts << Account.new(account)
         end
       end if res['accounts']
 
