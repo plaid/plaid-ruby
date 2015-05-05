@@ -12,7 +12,7 @@ module Plaid
 
   class << self
     # Configures the gem with the public, private, and environment vars
-    include Plaid::Configure
+    include Configure
 
     # API: public
     # Use this to create a new Plaid user
@@ -25,15 +25,15 @@ module Plaid
       payload[:pin]     = pin if pin
       payload[:options] = options.is_a?(Hash) ? JSON.generate(options) : options if options
 
-      res = Plaid::Connection.post(api_level, payload)
-      Plaid::User.build(res, api_level)
+      res = Connection.post(api_level, payload)
+      User.build(res, api_level)
     end
 
     # API: public
     # Use this to restore a user from Plaid based upon the access token
     # TODO: Rename this to something more descriptive for 2.0, such as 'get_user'
     def set_user(token, api_levels=[], institution_type=nil)
-      _user = Plaid::User.new
+      _user = User.new
       _user.access_token = fully_qualified_token(token, institution_type)
       _user.permissions = api_levels
       api_levels.each { |l| _user.get(l) }
@@ -44,12 +44,12 @@ module Plaid
     # Given an access code and query options, use this to get a dataset of
     # transactions and accounts for # a given user. See /connect/get endpoint
     #
-    # Returns a Plaid::User object with accounts and transactions within
+    # Returns a User object with accounts and transactions within
     # the date range given
     # Examples:
     #   Plaid.transactions 'test_wells', account: 'QPO8Jo8vdDHMepg41PBwckXm4KdK1yUdmXOwK'
     def transactions(token, options = {})
-      _user = Plaid::User.new
+      _user = User.new
       _user.access_token = token
       _user.permit! 'connect'
 
@@ -70,15 +70,15 @@ module Plaid
     # API: public
     # Builds an institution object and returns when the institution details exist
     def institution(id = nil)
-      res = Plaid::Connection.get('institutions', id)
-      id.nil? ? Plaid::Institution.all(res) : Plaid::Institution.build(res)
+      res = Connection.get('institutions', id)
+      id.nil? ? Institution.all(res) : Institution.new(res)
     end
 
     # API: public
     # Builds an category object and returns when the category details exist
     def category(id = nil)
-      res = Plaid::Connection.get('categories', id)
-      id.nil? ? Plaid::Category.all(res) : Plaid::Category.build(res)
+      res = Connection.get('categories', id)
+      id.nil? ? Category.all(res) : Category.new(res)
     end
   end
 end

@@ -12,7 +12,7 @@ module Plaid
     def select_mfa_method(selection, type=nil)
       type = self.type if type.nil?
       auth_path = self.permissions.last + '/step'
-      res = Plaid::Connection.post(auth_path, { options: { send_method: selection }.to_json, access_token: self.access_token, type: type })
+      res = Connection.post(auth_path, { options: { send_method: selection }.to_json, access_token: self.access_token, type: type })
       update(res, self.permissions.last)
     end
 
@@ -21,7 +21,7 @@ module Plaid
     def mfa_authentication(auth, type = nil)
       type = self.type if type.nil?
       auth_path = self.permissions.last + '/step'
-      res = Plaid::Connection.post(auth_path, { mfa: auth, access_token: self.access_token, type: type })
+      res = Connection.post(auth_path, { mfa: auth, access_token: self.access_token, type: type })
       self.accounts = []
       self.transactions = []
       update(res)
@@ -40,7 +40,7 @@ module Plaid
         api_level = 'auth' unless self.permit? 'auth'
         api_level = 'connect' unless self.permit? 'connect'
       end
-      res = Plaid::Connection.post('upgrade', { access_token: self.access_token, upgrade_to: api_level })
+      res = Connection.post('upgrade', { access_token: self.access_token, upgrade_to: api_level })
 
       # Reset accounts and transaction
       self.accounts = []
@@ -51,7 +51,7 @@ module Plaid
     # API: public
     # Use this method to delete a user from the Plaid API
     def delete_user
-      Plaid::Connection.delete('info', { access_token: self.access_token })
+      Connection.delete('info', { access_token: self.access_token })
     end
 
     ### Internal build methods
@@ -66,14 +66,14 @@ module Plaid
     end
 
     # API: semi-private
-    # This class method instantiates a new Plaid::Account object and updates it with the results
+    # This class method instantiates a new Account object and updates it with the results
     # from the API
     def self.build(res, api_level = nil)
       self.new.update(res, api_level)
     end
 
     # API: semi-private
-    # This method updates Plaid::Account with the results returned from the API
+    # This method updates Account with the results returned from the API
     def update(res, api_level = nil)
       self.permit! api_level
 
@@ -103,12 +103,12 @@ module Plaid
       return false unless self.permit? auth_level
       case auth_level
       when 'auth'
-        update(Plaid::Connection.post('auth/get', access_token: self.access_token))
+        update(Connection.post('auth/get', access_token: self.access_token))
       when 'connect'
         payload = { access_token: self.access_token }.merge(options)
-        update(Plaid::Connection.post('connect/get', payload))
+        update(Connection.post('connect/get', payload))
       when 'info'
-        update(Plaid::Connection.secure_get('info', self.access_token))
+        update(Connection.secure_get('info', self.access_token))
       else
         raise "Invalid auth level: #{auth_level}"
       end
@@ -143,13 +143,13 @@ module Plaid
     # API: semi-private
     # Helper method to update user balance
     def update_balance
-      update(Plaid::Connection.post('balance', { access_token: self.access_token }))
+      update(Connection.post('balance', { access_token: self.access_token }))
     end
 
     private
 
     def clean_up_user!
-      self.accounts.select! { |c| c.instance_of? Plaid::Account }
+      self.accounts.select! { |c| c.instance_of? Account }
     end
 
     def set_mfa_request!(res)
@@ -164,7 +164,7 @@ module Plaid
           owned_account = self.accounts.find { |h| h == account['_id'] }
           owned_account.new(account)
         else
-          self.accounts << Plaid::Account.build(account)
+          self.accounts << Account.build(account)
         end
       end if res['accounts']
 
@@ -173,7 +173,7 @@ module Plaid
           owned_transaction = self.transactions.find { |h| h == transaction['_id'] }
           owned_transaction.new(transaction)
         else
-          self.transactions << Plaid::Transaction.build(transaction)
+          self.transactions << Transaction.new(transaction)
         end
       end if res['transactions']
 
