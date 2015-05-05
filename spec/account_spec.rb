@@ -2,8 +2,8 @@ require 'spec_helper.rb'
 
 RSpec.describe Plaid::Account do
   # API: semi-private
-  describe '.build' do
-    subject { Plaid::Account.build(results) }
+  describe '.new' do
+    subject { Plaid::Account.new(results) }
 
     def self.with_results(_results, &examples)
       context "with results #{_results}" do
