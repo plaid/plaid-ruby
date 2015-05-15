@@ -62,7 +62,6 @@ module Plaid
       self.access_token = ''
       self.api_res = ''
       self.info = {}
-      self.information = Information.new
     end
 
     # API: semi-private
@@ -164,7 +163,7 @@ module Plaid
           owned_account = self.accounts.find { |h| h == account['_id'] }
           owned_account.new(account)
         else
-          self.accounts << Account.build(account)
+          self.accounts << Account.new(account)
         end
       end if res['accounts']
 
@@ -178,7 +177,7 @@ module Plaid
       end if res['transactions']
 
       self.pending_mfa_questions = ''
-      self.information.update(res['info']) if res['info']
+      self.information = Information.new(res['info']) if res['info']
       self.api_res = 'success'
 
       # TODO: Remove the following line when upgrading to V-2
