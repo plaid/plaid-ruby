@@ -40,6 +40,8 @@ Plaid.config do |p|
     p.customer_id = 'Plaid provided customer ID here'
     p.secret = 'Plaid provided secret key here'
     p.environment_location = 'URL for the development or production environment'
+    # i.e. 'https://tartan.plaid.com/' for development, or
+    # 'https://api.plaid.com/' for production
 end
 ```
 
