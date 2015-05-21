@@ -74,6 +74,29 @@ user = Plaid.set_user('access_token')
 user = Plaid.set_user('access_token', 'wells')
 ```
 
+### Exchanging a Link public_token for a Plaid access_token
+
+```ruby
+Plaid.config do |p|
+    p.customer_id = 'test_id'
+    p.secret = 'test_secret'
+    p.environment_location = 'https://tartan.plaid.com'
+end
+
+# Exchange a Link public_token for a Plaid access_token
+exchangeTokenResponse = Plaid.exchange_token('test,chase,connected')
+
+# Use the API access_token to initialize a user
+# Note: This example assumes you are using Link with the "auth" product
+user = Plaid.set_user(exchangeTokenResponse.access_token, ['auth'])
+
+# Retrieve the user's accounts
+user.get('auth')
+
+# Print the name of each account
+user.accounts.each { |account| print account.meta['name'] + "\n"}
+```
+
 ## Semantic Versioning
 
 Methods marked with `API: public` are officially supported by the gem maintainers. Since
