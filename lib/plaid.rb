@@ -4,6 +4,7 @@ require 'plaid/config'
 require 'plaid/models/user'
 require 'plaid/models/institution'
 require 'plaid/models/category'
+require 'plaid/models/exchange_token_response'
 
 require 'json'
 
@@ -27,6 +28,17 @@ module Plaid
 
       res = Connection.post(api_level, payload)
       User.build(res, api_level)
+    end
+
+    # API: public
+    # Exchange a Plaid Link public_token for a Plaid access_token
+    # Required parameters:
+    #   public_token
+    def exchange_token(public_token)
+      payload = { public_token: public_token }
+
+      res = Connection.post('exchange_token', payload)
+      ExchangeTokenResponse.new(res)
     end
 
     # API: public

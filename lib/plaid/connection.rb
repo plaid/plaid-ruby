@@ -87,6 +87,8 @@ module Plaid
           case body['code']
           when 1108 then error_handler('Institution not supported', res)
           when 1105 then error_handler('Corrupted token', res)
+          when 1106 then error_handler('Corrupted public_token', res)
+          when 1107 then error_handler('Missing public_token', res)
           when 1501 then error_handler('Not Found', res)
           else error_handler('Unauthorized',res)
           end

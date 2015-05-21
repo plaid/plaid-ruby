@@ -195,6 +195,12 @@ RSpec.describe Plaid do
     end
   end
 
+  describe '.exchange_token' do
+    subject { Plaid.exchange_token('test,chase,connected') }
+
+    it { expect(subject.access_token).to eql('test_chase') }
+  end
+
   describe '.transactions' do
     subject { Plaid.transactions(access_token, options) }
     let(:access_token) { 'test_wells' }
