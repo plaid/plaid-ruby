@@ -1,6 +1,6 @@
 module Plaid
   class Transaction
-    attr_accessor :id, :account, :date, :amount, :name, :meta, :location, :pending, :score, :cat, :type, :category, :category_id
+    attr_accessor :id, :account, :date, :amount, :name, :meta, :location, :pending, :score, :cat, :type, :category, :category_id, :pending_transaction
 
     def initialize(fields = {})
       @id = fields['_id']
@@ -10,6 +10,7 @@ module Plaid
       @name = fields['name']
       @location = fields['meta'].nil? ? {} : fields['meta']['location']
       @pending = fields['pending']
+      @pendingTransaction = fields['_pendingTransaction']
       @score = fields['score']
       @cat = Category.new({ 'id' => fields['category_id'], 'hierarchy' => fields['category'], 'type' => fields['type'] })
 
