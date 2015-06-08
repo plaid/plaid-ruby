@@ -25,7 +25,7 @@ module Plaid
         options.merge!({access_token:access_token})
         req = Net::HTTP::Get.new(uri)
         req.body = URI.encode_www_form(options) if options
-        req.content_type = 'multipart/form-data'
+        req.content_type = 'application/x-www-form-urlencoded'
         res = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') { |http| http.request(req) }
         parse_response(res)
       end
@@ -36,7 +36,7 @@ module Plaid
         options.merge!(client_id: Plaid.customer_id, secret: Plaid.secret)
         req = Net::HTTP::Patch.new(uri)
         req.body = URI.encode_www_form(options) if options
-        req.content_type = 'multipart/form-data'
+        req.content_type = 'application/x-www-form-urlencoded'
         res = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') { |http| http.request(req) }
         parse_response(res)
       end
@@ -47,7 +47,7 @@ module Plaid
         options.merge!(client_id: Plaid.customer_id, secret: Plaid.secret)
         req = Net::HTTP::Delete.new(uri)
         req.body = URI.encode_www_form(options) if options
-        req.content_type = 'multipart/form-data'
+        req.content_type = 'application/x-www-form-urlencoded'
         Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') { |http| http.request(req) }
       end
 
