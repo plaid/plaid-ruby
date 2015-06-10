@@ -6,6 +6,7 @@ module Plaid
     def initialize(code, message, resolve)
       super(message)
       @code = code
+      @resolve = resolve
     end
   end
 
