@@ -68,15 +68,15 @@ module Plaid
         when 200 then body
         when 201 then { msg: 'Requires further authentication', body: body}
         when 400
-          raise Plaid::BadRequest.new(body['code'], body['resolve'])
+          raise Plaid::BadRequest.new(body['code'], body['message'], body['resolve'])
         when 401
-          raise Plaid::Unauthorized.new(body['code'], body['resolve'])
+          raise Plaid::Unauthorized.new(body['code'], body['message'], body['resolve'])
         when 402
-          raise Plaid::RequestFailed.new(body['code'], body['resolve'])
+          raise Plaid::RequestFailed.new(body['code'], body['message'], body['resolve'])
         when 404
-          raise Plaid::NotFound.new(body['code'], body['resolve'])
+          raise Plaid::NotFound.new(body['code'], body['message'], body['resolve'])
         else
-          raise Plaid::ServerError.new(body['code'], body['resolve'])
+          raise Plaid::ServerError.new(body['code'], body['message'], body['resolve'])
         end
       end
 
@@ -88,7 +88,7 @@ module Plaid
         when nil
           body
         when 1301, 1401, 1501, 1601
-          raise Plaid::NotFound.new(body['code'], body['resolve'])
+          raise Plaid::NotFound.new(body['code'], boday['message'], body['resolve'])
         else
           body
         end
