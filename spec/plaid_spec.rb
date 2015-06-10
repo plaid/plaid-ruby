@@ -28,7 +28,13 @@ RSpec.describe Plaid do
 
         context 'when account is locked' do
           let(:password) { 'plaid_locked' }
-          it { expect { user }.to raise_error }
+          it "raises a locked error" do
+            expect { user }.to raise_error { |error|
+              expect(error).to be_a(Plaid::RequestFailed)
+              expect(error.code).to eq(1205)
+            }
+          end
+          
         end
 
         context 'with connection options' do
