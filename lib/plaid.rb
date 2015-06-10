@@ -1,10 +1,12 @@
 require 'plaid/version'
 require 'plaid/config'
+require 'plaid/errors'
 
 require 'plaid/models/user'
 require 'plaid/models/institution'
 require 'plaid/models/category'
 require 'plaid/models/exchange_token_response'
+
 
 require 'json'
 

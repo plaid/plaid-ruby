@@ -1,6 +1,7 @@
 require 'net/http'
 require 'json'
 require 'uri'
+
 module Plaid
   class Connection
     class << self
@@ -51,22 +52,6 @@ module Plaid
         Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') { |http| http.request(req) }
       end
 
-      # API: semi-private
-      # TODO: Refactor these to use symbols instead of strings
-      def error_handler(err, res = nil)
-        case err
-        when 'Bad Request'
-          puts res.body
-          raise 'The request was malformed. Did you check the API docs?'
-        when 'Unauthorized'
-          raise 'Access denied: Try using the correct credentials.'
-        when 'Corrupted token'
-          raise 'It appears that the access token has been corrupted'
-        else
-          raise err
-        end
-      end
-
       protected
 
       # API: semi-private
@@ -82,23 +67,16 @@ module Plaid
         case res.code.delete('.').to_i
         when 200 then body
         when 201 then { msg: 'Requires further authentication', body: body}
-        when 400 then error_handler('Bad Request',res)
+        when 400
+          raise Plaid::BadRequest.new(body['code'], body['resolve'])
         when 401
-          case body['code']
-          when 1108 then error_handler('Institution not supported', res)
-          when 1105 then error_handler('Corrupted token', res)
-          when 1106 then error_handler('Corrupted public_token', res)
-          when 1107 then error_handler('Missing public_token', res)
-          when 1501 then error_handler('Not Found', res)
-          else error_handler('Unauthorized',res)
-          end
+          raise Plaid::Unauthorized.new(body['code'], body['resolve'])
         when 402
-          return {msg: 'User account is locked', body: body} if body['code'] == 1205
-          error_handler('Request Failed', res)
+          raise Plaid::RequestFailed.new(body['code'], body['resolve'])
         when 404
-          error_handler('Not Found',res)
+          raise Plaid::NotFound.new(body['code'], body['resolve'])
         else
-          error_handler('Server Error',res)
+          raise Plaid::ServerError.new(body['code'], body['resolve'])
         end
       end
 
@@ -110,7 +88,7 @@ module Plaid
         when nil
           body
         when 1301, 1401, 1501, 1601
-          error_handler('Not Found',body)
+          raise Plaid::NotFound.new(body['code'], body['resolve'])
         else
           body
         end
