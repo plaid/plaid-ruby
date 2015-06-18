@@ -78,9 +78,9 @@ user = Plaid.set_user('access_token', 'wells')
 
 ```ruby
 Plaid.config do |p|
-    p.customer_id = 'test_id'
-    p.secret = 'test_secret'
-    p.environment_location = 'https://tartan.plaid.com'
+  p.customer_id = 'test_id'
+  p.secret = 'test_secret'
+  p.environment_location = 'https://tartan.plaid.com'
 end
 
 # Exchange a Link public_token for a Plaid access_token
