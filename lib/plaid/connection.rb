@@ -86,6 +86,7 @@ module Plaid
         when 401
           case body['code']
           when 1108 then error_handler('Institution not supported', res)
+          when 1102 then error_handler('The Client ID does not exist or the Secret does not match the Client ID you provided.', res)
           when 1105 then error_handler('Corrupted token', res)
           when 1106 then error_handler('Corrupted public_token', res)
           when 1107 then error_handler('Missing public_token', res)
