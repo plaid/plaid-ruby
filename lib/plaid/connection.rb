@@ -88,7 +88,7 @@ module Plaid
         when nil
           body
         when 1301, 1401, 1501, 1601
-          raise Plaid::NotFound.new(body['code'], boday['message'], body['resolve'])
+          raise Plaid::NotFound.new(body['code'], body['message'], body['resolve'])
         else
           body
         end
