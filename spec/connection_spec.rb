@@ -3,10 +3,10 @@ require 'spec_helper'
 RSpec.describe Plaid::Connection do
   
   let(:stub_url) { "https://tartan.plaid.com/testing" }
-  let(:bad_req_response) {  {"code": 1005, "message" => "invalid credentials", "resolve" => "The username or password provided is not correct."}.to_json }
-  let(:unauth_response) { {"code": 1105, "message" => "bad access_token", "resolve" => "This access_token appears to be corrupted."}.to_json }
-  let(:req_fail_response) {  {"code": 1200, "message" => "invalid credentials", "resolve" => "The username or password provided is not correct."}.to_json }
-  let(:req_not_found) {  {"code": 1600, "message" => "product not found", "resolve" => "This product doesn't exist yet, we're actually not sure how you reached this error..."}.to_json }
+  let(:bad_req_response) {  {"code" => 1005, "message" => "invalid credentials", "resolve" => "The username or password provided is not correct."}.to_json }
+  let(:unauth_response) { {"code" => 1105, "message" => "bad access_token", "resolve" => "This access_token appears to be corrupted."}.to_json }
+  let(:req_fail_response) {  {"code" => 1200, "message" => "invalid credentials", "resolve" => "The username or password provided is not correct."}.to_json }
+  let(:req_not_found) {  {"code" =>  1600, "message" => "product not found", "resolve" => "This product doesn't exist yet, we're actually not sure how you reached this error..."}.to_json }
 
   describe "#post" do
     it "should send a post request" do
