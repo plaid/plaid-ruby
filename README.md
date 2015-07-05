@@ -71,7 +71,7 @@ user = Plaid.set_user('access_token')
 ```
 
 ```ruby
-user = Plaid.set_user('access_token', 'wells')
+user = Plaid.set_user('access_token', ['connect'])
 ```
 
 ### Exchanging a Link public_token for a Plaid access_token
