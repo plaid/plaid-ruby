@@ -20,15 +20,18 @@ module Plaid
       # API: semi-private
       def get(path, id = nil)
         uri = build_uri(path,id)
-        res = Net::HTTP.get(uri)
-        parse_get_response(res)
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = (uri.scheme == 'https')
+        request = Net::HTTP::Get.new(uri.path)
+        res = http.request(request)
+        parse_get_response(res.body)
       end
 
       # API: semi-private
       def secure_get(path, access_token, options = {})
         uri = build_uri(path)
         options.merge!({access_token:access_token})
-        req = Net::HTTP::Get.new(uri)
+        req = Net::HTTP::Get.new(uri.path)
         req.body = URI.encode_www_form(options) if options
         req.content_type = 'application/x-www-form-urlencoded'
         res = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') { |http| http.request(req) }
@@ -39,7 +42,7 @@ module Plaid
       def patch(path, options = {})
         uri = build_uri(path)
         options.merge!(client_id: Plaid.customer_id, secret: Plaid.secret)
-        req = Net::HTTP::Patch.new(uri)
+        req = Net::HTTP::Patch.new(uri.path)
         req.body = URI.encode_www_form(options) if options
         req.content_type = 'application/x-www-form-urlencoded'
         res = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') { |http| http.request(req) }
@@ -50,7 +53,7 @@ module Plaid
       def delete(path, options = {})
         uri = build_uri(path)
         options.merge!(client_id: Plaid.customer_id, secret: Plaid.secret)
-        req = Net::HTTP::Delete.new(uri)
+        req = Net::HTTP::Delete.new(uri.path)
         req.body = URI.encode_www_form(options) if options
         req.content_type = 'application/x-www-form-urlencoded'
         Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') { |http| http.request(req) }
