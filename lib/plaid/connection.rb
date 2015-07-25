@@ -9,7 +9,11 @@ module Plaid
       def post(path, options = {})
         uri = build_uri(path)
         options.merge!(client_id: Plaid.customer_id, secret: Plaid.secret)
-        res = Net::HTTP.post_form(uri,options)
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = (uri.scheme == 'https')
+        request = Net::HTTP::Post.new(uri.path)
+        request.set_form_data(options)
+        res = http.request(request)
         parse_response(res)
       end
 
