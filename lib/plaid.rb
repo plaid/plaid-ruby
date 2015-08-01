@@ -7,7 +7,6 @@ require 'plaid/models/institution'
 require 'plaid/models/category'
 require 'plaid/models/exchange_token_response'
 
-
 require 'json'
 
 module Plaid
@@ -51,7 +50,7 @@ module Plaid
       _user.access_token = fully_qualified_token(token, institution_type)
       _user.permissions = api_levels
       api_levels.each { |l| _user.get(l) }
-      return _user
+      _user
     end
 
     # API: public
@@ -71,7 +70,7 @@ module Plaid
       options = JSON.generate(options) if options.kind_of?(Hash)
 
       _user.get_connect(options: options)
-      return _user
+      _user
     end
 
     # API: public
