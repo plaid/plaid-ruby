@@ -1,6 +1,4 @@
-require 'spec_helper.rb'
-
-RSpec.describe Plaid::Category do
+describe Plaid::Category do
   context 'when a single category is found' do
     let(:category) { Plaid.category('17001013') }
     it { expect(category).to be_kind_of(Plaid::Category) }

@@ -1,6 +1,4 @@
-require 'spec_helper.rb'
-
-RSpec.describe Plaid::Account do
+describe Plaid::Account do
   # API: semi-private
   describe '.new' do
     subject { Plaid::Account.new(results) }
