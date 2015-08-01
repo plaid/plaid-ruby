@@ -83,7 +83,7 @@ module Plaid
         set_mfa_request!(res)
       end
 
-      return self
+      self
     end
 
     # Internal helper methods
