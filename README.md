@@ -49,7 +49,7 @@ end
 Authenticate a user to your desired level of api access (auth / connect).
 
 ```ruby
-user = Plaid.add_user('auth','plaid_test','plaid_good','wells')
+user = Plaid.add_user('auth', 'plaid_test', 'plaid_good', 'wells')
 ```
 
 If the authentication requires a pin, you can pass it in as the fifth argument:
@@ -61,7 +61,7 @@ user = Plaid.add_user('auth', 'plaid_test', 'plaid_good', 'usaa', '1234')
 To add options such as `login_only` or `webhooks`, use the sixth argument:
 
 ```ruby
-user = Plaid.add_user('auth','plaid_test','plaid_good','wells', nil, { login_only: true, webhooks: 'https://example.org/callbacks/plaid')
+user = Plaid.add_user('auth', 'plaid_test', 'plaid_good', 'wells', nil, { login_only: true, webhooks: 'https://example.org/callbacks/plaid')
 ```
 
 ### Restoring a Plaid User using an access token
@@ -101,7 +101,7 @@ user.accounts.each { |account| print account.meta['name'] + "\n"}
 
 Methods marked with `API: public` are officially supported by the gem maintainers. Since
 we are using semantic versioning (http://semver.org/spec/v2.0.0.html), the maintainers are
-commited to backwards-compatibility support for these API calls when we update the Minor
+committed to backwards-compatibility support for these API calls when we update the Minor
 version. So for example, going from version 1.4.x to 1.5.x will not change these public
 API calls.
 
@@ -109,7 +109,7 @@ However, we may change these method signatures or even the gem architecture when
 the Major number. For example, we have some breaking changes in mind with version 2.0
 
 Methods marked with `API: semi-private` are used internally for consistency. While it is
-possible to monkey-patch against them for your own use, the maintainers make no gaurantees
+possible to monkey-patch against them for your own use, the maintainers make no guarantees
 on backwards compatibility.
 
 ## Learn More

@@ -1,6 +1,4 @@
-require 'spec_helper.rb'
-
-RSpec.describe 'Plaid.config' do
+describe 'Plaid.config' do
   around(:each) do |example|
     old_customer_id          = Plaid.customer_id
     old_secret               = Plaid.secret
@@ -27,19 +25,19 @@ RSpec.describe 'Plaid.config' do
   let(:prod_url) { 'https://api.plaid.com/' }
 
 
-  let(:user) { Plaid.add_user('connect','plaid_test','plaid_good','wells') }
+  let(:user) { Plaid.add_user('connect', 'plaid_test', 'plaid_good', 'wells') }
 
   context ':environment_location' do
     context 'with trailing slash' do
       let(:environment_location) { 'http://example.org/' }
-      it 'should leave it as-is' do
+      it 'leaves it as-is' do
         expect(Plaid.environment_location).to eql(environment_location)
       end
     end
 
     context 'without trailing slash' do
       let(:environment_location) { 'http://example.org' }
-      it 'should add a trailing slash' do
+      it 'adds a trailing slash' do
         expect(Plaid.environment_location).to eql(environment_location + '/')
       end
     end
