@@ -10,7 +10,7 @@ module Plaid
       @name = fields['name']
       @location = fields['meta'].nil? ? {} : fields['meta']['location']
       @pending = fields['pending']
-      @pendingTransaction = fields['_pendingTransaction']
+      @pending_transaction = fields['_pendingTransaction']
       @score = fields['score']
       @cat = Category.new({ 'id' => fields['category_id'], 'hierarchy' => fields['category'], 'type' => fields['type'] })
 
