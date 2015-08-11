@@ -1,8 +1,6 @@
-require 'spec_helper'
-
-RSpec.describe Plaid::PlaidError do
+describe Plaid::PlaidError do
   describe "#new" do
-    it "should allow code, message and resolution" do
+    it "allows code, message and resolution" do
       error = Plaid::PlaidError.new 1, "testing", "fix it"
       expect(error.code).to eq(1)
       expect(error.message).to eq("testing")
