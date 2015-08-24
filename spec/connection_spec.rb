@@ -43,6 +43,11 @@ describe Plaid::Connection do
       stub = stub_request(:post, stub_url).to_return(status: 404, body: req_not_found)
       expect { Plaid::Connection.post("testing") }.to raise_error(Plaid::NotFound, "product not found")
     end
+
+    it "throws a Plaid::ServerError on empty response" do
+      stub = stub_request(:post, stub_url).to_return(status: 504, body: '')
+      expect { Plaid::Connection.post("testing") }.to raise_error(Plaid::ServerError, '')
+    end
   end
 
   describe "#get" do
@@ -124,6 +129,11 @@ describe Plaid::Connection do
       stub = stub_request(:get, stub_url).to_return(status: 404, body: req_not_found)
       expect { Plaid::Connection.secure_get("testing", "test_wells") }.to raise_error(Plaid::NotFound, "product not found")
     end
+
+    it "throws a Plaid::ServerError on empty response" do
+      stub = stub_request(:get, stub_url).to_return(status: 504, body: '')
+      expect { Plaid::Connection.secure_get("testing", "test_wells") }.to raise_error(Plaid::ServerError, '')
+    end
   end
 
   describe "#patch" do
@@ -163,6 +173,11 @@ describe Plaid::Connection do
     it "throws a Plaid::NotFound on 404 response" do
       stub = stub_request(:patch, stub_url).to_return(status: 404, body: req_not_found)
       expect { Plaid::Connection.patch("testing") }.to raise_error(Plaid::NotFound, "product not found")
+    end
+
+    it "throws a Plaid::ServerError on empty response" do
+      stub = stub_request(:patch, stub_url).to_return(status: 504, body: '')
+      expect { Plaid::Connection.patch("testing") }.to raise_error(Plaid::ServerError, '')
     end
   end
 
