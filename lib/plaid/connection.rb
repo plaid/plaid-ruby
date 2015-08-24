@@ -71,7 +71,7 @@ module Plaid
 
       def parse_response(res)
         # unfortunately, the JSON gem will raise an exception if the response is empty
-        raise Plaid::ServerError.new(res.code, res.msg, '') if res.body.length < 2
+        raise Plaid::ServerError.new(res.code, res.msg, '') if res.body.to_s.length < 2
         # we got a response from the server, so parse it
         body = JSON.parse(res.body)
         case res.code.delete('.').to_i
