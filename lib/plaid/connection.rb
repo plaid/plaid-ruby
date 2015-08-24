@@ -70,7 +70,9 @@ module Plaid
       private
 
       def parse_response(res)
-        body = JSON.parse(res.body)
+        json = res.body
+        # unfortunately, the JSON gem will raise an exception if the response is empty
+        body = json.length >= 2 ? JSON.parse(json) : nil
         case res.code.delete('.').to_i
         when 200 then body
         when 201 then { msg: 'Requires further authentication', body: body}
