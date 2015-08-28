@@ -4,7 +4,7 @@ module Plaid
 
     def initialize(hash)
       @id   = hash['_id']
-      @name = hash['name']
+      @name = hash['meta']['name'] if hash['meta']
       @type = hash['type']
       @meta = hash['meta']
       @institution_type  = hash['institution_type']
