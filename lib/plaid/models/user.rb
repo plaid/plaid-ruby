@@ -159,10 +159,7 @@ module Plaid
 
     def populate_user!(res)
       res['accounts'].each do |account|
-        if self.accounts.any? { |h| h == account['_id'] }
-          owned_account = self.accounts.find { |h| h == account['_id'] }
-          owned_account.new(account)
-        else
+        if self.accounts.none? { |h| h.id == account['_id'] }
           self.accounts << Account.new(account)
         end
       end if res['accounts']
