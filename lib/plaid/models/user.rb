@@ -173,7 +173,7 @@ module Plaid
         end
       end if res['transactions']
 
-      self.pending_mfa_questions = ''
+      self.pending_mfa_questions = {}
       self.information = Information.new(res['info']) if res['info']
       self.api_res = 'success'
 
