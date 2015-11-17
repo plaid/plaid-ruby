@@ -28,13 +28,12 @@ describe Plaid do
 
         context 'when account is locked' do
           let(:password) { 'plaid_locked' }
-          it "raises a locked error" do
-            expect { user }.to raise_error { |error|
-              expect(error).to be_a(Plaid::RequestFailed)
+
+          it 'raises a locked error' do
+            expect { user }.to raise_error(Plaid::RequestFailed) { |error|
               expect(error.code).to eq(1205)
             }
           end
-
         end
 
         context 'with connection options' do
@@ -90,12 +89,12 @@ describe Plaid do
 
         context 'using incorrect password' do
           let(:password) { 'plaid_bad' }
-          it { expect { user }.to raise_error }
+          it { expect { user }.to raise_error(Plaid::RequestFailed, 'invalid credentials') }
         end
 
         context 'using incorrect username' do
           let(:username) { 'plaid_bad' }
-          it { expect { user }.to raise_error }
+          it { expect { user }.to raise_error(Plaid::RequestFailed, 'invalid credentials') }
         end
       end
 
@@ -104,12 +103,12 @@ describe Plaid do
 
         context 'using incorrect password' do
           let(:password) { 'plaid_bad' }
-          it { expect { user }.to raise_error }
+          it { expect { user }.to raise_error(Plaid::RequestFailed, 'invalid credentials') }
         end
 
         context 'using incorrect username' do
           let(:username) { 'plaid_bad' }
-          it { expect { user }.to raise_error }
+          it { expect { user }.to raise_error(Plaid::RequestFailed, 'invalid credentials') }
         end
       end
 
@@ -118,12 +117,12 @@ describe Plaid do
 
         context 'using incorrect password' do
           let(:password) { 'plaid_bad' }
-          it { expect { user }.to raise_error }
+          it { expect { user }.to raise_error(Plaid::RequestFailed, 'invalid credentials') }
         end
 
         context 'using incorrect username' do
           let(:username) { 'plaid_bad' }
-          it { expect { user }.to raise_error }
+          it { expect { user }.to raise_error(Plaid::RequestFailed, 'invalid credentials') }
         end
       end
     end
@@ -141,7 +140,7 @@ describe Plaid do
 
       context 'using incorrect PIN' do
         let(:pin) { '0000' }
-        it { expect { user }.to raise_error }
+        it { expect { user }.to raise_error(Plaid::RequestFailed, 'invalid pin') }
       end
     end
 

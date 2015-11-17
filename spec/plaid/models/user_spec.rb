@@ -37,7 +37,7 @@ describe Plaid::User do
     context 'enters incorrect credentials for MFA auth' do
       let(:mfa_user) { user.mfa_authentication('tomato') }
       let(:mfa_bad)  { mfa_user; Plaid.add_user('connect', 'plaid_test', 'plaid_good', 'bofa') }
-      it { expect { mfa_bad.mfa_authentication('bad') }.to raise_error }
+      it { expect { mfa_bad.mfa_authentication('bad') }.to raise_error(Plaid::RequestFailed, 'invalid mfa') }
     end
 
     context 'requests list of MFA credentials' do
@@ -143,7 +143,7 @@ describe Plaid::User do
     let(:info_user) { Plaid.add_user('info', 'plaid_test', 'plaid_good', 'wells') }
 
     context 'updates information correctly' do
-      it { expect { subject.get_info }.to raise_error }
+      it { expect { subject.get_info }.to raise_error(Plaid::Unauthorized, 'client_id missing') }
     end
   end
 
@@ -167,6 +167,6 @@ describe Plaid::User do
 
   # This stuff needs to be tested and rewritten. Have already
   # surfaced up a bug in it
-  pending "#populate_user"
+  pending '#populate_user'
 
 end
