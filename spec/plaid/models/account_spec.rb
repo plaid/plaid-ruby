@@ -10,7 +10,7 @@ describe Plaid::Account do
       end
     end
 
-    with_results('name' => 'Name') do it { expect(subject.name).to eql('Name') } end
+    with_results('meta' => {'name' => 'Name'}) do it { expect(subject.name).to eql('Name') } end
     with_results('_id' =>  'ID')   do it { expect(subject.id).to   eql('ID') }   end
     with_results('type' => 'Type') do it { expect(subject.type).to eql('Type') } end
     with_results('type' => 'STyp') do it { expect(subject.type).to eql('STyp') } end
@@ -28,6 +28,10 @@ describe Plaid::Account do
 
     with_results('numbers' => {}) do
       it { expect(subject.numbers).to eql({}) }
+    end
+
+    with_results({}) do
+      it { expect(subject.name).to eq nil } # doesn't blow up if 'meta' is missing
     end
   end
 end
