@@ -10,6 +10,6 @@ describe Plaid::Institution do
   end
 
   context 'when institution is not found' do
-    it { expect { Plaid.institution('dumb_bank') }.to raise_error }
+    it { expect { Plaid.institution('dumb_bank') }.to raise_error(Plaid::NotFound, 'unable to find institution') }
   end
 end

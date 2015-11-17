@@ -56,12 +56,12 @@ describe 'Plaid.config' do
   context 'has invalid dev keys' do
     let(:secret) { 'test_bad' }
     let(:environment_location) { dev_url }
-    it { expect { user }.to raise_error }
+    it { expect { user }.to raise_error(Plaid::Unauthorized, 'secret or client_id invalid') }
   end
 
   context 'has invalid production keys' do
     let(:secret) { 'test_bad' }
     let(:environment_location) { prod_url }
-    it { expect { user }.to raise_error }
+    it { expect { user }.to raise_error(Plaid::Unauthorized, 'secret or client_id invalid') }
   end
 end

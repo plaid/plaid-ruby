@@ -10,7 +10,7 @@ describe Plaid::Category do
   end
 
   context 'when category is not found' do
-    it { expect { Plaid.category('dumb_cat') }.to raise_error }
+    it { expect { Plaid.category('dumb_cat') }.to raise_error(Plaid::NotFound, 'unable to find category') }
   end
 
 end
