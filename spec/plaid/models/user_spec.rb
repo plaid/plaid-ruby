@@ -75,6 +75,11 @@ describe Plaid::User do
 
       it { expect(new_mfa_user.accounts).not_to be_empty }
     end
+
+    context 'selects MFA method, delivers correct payload, refreshes MFA token' do
+      let(:user) { Plaid.add_user('auth', 'plaid_test', 'plaid_good', 'us') }
+      it { expect(user.mfa_refresh('tomato').accounts).not_to be_empty }
+    end
   end
 
   context 'when authenticating' do

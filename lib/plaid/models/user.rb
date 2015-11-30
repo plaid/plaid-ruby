@@ -28,6 +28,17 @@ module Plaid
     end
 
     # API: public
+    # Sometimes, the /auth/step endpoint returns a 1215 "MFA access has changed"
+    # send a PATCH request to resolve this issue
+    def mfa_refresh(auth)
+      auth_path = permissions.last + '/step'
+      res = Connection.patch(auth_path, { mfa: auth, access_token: access_token, type: type })
+      self.accounts = []
+      self.transactions = []
+      update(res)
+    end
+
+    # API: public
     # Use this method to find out API levels available for this user
     def permit?(auth_level)
       self.permissions.include? auth_level
