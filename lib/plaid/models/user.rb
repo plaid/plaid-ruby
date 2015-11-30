@@ -136,7 +136,7 @@ module Plaid
 
       payload = { username: username, password: pass, access_token: self.access_token }
       payload.merge!(pin: pin) if pin
-      update(Plaid.patch('info', payload))
+      update(Connection.patch('info', payload))
     end
 
     # API: semi-private
