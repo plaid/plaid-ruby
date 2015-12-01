@@ -164,14 +164,18 @@ module Plaid
         end
       end if res['accounts']
 
-      res['transactions'].each do |transaction|
-        if self.transactions.any? { |t| t == transaction['_id'] }
-          owned_transaction = self.transactions.find { |h| h == transaction['_id'] }
-          owned_transaction.new(transaction)
-        else
-          self.transactions << Transaction.new(transaction)
+      if res['transactions']
+        self.transactions = [] # clear existing transactions
+
+        res['transactions'].each do |transaction|
+          if self.transactions.any? { |t| t == transaction['_id'] }
+            owned_transaction = self.transactions.find { |h| h == transaction['_id'] }
+            owned_transaction.new(transaction)
+          else
+            self.transactions << Transaction.new(transaction)
+          end
         end
-      end if res['transactions']
+      end
 
       self.pending_mfa_questions = {}
       self.information = Information.new(res['info']) if res['info']
