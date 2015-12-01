@@ -104,7 +104,7 @@ module Plaid
       when 'auth'
         update(Connection.post('auth/get', access_token: self.access_token))
       when 'connect'
-        payload = { access_token: self.access_token }.merge(options)
+        payload = { access_token: self.access_token }.merge({options: options.to_json})
         update(Connection.post('connect/get', payload))
       when 'info'
         update(Connection.secure_get('info', self.access_token))
