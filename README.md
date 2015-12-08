@@ -84,7 +84,7 @@ Plaid.config do |p|
 end
 
 # Exchange a Link public_token for a Plaid access_token
-exchangeTokenResponse = Plaid.exchange_token('test,chase,connected')
+exchangeTokenResponse = Plaid.exchange_token('test,chase,connected', 'account_id')
 
 # Use the API access_token to initialize a user
 # Note: This example assumes you are using Link with the "auth" product
