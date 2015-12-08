@@ -35,8 +35,9 @@ module Plaid
     # Exchange a Plaid Link public_token for a Plaid access_token
     # Required parameters:
     #   public_token
-    def exchange_token(public_token)
-      payload = { public_token: public_token }
+    #   account_id
+    def exchange_token(public_token, account_id)
+      payload = { public_token: public_token, account_id: account_id }
 
       res = Connection.post('exchange_token', payload)
       ExchangeTokenResponse.new(res)

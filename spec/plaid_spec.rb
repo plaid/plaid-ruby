@@ -201,7 +201,7 @@ describe Plaid do
   end
 
   describe '.exchange_token' do
-    subject { Plaid.exchange_token('test,chase,connected') }
+    subject { Plaid.exchange_token('test,chase,connected', 'QPO8Jo8vdDHMepg41PBwckXm4KdK1yUdmXOwK') }
 
     it { expect(subject.access_token).to eql('test_chase') }
   end
