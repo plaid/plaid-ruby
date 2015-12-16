@@ -6,7 +6,7 @@ Ruby bindings for the Plaid API
 
 This version is a beta version that contains failing tests for the new 'info' endpoint. While these have been tested individually on real accounts the tests here will fail with the test accounts supplied. These will be updated soon with test credentials.
 
-Latest stable version: **1.7.0**
+Latest stable version: **1.7.1**
 
 This version removes the need to use 'type' in each additional call.
 
@@ -85,6 +85,8 @@ end
 
 # Exchange a Link public_token for a Plaid access_token
 exchangeTokenResponse = Plaid.exchange_token('test,chase,connected')
+# Optionally include an account_id
+exchangeTokenResponse = Plaid.exchange_token('test,chase,connected', 'account_id')
 
 # Use the API access_token to initialize a user
 # Note: This example assumes you are using Link with the "auth" product
