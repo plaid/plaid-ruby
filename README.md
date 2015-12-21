@@ -36,7 +36,7 @@ Please read the great documentation at http://plaid.com/docs/ for more informati
 Configure the gem with your customer id, secret key, and the environment path you would like to use.
 
 ```ruby
-Plaid.config do |p|
+client = Plaid.config do |p|
   p.customer_id = 'Plaid provided customer ID here'
   p.secret = 'Plaid provided secret key here'
   p.environment_location = 'URL for the development or production environment'
@@ -49,48 +49,48 @@ end
 Authenticate a user to your desired level of api access (auth / connect).
 
 ```ruby
-user = Plaid.add_user('auth', 'plaid_test', 'plaid_good', 'wells')
+user = client.add_user('auth', 'plaid_test', 'plaid_good', 'wells')
 ```
 
 If the authentication requires a pin, you can pass it in as the fifth argument:
 
 ```ruby
-user = Plaid.add_user('auth', 'plaid_test', 'plaid_good', 'usaa', '1234')
+user = client.add_user('auth', 'plaid_test', 'plaid_good', 'usaa', '1234')
 ```
 
 To add options such as `login_only` or `webhooks`, use the sixth argument:
 
 ```ruby
-user = Plaid.add_user('auth', 'plaid_test', 'plaid_good', 'wells', nil, { login_only: true, webhooks: 'https://example.org/callbacks/plaid')
+user = client.add_user('auth', 'plaid_test', 'plaid_good', 'wells', nil, { login_only: true, webhooks: 'https://example.org/callbacks/plaid')
 ```
 
 ### Restoring a Plaid User using an access token
 
 ```ruby
-user = Plaid.set_user('access_token')
+user = client.set_user('access_token')
 ```
 
 ```ruby
-user = Plaid.set_user('access_token', ['connect'])
+user = client.set_user('access_token', ['connect'])
 ```
 
 ### Exchanging a Link public_token for a Plaid access_token
 
 ```ruby
-Plaid.config do |p|
+client = Plaid.config do |p|
   p.customer_id = 'test_id'
   p.secret = 'test_secret'
   p.environment_location = 'https://tartan.plaid.com'
 end
 
 # Exchange a Link public_token for a Plaid access_token
-exchangeTokenResponse = Plaid.exchange_token('test,chase,connected')
+exchangeTokenResponse = client.exchange_token('test,chase,connected')
 # Optionally include an account_id
-exchangeTokenResponse = Plaid.exchange_token('test,chase,connected', 'account_id')
+exchangeTokenResponse = client.exchange_token('test,chase,connected', 'account_id')
 
 # Use the API access_token to initialize a user
 # Note: This example assumes you are using Link with the "auth" product
-user = Plaid.set_user(exchangeTokenResponse.access_token, ['auth'])
+user = client.set_user(exchangeTokenResponse.access_token, ['auth'])
 
 # Retrieve the user's accounts
 user.get('auth')

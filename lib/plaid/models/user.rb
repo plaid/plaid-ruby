@@ -6,13 +6,24 @@ require 'json'
 module Plaid
   class User
     attr_accessor :accounts, :transactions, :access_token, :type, :permissions, :api_res, :pending_mfa_questions, :info, :information
+    attr_reader :connection
+
+    def initialize(connection)
+      @connection = connection
+      self.accounts = []
+      self.transactions = []
+      self.permissions = []
+      self.access_token = ''
+      self.api_res = ''
+      self.info = {}
+    end
 
     # API: public
     # Use this method to select the MFA method
     def select_mfa_method(selection, type=nil)
       type = self.type if type.nil?
       auth_path = self.permissions.last + '/step'
-      res = Connection.post(auth_path, { options: { send_method: selection }.to_json, access_token: self.access_token, type: type })
+      res = self.connection.post(auth_path, { options: { send_method: selection }.to_json, access_token: self.access_token, type: type })
       update(res, self.permissions.last)
     end
 
@@ -21,7 +32,7 @@ module Plaid
     def mfa_authentication(auth, type = nil)
       type = self.type if type.nil?
       auth_path = self.permissions.last + '/step'
-      res = Connection.post(auth_path, { mfa: auth, access_token: self.access_token, type: type })
+      res = self.connection.post(auth_path, { mfa: auth, access_token: self.access_token, type: type })
       self.accounts = []
       self.transactions = []
       update(res)
@@ -40,7 +51,7 @@ module Plaid
         api_level = 'auth' unless self.permit? 'auth'
         api_level = 'connect' unless self.permit? 'connect'
       end
-      res = Connection.post('upgrade', { access_token: self.access_token, upgrade_to: api_level })
+      res = self.connection.post('upgrade', { access_token: self.access_token, upgrade_to: api_level })
 
       # Reset accounts and transaction
       self.accounts = []
@@ -51,24 +62,14 @@ module Plaid
     # API: public
     # Use this method to delete a user from the Plaid API
     def delete_user
-      Connection.delete('info', { access_token: self.access_token })
-    end
-
-    ### Internal build methods
-    def initialize
-      self.accounts = []
-      self.transactions = []
-      self.permissions = []
-      self.access_token = ''
-      self.api_res = ''
-      self.info = {}
+      self.connection.delete('info', { access_token: self.access_token })
     end
 
     # API: semi-private
     # This class method instantiates a new Account object and updates it with the results
     # from the API
-    def self.build(res, api_level = nil)
-      self.new.update(res, api_level)
+    def self.build(connection, res, api_level = nil)
+      self.new(connection).update(res, api_level)
     end
 
     # API: semi-private
@@ -102,12 +103,12 @@ module Plaid
       return false unless self.permit? auth_level
       case auth_level
       when 'auth'
-        update(Connection.post('auth/get', access_token: self.access_token))
+        update(self.connection.post('auth/get', access_token: self.access_token))
       when 'connect'
         payload = { access_token: self.access_token }.merge(options)
-        update(Connection.post('connect/get', payload))
+        update(self.connection.post('connect/get', payload))
       when 'info'
-        update(Connection.secure_get('info', self.access_token))
+        update(self.connection.secure_get('info', self.access_token))
       else
         raise "Invalid auth level: #{auth_level}"
       end
@@ -136,13 +137,13 @@ module Plaid
 
       payload = { username: username, password: pass, access_token: self.access_token }
       payload.merge!(pin: pin) if pin
-      update(Plaid.patch('info', payload))
+      update(self.connection.patch('info', payload))
     end
 
     # API: semi-private
     # Helper method to update user balance
     def update_balance
-      update(Connection.post('balance', { access_token: self.access_token }))
+      update(self.connection.post('balance', { access_token: self.access_token }))
     end
 
     private
