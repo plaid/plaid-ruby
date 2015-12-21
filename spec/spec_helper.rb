@@ -7,8 +7,10 @@ require 'pry' if ENV['DEBUG']
 require 'webmock/rspec'
 WebMock.allow_net_connect!
 
-Plaid.config do |p|
-  p.customer_id = 'test_id'
-  p.secret = 'test_secret'
-  p.environment_location = 'https://tartan.plaid.com/'
+def test_client
+  Plaid.config do |p|
+    p.customer_id = 'test_id'
+    p.secret = 'test_secret'
+    p.environment_location = 'https://tartan.plaid.com/'
+  end
 end
