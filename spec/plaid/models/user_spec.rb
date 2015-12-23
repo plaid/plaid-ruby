@@ -133,8 +133,7 @@ describe Plaid::User do
   describe '#update_info' do
     let(:info_user) { Plaid.add_user('info', 'plaid_test', 'plaid_good', 'wells') }
     context 'updates information correctly' do
-      # TODO: This test needs to pass, currently test credentials are failing
-      pending { expect { info_user.update_info('plaid_test', 'plaid_good') }.to_not raise_error  }
+      it { expect { info_user.update_info('plaid_test', 'plaid_good') }.to_not raise_error  }
     end
   end
 
