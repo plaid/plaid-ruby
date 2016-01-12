@@ -74,7 +74,9 @@ user = Plaid.set_user('access_token')
 user = Plaid.set_user('access_token', ['connect'])
 ```
 
-### Exchanging a Link public_token for a Plaid access_token
+### Plaid Link Exchange Token Process
+
+Exchange a [Plaid Link][1] `public_token` for a Plaid `access_token`:
 
 ```ruby
 Plaid.config do |p|
@@ -97,6 +99,26 @@ user.get('auth')
 
 # Print the name of each account
 user.accounts.each { |account| print account.meta['name'] + "\n"}
+```
+
+With the [Plaid + Stripe ACH integration][2], exchange a Link `public_token`
+and `account_id` for an API `access_token` and  Stripe `bank_account_token`:
+
+```ruby
+Plaid.config do |p|
+  p.customer_id = 'test_id'
+  p.secret = 'test_secret'
+  p.environment_location = 'https://tartan.plaid.com'
+end
+
+# Exchange a Link public_token and account_id for an API access token and a
+# Stripe bank account token:
+exchangeTokenResponse = Plaid.exchange_token(public_token, account_id)
+
+# Use the access token to make API requests
+user = Plaid.set_user(exchangeTokenResponse.access_token, ['auth'])
+# Use the bank account token to make Stripe ACH API requests
+# exchangeTokenResponse.stripe_bank_account_token
 ```
 
 ## Semantic Versioning
@@ -123,3 +145,6 @@ Learn about the full functionality of the library on our [Wiki](https://github.c
 We highly encourage helping out with the gem. Either adding more tests, building new helper classes, fixing bugs, or anything to increase overall quality.
 
 Learn more about best practices, submitting a pull request, and rules for the build on our [Wiki](https://github.com/plaid/plaid-ruby/wiki/Contribute!)
+
+[1]: https://plaid.com/docs/link
+[2]: https://plaid.com/docs/link/stripe
