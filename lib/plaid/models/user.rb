@@ -50,8 +50,8 @@ module Plaid
 
     # API: public
     # Use this method to delete a user from the Plaid API
-    def delete_user
-      Connection.delete('info', { access_token: self.access_token })
+    def delete_user(auth_level='info')
+      Connection.delete(auth_level, { access_token: self.access_token })
     end
 
     ### Internal build methods
