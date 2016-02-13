@@ -50,8 +50,8 @@ module Plaid
 
     # API: public
     # Use this method to delete a user from the Plaid API
-    def delete_user
-      Connection.delete('info', { access_token: self.access_token })
+    def delete_user(auth_level='info')
+      Connection.delete(auth_level, { access_token: self.access_token })
     end
 
     ### Internal build methods
@@ -164,14 +164,18 @@ module Plaid
         end
       end if res['accounts']
 
-      res['transactions'].each do |transaction|
-        if self.transactions.any? { |t| t == transaction['_id'] }
-          owned_transaction = self.transactions.find { |h| h == transaction['_id'] }
-          owned_transaction.new(transaction)
-        else
-          self.transactions << Transaction.new(transaction)
+      if res['transactions']
+        self.transactions = [] # clear existing transactions
+
+        res['transactions'].each do |transaction|
+          if self.transactions.any? { |t| t == transaction['_id'] }
+            owned_transaction = self.transactions.find { |h| h == transaction['_id'] }
+            owned_transaction.new(transaction)
+          else
+            self.transactions << Transaction.new(transaction)
+          end
         end
-      end if res['transactions']
+      end
 
       self.pending_mfa_questions = {}
       self.information = Information.new(res['info']) if res['info']
