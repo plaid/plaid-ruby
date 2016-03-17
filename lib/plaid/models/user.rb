@@ -35,12 +35,15 @@ module Plaid
 
     # API: public
     # Use this method to upgrade a user to another api level
-    def upgrade(api_level=nil)
+    def upgrade(api_level=nil, webhook_url=nil)
       if api_level.nil?
         api_level = 'auth' unless self.permit? 'auth'
         api_level = 'connect' unless self.permit? 'connect'
       end
-      res = Connection.post('upgrade', { access_token: self.access_token, upgrade_to: api_level })
+      payload = { access_token: self.access_token, upgrade_to: api_level }
+      payload[:options] = JSON.generate({webhook: webhook_url}) if webhook_url && (api_level == 'connect')
+
+      res = Connection.post('upgrade', payload)
 
       # Reset accounts and transaction
       self.accounts = []

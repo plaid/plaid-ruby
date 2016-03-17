@@ -6,7 +6,7 @@ Ruby bindings for the Plaid API
 
 This version is a beta version that contains failing tests for the new 'info' endpoint. While these have been tested individually on real accounts the tests here will fail with the test accounts supplied. These will be updated soon with test credentials.
 
-Latest stable version: **1.5.3**
+Latest stable version: **1.7.1**
 
 This version removes the need to use 'type' in each additional call.
 
@@ -49,7 +49,7 @@ end
 Authenticate a user to your desired level of api access (auth / connect).
 
 ```ruby
-user = Plaid.add_user('auth','plaid_test','plaid_good','wells')
+user = Plaid.add_user('auth', 'plaid_test', 'plaid_good', 'wells')
 ```
 
 If the authentication requires a pin, you can pass it in as the fifth argument:
@@ -61,7 +61,7 @@ user = Plaid.add_user('auth', 'plaid_test', 'plaid_good', 'usaa', '1234')
 To add options such as `login_only` or `webhooks`, use the sixth argument:
 
 ```ruby
-user = Plaid.add_user('auth','plaid_test','plaid_good','wells', nil, { login_only: true, webhooks: 'https://example.org/callbacks/plaid')
+user = Plaid.add_user('auth', 'plaid_test', 'plaid_good', 'wells', nil, { login_only: true, webhooks: 'https://example.org/callbacks/plaid')
 ```
 
 ### Restoring a Plaid User using an access token
@@ -72,6 +72,22 @@ user = Plaid.set_user('access_token')
 
 ```ruby
 user = Plaid.set_user('access_token', ['connect'])
+```
+
+### Upgrading a User to additional permissions
+
+```ruby
+# Upgrade a user to the Connect product
+# receive user-authorized transaction and account data
+user.upgrade('connect')
+
+# when upgrading to Connect, you can also create a webhook
+user.upgrade('connect', 'http://requestb.in/')
+
+# Upgrade to Info product
+# retrieve various account holder information on file with the financial institution, including names, emails, phone numbers, and addresses
+user.upgrade('info')
+
 ```
 
 ### Exchanging a Link public_token for a Plaid access_token
@@ -85,6 +101,8 @@ end
 
 # Exchange a Link public_token for a Plaid access_token
 exchangeTokenResponse = Plaid.exchange_token('test,chase,connected')
+# Optionally include an account_id
+exchangeTokenResponse = Plaid.exchange_token('test,chase,connected', 'account_id')
 
 # Use the API access_token to initialize a user
 # Note: This example assumes you are using Link with the "auth" product
@@ -101,7 +119,7 @@ user.accounts.each { |account| print account.meta['name'] + "\n"}
 
 Methods marked with `API: public` are officially supported by the gem maintainers. Since
 we are using semantic versioning (http://semver.org/spec/v2.0.0.html), the maintainers are
-commited to backwards-compatibility support for these API calls when we update the Minor
+committed to backwards-compatibility support for these API calls when we update the Minor
 version. So for example, going from version 1.4.x to 1.5.x will not change these public
 API calls.
 
@@ -109,7 +127,7 @@ However, we may change these method signatures or even the gem architecture when
 the Major number. For example, we have some breaking changes in mind with version 2.0
 
 Methods marked with `API: semi-private` are used internally for consistency. While it is
-possible to monkey-patch against them for your own use, the maintainers make no gaurantees
+possible to monkey-patch against them for your own use, the maintainers make no guarantees
 on backwards compatibility.
 
 ## Learn More
