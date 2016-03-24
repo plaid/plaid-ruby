@@ -89,12 +89,12 @@ describe Plaid do
 
         context 'using incorrect password' do
           let(:password) { 'plaid_bad' }
-          it { expect { user }.to raise_error(Plaid::RequestFailed, 'invalid credentials') }
+          it { expect { user }.to raise_error(Plaid::RequestFailed, /invalid credentials/) }
         end
 
         context 'using incorrect username' do
           let(:username) { 'plaid_bad' }
-          it { expect { user }.to raise_error(Plaid::RequestFailed, 'invalid credentials') }
+          it { expect { user }.to raise_error(Plaid::RequestFailed, /invalid credentials/) }
         end
       end
 
@@ -103,12 +103,12 @@ describe Plaid do
 
         context 'using incorrect password' do
           let(:password) { 'plaid_bad' }
-          it { expect { user }.to raise_error(Plaid::RequestFailed, 'invalid credentials') }
+          it { expect { user }.to raise_error(Plaid::RequestFailed, /invalid credentials/) }
         end
 
         context 'using incorrect username' do
           let(:username) { 'plaid_bad' }
-          it { expect { user }.to raise_error(Plaid::RequestFailed, 'invalid credentials') }
+          it { expect { user }.to raise_error(Plaid::RequestFailed, /invalid credentials/) }
         end
       end
 
@@ -117,12 +117,12 @@ describe Plaid do
 
         context 'using incorrect password' do
           let(:password) { 'plaid_bad' }
-          it { expect { user }.to raise_error(Plaid::RequestFailed, 'invalid credentials') }
+          it { expect { user }.to raise_error(Plaid::RequestFailed, /invalid credentials/) }
         end
 
         context 'using incorrect username' do
           let(:username) { 'plaid_bad' }
-          it { expect { user }.to raise_error(Plaid::RequestFailed, 'invalid credentials') }
+          it { expect { user }.to raise_error(Plaid::RequestFailed, /invalid credentials/) }
         end
       end
     end
@@ -140,7 +140,7 @@ describe Plaid do
 
       context 'using incorrect PIN' do
         let(:pin) { '0000' }
-        it { expect { user }.to raise_error(Plaid::RequestFailed, 'invalid pin') }
+        it { expect { user }.to raise_error(Plaid::RequestFailed, /invalid pin/) }
       end
     end
 

@@ -1,10 +1,15 @@
 describe Plaid::PlaidError do
   describe "#new" do
-    it "allows code, message and resolution" do
-      error = Plaid::PlaidError.new 1, "testing", "fix it"
-      expect(error.code).to eq(1)
-      expect(error.message).to eq("testing")
-      expect(error.resolve).to eq("fix it")
+    it "displays code, message, and resolution when thrown" do
+      error = described_class.new(
+        1200,
+        "invalid credentials",
+        "The username or password provided is not correct"
+      )
+
+      expect(error.message).to include("1200")
+      expect(error.message).to include("invalid credentials")
+      expect(error.message).to include("The username or password provided is not correct")
     end
   end
 end
