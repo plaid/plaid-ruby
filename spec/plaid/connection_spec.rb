@@ -26,27 +26,27 @@ describe Plaid::Connection do
 
     it "throws Plaid::BadRequest on 400 response" do
       stub = stub_request(:post, stub_url).to_return(status: 400, body: bad_req_response)
-      expect { Plaid::Connection.post("testing") }.to raise_error(Plaid::BadRequest, "invalid credentials")
+      expect { Plaid::Connection.post("testing") }.to raise_error(Plaid::BadRequest, /invalid credentials/)
     end
 
     it "throws Plaid::Unauthorized on 401 response" do
       stub = stub_request(:post, stub_url).to_return(status: 401, body: unauth_response)
-      expect { Plaid::Connection.post("testing") }.to raise_error(Plaid::Unauthorized, "bad access_token")
+      expect { Plaid::Connection.post("testing") }.to raise_error(Plaid::Unauthorized, /bad access_token/)
     end
 
     it "throws Plaid::RequestFailed on 402 response" do
       stub = stub_request(:post, stub_url).to_return(status: 402, body: req_fail_response)
-      expect { Plaid::Connection.post("testing") }.to raise_error(Plaid::RequestFailed, "invalid credentials")
+      expect { Plaid::Connection.post("testing") }.to raise_error(Plaid::RequestFailed, /invalid credentials/)
     end
 
     it "throws a Plaid::NotFound on 404 response" do
       stub = stub_request(:post, stub_url).to_return(status: 404, body: req_not_found)
-      expect { Plaid::Connection.post("testing") }.to raise_error(Plaid::NotFound, "product not found")
+      expect { Plaid::Connection.post("testing") }.to raise_error(Plaid::NotFound, /product not found/)
     end
 
     it "throws a Plaid::ServerError on empty response" do
       stub = stub_request(:post, stub_url).to_return(status: 504, body: '')
-      expect { Plaid::Connection.post("testing") }.to raise_error(Plaid::ServerError, '')
+      expect { Plaid::Connection.post("testing") }.to raise_error(Plaid::ServerError)
     end
   end
 
@@ -71,22 +71,22 @@ describe Plaid::Connection do
 
     it "throws 404 for 1301 code" do
       stub = stub_request(:get, stub_url).to_return({:body => {"code" => 1301, "message" => "Doesn't matter", "resolve" => "Yep."}.to_json})
-      expect { Plaid::Connection.get("testing")}.to raise_error(Plaid::NotFound, "Doesn't matter")
+      expect { Plaid::Connection.get("testing")}.to raise_error(Plaid::NotFound, /Doesn't matter/)
     end
 
     it "throws 404 for 1401 code" do
       stub = stub_request(:get, stub_url).to_return({:body => {"code" => 1401, "message" => "Doesn't matter", "resolve" => "Yep."}.to_json})
-      expect { Plaid::Connection.get("testing")}.to raise_error(Plaid::NotFound, "Doesn't matter")
+      expect { Plaid::Connection.get("testing")}.to raise_error(Plaid::NotFound, /Doesn't matter/)
     end
 
     it "throws 404 for 1501 code" do
       stub = stub_request(:get, stub_url).to_return({:body => {"code" => 1501, "message" => "Doesn't matter", "resolve" => "Yep."}.to_json})
-      expect { Plaid::Connection.get("testing")}.to raise_error(Plaid::NotFound, "Doesn't matter")
+      expect { Plaid::Connection.get("testing")}.to raise_error(Plaid::NotFound, /Doesn't matter/)
     end
 
     it "throws 404 for 1601 code" do
       stub = stub_request(:get, stub_url).to_return({:body => {"code" => 1601, "message" => "Doesn't matter", "resolve" => "Yep."}.to_json})
-      expect { Plaid::Connection.get("testing")}.to raise_error(Plaid::NotFound, "Doesn't matter")
+      expect { Plaid::Connection.get("testing")}.to raise_error(Plaid::NotFound, /Doesn't matter/)
     end
 
   end
@@ -112,27 +112,27 @@ describe Plaid::Connection do
 
     it "throws Plaid::BadRequest on 400 response" do
       stub = stub_request(:get, stub_url).to_return(status: 400, body: bad_req_response)
-      expect { Plaid::Connection.secure_get("testing", "test_wells") }.to raise_error(Plaid::BadRequest, "invalid credentials")
+      expect { Plaid::Connection.secure_get("testing", "test_wells") }.to raise_error(Plaid::BadRequest, /invalid credentials/)
     end
 
     it "throws Plaid::Unauthorized on 401 response" do
       stub = stub_request(:get, stub_url).to_return(status: 401, body: unauth_response)
-      expect { Plaid::Connection.secure_get("testing", "test_wells") }.to raise_error(Plaid::Unauthorized, "bad access_token")
+      expect { Plaid::Connection.secure_get("testing", "test_wells") }.to raise_error(Plaid::Unauthorized, /bad access_token/)
     end
 
     it "throws Plaid::RequestFailed on 402 response" do
       stub = stub_request(:get, stub_url).to_return(status: 402, body: req_fail_response)
-      expect { Plaid::Connection.secure_get("testing", "test_wells") }.to raise_error(Plaid::RequestFailed, "invalid credentials")
+      expect { Plaid::Connection.secure_get("testing", "test_wells") }.to raise_error(Plaid::RequestFailed, /invalid credentials/)
     end
 
     it "throws a Plaid::NotFound on 404 response" do
       stub = stub_request(:get, stub_url).to_return(status: 404, body: req_not_found)
-      expect { Plaid::Connection.secure_get("testing", "test_wells") }.to raise_error(Plaid::NotFound, "product not found")
+      expect { Plaid::Connection.secure_get("testing", "test_wells") }.to raise_error(Plaid::NotFound, /product not found/)
     end
 
     it "throws a Plaid::ServerError on empty response" do
       stub = stub_request(:get, stub_url).to_return(status: 504, body: '')
-      expect { Plaid::Connection.secure_get("testing", "test_wells") }.to raise_error(Plaid::ServerError, '')
+      expect { Plaid::Connection.secure_get("testing", "test_wells") }.to raise_error(Plaid::ServerError)
     end
   end
 
@@ -157,27 +157,27 @@ describe Plaid::Connection do
 
     it "throws Plaid::BadRequest on 400 response" do
       stub = stub_request(:patch, stub_url).to_return(status: 400, body: bad_req_response)
-      expect { Plaid::Connection.patch("testing") }.to raise_error(Plaid::BadRequest, "invalid credentials")
+      expect { Plaid::Connection.patch("testing") }.to raise_error(Plaid::BadRequest, /invalid credentials/)
     end
 
     it "throws Plaid::Unauthorized on 401 response" do
       stub = stub_request(:patch, stub_url).to_return(status: 401, body: unauth_response)
-      expect { Plaid::Connection.patch("testing") }.to raise_error(Plaid::Unauthorized, "bad access_token")
+      expect { Plaid::Connection.patch("testing") }.to raise_error(Plaid::Unauthorized, /bad access_token/)
     end
 
     it "throws Plaid::RequestFailed on 402 response" do
       stub = stub_request(:patch, stub_url).to_return(status: 402, body: req_fail_response)
-      expect { Plaid::Connection.patch("testing") }.to raise_error(Plaid::RequestFailed, "invalid credentials")
+      expect { Plaid::Connection.patch("testing") }.to raise_error(Plaid::RequestFailed, /invalid credentials/)
     end
 
     it "throws a Plaid::NotFound on 404 response" do
       stub = stub_request(:patch, stub_url).to_return(status: 404, body: req_not_found)
-      expect { Plaid::Connection.patch("testing") }.to raise_error(Plaid::NotFound, "product not found")
+      expect { Plaid::Connection.patch("testing") }.to raise_error(Plaid::NotFound, /product not found/)
     end
 
     it "throws a Plaid::ServerError on empty response" do
       stub = stub_request(:patch, stub_url).to_return(status: 504, body: '')
-      expect { Plaid::Connection.patch("testing") }.to raise_error(Plaid::ServerError, '')
+      expect { Plaid::Connection.patch("testing") }.to raise_error(Plaid::ServerError)
     end
   end
 
