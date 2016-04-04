@@ -5,7 +5,7 @@ require 'uri'
 module Plaid
   class Connection
 
-    WAIT_TIMEOUT = 120
+    WAIT_TIMEOUT = 300
 
     class << self
       # API: semi-private
