@@ -187,18 +187,22 @@ describe Plaid::Client do
       it { expect(user.accounts).not_to be_empty }
     end
 
-    #TODO: Fully vet the info api endpoint for the beta functions before adding this as a supported function.
-    pending 'need to vet the info api endpoint' do
-      context 'gets a valid user with info' do
-        let(:user) { client.set_user('test_wells',['info']) }
-        it { expect(user.accounts).to be_truthy}
-      end
+    context 'gets a valid user with info' do
+      #TODO: Fully vet the info api endpoint for the beta functions before adding this as a supported function.
+      before { skip 'need to vet the info api endpoint' }
 
-      context 'gets a fully validated user with all access granted' do
-        let(:user) { client.set_user('test_wells', ['connect', 'info', 'auth']) }
-        it { expect(user.transactions).to be_truthy}
-      end
+      let(:user) { client.set_user('test_wells',['info']) }
+      it { expect(user.accounts).to be_truthy}
     end
+
+    context 'gets a fully validated user with all access granted' do
+      #TODO: Fully vet the info api endpoint for the beta functions before adding this as a supported function.
+      before { skip 'need to vet the info api endpoint' }
+
+      let(:user) { client.set_user('test_wells', ['connect', 'info', 'auth']) }
+      it { expect(user.transactions).to be_truthy}
+    end
+
   end
 
   describe '.exchange_token' do
