@@ -1,44 +1,30 @@
 describe 'Plaid.config' do
-  around(:each) do |example|
-    old_customer_id          = Plaid.customer_id
-    old_secret               = Plaid.secret
-    old_environment_location = Plaid.environment_location
-
-    Plaid.config do |p|
-      p.customer_id          = customer_id
-      p.secret               = secret
-      p.environment_location = environment_location
-    end
-
-    example.run
-
-    Plaid.config do |p|
-      p.customer_id          = old_customer_id
-      p.secret               = old_secret
-      p.environment_location = old_environment_location
-    end
-  end
-
   let(:customer_id) { 'test_id' }
   let(:secret)      { 'test_secret' }
-  let(:dev_url)  { 'https://tartan.plaid.com/' }
-  let(:prod_url) { 'https://api.plaid.com/' }
+  let(:dev_url)     { 'https://tartan.plaid.com/' }
+  let(:prod_url)    { 'https://api.plaid.com/' }
+  let(:client)      {
+    Plaid.config do |c|
+      c.customer_id = customer_id
+      c.secret = secret
+      c.environment_location = environment_location
+    end
+  }
 
-
-  let(:user) { Plaid.add_user('connect', 'plaid_test', 'plaid_good', 'wells') }
+  let(:user) { client.add_user('connect', 'plaid_test', 'plaid_good', 'wells') }
 
   context ':environment_location' do
     context 'with trailing slash' do
       let(:environment_location) { 'http://example.org/' }
       it 'leaves it as-is' do
-        expect(Plaid.environment_location).to eql(environment_location)
+        expect(client.connection.environment_location).to eql(environment_location)
       end
     end
 
     context 'without trailing slash' do
       let(:environment_location) { 'http://example.org' }
       it 'adds a trailing slash' do
-        expect(Plaid.environment_location).to eql(environment_location + '/')
+        expect(client.connection.environment_location).to eql(environment_location + '/')
       end
     end
   end
