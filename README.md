@@ -123,3 +123,7 @@ Learn about the full functionality of the library on our [Wiki](https://github.c
 We highly encourage helping out with the gem. Either adding more tests, building new helper classes, fixing bugs, or anything to increase overall quality.
 
 Learn more about best practices, submitting a pull request, and rules for the build on our [Wiki](https://github.com/plaid/plaid-ruby/wiki/Contribute!)
+
+## Contributors
+
+- @j4ustin (Justin Crites)
