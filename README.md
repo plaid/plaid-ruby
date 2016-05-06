@@ -1,16 +1,6 @@
-# Plaid [![Build Status](https://travis-ci.org/plaid/plaid-ruby.svg?branch=release_v_1.0.0)](https://travis-ci.org/plaid/plaid-ruby) [![Gem Version](https://badge.fury.io/rb/plaid.svg)](http://badge.fury.io/rb/plaid)
+# Plaid [![Build Status](https://travis-ci.org/plaid/plaid-ruby.svg)](https://travis-ci.org/plaid/plaid-ruby) [![Gem Version](https://badge.fury.io/rb/plaid.svg)](http://badge.fury.io/rb/plaid)
 
-Ruby bindings for the Plaid API
-
-## Notes
-
-This version is a beta version that contains failing tests for the new 'info' endpoint. While these have been tested individually on real accounts the tests here will fail with the test accounts supplied. These will be updated soon with test credentials.
-
-Latest stable version: **1.7.1**
-
-This version removes the need to use 'type' in each additional call.
-
-**Warning: If you have been using any version < 1 please switch to the correct branch (V0.1.6). Installing without specifying a version from RubyGems results in V1.1 build. **
+Ruby bindings for the Plaid API.
 
 ## Installation
 
@@ -20,106 +10,268 @@ Add this line to your application's Gemfile:
 gem 'plaid'
 ```
 
-And install
+And then execute:
 
     $ bundle
 
-Or install it system wide as:
+Or install it yourself as:
 
     $ gem install plaid
 
+The gem supports Ruby 2.x only.
+
 ## Usage
 
-Please read the great documentation at http://plaid.com/docs/ for more information.
+This gem wraps the Plaid API, which is fully described in the [documentation](http://plaid.com/docs).
 
-### Configuring Plaid
-Configure the gem with your customer id, secret key, and the environment path you would like to use.
+The RubyDoc for the gem is available [here](http://plaid.github.io/plaid-ruby).
 
-```ruby
-Plaid.config do |p|
-  p.customer_id = 'Plaid provided customer ID here'
-  p.secret = 'Plaid provided secret key here'
-  p.environment_location = 'URL for the development or production environment'
-  # i.e. 'https://tartan.plaid.com/' for development, or
-  # 'https://api.plaid.com/' for production
-end
-```
+### Configuring access to Plaid
 
-### Creating a new Plaid User
-Authenticate a user to your desired level of api access (auth / connect).
-
-```ruby
-user = Plaid.add_user('auth', 'plaid_test', 'plaid_good', 'wells')
-```
-
-If the authentication requires a pin, you can pass it in as the fifth argument:
-
-```ruby
-user = Plaid.add_user('auth', 'plaid_test', 'plaid_good', 'usaa', '1234')
-```
-
-To add options such as `login_only` or `webhooks`, use the sixth argument:
-
-```ruby
-user = Plaid.add_user('auth', 'plaid_test', 'plaid_good', 'wells', nil, { login_only: true, webhooks: 'https://example.org/callbacks/plaid')
-```
-
-### Restoring a Plaid User using an access token
-
-```ruby
-user = Plaid.set_user('access_token')
-```
-
-```ruby
-user = Plaid.set_user('access_token', ['connect'])
-```
-
-### Exchanging a Link public_token for a Plaid access_token
+Configure the gem with your client id, secret, and the environment you would like to use.
 
 ```ruby
 Plaid.config do |p|
-  p.customer_id = 'test_id'
-  p.secret = 'test_secret'
-  p.environment_location = 'https://tartan.plaid.com'
+  p.client_id = '<<< Plaid provided client ID >>>'
+  p.secret = '<<< Plaid provided secret key >>>'
+  p.env = :tartan  # or :api for production
 end
-
-# Exchange a Link public_token for a Plaid access_token
-exchangeTokenResponse = Plaid.exchange_token('test,chase,connected')
-# Optionally include an account_id
-exchangeTokenResponse = Plaid.exchange_token('test,chase,connected', 'account_id')
-
-# Use the API access_token to initialize a user
-# Note: This example assumes you are using Link with the "auth" product
-user = Plaid.set_user(exchangeTokenResponse.access_token, ['auth'])
-
-# Retrieve the user's accounts
-user.get('auth')
-
-# Print the name of each account
-user.accounts.each { |account| print account.meta['name'] + "\n"}
 ```
 
-## Semantic Versioning
+### Creating a new User
 
-Methods marked with `API: public` are officially supported by the gem maintainers. Since
-we are using semantic versioning (http://semver.org/spec/v2.0.0.html), the maintainers are
-committed to backwards-compatibility support for these API calls when we update the Minor
-version. So for example, going from version 1.4.x to 1.5.x will not change these public
-API calls.
+```ruby
+user = Plaid::User.create(:connect, 'wells', 'plaid_test', 'plaid_good')
+```
 
-However, we may change these method signatures or even the gem architecture when updating
-the Major number. For example, we have some breaking changes in mind with version 2.0
+This call will do a `POST /connect`. The response will contain account information and transactions 
+for last 30 days, which you can find in `user.accounts` and `user.initial_transactions`, accordingly.
 
-Methods marked with `API: semi-private` are used internally for consistency. While it is
-possible to monkey-patch against them for your own use, the maintainers make no guarantees
-on backwards compatibility.
+If the authentication requires a pin, you can pass it as a named parameter:
 
-## Learn More
+```ruby
+user = Plaid::User.create(:income, 'usaa', 'plaid_test', 'plaid_good', 'wells', pin: '1234')
+```
 
-Learn about the full functionality of the library on our [Wiki](https://github.com/plaid/plaid-ruby/wiki)
+To add options such as `login_only` or `webhook`, use `options` argument:
 
-## Contribute
+```ruby
+user = Plaid::User.create(:connect, 'wells', 'plaid_test', 'plaid_good', 
+                          options: { login_only: true, webhook: 'https://example.org/callbacks/plaid')
+```
 
-We highly encourage helping out with the gem. Either adding more tests, building new helper classes, fixing bugs, or anything to increase overall quality.
+The first argument for `Plaid::User.create` is always a product you want to add the user to (like,
+`:connect`, `:auth`, `:info`, `:income`, or `:risk`). The user object is bound to the product, and subsequent
+calls like `user.update` or `user.delete` are done for this product (i.e., `PATCH /info` and `DELETE /info`
+for `:info`).
 
-Learn more about best practices, submitting a pull request, and rules for the build on our [Wiki](https://github.com/plaid/plaid-ruby/wiki/Contribute!)
+### Instantiating a User with an existing access token
+
+If you've already added the user and saved the access token, you should use `User.load`:
+
+```ruby
+user = Plaid::User.load(:risk, 'access_token')
+```
+
+This won't make any API requests by itself, just set the product and the token in the `User` instance.
+
+### Exchanging a Link public token for a Plaid access token
+
+If you have a Link public token, use `User.exchange_token`:
+
+```ruby
+user = Plaid::User.exchange_token('public_token')   # bound to :connect product
+```
+
+With more options:
+
+```ruby
+user2 = Plaid::User.exchange_token('public_token', account_id: '...', product: :auth)
+```
+
+### Upgrading and changing the current product
+
+Plaid supports upgrading a user, i.e. adding it to another product:
+
+```ruby
+# Create a user in Connect
+user = Plaid::User.create(:connect, 'wells', 'plaid_test', 'plaid_good')
+
+# Upgrade this user, attaching it to Auth as well (makes a request to /upgrade).
+auth_user = user.upgrade(:auth)
+```
+
+The `auth_user` will be a different instance of `User`, attached to Auth, but the access token will be the same.
+
+Sometimes you know that the user has already been added to another product. To get a `User` instance with
+same access token, but different current product, use `User.for_product`:
+
+```ruby
+# Get a user attached to Connect
+user = Plaid::User.load(:connect, 'access_token')
+
+# Makes no requests
+info_user = user.for_product(:info)
+```
+
+Basically it's the same as:
+
+```ruby
+info_user = Plaid::User.load(:info, 'access_token')
+```
+
+### MFA (Multi-Factor Authorization)
+
+If MFA is requested by the financial institution, the `User.create` call would behave
+a bit differently:
+
+```ruby
+user = Plaid::User.create(:auth, 'wells', 'plaid_test', 'plaid_good') 
+
+user.accounts   #=> nil
+user.mfa?       #=> true
+user.mfa_type   #=> :questions
+user.mfa        #=> [{question: "What's the nickname of the person who created Ruby?"}]
+```
+
+In this case you'll have to submit the answer to the question:
+
+```ruby
+user.mfa_step('matz')        # This is the correct answer!
+
+user.mfa?       #=> false
+user.mfa_type   #=> nil
+user.mfa        #=> nil
+user.accounts   #=> [<Plaid::Account ...>, ...]
+```
+
+The code-based MFA workflow is similar. Basically you need to call `user.mfa_step(...)` 
+until `user.mfa?` becomes false.
+
+### Obtaining user-related data
+
+If you have a live `User` instance, you can use following methods 
+(independent of instance's current product):
+
+* `user.transactions(...)`. Makes a `/connect/get` request.
+* `user.auth(sync: false)`. Makes an `/auth/get` request. 
+* `user.info(sync: false)`. Makes an `/info/get` request.
+* `user.income(sync: false)`. Makes an `/income/get` request.
+* `user.risk(sync: false)`. Makes an `/risk/get` request.
+* `user.balance`. Makes an `/balance` request.
+
+All of these methods return appropriate data, but they also update the cached `user.accounts`. That is,
+if you user has access to Auth and Risk  products, the following code:
+
+```ruby
+user = User.load(:auth, 'access_token')
+user.auth
+user.risk
+```
+will result in `user.accounts` having both routing number and risk information for all the accounts. The
+subsequent `user.balance` call will just update the current balance, not touching the routing and risk information.
+
+The `sync` flag, if set to true, will result in updating the information from the server even if it has already been
+loaded. Otherwise cached information will be returned:
+
+```ruby
+user = User.load(:auth, 'access_token')   # Just set the token
+user.auth                                 # POST /auth/get 
+user.auth                                 # No POST, return cached info
+user.auth(sync: true)                     # POST /auth/get again
+```
+
+Same goes for other methods, except `User#transactions` and `User#balance` which always make requests to the API.
+
+### Categories
+
+You can request category information:
+
+```ruby
+cats = Plaid::Category.all             # Array of all known categories
+cat  = Plaid::Category.get('17001013') # A single category by its ID
+```
+
+### Institutions
+
+Financial institution information is available via `Plaid::Institution` and `Plaid::LongTailInstitution`:
+
+```ruby
+insts = Plaid::Institution.all                               # Array of all major financial institutions
+inst  = Plaid::Institution.get('5301a93ac140de84910000e0')   # A single institution by its ID
+
+lti  = Plaid::LongTailInstitution.get('bofa')                # A single one
+ltis = Plaid::LongTailInstitution.all(count: 20, offset: 20) # A page
+res  = Plaid::LongTailInstitution.search(query: 'c')         # Lookup by name
+```
+
+### Custom clients
+
+It's possible to use several Plaid environments and/or credentials in one app by 
+explicit instantiation of `Plaid::Client`:
+
+```ruby
+# Configuring the global client (Plaid.client) which is used by default 
+Plaid.config do |p|
+  p.client_id = 'client_id_1'
+  p.secret = 'secret_1'
+  p.env = :tartan
+end
+
+# Creating a custom client
+api = Plaid::Client.new(client_id: 'client_id_2', 'secret_2', env: :api)
+
+# Tartan user (using default client)
+user1 = Plaid::User.create(:connect, 'wells', 'plaid_test', 'plaid_good')
+
+# Api user (using api client)
+user2 = Plaid::User.create(:connect, 'wells', 'plaid_test', 'plaid_good', client: api)
+
+# Lookup a long tail institution in production
+res = Plaid::LongTailInstitution.search(query: 'c', client: api)
+```
+
+The `client` option can be passed to the following methods:
+
+* `User.create`
+* `User.load`
+* `User.exchange_token`
+* `Category.all`
+* `Category.get`
+* `Institution.all`
+* `Institution.get`
+* `LongTailInstitution.all`
+* `LongTailInstitution.search`
+* `LongTailInstitution.get`
+
+### Errors
+
+Any methods making API calls will result in an exception raised unless the response code is "200: Success" or
+"201: MFA Required".
+
+`Plaid::BadRequestError` is raised when status code is "400: Bad Request".
+
+`Plaid::UnauthorizedError` is raised when status code is "401: Unauthorized".
+
+`Plaid::RequestFailedError` is raised when status code is "402: Request Failed".
+
+`Plaid::NotFoundError` is raised when status code is "404: Cannot be Found".
+
+`Plaid::ServerError` is raised when status code is "50X: Server Error".
+
+Read more about response codes and their meaning in the
+[Plaid documentation](https://plaid.com/docs/api/#response-codes).
+
+## Development
+
+After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/plaid/plaid-ruby. See also [contributing guidelines](CONTRIBUTING.md).
+
+## License
+
+The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).

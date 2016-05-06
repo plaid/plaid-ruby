@@ -1,100 +1,63 @@
 require 'plaid/version'
-require 'plaid/config'
 require 'plaid/errors'
+require 'plaid/connector'
+require 'plaid/category'
+require 'plaid/institution'
+require 'plaid/user'
+require 'plaid/transaction'
+require 'plaid/info'
+require 'plaid/income'
+require 'plaid/client'
 
-require 'plaid/models/user'
-require 'plaid/models/institution'
-require 'plaid/models/category'
-require 'plaid/models/exchange_token_response'
+require 'uri'
 
-require 'json'
-
+# Public: The Plaid namespace.
 module Plaid
-  autoload :Connection, 'plaid/connection'
+  # Public: Available Plaid products.
+  PRODUCTS = %i(connect auth info income risk).freeze
 
-  class << self
-    # Configures the gem with the public, private, and environment vars
-    include Configure
+  class <<self
+    # Public: The default Client.
+    attr_accessor :client
 
-    # API: public
-    # Use this to create a new Plaid user
-    # Required parameters:
-    #   api_level, username, password, type
-    # TODO: Rename this to something more descriptive for 2.0, such as 'create_user`
-    def add_user(api_level, username, password, type, pin = nil, options = nil)
-      payload = { username: username, password: password, type: type }
+    # Public: The Integer read timeout for requests to Plaid HTTP API.
+    # Should be specified in seconds. Default value is 120 (2 minutes).
+    attr_accessor :read_timeout
 
-      payload[:pin]     = pin if pin
-      payload[:options] = options.is_a?(Hash) ? JSON.generate(options) : options if options
-
-      res = Connection.post(api_level, payload)
-      User.build(res, api_level)
-    end
-
-    # API: public
-    # Exchange a Plaid Link public_token for a Plaid access_token
-    # Required parameters:
-    #   public_token
-    #   account_id (optional)
-    def exchange_token(public_token, account_id = nil)
-      payload = { public_token: public_token }
-      # include the account id, if set
-      payload[:account_id] = account_id if account_id
-
-      res = Connection.post('exchange_token', payload)
-      ExchangeTokenResponse.new(res)
-    end
-
-    # API: public
-    # Use this to restore a user from Plaid based upon the access token
-    # TODO: Rename this to something more descriptive for 2.0, such as 'get_user'
-    def set_user(token, api_levels=[], institution_type=nil)
-      _user = User.new
-      _user.access_token = fully_qualified_token(token, institution_type)
-      _user.permissions = api_levels
-      api_levels.each { |l| _user.get(l) }
-      _user
-    end
-
-    # API: public
-    # Given an access code and query options, use this to get a dataset of
-    # transactions and accounts for # a given user. See /connect/get endpoint
+    # Public: A helper function to ease configuration.
     #
-    # Returns a User object with accounts and transactions within
-    # the date range given
-    # Examples:
-    #   Plaid.transactions 'test_wells', account: 'QPO8Jo8vdDHMepg41PBwckXm4KdK1yUdmXOwK'
-    def transactions(token, options = {})
-      _user = User.new
-      _user.access_token = token
-      _user.permit! 'connect'
-
-      # TODO: For 2.0, submit all data as JSON
-      options = JSON.generate(options) if options.kind_of?(Hash)
-
-      _user.get_connect(options: options)
-      _user
+    # Yields self.
+    #
+    # Examples
+    #
+    #   Plaid.configure do |p|
+    #     p.client_id = 'Plaid provided client ID here'
+    #     p.secret = 'Plaid provided secret key here'
+    #     p.env = :tartan
+    #     p.read_timeout = 300   # it's 5 minutes, yay!
+    #   end
+    #
+    # Returns nothing.
+    def config
+      client = Client.new
+      yield client
+      self.client = client
     end
 
-    # API: public
-    # Returns the fully-qualified token based upon type
-    # Note: Don't see this documented in the Plaid API docs, need to investigate this
-    def fully_qualified_token(token, institution_type)
-      institution_type.nil? ? token : token + '_' + institution_type
-    end
+    # Internal: Symbolize keys (and values) for a hash.
+    #
+    # hash   - The Hash with string keys (or nil).
+    # values - The Boolean flag telling the function to symbolize values
+    #          as well.
+    #
+    # Returns a Hash with keys.to_sym (or nil if hash is nil).
+    def symbolize_hash(hash, values: false)
+      return unless hash
+      return hash.map { |h| symbolize_hash(h) } if hash.is_a?(Array)
 
-    # API: public
-    # Builds an institution object and returns when the institution details exist
-    def institution(id = nil)
-      res = Connection.get('institutions', id)
-      id.nil? ? Institution.all(res) : Institution.new(res)
-    end
-
-    # API: public
-    # Builds an category object and returns when the category details exist
-    def category(id = nil)
-      res = Connection.get('categories', id)
-      id.nil? ? Category.all(res) : Category.new(res)
+      hash.each_with_object({}) do |(k, v), memo|
+        memo[k.to_sym] = values ? v.to_sym : v
+      end
     end
   end
 end

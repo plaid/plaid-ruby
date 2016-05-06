@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'plaid'
+require 'pry'
+
+Plaid.config do |p|
+  p.env = :tartan
+  p.client_id = ENV['PLAID_CLIENT_ID']
+  p.secret = ENV['PLAID_SECRET']
+end
+
+Pry.start
