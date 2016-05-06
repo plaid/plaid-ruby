@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>UPGRADING.md</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/github.css" type="text/css" media="screen" />
+<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+        <h1>
+            UPGRADING.md
+        </h1>
+        <ul class="files">
+            <li>UPGRADING.md</li>
+            <li>Last modified: 2016-05-06 09:58:12 +0600</li>
+        </ul>
+    </div>
+
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<h2 id="label-Upgrading+from+1.x+to+2.0.0">Upgrading from 1.x to 2.0.0</h2>
+
+<p>Make sure you use Ruby 2.0 or higher.</p>
+
+<p>Update the <code>Plaid.config</code> block:</p>
+
+<pre><code>Plaid.config do |p|
+  p.client_id = &#39;&lt;&lt;&lt; Plaid provided client ID &gt;&gt;&gt;&#39;  # WAS: customer_id
+  p.secret = &#39;&lt;&lt;&lt; Plaid provided secret key &gt;&gt;&gt;&#39;    # No change
+  p.env = :tartan  # or :api for production         # WAS: environment_location
+end
+</code></pre>
+
+<p>Use <code>Plaid::User.create</code> instead of <code>Plaid.add_user</code>
+(<strong>NOTE</strong>: parameter order has changed!)</p>
+
+<p>Use <code>Plaid::User.load</code> instead of <code>Plaid.set_user</code>
+(<strong>NOTE</strong>: parameter order has changed!)</p>
+
+<p>Use <code>Plaid::User.exchange_token</code> instead of
+<code>Plaid.exchange_token</code> (<strong>NOTE</strong>: parameter list
+has changed!)</p>
+
+<p>Use <code>Plaid::User.create</code> or (<code>.load</code>) and
+<code>Plaid::User#transactions</code> instead of
+<code>Plaid.transactions</code>.</p>
+
+<p>Use <code>Plaid::Institution.all</code> and
+<code>Plaid::Institution.get</code> instead of
+<code>Plaid.institution</code>.</p>
+
+<p>Use <code>Plaid::Category.all</code> and <code>Plaid::Category.get</code>
+instead of <code>Plaid.category</code>.</p>
+
+<p><code>Plaid::Account#institution_type</code> was renamed to
+<code>Plaid::Account#institution</code>.</p>
+
+<p><code>Plaid::Transaction#account</code> was renamed to
+<code>Plaid::Transaction#account_id</code>.</p>
+
+<p><code>Plaid::Transaction#date</code> is a Date, not a String object now.</p>
+
+<p><code>Plaid::Transaction#cat</code> was removed. Use
+<code>Plaid::Transaction#category_hierarchy</code> and
+<code>Plaid::Transaction#category_id</code> directly.</p>
+
+<p><code>Plaid::Transaction#category</code> was renamed to
+<code>Plaid::Transaction#category_hierarchy</code>.</p>
+
+<p><code>Plaid::Transaction#pending_transaction</code> was renamed to
+<code>Plaid::Transaction#pending_transaction_id</code>.</p>
+
+<p>Use <code>Plaid::User#mfa_step</code> instead of
+<code>Plaid::User#select_mfa_method</code> and
+<code>Plaid::User#mfa_authentication</code>.</p>
+
+<p><code>Plaid::User#permit?</code> was removed. You don&#39;t need this.</p>
+
+<p><code>Plaid::User.delete_user</code> was renamed to
+<code>Plaid::User.delete</code>.</p>
+
+<p><strong>NOTE</strong> that Symbols are now consistently used instead of
+Strings as product names, keys in hashes, etc. Look at the docs, they have
+all the examples.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+              </div>
+
+    </div>
+  </body>
+</html>

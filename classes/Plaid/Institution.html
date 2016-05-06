@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Plaid::Institution</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+        <h1>
+            <span class="type">Class</span> 
+            Plaid::Institution 
+            
+                <span class="parent">&lt; 
+                    
+                    Object
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/lib/plaid/institution_rb.html">lib/plaid/institution.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>A class encapsulating information about a Financial <a
+href="Institution.html">Institution</a> supported by <a
+href="../Plaid.html">Plaid</a>.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+    <!-- Sections -->
+    <div class="sectiontitle">Sections</div>
+    <ul>
+      
+        <li><a href="#Internal">Internal</a></li>
+      
+        <li><a href="#Public">Public</a></li>
+      
+    </ul>
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-all">all</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>G</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-get">get</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-inspect">inspect</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-to_s">to_s</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+              
+
+    
+      <div class="contenttitle" id="Public">
+        Public
+      </div>
+    
+
+    
+
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>credentials</td>
+            <td class='attr-desc'><p>The Hash with credential labels, how they are exactly named by the
+institution. E.g. {“username”: “Online ID”, “password”: “Password”}.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>has_mfa</td>
+            <td class='attr-desc'><p>The Boolean flag telling if the institution requires MFA.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>has_mfa?</td>
+            <td class='attr-desc'><p>The Boolean flag telling if the institution requires MFA.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>id</td>
+            <td class='attr-desc'><p>The String institution ID. E.g. “5301a93ac140de84910000e0”.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>mfa</td>
+            <td class='attr-desc'><p>The Hash with MFA options available. E.g. [“code”, “list”, “questions(3)”].
+This means that you are allowed to request a list of possible MFA options,
+use code-based MFA and questions MFA (there are 3 questions).</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>name</td>
+            <td class='attr-desc'><p>The String institution name. E.g. “Bank of America”.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>products</td>
+            <td class='attr-desc'><p>An Array with Symbol product names supported by the institution. E.g.
+[:connect, :auth, :balance, :info, :income, :risk]. See Plaid::PRODUCTS.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>type</td>
+            <td class='attr-desc'><p>The String institution shortname, or “type” per <a
+href="../Plaid.html">Plaid</a> API docs. E.g. “bofa”.</p></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-all">
+            
+              <b>all</b>(client: nil)
+            
+            <a href="../../classes/Plaid/Institution.html#method-c-all" name="method-c-all" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Get information about the Financial Institutions currently supported by <a
+href="../Plaid.html">Plaid</a>.</p>
+
+<p>Does a GET /institutions call.</p>
+<dl class="rdoc-list note-list"><dt>client
+<dd>
+<p>The <a href="Client.html">Plaid::Client</a> instance used to connect
+(default: <a href="../Plaid.html#attribute-c-client">Plaid.client</a>).</p>
+</dd></dl>
+
+<h3 id="method-c-all-label-Returns">Returns</h3>
+
+<p>Returns an Array of <a href="Institution.html">Institution</a> instances.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-all_source')" id="l_method-c-all_source">show</a>
+                
+              </p>
+              <div id="method-c-all_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/institution.rb, line 69</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">all</span>(<span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-constant">Connector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:institutions</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-identifier">client</span>).<span class="ruby-identifier">get</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">idata</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">new</span>(<span class="ruby-identifier">idata</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-get">
+            
+              <b>get</b>(id, client: nil)
+            
+            <a href="../../classes/Plaid/Institution.html#method-c-get" name="method-c-get" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Get information about a given Financial <a
+href="Institution.html">Institution</a>.</p>
+
+<p>Does a GET /institutions/:id call.</p>
+<dl class="rdoc-list note-list"><dt>id
+<dd>
+<p>the String institution ID (e.g. “5301a93ac140de84910000e0”).</p>
+</dd><dt>client
+<dd>
+<p>The <a href="Client.html">Plaid::Client</a> instance used to connect
+(default: <a href="../Plaid.html#attribute-c-client">Plaid.client</a>).</p>
+</dd></dl>
+
+<h3 id="method-c-get-label-Returns">Returns</h3>
+
+<p>Returns an <a href="Institution.html">Institution</a> instance or raises <a
+href="NotFoundError.html">Plaid::NotFoundError</a> if institution with
+given id is not found.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-get_source')" id="l_method-c-get_source">show</a>
+                
+              </p>
+              <div id="method-c-get_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/institution.rb, line 85</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">new</span> <span class="ruby-constant">Connector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:institutions</span>, <span class="ruby-identifier">id</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-identifier">client</span>).<span class="ruby-identifier">get</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-inspect">
+            
+              <b>inspect</b>()
+            
+            <a href="../../classes/Plaid/Institution.html#method-i-inspect" name="method-i-inspect" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Get a String representation of the institution.</p>
+
+<h3 id="method-i-inspect-label-Returns">Returns</h3>
+
+<p>Returns a String.</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Institution.html#method-i-to_s">to_s</a>
+            </div>
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-inspect_source')" id="l_method-i-inspect_source">show</a>
+                
+              </p>
+              <div id="method-i-inspect_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/institution.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">inspect</span>
+  <span class="ruby-node">&quot;#&lt;Plaid::Institution id=#{id.inspect}, type=#{type.inspect}, &quot;</span>        <span class="ruby-node">&quot;name=#{name.inspect}&gt;&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_s">
+            
+              <b>to_s</b>()
+            
+            <a href="../../classes/Plaid/Institution.html#method-i-to_s" name="method-i-to_s" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Get a String representation of the institution.</p>
+
+<h3 id="method-i-to_s-label-Returns">Returns</h3>
+
+<p>Returns a String.</p>
+            </div>
+          
+          
+          
+
+          
+            <div class="aka">
+              Alias for: <a href="Institution.html#method-i-inspect">inspect</a>
+            </div>
+          
+          
+          
+          </div>
+                    
+
+    
+      <div class="contenttitle" id="Internal">
+        Internal
+      </div>
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(fields)
+            
+            <a href="../../classes/Plaid/Institution.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Initialize an <a href="Institution.html">Institution</a> with given fields.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/institution.rb, line 37</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">fields</span>)
+  <span class="ruby-ivar">@id</span> = <span class="ruby-identifier">fields</span>[<span class="ruby-string">&#39;id&#39;</span>]
+  <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">fields</span>[<span class="ruby-string">&#39;name&#39;</span>]
+  <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">fields</span>[<span class="ruby-string">&#39;type&#39;</span>]
+  <span class="ruby-ivar">@has_mfa</span> = <span class="ruby-identifier">fields</span>[<span class="ruby-string">&#39;has_mfa&#39;</span>]
+  <span class="ruby-ivar">@mfa</span> = <span class="ruby-identifier">fields</span>[<span class="ruby-string">&#39;mfa&#39;</span>]
+  <span class="ruby-ivar">@credentials</span> = <span class="ruby-identifier">fields</span>[<span class="ruby-string">&#39;credentials&#39;</span>]
+  <span class="ruby-ivar">@products</span> = <span class="ruby-identifier">fields</span>[<span class="ruby-string">&#39;products&#39;</span>].<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:to_sym</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                        </div>
+
+    </div>
+  </body>
+</html>    

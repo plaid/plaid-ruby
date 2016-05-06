@@ -1,0 +1,604 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Plaid::Account</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+        <h1>
+            <span class="type">Class</span> 
+            Plaid::Account 
+            
+                <span class="parent">&lt; 
+                    
+                    Object
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/lib/plaid/account_rb.html">lib/plaid/account.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Representation of user account data.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+    <!-- Sections -->
+    <div class="sectiontitle">Sections</div>
+    <ul>
+      
+        <li><a href="#Internal">Internal</a></li>
+      
+        <li><a href="#Public">Public</a></li>
+      
+    </ul>
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-inspect">inspect</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-merge">merge</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-name">name</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-to_s">to_s</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-update_from">update_from</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(hash)
+            
+            <a href="../../classes/Plaid/Account.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/account.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">hash</span>)
+  <span class="ruby-ivar">@id</span>          = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;_id&#39;</span>]
+  <span class="ruby-ivar">@item_id</span>     = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;_item&#39;</span>]
+  <span class="ruby-ivar">@meta</span>        = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;meta&#39;</span>]
+  <span class="ruby-ivar">@type</span>        = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;type&#39;</span>].<span class="ruby-identifier">to_sym</span>
+  <span class="ruby-ivar">@subtype</span>     = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;subtype&#39;</span>]
+  <span class="ruby-ivar">@institution</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;institution_type&#39;</span>].<span class="ruby-identifier">to_sym</span>
+
+  <span class="ruby-keyword">unless</span> (<span class="ruby-identifier">bal</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;balance&#39;</span>]).<span class="ruby-identifier">nil?</span>
+    <span class="ruby-ivar">@available_balance</span> = <span class="ruby-identifier">bal</span>[<span class="ruby-string">&#39;available&#39;</span>]
+    <span class="ruby-ivar">@current_balance</span>   = <span class="ruby-identifier">bal</span>[<span class="ruby-string">&#39;current&#39;</span>]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> (<span class="ruby-identifier">risk</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;risk&#39;</span>])
+    <span class="ruby-ivar">@risk</span> = <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">Risk</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">risk</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@numbers</span> = <span class="ruby-constant">Plaid</span>.<span class="ruby-identifier">symbolize_hash</span>(<span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;numbers&#39;</span>])
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                        
+
+    
+      <div class="contenttitle" id="Public">
+        Public
+      </div>
+    
+
+    
+
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>available_balance</td>
+            <td class='attr-desc'><p>The Float value of the available balance for the account.</p>
+
+<p>The Available Balance is the Current Balance less any outstanding holds or
+debits that have not yet posted to the account. Note that not all
+institutions calculate the Available Balance. In the case that Available
+Balance is unavailable from the institution, <a
+href="../Plaid.html">Plaid</a> will either return an Available Balance
+value of null or only return a Current Balance.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>current_balance</td>
+            <td class='attr-desc'><p>The Float value of the current balance for the account.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>id</td>
+            <td class='attr-desc'><p>The String unique ID of the account. E.g.
+“QPO8Jo8vdDHMepg41PBwckXm4KdK1yUdmXOwK”.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>institution</td>
+            <td class='attr-desc'><p>The Symbol institution type, e.g. :wells.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>item_id</td>
+            <td class='attr-desc'><p>The String account ID unique to the accounts of a particular access token.
+E.g. “KdDjmojBERUKx3JkDd9RuxA5EvejA4SENO4AA”.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>meta</td>
+            <td class='attr-desc'><p>The Hash with additional information pertaining to the account such as the
+limit, name, or last few digits of the account number. E.g. {“name”: “Plaid
+Savings”, “number”: “9606” }.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>numbers</td>
+            <td class='attr-desc'><p>The Hash with account and routing numbers for the account.</p>
+
+<p>This attribute would be nil unless you used Auth product for the user.</p>
+
+<p>The Hash contains Symbol keys and String values. E.g. {routing:
+“021000021”, account: “9900009606”, wireRouting: “021000021”}.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>risk</td>
+            <td class='attr-desc'><p>The <a href="Risk.html">Risk</a> information associated with the account.</p>
+
+<p>This attribute would be nil unless you used <a href="Risk.html">Risk</a>
+product for the user.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>subtype</td>
+            <td class='attr-desc'><p>The String account subtype. E.g. “savings”.</p>
+
+<p>Read more about subtypes in the <a href="../Plaid.html">Plaid</a> API docs.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>type</td>
+            <td class='attr-desc'><p>The Symbol account type. One of :depository, :credit, :loan, :mortgage,
+:brokerage, and :other.</p></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-inspect">
+            
+              <b>inspect</b>()
+            
+            <a href="../../classes/Plaid/Account.html#method-i-inspect" name="method-i-inspect" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Get a String representation of the account.</p>
+
+<h3 id="method-i-inspect-label-Returns">Returns</h3>
+
+<p>Returns a String.</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Account.html#method-i-to_s">to_s</a>
+            </div>
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-inspect_source')" id="l_method-i-inspect_source">show</a>
+                
+              </p>
+              <div id="method-i-inspect_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/account.rb, line 79</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">inspect</span>
+  <span class="ruby-node">&quot;#&lt;Plaid::Account id=#{id.inspect}, type=#{type.inspect}, &quot;</span>        <span class="ruby-node">&quot;name=#{name.inspect}, institution=#{institution.inspect}&gt;&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-name">
+            
+              <b>name</b>()
+            
+            <a href="../../classes/Plaid/Account.html#method-i-name" name="method-i-name" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Get the account name.</p>
+
+<p>The name is obtained from <a href="Account.html#attribute-i-meta">meta</a>
+Hash.</p>
+
+<h3 id="method-i-name-label-Returns">Returns</h3>
+
+<p>Returns the String name.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-name_source')" id="l_method-i-name_source">show</a>
+                
+              </p>
+              <div id="method-i-name_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/account.rb, line 94</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">name</span>
+  <span class="ruby-identifier">meta</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">meta</span>[<span class="ruby-string">&#39;name&#39;</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_s">
+            
+              <b>to_s</b>()
+            
+            <a href="../../classes/Plaid/Account.html#method-i-to_s" name="method-i-to_s" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Get a String representation of the account.</p>
+
+<h3 id="method-i-to_s-label-Returns">Returns</h3>
+
+<p>Returns a String.</p>
+            </div>
+          
+          
+          
+
+          
+            <div class="aka">
+              Alias for: <a href="Account.html#method-i-inspect">inspect</a>
+            </div>
+          
+          
+          
+          </div>
+                    
+
+    
+      <div class="contenttitle" id="Internal">
+        Internal
+      </div>
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-merge">
+            
+              <b>merge</b>(accounts, new_accounts)
+            
+            <a href="../../classes/Plaid/Account.html#method-c-merge" name="method-c-merge" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Merge account information.</p>
+<dl class="rdoc-list note-list"><dt>accounts
+<dd>
+<p>The Array of <a href="Account.html">Account</a> instances.</p>
+</dd><dt>new_accounts
+<dd>
+<p>The Array of <a href="Account.html">Account</a> instances.</p>
+</dd></dl>
+
+<h3 id="method-c-merge-label-Returns">Returns</h3>
+
+<p>Returns accounts.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-merge_source')" id="l_method-c-merge_source">show</a>
+                
+              </p>
+              <div id="method-c-merge_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/account.rb, line 104</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">accounts</span>, <span class="ruby-identifier">new_accounts</span>)
+  <span class="ruby-comment"># Index accounts by their ID.</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment"># Same as index = accounts.index_by(&amp;:id) in ActiveSupport.</span>
+  <span class="ruby-identifier">index</span> = <span class="ruby-constant">Hash</span>[<span class="ruby-identifier">accounts</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">a</span>.<span class="ruby-identifier">id</span>, <span class="ruby-identifier">a</span>] }]
+
+  <span class="ruby-identifier">new_accounts</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">acc</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">old_acc</span> = <span class="ruby-identifier">index</span>[<span class="ruby-identifier">acc</span>.<span class="ruby-identifier">id</span>])
+      <span class="ruby-identifier">old_acc</span>.<span class="ruby-identifier">update_from</span>(<span class="ruby-identifier">acc</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">accounts</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">acc</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">accounts</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-update_from">
+            
+              <b>update_from</b>(another)
+            
+            <a href="../../classes/Plaid/Account.html#method-i-update_from" name="method-i-update_from" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Update account information.</p>
+
+<p>All fields which are not nil in another are copied to self.</p>
+<dl class="rdoc-list note-list"><dt>another
+<dd>
+<p>The <a href="Account.html">Account</a> instance with new information.</p>
+</dd></dl>
+
+<h3 id="method-i-update_from-label-Returns">Returns</h3>
+
+<p>Returns self.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-update_from_source')" id="l_method-i-update_from_source">show</a>
+                
+              </p>
+              <div id="method-i-update_from_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/account.rb, line 128</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">update_from</span>(<span class="ruby-identifier">another</span>)
+  <span class="ruby-comment"># A sanity check. Nobody would want to update information from totally</span>
+  <span class="ruby-comment"># different account!</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">id</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">another</span>.<span class="ruby-identifier">id</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;Plaid::Account#update_from: id != another.id!&#39;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-operator">%</span>(<span class="ruby-identifier">item_id</span> <span class="ruby-identifier">meta</span> <span class="ruby-identifier">name</span> <span class="ruby-identifier">type</span> <span class="ruby-identifier">subtype</span> <span class="ruby-identifier">institution</span> <span class="ruby-identifier">available_balance</span>
+     <span class="ruby-identifier">current_balance</span> <span class="ruby-identifier">numbers</span> <span class="ruby-identifier">risk</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">field</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">value</span> = <span class="ruby-identifier">another</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">field</span>)
+    <span class="ruby-identifier">instance_variable_set</span>(<span class="ruby-node">&quot;@#{field}&quot;</span>, <span class="ruby-identifier">value</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    
