@@ -231,6 +231,27 @@ module Plaid
       self
     end
 
+    # Public: Create or update the webhook for Connect.
+    #
+    # Does a PATCH /connect request.
+    #
+    # webhook - The String with webhook URL.
+    #
+    # Returns self.
+    def update_webhook(webhook)
+      raise ArgumentError, 'User#update_webhook only supported by Connect!' \
+        unless product == :connect
+
+      payload = {
+        access_token: access_token,
+        options: MultiJson.dump(webhook: webhook)
+      }
+
+      parse_response(Connector.new(:connect, auth: true, client: client)
+                              .patch(payload))
+      self
+    end
+
     # Public: Delete the user.
     #
     # Makes a delete request and freezes self to prevent further modifications
