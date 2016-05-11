@@ -165,11 +165,14 @@ module Plaid
     #               Default is first available email.
     #
     # Returns true if whole MFA process is completed, false otherwise.
-    def mfa_step(info = nil, send_method: nil)
+    def mfa_step(info = nil, send_method: nil, options: nil)
       payload = { access_token: access_token }
       payload[:mfa] = info if info
-      payload[:send_method] = MultiJson.dump(send_method) if send_method
-
+      if options || send_method
+        options = {} unless options
+        options[:send_method] = send_method if send_method
+        payload[:options] = MultiJson.dump(options)
+      end
       conn = Connector.new(product, :step, auth: true)
       response = conn.post(payload)
 

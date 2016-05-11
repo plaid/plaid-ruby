@@ -156,7 +156,7 @@ module ProductTests
                   { mask: 'SafePass Card', type: 'card' }], user.mfa)
 
     # Request to send code
-    body = credentials.merge(send_method: '{"type":"phone"}')
+    body = credentials.merge(options: '{"send_method":{"type":"phone"}}')
     stub_api :post, "#{product}/step", body: body, response: :mfa_code_sent,
                                        status: 201
 
