@@ -163,13 +163,34 @@ module Plaid
     # send_method - The Hash with code send method information.
     #               E.g. { type: 'phone' } or { mask: '123-...-4321' }.
     #               Default is first available email.
+    # options     - the Hash options (default: {}):
+    #               :list       - The Boolean flag which would request the
+    #                             available send methods if the institution
+    #                             requires code-based MFA credential (default:
+    #                             false).
+    #               :webhook    - The String webhook URL. Used with :connect,
+    #                             :income, and :risk products (default: nil).
+    #               :pending    - The Boolean flag requesting to return
+    #                             pending transactions. Used with :connect
+    #                             product (default: false).
+    #               :login_only - The Boolean option valid for initial
+    #                             authentication only. If set to false, the
+    #                             initial request will return transaction data
+    #                             based on the start_date and end_date.
+    #               :start_date - The start Date from which to return
+    #                             transactions (default: 30 days ago).
+    #               :end_date   - The end Date to which transactions
+    #                             will be collected (default: today).
     #
     # Returns true if whole MFA process is completed, false otherwise.
-    def mfa_step(info = nil, send_method: nil)
+    def mfa_step(info = nil, send_method: nil, options: nil)
       payload = { access_token: access_token }
       payload[:mfa] = info if info
-      payload[:send_method] = MultiJson.dump(send_method) if send_method
-
+      if options || send_method
+        options = {} unless options
+        options[:send_method] = send_method if send_method
+        payload[:options] = MultiJson.dump(options)
+      end
       conn = Connector.new(product, :step, auth: true)
       response = conn.post(payload)
 
