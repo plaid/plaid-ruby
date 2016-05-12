@@ -195,6 +195,17 @@ module ProductTests
     assert_same client, user.client
   end
 
+  # update_webhook should raise ArgumentError for every product except Connect.
+  # Here we test for this exception, and this method gets overriden in
+  # PlaidConnectUserTest.
+  def test_update_webhook
+    user = Plaid::User.load(product, 't0k3n')
+
+    assert_raises ArgumentError do
+      user.update_webhook('http://example.org/hook')
+    end
+  end
+
   protected
 
   def credentials(access_token: true)
@@ -341,6 +352,18 @@ class PlaidConnectUserTest < MiniTest::Test
     assert_equal 16, user.initial_transactions.size
     check_accounts 4, user.accounts
   end
+
+  # Overrides the method from ProductTests.
+  def test_update_webhook
+    user = Plaid::User.load(:connect, 't0k3n')
+
+    body = credentials.merge('options' =>
+      '{"webhook":"http://example.org/hook"}')
+
+    stub_api :patch, 'connect', body: body, response: :connect_add
+
+    assert_same user, user.update_webhook('http://example.org/hook')
+  end
 end
 
 ################################################################################
@@ -422,7 +445,7 @@ class PlaidInfoUserTest < MiniTest::Test
   include ProductTests
 
   def product
-    :connect
+    :info
   end
 
   def test_create_user
