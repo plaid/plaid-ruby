@@ -10,7 +10,7 @@ class PlaidConfigTest < MiniTest::Test
     assert_equal 'https://tartan.plaid.com/', Plaid.client.env
 
     Plaid.config do |p|
-      p.env = :api
+      p.env = :production
     end
 
     assert_equal 'https://api.plaid.com/', Plaid.client.env
