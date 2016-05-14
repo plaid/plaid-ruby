@@ -44,19 +44,19 @@ end
 user = Plaid::User.create(:connect, 'wells', 'plaid_test', 'plaid_good')
 ```
 
-This call will do a `POST /connect`. The response will contain account information and transactions 
+This call will do a `POST /connect`. The response will contain account information and transactions
 for last 30 days, which you can find in `user.accounts` and `user.initial_transactions`, accordingly.
 
 If the authentication requires a pin, you can pass it as a named parameter:
 
 ```ruby
-user = Plaid::User.create(:income, 'usaa', 'plaid_test', 'plaid_good', 'wells', pin: '1234')
+user = Plaid::User.create(:income, 'usaa', 'plaid_test', 'plaid_good', pin: '1234')
 ```
 
 To add options such as `login_only` or `webhook`, use `options` argument:
 
 ```ruby
-user = Plaid::User.create(:connect, 'wells', 'plaid_test', 'plaid_good', 
+user = Plaid::User.create(:connect, 'wells', 'plaid_test', 'plaid_good',
                           options: { login_only: true, webhook: 'https://example.org/callbacks/plaid')
 ```
 
@@ -126,7 +126,7 @@ If MFA is requested by the financial institution, the `User.create` call would b
 a bit differently:
 
 ```ruby
-user = Plaid::User.create(:auth, 'wells', 'plaid_test', 'plaid_good') 
+user = Plaid::User.create(:auth, 'wells', 'plaid_test', 'plaid_good')
 
 user.accounts   #=> nil
 user.mfa?       #=> true
@@ -145,16 +145,16 @@ user.mfa        #=> nil
 user.accounts   #=> [<Plaid::Account ...>, ...]
 ```
 
-The code-based MFA workflow is similar. Basically you need to call `user.mfa_step(...)` 
+The code-based MFA workflow is similar. Basically you need to call `user.mfa_step(...)`
 until `user.mfa?` becomes false.
 
 ### Obtaining user-related data
 
-If you have a live `User` instance, you can use following methods 
+If you have a live `User` instance, you can use following methods
 (independent of instance's current product):
 
 * `user.transactions(...)`. Makes a `/connect/get` request.
-* `user.auth(sync: false)`. Makes an `/auth/get` request. 
+* `user.auth(sync: false)`. Makes an `/auth/get` request.
 * `user.info(sync: false)`. Makes an `/info/get` request.
 * `user.income(sync: false)`. Makes an `/income/get` request.
 * `user.risk(sync: false)`. Makes an `/risk/get` request.
@@ -176,7 +176,7 @@ loaded. Otherwise cached information will be returned:
 
 ```ruby
 user = User.load(:auth, 'access_token')   # Just set the token
-user.auth                                 # POST /auth/get 
+user.auth                                 # POST /auth/get
 user.auth                                 # No POST, return cached info
 user.auth(sync: true)                     # POST /auth/get again
 ```
@@ -207,11 +207,11 @@ res  = Plaid::LongTailInstitution.search(query: 'c')         # Lookup by name
 
 ### Custom clients
 
-It's possible to use several Plaid environments and/or credentials in one app by 
+It's possible to use several Plaid environments and/or credentials in one app by
 explicit instantiation of `Plaid::Client`:
 
 ```ruby
-# Configuring the global client (Plaid.client) which is used by default 
+# Configuring the global client (Plaid.client) which is used by default
 Plaid.config do |p|
   p.client_id = 'client_id_1'
   p.secret = 'secret_1'
