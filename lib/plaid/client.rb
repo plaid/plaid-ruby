@@ -14,12 +14,14 @@ module Plaid
 
     # Public: Set Plaid environment to use.
     #
-    # env - The Symbol (:tartan, :api), or a full String URL like
+    # env - The Symbol (:tartan, :production), or a full String URL like
     #       'https://tartan.plaid.com'.
     def env=(env)
       case env
-      when :tartan, :api
-        @env = "https://#{env}.plaid.com/"
+      when :tartan
+        @env = 'https://tartan.plaid.com/'
+      when :production
+        @env = 'https://api.plaid.com/'
       when String
         begin
           URI.parse(env)
@@ -27,20 +29,20 @@ module Plaid
         rescue
           raise ArgumentError, 'Invalid URL in Plaid::Client.env' \
                                " (#{env.inspect}). " \
-                               'Specify either Symbol (:tartan, :api), or a ' \
-                               "full URL, like 'https://tartan.plaid.com'"
+                               'Specify either Symbol (:tartan, :production),' \
+                               " or a full URL, like 'https://tartan.plaid.com'"
         end
       else
         raise ArgumentError, 'Invalid value for Plaid::Client.env' \
                              " (#{env.inspect}): " \
-                             'must be :tartan, :api, or a full URL, ' \
+                             'must be :tartan, :production, or a full URL, ' \
                              "e.g. 'https://tartan.plaid.com'"
       end
     end
 
     # Public: Construct a Client instance.
     #
-    # env       - The Symbol (:tartan, :api), or a full String URL like
+    # env       - The Symbol (:tartan, :production), or a full String URL like
     #             'https://tartan.plaid.com'.
     # client_id - The String Plaid account client ID to authenticate requests.
     # secret    - The String Plaid account secret to authenticate requests.

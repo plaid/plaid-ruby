@@ -9,7 +9,7 @@ class PlaidClientTest < MiniTest::Test
     assert_equal 'https://tartan.plaid.com/', client.env
 
     client2 = Plaid::Client.new
-    client2.env = :api
+    client2.env = :production
 
     assert_equal 'https://api.plaid.com/', client2.env
   end
