@@ -89,11 +89,27 @@ module ProductTests
 
   def test_exchange_token
     body = credentials(access_token: false)
+           .merge('public_token' => 'pu61i< T<>k3N')
+
+    stub_api :post, 'exchange_token',
+             body: body, response: '{"access_token": "3x<hang3d"}'
+
+    user = Plaid::User.exchange_token('pu61i< T<>k3N',
+                                      product: product)
+
+    assert_kind_of Plaid::User, user
+    assert_equal '3x<hang3d', user.access_token
+    assert_equal product, user.product
+    assert_nil user.stripe_bank_account_token
+  end
+
+  def test_exchange_token_with_account_id
+    body = credentials(access_token: false)
            .merge('public_token' => 'pu61i< T<>k3N',
                   'account_id' => 'abcdef')
 
     stub_api :post, 'exchange_token',
-             body: body, response: '{"access_token": "3x<hang3d"}'
+             body: body, response: :exchange_token
 
     user = Plaid::User.exchange_token('pu61i< T<>k3N', 'abcdef',
                                       product: product)
@@ -101,6 +117,7 @@ module ProductTests
     assert_kind_of Plaid::User, user
     assert_equal '3x<hang3d', user.access_token
     assert_equal product, user.product
+    assert_equal user.stripe_bank_account_token, 'SBAT'
   end
 
   def test_question_mfa

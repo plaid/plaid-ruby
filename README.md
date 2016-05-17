@@ -89,6 +89,11 @@ With more options:
 user2 = Plaid::User.exchange_token('public_token', account_id: '...', product: :auth)
 ```
 
+If you want to [move money via Stripe's ACH
+API](https://plaid.com/docs/link/stripe/#step-4-write-server-side-handler), you
+ought to specify the `account_id` param. In this case the returned user
+instance will have the `stripe_bank_account_token` attribute set.
+
 ### Upgrading and changing the current product
 
 Plaid supports upgrading a user, i.e. adding it to another product:

@@ -37,6 +37,12 @@ module Plaid
     # { message: 'Code sent to xxx-xxx-5309' }
     attr_reader :mfa
 
+    # Public: The String stripe bank account token.
+    #
+    # This field is set when you use User.exchange_token to convert Link
+    # public_token into an access token suitable for Plaid API.
+    attr_reader :stripe_bank_account_token
+
     # Internal: The Plaid::Client instance used to make queries.
     attr_reader :client
 
@@ -107,6 +113,9 @@ module Plaid
 
     # Public: Exchange a Link public_token for an API access_token.
     #
+    # The account_id parameter is required if you wish to receive a Stripe bank
+    # account token.
+    #
     # public_token - The String Link public_token.
     # account_id   - The String account ID.
     # product      - The Symbol product name (default: :connect).
@@ -114,7 +123,8 @@ module Plaid
     #                (default is to use global Plaid client - Plaid.client).
     #
     # Returns a new User with access token obtained from Plaid and default
-    # product set to product.
+    # product set to product. User#stripe_bank_account_token for this user
+    # instance will contain the Stripe token.
     def self.exchange_token(public_token, account_id = nil,
                             product: :connect, client: nil)
       check_product product
@@ -124,7 +134,10 @@ module Plaid
 
       response = Connector.new(:exchange_token, auth: true, client: client)
                           .post(payload)
-      new product, response: response, client: client
+
+      stripe_token = account_id && response['stripe_bank_account_token']
+      new product, response: response, client: client,
+                   stripe_token: stripe_token
     end
 
     # Internal: Initialize a User instance.
@@ -134,14 +147,16 @@ module Plaid
     # response     - The Hash response body to parse.
     # mfa          - The Boolean flag indicating that response body
     #              - contains an MFA response.
+    # stripe_token - The String stripe bank account token.
     # client       - The Plaid::Client instance used to connect to the API
     #                (default is to use global Plaid client - Plaid.client).
     def initialize(product, access_token: nil, response: nil, mfa: nil,
-                   client: nil)
+                   stripe_token: nil, client: nil)
       @product = product
       @client = client
       @access_token = access_token if access_token
       @mfa_required = mfa
+      @stripe_bank_account_token = stripe_token
       @accounts = @initial_transactions = @info = @risk = @income = nil
 
       parse_response(response) if response
