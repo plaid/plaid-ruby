@@ -34,7 +34,7 @@ Configure the gem with your client id, secret, and the environment you would lik
 Plaid.config do |p|
   p.client_id = '<<< Plaid provided client ID >>>'
   p.secret = '<<< Plaid provided secret key >>>'
-  p.env = :tartan  # or :api for production
+  p.env = :tartan  # or :production
 end
 ```
 
@@ -224,7 +224,7 @@ Plaid.config do |p|
 end
 
 # Creating a custom client
-api = Plaid::Client.new(client_id: 'client_id_2', 'secret_2', env: :api)
+api = Plaid::Client.new(client_id: 'client_id_2', 'secret_2', env: :production)
 
 # Tartan user (using default client)
 user1 = Plaid::User.create(:connect, 'wells', 'plaid_test', 'plaid_good')
