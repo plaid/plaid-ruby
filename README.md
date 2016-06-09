@@ -224,7 +224,7 @@ Plaid.config do |p|
 end
 
 # Creating a custom client
-api = Plaid::Client.new(client_id: 'client_id_2', 'secret_2', env: :production)
+api = Plaid::Client.new(client_id: 'client_id_2', secret: 'secret_2', env: :production)
 
 # Tartan user (using default client)
 user1 = Plaid::User.create(:connect, 'wells', 'plaid_test', 'plaid_good')
