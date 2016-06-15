@@ -86,7 +86,7 @@ user = Plaid::User.exchange_token('public_token')   # bound to :connect product
 With more options:
 
 ```ruby
-user2 = Plaid::User.exchange_token('public_token', account_id: '...', product: :auth)
+user2 = Plaid::User.exchange_token('public_token', 'account_id', product: :auth)
 ```
 
 If you want to [move money via Stripe's ACH
