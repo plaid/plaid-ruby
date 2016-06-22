@@ -38,7 +38,7 @@ class PlaidTransactionTest < MiniTest::Test
     trans = Plaid::Transaction.new(parsed_transaction_data)
 
     s = '#<Plaid::Transaction id="0AZ0De04KqsreDgVwM1RSRYjyd8yXxSDQ8Zxn", '\
-        'account_id="0AZ0De04KqsreDgVwM1RSRYjyd8yXxSDQ8Zxn", date=2014-07-21, '\
+        'account_id="XARE85EJqKsjxLp6XR8ocg8VakrkXpTXmRdOo", date=2014-07-21, '\
         'amount=200, name="ATM Withdrawal", pending=false>'
 
     assert_equal s, trans.to_s
