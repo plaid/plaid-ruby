@@ -110,7 +110,7 @@ module Plaid
     #
     # Returns a String.
     def inspect
-      "#<Plaid::Transaction id=#{id.inspect}, account_id=#{id.inspect}, " \
+      "#<Plaid::Transaction id=#{id.inspect}, account_id=#{account_id.inspect}, " \
       "date=#{date}, amount=#{amount.inspect}, name=#{name.inspect}, " \
       "pending=#{pending.inspect}>"
     end
