@@ -146,7 +146,7 @@ module Plaid
     # access_token - The String access token obtained from Plaid.
     # response     - The Hash response body to parse.
     # mfa          - The Boolean flag indicating that response body
-    #              - contains an MFA response.
+    #                contains an MFA response.
     # stripe_token - The String stripe bank account token.
     # client       - The Plaid::Client instance used to connect to the API
     #                (default is to use global Plaid client - Plaid.client).
@@ -207,7 +207,13 @@ module Plaid
         payload[:options] = MultiJson.dump(options)
       end
       conn = Connector.new(product, :step, auth: true)
-      response = conn.post(payload)
+
+      # Use PATCH if we are in context of User#update.
+      response = if @mfa_patch
+                   conn.patch(payload)
+                 else
+                   conn.post(payload)
+                 end
 
       @mfa_required = conn.mfa?
       parse_response(response)
@@ -261,8 +267,17 @@ module Plaid
 
       payload[:pin] = pin if pin
 
-      parse_response(Connector.new(product, auth: true, client: client)
-                              .patch(payload))
+      conn = Connector.new(product, auth: true, client: client)
+      resp = conn.patch(payload)
+
+      if conn.mfa?
+        @mfa_required = true
+      end
+
+      parse_response(resp)
+
+      # A note for User#mfa_step to send PATCH request too
+      @mfa_patch = true
 
       self
     end

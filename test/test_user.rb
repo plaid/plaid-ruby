@@ -194,6 +194,33 @@ module ProductTests
     refute_nil user.accounts
   end
 
+  def test_patch_mfa
+    user = Plaid::User.load(product, 't0k3n')
+
+    stub_api :patch, product, response: :mfa_list, status: 201
+    user.update('new_user', 'new_password')
+
+    assert_predicate user, :mfa?
+    assert_equal :list, user.mfa_type
+
+    # Request to send code
+    stub_api :patch, "#{product}/step", response: :mfa_code_sent, status: 201
+    user.mfa_step send_method: { type: 'phone' }
+
+    assert_predicate user, :mfa?
+    assert_equal :device, user.mfa_type
+    assert_equal({ message: 'Code sent to xxx-xxx-5309' }, user.mfa)
+
+    # Send right code
+    stub_api :patch, "#{product}/step", response: "#{product}_add".to_sym
+    user.mfa_step '777'
+
+    refute_predicate user, :mfa?
+    assert_nil user.mfa_type
+    assert_nil user.mfa
+    refute_nil user.accounts
+  end
+
   def exchange_token_with_custom_client
     client = custom_client
     body = {
