@@ -336,7 +336,7 @@ module Plaid
       response = Connector.new(:upgrade, auth: true, client: client)
                           .post(payload)
 
-      User.new product, response: response
+      User.new product, response: response, client: client
     end
 
     # Public: Get the current user tied to another product.
