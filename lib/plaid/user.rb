@@ -90,9 +90,9 @@ module Plaid
       payload[:options] = MultiJson.dump(options) if options
 
       conn = Connector.new(product, auth: true, client: client)
-      resp = conn.post(payload)
+      response = conn.post(payload)
 
-      new product, response: resp, mfa: conn.mfa?, client: client
+      new product, response: response, mfa: conn.mfa?, client: client
     end
 
     # Public: Get User instance in case user access token is known.
@@ -107,8 +107,8 @@ module Plaid
     #           (default is to use global Plaid client - Plaid.client).
     #
     # Returns a Plaid::User instance.
-    def self.load(product, token, client: nil)
-      new check_product(product), access_token: token, client: client
+    def self.load(product, access_token, client: nil)
+      new check_product(product), access_token: access_token, client: client
     end
 
     # Public: Exchange a Link public_token for an API access_token.
