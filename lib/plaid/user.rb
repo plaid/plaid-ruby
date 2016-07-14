@@ -162,6 +162,8 @@ module Plaid
       parse_response(response) if response
     end
 
+    private_class_method :new
+
     # Public: Find out if MFA is required based on last request.
     #
     # After calling e.g. User.create you might need to make an additional
@@ -332,11 +334,17 @@ module Plaid
     # Returns another User record with the same access token, but tied to the
     # new product.
     def upgrade(product)
+      User.upgrade product, access_token, client: client
+    end
+
+    # Internal: Upgrade a User instance.
+    def self.upgrade(product, access_token, client: nil)
+      check_product(product)
       payload = { access_token: access_token, upgrade_to: product.to_s }
       response = Connector.new(:upgrade, auth: true, client: client)
                           .post(payload)
 
-      User.new product, response: response, client: client
+      new product, response: response, client: client
     end
 
     # Public: Get the current user tied to another product.
