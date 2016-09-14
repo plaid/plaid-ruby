@@ -8,6 +8,7 @@ require 'plaid/transaction'
 require 'plaid/info'
 require 'plaid/income'
 require 'plaid/client'
+require 'plaid/webhook'
 
 require 'uri'
 
