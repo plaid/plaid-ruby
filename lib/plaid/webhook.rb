@@ -23,7 +23,10 @@ module Plaid
       @access_token = fields['access_token']
       @total_transactions = fields['total_transactions']
       @code = fields['code']
-      @resolve = fields['resolve'] # present only for Error Response Webhook
+      # present only for Removed Transaction Webhook
+      @removed_transactions = fields['removed_transactions']
+      # present only for Error Response Webhook
+      @resolve = fields['resolve']
     end
 
     # Public: Share the type of Webhook this is from its code
@@ -82,6 +85,13 @@ module Plaid
     # Returns true if it is.
     def error_response?
       Webhook::CODEX[code].nil?
+    end
+
+    # Public: Get transaction IDs that were removed.
+    #
+    # Returns Array[String] or nil
+    def removed_transactions_ids
+      @removed_transactions
     end
 
     # Public: Get a Plaid::Error instance if this is an Error Response Webhook
