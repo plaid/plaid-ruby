@@ -5,7 +5,7 @@ module Plaid
     # E.g. "Initial transaction pull finished".
     attr_reader :message
 
-    # Public: The access token for authenticated user.
+    # Public: The String access token for authenticated user.
     attr_reader :access_token
 
     # Public: The Integer number of transactions available in Plaid.
@@ -33,7 +33,7 @@ module Plaid
     #
     # Returns String webhook type
     def type
-      Webhook::CODEX[@code] || 'ErrorResponse'
+      Webhook::CODEX[code] || 'ErrorResponse'
     end
 
     # Public: Detect if the webhook is Initial Transaction Webhook. Occurs
@@ -41,7 +41,7 @@ module Plaid
     #
     # Returns true if it is.
     def initial_transaction?
-      code == Webhook::InitialTransaction
+      code == Webhook::INITIAL_TRANSACTION
     end
 
     # Public: Detect if the webhook is Historical Transaction Webhook. Occurs
@@ -50,7 +50,7 @@ module Plaid
     #
     # Returns true if it is.
     def historical_transaction?
-      code == Webhook::HistoricalTransaction
+      code == Webhook::HISTORICAL_TRANSACTION
     end
 
     # Public: Detect if the webhook is Normal Transaction Webhook. Occurs at
@@ -59,7 +59,7 @@ module Plaid
     #
     # Returns true if it is.
     def normal_transaction?
-      code == Webhook::NormalTransaction
+      code == Webhook::NORMAL_TRANSACTION
     end
 
     # Public: Detect if the webhook is Removed Transaction Webhook. Occurs when
@@ -67,7 +67,7 @@ module Plaid
     #
     # Returns true if it is.
     def removed_transaction?
-      code == Webhook::RemovedTransaction
+      code == Webhook::REMOVED_TRANSACTION
     end
 
     # Public: Detect if the webhook is User's Webhook Updated. Occurs when an
@@ -75,7 +75,7 @@ module Plaid
     #
     # Returns true if it is.
     def user_webhook_updated?
-      code == Webhook::UserWebhookUpdated
+      code == Webhook::USER_WEBHOOK_UPDATED
     end
 
     # Public: Detect if the webhook is Error Response Webhook. Triggered when
@@ -118,19 +118,12 @@ module Plaid
 
     private
 
-    Webhook::InitialTransaction    = 0
-    Webhook::HistoricalTransaction = 1
-    Webhook::NormalTransaction     = 2
-    Webhook::RemovedTransaction    = 3
-    Webhook::UserWebhookUpdated    = 4
-    Webhook::ErrorResponse         = -1
-
-    Webhook::CODEX = {
-      0 => 'InitialTransaction',
-      1 => 'HistoricalTransaction',
-      2 => 'NormalTransaction',
-      3 => 'RemovedTransaction',
-      4 => 'UserWebhookUpdated'
-    }
+    codex = {}
+    ['initial transaction', 'historical transaction', 'normal transaction', 'removed transaction', 'user webhook updated'].each_with_index do |event, idx|
+      name = event.split.map(&:upcase).join('_')
+      codex[idx + 1] = name
+      const_set name, idx + 1
+    end
+    CODEX = codex.freeze
   end
 end
