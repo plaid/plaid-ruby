@@ -33,7 +33,7 @@ module Plaid
     #
     # Returns String webhook type
     def type
-      Webhook::CODEX[code] || 'ErrorResponse'
+      Webhook::CODEX[code] || 'ERROR_RESPONSE'
     end
 
     # Public: Detect if the webhook is Initial Transaction Webhook. Occurs
@@ -118,6 +118,7 @@ module Plaid
 
     private
 
+    Webhook::ERROR_RESPONSE = -1
     codex = {}
     ['initial transaction', 'historical transaction', 'normal transaction', 'removed transaction', 'user webhook updated'].each_with_index do |event, idx|
       name = event.split.map(&:upcase).join('_')
