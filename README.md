@@ -210,6 +210,55 @@ ltis = Plaid::LongTailInstitution.all(count: 20, offset: 20) # A page
 res  = Plaid::LongTailInstitution.search(query: 'c')         # Lookup by name
 ```
 
+### Webhooks
+
+You can register to receive [Webhooks](https://plaid.com/docs/api/#webhook) from Plaid when your users have new events. If you do, you'll receive `POST` requests with JSON.
+
+E.g. Initial Transaction Webhook:
+```json
+{
+ "message": "Initial transaction pull finished",
+ "access_token": "xxxxx",
+ "total_transactions": 123,
+ "code": 0
+}
+```
+
+You should parse that JSON into a Ruby Hash with String keys (eg. `webhook_hash = JSON.parse(json_string)`). Then, you can convert that Hash into a Ruby object using `Plaid::Webhook`:
+
+```ruby
+webhook = Plaid::Webhook.new(webhook_hash)
+
+# Was that the Initial Transaction Webhook?
+webhook.initial_transaction?
+access_token = webhook.access_token
+total_transactions = webhook.total_transactions
+
+# Or did Historical Transactions become available?
+webhook.historical_transaction?
+access_token = webhook.access_token
+total_transactions = webhook.total_transactions
+
+# Or did Normal Transactions become available?
+webhook.normal_transaction?
+access_token = webhook.access_token
+total_transactions = webhook.total_transactions
+
+# Or maybe a transaction was removed?
+webhook.removed_transaction?
+access_token = webhook.access_token
+removed_transactions_ids = webhook.removed_transactions_ids
+
+# Or was the User's Webhook Updated?
+webhook.user_webhook_updated?
+access_token = webhook.access_token
+
+# Otherwise, was it an error?
+webhook.error_response?
+# Which error?
+error = webhook.error
+```
+
 ### Custom clients
 
 It's possible to use several Plaid environments and/or credentials in one app by
