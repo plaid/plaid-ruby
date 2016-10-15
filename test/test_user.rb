@@ -118,6 +118,7 @@ module ProductTests
     assert_equal '3x<hang3d', user.access_token
     assert_equal product, user.product
     assert_equal user.stripe_bank_account_token, 'SBAT'
+    assert_equal user.processor_token, 'some-processor-token'
   end
 
   def test_question_mfa
