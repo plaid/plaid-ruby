@@ -7,6 +7,9 @@ module Plaid
     # Public: The access token for authenticated user.
     attr_reader :access_token
 
+    # Public: The processor token for a given account and authenticated user.
+    attr_reader :processor_token
+
     # Public: The current product. Provides a context for #update and #delete
     # calls. See Plaid::PRODUCTS.
     attr_reader :product
@@ -458,6 +461,8 @@ module Plaid
     # Internal: Set up attributes from Add User response.
     def parse_response(response)
       @access_token = response['access_token']
+      @processor_token = response['processor_token']
+
       return parse_mfa_response(response) if mfa?
 
       @mfa_type = @mfa = nil
