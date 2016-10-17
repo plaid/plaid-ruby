@@ -95,6 +95,10 @@ module Plaid
       @request = request
       @response = http.request(@request)
 
+      if @response.body.nil? || @response.body.empty?
+        raise Plaid::ServerError.new(0, 'Server error', 'Try to connect later')
+      end
+
       # All responses are expected to have a JSON body, so we always parse,
       # not looking at the status code.
       @body = MultiJson.load(@response.body)

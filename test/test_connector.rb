@@ -90,6 +90,15 @@ class PlaidConnectorTest < MiniTest::Test
     check_exception e
   end
 
+  def test_500_without_body
+    stub_test 500, body: ''
+    e = assert_raises(Plaid::ServerError) { make_request }
+
+    assert_equal 0, e.code
+    assert_equal 'Try to connect later', e.resolve
+    assert_equal 'Code 0: Server error. Try to connect later', e.message
+  end
+
   private
 
   def make_request
