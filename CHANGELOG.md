@@ -1,3 +1,13 @@
+# 2.1.0. 19-Oct-2016
+
+* Documentation fixes (@ishmael).
+* Fix `Transaction#to_s` behavior (@michel-tricot).
+* PATCH `/:product/step` flow.
+* Use the same client in `User#upgrade` (@betesh).
+* Webhook object (@zshannon).
+* `processor_token` access in `User.exchange_token` (@gylaz).
+* Raise `ServerError` in case server returned an empty response body.
+
 # 2.0.0. 24-May-2016
 
 * Use `~> 1.0` spec for multi_json dependency.
