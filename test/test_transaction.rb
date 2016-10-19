@@ -25,6 +25,7 @@ class PlaidTransactionTest < MiniTest::Test
     assert_equal '21012002', trans.category_id
     assert_equal 'Nw83eMkqVXSaZvM17aVqtoOwLo1nOAipXeZ74',
                  trans.pending_transaction_id
+    assert_equal '1000001', trans.reference_number
   end
 
   def test_pending
@@ -58,6 +59,7 @@ class PlaidTransactionTest < MiniTest::Test
           'city' => 'San Francisco',
           'state' => 'CA' } },
       'pending' => pending,
+      '_reference_number' => '1000001',
       '_pendingTransaction' => 'Nw83eMkqVXSaZvM17aVqtoOwLo1nOAipXeZ74',
       'type' => { 'primary' => 'special' },
       'category' => %w(Transfer Withdrawal ATM),
