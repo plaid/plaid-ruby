@@ -74,6 +74,10 @@ module Plaid
     # E.g. "13005000".
     attr_reader :category_id
 
+    # Public: A String attribute that is used by the bank/payment
+    # processor to identify transactions — where applicable.
+    attr_reader :reference_number
+
     # Public: The String ID of a posted transaction's associated
     # pending transaction - where applicable.
     attr_reader :pending_transaction_id
@@ -91,6 +95,7 @@ module Plaid
       @meta = Plaid.symbolize_hash(fields['meta'])
       @location = (@meta && @meta[:location]) || {}
       @pending = fields['pending']
+      @reference_number = fields['_reference_number']
       @pending_transaction_id = fields['_pendingTransaction']
       @score = Plaid.symbolize_hash(fields['score'])
 
