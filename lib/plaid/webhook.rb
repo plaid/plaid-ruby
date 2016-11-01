@@ -122,8 +122,8 @@ module Plaid
     codex = {}
     ['initial transaction', 'historical transaction', 'normal transaction', 'removed transaction', 'user webhook updated'].each_with_index do |event, idx|
       name = event.split.map(&:upcase).join('_')
-      codex[idx + 1] = name
-      const_set name, idx + 1
+      codex[idx] = name
+      const_set name, idx
     end
     CODEX = codex.freeze
   end
