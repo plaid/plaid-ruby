@@ -207,7 +207,7 @@ requests.</p></td>
               <p>Construct a <a href="Client.html">Client</a> instance.</p>
 <dl class="rdoc-list note-list"><dt>env
 <dd>
-<p>The Symbol (:tartan, :api), or a full String URL like &#39;<a
+<p>The Symbol (:tartan, :production), or a full String URL like &#39;<a
 href="https://tartan.plaid.com">tartan.plaid.com</a>&#39;.</p>
 </dd><dt><a href="Client.html#attribute-i-client_id">#client_id</a>
 <dd>
@@ -235,7 +235,7 @@ requests.</p>
                 
               </p>
               <div id="method-c-new_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 47</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">env</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">client_id</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">secret</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">env</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">env</span> = <span class="ruby-identifier">env</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">client_id</span> = <span class="ruby-identifier">client_id</span>
@@ -281,7 +281,7 @@ configured.</p>
                 
               </p>
               <div id="method-i-client_id_configured-3F_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 56</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">client_id_configured?</span>
   <span class="ruby-ivar">@client_id</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@client_id</span>.<span class="ruby-identifier">empty?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -303,7 +303,7 @@ configured.</p>
               <p>Set <a href="../Plaid.html">Plaid</a> environment to use.</p>
 <dl class="rdoc-list note-list"><dt>env
 <dd>
-<p>The Symbol (:tartan, :api), or a full String URL like &#39;<a
+<p>The Symbol (:tartan, :production), or a full String URL like &#39;<a
 href="https://tartan.plaid.com">tartan.plaid.com</a>&#39;.</p>
 </dd></dl>
             </div>
@@ -326,17 +326,19 @@ href="https://tartan.plaid.com">tartan.plaid.com</a>&#39;.</p>
                 <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 19</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">env=</span>(<span class="ruby-identifier">env</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">env</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-value">:tartan</span>, <span class="ruby-value">:api</span>
-    <span class="ruby-ivar">@env</span> = <span class="ruby-node">&quot;https://#{env}.plaid.com/&quot;</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:tartan</span>
+    <span class="ruby-ivar">@env</span> = <span class="ruby-string">&#39;https://tartan.plaid.com/&#39;</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:production</span>
+    <span class="ruby-ivar">@env</span> = <span class="ruby-string">&#39;https://api.plaid.com/&#39;</span>
   <span class="ruby-keyword">when</span> <span class="ruby-constant">String</span>
     <span class="ruby-keyword">begin</span>
       <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">env</span>)
       <span class="ruby-ivar">@env</span> = <span class="ruby-identifier">env</span>
     <span class="ruby-keyword">rescue</span>
-      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;Invalid URL in Plaid::Client.env&#39;</span>                                 <span class="ruby-node">&quot; (#{env.inspect}). &quot;</span>                                 <span class="ruby-string">&#39;Specify either Symbol (:tartan, :api), or a &#39;</span>                                 <span class="ruby-string">&quot;full URL, like &#39;https://tartan.plaid.com&#39;&quot;</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;Invalid URL in Plaid::Client.env&#39;</span>                                 <span class="ruby-node">&quot; (#{env.inspect}). &quot;</span>                                 <span class="ruby-string">&#39;Specify either Symbol (:tartan, :production),&#39;</span>                                 <span class="ruby-string">&quot; or a full URL, like &#39;https://tartan.plaid.com&#39;&quot;</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;Invalid value for Plaid::Client.env&#39;</span>                               <span class="ruby-node">&quot; (#{env.inspect}): &quot;</span>                               <span class="ruby-string">&#39;must be :tartan, :api, or a full URL, &#39;</span>                               <span class="ruby-string">&quot;e.g. &#39;https://tartan.plaid.com&#39;&quot;</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;Invalid value for Plaid::Client.env&#39;</span>                               <span class="ruby-node">&quot; (#{env.inspect}): &quot;</span>                               <span class="ruby-string">&#39;must be :tartan, :production, or a full URL, &#39;</span>                               <span class="ruby-string">&quot;e.g. &#39;https://tartan.plaid.com&#39;&quot;</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
@@ -377,7 +379,7 @@ configured.</p>
                 
               </p>
               <div id="method-i-secret_configured-3F_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 63</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">secret_configured?</span>
   <span class="ruby-ivar">@secret</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@secret</span>.<span class="ruby-identifier">empty?</span>
 <span class="ruby-keyword">end</span></pre>

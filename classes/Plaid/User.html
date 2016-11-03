@@ -237,6 +237,11 @@ href="../Plaid.html">Plaid</a> products.</p>
             
               
               <li>
+                <a href="#method-i-update_webhook">update_webhook</a>,
+              </li>
+            
+              
+              <li>
                 <a href="#method-i-upgrade">upgrade</a>
               </li>
             
@@ -339,10 +344,31 @@ sent to xxx-xxx-5309&#39; }</p></td>
             <td class='attr-rw'>
               [R]
             </td>
+            <td class='attr-name'>processor_token</td>
+            <td class='attr-desc'><p>The processor token for a given account and authenticated user.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
             <td class='attr-name'>product</td>
             <td class='attr-desc'><p>The current product. Provides a context for <a
 href="User.html#method-i-update">update</a> and <a
 href="User.html#method-i-delete">delete</a> calls. See Plaid::PRODUCTS.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>stripe_bank_account_token</td>
+            <td class='attr-desc'><p>The String stripe bank account token.</p>
+
+<p>This field is set when you use <a
+href="User.html#method-c-exchange_token">::exchange_token</a> to convert
+Link public_token into an access token suitable for <a
+href="../Plaid.html">Plaid</a> API.</p></td>
           </tr>
         
       </table>
@@ -436,7 +462,7 @@ href="../Plaid.html#attribute-c-client">Plaid.client</a>).</p>
                 
               </p>
               <div id="method-c-create_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 77</span>
+                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 86</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">product</span>, <span class="ruby-identifier">institution</span>, <span class="ruby-identifier">username</span>, <span class="ruby-identifier">password</span>,
                 <span class="ruby-identifier">pin</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">check_product</span> <span class="ruby-identifier">product</span>
@@ -467,6 +493,9 @@ href="../Plaid.html#attribute-c-client">Plaid.client</a>).</p>
           
             <div class="description">
               <p>Exchange a Link public_token for an API access_token.</p>
+
+<p>The account_id parameter is required if you wish to receive a Stripe bank
+account token.</p>
 <dl class="rdoc-list note-list"><dt>public_token
 <dd>
 <p>The String Link public_token.</p>
@@ -486,7 +515,9 @@ href="../Plaid.html#attribute-c-client">Plaid.client</a>).</p>
 <h3 id="method-c-exchange_token-label-Returns">Returns</h3>
 
 <p>Returns a new <a href="User.html">User</a> with access token obtained from
-<a href="../Plaid.html">Plaid</a> and default product set to product.</p>
+<a href="../Plaid.html">Plaid</a> and default product set to product. <a
+href="User.html#attribute-i-stripe_bank_account_token">#stripe_bank_account_token</a>
+for this user instance will contain the Stripe token.</p>
             </div>
           
           
@@ -504,7 +535,7 @@ href="../Plaid.html#attribute-c-client">Plaid.client</a>).</p>
                 
               </p>
               <div id="method-c-exchange_token_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 118</span>
+                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 131</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">exchange_token</span>(<span class="ruby-identifier">public_token</span>, <span class="ruby-identifier">account_id</span> = <span class="ruby-keyword">nil</span>,
                         <span class="ruby-identifier">product</span><span class="ruby-operator">:</span> <span class="ruby-value">:connect</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">check_product</span> <span class="ruby-identifier">product</span>
@@ -514,7 +545,10 @@ href="../Plaid.html#attribute-c-client">Plaid.client</a>).</p>
 
   <span class="ruby-identifier">response</span> = <span class="ruby-constant">Connector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:exchange_token</span>, <span class="ruby-identifier">auth</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-identifier">client</span>)
                       .<span class="ruby-identifier">post</span>(<span class="ruby-identifier">payload</span>)
-  <span class="ruby-identifier">new</span> <span class="ruby-identifier">product</span>, <span class="ruby-identifier">response</span><span class="ruby-operator">:</span> <span class="ruby-identifier">response</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-identifier">client</span>
+
+  <span class="ruby-identifier">stripe_token</span> = <span class="ruby-identifier">account_id</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">response</span>[<span class="ruby-string">&#39;stripe_bank_account_token&#39;</span>]
+  <span class="ruby-identifier">new</span> <span class="ruby-identifier">product</span>, <span class="ruby-identifier">response</span><span class="ruby-operator">:</span> <span class="ruby-identifier">response</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-identifier">client</span>,
+               <span class="ruby-identifier">stripe_token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">stripe_token</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -570,7 +604,7 @@ href="../Plaid.html#attribute-c-client">Plaid.client</a>).</p>
                 
               </p>
               <div id="method-c-load_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 104</span>
+                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 113</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">product</span>, <span class="ruby-identifier">token</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">new</span> <span class="ruby-identifier">check_product</span>(<span class="ruby-identifier">product</span>), <span class="ruby-identifier">access_token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">token</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-identifier">client</span>
 <span class="ruby-keyword">end</span></pre>
@@ -624,7 +658,7 @@ in.</p>
                 
               </p>
               <div id="method-i-auth_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 295</span>
+                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 370</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">auth</span>(<span class="ruby-identifier">sync</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">sync</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@accounts</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@accounts</span>[<span class="ruby-number">0</span>] <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@accounts</span>[<span class="ruby-number">0</span>].<span class="ruby-identifier">numbers</span>
     <span class="ruby-identifier">response</span> = <span class="ruby-constant">Connector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:auth</span>, <span class="ruby-value">:get</span>, <span class="ruby-identifier">auth</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-identifier">client</span>)
@@ -674,7 +708,7 @@ in.</p>
                 
               </p>
               <div id="method-i-balance_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 365</span>
+                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 440</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">balance</span>
   <span class="ruby-identifier">response</span> = <span class="ruby-constant">Connector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:balance</span>, <span class="ruby-identifier">auth</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-identifier">client</span>)
                       .<span class="ruby-identifier">post</span>(<span class="ruby-identifier">access_token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">access_token</span>)
@@ -721,7 +755,7 @@ the object.</p>
                 
               </p>
               <div id="method-i-delete_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 240</span>
+                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 315</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">delete</span>
   <span class="ruby-constant">Connector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">product</span>, <span class="ruby-identifier">auth</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-identifier">client</span>)
            .<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">access_token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">access_token</span>)
@@ -773,7 +807,7 @@ the object.</p>
                 
               </p>
               <div id="method-i-for_product_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 279</span>
+                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 354</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">for_product</span>(<span class="ruby-identifier">product</span>)
   <span class="ruby-constant">User</span>.<span class="ruby-identifier">load</span> <span class="ruby-identifier">product</span>, <span class="ruby-identifier">access_token</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-identifier">client</span>
 <span class="ruby-keyword">end</span></pre>
@@ -822,7 +856,7 @@ exists.</p>
                 
               </p>
               <div id="method-i-income_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 333</span>
+                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 408</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">income</span>(<span class="ruby-identifier">sync</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">sync</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@income</span>
     <span class="ruby-identifier">parse_response</span>(<span class="ruby-constant">Connector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:income</span>, <span class="ruby-value">:get</span>, <span class="ruby-identifier">auth</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-identifier">client</span>)
@@ -875,7 +909,7 @@ the server. Otherwise cached version is returned, if it exists.</p>
                 
               </p>
               <div id="method-i-info_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 315</span>
+                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 390</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">info</span>(<span class="ruby-identifier">sync</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">sync</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@info</span>
     <span class="ruby-identifier">parse_response</span>(<span class="ruby-constant">Connector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:info</span>, <span class="ruby-value">:get</span>, <span class="ruby-identifier">auth</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-identifier">client</span>)
@@ -925,7 +959,7 @@ the financial institution.</p>
                 
               </p>
               <div id="method-i-mfa-3F_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 156</span>
+                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 174</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">mfa?</span>
   <span class="ruby-ivar">@mfa_required</span>
 <span class="ruby-keyword">end</span></pre>
@@ -937,7 +971,7 @@ the financial institution.</p>
         <div class="method">
           <div class="title method-title" id="method-i-mfa_step">
             
-              <b>mfa_step</b>(info = nil, send_method: nil)
+              <b>mfa_step</b>(info = nil, send_method: nil, options: nil)
             
             <a href="../../classes/Plaid/User.html#method-i-mfa_step" name="method-i-mfa_step" class="permalink">Link</a>
           </div>
@@ -952,6 +986,33 @@ the financial institution.</p>
 <dd>
 <p>The Hash with code send method information. E.g. { type: &#39;phone&#39; }
 or { mask: &#39;123-…-4321&#39; }. Default is first available email.</p>
+</dd><dt>options
+<dd>
+<p>the Hash options (default: {}):</p>
+<dl class="rdoc-list note-list"><dt>:list
+<dd>
+<p>The Boolean flag which would request the available send methods if the
+institution requires code-based MFA credential (default: false).</p>
+</dd><dt>:webhook
+<dd>
+<p>The String webhook URL. Used with :connect, :income, and :risk products
+(default: nil).</p>
+</dd><dt>:pending
+<dd>
+<p>The Boolean flag requesting to return pending transactions. Used with
+:connect product (default: false).</p>
+</dd><dt>:login_only
+<dd>
+<p>The Boolean option valid for initial authentication only. If set to false,
+the initial request will return transaction data based on the start_date
+and end_date.</p>
+</dd><dt>:start_date
+<dd>
+<p>The start Date from which to return transactions (default: 30 days ago).</p>
+</dd><dt>:end_date
+<dd>
+<p>The end Date to which transactions will be collected (default: today).</p>
+</dd></dl>
 </dd></dl>
 
 <h3 id="method-i-mfa_step-label-Returns">Returns</h3>
@@ -974,14 +1035,23 @@ or { mask: &#39;123-…-4321&#39; }. Default is first available email.</p>
                 
               </p>
               <div id="method-i-mfa_step_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 168</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">mfa_step</span>(<span class="ruby-identifier">info</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">send_method</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
+                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 204</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">mfa_step</span>(<span class="ruby-identifier">info</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">send_method</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">payload</span> = { <span class="ruby-identifier">access_token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">access_token</span> }
   <span class="ruby-identifier">payload</span>[<span class="ruby-value">:mfa</span>] = <span class="ruby-identifier">info</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">info</span>
-  <span class="ruby-identifier">payload</span>[<span class="ruby-value">:send_method</span>] = <span class="ruby-constant">MultiJson</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-identifier">send_method</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">send_method</span>
-
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">send_method</span>
+    <span class="ruby-identifier">options</span> = {} <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:send_method</span>] = <span class="ruby-identifier">send_method</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">send_method</span>
+    <span class="ruby-identifier">payload</span>[<span class="ruby-value">:options</span>] = <span class="ruby-constant">MultiJson</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">conn</span> = <span class="ruby-constant">Connector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">product</span>, <span class="ruby-value">:step</span>, <span class="ruby-identifier">auth</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>)
-  <span class="ruby-identifier">response</span> = <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">post</span>(<span class="ruby-identifier">payload</span>)
+
+  <span class="ruby-comment"># Use PATCH if we are in context of User#update.</span>
+  <span class="ruby-identifier">response</span> = <span class="ruby-keyword">if</span> <span class="ruby-ivar">@mfa_patch</span>
+               <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">patch</span>(<span class="ruby-identifier">payload</span>)
+             <span class="ruby-keyword">else</span>
+               <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">post</span>(<span class="ruby-identifier">payload</span>)
+             <span class="ruby-keyword">end</span>
 
   <span class="ruby-ivar">@mfa_required</span> = <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">mfa?</span>
   <span class="ruby-identifier">parse_response</span>(<span class="ruby-identifier">response</span>)
@@ -1030,7 +1100,7 @@ from the server. Otherwise cached version is returned, if it exists.</p>
                 
               </p>
               <div id="method-i-risk_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 351</span>
+                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 426</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">risk</span>(<span class="ruby-identifier">sync</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">sync</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@accounts</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@accounts</span>[<span class="ruby-number">0</span>] <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@accounts</span>[<span class="ruby-number">0</span>].<span class="ruby-identifier">risk</span>
     <span class="ruby-identifier">parse_response</span>(<span class="ruby-constant">Connector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:risk</span>, <span class="ruby-value">:get</span>, <span class="ruby-identifier">auth</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-identifier">client</span>)
@@ -1092,7 +1162,7 @@ argument is present, only transactions for given account will be requested.</p>
                 
               </p>
               <div id="method-i-transactions_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 192</span>
+                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 237</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">transactions</span>(<span class="ruby-identifier">pending</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>, <span class="ruby-identifier">account_id</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
                  <span class="ruby-identifier">start_date</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">end_date</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">pending</span><span class="ruby-operator">:</span> <span class="ruby-identifier">pending</span> }
@@ -1157,7 +1227,7 @@ nil).</p>
                 
               </p>
               <div id="method-i-update_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 219</span>
+                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 264</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">update</span>(<span class="ruby-identifier">username</span>, <span class="ruby-identifier">password</span>, <span class="ruby-identifier">pin</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">payload</span> = {
     <span class="ruby-identifier">access_token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">access_token</span>,
@@ -1167,9 +1237,74 @@ nil).</p>
 
   <span class="ruby-identifier">payload</span>[<span class="ruby-value">:pin</span>] = <span class="ruby-identifier">pin</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">pin</span>
 
-  <span class="ruby-identifier">parse_response</span>(<span class="ruby-constant">Connector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">product</span>, <span class="ruby-identifier">auth</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-identifier">client</span>)
-                          .<span class="ruby-identifier">patch</span>(<span class="ruby-identifier">payload</span>))
+  <span class="ruby-identifier">conn</span> = <span class="ruby-constant">Connector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">product</span>, <span class="ruby-identifier">auth</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-identifier">client</span>)
+  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">patch</span>(<span class="ruby-identifier">payload</span>)
 
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">mfa?</span>
+    <span class="ruby-ivar">@mfa_required</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">parse_response</span>(<span class="ruby-identifier">resp</span>)
+
+  <span class="ruby-comment"># A note for User#mfa_step to send PATCH request too</span>
+  <span class="ruby-ivar">@mfa_patch</span> = <span class="ruby-keyword">true</span>
+
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-update_webhook">
+            
+              <b>update_webhook</b>(webhook)
+            
+            <a href="../../classes/Plaid/User.html#method-i-update_webhook" name="method-i-update_webhook" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Create or update the webhook for Connect.</p>
+
+<p>Does a PATCH /connect request.</p>
+<dl class="rdoc-list note-list"><dt>webhook
+<dd>
+<p>The String with webhook URL.</p>
+</dd></dl>
+
+<h3 id="method-i-update_webhook-label-Returns">Returns</h3>
+
+<p>Returns self.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-update_webhook_source')" id="l_method-i-update_webhook_source">show</a>
+                
+              </p>
+              <div id="method-i-update_webhook_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 295</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">update_webhook</span>(<span class="ruby-identifier">webhook</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;User#update_webhook only supported by Connect!&#39;</span>          <span class="ruby-keyword">unless</span> <span class="ruby-identifier">product</span> <span class="ruby-operator">==</span> <span class="ruby-value">:connect</span>
+
+  <span class="ruby-identifier">payload</span> = {
+    <span class="ruby-identifier">access_token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">access_token</span>,
+    <span class="ruby-identifier">options</span><span class="ruby-operator">:</span> <span class="ruby-constant">MultiJson</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-identifier">webhook</span><span class="ruby-operator">:</span> <span class="ruby-identifier">webhook</span>)
+  }
+
+  <span class="ruby-identifier">parse_response</span>(<span class="ruby-constant">Connector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:connect</span>, <span class="ruby-identifier">auth</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-identifier">client</span>)
+                          .<span class="ruby-identifier">patch</span>(<span class="ruby-identifier">payload</span>))
   <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
@@ -1223,13 +1358,13 @@ token, but tied to the new product.</p>
                 
               </p>
               <div id="method-i-upgrade_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 262</span>
+                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 337</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">upgrade</span>(<span class="ruby-identifier">product</span>)
   <span class="ruby-identifier">payload</span> = { <span class="ruby-identifier">access_token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">access_token</span>, <span class="ruby-identifier">upgrade_to</span><span class="ruby-operator">:</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">to_s</span> }
   <span class="ruby-identifier">response</span> = <span class="ruby-constant">Connector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:upgrade</span>, <span class="ruby-identifier">auth</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-identifier">client</span>)
                       .<span class="ruby-identifier">post</span>(<span class="ruby-identifier">payload</span>)
 
-  <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">product</span>, <span class="ruby-identifier">response</span><span class="ruby-operator">:</span> <span class="ruby-identifier">response</span>
+  <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">product</span>, <span class="ruby-identifier">response</span><span class="ruby-operator">:</span> <span class="ruby-identifier">response</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-identifier">client</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -1272,7 +1407,7 @@ token, but tied to the new product.</p>
         <div class="method">
           <div class="title method-title" id="method-c-new">
             
-              <b>new</b>(product, access_token: nil, response: nil, mfa: nil, client: nil)
+              <b>new</b>(product, access_token: nil, response: nil, mfa: nil, stripe_token: nil, client: nil)
             
             <a href="../../classes/Plaid/User.html#method-c-new" name="method-c-new" class="permalink">Link</a>
           </div>
@@ -1291,7 +1426,10 @@ token, but tied to the new product.</p>
 <p>The Hash response body to parse.</p>
 </dd><dt>mfa
 <dd>
-<p>The Boolean flag indicating that response body - contains an MFA response.</p>
+<p>The Boolean flag indicating that response body contains an MFA response.</p>
+</dd><dt>stripe_token
+<dd>
+<p>The String stripe bank account token.</p>
 </dd><dt>client
 <dd>
 <p>The <a href="Client.html">Plaid::Client</a> instance used to connect to the
@@ -1315,13 +1453,14 @@ href="../Plaid.html#attribute-c-client">Plaid.client</a>).</p>
                 
               </p>
               <div id="method-c-new_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 139</span>
+                <pre><span class="ruby-comment"># File lib/plaid/user.rb, line 156</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">product</span>, <span class="ruby-identifier">access_token</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">response</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">mfa</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>,
-               <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
+               <span class="ruby-identifier">stripe_token</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-ivar">@product</span> = <span class="ruby-identifier">product</span>
   <span class="ruby-ivar">@client</span> = <span class="ruby-identifier">client</span>
   <span class="ruby-ivar">@access_token</span> = <span class="ruby-identifier">access_token</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">access_token</span>
   <span class="ruby-ivar">@mfa_required</span> = <span class="ruby-identifier">mfa</span>
+  <span class="ruby-ivar">@stripe_bank_account_token</span> = <span class="ruby-identifier">stripe_token</span>
   <span class="ruby-ivar">@accounts</span> = <span class="ruby-ivar">@initial_transactions</span> = <span class="ruby-ivar">@info</span> = <span class="ruby-ivar">@risk</span> = <span class="ruby-ivar">@income</span> = <span class="ruby-keyword">nil</span>
 
   <span class="ruby-identifier">parse_response</span>(<span class="ruby-identifier">response</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">response</span>

@@ -23,7 +23,7 @@
         </h1>
         <ul class="files">
             <li>README.md</li>
-            <li>Last modified: 2016-05-06 09:58:12 +0600</li>
+            <li>Last modified: 2016-11-03 20:52:37 +0700</li>
         </ul>
     </div>
 
@@ -69,7 +69,7 @@ would like to use.</p>
 <pre><code>Plaid.config do |p|
   p.client_id = &#39;&lt;&lt;&lt; Plaid provided client ID &gt;&gt;&gt;&#39;
   p.secret = &#39;&lt;&lt;&lt; Plaid provided secret key &gt;&gt;&gt;&#39;
-  p.env = :tartan  # or :api for production
+  p.env = :tartan  # or :production
 end
 </code></pre>
 
@@ -85,13 +85,13 @@ accordingly.</p>
 
 <p>If the authentication requires a pin, you can pass it as a named parameter:</p>
 
-<pre><code>user = Plaid::User.create(:income, &#39;usaa&#39;, &#39;plaid_test&#39;, &#39;plaid_good&#39;, &#39;wells&#39;, pin: &#39;1234&#39;)
+<pre><code>user = Plaid::User.create(:income, &#39;usaa&#39;, &#39;plaid_test&#39;, &#39;plaid_good&#39;, pin: &#39;1234&#39;)
 </code></pre>
 
 <p>To add options such as <code>login_only</code> or <code>webhook</code>, use
 <code>options</code> argument:</p>
 
-<pre><code>user = Plaid::User.create(:connect, &#39;wells&#39;, &#39;plaid_test&#39;, &#39;plaid_good&#39;, 
+<pre><code>user = Plaid::User.create(:connect, &#39;wells&#39;, &#39;plaid_test&#39;, &#39;plaid_good&#39;,
                           options: { login_only: true, webhook: &#39;https://example.org/callbacks/plaid&#39;)
 </code></pre>
 
@@ -123,8 +123,14 @@ the token in the <code>User</code> instance.</p>
 
 <p>With more options:</p>
 
-<pre><code>user2 = Plaid::User.exchange_token(&#39;public_token&#39;, account_id: &#39;...&#39;, product: :auth)
+<pre><code>user2 = Plaid::User.exchange_token(&#39;public_token&#39;, &#39;account_id&#39;, product: :auth)
 </code></pre>
+
+<p>If you want to <a
+href="https://plaid.com/docs/link/stripe/#step-4-write-server-side-handler">move
+money via Stripe’s ACH API</a>, you ought to specify the
+<code>account_id</code> param. In this case the returned user instance will
+have the <code>stripe_bank_account_token</code> attribute set.</p>
 
 <h3 id="label-Upgrading+and+changing+the+current+product">Upgrading and changing the current product</h3>
 
@@ -162,7 +168,7 @@ info_user = user.for_product(:info)
 <p>If MFA is requested by the financial institution, the
 <code>User.create</code> call would behave a bit differently:</p>
 
-<pre><code>user = Plaid::User.create(:auth, &#39;wells&#39;, &#39;plaid_test&#39;, &#39;plaid_good&#39;) 
+<pre><code>user = Plaid::User.create(:auth, &#39;wells&#39;, &#39;plaid_test&#39;, &#39;plaid_good&#39;)
 
 user.accounts   #=&gt; nil
 user.mfa?       #=&gt; true
@@ -225,7 +231,7 @@ information from the server even if it has already been loaded. Otherwise
 cached information will be returned:</p>
 
 <pre><code>user = User.load(:auth, &#39;access_token&#39;)   # Just set the token
-user.auth                                 # POST /auth/get 
+user.auth                                 # POST /auth/get
 user.auth                                 # No POST, return cached info
 user.auth(sync: true)                     # POST /auth/get again
 </code></pre>
@@ -255,13 +261,61 @@ ltis = Plaid::LongTailInstitution.all(count: 20, offset: 20) # A page
 res  = Plaid::LongTailInstitution.search(query: &#39;c&#39;)         # Lookup by name
 </code></pre>
 
+<h3 id="label-Webhooks">Webhooks</h3>
+
+<p>You can register to receive <a
+href="https://plaid.com/docs/api/#webhook">Webhooks</a> from <a
+href="../classes/Plaid.html">Plaid</a> when your users have new events. If
+you do, you&#39;ll receive <code>POST</code> requests with JSON.</p>
+
+<p>E.g. Initial Transaction Webhook: <code>json {  &quot;message&quot;:
+&quot;Initial transaction pull finished&quot;,  &quot;access_token&quot;:
+&quot;xxxxx&quot;,  &quot;total_transactions&quot;: 123,  &quot;code&quot;:
+0 } </code></p>
+
+<p>You should parse that JSON into a Ruby Hash with String keys (eg.
+<code>webhook_hash = JSON.parse(json_string)</code>). Then, you can convert
+that Hash into a Ruby object using <code>Plaid::Webhook</code>:</p>
+
+<pre><code>webhook = Plaid::Webhook.new(webhook_hash)
+
+# Was that the Initial Transaction Webhook?
+webhook.initial_transaction?
+access_token = webhook.access_token
+total_transactions = webhook.total_transactions
+
+# Or did Historical Transactions become available?
+webhook.historical_transaction?
+access_token = webhook.access_token
+total_transactions = webhook.total_transactions
+
+# Or did Normal Transactions become available?
+webhook.normal_transaction?
+access_token = webhook.access_token
+total_transactions = webhook.total_transactions
+
+# Or maybe a transaction was removed?
+webhook.removed_transaction?
+access_token = webhook.access_token
+removed_transactions_ids = webhook.removed_transactions_ids
+
+# Or was the User&#39;s Webhook Updated?
+webhook.user_webhook_updated?
+access_token = webhook.access_token
+
+# Otherwise, was it an error?
+webhook.error_response?
+# Which error?
+error = webhook.error
+</code></pre>
+
 <h3 id="label-Custom+clients">Custom clients</h3>
 
 <p>It&#39;s possible to use several <a href="../classes/Plaid.html">Plaid</a>
 environments and/or credentials in one app by explicit instantiation of
 <code>Plaid::Client</code>:</p>
 
-<pre><code># Configuring the global client (Plaid.client) which is used by default 
+<pre><code># Configuring the global client (Plaid.client) which is used by default
 Plaid.config do |p|
   p.client_id = &#39;client_id_1&#39;
   p.secret = &#39;secret_1&#39;
@@ -269,7 +323,7 @@ Plaid.config do |p|
 end
 
 # Creating a custom client
-api = Plaid::Client.new(client_id: &#39;client_id_2&#39;, &#39;secret_2&#39;, env: :api)
+api = Plaid::Client.new(client_id: &#39;client_id_2&#39;, secret: &#39;secret_2&#39;, env: :production)
 
 # Tartan user (using default client)
 user1 = Plaid::User.create(:connect, &#39;wells&#39;, &#39;plaid_test&#39;, &#39;plaid_good&#39;)

@@ -261,6 +261,15 @@ are Symbols. E.g. { location: { “city”: “San Francisco”, “state”: �
             <td class='attr-rw'>
               [R]
             </td>
+            <td class='attr-name'>reference_number</td>
+            <td class='attr-desc'><p>A String attribute that is used by the bank/payment processor to identify
+transactions — where applicable.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
             <td class='attr-name'>score</td>
             <td class='attr-desc'><p>The Hash with numeric representation of <a href="../Plaid.html">Plaid</a>
 confidence in the meta data attached to the transaction. In the case of a
@@ -321,7 +330,7 @@ and known information. E.g.</p>
                 
               </p>
               <div id="method-c-new_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/transaction.rb, line 83</span>
+                <pre><span class="ruby-comment"># File lib/plaid/transaction.rb, line 87</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">fields</span>)
   <span class="ruby-ivar">@id</span> = <span class="ruby-identifier">fields</span>[<span class="ruby-string">&#39;_id&#39;</span>]
   <span class="ruby-ivar">@account_id</span> = <span class="ruby-identifier">fields</span>[<span class="ruby-string">&#39;_account&#39;</span>]
@@ -332,6 +341,7 @@ and known information. E.g.</p>
   <span class="ruby-ivar">@meta</span> = <span class="ruby-constant">Plaid</span>.<span class="ruby-identifier">symbolize_hash</span>(<span class="ruby-identifier">fields</span>[<span class="ruby-string">&#39;meta&#39;</span>])
   <span class="ruby-ivar">@location</span> = (<span class="ruby-ivar">@meta</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@meta</span>[<span class="ruby-value">:location</span>]) <span class="ruby-operator">||</span> {}
   <span class="ruby-ivar">@pending</span> = <span class="ruby-identifier">fields</span>[<span class="ruby-string">&#39;pending&#39;</span>]
+  <span class="ruby-ivar">@reference_number</span> = <span class="ruby-identifier">fields</span>[<span class="ruby-string">&#39;_reference_number&#39;</span>]
   <span class="ruby-ivar">@pending_transaction_id</span> = <span class="ruby-identifier">fields</span>[<span class="ruby-string">&#39;_pendingTransaction&#39;</span>]
   <span class="ruby-ivar">@score</span> = <span class="ruby-constant">Plaid</span>.<span class="ruby-identifier">symbolize_hash</span>(<span class="ruby-identifier">fields</span>[<span class="ruby-string">&#39;score&#39;</span>])
 
@@ -382,9 +392,9 @@ and known information. E.g.</p>
                 
               </p>
               <div id="method-i-inspect_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/transaction.rb, line 111</span>
+                <pre><span class="ruby-comment"># File lib/plaid/transaction.rb, line 116</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">inspect</span>
-  <span class="ruby-node">&quot;#&lt;Plaid::Transaction id=#{id.inspect}, account_id=#{id.inspect}, &quot;</span>        <span class="ruby-node">&quot;date=#{date}, amount=#{amount.inspect}, name=#{name.inspect}, &quot;</span>        <span class="ruby-node">&quot;pending=#{pending.inspect}&gt;&quot;</span>
+  <span class="ruby-node">&quot;#&lt;Plaid::Transaction id=#{id.inspect}, account_id=#{account_id.inspect}, &quot;</span>        <span class="ruby-node">&quot;date=#{date}, amount=#{amount.inspect}, name=#{name.inspect}, &quot;</span>        <span class="ruby-node">&quot;pending=#{pending.inspect}&gt;&quot;</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -423,7 +433,7 @@ and known information. E.g.</p>
                 
               </p>
               <div id="method-i-pending-3F_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/transaction.rb, line 104</span>
+                <pre><span class="ruby-comment"># File lib/plaid/transaction.rb, line 109</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">pending?</span>
   <span class="ruby-identifier">pending</span>
 <span class="ruby-keyword">end</span></pre>

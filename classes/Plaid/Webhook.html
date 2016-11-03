@@ -1,0 +1,898 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Plaid::Webhook</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+        <h1>
+            <span class="type">Class</span> 
+            Plaid::Webhook 
+            
+                <span class="parent">&lt; 
+                    
+                    Object
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/lib/plaid/webhook_rb.html">lib/plaid/webhook.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Representation of a webhook.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+    <!-- Sections -->
+    <div class="sectiontitle">Sections</div>
+    <ul>
+      
+        <li><a href="#Public">Public</a></li>
+      
+    </ul>
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-error">error</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-error_response-3F">error_response?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-historical_transaction-3F">historical_transaction?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-income-3F">income?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-initial_transaction-3F">initial_transaction?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-inspect">inspect</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-normal_transaction-3F">normal_transaction?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-removed_transaction-3F">removed_transaction?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-removed_transactions_ids">removed_transactions_ids</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-risk-3F">risk?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-to_s">to_s</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-type">type</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-user_webhook_updated-3F">user_webhook_updated?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">ERROR_RESPONSE</td>
+            <td>=</td>
+            <td class="attr-value">-1</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">CODEX</td>
+            <td>=</td>
+            <td class="attr-value">codex.freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+              
+
+    
+      <div class="contenttitle" id="Public">
+        Public
+      </div>
+    
+
+    
+
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>access_token</td>
+            <td class='attr-desc'><p>The String access token for authenticated user.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>code</td>
+            <td class='attr-desc'><p>The Integer code denoting the type of webhook this is. E.g. 0</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>message</td>
+            <td class='attr-desc'><p>The String human readable explanation of this webhook request. E.g.
+“Initial transaction pull finished”.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>total_transactions</td>
+            <td class='attr-desc'><p>The Integer number of transactions available in <a
+href="../Plaid.html">Plaid</a>. E.g. 124</p></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(fields)
+            
+            <a href="../../classes/Plaid/Webhook.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Initialize a <a href="Webhook.html">Webhook</a> instance.</p>
+<dl class="rdoc-list note-list"><dt>fields
+<dd>
+<p>The Hash with fields.</p>
+</dd></dl>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/webhook.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">fields</span>)
+  <span class="ruby-ivar">@message</span> = <span class="ruby-identifier">fields</span>[<span class="ruby-string">&#39;message&#39;</span>]
+  <span class="ruby-ivar">@access_token</span> = <span class="ruby-identifier">fields</span>[<span class="ruby-string">&#39;access_token&#39;</span>]
+  <span class="ruby-ivar">@total_transactions</span> = <span class="ruby-identifier">fields</span>[<span class="ruby-string">&#39;total_transactions&#39;</span>]
+  <span class="ruby-ivar">@code</span> = <span class="ruby-identifier">fields</span>[<span class="ruby-string">&#39;code&#39;</span>]
+  <span class="ruby-comment"># present only for Removed Transaction Webhook</span>
+  <span class="ruby-ivar">@removed_transactions</span> = <span class="ruby-identifier">fields</span>[<span class="ruby-string">&#39;removed_transactions&#39;</span>]
+  <span class="ruby-comment"># present only for Error Response Webhook</span>
+  <span class="ruby-ivar">@resolve</span> = <span class="ruby-identifier">fields</span>[<span class="ruby-string">&#39;resolve&#39;</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-error">
+            
+              <b>error</b>()
+            
+            <a href="../../classes/Plaid/Webhook.html#method-i-error" name="method-i-error" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Get a Plaid::Error instance if this is an Error Response <a
+href="Webhook.html">Webhook</a></p>
+
+<h3 id="method-i-error-label-Returns">Returns</h3>
+
+<p>Returns Plaid::Error or nil</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-error_source')" id="l_method-i-error_source">show</a>
+                
+              </p>
+              <div id="method-i-error_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/webhook.rb, line 114</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">error</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">error_response?</span>
+    <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">PlaidError</span>.<span class="ruby-identifier">new</span> <span class="ruby-ivar">@code</span>, <span class="ruby-ivar">@message</span>, <span class="ruby-ivar">@resolve</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-error_response-3F">
+            
+              <b>error_response?</b>()
+            
+            <a href="../../classes/Plaid/Webhook.html#method-i-error_response-3F" name="method-i-error_response-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Detect if the webhook is Error Response <a href="Webhook.html">Webhook</a>.
+Triggered when an error has occurred. Includes the relevant <a
+href="../Plaid.html">Plaid</a> error code with details on both the error
+type and steps for error resolution.</p>
+
+<h3 id="method-i-error_response-3F-label-Returns">Returns</h3>
+
+<p>Returns true if it is.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-error_response-3F_source')" id="l_method-i-error_response-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-error_response-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/webhook.rb, line 100</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">error_response?</span>
+  <span class="ruby-constant">Webhook</span><span class="ruby-operator">::</span><span class="ruby-constant">CODEX</span>[<span class="ruby-identifier">code</span>].<span class="ruby-identifier">nil?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-historical_transaction-3F">
+            
+              <b>historical_transaction?</b>()
+            
+            <a href="../../classes/Plaid/Webhook.html#method-i-historical_transaction-3F" name="method-i-historical_transaction-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Detect if the webhook is Historical <a
+href="Transaction.html">Transaction</a> <a href="Webhook.html">Webhook</a>.
+Occurs once the historical transaction pull has completed, shortly after
+the initial transaction pull.</p>
+
+<h3 id="method-i-historical_transaction-3F-label-Returns">Returns</h3>
+
+<p>Returns true if it is.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-historical_transaction-3F_source')" id="l_method-i-historical_transaction-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-historical_transaction-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/webhook.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">historical_transaction?</span>
+  <span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Webhook</span><span class="ruby-operator">::</span><span class="ruby-constant">HISTORICAL_TRANSACTION</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-income-3F">
+            
+              <b>income?</b>()
+            
+            <a href="../../classes/Plaid/Webhook.html#method-i-income-3F" name="method-i-income-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Detect if the webhook is <a href="Income.html">Income</a>. Occurs when <a
+href="Income.html">Income</a> data is ready.</p>
+
+<h3 id="method-i-income-3F-label-Returns">Returns</h3>
+
+<p>Returns true if it is.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-income-3F_source')" id="l_method-i-income-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-income-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/webhook.rb, line 84</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">income?</span>
+  <span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Webhook</span><span class="ruby-operator">::</span><span class="ruby-constant">INCOME</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-initial_transaction-3F">
+            
+              <b>initial_transaction?</b>()
+            
+            <a href="../../classes/Plaid/Webhook.html#method-i-initial_transaction-3F" name="method-i-initial_transaction-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Detect if the webhook is Initial <a href="Transaction.html">Transaction</a>
+<a href="Webhook.html">Webhook</a>. Occurs once the initial transaction
+pull has finished.</p>
+
+<h3 id="method-i-initial_transaction-3F-label-Returns">Returns</h3>
+
+<p>Returns true if it is.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-initial_transaction-3F_source')" id="l_method-i-initial_transaction-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-initial_transaction-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/webhook.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initial_transaction?</span>
+  <span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Webhook</span><span class="ruby-operator">::</span><span class="ruby-constant">INITIAL_TRANSACTION</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-inspect">
+            
+              <b>inspect</b>()
+            
+            <a href="../../classes/Plaid/Webhook.html#method-i-inspect" name="method-i-inspect" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Get a String representation of the transaction.</p>
+
+<h3 id="method-i-inspect-label-Returns">Returns</h3>
+
+<p>Returns a String.</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Webhook.html#method-i-to_s">to_s</a>
+            </div>
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-inspect_source')" id="l_method-i-inspect_source">show</a>
+                
+              </p>
+              <div id="method-i-inspect_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/webhook.rb, line 123</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">inspect</span>
+  <span class="ruby-node">&quot;#&lt;Plaid::Webhook type=#{type.inspect} code=#{code.inspect}, access_token=#{access_token.inspect}, &quot;</span>        <span class="ruby-node">&quot;total_transactions=#{total_transactions.inspect}, message=#{message.inspect}&gt;&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-normal_transaction-3F">
+            
+              <b>normal_transaction?</b>()
+            
+            <a href="../../classes/Plaid/Webhook.html#method-i-normal_transaction-3F" name="method-i-normal_transaction-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Detect if the webhook is Normal <a href="Transaction.html">Transaction</a>
+<a href="Webhook.html">Webhook</a>. Occurs at set intervals throughout the
+day as data is updated from the financial institutions.</p>
+
+<h3 id="method-i-normal_transaction-3F-label-Returns">Returns</h3>
+
+<p>Returns true if it is.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-normal_transaction-3F_source')" id="l_method-i-normal_transaction-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-normal_transaction-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/webhook.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">normal_transaction?</span>
+  <span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Webhook</span><span class="ruby-operator">::</span><span class="ruby-constant">NORMAL_TRANSACTION</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-removed_transaction-3F">
+            
+              <b>removed_transaction?</b>()
+            
+            <a href="../../classes/Plaid/Webhook.html#method-i-removed_transaction-3F" name="method-i-removed_transaction-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Detect if the webhook is Removed <a href="Transaction.html">Transaction</a>
+<a href="Webhook.html">Webhook</a>. Occurs when transactions have been
+removed from our system.</p>
+
+<h3 id="method-i-removed_transaction-3F-label-Returns">Returns</h3>
+
+<p>Returns true if it is.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-removed_transaction-3F_source')" id="l_method-i-removed_transaction-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-removed_transaction-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/webhook.rb, line 69</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">removed_transaction?</span>
+  <span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Webhook</span><span class="ruby-operator">::</span><span class="ruby-constant">REMOVED_TRANSACTION</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-removed_transactions_ids">
+            
+              <b>removed_transactions_ids</b>()
+            
+            <a href="../../classes/Plaid/Webhook.html#method-i-removed_transactions_ids" name="method-i-removed_transactions_ids" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Get transaction IDs that were removed.</p>
+
+<h3 id="method-i-removed_transactions_ids-label-Returns">Returns</h3>
+
+<p>Returns <a href="String">Array</a> or nil</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-removed_transactions_ids_source')" id="l_method-i-removed_transactions_ids_source">show</a>
+                
+              </p>
+              <div id="method-i-removed_transactions_ids_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/webhook.rb, line 107</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">removed_transactions_ids</span>
+  <span class="ruby-ivar">@removed_transactions</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-risk-3F">
+            
+              <b>risk?</b>()
+            
+            <a href="../../classes/Plaid/Webhook.html#method-i-risk-3F" name="method-i-risk-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Detect if the webhook is <a href="Risk.html">Risk</a>. Occurs when <a
+href="Risk.html">Risk</a> data is ready.</p>
+
+<h3 id="method-i-risk-3F-label-Returns">Returns</h3>
+
+<p>Returns true if it is.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-risk-3F_source')" id="l_method-i-risk-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-risk-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/webhook.rb, line 91</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">risk?</span>
+  <span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Webhook</span><span class="ruby-operator">::</span><span class="ruby-constant">RISK</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_s">
+            
+              <b>to_s</b>()
+            
+            <a href="../../classes/Plaid/Webhook.html#method-i-to_s" name="method-i-to_s" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Get a String representation of the transaction.</p>
+
+<h3 id="method-i-to_s-label-Returns">Returns</h3>
+
+<p>Returns a String.</p>
+            </div>
+          
+          
+          
+
+          
+            <div class="aka">
+              Alias for: <a href="Webhook.html#method-i-inspect">inspect</a>
+            </div>
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-type">
+            
+              <b>type</b>()
+            
+            <a href="../../classes/Plaid/Webhook.html#method-i-type" name="method-i-type" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Share the type of <a href="Webhook.html">Webhook</a> this is from its code</p>
+
+<h3 id="method-i-type-label-Returns">Returns</h3>
+
+<p>Returns String webhook type</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-type_source')" id="l_method-i-type_source">show</a>
+                
+              </p>
+              <div id="method-i-type_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/webhook.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">type</span>
+  <span class="ruby-constant">Webhook</span><span class="ruby-operator">::</span><span class="ruby-constant">CODEX</span>[<span class="ruby-identifier">code</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&#39;ERROR_RESPONSE&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-user_webhook_updated-3F">
+            
+              <b>user_webhook_updated?</b>()
+            
+            <a href="../../classes/Plaid/Webhook.html#method-i-user_webhook_updated-3F" name="method-i-user_webhook_updated-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Detect if the webhook is User&#39;s <a href="Webhook.html">Webhook</a>
+Updated. Occurs when an user&#39;s webhook is updated via a PATCH request
+without credentials.</p>
+
+<h3 id="method-i-user_webhook_updated-3F-label-Returns">Returns</h3>
+
+<p>Returns true if it is.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-user_webhook_updated-3F_source')" id="l_method-i-user_webhook_updated-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-user_webhook_updated-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/webhook.rb, line 77</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">user_webhook_updated?</span>
+  <span class="ruby-identifier">code</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Webhook</span><span class="ruby-operator">::</span><span class="ruby-constant">USER_WEBHOOK_UPDATED</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    
