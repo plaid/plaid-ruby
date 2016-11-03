@@ -1,3 +1,8 @@
+# 2.2.0. 03-Nov-2016
+
+* Add `Transaction#reference_number` (@ericbirdsall).
+* Fix webhook codes and add risk and income webhooks.
+
 # 2.1.0. 19-Oct-2016
 
 * Documentation fixes (@ishmael).
