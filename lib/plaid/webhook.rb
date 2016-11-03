@@ -78,6 +78,20 @@ module Plaid
       code == Webhook::USER_WEBHOOK_UPDATED
     end
 
+    # Public: Detect if the webhook is Income. Occurs when Income data is ready.
+    #
+    # Returns true if it is.
+    def income?
+      code == Webhook::INCOME
+    end
+
+    # Public: Detect if the webhook is Risk. Occurs when Risk data is ready.
+    #
+    # Returns true if it is.
+    def risk?
+      code == Webhook::RISK
+    end
+
     # Public: Detect if the webhook is Error Response Webhook. Triggered when
     # an error has occurred. Includes the relevant Plaid error code with
     # details on both the error type and steps for error resolution.
@@ -118,12 +132,21 @@ module Plaid
 
     private
 
-    Webhook::ERROR_RESPONSE = -1
+    ERROR_RESPONSE = -1
+
     codex = {}
-    ['initial transaction', 'historical transaction', 'normal transaction', 'removed transaction', 'user webhook updated'].each_with_index do |event, idx|
+    {
+      'initial transaction'    => 0,
+      'historical transaction' => 1,
+      'normal transaction'     => 2,
+      'removed transaction'    => 3,
+      'user webhook updated'   => 4,
+      'income'                 => 10,
+      'risk'                   => 20
+    }.each do |event, idx|
       name = event.split.map(&:upcase).join('_')
-      codex[idx + 1] = name
-      const_set name, idx + 1
+      codex[idx] = name
+      const_set name, idx
     end
     CODEX = codex.freeze
   end
