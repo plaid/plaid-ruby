@@ -153,6 +153,8 @@ user.accounts   #=> [<Plaid::Account ...>, ...]
 The code-based MFA workflow is similar. Basically you need to call `user.mfa_step(...)`
 until `user.mfa?` becomes false.
 
+When updating credentials for a user use `user.mfa_step` but pass `{update: true}` as part of the options hash: `mfa_step('matz', send_method: send_method, options: {update: true})`. This way it will send a `PATCH` request instead of a `POST`.
+
 ### Obtaining user-related data
 
 If you have a live `User` instance, you can use following methods
