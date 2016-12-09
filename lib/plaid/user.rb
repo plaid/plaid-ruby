@@ -212,7 +212,7 @@ module Plaid
       conn = Connector.new(product, :step, auth: true)
 
       # Use PATCH if the {update: true} was passed in the options Hash
-      response = if options[:update]
+      response = if options && options[:update]
                    conn.patch(payload)
                  else
                    conn.post(payload)
