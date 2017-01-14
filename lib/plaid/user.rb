@@ -212,7 +212,9 @@ module Plaid
       conn = Connector.new(product, :step, auth: true)
 
       # Use PATCH if the {update: true} was passed in the options Hash
-      response = if options && options[:update]
+      use_patch = (options && options[:update].present?) ? options[:update] : @mfa_patch
+
+      response = if use_patch
                    conn.patch(payload)
                  else
                    conn.post(payload)
@@ -278,6 +280,9 @@ module Plaid
       end
 
       parse_response(resp)
+
+      # A note for User#mfa_step to send PATCH request too
+      @mfa_patch = true
 
       self
     end
