@@ -18,12 +18,16 @@ class PlaidInstitutionTest < MiniTest::Test
     assert_equal str, i.inspect
   end
 
-  def test_all_institutions
-    stub_api :get, 'institutions', response: :institutions
+  def test_all
+    stub_api :post, 'institutions/all',
+             body: { count: '27', offset: '39', client_id: 'test_id',
+                     secret: 'test_secret' },
+             response: :institutions
 
-    insts = Plaid::Institution.all
+    insts = Plaid::Institution.all(count: 27, offset: 39)
 
     assert_equal 14, insts.size
+    assert_equal 1234, insts.total_count
 
     i = insts.select { |c| c.id == '5301a99504977c52b60000d0' }.first
     refute_nil i
@@ -38,15 +42,18 @@ class PlaidInstitutionTest < MiniTest::Test
     assert_equal 'chase', i.type
   end
 
-  def test_all_institutions_with_custom_client
-    stub_api :get, 'institutions', response: :institutions,
-             host: 'example.com'
+  def test_all_with_custom_client
+    full_test_credentials
+    stub_api :post, 'institutions/all',
+             body: { count: '27', offset: '39', client_id: 'test_id',
+                     secret: 'test_secret' },
+             response: :institutions, host: 'example.com'
 
-    Plaid::Institution.all client: custom_client
+    Plaid::Institution.all(count: 27, offset: 39, client: custom_client)
   end
 
   def test_get_single_institution
-    stub_api :get, 'institutions/5301a99504977c52b60000d0',
+    stub_api :get, 'institutions/all/5301a99504977c52b60000d0',
              response: :institution_chase
 
     i = Plaid::Institution.get '5301a99504977c52b60000d0'
@@ -64,14 +71,14 @@ class PlaidInstitutionTest < MiniTest::Test
   end
 
   def test_get_single_institution_with_custom_client
-    stub_api :get, 'institutions/123', response: :institution_chase,
+    stub_api :get, 'institutions/all/123', response: :institution_chase,
              host: 'example.com'
 
     Plaid::Institution.get '123', client: custom_client
   end
 
   def test_get_nonexistent_institution
-    stub_api :get, 'institutions/0', response: :institution_not_found,
+    stub_api :get, 'institutions/all/0', response: :institution_not_found,
                                      status: 404
 
     e = assert_raises(Plaid::NotFoundError) do
@@ -85,7 +92,8 @@ class PlaidInstitutionTest < MiniTest::Test
   private
 
   def custom_client
-    Plaid::Client.new(env: 'https://example.com')
+    Plaid::Client.new(env: 'https://example.com',
+                      client_id: 'test_id', secret: 'test_secret')
   end
 
   def bofa
@@ -115,7 +123,7 @@ end
 ################################################################################
 
 # The test for Plaid::LongTailInstitution
-class PlaidLongTailInstitutionTest < MiniTest::Test
+class PlaidSearchResultInstitutionTest < MiniTest::Test
   include TestHelpers
 
   def setup
@@ -123,7 +131,7 @@ class PlaidLongTailInstitutionTest < MiniTest::Test
   end
 
   def test_initialization
-    lti = Plaid::LongTailInstitution.new(bofa_data)
+    lti = Plaid::SearchResultInstitution.new(bofa_data)
 
     assert_equal 'bofa', lti.id
     assert_equal 'bofa', lti.type
@@ -154,111 +162,49 @@ class PlaidLongTailInstitutionTest < MiniTest::Test
   end
 
   def test_string_representation
-    lti = Plaid::LongTailInstitution.new(bofa_data)
+    lti = Plaid::SearchResultInstitution.new(bofa_data)
     s = '#<Plaid::LongTailInstitution id="schwab", name="Charles Schwab", ...>'
 
     assert s, lti.to_s
     assert s, lti.inspect
   end
 
-  def test_get
-    stub_api :get, 'institutions/search',
-             query: { id: 'bofa', client_id: 'test_id', secret: 'test_secret' },
-             response: :longtail_bofa
-
-    lti = Plaid::LongTailInstitution.get 'bofa'
-    assert_kind_of Plaid::LongTailInstitution, lti
-    assert_equal 'bofa', lti.id
-  end
-
-  def test_get_without_auth
-    reset_config
-    tartan
-
-    stub_api :get, 'institutions/search', query: { id: 'bofa' },
-                                          response: :longtail_bofa
-
-    lti = Plaid::LongTailInstitution.get 'bofa'
-    assert_kind_of Plaid::LongTailInstitution, lti
-    assert_equal 'bofa', lti.id
-  end
-
-  def test_get_with_custom_client
-    stub_api :get, 'institutions/search',
-             query: { id: 'bofa', client_id: 'test_id', secret: 'test_secret' },
-             response: :longtail_bofa, host: 'example.com'
-
-    Plaid::LongTailInstitution.get 'bofa', client: custom_client
-  end
-
-  def test_get_nonexistent_institution
-    stub_api :get, 'institutions/search',
-             query: { id: 'none', client_id: 'test_id', secret: 'test_secret' },
-             response: '[]'
-
-    lti = Plaid::LongTailInstitution.get 'none'
-    assert_nil lti
-  end
-
-  def test_all
-    stub_api :post, 'institutions/longtail',
-             body: { count: '27', offset: '39', client_id: 'test_id',
-                     secret: 'test_secret' },
-             response: :longtail_bunch
-
-    all = Plaid::LongTailInstitution.all(count: 27, offset: 39)
-
-    assert_equal 4, all.size
-    all.each do |lti|
-      assert_kind_of Plaid::LongTailInstitution, lti
-    end
-  end
-
-  def test_all_with_custom_client
-    stub_api :post, 'institutions/longtail',
-             body: { count: '27', offset: '39', client_id: 'test_id',
-                     secret: 'test_secret' },
-             response: :longtail_bunch, host: 'example.com'
-
-    Plaid::LongTailInstitution.all(count: 27, offset: 39, client: custom_client)
-  end
-
   def test_search
-    stub_api :get, 'institutions/search',
+    stub_api :get, 'institutions/all/search',
              query: { q: 'c', p: 'connect' },
              response: :longtail_bunch
-    all = Plaid::LongTailInstitution.search(query: 'c', product: :connect)
+    all = Plaid::Institution.search(query: 'c', product: :connect)
 
     assert_equal 4, all.size
     all.each do |lti|
-      assert_kind_of Plaid::LongTailInstitution, lti
+      assert_kind_of Plaid::SearchResultInstitution, lti
     end
   end
 
   def test_search_with_custom_client
-    stub_api :get, 'institutions/search',
+    stub_api :get, 'institutions/all/search',
              query: { q: 'c', p: 'connect' },
              response: :longtail_bunch, host: 'example.com'
 
 
-    Plaid::LongTailInstitution.search(query: 'c', product: :connect,
-                                      client: custom_client)
+    Plaid::Institution.search(query: 'c', product: :connect,
+                              client: custom_client)
   end
 
   def test_search_only_query
-    stub_api :get, 'institutions/search',
+    stub_api :get, 'institutions/all/search',
              query: { q: 'c' },
              response: :longtail_bunch
-    Plaid::LongTailInstitution.search(query: 'c')
+    Plaid::Institution.search(query: 'c')
   end
 
   def test_search_no_query
     assert_raises ArgumentError do
-      Plaid::LongTailInstitution.search
+      Plaid::Institution.search
     end
 
     assert_raises ArgumentError do
-      Plaid::LongTailInstitution.search(query: '')
+      Plaid::Institution.search(query: '')
     end
   end
 

@@ -199,15 +199,13 @@ cat  = Plaid::Category.get('17001013') # A single category by its ID
 
 ### Institutions
 
-Financial institution information is available via `Plaid::Institution` and `Plaid::LongTailInstitution`:
+Financial institution information is available via `Plaid::Institution`.
 
 ```ruby
-insts = Plaid::Institution.all                               # Array of all major financial institutions
+insts = Plaid::Institution.all(count: 20, offset: 20)        # A page
 inst  = Plaid::Institution.get('5301a93ac140de84910000e0')   # A single institution by its ID
 
-lti  = Plaid::LongTailInstitution.get('bofa')                # A single one
-ltis = Plaid::LongTailInstitution.all(count: 20, offset: 20) # A page
-res  = Plaid::LongTailInstitution.search(query: 'c')         # Lookup by name
+res  = Plaid::Institution.search(query: 'c')         # Lookup by name
 ```
 
 ### Webhooks
@@ -281,8 +279,8 @@ user1 = Plaid::User.create(:connect, 'wells', 'plaid_test', 'plaid_good')
 # Api user (using api client)
 user2 = Plaid::User.create(:connect, 'wells', 'plaid_test', 'plaid_good', client: api)
 
-# Lookup a long tail institution in production
-res = Plaid::LongTailInstitution.search(query: 'c', client: api)
+# Lookup an institution in production
+res = Plaid::Institution.search(query: 'c', client: api)
 ```
 
 The `client` option can be passed to the following methods:
@@ -294,9 +292,8 @@ The `client` option can be passed to the following methods:
 * `Category.get`
 * `Institution.all`
 * `Institution.get`
-* `LongTailInstitution.all`
-* `LongTailInstitution.search`
-* `LongTailInstitution.get`
+* `Institution.search`
+* `Institution.search_by_id`
 
 ### Errors
 
