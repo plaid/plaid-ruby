@@ -1,3 +1,7 @@
+# 3.0.0. 17-Jan-2017
+
+* Add `/institutions/all` and `/institutions/all/search` endpoints, see [UPGRADING.md](UPGRADING.md#upgrading-from-2xx-to-300)
+
 # 2.2.0. 03-Nov-2016
 
 * Add `Transaction#reference_number` (@ericbirdsall).
