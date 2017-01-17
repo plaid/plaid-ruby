@@ -19,7 +19,7 @@ module Plaid
     alias has_mfa? has_mfa
 
     # Public: The Hash with MFA options available. E.g. ["code", "list",
-    # "questions(3)"]. This means that you are allowed to request a list of
+    # "questions(3)"]. In this case you are allowed to request a list of
     # possible MFA options, use code-based MFA and questions MFA (there are 3
     # questions).
     attr_reader :mfa
@@ -60,38 +60,123 @@ module Plaid
     # Public: Get information about the Financial Institutions currently
     # supported by Plaid.
     #
-    # Does a GET /institutions call.
+    # Does a POST /institutions/all call. The result is paginated (count,
+    # offset params) and filtered by products. If the products param is
+    # specified, only institutions which support all of the products mentioned
+    # will be returned.
     #
-    # client - The Plaid::Client instance used to connect
-    #          (default: Plaid.client).
+    # count    - The Integer number of results to retrieve (default: 50).
+    # offset   - The Integer number of results to skip forward from the
+    #            beginning of the list (default: 0).
+    # products - The Array of product Symbols (see Plaid::PRODUCTS) or nil.
+    #            E.g. [:connect, :auth]. Default: nil.
+    # client   - The Plaid::Client instance used to connect
+    #            (default: Plaid.client).
     #
     # Returns an Array of Institution instances.
-    def self.all(client: nil)
-      Connector.new(:institutions, client: client).get.map do |idata|
-        new(idata)
+    def self.all(count: 50, offset: 0, products: nil, client: nil)
+      conn = Connector.new(:institutions, :all, auth: true, client: client)
+      payload = {
+        count: count,
+        offset: offset
+      }
+
+      if products
+        payload[:products] = MultiJson.encode(Array(products))
       end
+
+      resp = conn.post(payload)
+
+      Page.new(resp['total_count'],
+               resp['results'].map { |item| new(item) })
     end
 
     # Public: Get information about a given Financial Institution.
     #
-    # Does a GET /institutions/:id call.
+    # Does a GET /institutions/all/:id call.
     #
-    # id     - the String institution ID (e.g. "5301a93ac140de84910000e0").
+    # id     - the String institution ID (e.g. "5301a93ac140de84910000e0", or
+    #          "ins_109263").
     # client - The Plaid::Client instance used to connect
     #          (default: Plaid.client).
     #
     # Returns an Institution instance or raises Plaid::NotFoundError if
     # institution with given id is not found.
     def self.get(id, client: nil)
-      new Connector.new(:institutions, id, client: client).get
+      new Connector.new('institutions/all', id, client: client).get
+    end
+
+    # Public: Search Financial Institutions.
+    #
+    # query   - The String search query to match against the full list of
+    #           institutions. Partial matches are returned making this useful
+    #           for autocompletion purposes.
+    # product - The Symbol product name to filter by, one of Plaid::PRODUCTS
+    #           (e.g. :info, :connect, etc.). Only valid when query is
+    #           specified. If nil, results are not filtered by product
+    #           (default: nil).
+    # client  - The Plaid::Client instance used to connect
+    #           (default: Plaid.client).
+    #
+    # Returns an Array of SearchResultInstitution.
+    def self.search(query: nil, product: nil, client: nil)
+      raise ArgumentError, 'query must be specified' \
+        unless query.is_a?(String) && !query.empty?
+
+      payload = { q: query }
+      payload[:p] = product.to_s if product
+
+      resp = Connector.new('institutions/all', :search, client: client).get(payload)
+      resp.map { |inst| SearchResultInstitution.new(inst) }
+    end
+
+    # Public: Lookup a Financial Institution by ID.
+    #
+    # Does a GET /institutions/all/search call with id param.
+    #
+    # id - the String institution ID (e.g. 'bofa').
+    # client - The Plaid::Client instance used to connect
+    #          (default: Plaid.client).
+    #
+    # Returns an SearchResultInstitution instance or nil if institution with
+    # given id is not found.
+    def self.search_by_id(id, client: nil)
+      client ||= Plaid.client
+
+      # If client_id is set, use it, no authentication otherwise
+      auth = client && !client.client_id.nil?
+      conn = Connector.new('institutions/all', :search, auth: auth, client: client)
+      resp = conn.get(id: id)
+
+      case resp
+      when Hash
+        SearchResultInstitution.new resp
+      when Array
+        raise 'Non-empty array returned by /institutions/all/search with id' \
+          unless resp.empty?
+
+        nil
+      else
+        raise 'Unexpected result returned by /institutions/all/search with id: ' \
+          "#{resp.inspect}"
+      end
     end
   end
 
-  ##############################################################################
+  # Public: A page of results.
+  class Page < Array
+    # Public: The total number of institutions in all pages
+    attr_reader :total_count
 
-  # Public: A class encapsulating information about a "long tail" Financial
-  # Institution supported by Plaid.
-  class LongTailInstitution
+    def initialize(total_count, records)
+      @total_count = total_count
+      super records
+    end
+  end
+
+  # Public: A class encapsulating information about a Financial Institution
+  # supported by Plaid.
+  class SearchResultInstitution
     # Public: The String ID of the institution. Same as type. E.g. "bofa".
     attr_reader :id
 
@@ -137,7 +222,7 @@ module Plaid
     # Public: ???.
     attr_reader :name_break
 
-    # Internal: Initialize the LongTailInstitution instance.
+    # Internal: Initialize the SearchResultInstitution instance.
     def initialize(hash)
       %w(id type name video logo).each do |f|
         instance_variable_set "@#{f}", hash[f]
@@ -156,7 +241,7 @@ module Plaid
     #
     # Returns a String.
     def inspect
-      "#<Plaid::LongTailInstitution id=#{id.inspect}, name=#{name.inspect}, " \
+      "#<Plaid::SearchResultInstitution id=#{id.inspect}, name=#{name.inspect}, " \
         '...>'
     end
 
@@ -164,77 +249,5 @@ module Plaid
     #
     # Returns a String.
     alias to_s inspect
-
-    # Public: Lookup a "long tail" Financial Institution by ID.
-    #
-    # Does a GET /institutions/search call with id param.
-    #
-    # id - the String institution ID (e.g. 'bofa').
-    # client - The Plaid::Client instance used to connect
-    #          (default: Plaid.client).
-    #
-    # Returns an Institution instance or nil if institution with given id is not
-    # found.
-    def self.get(id, client: nil)
-      client ||= Plaid.client
-
-      # If client_id is set, use it, no authentication otherwise
-      auth = client && !client.client_id.nil?
-      conn = Connector.new(:institutions, :search, auth: auth, client: client)
-      resp = conn.get(id: id)
-
-      case resp
-      when Hash
-        new resp
-      when Array
-        raise 'Non-empty array returned by /institutions/search with id' \
-          unless resp.empty?
-
-        nil
-      else
-        raise 'Unexpected result returned by /institutions/search with id: ' \
-          "#{resp.inspect}"
-      end
-    end
-
-    # Public: Get information about the "long tail" institutions supported
-    # by Plaid via partnerships.
-    #
-    # Does a POST /institutions/longtail call.
-    #
-    # count  - The Integer number of results to retrieve (default: 50).
-    # offset - The Integer number of results to skip forward from the
-    #          beginning of the list (default: 0).
-    # client - The Plaid::Client instance used to connect
-    #          (default: Plaid.client).
-    #
-    # Returns an Array of LongTailInstitution instances.
-    def self.all(count: 50, offset: 0, client: nil)
-      conn = Connector.new(:institutions, :longtail, auth: true, client: client)
-      resp = conn.post(count: count, offset: offset)
-      resp.map { |lti_data| new(lti_data) }
-    end
-
-    # Public: Search "long tail" institutions.
-    #
-    # query   - The String search query to match against the full list of
-    #           institutions. Partial matches are returned making this useful
-    #           for autocompletion purposes.
-    # product - The Symbol product name to filter by, one of Plaid::PRODUCTS
-    #           (e.g. :info, :connect, etc.). Only valid when query is
-    #           specified. If nil, results are not filtered by product
-    #           (default: nil).
-    # client - The Plaid::Client instance used to connect
-    #          (default: Plaid.client).
-    def self.search(query: nil, product: nil, client: nil)
-      raise ArgumentError, 'query must be specified' \
-        unless query.is_a?(String) && !query.empty?
-
-      payload = { q: query }
-      payload[:p] = product.to_s if product
-
-      resp = Connector.new(:institutions, :search, client: client).get(payload)
-      resp.map { |lti_data| new(lti_data) }
-    end
   end
 end

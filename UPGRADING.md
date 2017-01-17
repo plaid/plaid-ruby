@@ -1,3 +1,18 @@
+## Upgrading from 2.x.x to 3.0.0
+
+Version 3.0.0 makes `Plaid::Institution` use new `institutions/all` endpoint
+of Plaid API which unites "native" and "long tail" institutions.
+`Plaid::LongTailInstitution` class is removed, its functionality is
+concentrated in `Plaid::Institution`.
+
+Use `Plaid::Institution.all` instead of `Plaid::LongTailInstitution.all` (the
+semantics is the same, with added products param).
+
+Use `Plaid::Institution.search` instead of `Plaid::LongTailInstitution.search`.
+
+Use `Plaid::Institution.search_by_id` instead of `Plaid::LongTailInstitution.get`.
+
+
 ## Upgrading from 1.x to 2.0.0
 
 Make sure you use Ruby 2.0 or higher.
