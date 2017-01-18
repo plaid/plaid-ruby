@@ -23,7 +23,7 @@
         </h1>
         <ul class="files">
             <li>UPGRADING.md</li>
-            <li>Last modified: 2016-11-03 20:52:37 +0700</li>
+            <li>Last modified: 2017-01-17 16:59:08 +0700</li>
         </ul>
     </div>
 
@@ -32,6 +32,25 @@
   
     <div class="description">
       
+<h2 id="label-Upgrading+from+2.x.x+to+3.0.0">Upgrading from 2.x.x to 3.0.0</h2>
+
+<p>Version 3.0.0 makes <code>Plaid::Institution</code> use new
+<code>institutions/all</code> endpoint of <a
+href="../classes/Plaid.html">Plaid</a> API which unites “native” and “long
+tail” institutions. <code>Plaid::LongTailInstitution</code> class is
+removed, its functionality is concentrated in
+<code>Plaid::Institution</code>.</p>
+
+<p>Use <code>Plaid::Institution.all</code> instead of
+<code>Plaid::LongTailInstitution.all</code> (the semantics is the same,
+with added products param).</p>
+
+<p>Use <code>Plaid::Institution.search</code> instead of
+<code>Plaid::LongTailInstitution.search</code>.</p>
+
+<p>Use <code>Plaid::Institution.search_by_id</code> instead of
+<code>Plaid::LongTailInstitution.get</code>.</p>
+
 <h2 id="label-Upgrading+from+1.x+to+2.0.0">Upgrading from 1.x to 2.0.0</h2>
 
 <p>Make sure you use Ruby 2.0 or higher.</p>

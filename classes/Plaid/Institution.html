@@ -121,6 +121,23 @@ href="../Plaid.html">Plaid</a>.</p>
           </ul>
         </dd>
       
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-search">search</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-search_by_id">search_by_id</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
         <dt>T</dt>
         <dd>
           <ul>
@@ -210,8 +227,8 @@ institution. E.g. {“username”: “Online ID”, “password”: “Password�
             </td>
             <td class='attr-name'>mfa</td>
             <td class='attr-desc'><p>The Hash with MFA options available. E.g. [“code”, “list”, “questions(3)”].
-This means that you are allowed to request a list of possible MFA options,
-use code-based MFA and questions MFA (there are 3 questions).</p></td>
+In this case you are allowed to request a list of possible MFA options, use
+code-based MFA and questions MFA (there are 3 questions).</p></td>
           </tr>
         
           <tr valign='top'>
@@ -251,7 +268,7 @@ href="../Plaid.html">Plaid</a> API docs. E.g. “bofa”.</p></td>
         <div class="method">
           <div class="title method-title" id="method-c-all">
             
-              <b>all</b>(client: nil)
+              <b>all</b>(count: 50, offset: 0, products: nil, client: nil)
             
             <a href="../../classes/Plaid/Institution.html#method-c-all" name="method-c-all" class="permalink">Link</a>
           </div>
@@ -261,8 +278,21 @@ href="../Plaid.html">Plaid</a> API docs. E.g. “bofa”.</p></td>
               <p>Get information about the Financial Institutions currently supported by <a
 href="../Plaid.html">Plaid</a>.</p>
 
-<p>Does a GET /institutions call.</p>
-<dl class="rdoc-list note-list"><dt>client
+<p>Does a POST /institutions/all call. The result is paginated (count, offset
+params) and filtered by products. If the products param is specified, only
+institutions which support all of the products mentioned will be returned.</p>
+<dl class="rdoc-list note-list"><dt>count
+<dd>
+<p>The Integer number of results to retrieve (default: 50).</p>
+</dd><dt>offset
+<dd>
+<p>The Integer number of results to skip forward from the beginning of the
+list (default: 0).</p>
+</dd><dt>products
+<dd>
+<p>The Array of product Symbols (see Plaid::PRODUCTS) or nil. E.g. [:connect,
+:auth]. Default: nil.</p>
+</dd><dt>client
 <dd>
 <p>The <a href="Client.html">Plaid::Client</a> instance used to connect
 (default: <a href="../Plaid.html#attribute-c-client">Plaid.client</a>).</p>
@@ -288,11 +318,22 @@ href="../Plaid.html">Plaid</a>.</p>
                 
               </p>
               <div id="method-c-all_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/institution.rb, line 69</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">all</span>(<span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
-  <span class="ruby-constant">Connector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:institutions</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-identifier">client</span>).<span class="ruby-identifier">get</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">idata</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">new</span>(<span class="ruby-identifier">idata</span>)
+                <pre><span class="ruby-comment"># File lib/plaid/institution.rb, line 77</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">all</span>(<span class="ruby-identifier">count</span><span class="ruby-operator">:</span> <span class="ruby-number">50</span>, <span class="ruby-identifier">offset</span><span class="ruby-operator">:</span> <span class="ruby-number">0</span>, <span class="ruby-identifier">products</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">conn</span> = <span class="ruby-constant">Connector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:institutions</span>, <span class="ruby-value">:all</span>, <span class="ruby-identifier">auth</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-identifier">client</span>)
+  <span class="ruby-identifier">payload</span> = {
+    <span class="ruby-identifier">count</span><span class="ruby-operator">:</span> <span class="ruby-identifier">count</span>,
+    <span class="ruby-identifier">offset</span><span class="ruby-operator">:</span> <span class="ruby-identifier">offset</span>
+  }
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">products</span>
+    <span class="ruby-identifier">payload</span>[<span class="ruby-value">:products</span>] = <span class="ruby-constant">MultiJson</span>.<span class="ruby-identifier">encode</span>(<span class="ruby-constant">Array</span>(<span class="ruby-identifier">products</span>))
   <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">post</span>(<span class="ruby-identifier">payload</span>)
+
+  <span class="ruby-constant">Page</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">resp</span>[<span class="ruby-string">&#39;total_count&#39;</span>],
+           <span class="ruby-identifier">resp</span>[<span class="ruby-string">&#39;results&#39;</span>].<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span> <span class="ruby-identifier">new</span>(<span class="ruby-identifier">item</span>) })
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -312,10 +353,11 @@ href="../Plaid.html">Plaid</a>.</p>
               <p>Get information about a given Financial <a
 href="Institution.html">Institution</a>.</p>
 
-<p>Does a GET /institutions/:id call.</p>
+<p>Does a GET /institutions/all/:id call.</p>
 <dl class="rdoc-list note-list"><dt>id
 <dd>
-<p>the String institution ID (e.g. “5301a93ac140de84910000e0”).</p>
+<p>the String institution ID (e.g. “5301a93ac140de84910000e0”, or
+“ins_109263”).</p>
 </dd><dt>client
 <dd>
 <p>The <a href="Client.html">Plaid::Client</a> instance used to connect
@@ -344,9 +386,141 @@ given id is not found.</p>
                 
               </p>
               <div id="method-c-get_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/institution.rb, line 85</span>
+                <pre><span class="ruby-comment"># File lib/plaid/institution.rb, line 105</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">new</span> <span class="ruby-constant">Connector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:institutions</span>, <span class="ruby-identifier">id</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-identifier">client</span>).<span class="ruby-identifier">get</span>
+  <span class="ruby-identifier">new</span> <span class="ruby-constant">Connector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;institutions/all&#39;</span>, <span class="ruby-identifier">id</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-identifier">client</span>).<span class="ruby-identifier">get</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-search">
+            
+              <b>search</b>(query: nil, product: nil, client: nil)
+            
+            <a href="../../classes/Plaid/Institution.html#method-c-search" name="method-c-search" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Search Financial Institutions.</p>
+<dl class="rdoc-list note-list"><dt>query
+<dd>
+<p>The String search query to match against the full list of institutions.
+Partial matches are returned making this useful for autocompletion
+purposes.</p>
+</dd><dt>product
+<dd>
+<p>The Symbol product name to filter by, one of Plaid::PRODUCTS (e.g. :info,
+:connect, etc.). Only valid when query is specified. If nil, results are
+not filtered by product (default: nil).</p>
+</dd><dt>client
+<dd>
+<p>The <a href="Client.html">Plaid::Client</a> instance used to connect
+(default: <a href="../Plaid.html#attribute-c-client">Plaid.client</a>).</p>
+</dd></dl>
+
+<h3 id="method-c-search-label-Returns">Returns</h3>
+
+<p>Returns an Array of <a
+href="SearchResultInstitution.html">SearchResultInstitution</a>.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-search_source')" id="l_method-c-search_source">show</a>
+                
+              </p>
+              <div id="method-c-search_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/institution.rb, line 122</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">search</span>(<span class="ruby-identifier">query</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">product</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;query must be specified&#39;</span>          <span class="ruby-keyword">unless</span> <span class="ruby-identifier">query</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">query</span>.<span class="ruby-identifier">empty?</span>
+
+  <span class="ruby-identifier">payload</span> = { <span class="ruby-identifier">q</span><span class="ruby-operator">:</span> <span class="ruby-identifier">query</span> }
+  <span class="ruby-identifier">payload</span>[<span class="ruby-value">:p</span>] = <span class="ruby-identifier">product</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">product</span>
+
+  <span class="ruby-identifier">resp</span> = <span class="ruby-constant">Connector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;institutions/all&#39;</span>, <span class="ruby-value">:search</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-identifier">client</span>).<span class="ruby-identifier">get</span>(<span class="ruby-identifier">payload</span>)
+  <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">inst</span><span class="ruby-operator">|</span> <span class="ruby-constant">SearchResultInstitution</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">inst</span>) }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-search_by_id">
+            
+              <b>search_by_id</b>(id, client: nil)
+            
+            <a href="../../classes/Plaid/Institution.html#method-c-search_by_id" name="method-c-search_by_id" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Lookup a Financial <a href="Institution.html">Institution</a> by ID.</p>
+
+<p>Does a GET /institutions/all/search call with id param.</p>
+<dl class="rdoc-list note-list"><dt>id
+<dd>
+<p>the String institution ID (e.g. &#39;bofa&#39;).</p>
+</dd><dt>client
+<dd>
+<p>The <a href="Client.html">Plaid::Client</a> instance used to connect
+(default: <a href="../Plaid.html#attribute-c-client">Plaid.client</a>).</p>
+</dd></dl>
+
+<h3 id="method-c-search_by_id-label-Returns">Returns</h3>
+
+<p>Returns an <a
+href="SearchResultInstitution.html">SearchResultInstitution</a> instance or
+nil if institution with given id is not found.</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-search_by_id_source')" id="l_method-c-search_by_id_source">show</a>
+                
+              </p>
+              <div id="method-c-search_by_id_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/institution.rb, line 143</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">search_by_id</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">client</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Plaid</span>.<span class="ruby-identifier">client</span>
+
+  <span class="ruby-comment"># If client_id is set, use it, no authentication otherwise</span>
+  <span class="ruby-identifier">auth</span> = <span class="ruby-identifier">client</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">client</span>.<span class="ruby-identifier">client_id</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">conn</span> = <span class="ruby-constant">Connector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;institutions/all&#39;</span>, <span class="ruby-value">:search</span>, <span class="ruby-identifier">auth</span><span class="ruby-operator">:</span> <span class="ruby-identifier">auth</span>, <span class="ruby-identifier">client</span><span class="ruby-operator">:</span> <span class="ruby-identifier">client</span>)
+  <span class="ruby-identifier">resp</span> = <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">id</span>)
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">resp</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Hash</span>
+    <span class="ruby-constant">SearchResultInstitution</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">resp</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Array</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;Non-empty array returned by /institutions/all/search with id&#39;</span>            <span class="ruby-keyword">unless</span> <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">empty?</span>
+
+    <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;Unexpected result returned by /institutions/all/search with id: &#39;</span>            <span class="ruby-node">&quot;#{resp.inspect}&quot;</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>

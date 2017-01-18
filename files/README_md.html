@@ -23,7 +23,7 @@
         </h1>
         <ul class="files">
             <li>README.md</li>
-            <li>Last modified: 2016-11-03 20:52:37 +0700</li>
+            <li>Last modified: 2017-01-17 16:53:32 +0700</li>
         </ul>
     </div>
 
@@ -250,15 +250,12 @@ cat  = Plaid::Category.get(&#39;17001013&#39;) # A single category by its ID
 <h3 id="label-Institutions">Institutions</h3>
 
 <p>Financial institution information is available via
-<code>Plaid::Institution</code> and
-<code>Plaid::LongTailInstitution</code>:</p>
+<code>Plaid::Institution</code>.</p>
 
-<pre><code>insts = Plaid::Institution.all                               # Array of all major financial institutions
+<pre><code>insts = Plaid::Institution.all(count: 20, offset: 20)        # A page
 inst  = Plaid::Institution.get(&#39;5301a93ac140de84910000e0&#39;)   # A single institution by its ID
 
-lti  = Plaid::LongTailInstitution.get(&#39;bofa&#39;)                # A single one
-ltis = Plaid::LongTailInstitution.all(count: 20, offset: 20) # A page
-res  = Plaid::LongTailInstitution.search(query: &#39;c&#39;)         # Lookup by name
+res  = Plaid::Institution.search(query: &#39;c&#39;)         # Lookup by name
 </code></pre>
 
 <h3 id="label-Webhooks">Webhooks</h3>
@@ -331,8 +328,8 @@ user1 = Plaid::User.create(:connect, &#39;wells&#39;, &#39;plaid_test&#39;, &#39
 # Api user (using api client)
 user2 = Plaid::User.create(:connect, &#39;wells&#39;, &#39;plaid_test&#39;, &#39;plaid_good&#39;, client: api)
 
-# Lookup a long tail institution in production
-res = Plaid::LongTailInstitution.search(query: &#39;c&#39;, client: api)
+# Lookup an institution in production
+res = Plaid::Institution.search(query: &#39;c&#39;, client: api)
 </code></pre>
 
 <p>The <code>client</code> option can be passed to the following methods:</p>
@@ -351,11 +348,9 @@ res = Plaid::LongTailInstitution.search(query: &#39;c&#39;, client: api)
 </li><li>
 <p><code>Institution.get</code></p>
 </li><li>
-<p><code>LongTailInstitution.all</code></p>
+<p><code>Institution.search</code></p>
 </li><li>
-<p><code>LongTailInstitution.search</code></p>
-</li><li>
-<p><code>LongTailInstitution.get</code></p>
+<p><code>Institution.search_by_id</code></p>
 </li></ul>
 
 <h3 id="label-Errors">Errors</h3>
