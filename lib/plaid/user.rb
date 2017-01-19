@@ -212,7 +212,7 @@ module Plaid
       conn = Connector.new(product, :step, auth: true)
 
       # Use PATCH if the {update: true} was passed in the options Hash
-      use_patch = (options && options[:update].present?) ? options[:update] : @mfa_patch
+      use_patch = (options && !options[:update].nil?) ? options[:update] : @mfa_patch
 
       response = if use_patch
                    conn.patch(payload)
