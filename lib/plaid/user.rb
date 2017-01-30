@@ -181,6 +181,9 @@ module Plaid
     # send_method - The Hash with code send method information.
     #               E.g. { type: 'phone' } or { mask: '123-...-4321' }.
     #               Default is first available email.
+    # patch       - The Boolean flag enforcing using PATCH for the
+    #               request (default: nil). If nil, PATCH is still
+    #               used after User#update call.
     # options     - the Hash options (default: {}):
     #               :list       - The Boolean flag which would request the
     #                             available send methods if the institution
@@ -201,7 +204,7 @@ module Plaid
     #                             will be collected (default: today).
     #
     # Returns true if whole MFA process is completed, false otherwise.
-    def mfa_step(info = nil, send_method: nil, options: nil)
+    def mfa_step(info = nil, send_method: nil, patch: nil, options: nil)
       payload = { access_token: access_token }
       payload[:mfa] = info if info
       if options || send_method
@@ -211,8 +214,10 @@ module Plaid
       end
       conn = Connector.new(product, :step, auth: true)
 
-      # Use PATCH if we are in context of User#update.
-      response = if @mfa_patch
+      # Use PATCH if we are in context of User#update or if explicitly asked to.
+      use_patch = patch.nil? ? @mfa_patch : patch
+
+      response = if use_patch
                    conn.patch(payload)
                  else
                    conn.post(payload)

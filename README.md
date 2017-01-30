@@ -153,6 +153,14 @@ user.accounts   #=> [<Plaid::Account ...>, ...]
 The code-based MFA workflow is similar. Basically you need to call `user.mfa_step(...)`
 until `user.mfa?` becomes false.
 
+When updating credentials for a user you might need to `user.mfa_step` with
+`patch: true`:
+
+```ruby
+mfa_step('matz', send_method: send_method, patch: true)
+```
+This way it will send a `PATCH` request instead of a `POST`.
+
 ### Obtaining user-related data
 
 If you have a live `User` instance, you can use following methods
