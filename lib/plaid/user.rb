@@ -93,9 +93,9 @@ module Plaid
       payload[:options] = MultiJson.dump(options) if options
 
       conn = Connector.new(product, auth: true, client: client)
-      resp = conn.post(payload)
+      response = conn.post(payload)
 
-      new product, response: resp, mfa: conn.mfa?, client: client
+      new product, response: response, mfa: conn.mfa?, client: client
     end
 
     # Public: Get User instance in case user access token is known.
@@ -110,8 +110,8 @@ module Plaid
     #           (default is to use global Plaid client - Plaid.client).
     #
     # Returns a Plaid::User instance.
-    def self.load(product, token, client: nil)
-      new check_product(product), access_token: token, client: client
+    def self.load(product, access_token, client: nil)
+      new check_product(product), access_token: access_token, client: client
     end
 
     # Public: Exchange a Link public_token for an API access_token.
@@ -164,6 +164,8 @@ module Plaid
 
       parse_response(response) if response
     end
+
+    private_class_method :new
 
     # Public: Find out if MFA is required based on last request.
     #
@@ -335,11 +337,17 @@ module Plaid
     # Returns another User record with the same access token, but tied to the
     # new product.
     def upgrade(product)
+      User.upgrade product, access_token, client: client
+    end
+
+    # Internal: Upgrade a User instance.
+    def self.upgrade(product, access_token, client: nil)
+      check_product(product)
       payload = { access_token: access_token, upgrade_to: product.to_s }
       response = Connector.new(:upgrade, auth: true, client: client)
                           .post(payload)
 
-      User.new product, response: response, client: client
+      new product, response: response, client: client
     end
 
     # Public: Get the current user tied to another product.
