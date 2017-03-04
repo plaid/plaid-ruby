@@ -31,11 +31,12 @@ module Plaid
     #
     # Examples
     #
+    #   Plaid.read_timeout = 300   # it's 5 minutes, yay!       
+    #
     #   Plaid.configure do |p|
     #     p.client_id = 'Plaid provided client ID here'
     #     p.secret = 'Plaid provided secret key here'
     #     p.env = :tartan
-    #     p.read_timeout = 300   # it's 5 minutes, yay!
     #   end
     #
     # Returns nothing.
