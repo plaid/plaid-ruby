@@ -1,12 +1,12 @@
 require_relative 'plaid_test'
 
-# Internal: The test for Plaid::Income.
-class PlaidIncomeTest < PlaidTest
+# Internal: The test for Plaid::Identity.
+class PlaidIdentityTest < PlaidTest
   def setup
     @client = create_client
     @item = @client.item.create(credentials: CREDENTIALS,
-                                institution_id: 'ins_1',
-                                initial_products: [:income])
+                                institution_id: SANDBOX_INSTITUTION,
+                                initial_products: [:identity])
     @access_token = @item['access_token']
   end
 
@@ -15,14 +15,13 @@ class PlaidIncomeTest < PlaidTest
   end
 
   def test_get
-    assert_raises(Plaid::ItemError) do
-      @client.income.get(@access_token)
-    end
+    response = @client.identity.get(@access_token)
+    refute_empty(response['identity'])
   end
 
   def test_get_invalid_access_token
     assert_raises(Plaid::InvalidInputError) do
-      @client.income.get(BAD_STRING)
+      @client.identity.get(BAD_STRING)
     end
   end
 end

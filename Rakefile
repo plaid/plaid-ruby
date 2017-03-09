@@ -9,8 +9,7 @@ RDoc::Task.new do |rdoc|
   rdoc.generator = 'sdoc'
   rdoc.main = 'README.md'
 
-  rdoc.rdoc_files.include('README.md', 'LICENSE', 'UPGRADING.md',
-                          'CONTRIBUTING.md', 'CHANGELOG.md', 'lib/**/*.rb')
+  rdoc.rdoc_files.include('README.md', 'LICENSE', 'UPGRADING.md', 'lib/**/*.rb')
   rdoc.markup = 'tomdoc'
 end
 

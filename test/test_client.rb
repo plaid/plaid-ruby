@@ -1,35 +1,25 @@
-require 'test_helper'
+require_relative 'plaid_test'
 
-# Internal: The test for Plaid::Client
-class PlaidClientTest < MiniTest::Test
-  def test_symbol_environments
-    client = Plaid::Client.new
-    client.env = :tartan
+# Internal: The test for Plaid::Client.
+class PlaidClientTest < PlaidTest
+  def test_env_setting
+    client = Plaid::Client.new(env: :sandbox,
+                               client_id: ENV['PLAID_RUBY_CLIENT_ID'],
+                               secret: ENV['PLAID_RUBY_SECRET'],
+                               public_key: ENV['PLAID_RUBY_PUBLIC_KEY'])
+    assert_equal(Plaid.url_from_env(:sandbox), client.instance_variable_get(:@env))
 
-    assert_equal 'https://tartan.plaid.com/', client.env
+    client = Plaid::Client.new(env: :development,
+                               client_id: ENV['PLAID_RUBY_CLIENT_ID'],
+                               secret: ENV['PLAID_RUBY_SECRET'],
+                               public_key: ENV['PLAID_RUBY_PUBLIC_KEY'])
+    assert_equal(Plaid.url_from_env(:development), client.instance_variable_get(:@env))
 
-    client2 = Plaid::Client.new
-    client2.env = :production
-
-    assert_equal 'https://api.plaid.com/', client2.env
-  end
-
-  def test_string_url
-    client = Plaid::Client.new
-    client.env = 'https://www.example.com/'
-
-    assert_equal 'https://www.example.com/', client.env
-  end
-
-  def test_wrong_values_for_env
-    assert_raises ArgumentError do
-      Plaid::Client.new(env: 123)
-    end
-
-    assert_raises ArgumentError do
-      Plaid.config do |p|
-        Plaid::Client.new(env: :unknown)
-      end
+    assert_raises(ArgumentError) do
+      Plaid::Client.new(env: :BAD_ENV,
+                        client_id: ENV['PLAID_RUBY_CLIENT_ID'],
+                        secret: ENV['PLAID_RUBY_SECRET'],
+                        public_key: ENV['PLAID_RUBY_PUBLIC_KEY'])
     end
   end
 end
