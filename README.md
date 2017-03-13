@@ -2,7 +2,7 @@
 
 The official Ruby bindings for the [Plaid API](https://plaid.com/docs).
 
-This module was recently released as version `4.0.x` for Plaid's updated API. Use the gem `plaid-legacy` for version `3.0.x`.
+**Note:** This module was recently refactored and released as version `4.0.x` to support [Plaid's updated API][1]. The previous module version, `3.0.x`, and API legacy documentation, is still available via RubyGems and mirrored as [`plaid-legacy`][2].
 
 ## Installation
 
@@ -353,3 +353,6 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/plaid/
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+
+[1]: https://blog.plaid.com/improving-our-api/
+[2]: https://github.com/plaid/plaid-ruby-legacy
