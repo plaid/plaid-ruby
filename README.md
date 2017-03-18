@@ -58,7 +58,7 @@ item = client.item.create(credentials: { username: 'user_good',
                           institution_id: 'ins_109509',
                           initial_products: %i(auth identity transactions))
 ```
-The first argument for `client.item.create` is always the credentials in the form of a hash. 
+The first argument for `client.item.create` is always the credentials in the form of a hash.
 ```ruby
 credentials = { username: 'user_good',
                 password: 'pass_good',
@@ -245,7 +245,7 @@ transactions = transaction_response['transactions']
 
 # the transactions in the response are paginated, so make multiple calls while
 # increasing the offset to retrieve all transactions
-while transactions.length < response['total_transactions']
+while transactions.length < transaction_response['total_transactions']
   transaction_response = client.transactions.get(access_token,
                                                  '2016-07-12',
                                                  '2017-01-09',
