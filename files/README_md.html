@@ -23,7 +23,7 @@
         </h1>
         <ul class="files">
             <li>README.md</li>
-            <li>Last modified: 2017-01-17 16:53:32 +0700</li>
+            <li>Last modified: 2017-03-21 12:53:04 +0700</li>
         </ul>
     </div>
 
@@ -32,9 +32,17 @@
   
     <div class="description">
       
-<h1 id="label-Plaid+rdoc-image-3Ahttps-3A-2F-2Ftravis-ci.org-2Fplaid-2Fplaid-ruby.svg+rdoc-image-3Ahttps-3A-2F-2Fbadge.fury.io-2Frb-2Fplaid.svg"><a href="../classes/Plaid.html">Plaid</a> <a href="https://travis-ci.org/plaid/plaid-ruby"><img src="https://travis-ci.org/plaid/plaid-ruby.svg"></a> <a href="http://badge.fury.io/rb/plaid"><img src="https://badge.fury.io/rb/plaid.svg"></a></h1>
+<h1 id="label-plaid-ruby+rdoc-image-3Ahttps-3A-2F-2Fcircleci.com-2Fgh-2Fplaid-2Fplaid-ruby.svg-3Fstyle-3Dsvg-26circle-token-3D30ee002ac2021da5b5b5a701d45fe2888af124a5+rdoc-image-3Ahttps-3A-2F-2Fbadge.fury.io-2Frb-2Fplaid.svg">plaid-ruby <a href="https://circleci.com/gh/plaid/plaid-ruby"><img src="https://circleci.com/gh/plaid/plaid-ruby.svg?style=svg&circle-token=30ee002ac2021da5b5b5a701d45fe2888af124a5"></a> <a href="http://badge.fury.io/rb/plaid"><img src="https://badge.fury.io/rb/plaid.svg"></a></h1>
 
-<p>Ruby bindings for the <a href="../classes/Plaid.html">Plaid</a> API.</p>
+<p>The official Ruby bindings for the <a href="https://plaid.com/docs">Plaid
+API</a>.</p>
+
+<p><strong>Note:</strong> This module was recently refactored and released as
+version <code>4.0.x</code> to support <a
+href="https://blog.plaid.com/improving-our-api/">Plaid’s updated API</a>.
+The previous module version, <code>3.0.x</code>, and API legacy
+documentation, is still available via RubyGems and mirrored as <a
+href="https://github.com/plaid/plaid-ruby-legacy">plaid-legacy</a>.</p>
 
 <h2 id="label-Installation">Installation</h2>
 
@@ -51,343 +59,336 @@
 
 <pre><code>$ gem install plaid</code></pre>
 
-<p>The gem supports Ruby 2.x only.</p>
+<p>The gem supports Ruby 2.1+ only.</p>
 
 <h2 id="label-Usage">Usage</h2>
 
 <p>This gem wraps the <a href="../classes/Plaid.html">Plaid</a> API, which is
-fully described in the <a href="http://plaid.com/docs">documentation</a>.</p>
+fully described in the <a
+href="https://plaid.com/docs/api">documentation</a>.</p>
 
-<p>The RubyDoc for the gem is available <a
-href="http://plaid.github.io/plaid-ruby">here</a>.</p>
+<p>The RubyDoc for the gem is available <a href="LINKPLACEHOLDER">here</a>.</p>
 
-<h3 id="label-Configuring+access+to+Plaid">Configuring access to <a href="../classes/Plaid.html">Plaid</a></h3>
+<h3 id="label-Creating+a+Plaid+client">Creating a <a href="../classes/Plaid.html">Plaid</a> client</h3>
 
-<p>Configure the gem with your client id, secret, and the environment you
-would like to use.</p>
+<p>Create an instance of the client using the <code>client_id</code>,
+<code>secret</code>, and <code>public_key</code> from your <a
+href="../classes/Plaid.html">Plaid</a> dashboard along with your
+environment of choice:</p>
 
-<pre><code>Plaid.config do |p|
-  p.client_id = &#39;&lt;&lt;&lt; Plaid provided client ID &gt;&gt;&gt;&#39;
-  p.secret = &#39;&lt;&lt;&lt; Plaid provided secret key &gt;&gt;&gt;&#39;
-  p.env = :tartan  # or :production
+<pre><code>require &#39;plaid&#39;
+
+$client = Plaid::Client.new(env: :sandbox,
+                            client_id: &#39;***&#39;,
+                            secret: &#39;***&#39;,
+                            public_key: &#39;***&#39;)
+</code></pre>
+
+<p>The <code>env</code> field is the environment which the client will be
+running in. Your choices for the <code>env</code> field include: -
+<code>:sandbox</code> allows you to do your initial integrations tests
+against preloaded data without being billed or making expensive API calls.
+More information about using the API sandbox can be found on the <a
+href="https://plaid.com/docs/api/blob/master/SANDBOX.md">API Sandbox
+documentation</a>. - <code>:development</code> allows you to test against
+both real and test accounts without being billed. More information about <a
+href="../classes/Plaid.html">Plaid</a> test accounts can be found in our <a
+href="https://plaid.com/docs/api/#sandbox">API documentation</a>. -
+<code>:production</code> is the production environment where you can launch
+your production ready application and be charged for your <a
+href="../classes/Plaid.html">Plaid</a> usage.</p>
+
+<h3 id="label-Creating+a+new+item">Creating a new item</h3>
+
+<p>A new item can be created by providing a set of credentials, an institution
+code, and a list of products to create the item with.</p>
+
+<pre><code>item = client.item.create(credentials: { username: &#39;user_good&#39;,
+                                         password: &#39;pass_good&#39;,
+                                         pin: &#39;1234&#39; },
+                          institution_id: &#39;ins_109509&#39;,
+                          initial_products: %i(auth identity transactions))
+</code></pre>
+
+<p>The first argument for <code>client.item.create</code> is always the
+credentials in the form of a hash. <code>ruby credentials = { username:
+&#39;user_good&#39;,                 password: &#39;pass_good&#39;,        
+pin: &#39;1234&#39; } </code> The <code>pin</code> field in the credentials
+hash is not required and does not need to be entered if your institution
+does not require it.</p>
+
+<p>A successful, non-MFA (multi-factor authentication) response (HTTP 200) to
+an item creation will come in the form of a hash where each of these
+attributes can be accessed by the corresponding string key: <code>ruby {
+&quot;access_token&quot; =&gt; String,   &quot;item&quot; =&gt; {
+&quot;available_products&quot; =&gt; [String],              
+&quot;billed_products&quot;    =&gt; [String],              
+&quot;error&quot;              =&gt; Object,              
+&quot;institution_id&quot;     =&gt; String,              
+&quot;item_id&quot;            =&gt; String,              
+&quot;webhook&quot;            =&gt; nullable String },  
+&quot;request_id&quot; =&gt; String } </code> The response provides three
+primary pieces of information: - <code>access_token</code> is your token to
+access this item and the item&#39;s products in the future such as
+<code>auth</code> or <code>transactions</code> - <code>item</code> provides
+information about the item such as the <code>item_id</code> and
+<code>available_products</code> - <code>request_id</code> is the identifier
+for your actual request, this is often used to file tickets if necessary</p>
+
+<p>There are other responses you can receive from an item creation such as an
+MFA response and an error response (they&#39;re all in hash form).</p>
+
+<p>An MFA response (HTTP 210) looks like this: <code>ruby {
+&quot;access_token&quot; =&gt; String,   &quot;device&quot;       =&gt;
+nullable String,   &quot;device_list&quot;  =&gt; nullable [Object],  
+&quot;mfa_type&quot;     =&gt; String Enum (device, device_list, questions,
+selections),   &quot;questions&quot;    =&gt; nullable [String],  
+&quot;request_id&quot;   =&gt; String,   &quot;selections&quot;   =&gt;
+nullable [Object] } </code></p>
+
+<p>An example of how an MFA onboarding flow looks like can be seen below in
+the Examples section.</p>
+
+<p>If an error occurs during the creation, an error will be thrown. The class
+for the error has values that you can access by using the following keys.
+<code>ruby { "error_type"      => String,   "error_code"      => String,  
+"error_message"   => String,   "display_message" => (nullable) String,  
+"request_id"      => String }  Additional information on the meaning or
+usage of each field can be found in our {API Error
+documentation}[https://plaid.com/docs/api#errors]</code>.</p>
+
+<p>You can also add options such as <code>transactions.await_results</code> or
+<code>webhook</code> to your item creation, use keyed arguments:</p>
+
+<pre><code>item = client.item.create(credentials: { username: &#39;user_good&#39;,
+                                         password: &#39;pass_good&#39; },
+                          institution_id: &#39;ins_109509&#39;,
+                          initial_products: %i(auth identity transactions),
+                          transactions_await_results: true,
+                          webhook: &#39;https://plaid.com/webhook-test&#39;)
+</code></pre>
+
+<p>More information about item creation options can be found in our <a
+href="https://plaid.com/docs/api#post-itemcreate">API documentation</a>.</p>
+
+<h2 id="label-Examples">Examples</h2>
+
+<h3 id="label-Exchanging+a+Link+public+token+for+a+Plaid+access_token">Exchanging a Link public token for a <a href="../classes/Plaid.html">Plaid</a> access_token</h3>
+
+<p>If you have a <a href="https://github.com/plaid/link">Link</a> <code>public
+token</code>, use this function to get an <code>access_token</code>:
+<code>client.item.public_token.exchange(public_token)</code></p>
+
+<p>An example of the function&#39;s usage if you have a
+<code>public_token</code> in hand:</p>
+
+<pre><code>response = client.item.public_token.exchange(public_token)
+access_token = response[&#39;access_token&#39;]
+</code></pre>
+
+<h3 id="label-Handle+MFA+during+item+creation">Handle MFA during item creation</h3>
+
+<p>If MFA is requested by the financial institution, there will be additional
+steps required to finish the item creation flow: “`ruby require
+&#39;plaid&#39;</p>
+
+<p>def answer_mfa(client, access_token, data)  case <a
+href="'mfa_type'">data</a>  when &#39;questions&#39; 
+answer_questions(client, access_token, <a href="'questions'">data</a>) 
+when &#39;device_list&#39;  answer_device_list(client, access_token, <a
+href="'device_list'">data</a>)  when &#39;selections&#39; 
+answer_selections(client, access_token, <a href="'selections'">data</a>) 
+when &#39;device&#39;  answer_device(client, access_token, <a
+href="'device'">data</a>)  else  raise &#39;Unknown MFA type from
+Plaid&#39;  end end</p>
+
+<p>def answer_questions(client, access_token, _questions)  # We have magically
+inferred the answer here, so we respond immediately.  # In the real world,
+we would present the questions to our user and  # submit their responses. 
+answers = [&#39;answer_0_0&#39;]  client.item.mfa(access_token,
+&#39;questions&#39;, answers) end</p>
+
+<p>def answer_device_list(client, access_token, device_list)  # We have picked
+the first device here.  # In the real world, we would ask our user which
+device the passcode  # should be sent to.  device = <a
+href="0">device_list</a>[&#39;device_id&#39;] 
+client.item.mfa(access_token, &#39;device_list&#39;, [device]) end</p>
+
+<p>def answer_device(client, access_token, _device)  # Another magically
+inferred answer.  # In the real world, we would ask our user for the
+passcode they received.  client.item.mfa(access_token, &#39;device&#39;,
+[&#39;1234&#39;]) end</p>
+
+<p>def answer_selections(client, access_token, _selections)  # We have
+magically inferred the answer here, so we respond immediately.  # In the
+real world, we would present the selection question and choices  # to our
+user and submit their responses.  answers = %w(tomato ketchup) 
+client.item.mfa(access_token, &#39;selections&#39;, answers) end</p>
+
+<p>begin  client = <a
+href="../classes/Plaid/Client.html#method-c-new">Plaid::Client.new</a>(env:
+:sandbox,  client_id: &#39;<strong><em>&#39;,  secret:
+&#39;</em></strong>&#39;,  public_key: &#39;<em>*</em>&#39;)</p>
+
+<p>response = client.item.create(credentials: { username: &#39;user_good&#39;,
+password: &#39;mfa_device&#39; },  institution_id: &#39;ins_109508&#39;, 
+initial_products: %i(transactions auth))</p>
+
+<p>access_token = <a href="'access_token'">response</a>  response =
+answer_mfa(client, access_token, response) while
+response.key?(&#39;mfa_type&#39;) rescue <a
+href="../classes/Plaid/PlaidError.html">Plaid::PlaidError</a>  raise
+&#39;Error in main flow.&#39; end “`</p>
+
+<h3 id="label-Deleting+an+item">Deleting an item</h3>
+
+<pre><code>require &#39;plaid&#39;
+
+client = Plaid::Client.new(env: :sandbox,
+                           client_id: &#39;***&#39;,
+                           secret: &#39;***&#39;,
+                           public_key: &#39;***&#39;)
+
+response = client.item.create(credentials: { username: &#39;user_good&#39;,
+                                             password: &#39;pass_good&#39; },
+                              institution_id: &#39;ins_109509&#39;,
+                              initial_products: %i(auth identity transactions))
+
+access_token = response[&#39;access_token&#39;]
+
+# Provide the access_token for the Item you want to delete
+client.item.delete(access_token)
+</code></pre>
+
+<h3 id="label-Get+paginated+transactions">Get paginated transactions</h3>
+
+<pre><code>require &#39;plaid&#39;
+
+client = Plaid::Client.new(env: :sandbox,
+                           client_id: &#39;***&#39;,
+                           secret: &#39;***&#39;,
+                           public_key: &#39;***&#39;)
+
+item_response = client.item.create(credentials: { username: &#39;user_good&#39;,
+                                                  password: &#39;pass_good&#39; },
+                                   institution_id: &#39;ins_109509&#39;,
+                                   initial_products: %i(auth identity transactions))
+
+access_token = item_response[&#39;access_token&#39;]
+
+transaction_response = client.transactions.get(access_token, &#39;2016-07-12&#39;, &#39;2017-01-09&#39;)
+transactions = transaction_response[&#39;transactions&#39;]
+
+# the transactions in the response are paginated, so make multiple calls while
+# increasing the offset to retrieve all transactions
+while transactions.length &lt; transaction_response[&#39;total_transactions&#39;]
+  transaction_response = client.transactions.get(access_token,
+                                                 &#39;2016-07-12&#39;,
+                                                 &#39;2017-01-09&#39;,
+                                                 offset: transactions.length)
+  transactions += transaction_response[&#39;transactions&#39;]
 end
 </code></pre>
-
-<h3 id="label-Creating+a+new+User">Creating a new User</h3>
-
-<pre><code>user = Plaid::User.create(:connect, &#39;wells&#39;, &#39;plaid_test&#39;, &#39;plaid_good&#39;)
-</code></pre>
-
-<p>This call will do a <code>POST /connect</code>. The response will contain
-account information and transactions for last 30 days, which you can find
-in <code>user.accounts</code> and <code>user.initial_transactions</code>,
-accordingly.</p>
-
-<p>If the authentication requires a pin, you can pass it as a named parameter:</p>
-
-<pre><code>user = Plaid::User.create(:income, &#39;usaa&#39;, &#39;plaid_test&#39;, &#39;plaid_good&#39;, pin: &#39;1234&#39;)
-</code></pre>
-
-<p>To add options such as <code>login_only</code> or <code>webhook</code>, use
-<code>options</code> argument:</p>
-
-<pre><code>user = Plaid::User.create(:connect, &#39;wells&#39;, &#39;plaid_test&#39;, &#39;plaid_good&#39;,
-                          options: { login_only: true, webhook: &#39;https://example.org/callbacks/plaid&#39;)
-</code></pre>
-
-<p>The first argument for <code>Plaid::User.create</code> is always a product
-you want to add the user to (like, <code>:connect</code>,
-<code>:auth</code>, <code>:info</code>, <code>:income</code>, or
-<code>:risk</code>). The user object is bound to the product, and
-subsequent calls like <code>user.update</code> or <code>user.delete</code>
-are done for this product (i.e., <code>PATCH /info</code> and <code>DELETE
-/info</code> for <code>:info</code>).</p>
-
-<h3 id="label-Instantiating+a+User+with+an+existing+access+token">Instantiating a User with an existing access token</h3>
-
-<p>If you&#39;ve already added the user and saved the access token, you should
-use <code>User.load</code>:</p>
-
-<pre><code>user = Plaid::User.load(:risk, &#39;access_token&#39;)
-</code></pre>
-
-<p>This won&#39;t make any API requests by itself, just set the product and
-the token in the <code>User</code> instance.</p>
-
-<h3 id="label-Exchanging+a+Link+public+token+for+a+Plaid+access+token">Exchanging a Link public token for a <a href="../classes/Plaid.html">Plaid</a> access token</h3>
-
-<p>If you have a Link public token, use <code>User.exchange_token</code>:</p>
-
-<pre><code>user = Plaid::User.exchange_token(&#39;public_token&#39;)   # bound to :connect product
-</code></pre>
-
-<p>With more options:</p>
-
-<pre><code>user2 = Plaid::User.exchange_token(&#39;public_token&#39;, &#39;account_id&#39;, product: :auth)
-</code></pre>
-
-<p>If you want to <a
-href="https://plaid.com/docs/link/stripe/#step-4-write-server-side-handler">move
-money via Stripe’s ACH API</a>, you ought to specify the
-<code>account_id</code> param. In this case the returned user instance will
-have the <code>stripe_bank_account_token</code> attribute set.</p>
-
-<h3 id="label-Upgrading+and+changing+the+current+product">Upgrading and changing the current product</h3>
-
-<p><a href="../classes/Plaid.html">Plaid</a> supports upgrading a user, i.e.
-adding it to another product:</p>
-
-<pre><code># Create a user in Connect
-user = Plaid::User.create(:connect, &#39;wells&#39;, &#39;plaid_test&#39;, &#39;plaid_good&#39;)
-
-# Upgrade this user, attaching it to Auth as well (makes a request to /upgrade).
-auth_user = user.upgrade(:auth)
-</code></pre>
-
-<p>The <code>auth_user</code> will be a different instance of
-<code>User</code>, attached to Auth, but the access token will be the same.</p>
-
-<p>Sometimes you know that the user has already been added to another product.
-To get a <code>User</code> instance with same access token, but different
-current product, use <code>User.for_product</code>:</p>
-
-<pre><code># Get a user attached to Connect
-user = Plaid::User.load(:connect, &#39;access_token&#39;)
-
-# Makes no requests
-info_user = user.for_product(:info)
-</code></pre>
-
-<p>Basically it&#39;s the same as:</p>
-
-<pre><code>info_user = Plaid::User.load(:info, &#39;access_token&#39;)
-</code></pre>
-
-<h3 id="label-MFA+-28Multi-Factor+Authorization-29">MFA (Multi-Factor Authorization)</h3>
-
-<p>If MFA is requested by the financial institution, the
-<code>User.create</code> call would behave a bit differently:</p>
-
-<pre><code>user = Plaid::User.create(:auth, &#39;wells&#39;, &#39;plaid_test&#39;, &#39;plaid_good&#39;)
-
-user.accounts   #=&gt; nil
-user.mfa?       #=&gt; true
-user.mfa_type   #=&gt; :questions
-user.mfa        #=&gt; [{question: &quot;What&#39;s the nickname of the person who created Ruby?&quot;}]
-</code></pre>
-
-<p>In this case you&#39;ll have to submit the answer to the question:</p>
-
-<pre><code>user.mfa_step(&#39;matz&#39;)        # This is the correct answer!
-
-user.mfa?       #=&gt; false
-user.mfa_type   #=&gt; nil
-user.mfa        #=&gt; nil
-user.accounts   #=&gt; [&lt;Plaid::Account ...&gt;, ...]
-</code></pre>
-
-<p>The code-based MFA workflow is similar. Basically you need to call
-<code>user.mfa_step(...)</code> until <code>user.mfa?</code> becomes false.</p>
 
 <h3 id="label-Obtaining+user-related+data">Obtaining user-related data</h3>
 
-<p>If you have a live <code>User</code> instance, you can use following
-methods (independent of instance&#39;s current product):</p>
-<ul><li>
-<p><code>user.transactions(...)</code>. Makes a <code>/connect/get</code>
-request.</p>
-</li><li>
-<p><code>user.auth(sync: false)</code>. Makes an <code>/auth/get</code>
-request.</p>
-</li><li>
-<p><code>user.info(sync: false)</code>. Makes an <code>/info/get</code>
-request.</p>
-</li><li>
-<p><code>user.income(sync: false)</code>. Makes an <code>/income/get</code>
-request.</p>
-</li><li>
-<p><code>user.risk(sync: false)</code>. Makes an <code>/risk/get</code>
-request.</p>
-</li><li>
-<p><code>user.balance</code>. Makes an <code>/balance</code> request.</p>
-</li></ul>
+<p>If you have an <code>access_token</code>, you can use following code to
+retreive data: “`ruby require &#39;plaid&#39;</p>
 
-<p>All of these methods return appropriate data, but they also update the
-cached <code>user.accounts</code>. That is, if you user has access to Auth
-and Risk products, the following code:</p>
+<p>client = <a
+href="../classes/Plaid/Client.html#method-c-new">Plaid::Client.new</a>(env:
+:sandbox,  client_id: &#39;<strong><em>&#39;,  secret:
+&#39;</em></strong>&#39;,  public_key: &#39;<em>*</em>&#39;)</p>
 
-<pre><code>user = User.load(:auth, &#39;access_token&#39;)
-user.auth
-user.risk
-</code></pre>
+<p>item_response = client.item.create(credentials: { username:
+&#39;user_good&#39;,  password: &#39;pass_good&#39; },  institution_id:
+&#39;ins_109509&#39;,  initial_products: %i(auth identity transactions))</p>
 
-<p>will result in <code>user.accounts</code> having both routing number and
-risk information for all the accounts. The subsequent
-<code>user.balance</code> call will just update the current balance, not
-touching the routing and risk information.</p>
+<p>access_token = <a href="'access_token'">item_response</a></p>
 
-<p>The <code>sync</code> flag, if set to true, will result in updating the
-information from the server even if it has already been loaded. Otherwise
-cached information will be returned:</p>
+<p>auth_response = client.auth.get(access_token) auth = <a
+href="'auth'">auth_response</a></p>
 
-<pre><code>user = User.load(:auth, &#39;access_token&#39;)   # Just set the token
-user.auth                                 # POST /auth/get
-user.auth                                 # No POST, return cached info
-user.auth(sync: true)                     # POST /auth/get again
-</code></pre>
+<pre><code>
+### Create a Stripe bank_account_token
 
-<p>Same goes for other methods, except <code>User#transactions</code> and
-<code>User#balance</code> which always make requests to the API.</p>
+Exchange a Plaid Link `public_token` for an API `access_token` and a Stripe `bank_account_token`:</code></pre>
 
-<h3 id="label-Categories">Categories</h3>
+<p>ruby require &#39;plaid&#39;</p>
 
-<p>You can request category information:</p>
+<p>client = <a
+href="../classes/Plaid/Client.html#method-c-new">Plaid::Client.new</a>(env:
+:sandbox,  client_id: &#39;<strong><em>&#39;,  secret:
+&#39;</em></strong>&#39;,  public_key: &#39;<em>*</em>&#39;)</p>
 
-<pre><code>cats = Plaid::Category.all             # Array of all known categories
-cat  = Plaid::Category.get(&#39;17001013&#39;) # A single category by its ID
-</code></pre>
+<p>exchange_token_response = client.item.public_token.exchange(&#39;[Plaid
+Link public_token]&#39;) access_token = <a
+href="'access_token'">exchange_token_response</a></p>
+
+<p>stripe_response =
+client.processor.stripe.bank_account_token.create(access_token,
+&#39;[Account ID]&#39;) bank_account_token = <a
+href="'stripe_bank_account_token'">stripe_response</a></p>
+
+<pre><code>
+There are also a number of other methods you can use to retrieve data:
+
+* `client.accounts.get(access_code, ...)`: accounts
+* `client.accounts.balance.get(access_code, ...)`: real-time balances
+* `client.auth.get(access_code, ...)`: auth
+* `client.identity.get(access_code, ...)`: identity
+* `client.transactions.get(access_code, ...)`: transactions
+* `client.credit_details.get(access_code, ...)`: credit details
+
+All of these methods return appropriate data. More information and especially information about fields available in all the returned hashes can be found on the [API documentation](https://plaid.com/docs/api).
+
+### Categories
+
+You can request category information:</code></pre>
+
+<p>ruby categories = client.categories.get # Array of all known categories “`</p>
 
 <h3 id="label-Institutions">Institutions</h3>
 
-<p>Financial institution information is available via
-<code>Plaid::Institution</code>.</p>
+<p>Financial institution information is available as shown below where the
+function arguments represent count and offset:</p>
 
-<pre><code>insts = Plaid::Institution.all(count: 20, offset: 20)        # A page
-inst  = Plaid::Institution.get(&#39;5301a93ac140de84910000e0&#39;)   # A single institution by its ID
-
-res  = Plaid::Institution.search(query: &#39;c&#39;)         # Lookup by name
+<pre><code>institutions = client.institutions.get(count: 3, offset: 1)
 </code></pre>
 
-<h3 id="label-Webhooks">Webhooks</h3>
-
-<p>You can register to receive <a
-href="https://plaid.com/docs/api/#webhook">Webhooks</a> from <a
-href="../classes/Plaid.html">Plaid</a> when your users have new events. If
-you do, you&#39;ll receive <code>POST</code> requests with JSON.</p>
-
-<p>E.g. Initial Transaction Webhook: <code>json {  &quot;message&quot;:
-&quot;Initial transaction pull finished&quot;,  &quot;access_token&quot;:
-&quot;xxxxx&quot;,  &quot;total_transactions&quot;: 123,  &quot;code&quot;:
-0 } </code></p>
-
-<p>You should parse that JSON into a Ruby Hash with String keys (eg.
-<code>webhook_hash = JSON.parse(json_string)</code>). Then, you can convert
-that Hash into a Ruby object using <code>Plaid::Webhook</code>:</p>
-
-<pre><code>webhook = Plaid::Webhook.new(webhook_hash)
-
-# Was that the Initial Transaction Webhook?
-webhook.initial_transaction?
-access_token = webhook.access_token
-total_transactions = webhook.total_transactions
-
-# Or did Historical Transactions become available?
-webhook.historical_transaction?
-access_token = webhook.access_token
-total_transactions = webhook.total_transactions
-
-# Or did Normal Transactions become available?
-webhook.normal_transaction?
-access_token = webhook.access_token
-total_transactions = webhook.total_transactions
-
-# Or maybe a transaction was removed?
-webhook.removed_transaction?
-access_token = webhook.access_token
-removed_transactions_ids = webhook.removed_transactions_ids
-
-# Or was the User&#39;s Webhook Updated?
-webhook.user_webhook_updated?
-access_token = webhook.access_token
-
-# Otherwise, was it an error?
-webhook.error_response?
-# Which error?
-error = webhook.error
-</code></pre>
-
-<h3 id="label-Custom+clients">Custom clients</h3>
-
-<p>It&#39;s possible to use several <a href="../classes/Plaid.html">Plaid</a>
-environments and/or credentials in one app by explicit instantiation of
-<code>Plaid::Client</code>:</p>
-
-<pre><code># Configuring the global client (Plaid.client) which is used by default
-Plaid.config do |p|
-  p.client_id = &#39;client_id_1&#39;
-  p.secret = &#39;secret_1&#39;
-  p.env = :tartan
-end
-
-# Creating a custom client
-api = Plaid::Client.new(client_id: &#39;client_id_2&#39;, secret: &#39;secret_2&#39;, env: :production)
-
-# Tartan user (using default client)
-user1 = Plaid::User.create(:connect, &#39;wells&#39;, &#39;plaid_test&#39;, &#39;plaid_good&#39;)
-
-# Api user (using api client)
-user2 = Plaid::User.create(:connect, &#39;wells&#39;, &#39;plaid_test&#39;, &#39;plaid_good&#39;, client: api)
-
-# Lookup an institution in production
-res = Plaid::Institution.search(query: &#39;c&#39;, client: api)
-</code></pre>
-
-<p>The <code>client</code> option can be passed to the following methods:</p>
-<ul><li>
-<p><code>User.create</code></p>
-</li><li>
-<p><code>User.load</code></p>
-</li><li>
-<p><code>User.exchange_token</code></p>
-</li><li>
-<p><code>Category.all</code></p>
-</li><li>
-<p><code>Category.get</code></p>
-</li><li>
-<p><code>Institution.all</code></p>
-</li><li>
-<p><code>Institution.get</code></p>
-</li><li>
-<p><code>Institution.search</code></p>
-</li><li>
-<p><code>Institution.search_by_id</code></p>
-</li></ul>
-
-<h3 id="label-Errors">Errors</h3>
+<h2 id="label-Errors">Errors</h2>
 
 <p>Any methods making API calls will result in an exception raised unless the
-response code is “200: Success” or “201: MFA Required”.</p>
+response code is “200: Success” or “210: MFA Required”.</p>
 
-<p><code>Plaid::BadRequestError</code> is raised when status code is “400: Bad
-Request”.</p>
+<p><code>Plaid::InvalidRequestError</code> is returned when the request is
+malformed and cannot be processed.</p>
 
-<p><code>Plaid::UnauthorizedError</code> is raised when status code is “401:
-Unauthorized”.</p>
+<p><code>Plaid::InvalidInputError</code> is returned when all fields are
+provided and are in the correct format, but the values provided are
+incorrect in some way.</p>
 
-<p><code>Plaid::RequestFailedError</code> is raised when status code is “402:
-Request Failed”.</p>
+<p><code>Plaid::RateLimitExceededError</code> returned when the request is
+valid but has exceeded established rate limits.</p>
 
-<p><code>Plaid::NotFoundError</code> is raised when status code is “404:
-Cannot be Found”.</p>
+<p><code>Plaid::APIError</code> is returned during planned maintenance windows
+and in response to API internal server errors.</p>
 
-<p><code>Plaid::ServerError</code> is raised when status code is “50X: Server
-Error”.</p>
+<p><code>Plaid::ItemError</code> indicates that information provided for the
+Item (such as credentials or MFA) may be invalid or that the Item is not
+supported on Plaid&#39;s platform.</p>
 
 <p>Read more about response codes and their meaning in the <a
-href="https://plaid.com/docs/api/#response-codes">Plaid documentation</a>.</p>
+href="https://plaid.com/docs/api">Plaid documentation</a>.</p>
 
-<h2 id="label-Development">Development</h2>
+<h2 id="label-Network+Timeout">Network Timeout</h2>
 
-<p>After checking out the repo, run <code>bin/setup</code> to install
-dependencies. You can also run <code>bin/console</code> for an interactive
-prompt that will allow you to experiment.</p>
-
-<p>To install this gem onto your local machine, run <code>bundle exec rake
-install</code>. To release a new version, update the version number in
-<code>version.rb</code>, and then run <code>bundle exec rake
-release</code>, which will create a git tag for the version, push git
-commits and tags, and push the <code>.gem</code> file to <a
-href="https://rubygems.org">rubygems.org</a>.</p>
+<p>A network timeout value is set in the <code>lib/plaid/connect.rb</code>
+file. It is currently defaulted at 600 (in seconds) which equates to about
+10 minutes. Some requests from the <a
+href="../classes/Plaid.html">Plaid</a> API may take longer than others and
+we want to make sure that all valid requests have a chance to complete.
+Adjust this value if necessary.</p>
 
 <h2 id="label-Contributing">Contributing</h2>
 

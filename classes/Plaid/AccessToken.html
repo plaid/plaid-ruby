@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title>Plaid::Income</title>
+    <title>Plaid::AccessToken</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
@@ -20,7 +20,7 @@
         
         <h1>
             <span class="type">Class</span> 
-            Plaid::Income 
+            Plaid::AccessToken 
             
                 <span class="parent">&lt; 
                     
@@ -31,7 +31,7 @@
         </h1>
         <ul class="files">
             
-            <li><a href="../../files/lib/plaid/products/income_rb.html">lib/plaid/products/income.rb</a></li>
+            <li><a href="../../files/lib/plaid/products/item_rb.html">lib/plaid/products/item.rb</a></li>
             
         </ul>
     </div>
@@ -40,7 +40,8 @@
   
     <div class="description">
       
-<p>Class used to call the <a href="Income.html">Income</a> product.</p>
+<p>Class used to call the <a href="AccessToken.html">AccessToken</a>
+sub-product.</p>
 
     </div>
   
@@ -69,13 +70,13 @@
     <div class="sectiontitle">Methods</div>
     <dl class="methods">
       
-        <dt>G</dt>
+        <dt>I</dt>
         <dd>
           <ul>
             
               
               <li>
-                <a href="#method-i-get">get</a>
+                <a href="#method-i-invalidate">invalidate</a>
               </li>
             
           </ul>
@@ -88,6 +89,18 @@
               
               <li>
                 <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-update_version">update_version</a>
               </li>
             
           </ul>
@@ -121,7 +134,7 @@
             
               <b>new</b>(client)
             
-            <a href="../../classes/Plaid/Income.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+            <a href="../../classes/Plaid/AccessToken.html#method-c-new" name="method-c-new" class="permalink">Link</a>
           </div>
           
           
@@ -144,7 +157,7 @@
                 
               </p>
               <div id="method-c-new_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/income.rb, line 4</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/item.rb, line 4</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">client</span>)
   <span class="ruby-ivar">@client</span> = <span class="ruby-identifier">client</span>
 <span class="ruby-keyword">end</span></pre>
@@ -173,27 +186,27 @@
       <div class="sectiontitle">Instance Public methods</div>
       
         <div class="method">
-          <div class="title method-title" id="method-i-get">
+          <div class="title method-title" id="method-i-invalidate">
             
-              <b>get</b>(access_token)
+              <b>invalidate</b>(access_token)
             
-            <a href="../../classes/Plaid/Income.html#method-i-get" name="method-i-get" class="permalink">Link</a>
+            <a href="../../classes/Plaid/AccessToken.html#method-i-invalidate" name="method-i-invalidate" class="permalink">Link</a>
           </div>
           
           
             <div class="description">
-              <p>Get information about user incomes</p>
+              <p>Rotate your access_token, keeping it attached to the item</p>
 
-<p>Does a POST /income/get call which returns income info for an
-access_tokeni&#39;s item</p>
+<p>Does a POST /item/access_token/invalidate call which will give you a new
+access_token allowing you to rotate access_tokens</p>
 <dl class="rdoc-list note-list"><dt>access_token
 <dd>
-<p>access_token who&#39;s item to fetch income for</p>
+<p>access_token to invalidate and rotate</p>
 </dd></dl>
 
-<h3 id="method-i-get-label-Returns">Returns</h3>
+<h3 id="method-i-invalidate-label-Returns">Returns</h3>
 
-<p>Returns a parsed JSON of income information</p>
+<p>Returns a parsed JSON with the new access_token and request id</p>
             </div>
           
           
@@ -207,14 +220,63 @@ access_tokeni&#39;s item</p>
               
               <p class="source-link">
                 Source: 
-                <a href="javascript:toggleSource('method-i-get_source')" id="l_method-i-get_source">show</a>
+                <a href="javascript:toggleSource('method-i-invalidate_source')" id="l_method-i-invalidate_source">show</a>
                 
               </p>
-              <div id="method-i-get_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/income.rb, line 15</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">get</span>(<span class="ruby-identifier">access_token</span>)
+              <div id="method-i-invalidate_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/products/item.rb, line 16</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">invalidate</span>(<span class="ruby-identifier">access_token</span>)
   <span class="ruby-identifier">payload</span> = { <span class="ruby-identifier">access_token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">access_token</span> }
-  <span class="ruby-ivar">@client</span>.<span class="ruby-identifier">post_with_auth</span>(<span class="ruby-string">&#39;income/get&#39;</span>, <span class="ruby-identifier">payload</span>)
+  <span class="ruby-ivar">@client</span>.<span class="ruby-identifier">post_with_auth</span>(<span class="ruby-string">&#39;item/access_token/invalidate&#39;</span>, <span class="ruby-identifier">payload</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-update_version">
+            
+              <b>update_version</b>(access_token_v1)
+            
+            <a href="../../classes/Plaid/AccessToken.html#method-i-update_version" name="method-i-update_version" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Generate a new API access_token for a legacy access_token</p>
+
+<p>Does a POST /item/access_token/update_version call which will give you an
+access_token for the new API.</p>
+<dl class="rdoc-list note-list"><dt>access_token_v1
+<dd>
+<p>legacy access_token</p>
+</dd></dl>
+
+<h3 id="method-i-update_version-label-Returns">Returns</h3>
+
+<p>Returns a parsed JSON with the new access_token and request id</p>
+            </div>
+          
+          
+          
+
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-update_version_source')" id="l_method-i-update_version_source">show</a>
+                
+              </p>
+              <div id="method-i-update_version_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/products/item.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">update_version</span>(<span class="ruby-identifier">access_token_v1</span>)
+  <span class="ruby-identifier">payload</span> = { <span class="ruby-identifier">access_token_v1</span><span class="ruby-operator">:</span> <span class="ruby-identifier">access_token_v1</span> }
+  <span class="ruby-ivar">@client</span>.<span class="ruby-identifier">post_with_auth</span>(<span class="ruby-string">&#39;item/access_token/update_version&#39;</span>, <span class="ruby-identifier">payload</span>)
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>

@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title>Plaid::Income</title>
+    <title>Plaid::SandboxItem</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
@@ -20,7 +20,7 @@
         
         <h1>
             <span class="type">Class</span> 
-            Plaid::Income 
+            Plaid::SandboxItem 
             
                 <span class="parent">&lt; 
                     
@@ -31,7 +31,7 @@
         </h1>
         <ul class="files">
             
-            <li><a href="../../files/lib/plaid/products/income_rb.html">lib/plaid/products/income.rb</a></li>
+            <li><a href="../../files/lib/plaid/products/sandbox_rb.html">lib/plaid/products/sandbox.rb</a></li>
             
         </ul>
     </div>
@@ -40,7 +40,8 @@
   
     <div class="description">
       
-<p>Class used to call the <a href="Income.html">Income</a> product.</p>
+<p>Class used to call the <a href="SandboxItem.html">SandboxItem</a>
+sub-product.</p>
 
     </div>
   
@@ -69,18 +70,6 @@
     <div class="sectiontitle">Methods</div>
     <dl class="methods">
       
-        <dt>G</dt>
-        <dd>
-          <ul>
-            
-              
-              <li>
-                <a href="#method-i-get">get</a>
-              </li>
-            
-          </ul>
-        </dd>
-      
         <dt>N</dt>
         <dd>
           <ul>
@@ -88,6 +77,18 @@
               
               <li>
                 <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-reset_login">reset_login</a>
               </li>
             
           </ul>
@@ -121,7 +122,7 @@
             
               <b>new</b>(client)
             
-            <a href="../../classes/Plaid/Income.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+            <a href="../../classes/Plaid/SandboxItem.html#method-c-new" name="method-c-new" class="permalink">Link</a>
           </div>
           
           
@@ -144,7 +145,7 @@
                 
               </p>
               <div id="method-c-new_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/income.rb, line 4</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/sandbox.rb, line 4</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">client</span>)
   <span class="ruby-ivar">@client</span> = <span class="ruby-identifier">client</span>
 <span class="ruby-keyword">end</span></pre>
@@ -173,27 +174,26 @@
       <div class="sectiontitle">Instance Public methods</div>
       
         <div class="method">
-          <div class="title method-title" id="method-i-get">
+          <div class="title method-title" id="method-i-reset_login">
             
-              <b>get</b>(access_token)
+              <b>reset_login</b>(access_token)
             
-            <a href="../../classes/Plaid/Income.html#method-i-get" name="method-i-get" class="permalink">Link</a>
+            <a href="../../classes/Plaid/SandboxItem.html#method-i-reset_login" name="method-i-reset_login" class="permalink">Link</a>
           </div>
           
           
             <div class="description">
-              <p>Get information about user incomes</p>
+              <p>Resets sandbox item login</p>
 
-<p>Does a POST /income/get call which returns income info for an
-access_tokeni&#39;s item</p>
+<p>Does a POST /sandbox/item/reset_login call</p>
 <dl class="rdoc-list note-list"><dt>access_token
 <dd>
-<p>access_token who&#39;s item to fetch income for</p>
+<p>access_token who&#39;s item to reset login for</p>
 </dd></dl>
 
-<h3 id="method-i-get-label-Returns">Returns</h3>
+<h3 id="method-i-reset_login-label-Returns">Returns</h3>
 
-<p>Returns a parsed JSON of income information</p>
+<p>Returns a parsed JSON of response</p>
             </div>
           
           
@@ -207,14 +207,14 @@ access_tokeni&#39;s item</p>
               
               <p class="source-link">
                 Source: 
-                <a href="javascript:toggleSource('method-i-get_source')" id="l_method-i-get_source">show</a>
+                <a href="javascript:toggleSource('method-i-reset_login_source')" id="l_method-i-reset_login_source">show</a>
                 
               </p>
-              <div id="method-i-get_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/income.rb, line 15</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">get</span>(<span class="ruby-identifier">access_token</span>)
+              <div id="method-i-reset_login_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/products/sandbox.rb, line 15</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">reset_login</span>(<span class="ruby-identifier">access_token</span>)
   <span class="ruby-identifier">payload</span> = { <span class="ruby-identifier">access_token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">access_token</span> }
-  <span class="ruby-ivar">@client</span>.<span class="ruby-identifier">post_with_auth</span>(<span class="ruby-string">&#39;income/get&#39;</span>, <span class="ruby-identifier">payload</span>)
+  <span class="ruby-ivar">@client</span>.<span class="ruby-identifier">post_with_auth</span>(<span class="ruby-string">&#39;sandbox/item/reset_login&#39;</span>, <span class="ruby-identifier">payload</span>)
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>

@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title>Plaid::Income</title>
+    <title>Plaid::Auth</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
@@ -20,7 +20,7 @@
         
         <h1>
             <span class="type">Class</span> 
-            Plaid::Income 
+            Plaid::Auth 
             
                 <span class="parent">&lt; 
                     
@@ -31,7 +31,7 @@
         </h1>
         <ul class="files">
             
-            <li><a href="../../files/lib/plaid/products/income_rb.html">lib/plaid/products/income.rb</a></li>
+            <li><a href="../../files/lib/plaid/products/auth_rb.html">lib/plaid/products/auth.rb</a></li>
             
         </ul>
     </div>
@@ -40,7 +40,7 @@
   
     <div class="description">
       
-<p>Class used to call the <a href="Income.html">Income</a> product.</p>
+<p>Class used to call the <a href="Auth.html">Auth</a> product.</p>
 
     </div>
   
@@ -121,7 +121,7 @@
             
               <b>new</b>(client)
             
-            <a href="../../classes/Plaid/Income.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+            <a href="../../classes/Plaid/Auth.html#method-c-new" name="method-c-new" class="permalink">Link</a>
           </div>
           
           
@@ -144,7 +144,7 @@
                 
               </p>
               <div id="method-c-new_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/income.rb, line 4</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/auth.rb, line 4</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">client</span>)
   <span class="ruby-ivar">@client</span> = <span class="ruby-identifier">client</span>
 <span class="ruby-keyword">end</span></pre>
@@ -175,25 +175,32 @@
         <div class="method">
           <div class="title method-title" id="method-i-get">
             
-              <b>get</b>(access_token)
+              <b>get</b>(access_token, account_ids: nil, options: nil)
             
-            <a href="../../classes/Plaid/Income.html#method-i-get" name="method-i-get" class="permalink">Link</a>
+            <a href="../../classes/Plaid/Auth.html#method-i-get" name="method-i-get" class="permalink">Link</a>
           </div>
           
           
             <div class="description">
-              <p>Get information about user incomes</p>
+              <p>Get information about account and routing numbers for checking and savings
+accounts</p>
 
-<p>Does a POST /income/get call which returns income info for an
-access_tokeni&#39;s item</p>
+<p>Does a POST /auth/get call which returns high level account information
+along with account and routing numbers for checking and savings accounts</p>
 <dl class="rdoc-list note-list"><dt>access_token
 <dd>
-<p>access_token who&#39;s item to fetch income for</p>
+<p>access_token who&#39;s item to fetch <a href="Auth.html">Auth</a> for</p>
+</dd><dt>account_ids
+<dd>
+<p>Specific account ids to fetch numbers for (optional)</p>
+</dd><dt>options
+<dd>
+<p>Additional options to merge into API request</p>
 </dd></dl>
 
 <h3 id="method-i-get-label-Returns">Returns</h3>
 
-<p>Returns a parsed JSON of income information</p>
+<p>Returns a parsed JSON of <a href="Auth.html">Auth</a> information</p>
             </div>
           
           
@@ -211,10 +218,15 @@ access_tokeni&#39;s item</p>
                 
               </p>
               <div id="method-i-get_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/income.rb, line 15</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">get</span>(<span class="ruby-identifier">access_token</span>)
-  <span class="ruby-identifier">payload</span> = { <span class="ruby-identifier">access_token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">access_token</span> }
-  <span class="ruby-ivar">@client</span>.<span class="ruby-identifier">post_with_auth</span>(<span class="ruby-string">&#39;income/get&#39;</span>, <span class="ruby-identifier">payload</span>)
+                <pre><span class="ruby-comment"># File lib/plaid/products/auth.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">get</span>(<span class="ruby-identifier">access_token</span>, <span class="ruby-identifier">account_ids</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">options_payload</span> = {}
+  <span class="ruby-identifier">options_payload</span>[<span class="ruby-value">:account_ids</span>] = <span class="ruby-identifier">account_ids</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">account_ids</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">options_payload</span> = <span class="ruby-identifier">options_payload</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">nil?</span>
+
+  <span class="ruby-identifier">payload</span> = { <span class="ruby-identifier">access_token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">access_token</span>,
+              <span class="ruby-identifier">options</span><span class="ruby-operator">:</span> <span class="ruby-identifier">options_payload</span> }
+  <span class="ruby-ivar">@client</span>.<span class="ruby-identifier">post_with_auth</span>(<span class="ruby-string">&#39;auth/get&#39;</span>, <span class="ruby-identifier">payload</span>)
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
