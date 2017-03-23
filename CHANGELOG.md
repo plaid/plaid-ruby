@@ -1,6 +1,6 @@
 # 4.0.0 09-Mar-2017
 
-* Refactored the entire library to support [Plaid's new API](https://blog.plaid.com/improving-our-api/). Use the [transition guide](https://plaid.com/docs/link/transition-guide) to update your integration. Version 3.x.x of this gem is mirroed at [plaid-legacy](https://github.plaid.com/plaid/plaid-ruby-legacy).
+* Refactored the entire library to support [Plaid's new API](https://blog.plaid.com/improving-our-api/). Use the [transition guide](https://plaid.com/docs/link/transition-guide) to update your integration. Version 3.x.x of this gem is mirroed at [plaid-legacy](https://github.com/plaid/plaid-ruby-legacy).
 
 # 3.0.0. 17-Jan-2017
 
