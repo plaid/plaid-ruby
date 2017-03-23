@@ -1,5 +1,5 @@
 module Plaid
-  # Internal: Base class for Plaid SDK errors
+  # Public: Base class for Plaid SDK errors
   class PlaidError < StandardError; end
 
   # Public: returned on Plaid server or network issues
