@@ -44,7 +44,7 @@ module Plaid
       response = http.request(request)
 
       if response.body.nil? || response.body.empty?
-        raise 'Server error, try to connect again later.'
+        raise(PlaidServerError, 'Server error, try to connect again later.')
       end
 
       # All responses are expected to have a JSON body, so we always parse,
@@ -63,7 +63,7 @@ module Plaid
     #
     # body - A parsed response body with error.
     #
-    # Raises a PlaidError
+    # Raises a PlaidAPIError
     def self.raise_error(body)
       raise Plaid::Error.error_from_type(body['error_type']).new(body['error_type'],
                                                                  body['error_code'],
