@@ -44,7 +44,7 @@ module Plaid
       response = http.request(request)
 
       if response.body.nil? || response.body.empty?
-        raise(PlaidServerError, 'Server error, try to connect again later.')
+        raise PlaidServerError, 'Server error, try to connect again later.'
       end
 
       # All responses are expected to have a JSON body, so we always parse,
