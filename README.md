@@ -43,7 +43,7 @@ $client = Plaid::Client.new(env: :sandbox,
 ```
 
 The `env` field is the environment which the client will be running in. Your choices for the `env` field include:
-- `:sandbox` allows you to do your initial integrations tests against preloaded data without being billed or making expensive API calls. More information about using the API sandbox can be found on the [API Sandbox documentation](https://plaid.com/docs/api/blob/master/SANDBOX.md).
+- `:sandbox` allows you to do your initial integrations tests against preloaded data without being billed or making expensive API calls. More information about using the API sandbox can be found on the [API Sandbox documentation](https://plaid.com/docs/api#sandbox).
 - `:development` allows you to test against both real and test accounts without being billed. More information about Plaid test accounts can be found in our [API documentation](https://plaid.com/docs/api/#sandbox).
 - `:production` is the production environment where you can launch your production ready application and be charged for your Plaid usage.
 
