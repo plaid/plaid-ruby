@@ -26,7 +26,7 @@ The gem supports Ruby 2.1+ only.
 
 This gem wraps the Plaid API, which is fully described in the [documentation](https://plaid.com/docs/api).
 
-The RubyDoc for the gem is available [here](LINKPLACEHOLDER).
+The RubyDoc for the gem is available [here](http://plaid.github.io/plaid-ruby/).
 
 ### Creating a Plaid client
 
