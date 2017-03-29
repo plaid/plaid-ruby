@@ -94,7 +94,7 @@ module Plaid
     # client_id  - The String Plaid account client ID to authenticate requests
     # secret     - The String Plaid account secret to authenticate requests
     # public_key - The String Plaid account public key to authenticate requests
-    def initialize(env:, client_id:, secret:, public_key:)
+    def initialize(env, client_id, secret, public_key)
       @env        = env_map(env)
       @client_id  = client_id
       @secret     = secret
