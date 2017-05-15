@@ -47,83 +47,9 @@ The `env` field is the environment which the client will be running in. Your cho
 - `:development` allows you to test against both real and test accounts without being billed. More information about Plaid test accounts can be found in our [API documentation](https://plaid.com/docs/api/#sandbox).
 - `:production` is the production environment where you can launch your production ready application and be charged for your Plaid usage.
 
-### Creating a new item
-
-A new item can be created by providing a set of credentials, an institution code, and a list of products to create the item with.
-
-```ruby
-item = client.item.create(credentials: { username: 'user_good',
-                                         password: 'pass_good',
-                                         pin: '1234' },
-                          institution_id: 'ins_109509',
-                          initial_products: %i(auth identity transactions))
-```
-The first argument for `client.item.create` is always the credentials in the form of a hash.
-```ruby
-credentials = { username: 'user_good',
-                password: 'pass_good',
-                pin: '1234' }
-```
-The `pin` field in the credentials hash is not required and does not need to be entered if your institution does not require it.
-
-A successful, non-MFA (multi-factor authentication) response (HTTP 200) to an item creation will come in the form of a hash where each of these attributes can be accessed by the corresponding string key:
-```ruby
-{ "access_token" => String,
-  "item" => { "available_products" => [String],
-              "billed_products"    => [String],
-              "error"              => Object,
-              "institution_id"     => String,
-              "item_id"            => String,
-              "webhook"            => nullable String },
-  "request_id" => String }
-```
-The response provides three primary pieces of information:
-- `access_token` is your token to access this item and the item's products in the future such as `auth` or `transactions`
-- `item` provides information about the item such as the `item_id` and `available_products`
-- `request_id` is the identifier for your actual request, this is often used to file tickets if necessary
-
-There are other responses you can receive from an item creation such as an MFA response and an error response (they're all in hash form).
-
-An MFA response (HTTP 210) looks like this:
-```ruby
-{ "access_token" => String,
-  "device"       => nullable String,
-  "device_list"  => nullable [Object],
-  "mfa_type"     => String Enum (device, device_list, questions, selections),
-  "questions"    => nullable [String],
-  "request_id"   => String,
-  "selections"   => nullable [Object] }
-```
-
-An example of how an MFA onboarding flow looks like can be seen below in the Examples section.
-
-If an error occurs during the creation, an error will be thrown. The class for the error has values that you can access by using the following keys.
-```ruby
-{ "error_type"      => String,
-  "error_code"      => String,
-  "error_message"   => String,
-  "display_message" => (nullable) String,
-  "request_id"      => String }
-```
-Additional information on the meaning or usage of each field can be found in our [API Error documentation](https://plaid.com/docs/api#errors).
-
-You can also add options such as `transactions.await_results` or `webhook` to your item creation, use keyed arguments:
-
-```ruby
-item = client.item.create(credentials: { username: 'user_good',
-                                         password: 'pass_good' },
-                          institution_id: 'ins_109509',
-                          initial_products: %i(auth identity transactions),
-                          transactions_await_results: true,
-                          webhook: 'https://plaid.com/webhook-test')
-```
-
-More information about item creation options can be found in our [API documentation](https://plaid.com/docs/api#post-itemcreate).
-
-
 ## Examples
 
-### Exchanging a Link public token for a Plaid access_token
+### Exchanging a Link public_token for a Plaid access_token
 
 If you have a [Link](https://github.com/plaid/link) `public token`, use this function to get an `access_token`: `client.item.public_token.exchange(public_token)`
 
@@ -132,75 +58,6 @@ An example of the function's usage if you have a `public_token` in hand:
 ```ruby
 response = client.item.public_token.exchange(public_token)
 access_token = response['access_token']
-```
-
-### Handle MFA during item creation
-
-If MFA is requested by the financial institution, there will be additional steps required to finish the item creation flow:
-```ruby
-require 'plaid'
-
-def answer_mfa(client, access_token, data)
-  case data['mfa_type']
-  when 'questions'
-    answer_questions(client, access_token, data['questions'])
-  when 'device_list'
-    answer_device_list(client, access_token, data['device_list'])
-  when 'selections'
-    answer_selections(client, access_token, data['selections'])
-  when 'device'
-    answer_device(client, access_token, data['device'])
-  else
-    raise 'Unknown MFA type from Plaid'
-  end
-end
-
-def answer_questions(client, access_token, _questions)
-  # We have magically inferred the answer here, so we respond immediately.
-  # In the real world, we would present the questions to our user and
-  # submit their responses.
-  answers = ['answer_0_0']
-  client.item.mfa(access_token, 'questions', answers)
-end
-
-def answer_device_list(client, access_token, device_list)
-  # We have picked the first device here.
-  # In the real world, we would ask our user which device the passcode
-  # should be sent to.
-  device = device_list[0]['device_id']
-  client.item.mfa(access_token, 'device_list', [device])
-end
-
-def answer_device(client, access_token, _device)
-  # Another magically inferred answer.
-  # In the real world, we would ask our user for the passcode they received.
-  client.item.mfa(access_token, 'device', ['1234'])
-end
-
-def answer_selections(client, access_token, _selections)
-  # We have magically inferred the answer here, so we respond immediately.
-  # In the real world, we would present the selection question and choices
-  # to our user and submit their responses.
-  answers = %w(tomato ketchup)
-  client.item.mfa(access_token, 'selections', answers)
-end
-
-begin
-  client = Plaid::Client.new(env: :sandbox,
-                             client_id: '***',
-                             secret: '***',
-                             public_key: '***')
-
-  response = client.item.create(credentials: { username: 'user_good',
-                                               password: 'mfa_device' },
-                                institution_id: 'ins_109508',
-                                initial_products: %i(transactions auth))
-
-  access_token = response['access_token']
-  response = answer_mfa(client, access_token, response) while response.key?('mfa_type')
-rescue Plaid::PlaidError
-  raise 'Error in main flow.'
-end
 ```
 
 ### Deleting an item
@@ -255,7 +112,7 @@ end
 
 ```
 
-### Obtaining user-related data
+### Obtaining Item-related data
 
 If you have an `access_token`, you can use following code to retreive data:
 ```ruby
