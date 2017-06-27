@@ -90,15 +90,41 @@ module Plaid
 
     # Public: Construct a Client instance
     #
+    # Optionally takes a block to allow overriding the default Faraday connection options.
+    #
     # env        - The Symbol (:sandbox, :development, :production)
     # client_id  - The String Plaid account client ID to authenticate requests
     # secret     - The String Plaid account secret to authenticate requests
     # public_key - The String Plaid account public key to authenticate requests
-    def initialize(env:, client_id:, secret:, public_key:)
+    def initialize(env:, client_id:, secret:, public_key:, &block)
       @env        = env_map(env)
       @client_id  = client_id
       @secret     = secret
       @public_key = public_key
+      @connection = create_connection(&block)
+    end
+
+    # Internal: Initializes a new Plaid connection object via Faraday
+    #
+    # Optionally takes a block to allow overriding the defaults.
+    def create_connection(&block)
+      @connection = Faraday.new url: @env do |builder|
+        block_given? ? yield(builder) : build_default_connection(builder)
+      end
+    end
+
+    # Internal: Set Plaid defaults on the Faraday connection
+    #
+    # Handles converting an env symbol into an environment URL
+    #
+    # builder - The plaid connection object.
+    def build_default_connection(builder)
+      builder.options[:timeout] = Plaid::Middleware::NETWORK_TIMEOUT
+      builder.headers = Plaid::Middleware::NETWORK_HEADERS
+      builder.request :json
+      builder.use Plaid::Middleware
+      builder.response :json, content_type: /\bjson$/
+      builder.adapter Faraday.default_adapter
     end
 
     # Public: Make a post request
@@ -108,7 +134,7 @@ module Plaid
     #
     # Returns the resulting parsed JSON of the request
     def post(path, payload)
-      Plaid::Connect.post(File.join(@env, path), payload)
+      @connection.post(path, payload).body
     end
 
     # Public: Make a post request with appended authentication fields
@@ -120,7 +146,7 @@ module Plaid
     def post_with_auth(path, payload)
       auth = { client_id: @client_id,
                secret: @secret }
-      Plaid::Connect.post(File.join(@env, path), payload.merge(auth))
+      @connection.post(path, payload.merge(auth)).body
     end
 
     # Public: Make a post request with appended public key field.
@@ -131,7 +157,7 @@ module Plaid
     # Returns the resulting parsed JSON of the request.
     def post_with_public_key(path, payload)
       public_key = { public_key: @public_key }
-      Plaid::Connect.post(File.join(@env, path), payload.merge(public_key))
+      @connection.post(path, payload.merge(public_key)).body
     end
   end
 end
