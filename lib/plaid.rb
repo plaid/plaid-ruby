@@ -13,7 +13,3 @@ require_relative 'plaid/products/item'
 require_relative 'plaid/products/processor'
 require_relative 'plaid/products/sandbox'
 require_relative 'plaid/products/transactions'
-
-# Public: The Plaid namespace.
-module Plaid
-end
