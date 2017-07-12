@@ -1,0 +1,155 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/item/create
+    body:
+      encoding: UTF-8
+      string: '{"credentials":{"username":"user_good","password":"pass_good"},"institution_id":"ins_109508","initial_products":["credit_details"],"options":{},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v4.0.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 12 Jul 2017 12:30:40 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-Xss-Protection:
+      - 1; mode=block
+      Content-Length:
+      - '422'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "access_token": "access-sandbox-c7468963-d716-4ad1-87f2-a603cc35e482",
+          "item": {
+            "available_products": [
+              "auth",
+              "balance",
+              "identity",
+              "income",
+              "transactions"
+            ],
+            "billed_products": [
+              "credit_details"
+            ],
+            "error": null,
+            "institution_id": "ins_109508",
+            "item_id": "gqK7bLpjrDur1vk9MBE5t73BqXZkv4uk8M9dB",
+            "webhook": ""
+          },
+          "request_id": "70BzM"
+        }
+    http_version: 
+  recorded_at: Wed, 12 Jul 2017 12:30:41 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/credit_details/get
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"ABCDEFG1234567","options":{},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v4.0.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 12 Jul 2017 12:30:42 GMT
+      Server:
+      - nginx
+      Content-Length:
+      - '267'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "display_message": null,
+          "error_code": "INVALID_ACCESS_TOKEN",
+          "error_message": "provided access token is in an invalid format. expected format: access-\u003cenvironment\u003e-\u003cidentifier\u003e",
+          "error_type": "INVALID_INPUT",
+          "request_id": "gQztc"
+        }
+    http_version: 
+  recorded_at: Wed, 12 Jul 2017 12:30:42 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/item/delete
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-c7468963-d716-4ad1-87f2-a603cc35e482","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v4.0.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 12 Jul 2017 12:30:43 GMT
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - DENY
+      X-Xss-Protection:
+      - 1; mode=block
+      Content-Length:
+      - '46'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "deleted": true,
+          "request_id": "G6dqU"
+        }
+    http_version: 
+  recorded_at: Wed, 12 Jul 2017 12:30:43 GMT
+recorded_with: VCR 3.0.3
