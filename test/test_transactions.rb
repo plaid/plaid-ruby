@@ -1,11 +1,10 @@
 require 'date'
 
-require_relative 'plaid_test'
+require_relative 'test_helper'
 
 # Internal: The test for Plaid::Transactions.
 class PlaidTransactionsTest < PlaidTest
   def setup
-    @client = create_client
     @item = @client.item.create(credentials: CREDENTIALS,
                                 institution_id: SANDBOX_INSTITUTION,
                                 initial_products: [:transactions],
@@ -85,9 +84,12 @@ class PlaidTransactionsTest < PlaidTest
     end
   end
 
-  def test_deactivate
-    @client.transactions.deactivate(@access_token)
-  end
+  # This test is disabled, as API returns "client is not authorized to access
+  # this endpoint" currently.
+  #
+  # def test_deactivate
+  #   @client.transactions.deactivate(@access_token)
+  # end
 
   def test_deactivate_invalid_access_token
     assert_raises(Plaid::InvalidInputError) do
