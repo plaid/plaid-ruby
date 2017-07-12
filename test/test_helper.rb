@@ -4,7 +4,7 @@ require 'minitest/around/unit'
 STUB_API = !ENV['STUB_API'].nil?
 
 if STUB_API
-  require 'webmock/test_unit'
+  require 'webmock/minitest'
   require 'vcr'
 
   VCR.configure do |config|

@@ -5,7 +5,7 @@ require 'uri'
 require_relative 'version'
 
 module Plaid
-  # Internal: A module encapsulating HTTP post requests
+  # Internal: A module encapsulating HTTP post requests.
   module Connect
     # Internal: Headers used for correct request and SDK tracking.
     NETWORK_HEADERS = { 'User-Agent'   => "Plaid Ruby v#{Plaid::VERSION}",
