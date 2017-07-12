@@ -28,7 +28,7 @@ class PlaidTest < MiniTest::Test
 
     if STUB_API && RECORD_MODE == :none
       # In non-recording mode we use stubs for auth
-      # (see rake vcr_hide_credentials)
+      # (see also task :vcr_hide_credentials in Rakefile)
       client_id = 'PLAID_RUBY_CLIENT_ID'
       secret = 'PLAID_RUBY_SECRET'
       public_key = 'PLAID_RUBY_PUBLIC_KEY'
