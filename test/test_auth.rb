@@ -1,4 +1,4 @@
-require_relative 'plaid_test'
+require_relative 'test_helper'
 
 # Internal: The test for Plaid::Auth.
 class PlaidAuthTest < PlaidTest
