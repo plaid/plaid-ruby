@@ -1,0 +1,45 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/institutions/get_by_id
+    body:
+      encoding: UTF-8
+      string: '{"institution_id":"ABCDEFG1234567","public_key":"PLAID_RUBY_PUBLIC_KEY"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v4.0.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 12 Jul 2017 12:35:56 GMT
+      Server:
+      - nginx
+      Content-Length:
+      - '180'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "display_message": null,
+          "error_code": "INVALID_INSTITUTION",
+          "error_message": "invalid institution_id provided",
+          "error_type": "INVALID_INPUT",
+          "request_id": "TRLTy"
+        }
+    http_version: 
+  recorded_at: Wed, 12 Jul 2017 12:35:56 GMT
+recorded_with: VCR 3.0.3

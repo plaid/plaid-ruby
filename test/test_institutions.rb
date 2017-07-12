@@ -1,11 +1,7 @@
-require_relative 'plaid_test'
+require_relative 'test_helper'
 
 # Internal: The test for Plaid::Institutions.
 class PlaidInstitutionsTest < PlaidTest
-  def setup
-    @client = create_client
-  end
-
   def test_get
     response = @client.institutions.get(count: 3, offset: 1)
     assert_equal(3, response['institutions'].length)
