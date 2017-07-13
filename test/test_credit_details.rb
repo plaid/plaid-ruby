@@ -15,15 +15,15 @@ class PlaidCreditDetailsTest < PlaidTest
 
   def test_get
     response = @client.credit_details.get(@access_token)
-    refute_empty(response['accounts'])
-    refute_empty(response['credit_details'])
+    refute_empty(response.accounts)
+    refute_empty(response.credit_details)
 
-    account_id = response['accounts'][3]['account_id']
+    account_id = response.accounts[3].account_id
     response = @client.credit_details.get(
       @access_token,
       account_ids: [account_id]
     )
-    assert_equal(1, response['credit_details'].length)
+    assert_equal(1, response.credit_details.size)
   end
 
   def test_get_invalid_access_token

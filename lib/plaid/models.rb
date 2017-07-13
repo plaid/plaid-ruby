@@ -53,13 +53,13 @@ module Plaid
     end
 
     class Balances < BaseModel
-      # Public: The Number available balance (or nil).
+      # Public: The Numeric available balance (or nil).
       property :available
 
-      # Public: The Number current balance (or nil).
+      # Public: The Numeric current balance (or nil).
       property :current
 
-      # Public: The Number limit (or nil).
+      # Public: The Numeric limit (or nil).
       property :limit
     end
 
@@ -111,5 +111,49 @@ module Plaid
       # Public: The String category group. E.g. "place".
       property :group
     end
+
+    class CreditDetailsAPR < BaseModel
+      # Public: The Numeric APR (e.g. 0.125).
+      property :apr
+
+      # Public: The Numeric balance subject to APR (e.g. 1200).
+      property :balance_subject_to_apr
+
+      # Public: The Numeric interest charge amount (e.g. 150).
+      property :interest_charge_amount
+    end
+
+    class CreditDetailsAPRs < BaseModel
+      property :balance_transfers, coerce: CreditDetailsAPR
+      property :cash_advances, coerce: CreditDetailsAPR
+      property :purchases, coerce: CreditDetailsAPR
+    end
+
+    class CreditDetails < BaseModel
+      # Public: The String account ID. E.g. "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D".
+      property :account_id
+
+      # Public: The APRs.
+      property :aprs, coerce: CreditDetailsAPRs
+
+      # Public: The Numeric last payment amount (e.g. 875).
+      property :last_payment_amount
+
+      # Public: The String last payment date. E.g. "2016-09-13T00:00:00Z".
+      property :last_payment_date
+
+      # Public: The Numeric last statement balance (e.g. 3450).
+      property :last_statement_balance
+
+      # Public: The String last statement date. E.g. "2016-10-01T00:00:00Z".
+      property :last_statement_date
+
+      # Public: The Numeric minimum payment amount (e.g. 800).
+      property :minimum_payment_amount
+
+      # Public: The String next bill due date. E.g. "2016-10-15T00:00:00Z".
+      property :next_bill_due_date
+    end
+
   end
 end

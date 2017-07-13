@@ -22,7 +22,15 @@ module Plaid
         options: options_payload
       }
 
-      @client.post_with_auth('credit_details/get', payload)
+      CreditDetailsResponse.new(
+        @client.post_with_auth('credit_details/get', payload))
     end
+  end
+
+  # Public: Response wrapper for /credit_details/get.
+  class CreditDetailsResponse < Models::BaseResponse
+    property :accounts, coerce: Array[Models::Account]
+    property :credit_details, coerce: Array[Models::CreditDetails]
+    property :item, coerce: Models::Item
   end
 end
