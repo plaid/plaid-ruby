@@ -1,5 +1,8 @@
+require 'faraday'
+require 'faraday_middleware'
+
+require_relative 'plaid/middleware'
 require_relative 'plaid/client'
-require_relative 'plaid/connect'
 require_relative 'plaid/errors'
 require_relative 'plaid/version'
 require_relative 'plaid/products/accounts'
