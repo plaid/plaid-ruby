@@ -1,19 +1,18 @@
 require 'minitest/autorun'
 require 'minitest/around/unit'
 
+require_relative '../lib/plaid'
+
 STUB_API = !ENV['STUB_API'].nil?
 
 if STUB_API
-  require 'webmock/minitest'
   require 'vcr'
 
   VCR.configure do |config|
     config.cassette_library_dir = 'test/vcr_cassettes'
-    config.hook_into :webmock
+    config.hook_into :faraday
   end
 end
-
-require_relative '../lib/plaid'
 
 # We support "all" and "none" here. "once" and "new_episodes" won't work due to
 # need to hide auth params (the client will use real client_id and secret, but
