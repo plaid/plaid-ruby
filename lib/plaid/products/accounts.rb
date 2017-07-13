@@ -14,7 +14,7 @@ module Plaid
     # account_ids  - Specific account IDs to fetch balances for (optional).
     # options      - Additional options to be merged into the request.
     #
-    # Returns a parsed JSON of balance response.
+    # Returns the AccountsResponse object with accounts information.
     def get(access_token, account_ids: nil, options: nil)
       options_payload = {}
       options_payload[:account_ids] = account_ids unless account_ids.nil?
@@ -48,7 +48,7 @@ module Plaid
     # account_ids  - Specific account ids to fetch accounts for (optional)
     # options      - Additional options to be merged into API request
     #
-    # Returns a parsed JSON of account information
+    # Returns the AccountsResponse object with accounts information.
     def get(access_token, account_ids: nil, options: nil)
       options_payload = {}
       options_payload[:account_ids] = account_ids unless account_ids.nil?
@@ -62,7 +62,7 @@ module Plaid
     end
   end
 
-  # Public: Response wrapper for /accounts/get and /accounts/balance/get
+  # Public: The response wrapper for /accounts/get and /accounts/balance/get.
   class AccountsResponse < Models::BaseResponse
     property :item, coerce: Models::Item
     property :accounts, coerce: Array[Models::Account]

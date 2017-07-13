@@ -9,10 +9,14 @@ module Plaid
     #
     # Does a POST /categories/get call to retrieve a list of all categories.
     #
-    # Returns a parsed JSON of a list of categories
+    # Returns the CategoriesResponse object with a list of categories.
     def get
-      payload = {}
-      @client.post('categories/get', payload)
+      CategoriesResponse.new(@client.post('categories/get', {}))
     end
+  end
+
+  # Public: Response wrapper for /categories/get.
+  class CategoriesResponse < Models::BaseResponse
+    property :categories, coerce: Array[Models::Category]
   end
 end

@@ -99,5 +99,17 @@ module Plaid
       # Public: The String wire routing number. E.g. "021000021".
       property :wire_routing
     end
+
+    class Category < BaseModel
+      # Public: The String category ID. E.g. "10000000".
+      property :category_id
+
+      # Public: The Array of Strings category hierarchy.
+      # E.g. ["Recreation", "Arts & Entertainment", "Circuses and Carnivals"].
+      property :hierarchy
+
+      # Public: The String category group. E.g. "place".
+      property :group
+    end
   end
 end
