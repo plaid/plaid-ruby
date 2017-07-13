@@ -10,25 +10,27 @@ module Plaid
     # Does a POST /accounts/balance/get call to get real-time balance information for all
     # accounts associated with the access_token's item
     #
-    # access_token - access_token who's item to fetch balances for
-    # account_ids  - Specific account ids to fetch balances for (optional)
-    # options      - Additional options to be merged into API request
+    # access_token - The String access_token for the item to fetch balances for.
+    # account_ids  - Specific account IDs to fetch balances for (optional).
+    # options      - Additional options to be merged into the request.
     #
-    # Returns a parsed JSON of balance response
+    # Returns a parsed JSON of balance response.
     def get(access_token, account_ids: nil, options: nil)
       options_payload = {}
       options_payload[:account_ids] = account_ids unless account_ids.nil?
-      options_payload = options_payload.merge(options) unless options.nil?
+      options && options_payload.merge!(options)
 
       payload = { access_token: access_token,
                   options: options_payload }
-      @client.post_with_auth('accounts/balance/get', payload)
+
+      AccountsResponse.new(
+        @client.post_with_auth('accounts/balance/get', payload))
     end
   end
 
   # Public: Class used to call the Accounts product.
   class Accounts
-    # Public: Memoized class instance to make requests from Plaid::Balance
+    # Public: Memoized class instance to make requests from Plaid::Balance.
     def balance
       @balance ||= Plaid::Balance.new(@client)
     end
@@ -54,7 +56,15 @@ module Plaid
 
       payload = { access_token: access_token,
                   options: options_payload }
-      @client.post_with_auth('accounts/get', payload)
+
+      AccountsResponse.new(
+        @client.post_with_auth('accounts/get', payload))
     end
+  end
+
+  # Public: Response wrapper for /accounts/get and /accounts/balance/get
+  class AccountsResponse < Models::BaseResponse
+    property :item, coerce: Models::Item
+    property :accounts, coerce: Array[Models::Account]
   end
 end

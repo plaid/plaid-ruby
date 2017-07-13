@@ -17,13 +17,14 @@ class PlaidAccountsTest < PlaidTest
     response = @client.accounts.get(@access_token)
     refute_empty(response)
 
-    account_id = response['accounts'][0]['account_id']
+    account_id = response.accounts[0].account_id
+
     response = @client.accounts.get(@access_token, account_ids: [account_id])
-    assert_equal(1, response['accounts'].length)
+    assert_equal(1, response.accounts.size)
 
     response = @client.accounts.get(@access_token,
                                     options: { account_ids: [account_id] })
-    assert_equal(1, response['accounts'].length)
+    assert_equal(1, response.accounts.size)
   end
 
   def test_get_invalid_access_token
@@ -40,15 +41,15 @@ class PlaidAccountsTest < PlaidTest
 
   def test_balance_get
     response = @client.accounts.balance.get(@access_token)
-    refute_empty(response['accounts'])
+    refute_empty(response.accounts)
 
-    account_id = response['accounts'][0]['account_id']
+    account_id = response.accounts[0].account_id
     response = @client.accounts.balance.get(@access_token, account_ids: [account_id])
-    assert_equal(1, response['accounts'].length)
+    assert_equal(1, response.accounts.size)
 
     response = @client.accounts.balance.get(@access_token,
                                             options: { account_ids: [account_id] })
-    assert_equal(1, response['accounts'].length)
+    assert_equal(1, response.accounts.size)
   end
 
   def test_balance_get_invalid_access_token

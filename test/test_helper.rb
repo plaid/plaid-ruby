@@ -39,14 +39,15 @@ class PlaidTest < MiniTest::Test
                                 public_key: public_key)
   end
 
+  # This method is called around every test method.
   def around(&block)
     create_client
 
     if STUB_API
-      cassette = "#{self.class}_#{self.name}"
-      VCR.use_cassette(cassette, record: RECORD_MODE, match_requests_on: [:method, :uri, :body]) do
-        block.call
-      end
+      VCR.use_cassette("#{self.class}_#{self.name}",
+                       record: RECORD_MODE,
+                       match_requests_on: [:method, :uri, :body],
+                       &block)
     else
       block.call
     end

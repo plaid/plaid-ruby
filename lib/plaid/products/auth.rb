@@ -23,7 +23,15 @@ module Plaid
 
       payload = { access_token: access_token,
                   options: options_payload }
-      @client.post_with_auth('auth/get', payload)
+
+      AuthResponse.new(@client.post_with_auth('auth/get', payload))
     end
+  end
+
+  # Public: Response wrapper for /accounts/get and /accounts/balance/get
+  class AuthResponse < Models::BaseResponse
+    property :accounts, coerce: Array[Models::Account]
+    property :numbers, coerce: Array[Models::Number]
+    property :item, coerce: Models::Item
   end
 end

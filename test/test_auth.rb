@@ -15,16 +15,16 @@ class PlaidAuthTest < PlaidTest
 
   def test_get
     response = @client.auth.get(@access_token)
-    refute_empty(response['accounts'])
-    refute_empty(response['numbers'])
+    refute_empty(response.accounts)
+    refute_empty(response.numbers)
 
-    account_id = response['accounts'][0]['account_id']
+    account_id = response.accounts[0].account_id
     response = @client.auth.get(@access_token, account_ids: [account_id])
-    assert_equal(1, response['numbers'].length)
+    assert_equal 1, response.numbers.size
 
     response = @client.auth.get(@access_token,
                                 options: { account_ids: [account_id] })
-    assert_equal(1, response['numbers'].length)
+    assert_equal 1, response.numbers.size
   end
 
   def test_get_invalid_access_token
