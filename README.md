@@ -35,14 +35,15 @@ Create an instance of the client using the `client_id`, `secret`, and `public_ke
 ```ruby
 require 'plaid'
 
-$client = Plaid::Client.new(env: :sandbox,
-                            client_id: '***',
-                            secret: '***',
-                            public_key: '***')
+client = Plaid::Client.new(env: :sandbox,
+                           client_id: '***',
+                           secret: '***',
+                           public_key: '***')
 
 ```
 
 The `env` field is the environment which the client will be running in. Your choices for the `env` field include:
+
 - `:sandbox` allows you to do your initial integrations tests against preloaded data without being billed or making expensive API calls. More information about using the API sandbox can be found on the [API Sandbox documentation](https://plaid.com/docs/api#sandbox).
 - `:development` allows you to test against both real and test accounts without being billed. More information about Plaid test accounts can be found in our [API documentation](https://plaid.com/docs/api/#sandbox).
 - `:production` is the production environment where you can launch your production ready application and be charged for your Plaid usage.
@@ -57,7 +58,7 @@ An example of the function's usage if you have a `public_token` in hand:
 
 ```ruby
 response = client.item.public_token.exchange(public_token)
-access_token = response['access_token']
+access_token = response.access_token
 ```
 
 ### Deleting an item
@@ -75,7 +76,7 @@ response = client.item.create(credentials: { username: 'user_good',
                               institution_id: 'ins_109509',
                               initial_products: %i(auth identity transactions))
 
-access_token = response['access_token']
+access_token = response.access_token
 
 # Provide the access_token for the Item you want to delete
 client.item.delete(access_token)
@@ -95,10 +96,10 @@ item_response = client.item.create(credentials: { username: 'user_good',
                                    institution_id: 'ins_109509',
                                    initial_products: %i(auth identity transactions))
 
-access_token = item_response['access_token']
+access_token = item_response.access_token
 
 transaction_response = client.transactions.get(access_token, '2016-07-12', '2017-01-09')
-transactions = transaction_response['transactions']
+transactions = transaction_response.transactions
 
 # the transactions in the response are paginated, so make multiple calls while
 # increasing the offset to retrieve all transactions
@@ -107,7 +108,7 @@ while transactions.length < transaction_response['total_transactions']
                                                  '2016-07-12',
                                                  '2017-01-09',
                                                  offset: transactions.length)
-  transactions += transaction_response['transactions']
+  transactions += transaction_response.transactions
 end
 
 ```
@@ -128,10 +129,10 @@ item_response = client.item.create(credentials: { username: 'user_good',
                                    institution_id: 'ins_109509',
                                    initial_products: %i(auth identity transactions))
 
-access_token = item_response['access_token']
+access_token = item_response.access_token
 
 auth_response = client.auth.get(access_token)
-auth = auth_response['auth']
+auth = auth_response.auth
 
 ```
 
@@ -147,23 +148,22 @@ client = Plaid::Client.new(env: :sandbox,
                            public_key: '***')
 
 exchange_token_response = client.item.public_token.exchange('[Plaid Link public_token]')
-access_token = exchange_token_response['access_token']
+access_token = exchange_token_response.access_token
 
 stripe_response = client.processor.stripe.bank_account_token.create(access_token, '[Account ID]')
-bank_account_token = stripe_response['stripe_bank_account_token']
-
+bank_account_token = stripe_response.stripe_bank_account_token
 ```
 
 There are also a number of other methods you can use to retrieve data:
 
-* `client.accounts.get(access_code, ...)`: accounts
-* `client.accounts.balance.get(access_code, ...)`: real-time balances
-* `client.auth.get(access_code, ...)`: auth
-* `client.identity.get(access_code, ...)`: identity
-* `client.transactions.get(access_code, ...)`: transactions
-* `client.credit_details.get(access_code, ...)`: credit details
+* `client.accounts.get(access_token, ...)`: accounts
+* `client.accounts.balance.get(access_token, ...)`: real-time balances
+* `client.auth.get(access_token, ...)`: auth
+* `client.identity.get(access_token, ...)`: identity
+* `client.transactions.get(access_token, ...)`: transactions
+* `client.credit_details.get(access_token, ...)`: credit details
 
-All of these methods return appropriate data. More information and especially information about fields available in all the returned hashes can be found on the [API documentation](https://plaid.com/docs/api).
+All of these methods return appropriate data. More information and can be found on the [API documentation](https://plaid.com/docs/api).
 
 ### Categories
 
