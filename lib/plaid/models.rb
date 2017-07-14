@@ -297,5 +297,30 @@ module Plaid
       # E.g. ["auth", "balance", "identity", "transactions"].
       property :products
     end
+
+    module MFA
+      class Device < BaseModel
+        property :display_message
+      end
+
+      class DeviceListElement < BaseModel
+        # Public: The String device ID.
+        property :device_id
+
+        # Public: The String device mask.
+        property :mask
+
+        # Public: The String device type.
+        property :type
+      end
+
+      class Selection < BaseModel
+        # Public: The String question.
+        property :question
+
+        # Public: The Array of String answers.
+        property :answers
+      end
+    end
   end
 end

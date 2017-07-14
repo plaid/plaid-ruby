@@ -10,10 +10,10 @@ class PlaidItemTest < PlaidTest
 
   def test_create
     create_item credentials: CREDENTIALS
-    refute_empty(@item['item'])
+    refute_empty(@item.item)
 
-    assert_equal(['transactions'], @item['item']['billed_products'])
-    assert_equal(SANDBOX_INSTITUTION, @item['item']['institution_id'])
+    assert_equal(['transactions'], @item.item.billed_products)
+    assert_equal(SANDBOX_INSTITUTION, @item.item.institution_id)
     refute_includes(@item, 'mfa_type')
   end
 
@@ -53,8 +53,8 @@ class PlaidItemTest < PlaidTest
                 transactions_await_results: true,
                 webhook: 'https://plaid.com/webhook-test')
 
-    refute_empty(@item['item'])
-    assert_equal('https://plaid.com/webhook-test', @item['item']['webhook'])
+    refute_empty(@item.item)
+    assert_equal('https://plaid.com/webhook-test', @item.item.webhook)
   end
 
   def test_create_with_additional_options
@@ -65,8 +65,8 @@ class PlaidItemTest < PlaidTest
 
     create_item(options: options)
 
-    refute_empty(@item['item'])
-    assert_equal('https://plaid.com/webhook-test', @item['item']['webhook'])
+    refute_empty(@item.item)
+    assert_equal('https://plaid.com/webhook-test', @item.item.webhook)
   end
 
   def test_create_with_options_date_objects
@@ -75,8 +75,8 @@ class PlaidItemTest < PlaidTest
                 transactions_await_results: true,
                 webhook: 'https://plaid.com/webhook-test')
 
-    refute_empty(@item['item'])
-    assert_equal('https://plaid.com/webhook-test', @item['item']['webhook'])
+    refute_empty(@item.item)
+    assert_equal('https://plaid.com/webhook-test', @item.item.webhook)
   end
 
   def test_create_with_invalid_options
@@ -90,29 +90,29 @@ class PlaidItemTest < PlaidTest
 
   def test_mfa_device
     create_item credentials: MFA_DEVICE_CREDENTIALS
-    assert_equal('device_list', @item['mfa_type'])
+    assert_equal('device_list', @item.mfa_type)
 
     mfa_response = answer_mfa(@item)
-    assert_equal('device', mfa_response['mfa_type'])
+    assert_equal('device', mfa_response.mfa_type)
 
     mfa_response = answer_mfa(mfa_response)
-    refute_empty(mfa_response['item'])
+    refute_empty(mfa_response.item)
   end
 
   def test_mfa_selections
     create_item credentials: MFA_SELECTIONS_CREDENTIALS
-    assert_equal('selections', @item['mfa_type'])
+    assert_equal('selections', @item.mfa_type)
 
     mfa_response = answer_mfa(@item)
-    refute_empty(mfa_response['item'])
+    refute_empty(mfa_response.item)
   end
 
   def test_mfa_questions
     create_item credentials: MFA_QUESTIONS_CREDENTIALS
-    assert_equal('questions', @item['mfa_type'])
+    assert_equal('questions', @item.mfa_type)
 
     mfa_response = answer_mfa(@item)
-    refute_empty(mfa_response['item'])
+    refute_empty(mfa_response.item)
   end
 
   def test_credentials_update
@@ -120,14 +120,14 @@ class PlaidItemTest < PlaidTest
     @client.sandbox.sandbox_item.reset_login(@access_token)
 
     update_response = @client.item.credentials.update(@access_token, CREDENTIALS)
-    refute_empty(update_response['item'])
+    refute_empty(update_response.item)
   end
 
   def test_get
     create_item
 
     item = @client.item.get(@access_token)
-    refute_empty(item['item'])
+    refute_empty(item.item)
   end
 
   def test_get_valid_access_token
@@ -142,7 +142,7 @@ class PlaidItemTest < PlaidTest
     create_item
 
     delete_response = @client.item.delete(@access_token)
-    assert_equal(true, delete_response['deleted'])
+    assert_equal(true, delete_response.deleted)
 
     # Don't delete it in teardown again
     @access_token = nil
@@ -160,12 +160,12 @@ class PlaidItemTest < PlaidTest
     create_item
 
     public_token_response = @client.item.public_token.create(@access_token)
-    refute_empty(public_token_response['public_token'])
+    refute_empty(public_token_response.public_token)
 
     exchange_token_response = @client.item.public_token.exchange(
-      public_token_response['public_token']
+      public_token_response.public_token
     )
-    refute_empty(exchange_token_response['access_token'])
+    refute_empty(exchange_token_response.access_token)
   end
 
   def test_public_token_invalid_access_token
@@ -188,9 +188,9 @@ class PlaidItemTest < PlaidTest
     create_item
 
     invalidate_response = @client.item.access_token.invalidate(@access_token)
-    refute_empty(invalidate_response['new_access_token'])
+    refute_empty(invalidate_response.new_access_token)
 
-    @access_token = invalidate_response['new_access_token']
+    @access_token = invalidate_response.new_access_token
   end
 
   def test_access_token_invalidate_invalid_access_token
@@ -214,7 +214,7 @@ class PlaidItemTest < PlaidTest
 
     webhook_response = @client.item.webhook.update(@access_token,
                                                   'https://plaid.com/webhook-test')
-    assert_equal('https://plaid.com/webhook-test', webhook_response['item']['webhook'])
+    assert_equal('https://plaid.com/webhook-test', webhook_response.item.webhook)
   end
 
   def test_webhook_update_invalid_access_token
@@ -251,20 +251,20 @@ class PlaidItemTest < PlaidTest
                                 webhook: webhook,
                                 options: options)
 
-    @access_token = @item['access_token']
+    @access_token = @item.access_token
     refute_empty(@access_token)
   end
 
   def answer_mfa(data)
-    case data['mfa_type']
+    case data.mfa_type
     when 'questions'
-      answer_questions(data['questions'])
+      answer_questions(data.questions)
     when 'device_list'
-      answer_device_list(data['device_list'])
+      answer_device_list(data.device_list)
     when 'selections'
-      answer_selections(data['selections'])
+      answer_selections(data.selections)
     when 'device'
-      answer_device(data['device'])
+      answer_device(data.device)
     end
   end
 
@@ -274,7 +274,7 @@ class PlaidItemTest < PlaidTest
   end
 
   def answer_device_list(device_list)
-    device = device_list[0]['device_id']
+    device = device_list[0].device_id
     @client.item.mfa(@access_token, 'device_list', [device])
   end
 
