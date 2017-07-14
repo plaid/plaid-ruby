@@ -1,10 +1,6 @@
 module Plaid
   # Public: Class used to call the Institutions product.
-  class Institutions
-    def initialize(client)
-      @client = client
-    end
-
+  class Institutions < BaseProduct
     # Public: Get information about Plaid institutions
     #
     # Does a POST /institutions/get call pulls a list of supported Plaid institutions
@@ -15,10 +11,10 @@ module Plaid
     #
     # Returns a parsed JSON of listed institution information
     def get(count:, offset:)
-      payload = { count: count,
-                  offset: offset }
+      payload = { count: count, offset: offset }
+
       MultipleInstitutionsResponse.new(
-        @client.post_with_auth('institutions/get', payload))
+        client.post_with_auth('institutions/get', payload))
     end
 
     # Public: Get information about a Plaid institution by ID
@@ -33,7 +29,7 @@ module Plaid
       payload = { institution_id: institution_id }
 
       SingleInstitutionResponse.new(
-        @client.post_with_public_key('institutions/get_by_id', payload))
+        client.post_with_public_key('institutions/get_by_id', payload))
     end
 
     # Public: Get information about all available institutions matching your query
@@ -46,11 +42,10 @@ module Plaid
     #
     # Returns a parsed JSON listing institution information
     def search(query, products = nil)
-      payload = { query: query,
-                  products: products }
+      payload = { query: query, products: products }
 
       MultipleInstitutionsResponse.new(
-        @client.post_with_public_key('institutions/search', payload))
+        client.post_with_public_key('institutions/search', payload))
     end
   end
 

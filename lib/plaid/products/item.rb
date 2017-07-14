@@ -1,10 +1,6 @@
 module Plaid
   # Public: Class used to call the AccessToken sub-product.
-  class AccessToken
-    def initialize(client)
-      @client = client
-    end
-
+  class AccessToken < BaseProduct
     # Public: Rotate your access_token, keeping it attached to the item
     #
     # Does a POST /item/access_token/invalidate call which will give you a new
@@ -18,7 +14,7 @@ module Plaid
       payload = { access_token: access_token }
 
       InvalidateResponse.new(
-        @client.post_with_auth('item/access_token/invalidate', payload))
+        client.post_with_auth('item/access_token/invalidate', payload))
     end
 
     class InvalidateResponse < Models::BaseResponse
@@ -39,7 +35,7 @@ module Plaid
       payload = { access_token_v1: access_token_v1 }
 
       UpdateVersionResponse.new(
-        @client.post_with_auth('item/access_token/update_version', payload))
+        client.post_with_auth('item/access_token/update_version', payload))
     end
 
     class UpdateVersionResponse < Models::BaseResponse
@@ -52,11 +48,7 @@ module Plaid
   end
 
   # Public: Class used to call the Credentials sub-product.
-  class Credentials
-    def initialize(client)
-      @client = client
-    end
-
+  class Credentials < BaseProduct
     # Public: Update credentials for an access_token.
     #
     # Does a POST /item/credentials/update call which is used to update
@@ -72,7 +64,7 @@ module Plaid
                   credentials: credentials }
 
       UpdateResponse.new(
-        @client.post_with_auth('item/credentials/update', payload))
+        client.post_with_auth('item/credentials/update', payload))
     end
 
     class UpdateResponse < Models::BaseResponse
@@ -81,11 +73,7 @@ module Plaid
   end
 
   # Public: Class used to call the PublicToken sub-product
-  class PublicToken
-    def initialize(client)
-      @client = client
-    end
-
+  class PublicToken < BaseProduct
     # Public: Creates a public token from an access_token.
     #
     # Does a POST /item/public_token/create call which can be used to
@@ -98,7 +86,7 @@ module Plaid
       payload = { access_token: access_token }
 
       CreateResponse.new(
-        @client.post_with_auth('item/public_token/create', payload))
+        client.post_with_auth('item/public_token/create', payload))
     end
 
     class CreateResponse < Models::BaseResponse
@@ -122,7 +110,7 @@ module Plaid
       payload = { public_token: public_token }
 
       ExchangeResponse.new(
-        @client.post_with_auth('item/public_token/exchange', payload))
+        client.post_with_auth('item/public_token/exchange', payload))
     end
 
     class ExchangeResponse < Models::BaseResponse
@@ -135,11 +123,7 @@ module Plaid
   end
 
   # Public: Class used to call the Webhook sub-product
-  class Webhook
-    def initialize(client)
-      @client = client
-    end
-
+  class Webhook < BaseProduct
     # Public: Update webhook for an access_token
     #
     # Does a POST /item/webhook/update call which is used to update webhook
@@ -155,7 +139,7 @@ module Plaid
                   webhook: webhook }
 
       UpdateResponse.new(
-        @client.post_with_auth('item/webhook/update', payload))
+        client.post_with_auth('item/webhook/update', payload))
     end
 
     class UpdateResponse < Models::BaseResponse
@@ -164,30 +148,22 @@ module Plaid
   end
 
   # Public: Class used to call the Item product.
-  class Item
-    # Public: Memoized class instance to make requests from Plaid::AccessToken
-    def access_token
-      @access_token ||= Plaid::AccessToken.new(@client)
-    end
+  class Item < BaseProduct
+    ##
+    # Public: The Plaid::AccessToken product accessor.
+    subproduct :access_token, Plaid::AccessToken
 
-    # Public: Memoized class instance to make requests from Plaid::Credentials
-    def credentials
-      @credentials ||= Plaid::Credentials.new(@client)
-    end
+    ##
+    # Public: The Plaid::Credentials product accessor.
+    subproduct :credentials, Plaid::Credentials
 
-    # Public: Memoized class instance to make requests from Plaid::PublicToken
-    def public_token
-      @public_token ||= Plaid::PublicToken.new(@client)
-    end
+    ##
+    # Public: The Plaid::PublicToken product accessor.
+    subproduct :public_token, Plaid::PublicToken
 
-    # Public: Memoized class instance to make requests from Plaid::Webhook
-    def webhook
-      @webhook ||= Plaid::Webhook.new(@client)
-    end
-
-    def initialize(client)
-      @client = client
-    end
+    ##
+    # Public: The Plaid::Webhook product accessor.
+    subproduct :webhook, Plaid::Webhook
 
     # Public: Creates an item.
     #
@@ -239,8 +215,7 @@ module Plaid
                   initial_products: initial_products,
                   options: options_payload }
 
-      ItemResponse.new(
-        @client.post_with_auth('item/create', payload))
+      ItemResponse.new(client.post_with_auth('item/create', payload))
     end
 
     class ItemResponse < Models::BaseResponse
@@ -282,8 +257,7 @@ module Plaid
                   mfa_type: mfa_type,
                   responses: responses }
 
-      ItemResponse.new(
-        @client.post_with_auth('item/mfa', payload))
+      ItemResponse.new(client.post_with_auth('item/mfa', payload))
     end
 
     # Public: Get information about an item.
@@ -297,8 +271,7 @@ module Plaid
     def get(access_token)
       payload = { access_token: access_token }
 
-      GetResponse.new(
-        @client.post_with_auth('item/get', payload))
+      GetResponse.new(client.post_with_auth('item/get', payload))
     end
 
     class GetResponse < Models::BaseResponse
@@ -315,8 +288,7 @@ module Plaid
     def delete(access_token)
       payload = { access_token: access_token }
 
-      DeleteResponse.new(
-        @client.post_with_auth('item/delete', payload))
+      DeleteResponse.new(client.post_with_auth('item/delete', payload))
     end
 
     class DeleteResponse < Models::BaseResponse

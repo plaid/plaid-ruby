@@ -1,10 +1,6 @@
 module Plaid
   # Public: Class used to call the BankAccountToken sub-product.
-  class BankAccountToken
-    def initialize(client)
-      @client = client
-    end
-
+  class BankAccountToken < BaseProduct
     # Public: Creates a Stripe bank account token from an access_token.
     #
     # Does a POST /processor/stripe/bank_account_token/create call which can be
@@ -19,7 +15,7 @@ module Plaid
                   account_id: account_id }
 
       CreateResponse.new(
-        @client.post_with_auth(
+        client.post_with_auth(
           'processor/stripe/bank_account_token/create', payload))
     end
 
@@ -30,26 +26,16 @@ module Plaid
   end
 
   # Public: Class used to call the Stripe sub-product.
-  class Stripe
-    # Public: Memoized class instance to make requests from Plaid::BankAccountToken
-    def bank_account_token
-      @bank_account_token ||= Plaid::BankAccountToken.new(@client)
-    end
-
-    def initialize(client)
-      @client = client
-    end
+  class Stripe < BaseProduct
+    ##
+    # Public: The Plaid::BankAccountToken product accessor.
+    subproduct :bank_account_token, Plaid::BankAccountToken
   end
 
   # Public: Class used to call the Processor product.
-  class Processor
-    # Public: Memoized class instance to make requests from Plaid::Stripe
-    def stripe
-      @stripe ||= Plaid::Stripe.new(@client)
-    end
-
-    def initialize(client)
-      @client = client
-    end
+  class Processor < BaseProduct
+    ##
+    # Public: The Plaid::Stripe product accessor.
+    subproduct :stripe, Plaid::Stripe
   end
 end

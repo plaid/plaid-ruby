@@ -1,10 +1,6 @@
 module Plaid
   # Public: Class used to call the Identity product.
-  class Identity
-    def initialize(client)
-      @client = client
-    end
-
+  class Identity < BaseProduct
     # Public: Get Identity information
     #
     # Does a POST /identity/get call to retrieve all info for a given access_token's item
@@ -16,7 +12,7 @@ module Plaid
       payload = { access_token: access_token }
 
       IdentityResponse.new(
-        @client.post_with_auth('identity/get', payload))
+        client.post_with_auth('identity/get', payload))
     end
   end
 

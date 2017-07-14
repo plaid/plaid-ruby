@@ -14,11 +14,7 @@ module Plaid
   end
 
   # Public: Class used to call the Transactions product.
-  class Transactions
-    def initialize(client)
-      @client = client
-    end
-
+  class Transactions < BaseProduct
     # Public: Get information about transactions
     #
     # Does a POST /transactions/get call which gives you high level account data along
@@ -48,7 +44,7 @@ module Plaid
                   options: options_payload }
 
       GetResponse.new(
-        @client.post_with_auth('transactions/get', payload))
+        client.post_with_auth('transactions/get', payload))
     end
 
     class GetResponse < Models::BaseResponse
@@ -75,7 +71,7 @@ module Plaid
       payload = { access_token: access_token }
 
       DeactivateResponse.new(
-        @client.post_with_auth('transactions/deactivate', payload))
+        client.post_with_auth('transactions/deactivate', payload))
     end
 
     class DeactivateResponse < Models::BaseResponse
