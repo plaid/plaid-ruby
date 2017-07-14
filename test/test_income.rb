@@ -13,6 +13,8 @@ class PlaidIncomeTest < PlaidTest
     @client.item.delete(@access_token)
   end
 
+  # FIXME add a real income test
+
   def test_get
     assert_raises(Plaid::ItemError) do
       @client.income.get(@access_token)

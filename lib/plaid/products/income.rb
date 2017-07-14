@@ -14,7 +14,13 @@ module Plaid
     # Returns a parsed JSON of income information
     def get(access_token)
       payload = { access_token: access_token }
-      @client.post_with_auth('income/get', payload)
+
+      IncomeResponse.new(@client.post_with_auth('income/get', payload))
     end
+  end
+
+  class IncomeResponse < Models::BaseResponse
+    property :item, coerce: Models::Item
+    property :income, coerce: Models::Income
   end
 end

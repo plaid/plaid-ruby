@@ -214,5 +214,56 @@ module Plaid
 
       property :phone_numbers, coerce: Array[IdentityPhoneNumber]
     end
+
+    class IncomeStream < BaseModel
+      # Public: The Numeric monthly income associated with the income stream.
+      property :monthly_income
+
+      # Public: The Numeric representation of our confidence in the income data
+      # associated with this particular income stream, with 0 being the lowest
+      # confidence and 1 being the highest.
+      property :confidence
+
+      # Public: The Numeric extent of data found for this income stream.
+      property :days
+
+      # Public: The String name of the entity associated with this income
+      # stream.
+      property :name
+    end
+
+    class Income < BaseModel
+      # Public: An array of income streams with detailed information on each.
+      property :income_streams, coerce: Array[IncomeStream]
+
+      # Public: The Numeric last year income, i.e. the sum of the Item’s income
+      # over the past 365 days. If Plaid has less than 365 days of data this will
+      # be less than a full year's income.
+      property :last_year_income
+
+      # Public: The Numeric last_year_income interpolated to value before
+      # taxes. This is the minimum pre-tax salary that assumes a filing status
+      # of single with zero dependents.
+      property :last_year_income_before_tax
+
+      # Public: The Numeric income extrapolated over a year based on current,
+      # active income streams. Income streams become inactive if they have not
+      # recurred for more than two cycles. For example, if a weekly paycheck
+      # hasn’t been seen for the past two weeks, it is no longer active.
+      property :projected_yearly_income
+
+      # Public: The Numeric projected_yearly_income interpolated to value
+      # before taxes. This is the minimum pre-tax salary that assumes a filing
+      # status of single with zero dependents.
+      property :projected_yearly_income_before_tax
+
+      # Public: The Numeric max number of income streams present at the same
+      # time over the past 365 days.
+      property :max_number_of_overlapping_income_streams
+
+      # Public: The Numeric total number of distinct income streams received
+      # over the past 365 days.
+      property :number_of_income_streams
+    end
   end
 end
