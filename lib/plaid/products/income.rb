@@ -9,9 +9,9 @@ module Plaid
     #
     # Returns the IdentityResponse object with Income info.
     def get(access_token)
-      payload = { access_token: access_token }
-
-      IncomeResponse.new(client.post_with_auth('income/get', payload))
+      post_with_auth('income/get',
+                     IncomeResponse,
+                     { access_token: access_token })
     end
   end
 

@@ -11,10 +11,9 @@ module Plaid
     # Returns an InvalidateResponse object with the new access_token and
     # request id.
     def invalidate(access_token)
-      payload = { access_token: access_token }
-
-      InvalidateResponse.new(
-        client.post_with_auth('item/access_token/invalidate', payload))
+      post_with_auth('item/access_token/invalidate',
+                     InvalidateResponse,
+                     { access_token: access_token })
     end
 
     class InvalidateResponse < Models::BaseResponse
@@ -32,10 +31,9 @@ module Plaid
     # Returns an UpdateVersionResponse object with new access_token and item
     # ID.
     def update_version(access_token_v1)
-      payload = { access_token_v1: access_token_v1 }
-
-      UpdateVersionResponse.new(
-        client.post_with_auth('item/access_token/update_version', payload))
+      post_with_auth('item/access_token/update_version',
+                     UpdateVersionResponse,
+                     { access_token_v1: access_token_v1 })
     end
 
     class UpdateVersionResponse < Models::BaseResponse
@@ -60,11 +58,9 @@ module Plaid
     # Returns an UpdateResponse object with either an ItemStatus or MFA
     # response.
     def update(access_token, credentials)
-      payload = { access_token: access_token,
-                  credentials: credentials }
-
-      UpdateResponse.new(
-        client.post_with_auth('item/credentials/update', payload))
+      post_with_auth('item/credentials/update',
+                     UpdateResponse,
+                     { access_token: access_token, credentials: credentials })
     end
 
     class UpdateResponse < Models::BaseResponse
@@ -83,10 +79,9 @@ module Plaid
     #
     # Returns a CreateResponse object with a public token and expiration info.
     def create(access_token)
-      payload = { access_token: access_token }
-
-      CreateResponse.new(
-        client.post_with_auth('item/public_token/create', payload))
+      post_with_auth('item/public_token/create',
+                     CreateResponse,
+                     { access_token: access_token })
     end
 
     class CreateResponse < Models::BaseResponse
@@ -107,10 +102,9 @@ module Plaid
     #
     # Returns an ExchangeResponse object with an access_token and request id.
     def exchange(public_token)
-      payload = { public_token: public_token }
-
-      ExchangeResponse.new(
-        client.post_with_auth('item/public_token/exchange', payload))
+      post_with_auth('item/public_token/exchange',
+                     ExchangeResponse,
+                     { public_token: public_token })
     end
 
     class ExchangeResponse < Models::BaseResponse
@@ -135,11 +129,9 @@ module Plaid
     #
     # Returns an UpdateResponse object with either an ItemStatus or MFA response.
     def update(access_token, webhook)
-      payload = { access_token: access_token,
-                  webhook: webhook }
-
-      UpdateResponse.new(
-        client.post_with_auth('item/webhook/update', payload))
+      post_with_auth('item/webhook/update',
+                     UpdateResponse,
+                     { access_token: access_token, webhook: webhook })
     end
 
     class UpdateResponse < Models::BaseResponse
@@ -171,20 +163,20 @@ module Plaid
     # possibly returning a success, error, or multi-factor authentication
     # response.
     #
-    # credentials                 - Institution credentials to create item with
-    # institution_id              - Institution ID to create item with
-    # initial_products            - Initial products to create the item with i.e. ['transactions']
-    # transactions_start_date     - date at which to begin the item's initial transaction pull
-    #                              (optional)
-    # transactions_end_date       - date at which to end the item's initial transaction pull
-    #                              (optional)
-    # transactions_await_results  - if true, the initial transaction pull will be performed
+    # credentials                - Institution credentials to create item with
+    # institution_id             - Institution ID to create item with
+    # initial_products           - Initial products to create the item with i.e. ['transactions']
+    # transactions_start_date    - date at which to begin the item's initial transaction pull
+    #                             (optional)
+    # transactions_end_date      - date at which to end the item's initial transaction pull
+    #                             (optional)
+    # transactions_await_results - if true, the initial transaction pull will be performed
     #                              synchronously (optional)
-    # webhook                     - webhook to associate with the item (optional)
-    # options                     - Additional options to merge into API request
+    # webhook                    - webhook to associate with the item (optional)
+    # options                    - Additional options to merge into API request
     #
-    # Returns a parsed JSON of item info including access_token and ItemStatus or
-    # MFA response or error
+    # Returns an ItemResponse object with item info including access_token and
+    # ItemStatus, or MFA response or error.
     def create(credentials:,
                institution_id:,
                initial_products:,
@@ -210,12 +202,12 @@ module Plaid
       options_payload[:webhook] = webhook unless webhook.nil?
       options_payload = options_payload.merge(options) unless options.nil?
 
-      payload = { credentials: credentials,
-                  institution_id: institution_id,
-                  initial_products: initial_products,
-                  options: options_payload }
-
-      ItemResponse.new(client.post_with_auth('item/create', payload))
+      post_with_auth('item/create',
+                     ItemResponse,
+                     { credentials: credentials,
+                       institution_id: institution_id,
+                       initial_products: initial_products,
+                       options: options_payload })
     end
 
     class ItemResponse < Models::BaseResponse
@@ -253,11 +245,11 @@ module Plaid
     #
     # Returns a parsed JSON of ItemStatus or another MFA step
     def mfa(access_token, mfa_type, responses)
-      payload = { access_token: access_token,
-                  mfa_type: mfa_type,
-                  responses: responses }
-
-      ItemResponse.new(client.post_with_auth('item/mfa', payload))
+      post_with_auth('item/mfa',
+                     ItemResponse,
+                     { access_token: access_token,
+                       mfa_type: mfa_type,
+                       responses: responses })
     end
 
     # Public: Get information about an item.
@@ -269,9 +261,9 @@ module Plaid
     #
     # Returns a GetResponse object with item information.
     def get(access_token)
-      payload = { access_token: access_token }
-
-      GetResponse.new(client.post_with_auth('item/get', payload))
+      post_with_auth('item/get',
+                     GetResponse,
+                     { access_token: access_token })
     end
 
     class GetResponse < Models::BaseResponse
@@ -286,9 +278,9 @@ module Plaid
     #
     # Returns a DeleteResponse object with delete result.
     def delete(access_token)
-      payload = { access_token: access_token }
-
-      DeleteResponse.new(client.post_with_auth('item/delete', payload))
+      post_with_auth('item/delete',
+                     DeleteResponse,
+                     { access_token: access_token })
     end
 
     class DeleteResponse < Models::BaseResponse

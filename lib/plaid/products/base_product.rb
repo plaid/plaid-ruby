@@ -32,6 +32,8 @@ module Plaid
 
     protected
 
+    # Private: Build a simple payload with access_token, options, and
+    # account_ids.
     def build_payload(access_token, account_ids: nil, options: nil)
       options_payload = {}
       options_payload[:account_ids] = account_ids unless account_ids.nil?
@@ -39,6 +41,16 @@ module Plaid
 
       { access_token: access_token,
         options: options_payload }
+    end
+
+    # Private: Do a POST to API and capture it into a response object.
+    def post_with_auth(path, response_class, payload)
+      response_class.new(client.post_with_auth(path, payload))
+    end
+
+    # Private: Do a POST to API and capture it into a response object.
+    def post_with_public_key(path, response_class, payload)
+      response_class.new(client.post_with_public_key(path, payload))
     end
   end
 end

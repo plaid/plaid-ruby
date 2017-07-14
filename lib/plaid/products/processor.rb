@@ -11,12 +11,9 @@ module Plaid
     #
     # Returns a parsed JSON containing a Stripe bank account token
     def create(access_token, account_id)
-      payload = { access_token: access_token,
-                  account_id: account_id }
-
-      CreateResponse.new(
-        client.post_with_auth(
-          'processor/stripe/bank_account_token/create', payload))
+      post_with_auth('processor/stripe/bank_account_token/create',
+                     CreateResponse,
+                     { access_token: access_token, account_id: account_id })
     end
 
     class CreateResponse < Models::BaseResponse

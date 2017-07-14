@@ -9,10 +9,9 @@ module Plaid
     #
     # Returns the IdentityResponse object with Identity info.
     def get(access_token)
-      payload = { access_token: access_token }
-
-      IdentityResponse.new(
-        client.post_with_auth('identity/get', payload))
+      post_with_auth('identity/get',
+                     IdentityResponse,
+                     { access_token: access_token })
     end
   end
 

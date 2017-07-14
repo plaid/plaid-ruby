@@ -36,15 +36,14 @@ module Plaid
       options_payload[:account_ids] = account_ids unless account_ids.nil?
       options_payload[:count] = count unless count.nil?
       options_payload[:offset] = offset unless offset.nil?
-      options_payload = options_payload.merge(options) unless options.nil?
+      options_payload.merge!(options) unless options.nil?
 
-      payload = { access_token: access_token,
-                  start_date: Plaid.convert_to_date_string(start_date),
-                  end_date: Plaid.convert_to_date_string(end_date),
-                  options: options_payload }
-
-      GetResponse.new(
-        client.post_with_auth('transactions/get', payload))
+      post_with_auth('transactions/get',
+                     GetResponse,
+                     { access_token: access_token,
+                       start_date: Plaid.convert_to_date_string(start_date),
+                       end_date: Plaid.convert_to_date_string(end_date),
+                       options: options_payload })
     end
 
     class GetResponse < Models::BaseResponse
@@ -68,10 +67,9 @@ module Plaid
     #
     # Returns a parsed JSON containing a message describing deactivation success.
     def deactivate(access_token)
-      payload = { access_token: access_token }
-
-      DeactivateResponse.new(
-        client.post_with_auth('transactions/deactivate', payload))
+      post_with_auth('transactions/deactivate',
+                     DeactivateResponse,
+                     { access_token: access_token })
     end
 
     class DeactivateResponse < Models::BaseResponse

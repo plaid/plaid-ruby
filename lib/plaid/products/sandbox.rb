@@ -9,10 +9,9 @@ module Plaid
     #
     # Returns a ResetLoginResponse object.
     def reset_login(access_token)
-      payload = { access_token: access_token }
-
-      ResetLoginResponse.new(
-        client.post_with_auth('sandbox/item/reset_login', payload))
+      post_with_auth('sandbox/item/reset_login',
+                     ResetLoginResponse,
+                     { access_token: access_token })
     end
 
     class ResetLoginResponse < Models::BaseResponse

@@ -13,10 +13,11 @@ module Plaid
     #
     # Returns a parsed JSON of Auth information
     def get(access_token, account_ids: nil, options: nil)
-      payload = build_payload(access_token,
-                              account_ids: account_ids, options: options)
-
-      AuthResponse.new(client.post_with_auth('auth/get', payload))
+      post_with_auth('auth/get',
+                     AuthResponse,
+                     build_payload(access_token,
+                                   account_ids: account_ids,
+                                   options: options))
     end
   end
 

@@ -11,10 +11,9 @@ module Plaid
     #
     # Returns a parsed JSON of listed institution information
     def get(count:, offset:)
-      payload = { count: count, offset: offset }
-
-      MultipleInstitutionsResponse.new(
-        client.post_with_auth('institutions/get', payload))
+      post_with_auth('institutions/get',
+                     MultipleInstitutionsResponse,
+                     { count: count, offset: offset })
     end
 
     # Public: Get information about a Plaid institution by ID
@@ -26,10 +25,9 @@ module Plaid
     #
     # Returns a parsed JSON of institution info for your institution id
     def get_by_id(institution_id)
-      payload = { institution_id: institution_id }
-
-      SingleInstitutionResponse.new(
-        client.post_with_public_key('institutions/get_by_id', payload))
+      post_with_public_key('institutions/get_by_id',
+                           SingleInstitutionResponse,
+                           { institution_id: institution_id })
     end
 
     # Public: Get information about all available institutions matching your query
@@ -42,10 +40,9 @@ module Plaid
     #
     # Returns a parsed JSON listing institution information
     def search(query, products = nil)
-      payload = { query: query, products: products }
-
-      MultipleInstitutionsResponse.new(
-        client.post_with_public_key('institutions/search', payload))
+      post_with_public_key('institutions/search',
+                           MultipleInstitutionsResponse,
+                           { query: query, products: products })
     end
   end
 
