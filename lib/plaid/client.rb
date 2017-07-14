@@ -26,60 +26,51 @@ module Plaid
       create_connection(&block)
     end
 
-    # Public: Memoized class instance to make requests from Plaid::Account
-    def accounts
-      @accounts ||= Plaid::Accounts.new(self)
-    end
+    extend SubproductMixin
 
-    # Public: Memoized class instance to make requests from Plaid::Auth
-    def auth
-      @auth ||= Plaid::Auth.new(self)
-    end
+    ##
+    # Public: The Plaid::Accounts product accessor.
+    subproduct :accounts
 
-    # Public: Memoized class instance to make requests from Plaid::Categories
-    def categories
-      @categories ||= Plaid::Categories.new(self)
-    end
+    ##
+    # Public: The Plaid::Auth product accessor.
+    subproduct :auth
 
-    # Public: Memoized class instance to make requests from Plaid::CreditDetails
-    def credit_details
-      @credit_details ||= Plaid::CreditDetails.new(self)
-    end
+    ##
+    # Public: The Plaid::Categories product accessor.
+    subproduct :categories
 
-    # Public: Memoized class instance to make requests from Plaid::Identity
-    def identity
-      @identity ||= Plaid::Identity.new(self)
-    end
+    ##
+    # Public: The Plaid::CreditDetails product accessor.
+    subproduct :credit_details
 
-    # Public: Memoized class instance to make requests from Plaid::Income
-    def income
-      @income ||= Plaid::Income.new(self)
-    end
+    ##
+    # Public: The Plaid::Identity product accessor.
+    subproduct :identity
 
-    # Public: Memoized class instance to make requests from Plaid::Institutions
-    def institutions
-      @institutions ||= Plaid::Institutions.new(self)
-    end
+    ##
+    # Public: The Plaid::Income product accessor.
+    subproduct :income
 
-    # Public: Memoized class instance to make requests from Plaid::Item
-    def item
-      @item ||= Plaid::Item.new(self)
-    end
+    ##
+    # Public: The Plaid::Institutions product accessor.
+    subproduct :institutions
 
-    # Public: Memoized class instance to make requests from Plaid::Processor
-    def processor
-      @processor ||= Plaid::Processor.new(self)
-    end
+    ##
+    # Public: The Plaid::Item product accessor.
+    subproduct :item
 
-    # Public: Memoized class instance to make requests from Plaid::Sandbox
-    def sandbox
-      @sandbox ||= Plaid::Sandbox.new(self)
-    end
+    ##
+    # Public: The Plaid::Processor product accessor.
+    subproduct :processor
 
-    # Public: Memoized class instance to make requests from Plaid::Transactions
-    def transactions
-      @transactions ||= Plaid::Transactions.new(self)
-    end
+    ##
+    # Public: The Plaid::Sandbox product accessor.
+    subproduct :sandbox
+
+    ##
+    # Public: The Plaid::Transactions product accessor.
+    subproduct :transactions
 
     # Public: Make a post request
     #
@@ -114,6 +105,11 @@ module Plaid
     end
 
     protected
+
+    # Internal: subproduct-generated methods depend on client method.
+    def client
+      self
+    end
 
     # Internal: Gets the API hostname for given environment.
     #
