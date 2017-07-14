@@ -6,8 +6,21 @@ module Plaid
   #   class SomeProduct
   #     subproduct :cool, Plaid::Cool
   #   end
+  #
+  # You may even skip the class part:
+  #
+  #   class SomeProduct
+  #     subproduct :foo_bar
+  #   end
+  #
+  # will use Plaid::FooBar.
   module SubproductMixin
-    def subproduct(name, klass)
+    def subproduct(name, klass = nil)
+      unless klass
+        class_name = name.to_s.split('_').map(&:capitalize).join
+        klass = Plaid.const_get(class_name)
+      end
+
       define_method(name) do
         ivar = "@#{name}"
 
@@ -32,7 +45,7 @@ module Plaid
 
     protected
 
-    # Private: Build a simple payload with access_token, options, and
+    # Internal: Build a simple payload with access_token, options, and
     # account_ids.
     def build_payload(access_token, account_ids: nil, options: nil)
       options_payload = {}
@@ -43,12 +56,12 @@ module Plaid
         options: options_payload }
     end
 
-    # Private: Do a POST to API and capture it into a response object.
+    # Internal: Do a POST to API and capture it into a response object.
     def post_with_auth(path, response_class, payload)
       response_class.new(client.post_with_auth(path, payload))
     end
 
-    # Private: Do a POST to API and capture it into a response object.
+    # Internal: Do a POST to API and capture it into a response object.
     def post_with_public_key(path, response_class, payload)
       response_class.new(client.post_with_public_key(path, payload))
     end

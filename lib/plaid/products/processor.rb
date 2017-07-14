@@ -26,13 +26,13 @@ module Plaid
   class Stripe < BaseProduct
     ##
     # Public: The Plaid::BankAccountToken product accessor.
-    subproduct :bank_account_token, Plaid::BankAccountToken
+    subproduct :bank_account_token
   end
 
   # Public: Class used to call the Processor product.
   class Processor < BaseProduct
     ##
     # Public: The Plaid::Stripe product accessor.
-    subproduct :stripe, Plaid::Stripe
+    subproduct :stripe
   end
 end

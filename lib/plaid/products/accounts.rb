@@ -13,7 +13,7 @@ module Plaid
     # Returns the AccountsResponse object with accounts information.
     def get(access_token, account_ids: nil, options: nil)
       post_with_auth('accounts/balance/get',
-                     AccountsResponse, 
+                     AccountsResponse,
                      build_payload(access_token,
                                    account_ids: account_ids,
                                    options: options))
@@ -24,7 +24,7 @@ module Plaid
   class Accounts < BaseProduct
     ##
     # Public: The Plaid::Balance product accessor.
-    subproduct :balance, Plaid::Balance
+    subproduct :balance
 
     # Public: Get information about all available accounts.
     #
@@ -38,7 +38,7 @@ module Plaid
     # Returns the AccountsResponse object with accounts information.
     def get(access_token, account_ids: nil, options: nil)
       post_with_auth('accounts/get',
-                     AccountsResponse, 
+                     AccountsResponse,
                      build_payload(access_token,
                                    account_ids: account_ids,
                                    options: options))
@@ -47,7 +47,12 @@ module Plaid
 
   # Public: The response wrapper for /accounts/get and /accounts/balance/get.
   class AccountsResponse < Models::BaseResponse
+    ##
+    # Public: The item (Models::Item).
     property :item, coerce: Models::Item
+
+    ##
+    # Public: The list of accounts (Models::Account).
     property :accounts, coerce: Array[Models::Account]
   end
 end

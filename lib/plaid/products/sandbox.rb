@@ -24,6 +24,6 @@ module Plaid
   class Sandbox < BaseProduct
     ##
     # Public: The Plaid::BankAccountToken product accessor.
-    subproduct :sandbox_item, Plaid::SandboxItem
+    subproduct :sandbox_item
   end
 end

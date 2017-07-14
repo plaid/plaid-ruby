@@ -143,19 +143,19 @@ module Plaid
   class Item < BaseProduct
     ##
     # Public: The Plaid::AccessToken product accessor.
-    subproduct :access_token, Plaid::AccessToken
+    subproduct :access_token
 
     ##
     # Public: The Plaid::Credentials product accessor.
-    subproduct :credentials, Plaid::Credentials
+    subproduct :credentials
 
     ##
     # Public: The Plaid::PublicToken product accessor.
-    subproduct :public_token, Plaid::PublicToken
+    subproduct :public_token
 
     ##
     # Public: The Plaid::Webhook product accessor.
-    subproduct :webhook, Plaid::Webhook
+    subproduct :webhook
 
     # Public: Creates an item.
     #
