@@ -11,10 +11,17 @@ module Plaid
     #
     # access_token - access_token who's item to reset login for
     #
-    # Returns a parsed JSON of response
+    # Returns a ResetLoginResponse object.
     def reset_login(access_token)
       payload = { access_token: access_token }
-      @client.post_with_auth('sandbox/item/reset_login', payload)
+
+      ResetLoginResponse.new(
+        @client.post_with_auth('sandbox/item/reset_login', payload))
+    end
+
+    class ResetLoginResponse < Models::BaseResponse
+      # Public: The Boolean reset success flag.
+      property :reset_login
     end
   end
 

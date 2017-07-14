@@ -7,8 +7,8 @@ module Plaid
 
     # Public: Creates a Stripe bank account token from an access_token.
     #
-    # Does a POST /processor/stripe/bank_account_token/create call which can
-    # be used to generate a Stripe bank account token for a given account ID.
+    # Does a POST /processor/stripe/bank_account_token/create call which can be
+    # used to generate a Stripe bank account token for a given account ID.
     #
     # access_token - access_token to create a public token for
     # account_id - ID of the account to create a bank account token for
@@ -17,8 +17,15 @@ module Plaid
     def create(access_token, account_id)
       payload = { access_token: access_token,
                   account_id: account_id }
-      @client.post_with_auth('processor/stripe/bank_account_token/create',
-                             payload)
+
+      CreateResponse.new(
+        @client.post_with_auth(
+          'processor/stripe/bank_account_token/create', payload))
+    end
+
+    class CreateResponse < Models::BaseResponse
+      # Public: The String stripe token.
+      property :stripe_bank_account_token
     end
   end
 
