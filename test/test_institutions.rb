@@ -4,7 +4,7 @@ require_relative 'test_helper'
 class PlaidInstitutionsTest < PlaidTest
   def test_get
     response = @client.institutions.get(count: 3, offset: 1)
-    assert_equal(3, response['institutions'].length)
+    assert_equal(3, response.institutions.length)
   end
 
   def test_get_invalid_parameters
@@ -15,7 +15,7 @@ class PlaidInstitutionsTest < PlaidTest
 
   def test_get_by_id
     response = @client.institutions.get_by_id(SANDBOX_INSTITUTION)
-    assert_equal(SANDBOX_INSTITUTION, response['institution']['institution_id'])
+    assert_equal(SANDBOX_INSTITUTION, response.institution.institution_id)
   end
 
   def test_get_by_id_invalid_parameters
@@ -26,12 +26,12 @@ class PlaidInstitutionsTest < PlaidTest
 
   def test_search
     response = @client.institutions.search(SANDBOX_INSTITUTION_NAME)
-    refute_empty(response['institutions'])
+    refute_empty(response.institutions)
   end
 
   def test_search_with_products
     response = @client.institutions.search(SANDBOX_INSTITUTION_NAME, [:transactions])
-    refute_empty(response['institutions'])
+    refute_empty(response.institutions)
   end
 
   def test_search_invalid_products

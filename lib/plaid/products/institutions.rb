@@ -17,7 +17,8 @@ module Plaid
     def get(count:, offset:)
       payload = { count: count,
                   offset: offset }
-      @client.post_with_auth('institutions/get', payload)
+      MultipleInstitutionsResponse.new(
+        @client.post_with_auth('institutions/get', payload))
     end
 
     # Public: Get information about a Plaid institution by ID
@@ -30,7 +31,9 @@ module Plaid
     # Returns a parsed JSON of institution info for your institution id
     def get_by_id(institution_id)
       payload = { institution_id: institution_id }
-      @client.post_with_public_key('institutions/get_by_id', payload)
+
+      SingleInstitutionResponse.new(
+        @client.post_with_public_key('institutions/get_by_id', payload))
     end
 
     # Public: Get information about all available institutions matching your query
@@ -45,7 +48,18 @@ module Plaid
     def search(query, products = nil)
       payload = { query: query,
                   products: products }
-      @client.post_with_public_key('institutions/search', payload)
+
+      MultipleInstitutionsResponse.new(
+        @client.post_with_public_key('institutions/search', payload))
     end
+  end
+
+  class SingleInstitutionResponse < Models::BaseResponse
+    property :institution, coerce: Models::Institution
+  end
+
+  class MultipleInstitutionsResponse < Models::BaseResponse
+    property :institutions, coerce: Array[Models::Institution]
+    property :total
   end
 end

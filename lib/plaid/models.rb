@@ -265,5 +265,37 @@ module Plaid
       # over the past 365 days.
       property :number_of_income_streams
     end
+
+    class InstitutionCredential < BaseModel
+      # Public: The String label. E.g. "User ID".
+      property :label
+
+      # Public: The String name. E.g. "username".
+      property :name
+
+      # Public: The String type. E.g. "text", or "password".
+      property :type
+    end
+
+    class Institution < BaseModel
+      property :credentials, coerce: Array[InstitutionCredential]
+
+      # Public: The Boolean flag indicating if the institution uses MFA.
+      property :has_mfa
+
+      # Public: The String institution ID (e.g. "ins_109512").
+      property :institution_id
+
+      # Public: The String institution name (e.g. "Houndstooth Bank").
+      property :name
+
+      # Public: The Array of String MFA types.
+      # E.g. ["code", "list", "questions", "selections"].
+      property :mfa
+
+      # Public: The Array of String product names supported by this institution.
+      # E.g. ["auth", "balance", "identity", "transactions"].
+      property :products
+    end
   end
 end
