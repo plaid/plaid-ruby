@@ -14,7 +14,15 @@ module Plaid
     # Returns a parsed JSON of Identity information
     def get(access_token)
       payload = { access_token: access_token }
-      @client.post_with_auth('identity/get', payload)
+
+      IdentityResponse.new(
+        @client.post_with_auth('identity/get', payload))
     end
+  end
+
+  class IdentityResponse < Models::BaseResponse
+    property :accounts, coerce: Array[Models::Account]
+    property :identity, coerce: Models::Identity
+    property :item, coerce: Models::Item
   end
 end

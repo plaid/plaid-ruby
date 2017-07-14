@@ -15,7 +15,7 @@ class PlaidIdentityTest < PlaidTest
 
   def test_get
     response = @client.identity.get(@access_token)
-    refute_empty(response['identity'])
+    refute_empty(response.identity)
   end
 
   def test_get_invalid_access_token

@@ -155,5 +155,64 @@ module Plaid
       property :next_bill_due_date
     end
 
+    class IdentityAddressData < BaseModel
+      # Public: The String street name.
+      property :street
+
+      # Public: The String name.
+      property :city
+
+      # Public: The String state name.
+      property :state
+
+      # Public: The String ZIP code.
+      property :zip
+    end
+
+    class IdentityAddress < BaseModel
+      # Public: The Array of String accounts, associated with this address.
+      # E.g. ["Plaid Credit Card 3333"].
+      property :accounts
+
+      # Public: The Boolean primary flag (true if it's the primary address).
+      property :primary
+
+      # Public: The address data
+      property :data, coerce: IdentityAddressData
+    end
+
+    class IdentityEmail < BaseModel
+      # Public: The String data, i.e. the address itself. E.g.
+      # "accountholder0@example.com".
+      property :data
+
+      # Public: The Boolean primary flag.
+      property :primary
+
+      # Public: The String type. E.g. "primary", or "secondary", or "other".
+      property :type
+    end
+
+    class IdentityPhoneNumber < BaseModel
+      # Public: The String data, i.e. the number itself. E.g.
+      # "4673956022".
+      property :data
+
+      # Public: The Boolean primary flag.
+      property :primary
+
+      # Public: The String type. E.g. "home", or "work", or "mobile1".
+      property :type
+    end
+
+    class Identity < BaseModel
+      property :addresses, coerce: Array[IdentityAddress]
+      property :emails, coerce: Array[IdentityEmail]
+
+      # Public: The Array of String names. E.g. ["John Doe", "Ronald McDonald"].
+      property :names
+
+      property :phone_numbers, coerce: Array[IdentityPhoneNumber]
+    end
   end
 end
