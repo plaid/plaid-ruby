@@ -322,5 +322,87 @@ module Plaid
         property :answers
       end
     end
+
+    class TransactionLocation < BaseModel
+      # Public: The String address (or nil).
+      property :address
+
+      # Public: The String city name (or nil).
+      property :city
+
+      # Public: The Numeric latitude of the place (or nil).
+      property :lat
+
+      # Public: The Numeric longitude of the place (or nil).
+      property :lon
+
+      # Public: The String state name (or nil).
+      property :state
+
+      # Public: The String store number (or nil).
+      property :store_number
+
+      # Public: The String ZIP code (or nil).
+      property :zip
+    end
+
+    class TransactionPaymentMeta < BaseModel
+      property :by_order_of
+      property :ppd_id
+      property :payee
+      property :payer
+      property :payment_method
+      property :payment_processor
+      property :reason
+      property :reference_number
+    end
+
+    class Transaction < BaseModel
+      # Public: The String transaction ID.
+      property :transaction_id
+
+      # Public: The String account ID.
+      property :account_id
+
+      # Public: The String account owner (or nil).
+      property :account_owner
+
+      # Public: The Numeric amount (or nil).
+      property :amount
+
+      # Public: The Array of String category (or nil).
+      # E.g. ["Payment", "Credit Card"].
+      property :category
+
+      # Public: The String category_id (or nil).
+      # E.g. "16001000".
+      property :category_id
+
+      # Public: The String transaction date. E.g. "2017-01-01".
+      property :date
+
+      # Public: The location where transaction occurred.
+      property :location, coerce: TransactionLocation
+
+      # Public: The String transaction name (or nil).
+      # E.g. "CREDIT CARD 3333 PAYMENT *//".
+      property :name
+
+      # Public: The String original description (or nil).
+      property :original_description
+
+      # Public: The payment meta information.
+      property :payment_meta, coerce: TransactionPaymentMeta
+
+      # Public: The Boolean pending flag (or nil).
+      property :pending
+
+      # Public: The String pending transaction ID (or nil).
+      property :pending_transaction_id
+
+      # Public: The String transaction type (or nil). E.g. "special", or
+      # "place".
+      property :transaction_type
+    end
   end
 end
