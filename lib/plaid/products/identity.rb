@@ -11,7 +11,7 @@ module Plaid
     #
     # access_token - access_token who's item to fetch Identity data for
     #
-    # Returns a parsed JSON of Identity information
+    # Returns the IdentityResponse object with Identity info.
     def get(access_token)
       payload = { access_token: access_token }
 

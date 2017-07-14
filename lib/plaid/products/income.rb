@@ -9,9 +9,9 @@ module Plaid
     #
     # Does a POST /income/get call which returns income info for an access_tokeni's item
     #
-    # access_token - access_token who's item to fetch income for
+    # access_token - access_token whose item to fetch income for.
     #
-    # Returns a parsed JSON of income information
+    # Returns the IdentityResponse object with Income info.
     def get(access_token)
       payload = { access_token: access_token }
 

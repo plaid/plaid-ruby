@@ -13,7 +13,7 @@ module Plaid
     # access_token - access_token who's item to fetch credit_details for
     # account_ids  - Specific account ids to fetch credit_details for (optional)
     #
-    # Returns a parsed JSON of credit_details information
+    # Returns the CreditDetailsResponse object with credit details info.
     def get(access_token, account_ids: nil)
       options_payload = {}
       options_payload[:account_ids] = account_ids unless account_ids.nil?
