@@ -77,4 +77,9 @@ task :vcr_hide_credentials do
 
 end
 
-task default: :test
+task :test_stubbed do
+  ENV['STUB_API'] ||= '1'
+  Rake::Task['test'].invoke
+end
+
+task default: :test_stubbed
