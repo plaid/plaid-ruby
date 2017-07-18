@@ -2,6 +2,7 @@ require 'bundler/gem_tasks'
 require 'sdoc'
 require 'rdoc/task'
 require 'rake/testtask'
+require 'dotenv/load'
 require 'fileutils'
 
 RDoc::Task.new do |rdoc|
