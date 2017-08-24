@@ -84,14 +84,4 @@ class PlaidTransactionsTest < PlaidTest
                                offset: BAD_STRING)
     end
   end
-
-  def test_deactivate
-    @client.transactions.deactivate(@access_token)
-  end
-
-  def test_deactivate_invalid_access_token
-    assert_raises(Plaid::InvalidInputError) do
-      @client.transactions.deactivate(BAD_STRING)
-    end
-  end
 end
