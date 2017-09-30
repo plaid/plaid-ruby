@@ -19,6 +19,7 @@ module Plaid
       payload = { count: count,
                   offset: offset }
       payload[:options] = options unless options.nil?
+
       @client.post_with_auth('institutions/get', payload)
     end
 

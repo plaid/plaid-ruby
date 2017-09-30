@@ -7,6 +7,11 @@ class PlaidInstitutionsTest < PlaidTest
   end
 
   def test_get
+    response = @client.institutions.get(count: 3, offset: 1)
+    assert_equal(3, response['institutions'].length)
+  end
+
+  def test_get_with_options
     response = @client.institutions.get(count: 3, offset: 1, options: {products: ['transactions']})
     assert_equal(3, response['institutions'].length)
   end
