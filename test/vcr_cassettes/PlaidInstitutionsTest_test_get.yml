@@ -131,4 +131,127 @@ http_interactions:
         }
     http_version: 
   recorded_at: Wed, 12 Jul 2017 12:35:55 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/institutions/get
+    body:
+      encoding: UTF-8
+      string: '{"count":3,"offset":1,"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v4.0.0
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      content-type:
+      - application/json
+      date:
+      - Tue, 10 Oct 2017 11:33:32 GMT
+      server:
+      - nginx
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '367'
+      connection:
+      - Close
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "institutions": [
+            {
+              "credentials": [
+                {
+                  "label": "User ID",
+                  "name": "username",
+                  "type": "text"
+                },
+                {
+                  "label": "Password",
+                  "name": "password",
+                  "type": "password"
+                }
+              ],
+              "has_mfa": false,
+              "institution_id": "ins_10",
+              "mfa": [],
+              "name": "American Express",
+              "products": [
+                "balance",
+                "transactions",
+                "income"
+              ]
+            },
+            {
+              "credentials": [
+                {
+                  "label": "Online ID",
+                  "name": "username",
+                  "type": "text"
+                },
+                {
+                  "label": "Password",
+                  "name": "password",
+                  "type": "password"
+                }
+              ],
+              "has_mfa": true,
+              "institution_id": "ins_1",
+              "mfa": [
+                "questions(3)"
+              ],
+              "name": "Bank of America",
+              "products": [
+                "auth",
+                "balance",
+                "transactions",
+                "credit_details",
+                "income",
+                "identity"
+              ]
+            },
+            {
+              "credentials": [
+                {
+                  "label": "User ID",
+                  "name": "username",
+                  "type": "text"
+                },
+                {
+                  "label": "Password",
+                  "name": "password",
+                  "type": "password"
+                }
+              ],
+              "has_mfa": true,
+              "institution_id": "ins_2",
+              "mfa": [
+                "questions(3)"
+              ],
+              "name": "BB\u0026T",
+              "products": [
+                "auth",
+                "balance",
+                "transactions",
+                "income",
+                "identity"
+              ]
+            }
+          ],
+          "request_id": "lVm65",
+          "total": 9626
+        }
+    http_version: 
+  recorded_at: Tue, 10 Oct 2017 11:33:32 GMT
 recorded_with: VCR 3.0.3
