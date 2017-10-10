@@ -2,6 +2,7 @@ require 'bundler/gem_tasks'
 require 'sdoc'
 require 'rdoc/task'
 require 'rake/testtask'
+require 'dotenv/load'
 require 'fileutils'
 
 RDoc::Task.new do |rdoc|
@@ -50,4 +51,35 @@ task update_github_docs: %i(rdoc update_gh_pages) do
   sh 'git push origin gh-pages'
 end
 
-task default: :test
+desc 'Hide real credentials in VCR cassettes'
+task :vcr_hide_credentials do
+
+  all_creds = %w(PLAID_RUBY_CLIENT_ID PLAID_RUBY_SECRET PLAID_RUBY_PUBLIC_KEY)
+
+  all_creds.each do |cred|
+    fail "#{cred} is not set" unless ENV[cred]
+  end
+
+  Dir['test/vcr_cassettes/*'].each do |fn|
+    data = File.read(fn)
+    data_0 = data.clone
+
+    all_creds.each do |cred|
+      data.gsub! ENV[cred], cred
+    end
+
+    if data != data_0
+      File.open(fn, 'w') { |f| f.write data }
+
+      puts ">> Updated #{fn}"
+    end
+  end
+
+end
+
+task :test_stubbed do
+  ENV['STUB_API'] ||= '1'
+  Rake::Task['test'].invoke
+end
+
+task default: :test_stubbed

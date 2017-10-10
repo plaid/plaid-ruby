@@ -1,9 +1,8 @@
-require_relative 'plaid_test'
+require_relative 'test_helper'
 
 # Internal: The test for Plaid::Income.
 class PlaidIncomeTest < PlaidTest
   def setup
-    @client = create_client
     @item = @client.item.create(credentials: CREDENTIALS,
                                 institution_id: 'ins_1',
                                 initial_products: [:income])

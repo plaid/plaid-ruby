@@ -1,11 +1,7 @@
-require_relative 'plaid_test'
+require_relative 'test_helper'
 
 # Internal: The test for Plaid::Categories.
 class PlaidCategoriesTest < PlaidTest
-  def setup
-    @client = create_client
-  end
-
   def test_get
     response = @client.categories.get
     refute_empty(response)

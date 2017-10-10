@@ -1,0 +1,83 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/item/create
+    body:
+      encoding: UTF-8
+      string: '{"credentials":{"username":"user_good","password":"pass_good"},"institution_id":"ABCDEFG1234567","initial_products":["transactions"],"options":{},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v4.0.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 12 Jul 2017 13:10:42 GMT
+      Server:
+      - nginx
+      Content-Length:
+      - '180'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "display_message": null,
+          "error_code": "INVALID_INSTITUTION",
+          "error_message": "invalid institution_id provided",
+          "error_type": "INVALID_INPUT",
+          "request_id": "THmVT"
+        }
+    http_version: 
+  recorded_at: Wed, 12 Jul 2017 13:10:42 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/item/create
+    body:
+      encoding: UTF-8
+      string: '{"credentials":{"username":"user_good","password":"pass_good"},"institution_id":"ABCDEFG1234567","initial_products":["transactions"],"options":{},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v4.0.0
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 400
+      message: 
+    headers:
+      content-type:
+      - application/json
+      date:
+      - Tue, 10 Oct 2017 11:36:53 GMT
+      server:
+      - nginx
+      content-length:
+      - '180'
+      connection:
+      - Close
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "display_message": null,
+          "error_code": "INVALID_INSTITUTION",
+          "error_message": "invalid institution_id provided",
+          "error_type": "INVALID_INPUT",
+          "request_id": "yenIT"
+        }
+    http_version: 
+  recorded_at: Tue, 10 Oct 2017 11:36:53 GMT
+recorded_with: VCR 3.0.3

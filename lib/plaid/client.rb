@@ -1,36 +1,29 @@
 # Public: The Plaid namespace.
 module Plaid
-  # Internal: Map environment to Plaid environment URL
-  #
-  # env - The type of the environment in symbol form
-  #
-  # Returns a string representing an environment URL
-  def self.url_from_env(env)
-    case env
-    when :sandbox
-      'https://sandbox.plaid.com/'
-    when :development
-      'https://development.plaid.com/'
-    when :production
-      'https://production.plaid.com/'
-    end
-  end
-
-  # Public: A class encapsulating client_id, secret, public key, and Plaid environment.
+  # Public: The main interface to Plaid API.
   class Client
-    # Internal: Set Plaid environment to use
+    # Public: All possible environments for the client to use.
+    ENVIRONMENTS = %i(sandbox development production)
+
+    # Public: The current environment in use (one of ENVIRONMENTS).
+    attr_reader :env
+
+    # Public: Construct a Client instance
     #
-    # Handles converting an env symbol into an environment URL
+    # Optionally takes a block to allow overriding the default Faraday connection options.
     #
-    # env - The Symbol (:sandbox, :development, :production)
-    #
-    # Returns a string representing the environment URL or raises an error
-    def env_map(env)
-      (@env = Plaid.url_from_env(env)) || raise(ArgumentError, 'Invalid value for ' \
-                                                                'Plaid::Client.env ' \
-                                                                "(#{env.inspect}): " \
-                                                                'must be :sandbox, '\
-                                                                ':development, or :production ')
+    # env        - The Symbol (:sandbox, :development, :production)
+    # client_id  - The String Plaid account client ID to authenticate requests
+    # secret     - The String Plaid account secret to authenticate requests
+    # public_key - The String Plaid account public key to authenticate requests
+    def initialize(env:, client_id:, secret:, public_key:, &block)
+      @env        = env.to_sym
+      @api_host   = api_host
+      @client_id  = client_id
+      @secret     = secret
+      @public_key = public_key
+
+      create_connection(&block)
     end
 
     # Public: Memoized class instance to make requests from Plaid::Account
@@ -88,19 +81,6 @@ module Plaid
       @transactions ||= Plaid::Transactions.new(self)
     end
 
-    # Public: Construct a Client instance
-    #
-    # env        - The Symbol (:sandbox, :development, :production)
-    # client_id  - The String Plaid account client ID to authenticate requests
-    # secret     - The String Plaid account secret to authenticate requests
-    # public_key - The String Plaid account public key to authenticate requests
-    def initialize(env:, client_id:, secret:, public_key:)
-      @env        = env_map(env)
-      @client_id  = client_id
-      @secret     = secret
-      @public_key = public_key
-    end
-
     # Public: Make a post request
     #
     # path    - Path or URL to make the request to
@@ -108,7 +88,7 @@ module Plaid
     #
     # Returns the resulting parsed JSON of the request
     def post(path, payload)
-      Plaid::Connect.post(File.join(@env, path), payload)
+      @connection.post(path, payload).body
     end
 
     # Public: Make a post request with appended authentication fields
@@ -118,9 +98,9 @@ module Plaid
     #
     # Returns the resulting parsed JSON of the request
     def post_with_auth(path, payload)
-      auth = { client_id: @client_id,
-               secret: @secret }
-      Plaid::Connect.post(File.join(@env, path), payload.merge(auth))
+      @connection.post(
+        path,
+        payload.merge(client_id: @client_id, secret: @secret)).body
     end
 
     # Public: Make a post request with appended public key field.
@@ -130,8 +110,46 @@ module Plaid
     #
     # Returns the resulting parsed JSON of the request.
     def post_with_public_key(path, payload)
-      public_key = { public_key: @public_key }
-      Plaid::Connect.post(File.join(@env, path), payload.merge(public_key))
+      @connection.post(path, payload.merge(public_key: @public_key)).body
+    end
+
+    protected
+
+    # Internal: Gets the API hostname for given environment.
+    #
+    # env - The Symbol (:sandbox, :development, :production)
+    #
+    # Returns a String representing the environment URL.
+    # Raises ArgumentError if environment is unknown.
+    def api_host
+      unless ENVIRONMENTS.include?(@env)
+        raise ArgumentError,
+          "Invalid value for env (#{@env.inspect}): must be one of " +
+          ENVIRONMENTS.map(&:inspect) * ', '
+      end
+
+      "https://#{@env}.plaid.com"
+    end
+
+    # Internal: Initializes a new Plaid connection object via Faraday.
+    #
+    # Optionally takes a block to allow overriding the defaults.
+    def create_connection(&block)
+      @connection = Faraday.new(url: @api_host) do |builder|
+        block_given? ? yield(builder) : build_default_connection(builder)
+      end
+    end
+
+    # Internal: Set Plaid defaults on the Faraday connection.
+    #
+    # builder - The Faraday builder object.
+    def build_default_connection(builder)
+      builder.options[:timeout] = Plaid::Middleware::NETWORK_TIMEOUT
+      builder.headers = Plaid::Middleware::NETWORK_HEADERS
+      builder.request :json
+      builder.use Plaid::Middleware
+      builder.response :json, content_type: /\bjson$/
+      builder.adapter Faraday.default_adapter
     end
   end
 end

@@ -1,5 +1,8 @@
+require 'faraday'
+require 'faraday_middleware'
+
+require_relative 'plaid/middleware'
 require_relative 'plaid/client'
-require_relative 'plaid/connect'
 require_relative 'plaid/errors'
 require_relative 'plaid/version'
 require_relative 'plaid/products/accounts'
@@ -13,7 +16,3 @@ require_relative 'plaid/products/item'
 require_relative 'plaid/products/processor'
 require_relative 'plaid/products/sandbox'
 require_relative 'plaid/products/transactions'
-
-# Public: The Plaid namespace.
-module Plaid
-end
