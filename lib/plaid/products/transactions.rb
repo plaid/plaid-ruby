@@ -57,18 +57,5 @@ module Plaid
                   options: options_payload }
       @client.post_with_auth('transactions/get', payload)
     end
-
-    # Public: Deactivate transactions for given access_token.
-    #
-    # Does a POST /transactions/deactivate call which deactivates the transaction product
-    # for a given access_token
-    #
-    # access_token - access_token to deactivate transactions for
-    #
-    # Returns a parsed JSON containing a message describing deactivation success.
-    def deactivate(access_token)
-      payload = { access_token: access_token }
-      @client.post_with_auth('transactions/deactivate', payload)
-    end
   end
 end
