@@ -15,7 +15,7 @@ class PlaidTransactionsTest < PlaidTest
   end
 
   def teardown
-    @client.item.delete(@access_token)
+    @client.item.remove(@access_token)
   end
 
   def test_get

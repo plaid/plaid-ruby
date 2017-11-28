@@ -226,5 +226,17 @@ module Plaid
       payload = { access_token: access_token }
       @client.post_with_auth('item/delete', payload)
     end
+
+    # Public: Removes an item
+    #
+    # Does a POST /item/remove call which is used to remove an item
+    #
+    # access_token - access_token who's item to remove
+    #
+    # Returns a parsed JSON of remove result
+    def remove(access_token)
+      payload = { access_token: access_token }
+      @client.post_with_auth('item/remove', payload)
+    end
   end
 end
