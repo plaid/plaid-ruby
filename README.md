@@ -77,8 +77,8 @@ response = client.item.create(credentials: { username: 'user_good',
 
 access_token = response['access_token']
 
-# Provide the access_token for the Item you want to delete
-client.item.delete(access_token)
+# Provide the access_token for the Item you want to remove
+client.item.remove(access_token)
 ```
 
 ### Get paginated transactions
