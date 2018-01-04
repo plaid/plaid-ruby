@@ -1,3 +1,9 @@
+# 4.1.0 04-Jan-2018
+
+* Make `/item/remove` the primary Item removal endpoint
+* Add #options parameter to `/institutions/get`
+* Handle network errors with `PlaidServerError`
+
 # 4.0.0 09-Mar-2017
 
 * Refactored the entire library to support [Plaid's new API](https://blog.plaid.com/improving-our-api/). Use the [transition guide](https://plaid.com/docs/link/transition-guide) to update your integration. Version 3.x.x of this gem is mirrored at [plaid-legacy](https://github.com/plaid/plaid-ruby-legacy).
