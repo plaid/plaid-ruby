@@ -15,14 +15,14 @@
 
 </head>
 
-<body>     
+<body>
     <div class="banner">
         
         <h1>
-            <span class="type">Class</span> 
-            Plaid::Institutions 
+            <span class="type">Class</span>
+            Plaid::Institutions
             
-                <span class="parent">&lt; 
+                <span class="parent">&lt;
                     
                     Object
                     
@@ -141,23 +141,23 @@ product.</p>
             
             <a href="../../classes/Plaid/Institutions.html#method-c-new" name="method-c-new" class="permalink">Link</a>
           </div>
-          
+
           
             <div class="description">
               
             </div>
           
-          
+
           
 
           
-          
+
           
             
             <div class="sourcecode">
               
               <p class="source-link">
-                Source: 
+                Source:
                 <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
                 
               </p>
@@ -193,11 +193,11 @@ product.</p>
         <div class="method">
           <div class="title method-title" id="method-i-get">
             
-              <b>get</b>(count:, offset:)
+              <b>get</b>(count:, offset:, options: nil)
             
             <a href="../../classes/Plaid/Institutions.html#method-i-get" name="method-i-get" class="permalink">Link</a>
           </div>
-          
+
           
             <div class="description">
               <p>Get information about <a href="../Plaid.html">Plaid</a> institutions</p>
@@ -211,6 +211,9 @@ institution</p>
 </dd><dt>offset
 <dd>
 <p>Offset to start pulling institutions</p>
+</dd><dt>options
+<dd>
+<p>Options for filtering institutions</p>
 </dd></dl>
 
 <h3 id="method-i-get-label-Returns">Returns</h3>
@@ -218,25 +221,27 @@ institution</p>
 <p>Returns a parsed JSON of listed institution information</p>
             </div>
           
-          
+
           
 
           
-          
+
           
             
             <div class="sourcecode">
               
               <p class="source-link">
-                Source: 
+                Source:
                 <a href="javascript:toggleSource('method-i-get_source')" id="l_method-i-get_source">show</a>
                 
               </p>
               <div id="method-i-get_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/institutions.rb, line 17</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">get</span>(<span class="ruby-identifier">count</span>,, <span class="ruby-identifier">offset</span>))
+                <pre><span class="ruby-comment"># File lib/plaid/products/institutions.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">get</span>(<span class="ruby-identifier">count</span>,, <span class="ruby-identifier">offset</span>,, <span class="ruby-identifier">options</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">payload</span> = { <span class="ruby-identifier">count</span><span class="ruby-operator">:</span> <span class="ruby-identifier">count</span>,
               <span class="ruby-identifier">offset</span><span class="ruby-operator">:</span> <span class="ruby-identifier">offset</span> }
+  <span class="ruby-identifier">payload</span>[<span class="ruby-value">:options</span>] = <span class="ruby-identifier">options</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">nil?</span>
+
   <span class="ruby-ivar">@client</span>.<span class="ruby-identifier">post_with_auth</span>(<span class="ruby-string">&#39;institutions/get&#39;</span>, <span class="ruby-identifier">payload</span>)
 <span class="ruby-keyword">end</span></pre>
               </div>
@@ -251,7 +256,7 @@ institution</p>
             
             <a href="../../classes/Plaid/Institutions.html#method-i-get_by_id" name="method-i-get_by_id" class="permalink">Link</a>
           </div>
-          
+
           
             <div class="description">
               <p>Get information about a <a href="../Plaid.html">Plaid</a> institution by ID</p>
@@ -268,22 +273,22 @@ information for an institution by ID</p>
 <p>Returns a parsed JSON of institution info for your institution id</p>
             </div>
           
-          
+
           
 
           
-          
+
           
             
             <div class="sourcecode">
               
               <p class="source-link">
-                Source: 
+                Source:
                 <a href="javascript:toggleSource('method-i-get_by_id_source')" id="l_method-i-get_by_id_source">show</a>
                 
               </p>
               <div id="method-i-get_by_id_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/institutions.rb, line 31</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/institutions.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">get_by_id</span>(<span class="ruby-identifier">institution_id</span>)
   <span class="ruby-identifier">payload</span> = { <span class="ruby-identifier">institution_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">institution_id</span> }
   <span class="ruby-ivar">@client</span>.<span class="ruby-identifier">post_with_public_key</span>(<span class="ruby-string">&#39;institutions/get_by_id&#39;</span>, <span class="ruby-identifier">payload</span>)
@@ -300,7 +305,7 @@ information for an institution by ID</p>
             
             <a href="../../classes/Plaid/Institutions.html#method-i-search" name="method-i-search" class="permalink">Link</a>
           </div>
-          
+
           
             <div class="description">
               <p>Get information about all available institutions matching your query</p>
@@ -320,22 +325,22 @@ institutions using a query parameter</p>
 <p>Returns a parsed JSON listing institution information</p>
             </div>
           
-          
+
           
 
           
-          
+
           
             
             <div class="sourcecode">
               
               <p class="source-link">
-                Source: 
+                Source:
                 <a href="javascript:toggleSource('method-i-search_source')" id="l_method-i-search_source">show</a>
                 
               </p>
               <div id="method-i-search_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/institutions.rb, line 45</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/institutions.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">search</span>(<span class="ruby-identifier">query</span>, <span class="ruby-identifier">products</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">payload</span> = { <span class="ruby-identifier">query</span><span class="ruby-operator">:</span> <span class="ruby-identifier">query</span>,
               <span class="ruby-identifier">products</span><span class="ruby-operator">:</span> <span class="ruby-identifier">products</span> }
@@ -349,4 +354,4 @@ institutions using a query parameter</p>
 
     </div>
   </body>
-</html>    
+</html>

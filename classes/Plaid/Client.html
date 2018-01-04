@@ -15,14 +15,14 @@
 
 </head>
 
-<body>     
+<body>
     <div class="banner">
         
         <h1>
-            <span class="type">Class</span> 
-            Plaid::Client 
+            <span class="type">Class</span>
+            Plaid::Client
             
-                <span class="parent">&lt; 
+                <span class="parent">&lt;
                     
                     Object
                     
@@ -40,8 +40,7 @@
   
     <div class="description">
       
-<p>A class encapsulating client_id, secret, public key, and <a
-href="../Plaid.html">Plaid</a> environment.</p>
+<p>The main interface to <a href="../Plaid.html">Plaid</a> API.</p>
 
     </div>
   
@@ -83,7 +82,24 @@ href="../Plaid.html">Plaid</a> environment.</p>
             
               
               <li>
+                <a href="#method-i-api_host">api_host</a>,
+              </li>
+            
+              
+              <li>
                 <a href="#method-i-auth">auth</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>B</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-build_default_connection">build_default_connection</a>
               </li>
             
           </ul>
@@ -100,19 +116,12 @@ href="../Plaid.html">Plaid</a> environment.</p>
             
               
               <li>
-                <a href="#method-i-credit_details">credit_details</a>
+                <a href="#method-i-create_connection">create_connection</a>,
               </li>
-            
-          </ul>
-        </dd>
-      
-        <dt>E</dt>
-        <dd>
-          <ul>
             
               
               <li>
-                <a href="#method-i-env_map">env_map</a>
+                <a href="#method-i-credit_details">credit_details</a>
               </li>
             
           </ul>
@@ -239,8 +248,41 @@ href="../Plaid.html">Plaid</a> environment.</p>
     
 
     
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">ENVIRONMENTS</td>
+            <td>=</td>
+            <td class="attr-value">%i(sandbox development production)</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p>All possible environments for the client to use.</p></td>
+            </tr>
+          
+        
+      </table>
+    
 
 
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>env</td>
+            <td class='attr-desc'><p>The current environment in use (one of <a
+href="Client.html#ENVIRONMENTS">ENVIRONMENTS</a>).</p></td>
+          </tr>
+        
+      </table>
     
 
 
@@ -251,14 +293,17 @@ href="../Plaid.html">Plaid</a> environment.</p>
         <div class="method">
           <div class="title method-title" id="method-c-new">
             
-              <b>new</b>(env:, client_id:, secret:, public_key:)
+              <b>new</b>(env:, client_id:, secret:, public_key:, &amp;block)
             
             <a href="../../classes/Plaid/Client.html#method-c-new" name="method-c-new" class="permalink">Link</a>
           </div>
-          
+
           
             <div class="description">
               <p>Construct a <a href="Client.html">Client</a> instance</p>
+
+<p>Optionally takes a block to allow overriding the default Faraday connection
+options.</p>
 <dl class="rdoc-list note-list"><dt>env
 <dd>
 <p>The Symbol (:sandbox, :development, :production)</p>
@@ -277,27 +322,30 @@ authenticate requests</p>
 </dd></dl>
             </div>
           
-          
+
           
 
           
-          
+
           
             
             <div class="sourcecode">
               
               <p class="source-link">
-                Source: 
+                Source:
                 <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
                 
               </p>
               <div id="method-c-new_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 97</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">env</span>,, <span class="ruby-identifier">client_id</span>,, <span class="ruby-identifier">secret</span>,, <span class="ruby-identifier">public_key</span>))
-  <span class="ruby-ivar">@env</span>        = <span class="ruby-identifier">env_map</span>(<span class="ruby-identifier">env</span>)
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">env</span>,, <span class="ruby-identifier">client_id</span>,, <span class="ruby-identifier">secret</span>,, <span class="ruby-identifier">public_key</span>,, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-ivar">@env</span>        = <span class="ruby-identifier">env</span>.<span class="ruby-identifier">to_sym</span>
+  <span class="ruby-ivar">@api_host</span>   = <span class="ruby-identifier">api_host</span>
   <span class="ruby-ivar">@client_id</span>  = <span class="ruby-identifier">client_id</span>
   <span class="ruby-ivar">@secret</span>     = <span class="ruby-identifier">secret</span>
   <span class="ruby-ivar">@public_key</span> = <span class="ruby-identifier">public_key</span>
+
+  <span class="ruby-identifier">create_connection</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -313,28 +361,28 @@ authenticate requests</p>
             
             <a href="../../classes/Plaid/Client.html#method-i-accounts" name="method-i-accounts" class="permalink">Link</a>
           </div>
-          
+
           
             <div class="description">
               <p>Memoized class instance to make requests from Plaid::Account</p>
             </div>
           
-          
+
           
 
           
-          
+
           
             
             <div class="sourcecode">
               
               <p class="source-link">
-                Source: 
+                Source:
                 <a href="javascript:toggleSource('method-i-accounts_source')" id="l_method-i-accounts_source">show</a>
                 
               </p>
               <div id="method-i-accounts_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 37</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 30</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">accounts</span>
   <span class="ruby-ivar">@accounts</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">Accounts</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -350,29 +398,29 @@ authenticate requests</p>
             
             <a href="../../classes/Plaid/Client.html#method-i-auth" name="method-i-auth" class="permalink">Link</a>
           </div>
-          
+
           
             <div class="description">
               <p>Memoized class instance to make requests from <a
 href="Auth.html">Plaid::Auth</a></p>
             </div>
           
-          
+
           
 
           
-          
+
           
             
             <div class="sourcecode">
               
               <p class="source-link">
-                Source: 
+                Source:
                 <a href="javascript:toggleSource('method-i-auth_source')" id="l_method-i-auth_source">show</a>
                 
               </p>
               <div id="method-i-auth_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 42</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">auth</span>
   <span class="ruby-ivar">@auth</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">Auth</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -388,29 +436,29 @@ href="Auth.html">Plaid::Auth</a></p>
             
             <a href="../../classes/Plaid/Client.html#method-i-categories" name="method-i-categories" class="permalink">Link</a>
           </div>
-          
+
           
             <div class="description">
               <p>Memoized class instance to make requests from <a
 href="Categories.html">Plaid::Categories</a></p>
             </div>
           
-          
+
           
 
           
-          
+
           
             
             <div class="sourcecode">
               
               <p class="source-link">
-                Source: 
+                Source:
                 <a href="javascript:toggleSource('method-i-categories_source')" id="l_method-i-categories_source">show</a>
                 
               </p>
               <div id="method-i-categories_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 47</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">categories</span>
   <span class="ruby-ivar">@categories</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">Categories</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -426,29 +474,29 @@ href="Categories.html">Plaid::Categories</a></p>
             
             <a href="../../classes/Plaid/Client.html#method-i-credit_details" name="method-i-credit_details" class="permalink">Link</a>
           </div>
-          
+
           
             <div class="description">
               <p>Memoized class instance to make requests from <a
 href="CreditDetails.html">Plaid::CreditDetails</a></p>
             </div>
           
-          
+
           
 
           
-          
+
           
             
             <div class="sourcecode">
               
               <p class="source-link">
-                Source: 
+                Source:
                 <a href="javascript:toggleSource('method-i-credit_details_source')" id="l_method-i-credit_details_source">show</a>
                 
               </p>
               <div id="method-i-credit_details_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 52</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">credit_details</span>
   <span class="ruby-ivar">@credit_details</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">CreditDetails</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -464,29 +512,29 @@ href="CreditDetails.html">Plaid::CreditDetails</a></p>
             
             <a href="../../classes/Plaid/Client.html#method-i-identity" name="method-i-identity" class="permalink">Link</a>
           </div>
-          
+
           
             <div class="description">
               <p>Memoized class instance to make requests from <a
 href="Identity.html">Plaid::Identity</a></p>
             </div>
           
-          
+
           
 
           
-          
+
           
             
             <div class="sourcecode">
               
               <p class="source-link">
-                Source: 
+                Source:
                 <a href="javascript:toggleSource('method-i-identity_source')" id="l_method-i-identity_source">show</a>
                 
               </p>
               <div id="method-i-identity_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 57</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">identity</span>
   <span class="ruby-ivar">@identity</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">Identity</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -502,29 +550,29 @@ href="Identity.html">Plaid::Identity</a></p>
             
             <a href="../../classes/Plaid/Client.html#method-i-income" name="method-i-income" class="permalink">Link</a>
           </div>
-          
+
           
             <div class="description">
               <p>Memoized class instance to make requests from <a
 href="Income.html">Plaid::Income</a></p>
             </div>
           
-          
+
           
 
           
-          
+
           
             
             <div class="sourcecode">
               
               <p class="source-link">
-                Source: 
+                Source:
                 <a href="javascript:toggleSource('method-i-income_source')" id="l_method-i-income_source">show</a>
                 
               </p>
               <div id="method-i-income_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 62</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">income</span>
   <span class="ruby-ivar">@income</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">Income</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -540,29 +588,29 @@ href="Income.html">Plaid::Income</a></p>
             
             <a href="../../classes/Plaid/Client.html#method-i-institutions" name="method-i-institutions" class="permalink">Link</a>
           </div>
-          
+
           
             <div class="description">
               <p>Memoized class instance to make requests from <a
 href="Institutions.html">Plaid::Institutions</a></p>
             </div>
           
-          
+
           
 
           
-          
+
           
             
             <div class="sourcecode">
               
               <p class="source-link">
-                Source: 
+                Source:
                 <a href="javascript:toggleSource('method-i-institutions_source')" id="l_method-i-institutions_source">show</a>
                 
               </p>
               <div id="method-i-institutions_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 67</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">institutions</span>
   <span class="ruby-ivar">@institutions</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">Institutions</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -578,29 +626,29 @@ href="Institutions.html">Plaid::Institutions</a></p>
             
             <a href="../../classes/Plaid/Client.html#method-i-item" name="method-i-item" class="permalink">Link</a>
           </div>
-          
+
           
             <div class="description">
               <p>Memoized class instance to make requests from <a
 href="Item.html">Plaid::Item</a></p>
             </div>
           
-          
+
           
 
           
-          
+
           
             
             <div class="sourcecode">
               
               <p class="source-link">
-                Source: 
+                Source:
                 <a href="javascript:toggleSource('method-i-item_source')" id="l_method-i-item_source">show</a>
                 
               </p>
               <div id="method-i-item_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 72</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">item</span>
   <span class="ruby-ivar">@item</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">Item</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -616,7 +664,7 @@ href="Item.html">Plaid::Item</a></p>
             
             <a href="../../classes/Plaid/Client.html#method-i-post" name="method-i-post" class="permalink">Link</a>
           </div>
-          
+
           
             <div class="description">
               <p>Make a post request</p>
@@ -633,24 +681,24 @@ href="Item.html">Plaid::Item</a></p>
 <p>Returns the resulting parsed JSON of the request</p>
             </div>
           
-          
+
           
 
           
-          
+
           
             
             <div class="sourcecode">
               
               <p class="source-link">
-                Source: 
+                Source:
                 <a href="javascript:toggleSource('method-i-post_source')" id="l_method-i-post_source">show</a>
                 
               </p>
               <div id="method-i-post_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 110</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 90</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">post</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">payload</span>)
-  <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">Connect</span>.<span class="ruby-identifier">post</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-ivar">@env</span>, <span class="ruby-identifier">path</span>), <span class="ruby-identifier">payload</span>)
+  <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">post</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">payload</span>).<span class="ruby-identifier">body</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -664,7 +712,7 @@ href="Item.html">Plaid::Item</a></p>
             
             <a href="../../classes/Plaid/Client.html#method-i-post_with_auth" name="method-i-post_with_auth" class="permalink">Link</a>
           </div>
-          
+
           
             <div class="description">
               <p>Make a post request with appended authentication fields</p>
@@ -681,26 +729,26 @@ href="Item.html">Plaid::Item</a></p>
 <p>Returns the resulting parsed JSON of the request</p>
             </div>
           
-          
+
           
 
           
-          
+
           
             
             <div class="sourcecode">
               
               <p class="source-link">
-                Source: 
+                Source:
                 <a href="javascript:toggleSource('method-i-post_with_auth_source')" id="l_method-i-post_with_auth_source">show</a>
                 
               </p>
               <div id="method-i-post_with_auth_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 120</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 100</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">post_with_auth</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">payload</span>)
-  <span class="ruby-identifier">auth</span> = { <span class="ruby-identifier">client_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@client_id</span>,
-           <span class="ruby-identifier">secret</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@secret</span> }
-  <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">Connect</span>.<span class="ruby-identifier">post</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-ivar">@env</span>, <span class="ruby-identifier">path</span>), <span class="ruby-identifier">payload</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">auth</span>))
+  <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">post</span>(
+    <span class="ruby-identifier">path</span>,
+    <span class="ruby-identifier">payload</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">client_id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@client_id</span>, <span class="ruby-identifier">secret</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@secret</span>)).<span class="ruby-identifier">body</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -714,7 +762,7 @@ href="Item.html">Plaid::Item</a></p>
             
             <a href="../../classes/Plaid/Client.html#method-i-post_with_public_key" name="method-i-post_with_public_key" class="permalink">Link</a>
           </div>
-          
+
           
             <div class="description">
               <p>Make a post request with appended public key field.</p>
@@ -731,25 +779,24 @@ href="Item.html">Plaid::Item</a></p>
 <p>Returns the resulting parsed JSON of the request.</p>
             </div>
           
-          
+
           
 
           
-          
+
           
             
             <div class="sourcecode">
               
               <p class="source-link">
-                Source: 
+                Source:
                 <a href="javascript:toggleSource('method-i-post_with_public_key_source')" id="l_method-i-post_with_public_key_source">show</a>
                 
               </p>
               <div id="method-i-post_with_public_key_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 132</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 112</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">post_with_public_key</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">payload</span>)
-  <span class="ruby-identifier">public_key</span> = { <span class="ruby-identifier">public_key</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@public_key</span> }
-  <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">Connect</span>.<span class="ruby-identifier">post</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-ivar">@env</span>, <span class="ruby-identifier">path</span>), <span class="ruby-identifier">payload</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">public_key</span>))
+  <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">post</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">payload</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">public_key</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@public_key</span>)).<span class="ruby-identifier">body</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -763,29 +810,29 @@ href="Item.html">Plaid::Item</a></p>
             
             <a href="../../classes/Plaid/Client.html#method-i-processor" name="method-i-processor" class="permalink">Link</a>
           </div>
-          
+
           
             <div class="description">
               <p>Memoized class instance to make requests from <a
 href="Processor.html">Plaid::Processor</a></p>
             </div>
           
-          
+
           
 
           
-          
+
           
             
             <div class="sourcecode">
               
               <p class="source-link">
-                Source: 
+                Source:
                 <a href="javascript:toggleSource('method-i-processor_source')" id="l_method-i-processor_source">show</a>
                 
               </p>
               <div id="method-i-processor_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 77</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 70</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">processor</span>
   <span class="ruby-ivar">@processor</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">Processor</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -801,29 +848,29 @@ href="Processor.html">Plaid::Processor</a></p>
             
             <a href="../../classes/Plaid/Client.html#method-i-sandbox" name="method-i-sandbox" class="permalink">Link</a>
           </div>
-          
+
           
             <div class="description">
               <p>Memoized class instance to make requests from <a
 href="Sandbox.html">Plaid::Sandbox</a></p>
             </div>
           
-          
+
           
 
           
-          
+
           
             
             <div class="sourcecode">
               
               <p class="source-link">
-                Source: 
+                Source:
                 <a href="javascript:toggleSource('method-i-sandbox_source')" id="l_method-i-sandbox_source">show</a>
                 
               </p>
               <div id="method-i-sandbox_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 82</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">sandbox</span>
   <span class="ruby-ivar">@sandbox</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">Sandbox</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -839,29 +886,29 @@ href="Sandbox.html">Plaid::Sandbox</a></p>
             
             <a href="../../classes/Plaid/Client.html#method-i-transactions" name="method-i-transactions" class="permalink">Link</a>
           </div>
-          
+
           
             <div class="description">
               <p>Memoized class instance to make requests from <a
 href="Transactions.html">Plaid::Transactions</a></p>
             </div>
           
-          
+
           
 
           
-          
+
           
             
             <div class="sourcecode">
               
               <p class="source-link">
-                Source: 
+                Source:
                 <a href="javascript:toggleSource('method-i-transactions_source')" id="l_method-i-transactions_source">show</a>
                 
               </p>
               <div id="method-i-transactions_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 87</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 80</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">transactions</span>
   <span class="ruby-ivar">@transactions</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">Transactions</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -887,49 +934,142 @@ href="Transactions.html">Plaid::Transactions</a></p>
 
     <!-- Methods -->
         
-      <div class="sectiontitle">Instance Public methods</div>
+      <div class="sectiontitle">Instance Protected methods</div>
       
         <div class="method">
-          <div class="title method-title" id="method-i-env_map">
+          <div class="title method-title" id="method-i-api_host">
             
-              <b>env_map</b>(env)
+              <b>api_host</b>()
             
-            <a href="../../classes/Plaid/Client.html#method-i-env_map" name="method-i-env_map" class="permalink">Link</a>
+            <a href="../../classes/Plaid/Client.html#method-i-api_host" name="method-i-api_host" class="permalink">Link</a>
           </div>
-          
+
           
             <div class="description">
-              <p>Set <a href="../Plaid.html">Plaid</a> environment to use</p>
-
-<p>Handles converting an env symbol into an environment URL</p>
+              <p>Gets the API hostname for given environment.</p>
 <dl class="rdoc-list note-list"><dt>env
 <dd>
 <p>The Symbol (:sandbox, :development, :production)</p>
 </dd></dl>
 
-<h3 id="method-i-env_map-label-Returns">Returns</h3>
+<h3 id="method-i-api_host-label-Returns">Returns</h3>
 
-<p>Returns a string representing the environment URL or raises an error</p>
+<p>Returns a String representing the environment URL. Raises ArgumentError if
+environment is unknown.</p>
             </div>
           
-          
+
           
 
           
-          
+
           
             
             <div class="sourcecode">
               
               <p class="source-link">
-                Source: 
-                <a href="javascript:toggleSource('method-i-env_map_source')" id="l_method-i-env_map_source">show</a>
+                Source:
+                <a href="javascript:toggleSource('method-i-api_host_source')" id="l_method-i-api_host_source">show</a>
                 
               </p>
-              <div id="method-i-env_map_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 28</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">env_map</span>(<span class="ruby-identifier">env</span>)
-  (<span class="ruby-ivar">@env</span> = <span class="ruby-constant">Plaid</span>.<span class="ruby-identifier">url_from_env</span>(<span class="ruby-identifier">env</span>)) <span class="ruby-operator">||</span> <span class="ruby-identifier">raise</span>(<span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;Invalid value for &#39;</span>                                                                  <span class="ruby-string">&#39;Plaid::Client.env &#39;</span>                                                                  <span class="ruby-node">&quot;(#{env.inspect}): &quot;</span>                                                                  <span class="ruby-string">&#39;must be :sandbox, &#39;</span>                                                                 <span class="ruby-string">&#39;:development, or :production &#39;</span>)
+              <div id="method-i-api_host_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 124</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">api_host</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-constant">ENVIRONMENTS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-ivar">@env</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>,
+      <span class="ruby-node">&quot;Invalid value for env (#{@env.inspect}): must be one of &quot;</span> <span class="ruby-operator">+</span>
+      <span class="ruby-constant">ENVIRONMENTS</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:inspect</span>) <span class="ruby-operator">*</span> <span class="ruby-string">&#39;, &#39;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-node">&quot;https://#{@env}.plaid.com&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-build_default_connection">
+            
+              <b>build_default_connection</b>(builder)
+            
+            <a href="../../classes/Plaid/Client.html#method-i-build_default_connection" name="method-i-build_default_connection" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              <p>Set <a href="../Plaid.html">Plaid</a> defaults on the Faraday connection.</p>
+<dl class="rdoc-list note-list"><dt>builder
+<dd>
+<p>The Faraday builder object.</p>
+</dd></dl>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-build_default_connection_source')" id="l_method-i-build_default_connection_source">show</a>
+                
+              </p>
+              <div id="method-i-build_default_connection_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 146</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">build_default_connection</span>(<span class="ruby-identifier">builder</span>)
+  <span class="ruby-identifier">builder</span>.<span class="ruby-identifier">options</span>[<span class="ruby-value">:timeout</span>] = <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">Middleware</span><span class="ruby-operator">::</span><span class="ruby-constant">NETWORK_TIMEOUT</span>
+  <span class="ruby-identifier">builder</span>.<span class="ruby-identifier">headers</span> = <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">Middleware</span><span class="ruby-operator">::</span><span class="ruby-constant">NETWORK_HEADERS</span>
+  <span class="ruby-identifier">builder</span>.<span class="ruby-identifier">request</span> <span class="ruby-value">:json</span>
+  <span class="ruby-identifier">builder</span>.<span class="ruby-identifier">use</span> <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">Middleware</span>
+  <span class="ruby-identifier">builder</span>.<span class="ruby-identifier">response</span> <span class="ruby-value">:json</span>, <span class="ruby-identifier">content_type</span><span class="ruby-operator">:</span> <span class="ruby-regexp">/\bjson$/</span>
+  <span class="ruby-identifier">builder</span>.<span class="ruby-identifier">adapter</span> <span class="ruby-constant">Faraday</span>.<span class="ruby-identifier">default_adapter</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-create_connection">
+            
+              <b>create_connection</b>(&amp;block)
+            
+            <a href="../../classes/Plaid/Client.html#method-i-create_connection" name="method-i-create_connection" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              <p>Initializes a new <a href="../Plaid.html">Plaid</a> connection object via
+Faraday.</p>
+
+<p>Optionally takes a block to allow overriding the defaults.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-create_connection_source')" id="l_method-i-create_connection_source">show</a>
+                
+              </p>
+              <div id="method-i-create_connection_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 137</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">create_connection</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-ivar">@connection</span> = <span class="ruby-constant">Faraday</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">url</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@api_host</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">builder</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">block_given?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">builder</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">build_default_connection</span>(<span class="ruby-identifier">builder</span>)
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -939,4 +1079,4 @@ href="Transactions.html">Plaid::Transactions</a></p>
 
     </div>
   </body>
-</html>    
+</html>

@@ -15,7 +15,7 @@
 
 </head>
 
-<body>     
+<body>
     <div class="banner">
         
         <h1>
@@ -23,7 +23,7 @@
         </h1>
         <ul class="files">
             <li>README.md</li>
-            <li>Last modified: 2017-03-21 12:53:04 +0700</li>
+            <li>Last modified: 2018-01-04 13:00:20 -0500</li>
         </ul>
     </div>
 
@@ -67,7 +67,8 @@ href="https://github.com/plaid/plaid-ruby-legacy">plaid-legacy</a>.</p>
 fully described in the <a
 href="https://plaid.com/docs/api">documentation</a>.</p>
 
-<p>The RubyDoc for the gem is available <a href="LINKPLACEHOLDER">here</a>.</p>
+<p>The RubyDoc for the gem is available <a
+href="http://plaid.github.io/plaid-ruby/">here</a>.</p>
 
 <h3 id="label-Creating+a+Plaid+client">Creating a <a href="../classes/Plaid.html">Plaid</a> client</h3>
 
@@ -89,91 +90,18 @@ running in. Your choices for the <code>env</code> field include: -
 <code>:sandbox</code> allows you to do your initial integrations tests
 against preloaded data without being billed or making expensive API calls.
 More information about using the API sandbox can be found on the <a
-href="https://plaid.com/docs/api/blob/master/SANDBOX.md">API Sandbox
-documentation</a>. - <code>:development</code> allows you to test against
-both real and test accounts without being billed. More information about <a
+href="https://plaid.com/docs/api#sandbox">API Sandbox documentation</a>. -
+<code>:development</code> allows you to test against both real and test
+accounts without being billed. More information about <a
 href="../classes/Plaid.html">Plaid</a> test accounts can be found in our <a
 href="https://plaid.com/docs/api/#sandbox">API documentation</a>. -
 <code>:production</code> is the production environment where you can launch
 your production ready application and be charged for your <a
 href="../classes/Plaid.html">Plaid</a> usage.</p>
 
-<h3 id="label-Creating+a+new+item">Creating a new item</h3>
-
-<p>A new item can be created by providing a set of credentials, an institution
-code, and a list of products to create the item with.</p>
-
-<pre><code>item = client.item.create(credentials: { username: &#39;user_good&#39;,
-                                         password: &#39;pass_good&#39;,
-                                         pin: &#39;1234&#39; },
-                          institution_id: &#39;ins_109509&#39;,
-                          initial_products: %i(auth identity transactions))
-</code></pre>
-
-<p>The first argument for <code>client.item.create</code> is always the
-credentials in the form of a hash. <code>ruby credentials = { username:
-&#39;user_good&#39;,                 password: &#39;pass_good&#39;,        
-pin: &#39;1234&#39; } </code> The <code>pin</code> field in the credentials
-hash is not required and does not need to be entered if your institution
-does not require it.</p>
-
-<p>A successful, non-MFA (multi-factor authentication) response (HTTP 200) to
-an item creation will come in the form of a hash where each of these
-attributes can be accessed by the corresponding string key: <code>ruby {
-&quot;access_token&quot; =&gt; String,   &quot;item&quot; =&gt; {
-&quot;available_products&quot; =&gt; [String],              
-&quot;billed_products&quot;    =&gt; [String],              
-&quot;error&quot;              =&gt; Object,              
-&quot;institution_id&quot;     =&gt; String,              
-&quot;item_id&quot;            =&gt; String,              
-&quot;webhook&quot;            =&gt; nullable String },  
-&quot;request_id&quot; =&gt; String } </code> The response provides three
-primary pieces of information: - <code>access_token</code> is your token to
-access this item and the item&#39;s products in the future such as
-<code>auth</code> or <code>transactions</code> - <code>item</code> provides
-information about the item such as the <code>item_id</code> and
-<code>available_products</code> - <code>request_id</code> is the identifier
-for your actual request, this is often used to file tickets if necessary</p>
-
-<p>There are other responses you can receive from an item creation such as an
-MFA response and an error response (they&#39;re all in hash form).</p>
-
-<p>An MFA response (HTTP 210) looks like this: <code>ruby {
-&quot;access_token&quot; =&gt; String,   &quot;device&quot;       =&gt;
-nullable String,   &quot;device_list&quot;  =&gt; nullable [Object],  
-&quot;mfa_type&quot;     =&gt; String Enum (device, device_list, questions,
-selections),   &quot;questions&quot;    =&gt; nullable [String],  
-&quot;request_id&quot;   =&gt; String,   &quot;selections&quot;   =&gt;
-nullable [Object] } </code></p>
-
-<p>An example of how an MFA onboarding flow looks like can be seen below in
-the Examples section.</p>
-
-<p>If an error occurs during the creation, an error will be thrown. The class
-for the error has values that you can access by using the following keys.
-<code>ruby { "error_type"      => String,   "error_code"      => String,  
-"error_message"   => String,   "display_message" => (nullable) String,  
-"request_id"      => String }  Additional information on the meaning or
-usage of each field can be found in our {API Error
-documentation}[https://plaid.com/docs/api#errors]</code>.</p>
-
-<p>You can also add options such as <code>transactions.await_results</code> or
-<code>webhook</code> to your item creation, use keyed arguments:</p>
-
-<pre><code>item = client.item.create(credentials: { username: &#39;user_good&#39;,
-                                         password: &#39;pass_good&#39; },
-                          institution_id: &#39;ins_109509&#39;,
-                          initial_products: %i(auth identity transactions),
-                          transactions_await_results: true,
-                          webhook: &#39;https://plaid.com/webhook-test&#39;)
-</code></pre>
-
-<p>More information about item creation options can be found in our <a
-href="https://plaid.com/docs/api#post-itemcreate">API documentation</a>.</p>
-
 <h2 id="label-Examples">Examples</h2>
 
-<h3 id="label-Exchanging+a+Link+public+token+for+a+Plaid+access_token">Exchanging a Link public token for a <a href="../classes/Plaid.html">Plaid</a> access_token</h3>
+<h3 id="label-Exchanging+a+Link+public_token+for+a+Plaid+access_token">Exchanging a Link public_token for a <a href="../classes/Plaid.html">Plaid</a> access_token</h3>
 
 <p>If you have a <a href="https://github.com/plaid/link">Link</a> <code>public
 token</code>, use this function to get an <code>access_token</code>:
@@ -185,60 +113,6 @@ token</code>, use this function to get an <code>access_token</code>:
 <pre><code>response = client.item.public_token.exchange(public_token)
 access_token = response[&#39;access_token&#39;]
 </code></pre>
-
-<h3 id="label-Handle+MFA+during+item+creation">Handle MFA during item creation</h3>
-
-<p>If MFA is requested by the financial institution, there will be additional
-steps required to finish the item creation flow: “`ruby require
-&#39;plaid&#39;</p>
-
-<p>def answer_mfa(client, access_token, data)  case <a
-href="'mfa_type'">data</a>  when &#39;questions&#39; 
-answer_questions(client, access_token, <a href="'questions'">data</a>) 
-when &#39;device_list&#39;  answer_device_list(client, access_token, <a
-href="'device_list'">data</a>)  when &#39;selections&#39; 
-answer_selections(client, access_token, <a href="'selections'">data</a>) 
-when &#39;device&#39;  answer_device(client, access_token, <a
-href="'device'">data</a>)  else  raise &#39;Unknown MFA type from
-Plaid&#39;  end end</p>
-
-<p>def answer_questions(client, access_token, _questions)  # We have magically
-inferred the answer here, so we respond immediately.  # In the real world,
-we would present the questions to our user and  # submit their responses. 
-answers = [&#39;answer_0_0&#39;]  client.item.mfa(access_token,
-&#39;questions&#39;, answers) end</p>
-
-<p>def answer_device_list(client, access_token, device_list)  # We have picked
-the first device here.  # In the real world, we would ask our user which
-device the passcode  # should be sent to.  device = <a
-href="0">device_list</a>[&#39;device_id&#39;] 
-client.item.mfa(access_token, &#39;device_list&#39;, [device]) end</p>
-
-<p>def answer_device(client, access_token, _device)  # Another magically
-inferred answer.  # In the real world, we would ask our user for the
-passcode they received.  client.item.mfa(access_token, &#39;device&#39;,
-[&#39;1234&#39;]) end</p>
-
-<p>def answer_selections(client, access_token, _selections)  # We have
-magically inferred the answer here, so we respond immediately.  # In the
-real world, we would present the selection question and choices  # to our
-user and submit their responses.  answers = %w(tomato ketchup) 
-client.item.mfa(access_token, &#39;selections&#39;, answers) end</p>
-
-<p>begin  client = <a
-href="../classes/Plaid/Client.html#method-c-new">Plaid::Client.new</a>(env:
-:sandbox,  client_id: &#39;<strong><em>&#39;,  secret:
-&#39;</em></strong>&#39;,  public_key: &#39;<em>*</em>&#39;)</p>
-
-<p>response = client.item.create(credentials: { username: &#39;user_good&#39;,
-password: &#39;mfa_device&#39; },  institution_id: &#39;ins_109508&#39;, 
-initial_products: %i(transactions auth))</p>
-
-<p>access_token = <a href="'access_token'">response</a>  response =
-answer_mfa(client, access_token, response) while
-response.key?(&#39;mfa_type&#39;) rescue <a
-href="../classes/Plaid/PlaidError.html">Plaid::PlaidError</a>  raise
-&#39;Error in main flow.&#39; end “`</p>
 
 <h3 id="label-Deleting+an+item">Deleting an item</h3>
 
@@ -256,8 +130,8 @@ response = client.item.create(credentials: { username: &#39;user_good&#39;,
 
 access_token = response[&#39;access_token&#39;]
 
-# Provide the access_token for the Item you want to delete
-client.item.delete(access_token)
+# Provide the access_token for the Item you want to remove
+client.item.remove(access_token)
 </code></pre>
 
 <h3 id="label-Get+paginated+transactions">Get paginated transactions</h3>
@@ -290,7 +164,7 @@ while transactions.length &lt; transaction_response[&#39;total_transactions&#39;
 end
 </code></pre>
 
-<h3 id="label-Obtaining+user-related+data">Obtaining user-related data</h3>
+<h3 id="label-Obtaining+Item-related+data">Obtaining Item-related data</h3>
 
 <p>If you have an <code>access_token</code>, you can use following code to
 retreive data: “`ruby require &#39;plaid&#39;</p>

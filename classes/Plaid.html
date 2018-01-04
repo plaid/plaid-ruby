@@ -15,23 +15,21 @@
 
 </head>
 
-<body>     
+<body>
     <div class="banner">
         
         <h1>
-            <span class="type">Module</span> 
-            Plaid 
+            <span class="type">Module</span>
+            Plaid
             
         </h1>
         <ul class="files">
             
-            <li><a href="../files/lib/plaid_rb.html">lib/plaid.rb</a></li>
-            
             <li><a href="../files/lib/plaid/client_rb.html">lib/plaid/client.rb</a></li>
             
-            <li><a href="../files/lib/plaid/connect_rb.html">lib/plaid/connect.rb</a></li>
-            
             <li><a href="../files/lib/plaid/errors_rb.html">lib/plaid/errors.rb</a></li>
+            
+            <li><a href="../files/lib/plaid/middleware_rb.html">lib/plaid/middleware.rb</a></li>
             
             <li><a href="../files/lib/plaid/products/accounts_rb.html">lib/plaid/products/accounts.rb</a></li>
             
@@ -66,8 +64,6 @@
       
 <p>The <a href="Plaid.html">Plaid</a> namespace.</p>
 
-<p>The <a href="Plaid.html">Plaid</a> namespace.</p>
-
     </div>
   
 
@@ -93,11 +89,6 @@
     <!-- Namespace -->
     <div class="sectiontitle">Namespace</div>
     <ul>
-      
-        <li>
-          <span class="type">MODULE</span>
-          <a href="Plaid/Connect.html">Plaid::Connect</a>
-        </li>
       
         <li>
           <span class="type">MODULE</span>
@@ -191,7 +182,22 @@
       
         <li>
           <span class="type">CLASS</span>
+          <a href="Plaid/Middleware.html">Plaid::Middleware</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Plaid/PlaidAPIError.html">Plaid::PlaidAPIError</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
           <a href="Plaid/PlaidError.html">Plaid::PlaidError</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Plaid/PlaidServerError.html">Plaid::PlaidServerError</a>
         </li>
       
         <li>
@@ -255,18 +261,6 @@
           </ul>
         </dd>
       
-        <dt>U</dt>
-        <dd>
-          <ul>
-            
-              
-              <li>
-                <a href="#method-c-url_from_env">url_from_env</a>
-              </li>
-            
-          </ul>
-        </dd>
-      
     </dl>
   
 
@@ -288,7 +282,7 @@
           <tr valign='top'>
             <td class="attr-name">VERSION</td>
             <td>=</td>
-            <td class="attr-value">&#39;4.0.0&#39;.freeze</td>
+            <td class="attr-value">&#39;4.1.0&#39;.freeze</td>
           </tr>
           
             <tr valign='top'>
@@ -349,7 +343,7 @@
             
             <a href="../classes/Plaid.html#method-c-convert_to_date_string" name="method-c-convert_to_date_string" class="permalink">Link</a>
           </div>
-          
+
           
             <div class="description">
               <p>Converts date objects to strings if needed</p>
@@ -367,17 +361,17 @@ return a string representation of the Date</p>
 dates</p>
             </div>
           
-          
+
           
 
           
-          
+
           
             
             <div class="sourcecode">
               
               <p class="source-link">
-                Source: 
+                Source:
                 <a href="javascript:toggleSource('method-c-convert_to_date_string_source')" id="l_method-c-convert_to_date_string_source">show</a>
                 
               </p>
@@ -395,60 +389,8 @@ dates</p>
             </div>
             
           </div>
-        
-        <div class="method">
-          <div class="title method-title" id="method-c-url_from_env">
-            
-              <b>url_from_env</b>(env)
-            
-            <a href="../classes/Plaid.html#method-c-url_from_env" name="method-c-url_from_env" class="permalink">Link</a>
-          </div>
-          
-          
-            <div class="description">
-              <p>Map environment to <a href="Plaid.html">Plaid</a> environment URL</p>
-<dl class="rdoc-list note-list"><dt>env
-<dd>
-<p>The type of the environment in symbol form</p>
-</dd></dl>
-
-<h3 id="method-c-url_from_env-label-Returns">Returns</h3>
-
-<p>Returns a string representing an environment URL</p>
-            </div>
-          
-          
-          
-
-          
-          
-          
-            
-            <div class="sourcecode">
-              
-              <p class="source-link">
-                Source: 
-                <a href="javascript:toggleSource('method-c-url_from_env_source')" id="l_method-c-url_from_env_source">show</a>
-                
-              </p>
-              <div id="method-c-url_from_env_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 8</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">url_from_env</span>(<span class="ruby-identifier">env</span>)
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">env</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-value">:sandbox</span>
-    <span class="ruby-string">&#39;https://sandbox.plaid.com/&#39;</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-value">:development</span>
-    <span class="ruby-string">&#39;https://development.plaid.com/&#39;</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-value">:production</span>
-    <span class="ruby-string">&#39;https://production.plaid.com/&#39;</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-              </div>
-            </div>
-            
-          </div>
                         </div>
 
     </div>
   </body>
-</html>    
+</html>
