@@ -1,3 +1,9 @@
+# 5.0.0 xx-Mar-2018
+
+* Introduce true response objects instead of deep nested hashes. Any of the
+  three syntaxes can be used interchangeably for any API response:
+  `response['foo']['bar']`, `response[:foo][:bar]`, or `response.foo.bar`.
+
 # 4.1.0 04-Jan-2018
 
 * Make `/item/remove` the primary Item removal endpoint
