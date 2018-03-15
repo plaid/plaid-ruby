@@ -10,7 +10,7 @@ class PlaidProcessorTest < PlaidTest
   end
 
   def teardown
-    @client.item.delete(@access_token)
+    @client.item.remove(@access_token)
   end
 
   def test_stripe_bank_account_token_create_invalid_account_id

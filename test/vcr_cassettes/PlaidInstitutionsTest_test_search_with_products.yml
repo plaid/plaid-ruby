@@ -79,4 +79,79 @@ http_interactions:
         }
     http_version: 
   recorded_at: Wed, 12 Jul 2017 12:36:00 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/institutions/search
+    body:
+      encoding: UTF-8
+      string: '{"query":"First Platypus Bank","products":["transactions"],"public_key":"PLAID_RUBY_PUBLIC_KEY"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v4.0.0
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      content-type:
+      - application/json
+      date:
+      - Tue, 10 Oct 2017 11:33:40 GMT
+      server:
+      - nginx
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '659'
+      connection:
+      - Close
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "institutions": [
+            {
+              "credentials": [
+                {
+                  "label": "Username",
+                  "name": "username",
+                  "type": "text"
+                },
+                {
+                  "label": "Password",
+                  "name": "password",
+                  "type": "password"
+                }
+              ],
+              "has_mfa": true,
+              "institution_id": "ins_109508",
+              "mfa": [
+                "code",
+                "list",
+                "questions",
+                "selections"
+              ],
+              "name": "First Platypus Bank",
+              "products": [
+                "auth",
+                "balance",
+                "transactions",
+                "credit_details",
+                "income",
+                "identity"
+              ]
+            }
+          ],
+          "request_id": "ouEOU"
+        }
+    http_version: 
+  recorded_at: Tue, 10 Oct 2017 11:33:40 GMT
 recorded_with: VCR 3.0.3

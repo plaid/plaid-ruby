@@ -6,14 +6,19 @@ module Plaid
     # Does a POST /institutions/get call pulls a list of supported Plaid institutions
     # with the information for each institution
     #
-    # count  - Amount of institutions to pull
-    # offset - Offset to start pulling institutions
+    # count   - Amount of institutions to pull
+    # offset  - Offset to start pulling institutions
+    # options - Options for filtering institutions
     #
     # Returns a parsed JSON of listed institution information
-    def get(count:, offset:)
+    def get(count:, offset:, options: nil)
+      payload = { count: count,
+                  offset: offset }
+      payload[:options] = options unless options.nil?
+
       post_with_auth('institutions/get',
                      MultipleInstitutionsResponse,
-                     { count: count, offset: offset })
+                     payload)
     end
 
     # Public: Get information about a Plaid institution by ID

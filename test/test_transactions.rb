@@ -15,7 +15,7 @@ class PlaidTransactionsTest < PlaidTest
   end
 
   def teardown
-    @client.item.delete(@access_token)
+    @client.item.remove(@access_token)
   end
 
   def test_get
@@ -81,19 +81,6 @@ class PlaidTransactionsTest < PlaidTest
                                '2017-01-01',
                                count: BAD_STRING,
                                offset: BAD_STRING)
-    end
-  end
-
-  # This test is disabled, as API returns "client is not authorized to access
-  # this endpoint" currently.
-  #
-  # def test_deactivate
-  #   @client.transactions.deactivate(@access_token)
-  # end
-
-  def test_deactivate_invalid_access_token
-    assert_raises(Plaid::InvalidInputError) do
-      @client.transactions.deactivate(BAD_STRING)
     end
   end
 end

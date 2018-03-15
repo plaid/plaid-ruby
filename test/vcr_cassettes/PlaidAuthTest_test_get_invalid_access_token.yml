@@ -61,7 +61,7 @@ http_interactions:
           },
           "request_id": "D8po6"
         }
-    http_version: 
+    http_version:
   recorded_at: Wed, 12 Jul 2017 12:26:16 GMT
 - request:
     method: post
@@ -103,11 +103,11 @@ http_interactions:
           "error_type": "INVALID_INPUT",
           "request_id": "Z9nLl"
         }
-    http_version: 
+    http_version:
   recorded_at: Wed, 12 Jul 2017 12:26:17 GMT
 - request:
     method: post
-    uri: https://sandbox.plaid.com/item/delete
+    uri: https://sandbox.plaid.com/item/remove
     body:
       encoding: UTF-8
       string: '{"access_token":"access-sandbox-c72cd5d7-c9fe-4d53-89bf-6bad5663e0d0","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
@@ -150,6 +150,146 @@ http_interactions:
           "deleted": true,
           "request_id": "luELe"
         }
-    http_version: 
+    http_version:
   recorded_at: Wed, 12 Jul 2017 12:26:19 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/item/create
+    body:
+      encoding: UTF-8
+      string: '{"credentials":{"username":"user_good","password":"pass_good"},"institution_id":"ins_109508","initial_products":["auth"],"options":{},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v4.0.0
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message:
+    headers:
+      content-type:
+      - application/json
+      date:
+      - Tue, 10 Oct 2017 11:33:55 GMT
+      server:
+      - nginx
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '423'
+      connection:
+      - Close
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "access_token": "access-sandbox-19911fa0-e6ec-4781-a5b3-ab894ffc9a64",
+          "item": {
+            "available_products": [
+              "balance",
+              "credit_details",
+              "identity",
+              "income",
+              "transactions"
+            ],
+            "billed_products": [
+              "auth"
+            ],
+            "error": null,
+            "institution_id": "ins_109508",
+            "item_id": "lvpj1JJaGpf1jx3AwzErCd5xL5xLRwhjjj1M7q",
+            "webhook": ""
+          },
+          "request_id": "m4ujm"
+        }
+    http_version:
+  recorded_at: Tue, 10 Oct 2017 11:33:56 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/auth/get
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"ABCDEFG1234567","options":{},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v4.0.0
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 400
+      message:
+    headers:
+      content-type:
+      - application/json
+      date:
+      - Tue, 10 Oct 2017 11:33:57 GMT
+      server:
+      - nginx
+      content-length:
+      - '267'
+      connection:
+      - Close
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "display_message": null,
+          "error_code": "INVALID_ACCESS_TOKEN",
+          "error_message": "provided access token is in an invalid format. expected format: access-\u003cenvironment\u003e-\u003cidentifier\u003e",
+          "error_type": "INVALID_INPUT",
+          "request_id": "XSFvk"
+        }
+    http_version:
+  recorded_at: Tue, 10 Oct 2017 11:33:57 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/item/remove
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-19911fa0-e6ec-4781-a5b3-ab894ffc9a64","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v4.0.0
+      Content-Type:
+      - application/json
+  response:
+    status:
+      code: 200
+      message:
+    headers:
+      content-type:
+      - application/json
+      date:
+      - Tue, 10 Oct 2017 11:33:58 GMT
+      server:
+      - nginx
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - DENY
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '46'
+      connection:
+      - Close
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "deleted": true,
+          "request_id": "cpBFm"
+        }
+    http_version:
+  recorded_at: Tue, 10 Oct 2017 11:33:59 GMT
 recorded_with: VCR 3.0.3

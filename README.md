@@ -71,15 +71,11 @@ client = Plaid::Client.new(env: :sandbox,
                            secret: '***',
                            public_key: '***')
 
-response = client.item.create(credentials: { username: 'user_good',
-                                             password: 'pass_good' },
-                              institution_id: 'ins_109509',
-                              initial_products: %i(auth identity transactions))
+exchange_token_response = client.item.public_token.exchange('[Plaid Link public_token]')
+access_token = exchange_token_response['access_token']
 
-access_token = response.access_token
-
-# Provide the access_token for the Item you want to delete
-client.item.delete(access_token)
+# Provide the access_token for the Item you want to remove
+client.item.remove(access_token)
 ```
 
 ### Get paginated transactions
@@ -91,12 +87,8 @@ client = Plaid::Client.new(env: :sandbox,
                            secret: '***',
                            public_key: '***')
 
-item_response = client.item.create(credentials: { username: 'user_good',
-                                                  password: 'pass_good' },
-                                   institution_id: 'ins_109509',
-                                   initial_products: %i(auth identity transactions))
-
-access_token = item_response.access_token
+exchange_token_response = client.item.public_token.exchange('[Plaid Link public_token]')
+access_token = exchange_token_response.access_token
 
 transaction_response = client.transactions.get(access_token, '2016-07-12', '2017-01-09')
 transactions = transaction_response.transactions
@@ -124,16 +116,11 @@ client = Plaid::Client.new(env: :sandbox,
                            secret: '***',
                            public_key: '***')
 
-item_response = client.item.create(credentials: { username: 'user_good',
-                                                  password: 'pass_good' },
-                                   institution_id: 'ins_109509',
-                                   initial_products: %i(auth identity transactions))
-
-access_token = item_response.access_token
+exchange_token_response = client.item.public_token.exchange('[Plaid Link public_token]')
+access_token = exchange_token_response.access_token
 
 auth_response = client.auth.get(access_token)
 auth = auth_response.auth
-
 ```
 
 ### Create a Stripe bank_account_token

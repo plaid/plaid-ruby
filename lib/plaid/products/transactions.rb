@@ -57,24 +57,5 @@ module Plaid
       # Public: The Numeric total transactions count.
       property :total_transactions
     end
-
-    # Public: Deactivate transactions for given access_token.
-    #
-    # Does a POST /transactions/deactivate call which deactivates the
-    # transaction product for a given access_token.
-    #
-    # access_token - access_token to deactivate transactions for.
-    #
-    # Returns a parsed JSON containing a message describing deactivation success.
-    def deactivate(access_token)
-      post_with_auth('transactions/deactivate',
-                     DeactivateResponse,
-                     { access_token: access_token })
-    end
-
-    class DeactivateResponse < Models::BaseResponse
-      # Public: The String deactivation message.
-      property :message
-    end
   end
 end

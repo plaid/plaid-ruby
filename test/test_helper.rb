@@ -44,10 +44,10 @@ class PlaidTest < MiniTest::Test
     create_client
 
     if STUB_API
-      VCR.use_cassette("#{self.class}_#{self.name}",
-                       record: RECORD_MODE,
-                       match_requests_on: [:method, :uri, :body],
-                       &block)
+      cassette = "#{self.class}_#{self.name}"
+      VCR.use_cassette(cassette, record: RECORD_MODE, match_requests_on: [:method, :uri, :body]) do
+        block.call
+      end
     else
       block.call
     end

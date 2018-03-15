@@ -270,22 +270,22 @@ module Plaid
       property :item, coerce: Models::Item
     end
 
-    # Public: Deletes an item
+    # Public: Removes an item
     #
-    # Does a POST /item/delete call which is used to delete an item
+    # Does a POST /item/remove call which is used to remove an item
     #
-    # access_token - access_token who's item to delete
+    # access_token - access_token who's item to remove
     #
-    # Returns a DeleteResponse object with delete result.
-    def delete(access_token)
-      post_with_auth('item/delete',
-                     DeleteResponse,
+    # Returns a RemoveResponse object with remove result.
+    def remove(access_token)
+      post_with_auth('item/remove',
+                     RemoveResponse,
                      { access_token: access_token })
     end
 
-    class DeleteResponse < Models::BaseResponse
-      # Public: The Boolean flag meaning successful deletion.
-      property :deleted
+    class RemoveResponse < Models::BaseResponse
+      # Public: The Boolean flag meaning successful removal.
+      property :removed
     end
   end
 end
