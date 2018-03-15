@@ -72,7 +72,7 @@ client = Plaid::Client.new(env: :sandbox,
                            public_key: '***')
 
 exchange_token_response = client.item.public_token.exchange('[Plaid Link public_token]')
-access_token = exchange_token_response['access_token']
+access_token = exchange_token_response.access_token
 
 # Provide the access_token for the Item you want to remove
 client.item.remove(access_token)
@@ -150,7 +150,7 @@ There are also a number of other methods you can use to retrieve data:
 * `client.transactions.get(access_token, ...)`: transactions
 * `client.credit_details.get(access_token, ...)`: credit details
 
-All of these methods return appropriate data. More information and can be found on the [API documentation](https://plaid.com/docs/api).
+All of these methods return appropriate data. More information can be found on the [API documentation](https://plaid.com/docs/api).
 
 ### Categories
 

@@ -79,7 +79,6 @@ end
 task test: :enable_strict_models
 
 task :enable_strict_models do
-  puts "Setting models to strict"
   ENV['PLAID_STRICT_MODELS'] ||= '1'
 end
 
