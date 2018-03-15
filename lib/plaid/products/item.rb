@@ -286,6 +286,7 @@ module Plaid
     class RemoveResponse < Models::BaseResponse
       # Public: The Boolean flag meaning successful removal.
       property :removed
+      property :deleted
     end
   end
 end

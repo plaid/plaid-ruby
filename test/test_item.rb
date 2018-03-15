@@ -138,21 +138,11 @@ class PlaidItemTest < PlaidTest
     end
   end
 
-  def test_delete
-    create_item
-
-    delete_response = @client.item.delete(@access_token)
-    assert_equal(true, delete_response.deleted)
-
-    # Don't delete it in teardown again
-    @access_token = nil
-  end
-
   def test_remove
     create_item
 
     remove_response = @client.item.remove(@access_token)
-    assert_equal(true, remove_response.removed
+    assert_equal(true, remove_response.removed)
 
     # Don't remove it in teardown again
     @access_token = nil
