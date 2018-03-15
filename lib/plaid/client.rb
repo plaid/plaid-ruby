@@ -104,6 +104,18 @@ module Plaid
       @connection.post(path, payload.merge(public_key: @public_key)).body
     end
 
+    # Public: Set Plaid defaults on the Faraday connection.
+    #
+    # builder - The Faraday builder object.
+    def self.build_default_connection(builder)
+      builder.options[:timeout] = Plaid::Middleware::NETWORK_TIMEOUT
+      builder.headers = Plaid::Middleware::NETWORK_HEADERS
+      builder.request :json
+      builder.use Plaid::Middleware
+      builder.response :json, content_type: /\bjson$/
+      builder.adapter Faraday.default_adapter
+    end
+
     protected
 
     # Internal: subproduct-generated methods depend on client method.
@@ -132,20 +144,8 @@ module Plaid
     # Optionally takes a block to allow overriding the defaults.
     def create_connection(&block)
       @connection = Faraday.new(url: @api_host) do |builder|
-        block_given? ? yield(builder) : build_default_connection(builder)
+        block_given? ? yield(builder) : Client.build_default_connection(builder)
       end
-    end
-
-    # Internal: Set Plaid defaults on the Faraday connection.
-    #
-    # builder - The Faraday builder object.
-    def build_default_connection(builder)
-      builder.options[:timeout] = Plaid::Middleware::NETWORK_TIMEOUT
-      builder.headers = Plaid::Middleware::NETWORK_HEADERS
-      builder.request :json
-      builder.use Plaid::Middleware
-      builder.response :json, content_type: /\bjson$/
-      builder.adapter Faraday.default_adapter
     end
   end
 end
