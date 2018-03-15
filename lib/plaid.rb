@@ -39,5 +39,5 @@ module Plaid
     @relaxed_models = value
   end
 
-  module_function :relaxed_models, :relaxed_models=
+  module_function :relaxed_models?, :relaxed_models=
 end

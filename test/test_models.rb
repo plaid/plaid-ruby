@@ -12,7 +12,7 @@ class PlaidBaseModelTest < PlaidTest
   end
 
   def setup
-    @relaxed_models = Plaid.relaxed_models
+    @relaxed_models = Plaid.relaxed_models?
   end
 
   def teardown
