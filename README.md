@@ -39,7 +39,6 @@ client = Plaid::Client.new(env: :sandbox,
                            client_id: '***',
                            secret: '***',
                            public_key: '***')
-
 ```
 
 The `env` field is the environment which the client will be running in. Your choices for the `env` field include:
@@ -47,6 +46,19 @@ The `env` field is the environment which the client will be running in. Your cho
 - `:sandbox` allows you to do your initial integrations tests against preloaded data without being billed or making expensive API calls. More information about using the API sandbox can be found on the [API Sandbox documentation](https://plaid.com/docs/api#sandbox).
 - `:development` allows you to test against both real and test accounts without being billed. More information about Plaid test accounts can be found in our [API documentation](https://plaid.com/docs/api/#sandbox).
 - `:production` is the production environment where you can launch your production ready application and be charged for your Plaid usage.
+
+### Tuning Faraday
+
+The gem uses Faraday to wrap HTTPS connections, which allows you to tune certain params:
+
+```ruby
+client = Plaid::Client.new(env: :sandbox, client_id: '***', secret: '***', public_key: '***') do |builder|
+  Plaid::Client.build_default_connection(builder)
+
+  # Increase network timeout
+  builder.options[:timeout] = 60*20    # 20 minutes
+end
+```
 
 ## Examples
 
@@ -186,9 +198,21 @@ Any methods making API calls will result in an exception raised unless the respo
 Read more about response codes and their meaning in the
 [Plaid documentation](https://plaid.com/docs/api).
 
+## Response Objects
+
+Any API call returns a response object which is accessible by dot notation
+(`response.foo.bar`) or Symbols and Strings as keys: `response[:foo][:bar]`
+and `response['foo']['bar']`. Expected keys for all types of responses are defined,
+and any attempt to access an unknown key will cause `NoMethodError` exception.
+
+These strict model checks can be disabled by setting `Plaid.relaxed_models = true`.
+
 ## Network Timeout
 
-A network timeout value is set in the `lib/plaid/connect.rb` file. It is currently defaulted at 600 (in seconds) which equates to about 10 minutes. Some requests from the Plaid API may take longer than others and we want to make sure that all valid requests have a chance to complete. Adjust this value if necessary.
+A network timeout value is currently defaulted at 600 seconds = 10 minutes.
+Some requests from the Plaid API may take longer than others and we want to
+make sure that all valid requests have a chance to complete. Adjust this value
+if necessary (see "Tuning Faraday").
 
 ## Contributing
 

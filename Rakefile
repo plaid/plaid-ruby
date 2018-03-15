@@ -76,12 +76,6 @@ task :vcr_hide_credentials do
   end
 end
 
-task test: :enable_strict_models
-
-task :enable_strict_models do
-  ENV['PLAID_STRICT_MODELS'] ||= '1'
-end
-
 task :test_stubbed do
   ENV['STUB_API'] ||= '1'
   Rake::Task['test'].invoke

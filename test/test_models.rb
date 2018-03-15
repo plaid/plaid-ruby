@@ -12,11 +12,11 @@ class PlaidBaseModelTest < PlaidTest
   end
 
   def setup
-    @strict_models = ENV['PLAID_STRICT_MODELS']
+    @relaxed_models = Plaid.relaxed_models
   end
 
   def teardown
-    ENV['PLAID_STRICT_MODELS'] = @strict_models
+    Plaid.relaxed_models = @relaxed_models
   end
 
   def test_access
@@ -32,15 +32,25 @@ class PlaidBaseModelTest < PlaidTest
   end
 
   def test_unknown_attributes_in_strict_mode
-    ENV['PLAID_STRICT_MODELS'] = '1'
+    Plaid.relaxed_models = false
 
     assert_raises(NoMethodError) do
       TestModel.new({'bar' => 123})
     end
+
+    model = TestModel.new({'foo' => 123})
+
+    assert_raises(NoMethodError) do
+      model['abc']
+    end
+
+    assert_raises(NoMethodError) do
+      model.abc
+    end
   end
 
   def test_unknown_attributes_in_relaxed_mode
-    ENV.delete('PLAID_STRICT_MODELS')
+    Plaid.relaxed_models = true
 
     model = TestModel.new({'bar' => 123})
 

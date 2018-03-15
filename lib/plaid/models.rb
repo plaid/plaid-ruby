@@ -6,17 +6,8 @@ module Plaid
       include Hashie::Extensions::Dash::IndifferentAccess
       include Hashie::Extensions::Dash::Coercion
 
-      # We support two modes for parsing response bodies.
-      #
-      # Relaxed mode (default). If a response contains an unknown
-      # attribute, it won't cause any error and will be accessible
-      # using brackets notation: `response['unknown_attribute']`.
-      #
-      # Strict mode. Unknown attributes will cause NoMethodError.
-      # This is the mode that we want for tests to ensure that
-      # plaid-ruby's response models are correct.
       def assert_property_exists!(property)
-        super if ENV['PLAID_STRICT_MODELS']
+        super unless Plaid.relaxed_models?
       end
     end
 

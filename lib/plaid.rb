@@ -18,3 +18,26 @@ require_relative 'plaid/products/processor'
 require_relative 'plaid/products/sandbox'
 require_relative 'plaid/products/transactions'
 require_relative 'plaid/client'
+
+module Plaid
+  # Public: Get relaxed models state.
+  #
+  # We support two modes for parsing response bodies.
+  #
+  # Strict mode (default). Unknown attributes will cause NoMethodError.
+  #
+  # Relaxed mode. If a response contains an unknown
+  # attribute, it won't cause any error and will be accessible
+  # using brackets notation: `response['unknown_attribute']`.
+  #
+  # Returns truey value for relaxed mode and falsey for strict.
+  def relaxed_models?
+    defined?(@relaxed_models) && @relaxed_models
+  end
+
+  def relaxed_models=(value)
+    @relaxed_models = value
+  end
+
+  module_function :relaxed_models, :relaxed_models=
+end
