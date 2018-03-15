@@ -20,6 +20,8 @@ end
 RECORD_MODE = (ENV['RECORD_MODE'] || 'none').to_sym
 
 class PlaidTest < MiniTest::Test
+  attr_reader :client, :item, :access_token
+
   def create_client
     client_id = ENV['PLAID_RUBY_CLIENT_ID']
     secret = ENV['PLAID_RUBY_SECRET']
@@ -37,6 +39,36 @@ class PlaidTest < MiniTest::Test
                                 client_id: client_id,
                                 secret: secret,
                                 public_key: public_key)
+  end
+
+  # Helper used to create a test item with given products
+  def create_item(credentials: CREDENTIALS,
+                  institution_id: SANDBOX_INSTITUTION,
+                  initial_products: [:transactions],
+                  transactions_start_date: nil,
+                  transactions_end_date: nil,
+                  transactions_await_results: nil,
+                  webhook: nil,
+                  options: nil)
+
+    @item = client.item.create(credentials: credentials,
+                               institution_id: institution_id,
+                               initial_products: initial_products,
+                               transactions_start_date: transactions_start_date,
+                               transactions_end_date: transactions_end_date,
+                               transactions_await_results: transactions_await_results,
+                               webhook: webhook,
+                               options: options)
+
+    @access_token = item.access_token
+    refute_empty(@access_token)
+  end
+
+  # If create_item was used, remove the item
+  def teardown
+    if access_token
+      client.item.remove(access_token)
+    end
   end
 
   # This method is called around every test method.
