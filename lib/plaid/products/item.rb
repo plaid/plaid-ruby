@@ -286,7 +286,6 @@ module Plaid
     class RemoveResponse < Models::BaseResponse
       # Public: The Boolean flag meaning successful removal.
       property :removed
-      property :deleted        # FIXME kill this after rerecording cassettes
     end
   end
 end
