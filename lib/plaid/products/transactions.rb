@@ -40,10 +40,10 @@ module Plaid
 
       post_with_auth('transactions/get',
                      GetResponse,
-                     { access_token: access_token,
-                       start_date: Plaid.convert_to_date_string(start_date),
-                       end_date: Plaid.convert_to_date_string(end_date),
-                       options: options_payload })
+                     access_token: access_token,
+                     start_date: Plaid.convert_to_date_string(start_date),
+                     end_date: Plaid.convert_to_date_string(end_date),
+                     options: options_payload)
     end
 
     class GetResponse < Models::BaseResponse

@@ -16,7 +16,7 @@ class PlaidAccountsTest < PlaidTest
     assert_equal(1, response.accounts.size)
 
     response = client.accounts.get(access_token,
-                                    options: { account_ids: [account_id] })
+                                   options: { account_ids: [account_id] })
     assert_equal(1, response.accounts.size)
   end
 
@@ -41,7 +41,7 @@ class PlaidAccountsTest < PlaidTest
     assert_equal(1, response.accounts.size)
 
     response = client.accounts.balance.get(access_token,
-                                            options: { account_ids: [account_id] })
+                                           options: { account_ids: [account_id] })
     assert_equal(1, response.accounts.size)
   end
 

@@ -11,7 +11,7 @@ module Plaid
     def reset_login(access_token)
       post_with_auth('sandbox/item/reset_login',
                      ResetLoginResponse,
-                     { access_token: access_token })
+                     access_token: access_token)
     end
 
     class ResetLoginResponse < Models::BaseResponse

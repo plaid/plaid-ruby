@@ -53,11 +53,10 @@ end
 
 desc 'Hide real credentials in VCR cassettes'
 task :vcr_hide_credentials do
-
   all_creds = %w(PLAID_RUBY_CLIENT_ID PLAID_RUBY_SECRET PLAID_RUBY_PUBLIC_KEY)
 
   all_creds.each do |cred|
-    fail "#{cred} is not set" unless ENV[cred]
+    raise "#{cred} is not set" unless ENV[cred]
   end
 
   Dir['test/vcr_cassettes/*'].each do |fn|
@@ -68,11 +67,10 @@ task :vcr_hide_credentials do
       data.gsub! ENV[cred], cred
     end
 
-    if data != data_0
-      File.open(fn, 'w') { |f| f.write data }
+    next unless data != data_0
+    File.open(fn, 'w') { |f| f.write data }
 
-      puts ">> Updated #{fn}"
-    end
+    puts ">> Updated #{fn}"
   end
 end
 

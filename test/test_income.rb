@@ -6,7 +6,7 @@ class PlaidIncomeTest < PlaidTest
     create_item institution_id: 'ins_1', initial_products: [:income]
   end
 
-  # FIXME add a real income test
+  # FIXME: add a real income test
 
   def test_get
     assert_raises(Plaid::ItemError) do

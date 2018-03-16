@@ -11,7 +11,7 @@ module Plaid
     def get(access_token)
       post_with_auth('identity/get',
                      IdentityResponse,
-                     { access_token: access_token })
+                     access_token: access_token)
     end
   end
 

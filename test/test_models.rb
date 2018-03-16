@@ -20,7 +20,7 @@ class PlaidBaseModelTest < PlaidTest
   end
 
   def test_access
-    model = TestModel.new({'foo' => 123, 'sub' => {'baz' => 456}})
+    model = TestModel.new('foo' => 123, 'sub' => { 'baz' => 456 })
 
     assert_equal 123, model['foo']
     assert_equal 123, model[:foo]
@@ -35,10 +35,10 @@ class PlaidBaseModelTest < PlaidTest
     Plaid.relaxed_models = false
 
     assert_raises(NoMethodError) do
-      TestModel.new({'bar' => 123})
+      TestModel.new('bar' => 123)
     end
 
-    model = TestModel.new({'foo' => 123})
+    model = TestModel.new('foo' => 123)
 
     assert_raises(NoMethodError) do
       model['abc']
@@ -52,7 +52,7 @@ class PlaidBaseModelTest < PlaidTest
   def test_unknown_attributes_in_relaxed_mode
     Plaid.relaxed_models = true
 
-    model = TestModel.new({'bar' => 123})
+    model = TestModel.new('bar' => 123)
 
     assert_equal 123, model['bar']
   end

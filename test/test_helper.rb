@@ -66,22 +66,20 @@ class PlaidTest < MiniTest::Test
 
   # If create_item was used, remove the item
   def teardown
-    if access_token
-      client.item.remove(access_token)
-    end
+    client.item.remove(access_token) if access_token
   end
 
   # This method is called around every test method.
-  def around(&block)
+  def around
     create_client
 
     if STUB_API
-      cassette = "#{self.class}_#{self.name}"
+      cassette = "#{self.class}_#{name}"
       VCR.use_cassette(cassette, record: RECORD_MODE, match_requests_on: [:method, :uri, :body]) do
-        block.call
+        yield
       end
     else
-      block.call
+      yield
     end
   end
 

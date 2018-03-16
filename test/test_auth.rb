@@ -16,7 +16,7 @@ class PlaidAuthTest < PlaidTest
     assert_equal 1, response.numbers.size
 
     response = client.auth.get(access_token,
-                                options: { account_ids: [account_id] })
+                               options: { account_ids: [account_id] })
     assert_equal 1, response.numbers.size
   end
 

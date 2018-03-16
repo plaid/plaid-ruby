@@ -12,7 +12,7 @@ module Plaid
     # Returns the CreditDetailsResponse object with credit details info.
     def get(access_token, account_ids: nil)
       post_with_auth('credit_details/get',
-                     CreditDetailsResponse, 
+                     CreditDetailsResponse,
                      build_payload(access_token,
                                    account_ids: account_ids))
     end
