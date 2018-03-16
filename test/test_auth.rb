@@ -1,12 +1,12 @@
 require_relative 'test_helper'
 
-# rubocop:disable Metrics/AbcSize
-
 # Internal: The test for Plaid::Auth.
 class PlaidAuthTest < PlaidTest
   def setup
     create_item initial_products: [:auth]
   end
+
+  # rubocop:disable Metrics/AbcSize
 
   def test_get
     response = client.auth.get(access_token)
@@ -21,6 +21,8 @@ class PlaidAuthTest < PlaidTest
                                options: { account_ids: [account_id] })
     assert_equal 1, response.numbers.size
   end
+
+  # rubocop:enable Metrics/AbcSize
 
   def test_get_invalid_access_token
     assert_raises(Plaid::InvalidInputError) do

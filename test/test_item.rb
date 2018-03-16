@@ -1,9 +1,7 @@
 require_relative 'test_helper'
 
-# rubocop:disable Metrics/ClassLength
-
 # Internal: The test for Plaid::Item.
-class PlaidItemTest < PlaidTest
+class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
   def test_create
     create_item credentials: CREDENTIALS
     refute_empty(item.item)
@@ -67,7 +65,7 @@ class PlaidItemTest < PlaidTest
 
   def test_create_with_options_date_objects
     create_item(transactions_start_date: Date.parse('2016-01-01'),
-                transactions_end_date: DateTime.parse('2017-01-01'),
+                transactions_end_date: Date.parse('2017-01-01'),
                 transactions_await_results: true,
                 webhook: 'https://plaid.com/webhook-test')
 
@@ -155,7 +153,8 @@ class PlaidItemTest < PlaidTest
     refute_empty(public_token_response.public_token)
 
     exchange_token_response = client.item.public_token.exchange(
-      public_token_response.public_token)
+      public_token_response.public_token
+    )
     refute_empty(exchange_token_response.access_token)
   end
 
@@ -197,7 +196,8 @@ class PlaidItemTest < PlaidTest
 
     webhook_response = client.item.webhook.update(
       access_token,
-      'https://plaid.com/webhook-test')
+      'https://plaid.com/webhook-test'
+    )
 
     assert_equal 'https://plaid.com/webhook-test',
                  webhook_response.item.webhook
@@ -247,7 +247,7 @@ class PlaidItemTest < PlaidTest
   end
 
   def answer_selections(*)
-    answers = %w(tomato ketchup)
+    answers = %w[tomato ketchup]
     client.item.mfa(access_token, 'selections', answers)
   end
 end

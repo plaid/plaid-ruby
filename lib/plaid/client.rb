@@ -3,7 +3,7 @@ module Plaid
   # Public: The main interface to Plaid API.
   class Client
     # Public: All possible environments for the client to use.
-    ENVIRONMENTS = %i(sandbox development production).freeze
+    ENVIRONMENTS = %i[sandbox development production].freeze
 
     # Public: The current environment in use (one of ENVIRONMENTS).
     attr_reader :env
@@ -92,7 +92,8 @@ module Plaid
     def post_with_auth(path, payload)
       @connection.post(
         path,
-        payload.merge(client_id: @client_id, secret: @secret)).body
+        payload.merge(client_id: @client_id, secret: @secret)
+      ).body
     end
 
     # Public: Make a post request with appended public key field.

@@ -1,9 +1,8 @@
-# coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
+lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'plaid/version'
 
-Gem::Specification.new do |spec|
+Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.name          = 'plaid'
   spec.version       = Plaid::VERSION
   spec.authors       = ['Edmund Loo']
@@ -41,10 +40,10 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'bundler', '~> 1.7'
   spec.add_development_dependency 'dotenv'
-  spec.add_development_dependency 'rake', '>= 10.0'
-  spec.add_development_dependency 'sdoc', '~> 0.4.1'
   spec.add_development_dependency 'minitest', '~> 5.10'
   spec.add_development_dependency 'minitest-around', '~> 0.4.0'
-  spec.add_development_dependency 'vcr', '~> 3.0.3'
+  spec.add_development_dependency 'rake', '>= 10.0'
   spec.add_development_dependency 'rubocop', '~> 0.53.0'
+  spec.add_development_dependency 'sdoc', '~> 0.4.1'
+  spec.add_development_dependency 'vcr', '~> 3.0.3'
 end

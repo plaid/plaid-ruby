@@ -27,13 +27,13 @@ module Plaid
       @display_message = display_message
       @request_id      = request_id
 
-      super <<-EOS
+      super <<-TEXT
 Error Type      : #{error_type}
 Error Code      : #{error_code}
 Error Message   : #{error_message}
 Display Message : #{display_message}
 Request ID      : #{request_id}
-EOS
+TEXT
     end
   end
 

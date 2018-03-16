@@ -59,7 +59,8 @@ class PlaidTest < MiniTest::Test
       transactions_end_date: transactions_end_date,
       transactions_await_results: transactions_await_results,
       webhook: webhook,
-      options: options)
+      options: options
+    )
 
     @access_token = item.access_token
     refute_empty(@access_token)
@@ -77,7 +78,7 @@ class PlaidTest < MiniTest::Test
     if STUB_API
       cassette = "#{self.class}_#{name}"
       VCR.use_cassette(cassette, record: RECORD_MODE,
-                                 match_requests_on: [:method, :uri, :body]) do
+                                 match_requests_on: %i[method uri body]) do
         yield
       end
     else
@@ -108,6 +109,6 @@ class PlaidTest < MiniTest::Test
 
   SANDBOX_INSTITUTION_NAME = 'First Platypus Bank'.freeze
 
-  SANDBOX_INSTITUTIONS = %w(ins_109508 ins_109509 ins_109510
-                            ins_109511 ins_109512).freeze
+  SANDBOX_INSTITUTIONS = %w[ins_109508 ins_109509 ins_109510
+                            ins_109511 ins_109512].freeze
 end
