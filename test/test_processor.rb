@@ -7,9 +7,22 @@ class PlaidProcessorTest < PlaidTest
   end
 
   def test_stripe_bank_account_token_create_invalid_account_id
-    assert_raises(Plaid::InvalidRequestError) do
+    error = assert_raises(Plaid::InvalidRequestError) do
       client.processor.stripe.bank_account_token.create access_token,
                                                         BAD_STRING
     end
+
+    assert_equal 'INVALID_FIELD', error.error_code
+    assert_match(/account_id must be a properly formatted/, error.error_message)
+  end
+
+  def test_dwolla_processor_token_create_invalid_account_id
+    error = assert_raises(Plaid::InvalidRequestError) do
+      client.processor.dwolla.processor_token.create access_token,
+                                                     BAD_STRING
+    end
+
+    assert_equal 'INVALID_FIELD', error.error_code
+    assert_match(/account_id must be a properly formatted/, error.error_message)
   end
 end

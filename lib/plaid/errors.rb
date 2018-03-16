@@ -28,6 +28,7 @@ module Plaid
       @request_id      = request_id
 
       super <<-TEXT
+
 Error Type      : #{error_type}
 Error Code      : #{error_code}
 Error Message   : #{error_message}
