@@ -2,20 +2,25 @@ require 'hashie'
 
 module Plaid
   module Models
+    # Internal: Base model for all other models.
     class BaseModel < Hashie::Dash
       include Hashie::Extensions::Dash::IndifferentAccess
       include Hashie::Extensions::Dash::Coercion
 
+      # Internal: Be strict or forgiving depending on Plaid.relaxed_models
+      # value.
       def assert_property_exists!(property)
         super unless Plaid.relaxed_models?
       end
     end
 
+    # Internal: Base API response.
     class BaseResponse < BaseModel
       # Public: The String request ID assigned by the API.
       property :request_id
     end
 
+    # Public: A representation of an error.
     class Error < BaseModel
       # Public: The String broad categorization of the error. One of:
       # 'INVALID_REQUEST', 'INVALID_INPUT', 'RATE_LIMIT_EXCEEDED', 'API_ERROR',
@@ -34,6 +39,7 @@ module Plaid
       property :display_message
     end
 
+    # Public: A representation of an item.
     class Item < BaseModel
       # Public: The Array with String products available for this item
       # (e.g. ["balance", "auth"]).
@@ -56,6 +62,7 @@ module Plaid
       property :webhook
     end
 
+    # Public: A representation of account balances.
     class Balances < BaseModel
       # Public: The Numeric available balance (or nil).
       property :available
@@ -67,8 +74,10 @@ module Plaid
       property :limit
     end
 
+    # Public: A representation of an account.
     class Account < BaseModel
-      # Public: The String account ID, e.g. "QKKzevvp33HxPWpoqn6rI13BxW4awNSjnw4xv".
+      # Public: The String account ID, e.g.
+      # "QKKzevvp33HxPWpoqn6rI13BxW4awNSjnw4xv".
       property :account_id
 
       # Public: Balances for this account.
@@ -90,11 +99,13 @@ module Plaid
       property :subtype
     end
 
+    # Public: A representation of an account number.
     class Number < BaseModel
       # Public: The String account number. E.g. "1111222233330000".
       property :account
 
-      # Public: The String account ID. E.g. "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D".
+      # Public: The String account ID. E.g.
+      # "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D".
       property :account_id
 
       # Public: The String routing number. E.g. "011401533".
@@ -104,6 +115,7 @@ module Plaid
       property :wire_routing
     end
 
+    # Public: A representation of a transaction category.
     class Category < BaseModel
       # Public: The String category ID. E.g. "10000000".
       property :category_id
@@ -116,6 +128,7 @@ module Plaid
       property :group
     end
 
+    # Public: A representation of a single Credit Details APR.
     class CreditDetailsAPR < BaseModel
       # Public: The Numeric APR (e.g. 0.125).
       property :apr
@@ -127,14 +140,17 @@ module Plaid
       property :interest_charge_amount
     end
 
+    # Public: A representation of Credit Details APRs data.
     class CreditDetailsAPRs < BaseModel
       property :balance_transfers, coerce: CreditDetailsAPR
       property :cash_advances, coerce: CreditDetailsAPR
       property :purchases, coerce: CreditDetailsAPR
     end
 
+    # Public: A representation of Credit Details data.
     class CreditDetails < BaseModel
-      # Public: The String account ID. E.g. "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D".
+      # Public: The String account ID. E.g.
+      # "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D".
       property :account_id
 
       # Public: The APRs.
@@ -159,6 +175,7 @@ module Plaid
       property :next_bill_due_date
     end
 
+    # Public: A representation of Identity address details.
     class IdentityAddressData < BaseModel
       # Public: The String street name.
       property :street
@@ -173,6 +190,7 @@ module Plaid
       property :zip
     end
 
+    # Public: A representation of Identity address data.
     class IdentityAddress < BaseModel
       # Public: The Array of String accounts, associated with this address.
       # E.g. ["Plaid Credit Card 3333"].
@@ -185,6 +203,7 @@ module Plaid
       property :data, coerce: IdentityAddressData
     end
 
+    # Public: A representation of Identity email data.
     class IdentityEmail < BaseModel
       # Public: The String data, i.e. the address itself. E.g.
       # "accountholder0@example.com".
@@ -197,6 +216,7 @@ module Plaid
       property :type
     end
 
+    # Public: A representation of Identity phone number data.
     class IdentityPhoneNumber < BaseModel
       # Public: The String data, i.e. the number itself. E.g.
       # "4673956022".
@@ -209,6 +229,7 @@ module Plaid
       property :type
     end
 
+    # Public: A representation of Identity data.
     class Identity < BaseModel
       property :addresses, coerce: Array[IdentityAddress]
       property :emails, coerce: Array[IdentityEmail]
@@ -219,6 +240,7 @@ module Plaid
       property :phone_numbers, coerce: Array[IdentityPhoneNumber]
     end
 
+    # Public: A representation of Income Stream data.
     class IncomeStream < BaseModel
       # Public: The Numeric monthly income associated with the income stream.
       property :monthly_income
@@ -236,13 +258,14 @@ module Plaid
       property :name
     end
 
+    # Public: A representation of Income data.
     class Income < BaseModel
       # Public: An array of income streams with detailed information on each.
       property :income_streams, coerce: Array[IncomeStream]
 
-      # Public: The Numeric last year income, i.e. the sum of the Item’s income
-      # over the past 365 days. If Plaid has less than 365 days of data this will
-      # be less than a full year's income.
+      # Public: The Numeric last year income, i.e. the sum of the Item's
+      # income over the past 365 days. If Plaid has less than 365 days of data
+      # this will be less than a full year's income.
       property :last_year_income
 
       # Public: The Numeric last_year_income interpolated to value before
@@ -253,7 +276,7 @@ module Plaid
       # Public: The Numeric income extrapolated over a year based on current,
       # active income streams. Income streams become inactive if they have not
       # recurred for more than two cycles. For example, if a weekly paycheck
-      # hasn’t been seen for the past two weeks, it is no longer active.
+      # hasn't been seen for the past two weeks, it is no longer active.
       property :projected_yearly_income
 
       # Public: The Numeric projected_yearly_income interpolated to value
@@ -270,6 +293,7 @@ module Plaid
       property :number_of_income_streams
     end
 
+    # Public: A representation of an institution login credential.
     class InstitutionCredential < BaseModel
       # Public: The String label. E.g. "User ID".
       property :label
@@ -281,6 +305,7 @@ module Plaid
       property :type
     end
 
+    # Public: A representation of Institution.
     class Institution < BaseModel
       property :credentials, coerce: Array[InstitutionCredential]
 
@@ -303,10 +328,12 @@ module Plaid
     end
 
     module MFA
+      # Public: A representation of an MFA device.
       class Device < BaseModel
         property :display_message
       end
 
+      # Public: A representation of a single element in a device list.
       class DeviceListElement < BaseModel
         # Public: The String device ID.
         property :device_id
@@ -318,6 +345,7 @@ module Plaid
         property :type
       end
 
+      # Public: A representation of MFA selection.
       class Selection < BaseModel
         # Public: The String question.
         property :question
@@ -327,6 +355,7 @@ module Plaid
       end
     end
 
+    # Public: A representation of Transaction location.
     class TransactionLocation < BaseModel
       # Public: The String address (or nil).
       property :address
@@ -350,6 +379,7 @@ module Plaid
       property :zip
     end
 
+    # Public: A representation of Transaction Payment meta information.
     class TransactionPaymentMeta < BaseModel
       property :by_order_of
       property :ppd_id
@@ -361,6 +391,7 @@ module Plaid
       property :reference_number
     end
 
+    # Public: A representation of Transaction.
     class Transaction < BaseModel
       # Public: The String transaction ID.
       property :transaction_id

@@ -1,16 +1,16 @@
 module Plaid
   # Public: Class used to call the Institutions product.
   class Institutions < BaseProduct
-    # Public: Get information about Plaid institutions
+    # Public: Get information about Plaid institutions.
     #
-    # Does a POST /institutions/get call pulls a list of supported Plaid institutions
-    # with the information for each institution
+    # Does a POST /institutions/get call pulls a list of supported Plaid
+    # institutions with the information for each institution.
     #
-    # count   - Amount of institutions to pull
-    # offset  - Offset to start pulling institutions
-    # options - Options for filtering institutions
+    # count   - Amount of institutions to pull.
+    # offset  - Offset to start pulling institutions.
+    # options - Options for filtering institutions.
     #
-    # Returns a parsed JSON of listed institution information
+    # Returns a MultipleInstitutionsResponse instance.
     def get(count:, offset:, options: nil)
       payload = { count: count,
                   offset: offset }
@@ -21,40 +21,44 @@ module Plaid
                      payload)
     end
 
-    # Public: Get information about a Plaid institution by ID
+    # Public: Get information about a Plaid institution by ID.
     #
     # Does a POST /institutions/get_by_id call which allows you to pull
-    # information for an institution by ID
+    # information for an institution by ID.
     #
-    # institution_id - Specific institution id to fetch information for
+    # institution_id - Specific institution id to fetch information for.
     #
-    # Returns a parsed JSON of institution info for your institution id
+    # Returns a SingleInstitutionResponse instance.
     def get_by_id(institution_id)
       post_with_public_key('institutions/get_by_id',
                            SingleInstitutionResponse,
-                           { institution_id: institution_id })
+                           institution_id: institution_id)
     end
 
-    # Public: Get information about all available institutions matching your query
+    # Public: Get information about all available institutions matching your
+    # query.
     #
-    # Does a POST /institutions/search call which allows you to pull a list of institutions
-    # using a query parameter
+    # Does a POST /institutions/search call which allows you to pull a list of
+    # institutions using a query parameter.
     #
-    # query   - Search query to attempt to match institutions to
-    # producs - Product supported filter (optional)
+    # query   - Search query to attempt to match institutions to.
+    # producs - Product supported filter (optional).
     #
-    # Returns a parsed JSON listing institution information
+    # Returns a MultipleInstitutionsResponse instance.
     def search(query, products = nil)
       post_with_public_key('institutions/search',
                            MultipleInstitutionsResponse,
-                           { query: query, products: products })
+                           query: query,
+                           products: products)
     end
   end
 
+  # Public: Response for institutions search returning a single institution.
   class SingleInstitutionResponse < Models::BaseResponse
     property :institution, coerce: Models::Institution
   end
 
+  # Public: Response for institutions search returning multiple institutions.
   class MultipleInstitutionsResponse < Models::BaseResponse
     property :institutions, coerce: Array[Models::Institution]
     property :total

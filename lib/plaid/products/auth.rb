@@ -2,16 +2,17 @@ module Plaid
   # Public: Class used to call the Auth product.
   class Auth < BaseProduct
     # Public: Get information about account and routing numbers for checking
-    # and savings accounts
+    # and savings accounts.
     #
-    # Does a POST /auth/get call which returns high level account information along with
-    # account and routing numbers for checking and savings accounts
+    # Does a POST /auth/get call which returns high level account information
+    # along with account and routing numbers for checking and savings
+    # accounts.
     #
-    # access_token - access_token who's item to fetch Auth for
-    # account_ids  - Specific account ids to fetch numbers for (optional)
-    # options      - Additional options to merge into API request
+    # access_token - access_token who's item to fetch Auth for.
+    # account_ids  - Specific account ids to fetch numbers for (optional).
+    # options      - Additional options to merge into API request.
     #
-    # Returns a parsed JSON of Auth information
+    # Returns AuthResponse.
     def get(access_token, account_ids: nil, options: nil)
       post_with_auth('auth/get',
                      AuthResponse,

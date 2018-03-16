@@ -3,12 +3,15 @@ module Plaid
   class Balance < BaseProduct
     # Public: Get information about all available balances.
     #
-    # Does a POST /accounts/balance/get call to get real-time balance information for all
-    # accounts associated with the access_token's item.
+    # Does a POST /accounts/balance/get call to get real-time balance
+    # information for all accounts associated with the access_token's item.
     #
-    # access_token - The String access_token for the item to fetch balances for.
-    # account_ids  - The Array with specific account IDs to fetch balances for (optional).
-    # options      - Additional options to be merged into the request (optional).
+    # access_token - The String access_token for the item to fetch balances
+    #                for.
+    # account_ids  - The Array with specific account IDs to fetch balances for
+    #                (optional).
+    # options      - Additional options to be merged into the request
+    #                (optional).
     #
     # Returns the AccountsResponse object with accounts information.
     def get(access_token, account_ids: nil, options: nil)

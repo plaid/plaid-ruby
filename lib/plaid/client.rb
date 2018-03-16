@@ -3,14 +3,15 @@ module Plaid
   # Public: The main interface to Plaid API.
   class Client
     # Public: All possible environments for the client to use.
-    ENVIRONMENTS = %i(sandbox development production)
+    ENVIRONMENTS = %i(sandbox development production).freeze
 
     # Public: The current environment in use (one of ENVIRONMENTS).
     attr_reader :env
 
     # Public: Construct a Client instance
     #
-    # Optionally takes a block to allow overriding the default Faraday connection options.
+    # Optionally takes a block to allow overriding the default Faraday
+    # connection options.
     #
     # env        - The Symbol (:sandbox, :development, :production)
     # client_id  - The String Plaid account client ID to authenticate requests
@@ -132,8 +133,8 @@ module Plaid
     def api_host
       unless ENVIRONMENTS.include?(@env)
         raise ArgumentError,
-          "Invalid value for env (#{@env.inspect}): must be one of " +
-          ENVIRONMENTS.map(&:inspect) * ', '
+              "Invalid value for env (#{@env.inspect}): must be one of " +
+              ENVIRONMENTS.map(&:inspect) * ', '
       end
 
       "https://#{@env}.plaid.com"
@@ -142,7 +143,7 @@ module Plaid
     # Internal: Initializes a new Plaid connection object via Faraday.
     #
     # Optionally takes a block to allow overriding the defaults.
-    def create_connection(&block)
+    def create_connection
       @connection = Faraday.new(url: @api_host) do |builder|
         block_given? ? yield(builder) : Client.build_default_connection(builder)
       end

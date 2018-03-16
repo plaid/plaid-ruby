@@ -1,13 +1,14 @@
 module Plaid
   # Public: Class used to call the CreditDetails product.
   class CreditDetails < BaseProduct
-    # Public: Get information about all available credit_details
+    # Public: Get information about all available credit_details.
     #
-    # Does a POST /credit_details/get call which fetches credit details associated with
-    # and access_token's item
+    # Does a POST /credit_details/get call which fetches credit details
+    # associated with an access_token's item.
     #
-    # access_token - access_token who's item to fetch credit_details for
-    # account_ids  - Specific account ids to fetch credit_details for (optional)
+    # access_token - access_token of an item to fetch credit details for.
+    # account_ids  - Specific account ids to fetch credit details for
+    #                (optional).
     #
     # Returns the CreditDetailsResponse object with credit details info.
     def get(access_token, account_ids: nil)

@@ -8,7 +8,9 @@ class PlaidInstitutionsTest < PlaidTest
   end
 
   def test_get_with_options
-    response = client.institutions.get(count: 3, offset: 1, options: { products: ['transactions'] })
+    response = client.institutions.get count: 3,
+                                       offset: 1,
+                                       options: { products: ['transactions'] }
     assert_equal(3, response['institutions'].length)
   end
 
@@ -35,7 +37,8 @@ class PlaidInstitutionsTest < PlaidTest
   end
 
   def test_search_with_products
-    response = client.institutions.search(SANDBOX_INSTITUTION_NAME, [:transactions])
+    response = client.institutions.search SANDBOX_INSTITUTION_NAME,
+                                          [:transactions]
     refute_empty(response.institutions)
   end
 

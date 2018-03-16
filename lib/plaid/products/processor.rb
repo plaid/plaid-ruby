@@ -16,6 +16,7 @@ module Plaid
                      access_token: access_token, account_id: account_id)
     end
 
+    # Public: A response for /processor/stripe/bank_account_token/create.
     class CreateResponse < Models::BaseResponse
       # Public: The String stripe token.
       property :stripe_bank_account_token

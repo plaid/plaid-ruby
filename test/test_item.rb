@@ -1,5 +1,7 @@
 require_relative 'test_helper'
 
+# rubocop:disable Metrics/ClassLength
+
 # Internal: The test for Plaid::Item.
 class PlaidItemTest < PlaidTest
   def test_create
@@ -65,7 +67,7 @@ class PlaidItemTest < PlaidTest
 
   def test_create_with_options_date_objects
     create_item(transactions_start_date: Date.parse('2016-01-01'),
-                transactions_end_date: DateTime.strptime('2017-01-01', '%Y-%m-%d'),
+                transactions_end_date: DateTime.parse('2017-01-01'),
                 transactions_await_results: true,
                 webhook: 'https://plaid.com/webhook-test')
 
@@ -193,9 +195,12 @@ class PlaidItemTest < PlaidTest
   def test_webhook_update
     create_item
 
-    webhook_response = client.item.webhook.update(access_token,
-                                                  'https://plaid.com/webhook-test')
-    assert_equal('https://plaid.com/webhook-test', webhook_response.item.webhook)
+    webhook_response = client.item.webhook.update(
+      access_token,
+      'https://plaid.com/webhook-test')
+
+    assert_equal 'https://plaid.com/webhook-test',
+                 webhook_response.item.webhook
   end
 
   def test_webhook_update_invalid_access_token

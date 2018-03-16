@@ -11,11 +11,12 @@ module Plaid
     # Returns an InvalidateResponse object with the new access_token and
     # request id.
     def invalidate(access_token)
-      post_with_auth('item/access_token/invalidate',
+      post_with_auth 'item/access_token/invalidate',
                      InvalidateResponse,
-                     { access_token: access_token })
+                     access_token: access_token
     end
 
+    # Public: Response for /item/access_token/invalidate.
     class InvalidateResponse < Models::BaseResponse
       # Public: The String new access token.
       property :new_access_token
@@ -31,11 +32,12 @@ module Plaid
     # Returns an UpdateVersionResponse object with new access_token and item
     # ID.
     def update_version(access_token_v1)
-      post_with_auth('item/access_token/update_version',
+      post_with_auth 'item/access_token/update_version',
                      UpdateVersionResponse,
-                     { access_token_v1: access_token_v1 })
+                     access_token_v1: access_token_v1
     end
 
+    # Public: Response for /item/access_token/update_version.
     class UpdateVersionResponse < Models::BaseResponse
       # Public: The String new access token for use.
       property :access_token
@@ -58,11 +60,13 @@ module Plaid
     # Returns an UpdateResponse object with either an ItemStatus or MFA
     # response.
     def update(access_token, credentials)
-      post_with_auth('item/credentials/update',
+      post_with_auth 'item/credentials/update',
                      UpdateResponse,
-                     { access_token: access_token, credentials: credentials })
+                     access_token: access_token,
+                     credentials: credentials
     end
 
+    # Public: Response for /item/credentials/update.
     class UpdateResponse < Models::BaseResponse
       property :item, coerce: Models::Item
     end
@@ -79,11 +83,12 @@ module Plaid
     #
     # Returns a CreateResponse object with a public token and expiration info.
     def create(access_token)
-      post_with_auth('item/public_token/create',
+      post_with_auth 'item/public_token/create',
                      CreateResponse,
-                     { access_token: access_token })
+                     access_token: access_token
     end
 
+    # Public: Response for /item/public_token/create.
     class CreateResponse < Models::BaseResponse
       # Public: The String token.
       property :public_token
@@ -102,11 +107,12 @@ module Plaid
     #
     # Returns an ExchangeResponse object with an access_token and request id.
     def exchange(public_token)
-      post_with_auth('item/public_token/exchange',
+      post_with_auth 'item/public_token/exchange',
                      ExchangeResponse,
-                     { public_token: public_token })
+                     public_token: public_token
     end
 
+    # Public: Response for /item/public_token/exchange.
     class ExchangeResponse < Models::BaseResponse
       # Public: The String access token for use with API.
       property :access_token
@@ -118,22 +124,25 @@ module Plaid
 
   # Public: Class used to call the Webhook sub-product
   class Webhook < BaseProduct
-    # Public: Update webhook for an access_token
+    # Public: Update webhook for an access_token.
     #
     # Does a POST /item/webhook/update call which is used to update webhook
-    # for a particular access_token, webhooks are used to be notified when
-    # transactions for an item are updated and ready
+    # for a particular access_token. Webhooks are used to be notified when
+    # transactions for an item are updated and ready.
     #
-    # access_token - access_token who's item to update webhood for
-    # webhook      - a new webhook link
+    # access_token - The access_token of an item to update webhook for.
+    # webhook      - The new webhook link.
     #
-    # Returns an UpdateResponse object with either an ItemStatus or MFA response.
+    # Returns an UpdateResponse object with either an ItemStatus or MFA
+    # response.
     def update(access_token, webhook)
       post_with_auth('item/webhook/update',
                      UpdateResponse,
-                     { access_token: access_token, webhook: webhook })
+                     access_token: access_token,
+                     webhook: webhook)
     end
 
+    # Public: Response for /item/webhook/update.
     class UpdateResponse < Models::BaseResponse
       property :item, coerce: Models::Item
     end
@@ -163,17 +172,20 @@ module Plaid
     # possibly returning a success, error, or multi-factor authentication
     # response.
     #
-    # credentials                - Institution credentials to create item with
-    # institution_id             - Institution ID to create item with
-    # initial_products           - Initial products to create the item with i.e. ['transactions']
-    # transactions_start_date    - date at which to begin the item's initial transaction pull
-    #                             (optional)
-    # transactions_end_date      - date at which to end the item's initial transaction pull
-    #                             (optional)
-    # transactions_await_results - if true, the initial transaction pull will be performed
-    #                              synchronously (optional)
-    # webhook                    - webhook to associate with the item (optional)
-    # options                    - Additional options to merge into API request
+    # credentials                - Institution credentials to create item with.
+    # institution_id             - Institution ID to create item with.
+    # initial_products           - Initial products to create the item with,
+    #                              i.e. [:transactions].
+    # transactions_start_date    - date at which to begin the item's initial
+    #                              transaction pull (optional).
+    # transactions_end_date      - date at which to end the item's initial
+    #                              transaction pull (optional).
+    # transactions_await_results - if true, the initial transaction pull will
+    #                              be performed synchronously (optional).
+    # webhook                    - webhook to associate with the item
+    #                              (optional).
+    # options                    - Additional options to merge into API
+    #                              request.
     #
     # Returns an ItemResponse object with item info including access_token and
     # ItemStatus, or MFA response or error.
@@ -186,30 +198,37 @@ module Plaid
                webhook: nil,
                options: nil)
 
-      transactions_options = {}
-      unless transactions_start_date.nil?
-        transactions_options[:start_date] = Plaid.convert_to_date_string(transactions_start_date)
-      end
-      unless transactions_end_date.nil?
-        transactions_options[:end_date] = Plaid.convert_to_date_string(transactions_end_date)
-      end
-      unless transactions_await_results.nil?
-        transactions_options[:await_results] = transactions_await_results
-      end
-
       options_payload = {}
-      options_payload[:transactions] = transactions_options if transactions_options != {}
+
+      txn_options = transaction_options transactions_start_date,
+                                        transactions_end_date,
+                                        transactions_await_results
+
+      options_payload[:transactions] = txn_options if txn_options != {}
       options_payload[:webhook] = webhook unless webhook.nil?
       options_payload = options_payload.merge(options) unless options.nil?
 
       post_with_auth('item/create',
                      ItemResponse,
-                     { credentials: credentials,
-                       institution_id: institution_id,
-                       initial_products: initial_products,
-                       options: options_payload })
+                     credentials: credentials,
+                     institution_id: institution_id,
+                     initial_products: initial_products,
+                     options: options_payload)
     end
 
+    private def transaction_options(start_date, end_date, await_results)
+      {}.tap do |options|
+        options[:start_date] = Plaid.convert_to_date_string(start_date) \
+          if start_date
+
+        options[:end_date] = Plaid.convert_to_date_string(end_date) \
+          if end_date
+
+        options[:await_results] = await_results if await_results
+      end
+    end
+
+    # Public: Response for /item/create and /item/mfa endpoints.
     class ItemResponse < Models::BaseResponse
       # Public: The String access_token to use with API.
       property :access_token
@@ -239,17 +258,17 @@ module Plaid
     # Does a POST /item/mfa call which gives you the ability to respond to an
     # MFA.
     #
-    # access_token - To submit MFA step for
-    # mfa_type     - The MFA type indicated in the MFA response
-    # responses    - List of answers/responses to MFA
+    # access_token - To submit MFA step for.
+    # mfa_type     - The MFA type indicated in the MFA response.
+    # responses    - List of answers/responses to MFA.
     #
-    # Returns a parsed JSON of ItemStatus or another MFA step
+    # Returns an ItemResponse instance.
     def mfa(access_token, mfa_type, responses)
       post_with_auth('item/mfa',
                      ItemResponse,
-                     { access_token: access_token,
-                       mfa_type: mfa_type,
-                       responses: responses })
+                     access_token: access_token,
+                     mfa_type: mfa_type,
+                     responses: responses)
     end
 
     # Public: Get information about an item.
@@ -263,9 +282,10 @@ module Plaid
     def get(access_token)
       post_with_auth('item/get',
                      GetResponse,
-                     { access_token: access_token })
+                     access_token: access_token)
     end
 
+    # Public: Response for /item/get.
     class GetResponse < Models::BaseResponse
       property :item, coerce: Models::Item
     end
@@ -280,9 +300,10 @@ module Plaid
     def remove(access_token)
       post_with_auth('item/remove',
                      RemoveResponse,
-                     { access_token: access_token })
+                     access_token: access_token)
     end
 
+    # Public: Response for /item/remove.
     class RemoveResponse < Models::BaseResponse
       # Public: The Boolean flag meaning successful removal.
       property :removed

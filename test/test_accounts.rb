@@ -1,5 +1,7 @@
 require_relative 'test_helper'
 
+# rubocop:disable Metrics/AbcSize
+
 # Internal: The test for Plaid::Accounts.
 class PlaidAccountsTest < PlaidTest
   def setup
@@ -37,12 +39,14 @@ class PlaidAccountsTest < PlaidTest
     refute_empty(response.accounts)
 
     account_id = response.accounts[0].account_id
-    response = client.accounts.balance.get(access_token, account_ids: [account_id])
-    assert_equal(1, response.accounts.size)
+    response = client.accounts.balance.get access_token,
+                                           account_ids: [account_id]
+    assert_equal 1, response.accounts.size
 
-    response = client.accounts.balance.get(access_token,
-                                           options: { account_ids: [account_id] })
-    assert_equal(1, response.accounts.size)
+    response = client.accounts.balance.get(
+      access_token,
+      options: { account_ids: [account_id] })
+    assert_equal 1, response.accounts.size
   end
 
   def test_balance_get_invalid_access_token

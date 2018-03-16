@@ -1,9 +1,10 @@
 module Plaid
   # Public: Class used to call the Income product.
   class Income < BaseProduct
-    # Public: Get information about user incomes
+    # Public: Get information about user incomes.
     #
-    # Does a POST /income/get call which returns income info for an access_tokeni's item
+    # Does a POST /income/get call which returns income info for an
+    # access_token's item.
     #
     # access_token - access_token whose item to fetch income for.
     #
@@ -15,6 +16,7 @@ module Plaid
     end
   end
 
+  # Public: Income product response.
   class IncomeResponse < Models::BaseResponse
     property :item, coerce: Models::Item
     property :income, coerce: Models::Income

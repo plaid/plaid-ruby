@@ -8,7 +8,8 @@ class PlaidProcessorTest < PlaidTest
 
   def test_stripe_bank_account_token_create_invalid_account_id
     assert_raises(Plaid::InvalidRequestError) do
-      client.processor.stripe.bank_account_token.create(access_token, BAD_STRING)
+      client.processor.stripe.bank_account_token.create access_token,
+                                                        BAD_STRING
     end
   end
 end

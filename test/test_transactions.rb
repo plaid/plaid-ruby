@@ -32,7 +32,7 @@ class PlaidTransactionsTest < PlaidTest
     account_id = response['accounts'][0]['account_id']
     response = client.transactions.get(access_token,
                                        Date.parse('2016-01-01'),
-                                       DateTime.strptime('2017-01-01', '%Y-%m-%d'),
+                                       DateTime.parse('2017-01-01'),
                                        account_ids: [account_id])
     refute_empty(response['transactions'])
   end

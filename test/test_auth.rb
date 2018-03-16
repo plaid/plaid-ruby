@@ -1,5 +1,7 @@
 require_relative 'test_helper'
 
+# rubocop:disable Metrics/AbcSize
+
 # Internal: The test for Plaid::Auth.
 class PlaidAuthTest < PlaidTest
   def setup

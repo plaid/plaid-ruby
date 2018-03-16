@@ -14,6 +14,7 @@ module Plaid
                      access_token: access_token)
     end
 
+    # Public: Response for /sandbox/item/reset_login.
     class ResetLoginResponse < Models::BaseResponse
       # Public: The Boolean reset success flag.
       property :reset_login
