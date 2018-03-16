@@ -44,6 +44,6 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.add_development_dependency 'minitest-around', '~> 0.4.0'
   spec.add_development_dependency 'rake', '>= 10.0'
   spec.add_development_dependency 'rubocop', '~> 0.53.0'
-  spec.add_development_dependency 'sdoc', '~> 0.4.1'
-  spec.add_development_dependency 'vcr', '~> 3.0.3'
+  spec.add_development_dependency 'sdoc', '~> 1.0.0'
+  spec.add_development_dependency 'vcr', '~> 4.0.0'
 end
