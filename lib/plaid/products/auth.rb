@@ -14,11 +14,11 @@ module Plaid
     #
     # Returns AuthResponse.
     def get(access_token, account_ids: nil, options: nil)
-      post_with_auth('auth/get',
+      post_with_auth 'auth/get',
                      AuthResponse,
                      build_payload(access_token,
                                    account_ids: account_ids,
-                                   options: options))
+                                   options: options)
     end
   end
 

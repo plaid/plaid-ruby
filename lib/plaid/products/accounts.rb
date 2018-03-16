@@ -15,11 +15,11 @@ module Plaid
     #
     # Returns the AccountsResponse object with accounts information.
     def get(access_token, account_ids: nil, options: nil)
-      post_with_auth('accounts/balance/get',
+      post_with_auth 'accounts/balance/get',
                      AccountsResponse,
                      build_payload(access_token,
                                    account_ids: account_ids,
-                                   options: options))
+                                   options: options)
     end
   end
 
@@ -40,11 +40,11 @@ module Plaid
     #
     # Returns the AccountsResponse object with accounts information.
     def get(access_token, account_ids: nil, options: nil)
-      post_with_auth('accounts/get',
+      post_with_auth 'accounts/get',
                      AccountsResponse,
                      build_payload(access_token,
                                    account_ids: account_ids,
-                                   options: options))
+                                   options: options)
     end
   end
 

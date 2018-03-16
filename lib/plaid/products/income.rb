@@ -8,11 +8,11 @@ module Plaid
     #
     # access_token - access_token whose item to fetch income for.
     #
-    # Returns the IdentityResponse object with Income info.
+    # Returns the IncomeResponse object with Income info.
     def get(access_token)
-      post_with_auth('income/get',
+      post_with_auth 'income/get',
                      IncomeResponse,
-                     access_token: access_token)
+                     access_token: access_token
     end
   end
 

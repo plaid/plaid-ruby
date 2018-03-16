@@ -10,9 +10,9 @@ module Plaid
     #
     # Returns the IdentityResponse object with Identity info.
     def get(access_token)
-      post_with_auth('identity/get',
+      post_with_auth 'identity/get',
                      IdentityResponse,
-                     access_token: access_token)
+                     access_token: access_token
     end
   end
 

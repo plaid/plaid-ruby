@@ -27,12 +27,12 @@ module Plaid
       options_payload[:offset] = offset unless offset.nil?
       options_payload.merge!(options) unless options.nil?
 
-      post_with_auth('transactions/get',
+      post_with_auth 'transactions/get',
                      GetResponse,
                      access_token: access_token,
                      start_date: Plaid.convert_to_date_string(start_date),
                      end_date: Plaid.convert_to_date_string(end_date),
-                     options: options_payload)
+                     options: options_payload
     end
 
     # Public: Response for /transactions/get.

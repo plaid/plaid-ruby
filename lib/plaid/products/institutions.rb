@@ -16,9 +16,9 @@ module Plaid
                   offset: offset }
       payload[:options] = options unless options.nil?
 
-      post_with_auth('institutions/get',
+      post_with_auth 'institutions/get',
                      MultipleInstitutionsResponse,
-                     payload)
+                     payload
     end
 
     # Public: Get information about a Plaid institution by ID.
@@ -30,9 +30,9 @@ module Plaid
     #
     # Returns a SingleInstitutionResponse instance.
     def get_by_id(institution_id)
-      post_with_public_key('institutions/get_by_id',
+      post_with_public_key 'institutions/get_by_id',
                            SingleInstitutionResponse,
-                           institution_id: institution_id)
+                           institution_id: institution_id
     end
 
     # Public: Get information about all available institutions matching your
@@ -46,10 +46,10 @@ module Plaid
     #
     # Returns a MultipleInstitutionsResponse instance.
     def search(query, products = nil)
-      post_with_public_key('institutions/search',
+      post_with_public_key 'institutions/search',
                            MultipleInstitutionsResponse,
                            query: query,
-                           products: products)
+                           products: products
     end
   end
 
