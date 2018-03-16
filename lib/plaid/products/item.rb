@@ -136,10 +136,10 @@ module Plaid
     # Returns an UpdateResponse object with either an ItemStatus or MFA
     # response.
     def update(access_token, webhook)
-      post_with_auth('item/webhook/update',
+      post_with_auth 'item/webhook/update',
                      UpdateResponse,
                      access_token: access_token,
-                     webhook: webhook)
+                     webhook: webhook
     end
 
     # Public: Response for /item/webhook/update.
@@ -208,12 +208,12 @@ module Plaid
       options_payload[:webhook] = webhook unless webhook.nil?
       options_payload = options_payload.merge(options) unless options.nil?
 
-      post_with_auth('item/create',
+      post_with_auth 'item/create',
                      ItemResponse,
                      credentials: credentials,
                      institution_id: institution_id,
                      initial_products: initial_products,
-                     options: options_payload)
+                     options: options_payload
     end
 
     private def transaction_options(start_date, end_date, await_results)
@@ -264,11 +264,11 @@ module Plaid
     #
     # Returns an ItemResponse instance.
     def mfa(access_token, mfa_type, responses)
-      post_with_auth('item/mfa',
+      post_with_auth 'item/mfa',
                      ItemResponse,
                      access_token: access_token,
                      mfa_type: mfa_type,
-                     responses: responses)
+                     responses: responses
     end
 
     # Public: Get information about an item.
@@ -280,9 +280,9 @@ module Plaid
     #
     # Returns a GetResponse object with item information.
     def get(access_token)
-      post_with_auth('item/get',
+      post_with_auth 'item/get',
                      GetResponse,
-                     access_token: access_token)
+                     access_token: access_token
     end
 
     # Public: Response for /item/get.
@@ -298,9 +298,9 @@ module Plaid
     #
     # Returns a RemoveResponse object with remove result.
     def remove(access_token)
-      post_with_auth('item/remove',
+      post_with_auth 'item/remove',
                      RemoveResponse,
-                     access_token: access_token)
+                     access_token: access_token
     end
 
     # Public: Response for /item/remove.

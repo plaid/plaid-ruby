@@ -9,9 +9,9 @@ module Plaid
     #
     # Returns a ResetLoginResponse object.
     def reset_login(access_token)
-      post_with_auth('sandbox/item/reset_login',
+      post_with_auth 'sandbox/item/reset_login',
                      ResetLoginResponse,
-                     access_token: access_token)
+                     access_token: access_token
     end
 
     # Public: Response for /sandbox/item/reset_login.
