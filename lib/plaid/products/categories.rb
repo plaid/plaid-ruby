@@ -13,6 +13,9 @@ module Plaid
 
   # Public: Response wrapper for /categories/get.
   class CategoriesResponse < Models::BaseResponse
+    ##
+    # :attr_reader:
+    # Public: Categories: Array of Plaid::Models::Category.
     property :categories, coerce: Array[Models::Category]
   end
 end

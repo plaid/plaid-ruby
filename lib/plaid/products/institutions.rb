@@ -41,8 +41,8 @@ module Plaid
     # Does a POST /institutions/search call which allows you to pull a list of
     # institutions using a query parameter.
     #
-    # query   - Search query to attempt to match institutions to.
-    # producs - Product supported filter (optional).
+    # query    - Search query to attempt to match institutions to.
+    # products - Product supported filter (optional).
     #
     # Returns a MultipleInstitutionsResponse instance.
     def search(query, products = nil)
@@ -55,12 +55,22 @@ module Plaid
 
   # Public: Response for institutions search returning a single institution.
   class SingleInstitutionResponse < Models::BaseResponse
+    ##
+    # :attr_reader:
+    # Public: Institution info: Plaid::Models::Institution.
     property :institution, coerce: Models::Institution
   end
 
   # Public: Response for institutions search returning multiple institutions.
   class MultipleInstitutionsResponse < Models::BaseResponse
+    ##
+    # :attr_reader:
+    # Public: Institutions info: Array of Plaid::Models::Institution.
     property :institutions, coerce: Array[Models::Institution]
+
+    ##
+    # :attr_reader:
+    # Public: The total number of search results.
     property :total
   end
 end

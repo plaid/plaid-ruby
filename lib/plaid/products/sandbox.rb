@@ -5,7 +5,7 @@ module Plaid
     #
     # Does a POST /sandbox/item/reset_login call.
     #
-    # access_token - access_token who's item to reset login for
+    # access_token - access_token which item to reset login for.
     #
     # Returns a ResetLoginResponse object.
     def reset_login(access_token)
@@ -16,6 +16,8 @@ module Plaid
 
     # Public: Response for /sandbox/item/reset_login.
     class ResetLoginResponse < Models::BaseResponse
+      ##
+      # :attr_reader:
       # Public: The Boolean reset success flag.
       property :reset_login
     end
@@ -24,7 +26,8 @@ module Plaid
   # Public: Class used to call the Sandbox product.
   class Sandbox < BaseProduct
     ##
-    # Public: The Plaid::BankAccountToken product accessor.
+    # :attr_reader:
+    # Public: The Plaid::SandboxItem product accessor.
     subproduct :sandbox_item
   end
 end

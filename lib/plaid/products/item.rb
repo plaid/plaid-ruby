@@ -18,6 +18,8 @@ module Plaid
 
     # Public: Response for /item/access_token/invalidate.
     class InvalidateResponse < Models::BaseResponse
+      ##
+      # :attr_reader:
       # Public: The String new access token.
       property :new_access_token
     end
@@ -39,9 +41,13 @@ module Plaid
 
     # Public: Response for /item/access_token/update_version.
     class UpdateVersionResponse < Models::BaseResponse
+      ##
+      # :attr_reader:
       # Public: The String new access token for use.
       property :access_token
 
+      ##
+      # :attr_reader:
       # Public: The String item ID.
       property :item_id
     end
@@ -68,6 +74,9 @@ module Plaid
 
     # Public: Response for /item/credentials/update.
     class UpdateResponse < Models::BaseResponse
+      ##
+      # :attr_reader:
+      # Public: The item: Plaid::Models::Item.
       property :item, coerce: Models::Item
     end
   end
@@ -90,9 +99,13 @@ module Plaid
 
     # Public: Response for /item/public_token/create.
     class CreateResponse < Models::BaseResponse
+      ##
+      # :attr_reader:
       # Public: The String token.
       property :public_token
 
+      ##
+      # :attr_reader:
       # Public: The String token expiration time.
       property :expiration
     end
@@ -114,9 +127,13 @@ module Plaid
 
     # Public: Response for /item/public_token/exchange.
     class ExchangeResponse < Models::BaseResponse
+      ##
+      # :attr_reader:
       # Public: The String access token for use with API.
       property :access_token
 
+      ##
+      # :attr_reader:
       # Public: The String item ID.
       property :item_id
     end
@@ -144,6 +161,9 @@ module Plaid
 
     # Public: Response for /item/webhook/update.
     class UpdateResponse < Models::BaseResponse
+      ##
+      # :attr_reader:
+      # Public: The item: Plaid::Models::Item.
       property :item, coerce: Models::Item
     end
   end
@@ -151,18 +171,22 @@ module Plaid
   # Public: Class used to call the Item product.
   class Item < BaseProduct
     ##
+    # :attr_reader:
     # Public: The Plaid::AccessToken product accessor.
     subproduct :access_token
 
     ##
+    # :attr_reader:
     # Public: The Plaid::Credentials product accessor.
     subproduct :credentials
 
     ##
+    # :attr_reader:
     # Public: The Plaid::PublicToken product accessor.
     subproduct :public_token
 
     ##
+    # :attr_reader:
     # Public: The Plaid::Webhook product accessor.
     subproduct :webhook
 
@@ -230,26 +254,42 @@ module Plaid
 
     # Public: Response for /item/create and /item/mfa endpoints.
     class ItemResponse < Models::BaseResponse
+      ##
+      # :attr_reader:
       # Public: The String access_token to use with API.
       property :access_token
 
-      # Public: The Item object, returned if item has been successfully
-      # created.
+      ##
+      # :attr_reader:
+      # Public: The Plaid::Models::Item object, returned if item has been
+      # successfully created.
       property :item, coerce: Models::Item
 
+      ##
+      # :attr_reader:
+      # Public: The MFA/OTP device information: Plaid::Models::MFA::Device.
       property :device, coerce: Models::MFA::Device
 
-      # Public: The list of devices to send the OTP to.
+      ##
+      # :attr_reader:
+      # Public: The list of devices to send the OTP to:
+      # Array of Plaid::Models::MFA::DeviceListElement.
       property :device_list, coerce: Array[Models::MFA::DeviceListElement]
 
+      ##
+      # :attr_reader:
       # Public: The String MFA type. E.g. "device_list", "device", "questions",
       # "selections".
       property :mfa_type
 
+      ##
+      # :attr_reader:
       # Public: The Array of String MFA questions.
       property :questions
 
-      # Public: The Array of MFA selections.
+      ##
+      # :attr_reader:
+      # Public: The Array of MFA selections: Plaid::Models::MFA::Selection.
       property :selections, coerce: Array[Models::MFA::Selection]
     end
 
@@ -287,6 +327,9 @@ module Plaid
 
     # Public: Response for /item/get.
     class GetResponse < Models::BaseResponse
+      ##
+      # :attr_reader:
+      # Public: The item: Plaid::Models::Item.
       property :item, coerce: Models::Item
     end
 
@@ -305,6 +348,8 @@ module Plaid
 
     # Public: Response for /item/remove.
     class RemoveResponse < Models::BaseResponse
+      ##
+      # :attr_reader:
       # Public: The Boolean flag meaning successful removal.
       property :removed
     end

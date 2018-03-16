@@ -18,7 +18,14 @@ module Plaid
 
   # Public: Income product response.
   class IncomeResponse < Models::BaseResponse
+    ##
+    # :attr_reader:
+    # Public: The item: Plaid::Models::Item.
     property :item, coerce: Models::Item
+
+    ##
+    # :attr_reader:
+    # Public: Income information: Plaid::Models::Income.
     property :income, coerce: Models::Income
   end
 end

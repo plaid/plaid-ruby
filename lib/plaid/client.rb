@@ -30,46 +30,57 @@ module Plaid
     extend SubproductMixin
 
     ##
+    # :attr_reader:
     # Public: The Plaid::Accounts product accessor.
     subproduct :accounts
 
     ##
+    # :attr_reader:
     # Public: The Plaid::Auth product accessor.
     subproduct :auth
 
     ##
+    # :attr_reader:
     # Public: The Plaid::Categories product accessor.
     subproduct :categories
 
     ##
+    # :attr_reader:
     # Public: The Plaid::CreditDetails product accessor.
     subproduct :credit_details
 
     ##
+    # :attr_reader:
     # Public: The Plaid::Identity product accessor.
     subproduct :identity
 
     ##
+    # :attr_reader:
     # Public: The Plaid::Income product accessor.
     subproduct :income
 
     ##
+    # :attr_reader:
     # Public: The Plaid::Institutions product accessor.
     subproduct :institutions
 
     ##
+    # :attr_reader:
     # Public: The Plaid::Item product accessor.
     subproduct :item
 
     ##
+    # :attr_reader:
     # Public: The Plaid::Processor product accessor.
     subproduct :processor
 
     ##
+    # :attr_reader:
     # Public: The Plaid::Sandbox product accessor.
     subproduct :sandbox
 
     ##
+    # :attr_reader:
     # Public: The Plaid::Transactions product accessor.
     subproduct :transactions
 

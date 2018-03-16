@@ -37,13 +37,28 @@ module Plaid
 
     # Public: Response for /transactions/get.
     class GetResponse < Models::BaseResponse
+      ##
+      # :attr_reader:
+      # Public: The item: Plaid::Models::Item.
       property :item, coerce: Models::Item
+
+      ##
+      # :attr_reader:
+      # Public: The list of accounts: Array of Plaid::Models::Account.
       property :accounts, coerce: Array[Models::Account]
+
+      ##
+      # :attr_reader:
+      # Public: The list of transactions: Array of Plaid::Models::Transaction.
       property :transactions, coerce: Array[Models::Transaction]
 
+      ##
+      # :attr_reader:
       # Public: The String last updated time (if available).
       property :last_updated
 
+      ##
+      # :attr_reader:
       # Public: The Numeric total transactions count.
       property :total_transactions
     end

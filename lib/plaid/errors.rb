@@ -2,7 +2,7 @@ module Plaid
   # Public: Base class for Plaid SDK errors
   class PlaidError < StandardError; end
 
-  # Public: returned on Plaid server or network issues
+  # Public: Returned on Plaid server or network issues
   class PlaidServerError < PlaidError; end
 
   # Public: Base class for any error returned by the API
@@ -38,22 +38,22 @@ TEXT
     end
   end
 
-  # Public: returned when the request is malformed and cannot be processed.
+  # Public: Returned when the request is malformed and cannot be processed.
   class InvalidRequestError    < PlaidAPIError; end
 
-  # Public: returned when all fields are provided and are in the correct
+  # Public: Returned when all fields are provided and are in the correct
   # format, but the values provided are incorrect in some way.
   class InvalidInputError      < PlaidAPIError; end
 
-  # Public: returned when the request is valid but has exceeded established
+  # Public: Returned when the request is valid but has exceeded established
   # rate limits.
   class RateLimitExceededError < PlaidAPIError; end
 
-  # Public: returned during planned maintenance windows and in response to API
+  # Public: Returned during planned maintenance windows and in response to API
   # internal server errors.
   class APIError               < PlaidAPIError; end
 
-  # Public: indicates that information provided for the item (such as
+  # Public: Indicates that information provided for the item (such as
   # credentials or MFA) may be invalid or that the item is not supported on
   # Plaid's platform.
   class ItemError              < PlaidAPIError; end

@@ -18,8 +18,19 @@ module Plaid
 
   # Public: Response for /identity/get.
   class IdentityResponse < Models::BaseResponse
+    ##
+    # :attr_reader:
+    # Public: The list of accounts: Array of Plaid::Models::Account.
     property :accounts, coerce: Array[Models::Account]
+
+    ##
+    # :attr_reader:
+    # Public: Identity information: Plaid::Models::Identity.
     property :identity, coerce: Models::Identity
+
+    ##
+    # :attr_reader:
+    # Public: The item: Plaid::Models::Item.
     property :item, coerce: Models::Item
   end
 end

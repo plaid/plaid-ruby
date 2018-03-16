@@ -51,11 +51,13 @@ module Plaid
   # Public: The response wrapper for /accounts/get and /accounts/balance/get.
   class AccountsResponse < Models::BaseResponse
     ##
-    # Public: The item (Models::Item).
+    # :attr_reader:
+    # Public: The item: Plaid::Models::Item.
     property :item, coerce: Models::Item
 
     ##
-    # Public: The list of accounts (Models::Account).
+    # :attr_reader:
+    # Public: The list of accounts: Array of Plaid::Models::Account.
     property :accounts, coerce: Array[Models::Account]
   end
 end

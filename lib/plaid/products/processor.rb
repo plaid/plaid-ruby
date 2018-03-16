@@ -21,18 +21,23 @@ module Plaid
 
       # Public: A response for /processor/stripe/bank_account_token/create.
       class CreateResponse < Models::BaseResponse
+        ##
+        # :attr_reader:
         # Public: The String stripe token.
         property :stripe_bank_account_token
       end
     end
 
     ##
-    # Public: The Plaid::BankAccountToken product accessor.
+    # :attr_reader:
+    # Public: The Plaid::Stripe::BankAccountToken product accessor.
     subproduct :bank_account_token, BankAccountToken
   end
 
   # Public: A response for /processor/.../processor_token/create.
   class ProcessorTokenResponse < Models::BaseResponse
+    ##
+    # :attr_reader:
     # Public: The String processor token.
     property :processor_token
   end
@@ -49,7 +54,8 @@ module Plaid
       # access_token - access_token to create a public token for.
       # account_id - ID of the account to create a processor token for.
       #
-      # Returns a CreateResponseObject containing a Dwolla processor token.
+      # Returns a ProcessorTokenResponse object containing a Dwolla processor
+      # token.
       def create(access_token, account_id)
         post_with_auth 'processor/dwolla/processor_token/create',
                        ProcessorTokenResponse,
@@ -59,7 +65,8 @@ module Plaid
     end
 
     ##
-    # Public: The Plaid::DwollaProcessorToken product accessor.
+    # :attr_reader:
+    # Public: The Plaid::Dwolla::ProcessorToken product accessor.
     subproduct :processor_token, ProcessorToken
   end
 
@@ -75,7 +82,8 @@ module Plaid
       # access_token - access_token to create a public token for.
       # account_id - ID of the account to create a processor token for.
       #
-      # Returns a CreateResponseObject containing an Apex processor token.
+      # Returns a ProcessorTokenResponse object containing an Apex processor
+      # token.
       def create(access_token, account_id)
         post_with_auth 'processor/apex/processor_token/create',
                        ProcessorTokenResponse,
@@ -85,6 +93,7 @@ module Plaid
     end
 
     ##
+    # :attr_reader:
     # Public: The Plaid::ApexProcessorToken product accessor.
     subproduct :processor_token, ProcessorToken
   end
@@ -92,14 +101,17 @@ module Plaid
   # Public: Class used to call the Processor product.
   class Processor < BaseProduct
     ##
+    # :attr_reader:
     # Public: The Plaid::Stripe product accessor.
     subproduct :stripe
 
     ##
+    # :attr_reader:
     # Public: The Plaid::Dwolla product accessor.
     subproduct :dwolla
 
     ##
+    # :attr_reader:
     # Public: The Plaid::Apex product accessor.
     subproduct :apex
   end

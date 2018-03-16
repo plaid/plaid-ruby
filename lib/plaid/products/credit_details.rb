@@ -21,8 +21,20 @@ module Plaid
 
   # Public: Response wrapper for /credit_details/get.
   class CreditDetailsResponse < Models::BaseResponse
+    ##
+    # :attr_reader:
+    # Public: The list of accounts: Array of Plaid::Models::Account.
     property :accounts, coerce: Array[Models::Account]
+
+    ##
+    # :attr_reader:
+    # Public: The list of credit details: Array of
+    # Plaid::Models::CreditDetails.
     property :credit_details, coerce: Array[Models::CreditDetails]
+
+    ##
+    # :attr_reader:
+    # Public: The item: Plaid::Models::Item.
     property :item, coerce: Models::Item
   end
 end
