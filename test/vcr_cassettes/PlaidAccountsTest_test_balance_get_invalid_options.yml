@@ -8,41 +8,37 @@ http_interactions:
       string: '{"credentials":{"username":"user_good","password":"pass_good"},"institution_id":"ins_109508","initial_products":["transactions"],"options":{},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
     headers:
       User-Agent:
-      - Plaid Ruby v4.0.0
+      - Plaid Ruby v4.1.0
       Content-Type:
       - application/json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
   response:
     status:
       code: 200
-      message: OK
+      message: 
     headers:
-      Content-Type:
-      - application/json
-      Date:
-      - Wed, 12 Jul 2017 12:07:13 GMT
-      Server:
+      server:
       - nginx
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains; preload
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - DENY
-      X-Xss-Protection:
-      - 1; mode=block
-      Content-Length:
+      date:
+      - Fri, 16 Mar 2018 02:21:37 GMT
+      content-type:
+      - application/json
+      content-length:
       - '422'
-      Connection:
-      - keep-alive
+      connection:
+      - close
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
     body:
       encoding: UTF-8
       string: |-
         {
-          "access_token": "access-sandbox-5ed75da8-7d5c-43b1-abec-abfff14a2cfb",
+          "access_token": "access-sandbox-02ae54a0-0d27-4591-9ede-09d8d9bef550",
           "item": {
             "available_products": [
               "auth",
@@ -56,43 +52,39 @@ http_interactions:
             ],
             "error": null,
             "institution_id": "ins_109508",
-            "item_id": "bEJwolQDm9c8dkmNpZXAC6dXnelnBXTvb3PrZ",
+            "item_id": "91JVw8GyblInWRX5198VtWN5vavbnetX4z3Eb",
             "webhook": ""
           },
-          "request_id": "vmsvx"
+          "request_id": "Z8zKl"
         }
-    http_version:
-  recorded_at: Wed, 12 Jul 2017 12:07:13 GMT
+    http_version: 
+  recorded_at: Fri, 16 Mar 2018 02:21:38 GMT
 - request:
     method: post
     uri: https://sandbox.plaid.com/accounts/balance/get
     body:
       encoding: UTF-8
-      string: '{"access_token":"access-sandbox-5ed75da8-7d5c-43b1-abec-abfff14a2cfb","options":{"account_ids":"ABCDEFG1234567"},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+      string: '{"access_token":"access-sandbox-02ae54a0-0d27-4591-9ede-09d8d9bef550","options":{"account_ids":"ABCDEFG1234567"},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
     headers:
       User-Agent:
-      - Plaid Ruby v4.0.0
+      - Plaid Ruby v4.1.0
       Content-Type:
       - application/json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
   response:
     status:
       code: 400
-      message: Bad Request
+      message: 
     headers:
-      Content-Type:
-      - application/json
-      Date:
-      - Wed, 12 Jul 2017 12:07:14 GMT
-      Server:
+      server:
       - nginx
-      Content-Length:
+      date:
+      - Fri, 16 Mar 2018 02:21:39 GMT
+      content-type:
+      - application/json
+      content-length:
       - '211'
-      Connection:
-      - keep-alive
+      connection:
+      - close
     body:
       encoding: UTF-8
       string: |-
@@ -101,195 +93,51 @@ http_interactions:
           "error_code": "INVALID_FIELD",
           "error_message": "options.account_ids must be a non-empty array of valid account ids",
           "error_type": "INVALID_REQUEST",
-          "request_id": "rskoF"
+          "request_id": "mPc0w"
         }
-    http_version:
-  recorded_at: Wed, 12 Jul 2017 12:07:14 GMT
+    http_version: 
+  recorded_at: Fri, 16 Mar 2018 02:21:39 GMT
 - request:
     method: post
     uri: https://sandbox.plaid.com/item/remove
     body:
       encoding: UTF-8
-      string: '{"access_token":"access-sandbox-5ed75da8-7d5c-43b1-abec-abfff14a2cfb","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+      string: '{"access_token":"access-sandbox-02ae54a0-0d27-4591-9ede-09d8d9bef550","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
     headers:
       User-Agent:
-      - Plaid Ruby v4.0.0
-      Content-Type:
-      - application/json
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Content-Type:
-      - application/json
-      Date:
-      - Wed, 12 Jul 2017 12:07:16 GMT
-      Server:
-      - nginx
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains; preload
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - DENY
-      X-Xss-Protection:
-      - 1; mode=block
-      Content-Length:
-      - '46'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-          "deleted": true,
-          "request_id": "HdivG"
-        }
-    http_version:
-  recorded_at: Wed, 12 Jul 2017 12:07:16 GMT
-- request:
-    method: post
-    uri: https://sandbox.plaid.com/item/create
-    body:
-      encoding: UTF-8
-      string: '{"credentials":{"username":"user_good","password":"pass_good"},"institution_id":"ins_109508","initial_products":["transactions"],"options":{},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
-    headers:
-      User-Agent:
-      - Plaid Ruby v4.0.0
+      - Plaid Ruby v4.1.0
       Content-Type:
       - application/json
   response:
     status:
       code: 200
-      message:
+      message: 
     headers:
-      content-type:
-      - application/json
-      date:
-      - Tue, 10 Oct 2017 11:34:34 GMT
       server:
       - nginx
-      strict-transport-security:
-      - max-age=31536000; includeSubDomains; preload
-      x-content-type-options:
-      - nosniff
-      x-frame-options:
-      - DENY
-      x-xss-protection:
-      - 1; mode=block
-      content-length:
-      - '422'
-      connection:
-      - Close
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-          "access_token": "access-sandbox-3e1cf35d-488b-492b-b2c5-0ee05e41ae87",
-          "item": {
-            "available_products": [
-              "auth",
-              "balance",
-              "credit_details",
-              "identity",
-              "income"
-            ],
-            "billed_products": [
-              "transactions"
-            ],
-            "error": null,
-            "institution_id": "ins_109508",
-            "item_id": "Q149pjXxr5CjQL5D6zZ6iyo4X1w96kupMlnmd",
-            "webhook": ""
-          },
-          "request_id": "bOsBi"
-        }
-    http_version:
-  recorded_at: Tue, 10 Oct 2017 11:34:34 GMT
-- request:
-    method: post
-    uri: https://sandbox.plaid.com/accounts/balance/get
-    body:
-      encoding: UTF-8
-      string: '{"access_token":"access-sandbox-3e1cf35d-488b-492b-b2c5-0ee05e41ae87","options":{"account_ids":"ABCDEFG1234567"},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
-    headers:
-      User-Agent:
-      - Plaid Ruby v4.0.0
-      Content-Type:
-      - application/json
-  response:
-    status:
-      code: 400
-      message:
-    headers:
+      date:
+      - Fri, 16 Mar 2018 02:21:41 GMT
       content-type:
       - application/json
-      date:
-      - Tue, 10 Oct 2017 11:34:35 GMT
-      server:
-      - nginx
-      content-length:
-      - '211'
-      connection:
-      - Close
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-          "display_message": null,
-          "error_code": "INVALID_FIELD",
-          "error_message": "options.account_ids must be a non-empty array of valid account ids",
-          "error_type": "INVALID_REQUEST",
-          "request_id": "QFyFC"
-        }
-    http_version:
-  recorded_at: Tue, 10 Oct 2017 11:34:35 GMT
-- request:
-    method: post
-    uri: https://sandbox.plaid.com/item/remove
-    body:
-      encoding: UTF-8
-      string: '{"access_token":"access-sandbox-3e1cf35d-488b-492b-b2c5-0ee05e41ae87","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
-    headers:
-      User-Agent:
-      - Plaid Ruby v4.0.0
-      Content-Type:
-      - application/json
-  response:
-    status:
-      code: 200
-      message:
-    headers:
-      content-type:
-      - application/json
-      date:
-      - Tue, 10 Oct 2017 11:34:37 GMT
-      server:
-      - nginx
-      strict-transport-security:
-      - max-age=31536000; includeSubDomains; preload
-      x-content-type-options:
-      - nosniff
-      x-frame-options:
-      - DENY
-      x-xss-protection:
-      - 1; mode=block
       content-length:
       - '46'
       connection:
-      - Close
+      - close
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
     body:
       encoding: UTF-8
       string: |-
         {
-          "deleted": true,
-          "request_id": "IwcTu"
+          "removed": true,
+          "request_id": "acGpr"
         }
-    http_version:
-  recorded_at: Tue, 10 Oct 2017 11:34:37 GMT
+    http_version: 
+  recorded_at: Fri, 16 Mar 2018 02:21:41 GMT
 recorded_with: VCR 3.0.3
