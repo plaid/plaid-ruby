@@ -41,7 +41,7 @@ module Plaid
   class Dwolla < BaseProduct
     # Public: Class used to call the dwolla.processor_token subproduct
     class ProcessorToken < BaseProduct
-      # Public: Creates a Stripe bank account token from an access_token.
+      # Public: Creates a Dwolla processor token from an access_token.
       #
       # Does a POST /processor/dwolla/processor_token/create call which can be
       # used to generate a Dwolla processor token for a given account ID.
@@ -49,7 +49,7 @@ module Plaid
       # access_token - access_token to create a public token for.
       # account_id - ID of the account to create a processor token for.
       #
-      # Returns a CreateResponseObject containing a Stripe bank account token
+      # Returns a CreateResponseObject containing a Dwolla processor token.
       def create(access_token, account_id)
         post_with_auth 'processor/dwolla/processor_token/create',
                        ProcessorTokenResponse,
@@ -63,6 +63,32 @@ module Plaid
     subproduct :processor_token, ProcessorToken
   end
 
+  # Public: Class used to call the Apex sub-product.
+  class Apex < BaseProduct
+    # Public: Class used to call the apex.processor_token subproduct
+    class ProcessorToken < BaseProduct
+      # Public: Creates an Apex processor token from an access_token.
+      #
+      # Does a POST /processor/apex/processor_token/create call which can be
+      # used to generate an Apex processor token for a given account ID.
+      #
+      # access_token - access_token to create a public token for.
+      # account_id - ID of the account to create a processor token for.
+      #
+      # Returns a CreateResponseObject containing an Apex processor token.
+      def create(access_token, account_id)
+        post_with_auth 'processor/apex/processor_token/create',
+                       ProcessorTokenResponse,
+                       access_token: access_token,
+                       account_id: account_id
+      end
+    end
+
+    ##
+    # Public: The Plaid::ApexProcessorToken product accessor.
+    subproduct :processor_token, ProcessorToken
+  end
+
   # Public: Class used to call the Processor product.
   class Processor < BaseProduct
     ##
@@ -72,5 +98,9 @@ module Plaid
     ##
     # Public: The Plaid::Dwolla product accessor.
     subproduct :dwolla
+
+    ##
+    # Public: The Plaid::Apex product accessor.
+    subproduct :apex
   end
 end

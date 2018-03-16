@@ -36,7 +36,7 @@ changes in API you'll need to update the pre-recorded responses. Here's how:
    use this:
 
    ```
-   RECORD_MODE=all STUB_API=1 ruby -w -I"lib:test" -rminitest/pride test/test_which_fails.rb
+   RECORD_MODE=all STUB_API=1 ruby -w -I"lib:test" -rminitest/pride -rdotenv/load test/test_which_fails.rb
    ```
 3. Run `rake vcr_hide_credentials`. This step is essential, because
    newly recorded files will contain your real `client_id` and friends. This
