@@ -1,32 +1,33 @@
 module Plaid
   # Public: Class used to call the SandboxItem sub-product.
-  class SandboxItem
-    def initialize(client)
-      @client = client
+  class SandboxItem < BaseProduct
+    # Public: Resets sandbox item login.
+    #
+    # Does a POST /sandbox/item/reset_login call.
+    #
+    # access_token - access_token which item to reset login for.
+    #
+    # Returns a ResetLoginResponse object.
+    def reset_login(access_token)
+      post_with_auth 'sandbox/item/reset_login',
+                     ResetLoginResponse,
+                     access_token: access_token
     end
 
-    # Public: Resets sandbox item login
-    #
-    # Does a POST /sandbox/item/reset_login call
-    #
-    # access_token - access_token who's item to reset login for
-    #
-    # Returns a parsed JSON of response
-    def reset_login(access_token)
-      payload = { access_token: access_token }
-      @client.post_with_auth('sandbox/item/reset_login', payload)
+    # Public: Response for /sandbox/item/reset_login.
+    class ResetLoginResponse < Models::BaseResponse
+      ##
+      # :attr_reader:
+      # Public: The Boolean reset success flag.
+      property :reset_login
     end
   end
 
   # Public: Class used to call the Sandbox product.
-  class Sandbox
-    # Public: Memoized class instance to make requests from Plaid::SandboxItem
-    def sandbox_item
-      @sandbox_item ||= Plaid::SandboxItem.new(@client)
-    end
-
-    def initialize(client)
-      @client = client
-    end
+  class Sandbox < BaseProduct
+    ##
+    # :attr_reader:
+    # Public: The Plaid::SandboxItem product accessor.
+    subproduct :sandbox_item
   end
 end

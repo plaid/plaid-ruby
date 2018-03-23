@@ -1,9 +1,8 @@
-# coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
+lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'plaid/version'
 
-Gem::Specification.new do |spec|
+Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.name          = 'plaid'
   spec.version       = Plaid::VERSION
   spec.authors       = ['Edmund Loo']
@@ -15,8 +14,9 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://plaid.com/'
   spec.license       = 'MIT'
 
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
+  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the
+  # 'allowed_push_host' to allow pushing to a single host or delete this
+  # section to allow pushing to any host.
   if spec.respond_to?(:metadata)
     spec.metadata['allowed_push_host'] = 'https://rubygems.org'
   else
@@ -36,12 +36,14 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'faraday'
   spec.add_dependency 'faraday_middleware'
+  spec.add_dependency 'hashie', '>= 3.4.3'
 
   spec.add_development_dependency 'bundler', '~> 1.7'
   spec.add_development_dependency 'dotenv'
-  spec.add_development_dependency 'rake', '>= 10.0'
-  spec.add_development_dependency 'sdoc', '~> 0.4.1'
   spec.add_development_dependency 'minitest', '~> 5.10'
   spec.add_development_dependency 'minitest-around', '~> 0.4.0'
-  spec.add_development_dependency 'vcr', '~> 3.0.3'
+  spec.add_development_dependency 'rake', '>= 10.0'
+  spec.add_development_dependency 'rubocop', '~> 0.53.0'
+  spec.add_development_dependency 'sdoc', '~> 1.0.0'
+  spec.add_development_dependency 'vcr', '~> 4.0.0'
 end

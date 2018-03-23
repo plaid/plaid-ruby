@@ -5,7 +5,7 @@ http_interactions:
     uri: https://sandbox.plaid.com/item/create
     body:
       encoding: UTF-8
-      string: '{"credentials":{"username":"user_good","password":"pass_good"},"institution_id":"ins_109508","initial_products":["transactions"],"options":{},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+      string: '{"credentials":{"username":"user_good","password":"pass_good"},"institution_id":"ins_109508","initial_products":["auth"],"options":{},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
     headers:
       User-Agent:
       - Plaid Ruby v4.1.0
@@ -19,11 +19,11 @@ http_interactions:
       server:
       - nginx
       date:
-      - Fri, 16 Mar 2018 02:21:24 GMT
+      - Fri, 16 Mar 2018 12:08:06 GMT
       content-type:
       - application/json
       content-length:
-      - '422'
+      - '423'
       connection:
       - close
       strict-transport-security:
@@ -38,33 +38,33 @@ http_interactions:
       encoding: UTF-8
       string: |-
         {
-          "access_token": "access-sandbox-60a7683d-9cc7-441d-ae18-921677beda59",
+          "access_token": "access-sandbox-c073b378-f125-4d36-8219-c135f61f0b12",
           "item": {
             "available_products": [
-              "auth",
               "balance",
               "credit_details",
               "identity",
-              "income"
+              "income",
+              "transactions"
             ],
             "billed_products": [
-              "transactions"
+              "auth"
             ],
             "error": null,
             "institution_id": "ins_109508",
-            "item_id": "lv4DQ195oEFxa3DAqDnmFbmoyaJN1jHDp15r6",
+            "item_id": "mpVjQWXDLycPdbdoVW7DFl9LorK3kQfxdLDAdG",
             "webhook": ""
           },
-          "request_id": "qX3R8"
+          "request_id": "1JlLq"
         }
     http_version: 
-  recorded_at: Fri, 16 Mar 2018 02:21:24 GMT
+  recorded_at: Fri, 16 Mar 2018 12:08:07 GMT
 - request:
     method: post
-    uri: https://sandbox.plaid.com/accounts/get
+    uri: https://sandbox.plaid.com/processor/apex/processor_token/create
     body:
       encoding: UTF-8
-      string: '{"access_token":"ABCDEFG1234567","options":{},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+      string: '{"access_token":"access-sandbox-c073b378-f125-4d36-8219-c135f61f0b12","account_id":"ABCDEFG1234567","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
     headers:
       User-Agent:
       - Plaid Ruby v4.1.0
@@ -78,11 +78,11 @@ http_interactions:
       server:
       - nginx
       date:
-      - Fri, 16 Mar 2018 02:21:25 GMT
+      - Fri, 16 Mar 2018 12:08:08 GMT
       content-type:
       - application/json
       content-length:
-      - '267'
+      - '202'
       connection:
       - close
     body:
@@ -90,19 +90,19 @@ http_interactions:
       string: |-
         {
           "display_message": null,
-          "error_code": "INVALID_ACCESS_TOKEN",
-          "error_message": "provided access token is in an invalid format. expected format: access-\u003cenvironment\u003e-\u003cidentifier\u003e",
-          "error_type": "INVALID_INPUT",
-          "request_id": "Mr3Af"
+          "error_code": "INVALID_FIELD",
+          "error_message": "account_id must be a properly formatted, non-empty string",
+          "error_type": "INVALID_REQUEST",
+          "request_id": "hn1ID"
         }
     http_version: 
-  recorded_at: Fri, 16 Mar 2018 02:21:26 GMT
+  recorded_at: Fri, 16 Mar 2018 12:08:08 GMT
 - request:
     method: post
     uri: https://sandbox.plaid.com/item/remove
     body:
       encoding: UTF-8
-      string: '{"access_token":"access-sandbox-60a7683d-9cc7-441d-ae18-921677beda59","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+      string: '{"access_token":"access-sandbox-c073b378-f125-4d36-8219-c135f61f0b12","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
     headers:
       User-Agent:
       - Plaid Ruby v4.1.0
@@ -116,7 +116,7 @@ http_interactions:
       server:
       - nginx
       date:
-      - Fri, 16 Mar 2018 02:21:28 GMT
+      - Fri, 16 Mar 2018 12:08:10 GMT
       content-type:
       - application/json
       content-length:
@@ -136,8 +136,8 @@ http_interactions:
       string: |-
         {
           "removed": true,
-          "request_id": "TzqyE"
+          "request_id": "5W4RF"
         }
     http_version: 
-  recorded_at: Fri, 16 Mar 2018 02:21:28 GMT
+  recorded_at: Fri, 16 Mar 2018 12:08:11 GMT
 recorded_with: VCR 3.0.3

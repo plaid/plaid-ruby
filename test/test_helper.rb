@@ -20,6 +20,8 @@ end
 RECORD_MODE = (ENV['RECORD_MODE'] || 'none').to_sym
 
 class PlaidTest < MiniTest::Test
+  attr_reader :client, :item, :access_token
+
   def create_client
     client_id = ENV['PLAID_RUBY_CLIENT_ID']
     secret = ENV['PLAID_RUBY_SECRET']
@@ -39,16 +41,48 @@ class PlaidTest < MiniTest::Test
                                 public_key: public_key)
   end
 
-  def around(&block)
+  # Helper used to create a test item with given products
+  def create_item(credentials: CREDENTIALS,
+                  institution_id: SANDBOX_INSTITUTION,
+                  initial_products: [:transactions],
+                  transactions_start_date: nil,
+                  transactions_end_date: nil,
+                  transactions_await_results: nil,
+                  webhook: nil,
+                  options: nil)
+
+    @item = client.item.create(
+      credentials: credentials,
+      institution_id: institution_id,
+      initial_products: initial_products,
+      transactions_start_date: transactions_start_date,
+      transactions_end_date: transactions_end_date,
+      transactions_await_results: transactions_await_results,
+      webhook: webhook,
+      options: options
+    )
+
+    @access_token = item.access_token
+    refute_empty(@access_token)
+  end
+
+  # If create_item was used, remove the item
+  def teardown
+    client.item.remove(access_token) if access_token
+  end
+
+  # This method is called around every test method.
+  def around
     create_client
 
     if STUB_API
-      cassette = "#{self.class}_#{self.name}"
-      VCR.use_cassette(cassette, record: RECORD_MODE, match_requests_on: [:method, :uri, :body]) do
-        block.call
+      cassette = "#{self.class}_#{name}"
+      VCR.use_cassette(cassette, record: RECORD_MODE,
+                                 match_requests_on: %i[method uri body]) do
+        yield
       end
     else
-      block.call
+      yield
     end
   end
 
@@ -75,5 +109,6 @@ class PlaidTest < MiniTest::Test
 
   SANDBOX_INSTITUTION_NAME = 'First Platypus Bank'.freeze
 
-  SANDBOX_INSTITUTIONS = %w(ins_109508 ins_109509 ins_109510 ins_109511 ins_109512).freeze
+  SANDBOX_INSTITUTIONS = %w[ins_109508 ins_109509 ins_109510
+                            ins_109511 ins_109512].freeze
 end

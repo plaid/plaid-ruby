@@ -1,28 +1,40 @@
 module Plaid
   # Public: Class used to call the CreditDetails product.
-  class CreditDetails
-    def initialize(client)
-      @client = client
-    end
-
-    # Public: Get information about all available credit_details
+  class CreditDetails < BaseProduct
+    # Public: Get information about all available credit_details.
     #
-    # Does a POST /credit_details/get call which fetches credit details associated with
-    # and access_token's item
+    # Does a POST /credit_details/get call which fetches credit details
+    # associated with an access_token's item.
     #
-    # access_token - access_token who's item to fetch credit_details for
-    # account_ids  - Specific account ids to fetch credit_details for (optional)
+    # access_token - access_token of an item to fetch credit details for.
+    # account_ids  - Specific account ids to fetch credit details for
+    #                (optional).
     #
-    # Returns a parsed JSON of credit_details information
+    # Returns the CreditDetailsResponse object with credit details info.
     def get(access_token, account_ids: nil)
-      options_payload = {}
-      options_payload[:account_ids] = account_ids unless account_ids.nil?
-      payload = {
-        access_token: access_token,
-        options: options_payload
-      }
-
-      @client.post_with_auth('credit_details/get', payload)
+      post_with_auth 'credit_details/get',
+                     CreditDetailsResponse,
+                     build_payload(access_token,
+                                   account_ids: account_ids)
     end
+  end
+
+  # Public: Response wrapper for /credit_details/get.
+  class CreditDetailsResponse < Models::BaseResponse
+    ##
+    # :attr_reader:
+    # Public: The list of accounts: Array of Plaid::Models::Account.
+    property :accounts, coerce: Array[Models::Account]
+
+    ##
+    # :attr_reader:
+    # Public: The list of credit details: Array of
+    # Plaid::Models::CreditDetails.
+    property :credit_details, coerce: Array[Models::CreditDetails]
+
+    ##
+    # :attr_reader:
+    # Public: The item: Plaid::Models::Item.
+    property :item, coerce: Models::Item
   end
 end

@@ -1,0 +1,23 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.3
+    steps:
+      - checkout
+      - run:
+          name: Bundle Install
+          command: bundle check || bundle install
+      - run:
+          name: Stubbed API test
+          command: bundle exec rake test
+          environment:
+            STUB_API: yes
+      - run:
+          name: Live API test
+          command: bundle exec rake test
+      - run:
+          name: Rubocop test
+          command: bundle exec rubocop
+
