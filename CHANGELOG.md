@@ -1,4 +1,4 @@
-# 5.0.0 xx-Mar-2018
+# 5.0.0 23-Mar-2018
 
 * Introduce true response objects instead of deep nested hashes. Any of the
   three syntaxes can be used interchangeably for any API response:
