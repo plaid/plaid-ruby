@@ -9,10 +9,22 @@
 <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
 <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
 
+
+    <meta property="og:title" value="Plaid::PlaidAPIError">
+
+  
+    
+    <meta name="description" content="Base class for any error returned by the API.">
+    <meta property="og:description" content="Base class for any error returned by the API.">
+  
+
+    <meta name="keywords" content="Plaid::PlaidAPIError class">
+  
+    <meta name="keywords" content="new">
+  
 </head>
 
 <body>
@@ -147,7 +159,10 @@
 
 
     <!-- Methods -->
-              
+    
+    
+    
+  
 
     
       <div class="contenttitle" id="Internal">
@@ -177,22 +192,22 @@
 
           
             <div class="description">
-              <p>Initialize an error with proper attributes</p>
+              <p>Initialize an error with proper attributes.</p>
 <dl class="rdoc-list note-list"><dt><a href="PlaidAPIError.html#attribute-i-error_type">#error_type</a>
 <dd>
-<p>A broad categorization of the error</p>
+<p>A broad categorization of the error.</p>
 </dd><dt><a href="PlaidAPIError.html#attribute-i-error_code">#error_code</a>
 <dd>
-<p>The particular error code</p>
+<p>The particular error code.</p>
 </dd><dt><a href="PlaidAPIError.html#attribute-i-error_message">#error_message</a>
 <dd>
-<p>A developer-friendly representation of the error message</p>
+<p>A developer-friendly representation of the error message.</p>
 </dd><dt><a href="PlaidAPIError.html#attribute-i-display_message">#display_message</a>
 <dd>
-<p>A user-friendly representation of the error message</p>
+<p>A user-friendly representation of the error message.</p>
 </dd><dt><a href="PlaidAPIError.html#attribute-i-request_id">#request_id</a>
 <dd>
-<p>The ID of the request you made, can be used to escalate problems</p>
+<p>The ID of the request you made, can be used to escalate problems.</p>
 </dd></dl>
             </div>
           
@@ -211,21 +226,34 @@
                 
               </p>
               <div id="method-c-new_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/errors.rb, line 19</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">error_type</span>, <span class="ruby-identifier">error_code</span>, <span class="ruby-identifier">error_message</span>, <span class="ruby-identifier">display_message</span>, <span class="ruby-identifier">request_id</span>)
-  <span class="ruby-ivar">@error_type</span>      = <span class="ruby-identifier">error_type</span>
-  <span class="ruby-ivar">@error_code</span>      = <span class="ruby-identifier">error_code</span>
-  <span class="ruby-ivar">@error_message</span>   = <span class="ruby-identifier">error_message</span>
-  <span class="ruby-ivar">@display_message</span> = <span class="ruby-identifier">display_message</span>
-  <span class="ruby-ivar">@request_id</span>      = <span class="ruby-identifier">request_id</span>
+                <pre><span class="ruby-comment"># File lib/plaid/errors.rb, line 22</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">error_type</span>, <span class="ruby-identifier">error_code</span>, <span class="ruby-identifier">error_message</span>, <span class="ruby-identifier">display_message</span>,
+                   <span class="ruby-identifier">request_id</span>)
+      <span class="ruby-ivar">@error_type</span>      = <span class="ruby-identifier">error_type</span>
+      <span class="ruby-ivar">@error_code</span>      = <span class="ruby-identifier">error_code</span>
+      <span class="ruby-ivar">@error_message</span>   = <span class="ruby-identifier">error_message</span>
+      <span class="ruby-ivar">@display_message</span> = <span class="ruby-identifier">display_message</span>
+      <span class="ruby-ivar">@request_id</span>      = <span class="ruby-identifier">request_id</span>
 
-  <span class="ruby-keyword">super</span> <span class="ruby-string">&quot;\n&quot;</span>             <span class="ruby-node">&quot;Error Type      : #{@error_type}\n&quot;</span>             <span class="ruby-node">&quot;Error Code      : #{@error_code}\n&quot;</span>             <span class="ruby-node">&quot;Error Message   : #{@error_message}\n&quot;</span>             <span class="ruby-node">&quot;Display Message : #{@display_message}\n&quot;</span>             <span class="ruby-node">&quot;Request ID      : #{@request_id}\n&quot;</span>
-<span class="ruby-keyword">end</span></pre>
+      <span class="ruby-keyword">super</span> <span class="ruby-identifier">&lt;&lt;-TEXT</span>
+<span class="ruby-value">
+Error Type      : #{error_type}
+Error Code      : #{error_code}
+Error Message   : #{error_message}
+Display Message : #{display_message}
+Request ID      : #{request_id}
+</span><span class="ruby-identifier">TEXT</span>
+    <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
             
           </div>
-                        </div>
+        
+      
+    
+    
+  
+</div>
 
     </div>
   </body>

@@ -9,10 +9,22 @@
 <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
 <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
 
+
+    <meta property="og:title" value="Plaid::SandboxItem">
+
+  
+    
+    <meta name="description" content="Class used to call the SandboxItem sub-product.">
+    <meta property="og:description" content="Class used to call the SandboxItem sub-product.">
+  
+
+    <meta name="keywords" content="Plaid::SandboxItem class">
+  
+    <meta name="keywords" content="reset_login">
+  
 </head>
 
 <body>
@@ -24,7 +36,7 @@
             
                 <span class="parent">&lt;
                     
-                    Object
+                    <a href="BaseProduct.html">Plaid::BaseProduct</a>
                     
                 </span>
             
@@ -63,24 +75,23 @@ sub-product.</p>
 
 
   
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="SandboxItem/ResetLoginResponse.html">Plaid::SandboxItem::ResetLoginResponse</a>
+        </li>
+      
+    </ul>
+  
 
 
   
     <!-- Method ref -->
     <div class="sectiontitle">Methods</div>
     <dl class="methods">
-      
-        <dt>N</dt>
-        <dd>
-          <ul>
-            
-              
-              <li>
-                <a href="#method-c-new">new</a>
-              </li>
-            
-          </ul>
-        </dd>
       
         <dt>R</dt>
         <dd>
@@ -115,45 +126,9 @@ sub-product.</p>
 
     <!-- Methods -->
     
-      <div class="sectiontitle">Class Public methods</div>
-      
-        <div class="method">
-          <div class="title method-title" id="method-c-new">
-            
-              <b>new</b>(client)
-            
-            <a href="../../classes/Plaid/SandboxItem.html#method-c-new" name="method-c-new" class="permalink">Link</a>
-          </div>
-
-          
-            <div class="description">
-              
-            </div>
-          
-
-          
-
-          
-
-          
-            
-            <div class="sourcecode">
-              
-              <p class="source-link">
-                Source:
-                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
-                
-              </p>
-              <div id="method-c-new_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/sandbox.rb, line 4</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">client</span>)
-  <span class="ruby-ivar">@client</span> = <span class="ruby-identifier">client</span>
-<span class="ruby-keyword">end</span></pre>
-              </div>
-            </div>
-            
-          </div>
-                        
+    
+    
+  
 
     
       <div class="contenttitle" id="Public">
@@ -170,7 +145,8 @@ sub-product.</p>
 
 
     <!-- Methods -->
-        
+    
+    
       <div class="sectiontitle">Instance Public methods</div>
       
         <div class="method">
@@ -183,17 +159,18 @@ sub-product.</p>
 
           
             <div class="description">
-              <p>Resets sandbox item login</p>
+              <p>Resets sandbox item login.</p>
 
-<p>Does a POST /sandbox/item/reset_login call</p>
+<p>Does a POST /sandbox/item/reset_login call.</p>
 <dl class="rdoc-list note-list"><dt>access_token
 <dd>
-<p>access_token who&#39;s item to reset login for</p>
+<p>access_token which item to reset login for.</p>
 </dd></dl>
 
 <h3 id="method-i-reset_login-label-Returns">Returns</h3>
 
-<p>Returns a parsed JSON of response</p>
+<p>Returns a <a
+href="SandboxItem/ResetLoginResponse.html">ResetLoginResponse</a> object.</p>
             </div>
           
 
@@ -211,16 +188,21 @@ sub-product.</p>
                 
               </p>
               <div id="method-i-reset_login_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/sandbox.rb, line 15</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">reset_login</span>(<span class="ruby-identifier">access_token</span>)
-  <span class="ruby-identifier">payload</span> = { <span class="ruby-identifier">access_token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">access_token</span> }
-  <span class="ruby-ivar">@client</span>.<span class="ruby-identifier">post_with_auth</span>(<span class="ruby-string">&#39;sandbox/item/reset_login&#39;</span>, <span class="ruby-identifier">payload</span>)
+                <pre><span class="ruby-comment"># File lib/plaid/products/sandbox.rb, line 11</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reset_login</span>(<span class="ruby-identifier">access_token</span>)
+  <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;sandbox/item/reset_login&#39;</span>,
+                 <span class="ruby-constant">ResetLoginResponse</span>,
+                 <span class="ruby-value">access_token:</span> <span class="ruby-identifier">access_token</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
             
           </div>
-                    </div>
+        
+      
+    
+  
+</div>
 
     </div>
   </body>

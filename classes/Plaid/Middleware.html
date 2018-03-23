@@ -9,10 +9,22 @@
 <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
 <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
 
+
+    <meta property="og:title" value="Plaid::Middleware">
+
+  
+    
+    <meta name="description" content="The Faraday middleware used to catch errors.">
+    <meta property="og:description" content="The Faraday middleware used to catch errors.">
+  
+
+    <meta name="keywords" content="Plaid::Middleware class">
+  
+    <meta name="keywords" content="on_complete">
+  
 </head>
 
 <body>
@@ -37,6 +49,12 @@
     </div>
     <div id="bodyContent">
         <div id="content">
+  
+    <div class="description">
+      
+<p>The Faraday middleware used to catch errors.</p>
+
+    </div>
   
 
 
@@ -95,7 +113,8 @@
 
 
     <!-- Methods -->
-        
+    
+    
       <div class="sectiontitle">Instance Public methods</div>
       
         <div class="method">
@@ -126,20 +145,27 @@
                 
               </p>
               <div id="method-i-on_complete_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/middleware.rb, line 16</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">on_complete</span>(<span class="ruby-identifier">env</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">Faraday</span><span class="ruby-operator">::</span><span class="ruby-constant">Response</span><span class="ruby-operator">::</span><span class="ruby-constant">RaiseError</span><span class="ruby-operator">::</span><span class="ruby-constant">ClientErrorStatuses</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">env</span>[<span class="ruby-value">:status</span>])
-  <span class="ruby-identifier">raise</span> <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">Error</span>.<span class="ruby-identifier">error_from_type</span>(<span class="ruby-identifier">env</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">&#39;error_type&#39;</span>]).<span class="ruby-identifier">new</span>(<span class="ruby-identifier">env</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">&#39;error_type&#39;</span>],
-                                                                 <span class="ruby-identifier">env</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">&#39;error_code&#39;</span>],
-                                                                 <span class="ruby-identifier">env</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">&#39;error_message&#39;</span>],
-                                                                 <span class="ruby-identifier">env</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">&#39;display_message&#39;</span>],
-                                                                 <span class="ruby-identifier">env</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">&#39;request_id&#39;</span>])
+                <pre><span class="ruby-comment"># File lib/plaid/middleware.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">on_complete</span>(<span class="ruby-identifier">env</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">Faraday</span><span class="ruby-operator">::</span><span class="ruby-constant">Response</span><span class="ruby-operator">::</span><span class="ruby-constant">RaiseError</span><span class="ruby-operator">::</span><span class="ruby-constant">ClientErrorStatuses</span>
+                .<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">env</span>[<span class="ruby-value">:status</span>])
+
+  <span class="ruby-identifier">error_class</span> = <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">Error</span>.<span class="ruby-identifier">error_from_type</span>(<span class="ruby-identifier">env</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">&#39;error_type&#39;</span>])
+
+  <span class="ruby-identifier">raise</span> <span class="ruby-identifier">error_class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">env</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">&#39;error_type&#39;</span>],
+                        <span class="ruby-identifier">env</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">&#39;error_code&#39;</span>],
+                        <span class="ruby-identifier">env</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">&#39;error_message&#39;</span>],
+                        <span class="ruby-identifier">env</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">&#39;display_message&#39;</span>],
+                        <span class="ruby-identifier">env</span>.<span class="ruby-identifier">body</span>[<span class="ruby-string">&#39;request_id&#39;</span>])
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
             
           </div>
-                    
+        
+      
+    
+  
 
     
       <div class="contenttitle" id="Internal">
@@ -187,7 +213,11 @@
 
 
     <!-- Methods -->
-              </div>
+    
+    
+    
+  
+</div>
 
     </div>
   </body>

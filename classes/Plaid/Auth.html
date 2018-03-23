@@ -9,10 +9,22 @@
 <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
 <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
 
+
+    <meta property="og:title" value="Plaid::Auth">
+
+  
+    
+    <meta name="description" content="Class used to call the Auth product.">
+    <meta property="og:description" content="Class used to call the Auth product.">
+  
+
+    <meta name="keywords" content="Plaid::Auth class">
+  
+    <meta name="keywords" content="get">
+  
 </head>
 
 <body>
@@ -24,7 +36,7 @@
             
                 <span class="parent">&lt;
                     
-                    Object
+                    BaseProduct
                     
                 </span>
             
@@ -81,18 +93,6 @@
           </ul>
         </dd>
       
-        <dt>N</dt>
-        <dd>
-          <ul>
-            
-              
-              <li>
-                <a href="#method-c-new">new</a>
-              </li>
-            
-          </ul>
-        </dd>
-      
     </dl>
   
 
@@ -114,45 +114,9 @@
 
     <!-- Methods -->
     
-      <div class="sectiontitle">Class Public methods</div>
-      
-        <div class="method">
-          <div class="title method-title" id="method-c-new">
-            
-              <b>new</b>(client)
-            
-            <a href="../../classes/Plaid/Auth.html#method-c-new" name="method-c-new" class="permalink">Link</a>
-          </div>
-
-          
-            <div class="description">
-              
-            </div>
-          
-
-          
-
-          
-
-          
-            
-            <div class="sourcecode">
-              
-              <p class="source-link">
-                Source:
-                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
-                
-              </p>
-              <div id="method-c-new_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/auth.rb, line 4</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">client</span>)
-  <span class="ruby-ivar">@client</span> = <span class="ruby-identifier">client</span>
-<span class="ruby-keyword">end</span></pre>
-              </div>
-            </div>
-            
-          </div>
-                        
+    
+    
+  
 
     
       <div class="contenttitle" id="Public">
@@ -169,7 +133,8 @@
 
 
     <!-- Methods -->
-        
+    
+    
       <div class="sectiontitle">Instance Public methods</div>
       
         <div class="method">
@@ -183,24 +148,24 @@
           
             <div class="description">
               <p>Get information about account and routing numbers for checking and savings
-accounts</p>
+accounts.</p>
 
 <p>Does a POST /auth/get call which returns high level account information
-along with account and routing numbers for checking and savings accounts</p>
+along with account and routing numbers for checking and savings accounts.</p>
 <dl class="rdoc-list note-list"><dt>access_token
 <dd>
-<p>access_token who&#39;s item to fetch <a href="Auth.html">Auth</a> for</p>
+<p>access_token who&#39;s item to fetch <a href="Auth.html">Auth</a> for.</p>
 </dd><dt>account_ids
 <dd>
-<p>Specific account ids to fetch numbers for (optional)</p>
+<p>Specific account ids to fetch numbers for (optional).</p>
 </dd><dt>options
 <dd>
-<p>Additional options to merge into API request</p>
+<p>Additional options to merge into API request.</p>
 </dd></dl>
 
 <h3 id="method-i-get-label-Returns">Returns</h3>
 
-<p>Returns a parsed JSON of <a href="Auth.html">Auth</a> information</p>
+<p>Returns <a href="AuthResponse.html">AuthResponse</a>.</p>
             </div>
           
 
@@ -218,21 +183,23 @@ along with account and routing numbers for checking and savings accounts</p>
                 
               </p>
               <div id="method-i-get_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/auth.rb, line 19</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">get</span>(<span class="ruby-identifier">access_token</span>, <span class="ruby-identifier">account_ids</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">options_payload</span> = {}
-  <span class="ruby-identifier">options_payload</span>[<span class="ruby-value">:account_ids</span>] = <span class="ruby-identifier">account_ids</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">account_ids</span>.<span class="ruby-identifier">nil?</span>
-  <span class="ruby-identifier">options_payload</span> = <span class="ruby-identifier">options_payload</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">nil?</span>
-
-  <span class="ruby-identifier">payload</span> = { <span class="ruby-identifier">access_token</span><span class="ruby-operator">:</span> <span class="ruby-identifier">access_token</span>,
-              <span class="ruby-identifier">options</span><span class="ruby-operator">:</span> <span class="ruby-identifier">options_payload</span> }
-  <span class="ruby-ivar">@client</span>.<span class="ruby-identifier">post_with_auth</span>(<span class="ruby-string">&#39;auth/get&#39;</span>, <span class="ruby-identifier">payload</span>)
+                <pre><span class="ruby-comment"># File lib/plaid/products/auth.rb, line 16</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get</span>(<span class="ruby-identifier">access_token</span>, <span class="ruby-value">account_ids:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">options:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;auth/get&#39;</span>,
+                 <span class="ruby-constant">AuthResponse</span>,
+                 <span class="ruby-identifier">build_payload</span>(<span class="ruby-identifier">access_token</span>,
+                               <span class="ruby-value">account_ids:</span> <span class="ruby-identifier">account_ids</span>,
+                               <span class="ruby-value">options:</span> <span class="ruby-identifier">options</span>)
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
             
           </div>
-                    </div>
+        
+      
+    
+  
+</div>
 
     </div>
   </body>

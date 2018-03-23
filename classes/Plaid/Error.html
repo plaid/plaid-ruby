@@ -9,10 +9,22 @@
 <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
 <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
 <script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
 
+
+    <meta property="og:title" value="Plaid::Error">
+
+  
+    
+    <meta name="description" content="A module that provides utilities for errors.">
+    <meta property="og:description" content="A module that provides utilities for errors.">
+  
+
+    <meta name="keywords" content="Plaid::Error class">
+  
+    <meta name="keywords" content="error_from_type">
+  
 </head>
 
 <body>
@@ -89,13 +101,40 @@
     
 
     
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">ERROR_TYPE_MAP</td>
+            <td>=</td>
+            <td class="attr-value">{
+&#39;INVALID_REQUEST&#39; =&gt; Plaid::InvalidRequestError,
+&#39;INVALID_INPUT&#39; =&gt; Plaid::InvalidInputError,
+&#39;RATE_LIMIT_EXCEEDED_ERROR&#39; =&gt; Plaid::RateLimitExceededError,
+&#39;API_ERROR&#39; =&gt; Plaid::APIError,
+&#39;ITEM_ERROR&#39; =&gt; Plaid::ItemError
+}.freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
 
 
     
 
 
     <!-- Methods -->
-              
+    
+    
+    
+  
 
     
       <div class="contenttitle" id="Internal">
@@ -125,18 +164,18 @@
 
           
             <div class="description">
-              <p>Map error_type to <a href="PlaidAPIError.html">PlaidAPIError</a></p>
+              <p>Map error_type to <a href="PlaidAPIError.html">PlaidAPIError</a>.</p>
 
 <p>Maps an error_type from an error HTTP response to an actual <a
-href="PlaidAPIError.html">PlaidAPIError</a> class instance</p>
+href="PlaidAPIError.html">PlaidAPIError</a> class instance.</p>
 <dl class="rdoc-list note-list"><dt>error_type
 <dd>
-<p>The type of the error as indicated by the error response body</p>
+<p>The type of the error as indicated by the error response body.</p>
 </dd></dl>
 
 <h3 id="method-c-error_from_type-label-Returns">Returns</h3>
 
-<p>Returns an error class mapped from error_type</p>
+<p>Returns an error class mapped from error_type.</p>
             </div>
           
 
@@ -154,28 +193,20 @@ href="PlaidAPIError.html">PlaidAPIError</a> class instance</p>
                 
               </p>
               <div id="method-c-error_from_type_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/errors.rb, line 62</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">error_from_type</span>(<span class="ruby-identifier">error_type</span>)
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">error_type</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;INVALID_REQUEST&#39;</span>
-    <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">InvalidRequestError</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;INVALID_INPUT&#39;</span>
-    <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">InvalidInputError</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;RATE_LIMIT_EXCEEDED_ERROR&#39;</span>
-    <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">RateLimitExceededError</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;API_ERROR&#39;</span>
-    <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">APIError</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;ITEM_ERROR&#39;</span>
-    <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">ItemError</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">PlaidAPIError</span>
-  <span class="ruby-keyword">end</span>
+                <pre><span class="ruby-comment"># File lib/plaid/errors.rb, line 80</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">error_from_type</span>(<span class="ruby-identifier">error_type</span>)
+  <span class="ruby-constant">ERROR_TYPE_MAP</span>[<span class="ruby-identifier">error_type</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">PlaidAPIError</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
             
           </div>
-                        </div>
+        
+      
+    
+    
+  
+</div>
 
     </div>
   </body>

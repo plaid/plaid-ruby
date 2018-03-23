@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../css/github.css" type="text/css" media="screen" />
 <script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
 
@@ -23,7 +22,7 @@
         </h1>
         <ul class="files">
             <li>README.md</li>
-            <li>Last modified: 2018-01-04 13:00:20 -0500</li>
+            <li>Last modified: 2018-03-23 12:53:08 +0700</li>
         </ul>
     </div>
 
@@ -53,11 +52,13 @@ href="https://github.com/plaid/plaid-ruby-legacy">plaid-legacy</a>.</p>
 
 <p>And then execute:</p>
 
-<pre><code>$ bundle</code></pre>
+<pre><code>$ bundle
+</code></pre>
 
 <p>Or install it yourself as:</p>
 
-<pre><code>$ gem install plaid</code></pre>
+<pre><code>$ gem install plaid
+</code></pre>
 
 <p>The gem supports Ruby 2.1+ only.</p>
 
@@ -79,25 +80,42 @@ environment of choice:</p>
 
 <pre><code>require &#39;plaid&#39;
 
-$client = Plaid::Client.new(env: :sandbox,
-                            client_id: &#39;***&#39;,
-                            secret: &#39;***&#39;,
-                            public_key: &#39;***&#39;)
+client = Plaid::Client.new(env: :sandbox,
+                           client_id: &#39;***&#39;,
+                           secret: &#39;***&#39;,
+                           public_key: &#39;***&#39;)
 </code></pre>
 
 <p>The <code>env</code> field is the environment which the client will be
-running in. Your choices for the <code>env</code> field include: -
-<code>:sandbox</code> allows you to do your initial integrations tests
+running in. Your choices for the <code>env</code> field include:</p>
+<ul><li>
+<p><code>:sandbox</code> allows you to do your initial integrations tests
 against preloaded data without being billed or making expensive API calls.
 More information about using the API sandbox can be found on the <a
-href="https://plaid.com/docs/api#sandbox">API Sandbox documentation</a>. -
-<code>:development</code> allows you to test against both real and test
+href="https://plaid.com/docs/api#sandbox">API Sandbox documentation</a>.</p>
+</li><li>
+<p><code>:development</code> allows you to test against both real and test
 accounts without being billed. More information about <a
 href="../classes/Plaid.html">Plaid</a> test accounts can be found in our <a
-href="https://plaid.com/docs/api/#sandbox">API documentation</a>. -
-<code>:production</code> is the production environment where you can launch
+href="https://plaid.com/docs/api/#sandbox">API documentation</a>.</p>
+</li><li>
+<p><code>:production</code> is the production environment where you can launch
 your production ready application and be charged for your <a
 href="../classes/Plaid.html">Plaid</a> usage.</p>
+</li></ul>
+
+<h3 id="label-Tuning+Faraday">Tuning Faraday</h3>
+
+<p>The gem uses Faraday to wrap HTTPS connections, which allows you to tune
+certain params:</p>
+
+<pre><code>client = Plaid::Client.new(env: :sandbox, client_id: &#39;***&#39;, secret: &#39;***&#39;, public_key: &#39;***&#39;) do |builder|
+  Plaid::Client.build_default_connection(builder)
+
+  # Increase network timeout
+  builder.options[:timeout] = 60*20    # 20 minutes
+end
+</code></pre>
 
 <h2 id="label-Examples">Examples</h2>
 
@@ -111,7 +129,7 @@ token</code>, use this function to get an <code>access_token</code>:
 <code>public_token</code> in hand:</p>
 
 <pre><code>response = client.item.public_token.exchange(public_token)
-access_token = response[&#39;access_token&#39;]
+access_token = response.access_token
 </code></pre>
 
 <h3 id="label-Deleting+an+item">Deleting an item</h3>
@@ -123,12 +141,8 @@ client = Plaid::Client.new(env: :sandbox,
                            secret: &#39;***&#39;,
                            public_key: &#39;***&#39;)
 
-response = client.item.create(credentials: { username: &#39;user_good&#39;,
-                                             password: &#39;pass_good&#39; },
-                              institution_id: &#39;ins_109509&#39;,
-                              initial_products: %i(auth identity transactions))
-
-access_token = response[&#39;access_token&#39;]
+exchange_token_response = client.item.public_token.exchange(&#39;[Plaid Link public_token]&#39;)
+access_token = exchange_token_response.access_token
 
 # Provide the access_token for the Item you want to remove
 client.item.remove(access_token)
@@ -143,15 +157,11 @@ client = Plaid::Client.new(env: :sandbox,
                            secret: &#39;***&#39;,
                            public_key: &#39;***&#39;)
 
-item_response = client.item.create(credentials: { username: &#39;user_good&#39;,
-                                                  password: &#39;pass_good&#39; },
-                                   institution_id: &#39;ins_109509&#39;,
-                                   initial_products: %i(auth identity transactions))
-
-access_token = item_response[&#39;access_token&#39;]
+exchange_token_response = client.item.public_token.exchange(&#39;[Plaid Link public_token]&#39;)
+access_token = exchange_token_response.access_token
 
 transaction_response = client.transactions.get(access_token, &#39;2016-07-12&#39;, &#39;2017-01-09&#39;)
-transactions = transaction_response[&#39;transactions&#39;]
+transactions = transaction_response.transactions
 
 # the transactions in the response are paginated, so make multiple calls while
 # increasing the offset to retrieve all transactions
@@ -160,7 +170,7 @@ while transactions.length &lt; transaction_response[&#39;total_transactions&#39;
                                                  &#39;2016-07-12&#39;,
                                                  &#39;2017-01-09&#39;,
                                                  offset: transactions.length)
-  transactions += transaction_response[&#39;transactions&#39;]
+  transactions += transaction_response.transactions
 end
 </code></pre>
 
@@ -171,56 +181,60 @@ retreive data: “`ruby require &#39;plaid&#39;</p>
 
 <p>client = <a
 href="../classes/Plaid/Client.html#method-c-new">Plaid::Client.new</a>(env:
-:sandbox,  client_id: &#39;<strong><em>&#39;,  secret:
-&#39;</em></strong>&#39;,  public_key: &#39;<em>*</em>&#39;)</p>
+:sandbox,  client_id: &#39;<strong>*&#39;,  secret:
+&#39;</strong><em>&#39;,  public_key: &#39;</em>**&#39;)</p>
 
-<p>item_response = client.item.create(credentials: { username:
-&#39;user_good&#39;,  password: &#39;pass_good&#39; },  institution_id:
-&#39;ins_109509&#39;,  initial_products: %i(auth identity transactions))</p>
+<p>exchange_token_response = client.item.public_token.exchange(&#39;[Plaid
+Link public_token]&#39;) access_token =
+exchange_token_response.access_token</p>
 
-<p>access_token = <a href="'access_token'">item_response</a></p>
+<p>auth_response = client.auth.get(access_token) auth = auth_response.auth “`</p>
 
-<p>auth_response = client.auth.get(access_token) auth = <a
-href="'auth'">auth_response</a></p>
+<h3 id="label-Create+a+Stripe+bank_account_token">Create a Stripe bank_account_token</h3>
 
-<pre><code>
-### Create a Stripe bank_account_token
-
-Exchange a Plaid Link `public_token` for an API `access_token` and a Stripe `bank_account_token`:</code></pre>
-
-<p>ruby require &#39;plaid&#39;</p>
+<p>Exchange a <a href="../classes/Plaid.html">Plaid</a> Link
+<code>public_token</code> for an API <code>access_token</code> and a Stripe
+<code>bank_account_token</code>: “`ruby require &#39;plaid&#39;</p>
 
 <p>client = <a
 href="../classes/Plaid/Client.html#method-c-new">Plaid::Client.new</a>(env:
-:sandbox,  client_id: &#39;<strong><em>&#39;,  secret:
-&#39;</em></strong>&#39;,  public_key: &#39;<em>*</em>&#39;)</p>
+:sandbox,  client_id: &#39;<strong>*&#39;,  secret:
+&#39;</strong><em>&#39;,  public_key: &#39;</em>**&#39;)</p>
 
 <p>exchange_token_response = client.item.public_token.exchange(&#39;[Plaid
-Link public_token]&#39;) access_token = <a
-href="'access_token'">exchange_token_response</a></p>
+Link public_token]&#39;) access_token =
+exchange_token_response.access_token</p>
 
 <p>stripe_response =
 client.processor.stripe.bank_account_token.create(access_token,
-&#39;[Account ID]&#39;) bank_account_token = <a
-href="'stripe_bank_account_token'">stripe_response</a></p>
+&#39;[Account ID]&#39;) bank_account_token =
+stripe_response.stripe_bank_account_token “`</p>
 
-<pre><code>
-There are also a number of other methods you can use to retrieve data:
+<p>There are also a number of other methods you can use to retrieve data:</p>
+<ul><li>
+<p><code>client.accounts.get(access_token, ...)</code>: accounts</p>
+</li><li>
+<p><code>client.accounts.balance.get(access_token, ...)</code>: real-time
+balances</p>
+</li><li>
+<p><code>client.auth.get(access_token, ...)</code>: auth</p>
+</li><li>
+<p><code>client.identity.get(access_token, ...)</code>: identity</p>
+</li><li>
+<p><code>client.transactions.get(access_token, ...)</code>: transactions</p>
+</li><li>
+<p><code>client.credit_details.get(access_token, ...)</code>: credit details</p>
+</li></ul>
 
-* `client.accounts.get(access_code, ...)`: accounts
-* `client.accounts.balance.get(access_code, ...)`: real-time balances
-* `client.auth.get(access_code, ...)`: auth
-* `client.identity.get(access_code, ...)`: identity
-* `client.transactions.get(access_code, ...)`: transactions
-* `client.credit_details.get(access_code, ...)`: credit details
+<p>All of these methods return appropriate data. More information can be found
+on the <a href="https://plaid.com/docs/api">API documentation</a>.</p>
 
-All of these methods return appropriate data. More information and especially information about fields available in all the returned hashes can be found on the [API documentation](https://plaid.com/docs/api).
+<h3 id="label-Categories">Categories</h3>
 
-### Categories
+<p>You can request category information:</p>
 
-You can request category information:</code></pre>
-
-<p>ruby categories = client.categories.get # Array of all known categories “`</p>
+<pre><code>categories = client.categories.get             # Array of all known categories
+</code></pre>
 
 <h3 id="label-Institutions">Institutions</h3>
 
@@ -255,14 +269,25 @@ supported on Plaid&#39;s platform.</p>
 <p>Read more about response codes and their meaning in the <a
 href="https://plaid.com/docs/api">Plaid documentation</a>.</p>
 
+<h2 id="label-Response+Objects">Response Objects</h2>
+
+<p>Any API call returns a response object which is accessible by dot notation
+(<code>response.foo.bar</code>) or Symbols and Strings as keys:
+<code>response[:foo][:bar]</code> and
+<code>response['foo'][&#39;bar&#39;]</code>. Expected keys for all types of
+responses are defined, and any attempt to access an unknown key will cause
+<code>NoMethodError</code> exception.</p>
+
+<p>These strict model checks can be disabled by setting
+<code>Plaid.relaxed_models = true</code>.</p>
+
 <h2 id="label-Network+Timeout">Network Timeout</h2>
 
-<p>A network timeout value is set in the <code>lib/plaid/connect.rb</code>
-file. It is currently defaulted at 600 (in seconds) which equates to about
-10 minutes. Some requests from the <a
-href="../classes/Plaid.html">Plaid</a> API may take longer than others and
-we want to make sure that all valid requests have a chance to complete.
-Adjust this value if necessary.</p>
+<p>A network timeout value is currently defaulted at 600 seconds = 10 minutes.
+Some requests from the <a href="../classes/Plaid.html">Plaid</a> API may
+take longer than others and we want to make sure that all valid requests
+have a chance to complete. Adjust this value if necessary (see “Tuning
+Faraday”).</p>
 
 <h2 id="label-Contributing">Contributing</h2>
 
@@ -308,7 +333,11 @@ href="http://opensource.org/licenses/MIT">MIT License</a>.</p>
 
 
     <!-- Methods -->
-              </div>
+    
+    
+    
+  
+</div>
 
     </div>
   </body>
