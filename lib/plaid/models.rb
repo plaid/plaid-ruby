@@ -100,6 +100,16 @@ module Plaid
       # :attr_reader:
       # Public: The Numeric limit (or nil).
       property :limit
+
+      ##
+      # :attr_reader:
+      # Public: The String available balance ISO currency code.
+      property :iso_currency_code
+
+      ##
+      # :attr_reader:
+      # Public: The String available balance unofficial currency code or (nil).
+      property :unofficial_currency_code
     end
 
     # Public: A representation of an account.
