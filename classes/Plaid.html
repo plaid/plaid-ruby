@@ -384,7 +384,19 @@
           <tr valign='top'>
             <td class="attr-name">VERSION</td>
             <td>=</td>
-            <td class="attr-value">&#39;5.0.0&#39;.freeze</td>
+            <td class="attr-value">&#39;6.0.0&#39;.freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">API_VERSION</td>
+            <td>=</td>
+            <td class="attr-value">&#39;2018-05-22&#39;.freeze</td>
           </tr>
           
             <tr valign='top'>
@@ -432,7 +444,7 @@
                 
               </p>
               <div id="method-c-relaxed_models-3D_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid.rb, line 40</span>
+                <pre><span class="ruby-comment"># File lib/plaid.rb, line 44</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">relaxed_models=</span>(<span class="ruby-identifier">value</span>)
   <span class="ruby-ivar">@relaxed_models</span> = <span class="ruby-identifier">value</span>
 <span class="ruby-keyword">end</span></pre>
@@ -483,7 +495,11 @@ href="'unknown_attribute'">response</a>`.</p>
               <div id="method-c-relaxed_models-3F_source" class="dyn-source">
                 <pre><span class="ruby-comment"># File lib/plaid.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">relaxed_models?</span>
-  <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@relaxed_models</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@relaxed_models</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@relaxed_models</span>)
+    <span class="ruby-ivar">@relaxed_models</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -572,7 +588,7 @@ return a string representation of the Date.</p>
                 
               </p>
               <div id="method-c-convert_to_date_string_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid.rb, line 54</span>
+                <pre><span class="ruby-comment"># File lib/plaid.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">convert_to_date_string</span>(<span class="ruby-identifier">date</span>)
   <span class="ruby-identifier">date</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">date</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">date</span>.<span class="ruby-identifier">to_date</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&#39;%Y-%m-%d&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
