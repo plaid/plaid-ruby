@@ -2,6 +2,7 @@
 
 * Use `Plaid-Version` header to request the certain compatible API version.
 * Change Auth-related data structures to conform to the API.
+* Include currency-related fields for transaction and account objects.
 
 # 5.0.0 23-Mar-2018
 
