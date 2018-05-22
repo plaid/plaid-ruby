@@ -2,8 +2,6 @@
 
 The official Ruby bindings for the [Plaid API](https://plaid.com/docs).
 
-**Note:** This module was recently refactored and released as version `4.0.x` to support [Plaid's updated API][1]. The previous module version, `3.0.x`, and API legacy documentation, is still available via RubyGems and mirrored as [`plaid-legacy`][2].
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -21,6 +19,18 @@ Or install it yourself as:
     $ gem install plaid
 
 The gem supports Ruby 2.1+ only.
+
+### Versioning
+
+Each major version of `plaid-ruby` targets a specific version of the Plaid API:
+
+| API version | plaid-ruby release |
+| ----------- | ------------------ |
+| [`2018-05-22`][api-version-2018-05-22] (**latest**) | `6.x.x` |
+| `2017-03-01` | `5.x.x` |
+
+For information about what has changed between versions and how to update your integration, head to the [version changelog][version-changelog].
+
 
 ## Usage
 
@@ -222,5 +232,10 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/plaid/
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
 
-[1]: https://blog.plaid.com/improving-our-api/
+### Legacy API
+
+If you're looking for a Ruby client that works with the legacy Plaid API, use the [`plaid-legacy` gem][2].
+
 [2]: https://github.com/plaid/plaid-ruby-legacy
+[version-changelog]: https://plaid.com/docs/version-changelog
+[api-version-2018-05-22]: https://plaid.com/docs/api-upgrades#2018-05-22
