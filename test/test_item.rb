@@ -170,6 +170,14 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
     end
   end
 
+  def test_public_token_sandbox
+    public_token_response = client.sandbox.sandbox_public_token.create(
+      institution_id: SANDBOX_INSTITUTION,
+      initial_products: ['transactions']
+    )
+    refute_empty(public_token_response.public_token)
+  end
+
   def test_access_token_invalidate
     create_item
 
