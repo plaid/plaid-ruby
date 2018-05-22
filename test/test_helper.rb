@@ -19,6 +19,9 @@ end
 # cassettes will hold stubbed values).
 RECORD_MODE = (ENV['RECORD_MODE'] || 'none').to_sym
 
+# Using strict models to catch any new fields returned by the API
+Plaid.relaxed_models = false
+
 class PlaidTest < MiniTest::Test
   attr_reader :client, :item, :access_token
 
@@ -26,6 +29,7 @@ class PlaidTest < MiniTest::Test
     client_id = ENV['PLAID_RUBY_CLIENT_ID']
     secret = ENV['PLAID_RUBY_SECRET']
     public_key = ENV['PLAID_RUBY_PUBLIC_KEY']
+
     if STUB_API && RECORD_MODE == :none
       # In non-recording mode we use stubs for auth
       # (see also task :vcr_hide_credentials in Rakefile)
