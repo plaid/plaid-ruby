@@ -8,8 +8,9 @@ module Plaid
   # Internal: The Faraday middleware used to catch errors.
   class Middleware < ::Faraday::Response::Middleware
     # Internal: Headers used for correct request and SDK tracking.
-    NETWORK_HEADERS = { 'User-Agent'   => "Plaid Ruby v#{Plaid::VERSION}",
-                        'Content-Type' => 'application/json' }.freeze
+    NETWORK_HEADERS = { 'User-Agent'    => "Plaid Ruby v#{Plaid::VERSION}",
+                        'Content-Type'  => 'application/json',
+                        'Plaid-Version' => "v#{Plaid::API_VERSION}"}.freeze
 
     # Internal: Default read timeout for HTTP calls in seconds.
     NETWORK_TIMEOUT = 600
