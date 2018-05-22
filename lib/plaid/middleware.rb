@@ -10,7 +10,7 @@ module Plaid
     # Internal: Headers used for correct request and SDK tracking.
     NETWORK_HEADERS = { 'User-Agent'    => "Plaid Ruby v#{Plaid::VERSION}",
                         'Content-Type'  => 'application/json',
-                        'Plaid-Version' => "#{Plaid::API_VERSION}".freeze}
+                        'Plaid-Version' => Plaid::API_VERSION }.freeze
 
     # Internal: Default read timeout for HTTP calls in seconds.
     NETWORK_TIMEOUT = 600
