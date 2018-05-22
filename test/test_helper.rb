@@ -19,6 +19,9 @@ end
 # cassettes will hold stubbed values).
 RECORD_MODE = (ENV['RECORD_MODE'] || 'none').to_sym
 
+# Using strict models to catch any new fields returned by the API
+Plaid.relaxed_models = false
+
 class PlaidTest < MiniTest::Test
   attr_reader :client, :item, :access_token
 

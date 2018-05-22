@@ -100,6 +100,16 @@ module Plaid
       # :attr_reader:
       # Public: The Numeric limit (or nil).
       property :limit
+
+      ##
+      # :attr_reader:
+      # Public: The String ISO currency code for the amount
+      property :iso_currency_code
+
+      ##
+      # :attr_reader:
+      # Public: The String unofficial currency code for the amount
+      property :unofficial_currency_code
     end
 
     # Public: A representation of an account.
@@ -141,8 +151,8 @@ module Plaid
       property :subtype
     end
 
-    # Public: A representation of an account number.
-    class Number < BaseModel
+    # Public: A representation of an ACH account number.
+    class NumberACH < BaseModel
       ##
       # :attr_reader:
       # Public: The String account number. E.g. "1111222233330000".
@@ -163,6 +173,43 @@ module Plaid
       # :attr_reader:
       # Public: The String wire routing number. E.g. "021000021".
       property :wire_routing
+    end
+
+    # Public: A representation of an EFT (Canadian) account number.
+    class NumberEFT < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The String account number. E.g. "1111222233330000".
+      property :account
+
+      ##
+      # :attr_reader:
+      # Public: The String account ID. E.g.
+      # "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D".
+      property :account_id
+
+      ##
+      # :attr_reader:
+      # Public: The String branch number. E.g. "021".
+      property :branch
+
+      ##
+      # :attr_reader:
+      # Public: The String institution number. E.g. "01140".
+      property :institution
+    end
+
+    # Public: A representation of a Auth Numbers response
+    class Numbers < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The Array of NumberACH.
+      property :ach, coerce: Array[NumberACH]
+
+      ##
+      # :attr_reader:
+      # Public: The Array of NumberEFT.
+      property :eft, coerce: Array[NumberEFT]
     end
 
     # Public: A representation of a transaction category.
@@ -678,6 +725,16 @@ module Plaid
       # Public: The String transaction type (or nil). E.g. "special", or
       # "place".
       property :transaction_type
+
+      ##
+      # :attr_reader:
+      # Public: The String ISO currency code for the amount
+      property :iso_currency_code
+
+      ##
+      # :attr_reader:
+      # Public: The String unofficial currency code for the amount
+      property :unofficial_currency_code
     end
   end
 end

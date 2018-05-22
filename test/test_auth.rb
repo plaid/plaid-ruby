@@ -15,11 +15,11 @@ class PlaidAuthTest < PlaidTest
 
     account_id = response.accounts[0].account_id
     response = client.auth.get(access_token, account_ids: [account_id])
-    assert_equal 1, response.numbers.size
+    assert_equal 1, response.numbers.ach.size
 
     response = client.auth.get(access_token,
                                options: { account_ids: [account_id] })
-    assert_equal 1, response.numbers.size
+    assert_equal 1, response.numbers.ach.size
   end
 
   # rubocop:enable Metrics/AbcSize

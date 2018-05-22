@@ -31,8 +31,8 @@ module Plaid
 
     ##
     # :attr_reader:
-    # Public: The list of account numbers: Array of Plaid::Models::Number.
-    property :numbers, coerce: Array[Models::Number]
+    # Public: The item: Plaid::Models::Numbers.
+    property :numbers, coerce: Models::Numbers
 
     ##
     # :attr_reader:

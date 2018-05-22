@@ -33,7 +33,11 @@ module Plaid
   #
   # Returns truey value for relaxed mode and falsey for strict.
   def relaxed_models?
-    defined?(@relaxed_models) && @relaxed_models
+    if defined?(@relaxed_models)
+      @relaxed_models
+    else
+      true
+    end
   end
 
   # Public: Sets value for relaxed_models.
