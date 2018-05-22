@@ -1,3 +1,8 @@
+# 6.0.0 22-May-2018
+
+* Use `Plaid-Version` header to request the certain compatible API version.
+* Change Auth-related data structures to conform to the API.
+
 # 5.0.0 23-Mar-2018
 
 * Introduce true response objects instead of deep nested hashes. Any of the
