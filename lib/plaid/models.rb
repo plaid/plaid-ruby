@@ -150,18 +150,7 @@ module Plaid
       # Public: The String subtype, e.g. "checking".
       property :subtype
     end
-    # Public: A representation of a Auth Numbers response
-    class Numbers < BaseModel
-      ##
-      # :attr_reader:
-      # Public: The Array of NumberACH.
-      property :ach, coerce: Array[NumberACH]
 
-      ##
-      # :attr_reader:
-      # Public: The Array of NumberEFT.      
-      property :eft, coerce: Array[NumberEFT]
-    end 
     # Public: A representation of an ACH account number.
     class NumberACH < BaseModel
       ##
@@ -208,6 +197,19 @@ module Plaid
       # :attr_reader:
       # Public: The String institution number. E.g. "01140".
       property :institution
+    end
+
+    # Public: A representation of a Auth Numbers response
+    class Numbers < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The Array of NumberACH.
+      property :ach, coerce: Array[NumberACH]
+
+      ##
+      # :attr_reader:
+      # Public: The Array of NumberEFT.
+      property :eft, coerce: Array[NumberEFT]
     end
 
     # Public: A representation of a transaction category.
