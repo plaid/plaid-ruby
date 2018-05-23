@@ -4,6 +4,7 @@ require 'rdoc/task'
 require 'rake/testtask'
 require 'dotenv/load'
 require 'fileutils'
+require 'tmpdir'
 
 RDoc::Task.new do |rdoc|
   rdoc.rdoc_dir = 'doc/rdoc'
