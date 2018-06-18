@@ -49,6 +49,11 @@ module Plaid
       property :display_message
     end
 
+    # Public: A representation of an asset report.
+    class AssetReport < BaseModel
+      property :asset_report_id
+    end
+
     # Public: A representation of an item.
     class Item < BaseModel
       ##

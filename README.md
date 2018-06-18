@@ -18,7 +18,7 @@ Or install it yourself as:
 
     $ gem install plaid
 
-The gem supports Ruby 2.1+ only.
+The gem supports Ruby 2.2+ only.
 
 ### Versioning
 

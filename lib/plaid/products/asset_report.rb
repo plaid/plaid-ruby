@@ -1,6 +1,6 @@
 module Plaid
   # Public: Class used to call the Assets product.
-  class Assets < BaseProduct
+  class AssetReport < BaseProduct
     # Public: Get information about all available balances.
     #
     # Does a POST /accounts/balance/get call to get real-time balance
@@ -14,19 +14,25 @@ module Plaid
     #                (optional).
     #
     # Returns the AccountsResponse object with accounts information.
-    def create(access_tokens, days_requested, options: {})
+    def create(access_tokens, days_requested, options)
       post_with_auth 'asset_report/create',
-                    AccountsResponse,
+                    AssetReportCreateResponse,
                     {
                       access_tokens: access_tokens,
                       days_requested: days_requested,
                       options: options,
                     }
     end
+
+    def get(asset_report_token)
+      post_with_auth 'asset_report/get',
+                    AssetReportGetResponse,
+                    {}
+    end
   end
 
-  # Public: The response wrapper for /asset_report/get.
-  class AssetsCreateResponse < Models::BaseResponse
+  # Public: The response wrapper for /asset_report/create.
+  class AssetReportCreateResponse < Models::BaseResponse
     ##
     # :attr_reader:
     # Public: The asset report token: String.
@@ -36,5 +42,13 @@ module Plaid
     # :attr_reader:
     # Public: The asset report ID: String.
     property :asset_report_id
+  end
+
+  # Public: The response wrapper for /asset_report/get.
+  class AssetReportGetResponse < Models::BaseResponse
+    ##
+    # :attr_reader:
+    # Public: The asset report token: String.
+    property :report, coerce: Models::AssetReport
   end
 end
