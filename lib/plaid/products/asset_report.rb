@@ -27,7 +27,9 @@ module Plaid
     def get(asset_report_token)
       post_with_auth 'asset_report/get',
                     AssetReportGetResponse,
-                    {}
+                    {
+                      asset_report_token: asset_report_token,
+                    }
     end
   end
 
