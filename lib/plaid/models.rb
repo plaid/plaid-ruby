@@ -58,8 +58,8 @@ module Plaid
 
       ##
       # :attr_reader:
-      # Public: The underlying cause.
-      property :cause, coerce: Error
+      # Public: The underlying error.
+      property :error, coerce: Error
     end
 
     # Public: A representation of a warning.
