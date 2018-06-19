@@ -17,12 +17,10 @@ module Plaid
     # Returns a AssetReportCreateResponse object.
     def create(access_tokens, days_requested, options)
       post_with_auth 'asset_report/create',
-                    AssetReportCreateResponse,
-                    {
-                      access_tokens: access_tokens,
-                      days_requested: days_requested,
-                      options: options,
-                    }
+                     AssetReportCreateResponse,
+                     access_tokens: access_tokens,
+                     days_requested: days_requested,
+                     options: options
     end
 
     # Public: Retrieve an asset report.
@@ -32,10 +30,8 @@ module Plaid
     # Returns a AssetReportGetResponse object.
     def get(asset_report_token)
       post_with_auth 'asset_report/get',
-                    AssetReportGetResponse,
-                    {
-                      asset_report_token: asset_report_token,
-                    }
+                     AssetReportGetResponse,
+                     asset_report_token: asset_report_token
     end
 
     # Public: Retrieve an asset report as a PDF.
@@ -44,9 +40,8 @@ module Plaid
     #
     # Returns the PDF.
     def get_pdf(asset_report_token)
-      client.post_with_auth('asset_report/pdf/get', {
-        asset_report_token: asset_report_token,
-      })
+      client.post_with_auth 'asset_report/pdf/get',
+                            asset_report_token: asset_report_token
     end
 
     # Public: Remove an asset report.
@@ -56,10 +51,8 @@ module Plaid
     # Returns a AssetReportRemoveResponse object.
     def remove(asset_report_token)
       post_with_auth 'asset_report/remove',
-                    AssetReportRemoveResponse,
-                    {
-                      asset_report_token: asset_report_token,
-                    }
+                     AssetReportRemoveResponse,
+                     asset_report_token: asset_report_token
     end
 
     # Public: Create an audit copy token.
@@ -71,11 +64,9 @@ module Plaid
     # Returns a AuditCopyCreateResponse object.
     def create_audit_copy(asset_report_token, auditor_id)
       post_with_auth 'asset_report/audit_copy/create',
-                    AuditCopyCreateResponse,
-                    {
-                      asset_report_token: asset_report_token,
-                      auditor_id: auditor_id,
-                    }
+                     AuditCopyCreateResponse,
+                     asset_report_token: asset_report_token,
+                     auditor_id: auditor_id
     end
 
     # Public: Remove an audit copy token.
@@ -85,10 +76,8 @@ module Plaid
     # Returns a AuditCopyRemoveResponse object.
     def remove_audit_copy(audit_copy_token)
       post_with_auth 'asset_report/audit_copy/remove',
-                    AuditCopyRemoveResponse,
-                    {
-                      audit_copy_token: audit_copy_token,
-                    }
+                     AuditCopyRemoveResponse,
+                     audit_copy_token: audit_copy_token
     end
   end
 

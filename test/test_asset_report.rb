@@ -2,10 +2,9 @@ require_relative 'test_helper'
 
 # Internal: The test for Plaid::AssetReport.
 class PlaidAssetReportTest < PlaidTest
-
-  # rubocop:disable Metrics/AbcSize
-
+  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
   def test_full_flow
+    # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
     # Create an item with the "assets" product.
     create_item initial_products: [:assets]
 
@@ -21,30 +20,27 @@ class PlaidAssetReportTest < PlaidTest
         last_name: 'Doe',
         ssn: '123-45-6789',
         phone_number: '(555) 123-4567',
-        email: 'jane.doe@example.com',
-      },
+        email: 'jane.doe@example.com'
+      }
     }
-    response = @client.asset_report.create([access_token], days_requested, options)
+    response = @client.asset_report.create(
+      [access_token], days_requested, options
+    )
     refute_empty(response.asset_report_id)
     refute_empty(response.asset_report_token)
 
     # Poll until report generation has finished.
     asset_report_token = response.asset_report_token
     retries = 20
-    while
+    loop do
       begin
         response = @client.asset_report.get(asset_report_token)
         break
       rescue Plaid::PlaidAPIError => e
-        if e.error_code == 'PRODUCT_NOT_READY'
-          if retries == 0
-            raise 'Timed out while waiting for asset report generation'
-          else
-            sleep 1
-          end
-        else
-          raise e
-        end
+        raise e if e.error_code != 'PRODUCT_NOT_READY'
+        raise 'Timed out while waiting for asset report generation' \
+          if retries.zero?
+        sleep 1
       end
     end
     refute_empty(response.report)
@@ -55,7 +51,8 @@ class PlaidAssetReportTest < PlaidTest
 
     # Create an audit copy token.
     response = @client.asset_report.create_audit_copy(
-      asset_report_token, 'fannie_mae')
+      asset_report_token, 'fannie_mae'
+    )
     refute_empty(response.audit_copy_token)
 
     # Remove the audit copy.

@@ -869,12 +869,12 @@ module Plaid
     class AssetReportTransaction < BaseModel
       ##
       # :attr_reader:
-      # Public: Plaid’s unique identifier for the account.
+      # Public: Plaid's unique identifier for the account.
       property :account_id
 
       ##
       # :attr_reader:
-      # Public: Plaid’s unique identifier for the transaction.
+      # Public: Plaid's unique identifier for the transaction.
       property :transaction_id
 
       ##
@@ -921,7 +921,7 @@ module Plaid
     class AssetReportAccount < BaseModel
       ##
       # :attr_reader:
-      # Public: Plaid’s unique identifier for the account.
+      # Public: Plaid's unique identifier for the account.
       property :account_id
 
       ##
@@ -986,7 +986,7 @@ module Plaid
     class AssetReportItem < BaseModel
       ##
       # :attr_reader:
-      # Public: Plaid’s unique identifier for the Item.
+      # Public: Plaid's unique identifier for the Item.
       property :item_id
 
       ##
@@ -1001,7 +1001,7 @@ module Plaid
 
       ##
       # :attr_reader:
-      # Public: The date and time when this Item’s data was retrieved from the
+      # Public: The date and time when this Item's data was retrieved from the
       # financial institution.
       property :date_last_updated
 
@@ -1021,35 +1021,35 @@ module Plaid
 
       ##
       # :attr_reader:
-      # Public: The user’s first name.
+      # Public: The user's first name.
       property :first_name
 
       ##
       # :attr_reader:
-      # Public: The user’s middle name.
+      # Public: The user's middle name.
       property :middle_name
 
       ##
       # :attr_reader:
-      # Public: The user’s last name.
+      # Public: The user's last name.
       property :last_name
 
       ##
       # :attr_reader:
-      # Public: The user’s social security number Format:
+      # Public: The user's social security number Format:
       # "\d\d\d-\d\d-\d\d\d\d".
       property :ssn
 
       ##
       # :attr_reader:
-      # Public: The user’s phone number Format:
+      # Public: The user's phone number Format:
       # "+{country_code}{area code and subscriber number}", e.g.
       # "+14155555555" (known as E.164 format)
       property :phone_number
 
       ##
       # :attr_reader:
-      # Public: The user’s email address.
+      # Public: The user's email address.
       property :email
     end
 
@@ -1057,7 +1057,7 @@ module Plaid
     class AssetReport < BaseModel
       ##
       # :attr_reader:
-      # Public: Plaid’s unique identifier for this asset report.
+      # Public: Plaid's unique identifier for this asset report.
       property :asset_report_id
 
       ##
