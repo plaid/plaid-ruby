@@ -52,5 +52,10 @@ module Plaid
     # :attr_reader:
     # Public: The asset report token: String.
     property :report, coerce: Models::AssetReport
+
+    ##
+    # :attr_reader:
+    # Public: Warnings encountered during asset report generation.
+    property :warnings, coerce: Array[Models::Warning]
   end
 end

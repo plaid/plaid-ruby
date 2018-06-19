@@ -27,10 +27,13 @@ class PlaidAssetsTest < PlaidTest
     refute_empty(response.asset_report_id)
     refute_empty(response.asset_report_token)
 
+    asset_report_token = response.asset_report_token
+
     retries = 20
     while
       begin
-        response = @client.asset_report.get(response.asset_report_token)
+        response = @client.asset_report.get(asset_report_token)
+        break
       rescue Plaid::PlaidAPIError => e
         if e.error_code == 'PRODUCT_NOT_READY'
           if retries == 0
@@ -45,5 +48,7 @@ class PlaidAssetsTest < PlaidTest
     end
 
     refute_empty(response.report)
+
+
   end
 end
