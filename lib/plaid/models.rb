@@ -49,6 +49,37 @@ module Plaid
       property :display_message
     end
 
+    # Public: A representation of a cause.
+    class Cause < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The item ID.
+      property :item_id
+
+      ##
+      # :attr_reader:
+      # Public: The underlying error.
+      property :error, coerce: Error
+    end
+
+    # Public: A representation of a warning.
+    class Warning < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The type of warning.
+      property :warning_type
+
+      ##
+      # :attr_reader:
+      # Public: The warning code.
+      property :warning_code
+
+      ##
+      # :attr_reader:
+      # Public: The underlying cause.
+      property :cause, coerce: Cause
+    end
+
     # Public: A representation of an item.
     class Item < BaseModel
       ##
@@ -735,6 +766,326 @@ module Plaid
       # :attr_reader:
       # Public: The String unofficial currency code for the amount
       property :unofficial_currency_code
+    end
+
+    # Public: A representation of an asset report address.
+    class AssetReportAddress < BaseModel
+      ##
+      # :attr_reader:
+      # Public: Data about the components comprising an address; see
+      # IdentityAddressData object for fields.
+      property :data, coerce: IdentityAddressData
+
+      ##
+      # :attr_reader:
+      # Public: When true, identifies the address as the primary address on an
+      # account.
+      property :primary
+    end
+
+    # Public: A representation of an asset report owner.
+    class AssetReportOwner < BaseModel
+      ##
+      # :attr_reader:
+      # Public: A list of names associated with the account by the financial
+      # institution.
+      property :names, coerce: Array[String]
+
+      ##
+      # :attr_reader:
+      # Public: A list of phone numbers associated with the account by the
+      # financial institution; see IdentityPhoneNumber number object for
+      # fields.
+      property :phone_numbers, coerce: Array[IdentityPhoneNumber]
+
+      ##
+      # :attr_reader:
+      # Public: A list of emails associated with the account by the financial
+      # institution; see IdentityEmail object for fields.
+      property :emails, coerce: Array[IdentityEmail]
+
+      ##
+      # :attr_reader:
+      # Public: Data about the various addresses associated with the account
+      # by the financial institution; see AssetReportAddress object for fields.
+      property :addresses, coerce: Array[AssetReportAddress]
+    end
+
+    # Public: A representation of an asset report balance.
+    class AssetReportBalance < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The available balance as reported by the financial institution.
+      # This is usually, but not always, the current balance less any
+      # outstanding holds or debits that have not yet posted to the account.
+      property :available
+
+      ##
+      # :attr_reader:
+      # Public: The total amount of funds in the account.
+      property :current
+
+      ##
+      # :attr_reader:
+      # Public: The ISO currency code of the transaction, either USD or CAD.
+      # Always nil if unofficial_currency_code is non-nil.
+      property :iso_currency_code
+
+      ##
+      # :attr_reader:
+      # Public: The unofficial currency code associated with the transaction.
+      # Always nil if iso_currency_code is non-nil.
+      property :unofficial_currency_code
+    end
+
+    # Public: A representation of an asset report historical balance.
+    class AssetReportHistoricalBalance < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The date of the calculated historical balance.
+      property :date
+
+      ##
+      # :attr_reader:
+      # Public: The total amount of funds in the account, calculated from the
+      # current balance in the balance object by subtracting inflows and adding
+      # back outflows according to the posted date of each.
+      property :current
+
+      ##
+      # :attr_reader:
+      # Public: The ISO currency code of the transaction, either USD or CAD.
+      # Always nil if unofficial_currency_code is non-nil.
+      property :iso_currency_code
+
+      ##
+      # :attr_reader:
+      # Public: The unofficial currency code associated with the transaction.
+      # Always nil if iso_currency_code is non-nil.
+      property :unofficial_currency_code
+    end
+
+    # Public: A representation of an asset report transaction.
+    class AssetReportTransaction < BaseModel
+      ##
+      # :attr_reader:
+      # Public: Plaid's unique identifier for the account.
+      property :account_id
+
+      ##
+      # :attr_reader:
+      # Public: Plaid's unique identifier for the transaction.
+      property :transaction_id
+
+      ##
+      # :attr_reader:
+      # Public: For pending transactions, Plaid returns the date the
+      # transaction occurred; for posted transactions, Plaid returns the date
+      # the transaction posts; both dates are returned in an ISO 8601 format
+      # (YYYY-MM-DD).
+      property :date
+
+      ##
+      # :attr_reader:
+      # Public: The string returned by the financial institution to describe
+      # the transaction.
+      property :original_description
+
+      ##
+      # :attr_reader:
+      # Public: When true, identifies the transaction as pending or unsettled;
+      # pending transaction details (description, amount) may change before
+      # they are settled.
+      property :pending
+
+      ##
+      # :attr_reader:
+      # Public: The settled dollar value; positive values when money moves out
+      # of the account, negative values when money moves in.
+      property :amount
+
+      ##
+      # :attr_reader:
+      # Public: The ISO currency code of the transaction, either USD or CAD.
+      # Always nil if unofficial_currency_code is non-nil.
+      property :iso_currency_code
+
+      ##
+      # :attr_reader:
+      # Public: The unofficial currency code associated with the transaction.
+      # Always nil if iso_currency_code is non-nil.
+      property :unofficial_currency_code
+    end
+
+    # Public: A representation of an asset report account.
+    class AssetReportAccount < BaseModel
+      ##
+      # :attr_reader:
+      # Public: Plaid's unique identifier for the account.
+      property :account_id
+
+      ##
+      # :attr_reader:
+      # Public: The last 2-5 digits of the account's number.
+      property :mask
+
+      ##
+      # :attr_reader:
+      # Public: The name of the account, either assigned by the user or by the
+      # financial institution itself.
+      property :name
+
+      ##
+      # :attr_reader:
+      # Public: The official name of the account as given by the financial
+      # institution.
+      property :official_name
+
+      ##
+      # :attr_reader:
+      # Public: The primary type of the account (e.g., "depository").
+      property :type
+
+      ##
+      # :attr_reader:
+      # Public: The secondary type of the account (e.g., "checking").
+      property :subtype
+
+      ##
+      # :attr_reader:
+      # Public: Data returned by the financial institution about the account
+      # owner or owners; see AssetReportOwner object for fields.
+      property :owners, coerce: Array[AssetReportOwner]
+
+      ##
+      # :attr_reader:
+      # Public: Data about the various balances on the account; see
+      # AssetReportBalance object for fields.
+      property :balances, coerce: AssetReportBalance
+
+      ##
+      # :attr_reader:
+      # Public: Calculated data about the historical balances on the account;
+      # see AssetReportHistoricalBalance object for fields.
+      property :historical_balances, coerce: Array[AssetReportHistoricalBalance]
+
+      ##
+      # :attr_reader:
+      # Public: Data about the transactions.
+      property :transactions, coerce: Array[AssetReportTransaction]
+
+      ##
+      # :attr_reader:
+      # Public: The duration of transaction history available for this Item,
+      # typically defined as the time since the date of the earliest
+      # transaction in that account.
+      property :days_available
+    end
+
+    # Public: A representation of an asset report item.
+    class AssetReportItem < BaseModel
+      ##
+      # :attr_reader:
+      # Public: Plaid's unique identifier for the Item.
+      property :item_id
+
+      ##
+      # :attr_reader:
+      # Public: The full financial institution name associated with the Item.
+      property :institution_name
+
+      ##
+      # :attr_reader:
+      # Public: The financial institution associated with the Item.
+      property :institution_id
+
+      ##
+      # :attr_reader:
+      # Public: The date and time when this Item's data was retrieved from the
+      # financial institution.
+      property :date_last_updated
+
+      ##
+      # :attr_reader:
+      # Public: Data about each of the accounts open on the Item; see Account
+      # object for fields.
+      property :accounts, coerce: Array[AssetReportAccount]
+    end
+
+    # Public: A representation of an asset report user.
+    class AssetReportUser < BaseModel
+      ##
+      # :attr_reader:
+      # Public: An identifier you determine and submit for the user.
+      property :client_user_id
+
+      ##
+      # :attr_reader:
+      # Public: The user's first name.
+      property :first_name
+
+      ##
+      # :attr_reader:
+      # Public: The user's middle name.
+      property :middle_name
+
+      ##
+      # :attr_reader:
+      # Public: The user's last name.
+      property :last_name
+
+      ##
+      # :attr_reader:
+      # Public: The user's social security number. Format:
+      # "\d\d\d-\d\d-\d\d\d\d".
+      property :ssn
+
+      ##
+      # :attr_reader:
+      # Public: The user's phone number Format:
+      # "+{country_code}{area code and subscriber number}", e.g.
+      # "+14155555555" (known as E.164 format)
+      property :phone_number
+
+      ##
+      # :attr_reader:
+      # Public: The user's email address.
+      property :email
+    end
+
+    # Public: A representation of an asset report.
+    class AssetReport < BaseModel
+      ##
+      # :attr_reader:
+      # Public: Plaid's unique identifier for this asset report.
+      property :asset_report_id
+
+      ##
+      # :attr_reader:
+      # Public: An identifier you determine and submit for the Asset Report.
+      property :client_report_id
+
+      ##
+      # :attr_reader:
+      # Public: The date and time when the Asset Report was created.
+      property :date_generated
+
+      ##
+      # :attr_reader:
+      # Public: The duration of transaction history you requested.
+      property :days_requested
+
+      ##
+      # :attr_reader:
+      # Public: Data submitted by you about the user whose Asset Report is
+      # being compiled; see AssetReportUser object for fields.
+      property :user, coerce: AssetReportUser
+
+      ##
+      # :attr_reader:
+      # Public: Data returned by Plaid about each of the Items included in the
+      # Asset Report; see AssetReportItem object for fields.
+      property :items, coerce: Array[AssetReportItem]
     end
   end
 end

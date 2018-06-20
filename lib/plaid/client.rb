@@ -41,6 +41,11 @@ module Plaid
 
     ##
     # :attr_reader:
+    # Public: The Plaid::AssetReport product accessor.
+    subproduct :asset_report
+
+    ##
+    # :attr_reader:
     # Public: The Plaid::Categories product accessor.
     subproduct :categories
 
