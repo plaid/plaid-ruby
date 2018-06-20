@@ -1,3 +1,7 @@
+# 6.1.0 20-Jun-2018
+
+* Add bindings for the new [assets product](https://plaid.com/docs/api/#assets).
+
 # 6.0.0 22-May-2018
 
 * Use `Plaid-Version` header to request the certain compatible API version.
