@@ -2,9 +2,7 @@ require_relative 'test_helper'
 
 # Internal: The test for Plaid::AssetReport.
 class PlaidAssetReportTest < PlaidTest
-  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-  def test_full_flow
-    # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
+  def test_full_flow # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     # Create an item with the "assets" product.
     create_item initial_products: [:assets]
 
@@ -28,21 +26,20 @@ class PlaidAssetReportTest < PlaidTest
     )
     refute_empty(response.asset_report_id)
     refute_empty(response.asset_report_token)
+    asset_report_token = response.asset_report_token
 
     # Poll until report generation has finished.
-    asset_report_token = response.asset_report_token
-    retries = 20
-    loop do
+    response = nil
+    20.times do
       begin
         response = @client.asset_report.get(asset_report_token)
         break
       rescue Plaid::PlaidAPIError => e
         raise e if e.error_code != 'PRODUCT_NOT_READY'
-        raise 'Timed out while waiting for asset report generation' \
-          if retries.zero?
         sleep 1
       end
     end
+    assert response, 'Timed out while waiting for asset report generation'
     refute_empty(response.report)
 
     # Get the asset report as a PDF.

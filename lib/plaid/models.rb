@@ -789,7 +789,7 @@ module Plaid
       # :attr_reader:
       # Public: A list of names associated with the account by the financial
       # institution.
-      property :names
+      property :names, coerce: Array[String]
 
       ##
       # :attr_reader:
@@ -828,13 +828,13 @@ module Plaid
       ##
       # :attr_reader:
       # Public: The ISO currency code of the transaction, either USD or CAD.
-      # Always null if unofficial_currency_code is non-null.
+      # Always nil if unofficial_currency_code is non-nil.
       property :iso_currency_code
 
       ##
       # :attr_reader:
       # Public: The unofficial currency code associated with the transaction.
-      # Always null if iso_currency_code is non-null.
+      # Always nil if iso_currency_code is non-nil.
       property :unofficial_currency_code
     end
 
@@ -855,13 +855,13 @@ module Plaid
       ##
       # :attr_reader:
       # Public: The ISO currency code of the transaction, either USD or CAD.
-      # Always null if unofficial_currency_code is non-null.
+      # Always nil if unofficial_currency_code is non-nil.
       property :iso_currency_code
 
       ##
       # :attr_reader:
       # Public: The unofficial currency code associated with the transaction.
-      # Always null if iso_currency_code is non-null.
+      # Always nil if iso_currency_code is non-nil.
       property :unofficial_currency_code
     end
 
@@ -907,13 +907,13 @@ module Plaid
       ##
       # :attr_reader:
       # Public: The ISO currency code of the transaction, either USD or CAD.
-      # Always null if unofficial_currency_code is non-null.
+      # Always nil if unofficial_currency_code is non-nil.
       property :iso_currency_code
 
       ##
       # :attr_reader:
       # Public: The unofficial currency code associated with the transaction.
-      # Always null if iso_currency_code is non-null.
+      # Always nil if iso_currency_code is non-nil.
       property :unofficial_currency_code
     end
 
@@ -1036,7 +1036,7 @@ module Plaid
 
       ##
       # :attr_reader:
-      # Public: The user's social security number Format:
+      # Public: The user's social security number. Format:
       # "\d\d\d-\d\d-\d\d\d\d".
       property :ssn
 
