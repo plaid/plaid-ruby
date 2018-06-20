@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Plaid::AssetReport</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <meta property="og:title" value="Plaid::AssetReport">
+
+  
+    
+    <meta name="description" content="Class used to call the Assets product. Documentation available at plaid.com/docs/api/#assets.">
+    <meta property="og:description" content="Class used to call the Assets product. Documentation available at plaid.com/docs/api/#assets.">
+  
+
+    <meta name="keywords" content="Plaid::AssetReport class">
+  
+    <meta name="keywords" content="create, get, get_pdf, remove, create_audit_copy, remove_audit_copy">
+  
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            <span class="type">Class</span>
+            Plaid::AssetReport
+            
+                <span class="parent">&lt;
+                    
+                    BaseProduct
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/lib/plaid/products/asset_report_rb.html">lib/plaid/products/asset_report.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Class used to call the Assets product. Documentation available at <a
+href="https://plaid.com/docs/api/#assets">plaid.com/docs/api/#assets</a>.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+    <!-- Sections -->
+    <div class="sectiontitle">Sections</div>
+    <ul>
+      
+        <li><a href="#Public">Public</a></li>
+      
+    </ul>
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-create">create</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-create_audit_copy">create_audit_copy</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>G</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-get">get</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-get_pdf">get_pdf</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-remove">remove</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-remove_audit_copy">remove_audit_copy</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+    
+  
+
+    
+      <div class="contenttitle" id="Public">
+        Public
+      </div>
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-create">
+            
+              <b>create</b>(access_tokens, days_requested, options)
+            
+            <a href="../../classes/Plaid/AssetReport.html#method-i-create" name="method-i-create" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              <p>Create an asset report.</p>
+<dl class="rdoc-list note-list"><dt>access_tokens
+<dd>
+<p>An array of access tokens, one token for each <a href="Item.html">Item</a>
+to be included in the Asset Report.</p>
+</dd><dt>days_requested
+<dd>
+<p>Days of transaction history requested to be included in the Asset Report.
+<a href="../Plaid.html">Plaid</a> will return as much data as possible
+within the implied date range, up to a maximum of 730 days (2 years) of
+history.</p>
+</dd><dt>options
+<dd>
+<p>An optional object containing client-provided user information, a
+client-provided report ID, and a webhook. For more information, see the
+website listed above.</p>
+</dd></dl>
+
+<h3 id="method-i-create-label-Returns">Returns</h3>
+
+<p>Returns a <a
+href="AssetReportCreateResponse.html">AssetReportCreateResponse</a> object.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-create_source')" id="l_method-i-create_source">show</a>
+                
+              </p>
+              <div id="method-i-create_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/products/asset_report.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>(<span class="ruby-identifier">access_tokens</span>, <span class="ruby-identifier">days_requested</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;asset_report/create&#39;</span>,
+                 <span class="ruby-constant">AssetReportCreateResponse</span>,
+                 <span class="ruby-value">access_tokens:</span> <span class="ruby-identifier">access_tokens</span>,
+                 <span class="ruby-value">days_requested:</span> <span class="ruby-identifier">days_requested</span>,
+                 <span class="ruby-value">options:</span> <span class="ruby-identifier">options</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-create_audit_copy">
+            
+              <b>create_audit_copy</b>(asset_report_token, auditor_id)
+            
+            <a href="../../classes/Plaid/AssetReport.html#method-i-create_audit_copy" name="method-i-create_audit_copy" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              <p>Create an audit copy token.</p>
+<dl class="rdoc-list note-list"><dt>asset_report_token
+<dd>
+<p>The asset report token from the `create` response.</p>
+</dd><dt>auditor_id
+<dd>
+<p>The ID of the third party with which you would like to share the asset
+report.</p>
+</dd></dl>
+
+<h3 id="method-i-create_audit_copy-label-Returns">Returns</h3>
+
+<p>Returns a <a
+href="AuditCopyCreateResponse.html">AuditCopyCreateResponse</a> object.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-create_audit_copy_source')" id="l_method-i-create_audit_copy_source">show</a>
+                
+              </p>
+              <div id="method-i-create_audit_copy_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/products/asset_report.rb, line 65</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_audit_copy</span>(<span class="ruby-identifier">asset_report_token</span>, <span class="ruby-identifier">auditor_id</span>)
+  <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;asset_report/audit_copy/create&#39;</span>,
+                 <span class="ruby-constant">AuditCopyCreateResponse</span>,
+                 <span class="ruby-value">asset_report_token:</span> <span class="ruby-identifier">asset_report_token</span>,
+                 <span class="ruby-value">auditor_id:</span> <span class="ruby-identifier">auditor_id</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-get">
+            
+              <b>get</b>(asset_report_token)
+            
+            <a href="../../classes/Plaid/AssetReport.html#method-i-get" name="method-i-get" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              <p>Retrieve an asset report.</p>
+<dl class="rdoc-list note-list"><dt>asset_report_token
+<dd>
+<p>The asset report token from the `create` response.</p>
+</dd></dl>
+
+<h3 id="method-i-get-label-Returns">Returns</h3>
+
+<p>Returns a <a href="AssetReportGetResponse.html">AssetReportGetResponse</a>
+object.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-get_source')" id="l_method-i-get_source">show</a>
+                
+              </p>
+              <div id="method-i-get_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/products/asset_report.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get</span>(<span class="ruby-identifier">asset_report_token</span>)
+  <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;asset_report/get&#39;</span>,
+                 <span class="ruby-constant">AssetReportGetResponse</span>,
+                 <span class="ruby-value">asset_report_token:</span> <span class="ruby-identifier">asset_report_token</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-get_pdf">
+            
+              <b>get_pdf</b>(asset_report_token)
+            
+            <a href="../../classes/Plaid/AssetReport.html#method-i-get_pdf" name="method-i-get_pdf" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              <p>Retrieve an asset report as a PDF.</p>
+<dl class="rdoc-list note-list"><dt>asset_report_token
+<dd>
+<p>The asset report token from the `create` response.</p>
+</dd></dl>
+
+<h3 id="method-i-get_pdf-label-Returns">Returns</h3>
+
+<p>Returns the PDF.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-get_pdf_source')" id="l_method-i-get_pdf_source">show</a>
+                
+              </p>
+              <div id="method-i-get_pdf_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/products/asset_report.rb, line 42</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_pdf</span>(<span class="ruby-identifier">asset_report_token</span>)
+  <span class="ruby-identifier">client</span>.<span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;asset_report/pdf/get&#39;</span>,
+                        <span class="ruby-value">asset_report_token:</span> <span class="ruby-identifier">asset_report_token</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-remove">
+            
+              <b>remove</b>(asset_report_token)
+            
+            <a href="../../classes/Plaid/AssetReport.html#method-i-remove" name="method-i-remove" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              <p>Remove an asset report.</p>
+<dl class="rdoc-list note-list"><dt>asset_report_token
+<dd>
+<p>The asset report token from the `create` response.</p>
+</dd></dl>
+
+<h3 id="method-i-remove-label-Returns">Returns</h3>
+
+<p>Returns a <a
+href="AssetReportRemoveResponse.html">AssetReportRemoveResponse</a> object.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-remove_source')" id="l_method-i-remove_source">show</a>
+                
+              </p>
+              <div id="method-i-remove_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/products/asset_report.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remove</span>(<span class="ruby-identifier">asset_report_token</span>)
+  <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;asset_report/remove&#39;</span>,
+                 <span class="ruby-constant">AssetReportRemoveResponse</span>,
+                 <span class="ruby-value">asset_report_token:</span> <span class="ruby-identifier">asset_report_token</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-remove_audit_copy">
+            
+              <b>remove_audit_copy</b>(audit_copy_token)
+            
+            <a href="../../classes/Plaid/AssetReport.html#method-i-remove_audit_copy" name="method-i-remove_audit_copy" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              <p>Remove an audit copy token.</p>
+<dl class="rdoc-list note-list"><dt>audit_copy_token
+<dd>
+<p>The audit copy token from the `create` response.</p>
+</dd></dl>
+
+<h3 id="method-i-remove_audit_copy-label-Returns">Returns</h3>
+
+<p>Returns a <a
+href="AuditCopyRemoveResponse.html">AuditCopyRemoveResponse</a> object.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-remove_audit_copy_source')" id="l_method-i-remove_audit_copy_source">show</a>
+                
+              </p>
+              <div id="method-i-remove_audit_copy_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/products/asset_report.rb, line 77</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remove_audit_copy</span>(<span class="ruby-identifier">audit_copy_token</span>)
+  <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;asset_report/audit_copy/remove&#39;</span>,
+                 <span class="ruby-constant">AuditCopyRemoveResponse</span>,
+                 <span class="ruby-value">audit_copy_token:</span> <span class="ruby-identifier">audit_copy_token</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

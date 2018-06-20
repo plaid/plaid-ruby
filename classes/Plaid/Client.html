@@ -191,6 +191,14 @@
             <td class='attr-rw'>
               [R]
             </td>
+            <td class='attr-name'>asset_report</td>
+            <td class='attr-desc'><p>The <a href="AssetReport.html">Plaid::AssetReport</a> product accessor.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
             <td class='attr-name'>auth</td>
             <td class='attr-desc'><p>The <a href="Auth.html">Plaid::Auth</a> product accessor.</p></td>
           </tr>
@@ -360,7 +368,7 @@ href="Client.html#ENVIRONMENTS">ENVIRONMENTS</a>).</p></td>
                 
               </p>
               <div id="method-c-build_default_connection_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 123</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 128</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">build_default_connection</span>(<span class="ruby-identifier">builder</span>)
   <span class="ruby-identifier">builder</span>.<span class="ruby-identifier">options</span>[<span class="ruby-value">:timeout</span>] = <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">Middleware</span><span class="ruby-operator">::</span><span class="ruby-constant">NETWORK_TIMEOUT</span>
   <span class="ruby-identifier">builder</span>.<span class="ruby-identifier">headers</span> = <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">Middleware</span><span class="ruby-operator">::</span><span class="ruby-constant">NETWORK_HEADERS</span>
@@ -479,7 +487,7 @@ authenticate requests</p>
                 
               </p>
               <div id="method-i-post_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 93</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 98</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">post</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">payload</span>)
   <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">post</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">payload</span>).<span class="ruby-identifier">body</span>
 <span class="ruby-keyword">end</span></pre>
@@ -527,7 +535,7 @@ authenticate requests</p>
                 
               </p>
               <div id="method-i-post_with_auth_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 103</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 108</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">post_with_auth</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">payload</span>)
   <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">post</span>(
     <span class="ruby-identifier">path</span>,
@@ -578,7 +586,7 @@ authenticate requests</p>
                 
               </p>
               <div id="method-i-post_with_public_key_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 116</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 121</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">post_with_public_key</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">payload</span>)
   <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">post</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">payload</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">public_key:</span> <span class="ruby-ivar">@public_key</span>)).<span class="ruby-identifier">body</span>
 <span class="ruby-keyword">end</span></pre>
@@ -647,7 +655,7 @@ environment is unknown.</p>
                 
               </p>
               <div id="method-i-api_host_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 145</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 150</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">api_host</span>
   <span class="ruby-keyword">unless</span> <span class="ruby-constant">ENVIRONMENTS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-ivar">@env</span>)
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>,
@@ -690,7 +698,7 @@ environment is unknown.</p>
                 
               </p>
               <div id="method-i-client_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 135</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 140</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">client</span>
   <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -730,7 +738,7 @@ Faraday.</p>
                 
               </p>
               <div id="method-i-create_connection_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 158</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 163</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_connection</span>
   <span class="ruby-ivar">@connection</span> = <span class="ruby-constant">Faraday</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">url:</span> <span class="ruby-ivar">@api_host</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">builder</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">block_given?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">builder</span>) <span class="ruby-operator">:</span> <span class="ruby-constant">Client</span>.<span class="ruby-identifier">build_default_connection</span>(<span class="ruby-identifier">builder</span>)
