@@ -237,5 +237,5 @@ The gem is available as open source under the terms of the [MIT License](http://
 If you're looking for a Ruby client that works with the legacy Plaid API, use the [`plaid-legacy` gem][2].
 
 [2]: https://github.com/plaid/plaid-ruby-legacy
-[version-changelog]: https://plaid.com/docs/version-changelog
+[version-changelog]: https://plaid.com/docs/api-upgrades
 [api-version-2018-05-22]: https://plaid.com/docs/api-upgrades#2018-05-22
