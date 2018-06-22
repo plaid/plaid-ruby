@@ -29,7 +29,7 @@ Each major version of `plaid-ruby` targets a specific version of the Plaid API:
 | [`2018-05-22`][api-version-2018-05-22] (**latest**) | `6.x.x` |
 | `2017-03-08` | `5.x.x` |
 
-For information about what has changed between versions and how to update your integration, head to the [version changelog][version-changelog].
+For information about what has changed between versions and how to update your integration, head to the [version changelog](https://plaid.com/docs/api-upgrades/).
 
 
 ## Usage
