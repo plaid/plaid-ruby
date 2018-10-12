@@ -46,14 +46,33 @@ class PlaidAssetReportTest < PlaidTest
     pdf = @client.asset_report.get_pdf(asset_report_token)
     refute_empty(pdf)
 
+    # Create a filtered copy of the report.
+    account_ids_to_exclude =
+      [response.report.items[0].accounts[0].account_id]
+    response = @client.asset_report.filter(
+      asset_report_token,
+      account_ids_to_exclude
+    )
+    refute_empty(response.asset_report_token)
+
+    # Create refreshed copy of the report.
+    response = @client.asset_report.refresh(asset_report_token, 10, {})
+    refute_empty(response.asset_report_token)
+
     # Create an audit copy token.
     response = @client.asset_report.create_audit_copy(
-      asset_report_token, 'fannie_mae'
+      asset_report_token,
+      @client.client_id
     )
-    refute_empty(response.audit_copy_token)
+    audit_copy_token = response.audit_copy_token
+    refute_empty(audit_copy_token)
+
+    # Get the audit copy.
+    response = @client.asset_report.get_audit_copy(audit_copy_token)
+    refute_empty(response.report)
 
     # Remove the audit copy.
-    response = @client.asset_report.remove_audit_copy(response.audit_copy_token)
+    response = @client.asset_report.remove_audit_copy(audit_copy_token)
     assert_equal(response.removed, true)
 
     # Remove the asset report.

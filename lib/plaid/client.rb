@@ -8,6 +8,9 @@ module Plaid
     # Public: The current environment in use (one of ENVIRONMENTS).
     attr_reader :env
 
+    # Public: The client ID.
+    attr_accessor :client_id
+
     # Public: Construct a Client instance
     #
     # Optionally takes a block to allow overriding the default Faraday
