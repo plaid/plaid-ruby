@@ -553,12 +553,6 @@ module Plaid
 
       ##
       # :attr_reader:
-      # Public: The String reflecting the MFA code type ("numeric" /
-      # "alphanumeric")
-      property :mfa_code_type
-
-      ##
-      # :attr_reader:
       # Public: The String institution ID (e.g. "ins_109512").
       property :institution_id
 
