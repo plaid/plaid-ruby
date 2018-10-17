@@ -553,7 +553,8 @@ module Plaid
 
       ##
       # :attr_reader:
-      # Public: The String reflecting the MFA code type ("numeric" / "alphanumeric")
+      # Public: The String reflecting the MFA code type ("numeric" /
+      # "alphanumeric")
       property :mfa_code_type
 
       ##
