@@ -1,0 +1,19 @@
+---
+before_install:
+  - gem update --system
+  - gem update bundler
+language: ruby
+rvm:
+  - 2.2.9
+  - 2.3.6
+  - 2.4.3
+  - 2.5.0
+  - ruby-head
+  - jruby-9.1.16.0
+env:
+  global:
+    NOBENCHMARK=1
+script: rake
+matrix:
+  allow_failures:
+    - rvm: jruby-9.1.16.0

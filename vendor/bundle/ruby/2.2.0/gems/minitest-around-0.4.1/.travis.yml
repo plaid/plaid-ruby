@@ -1,0 +1,23 @@
+language: ruby
+sudo: false
+cache: bundler
+rvm:
+  - 2.0
+  - 2.1
+  - 2.2
+  - 2.3
+  - 2.4
+  - ruby-head
+  - jruby
+  - jruby-head
+  - rbx-2
+env:
+  global:
+    - CODECLIMATE_REPO_TOKEN=e2647eb4bb8263157b9d99d9f79a49f8262a7e5ed11b07bdfbd312afdb43c2fa
+    - JRUBY_OPTS='--dev -J-Xmx1024M'
+matrix:
+  allow_failures:
+    - rvm: ruby-head
+    - rvm: jruby-head
+    - rvm: rbx-2
+  fast_finish: true

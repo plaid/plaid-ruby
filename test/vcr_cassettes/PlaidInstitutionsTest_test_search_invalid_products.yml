@@ -38,4 +38,48 @@ http_interactions:
         }
     http_version: 
   recorded_at: Fri, 16 Mar 2018 02:21:03 GMT
-recorded_with: VCR 3.0.3
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/institutions/search
+    body:
+      encoding: UTF-8
+      string: '{"query":"First Platypus Bank","products":["ABCDEFG1234567"],"public_key":"PLAID_RUBY_PUBLIC_KEY"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v6.1.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2018-05-22'
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      server:
+      - nginx
+      date:
+      - Wed, 17 Oct 2018 18:47:47 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '171'
+      connection:
+      - close
+      plaid-version:
+      - '2018-05-22'
+      vary:
+      - Accept-Encoding
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "display_message": null,
+          "error_code": "INVALID_PRODUCT",
+          "error_message": "invalid product in products: \"ABCDEFG1234567\"",
+          "error_type": "INVALID_INPUT",
+          "request_id": "QU0Ulf3eN1fGavE"
+        }
+    http_version: 
+  recorded_at: Wed, 17 Oct 2018 18:47:47 GMT
+recorded_with: VCR 4.0.0
