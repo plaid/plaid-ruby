@@ -44,13 +44,13 @@ class PlaidAssetReportTest < PlaidTest
       account_ids_to_exclude
     )
     refute_empty(response.asset_report_token)
-    response = poll_for_asset_report(asset_report_token)
+    response = poll_for_asset_report(response.asset_report_token)
     refute_empty(response.report)
 
     # Create refreshed copy of the report.
     response = @client.asset_report.refresh(asset_report_token, 10, {})
     refute_empty(response.asset_report_token)
-    response = poll_for_asset_report(asset_report_token)
+    response = poll_for_asset_report(response.asset_report_token)
     refute_empty(response.report)
 
     # Create an audit copy token.
