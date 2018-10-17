@@ -15,7 +15,7 @@ module Plaid
     #                  For more information, see the website listed above.
     #
     # Returns a AssetReportCreateResponse object.
-    def create(access_tokens, days_requested, options)
+    def create(access_tokens, days_requested, options = {})
       post_with_auth 'asset_report/create',
                      AssetReportCreateResponse,
                      access_tokens: access_tokens,
@@ -52,7 +52,7 @@ module Plaid
     #                      listed above.
     #
     # Returns a AssetReportRefreshResponse object.
-    def refresh(asset_report_token, days_requested, options)
+    def refresh(asset_report_token, days_requested, options = {})
       post_with_auth 'asset_report/refresh',
                      AssetReportRefreshResponse,
                      asset_report_token: asset_report_token,
