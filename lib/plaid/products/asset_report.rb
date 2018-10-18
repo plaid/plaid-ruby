@@ -10,15 +10,52 @@ module Plaid
     #                  the Asset Report. Plaid will return as much data as
     #                  possible within the implied date range, up to a maximum
     #                  of 730 days (2 years) of history.
-    # options -        An optional object containing client-provided user
+    # options        - An optional object containing client-provided user
     #                  information, a client-provided report ID, and a webhook.
     #                  For more information, see the website listed above.
     #
     # Returns a AssetReportCreateResponse object.
-    def create(access_tokens, days_requested, options)
+    def create(access_tokens, days_requested, options = {})
       post_with_auth 'asset_report/create',
                      AssetReportCreateResponse,
                      access_tokens: access_tokens,
+                     days_requested: days_requested,
+                     options: options
+    end
+
+    # Public: Create a new, filtered asset report.
+    #
+    # asset_report_token     - The asset report token for the asset report you
+    #                          want to filter.
+    # account_ids_to_exclude - The list of account IDs to exclude from the
+    #                          original asset report.
+    #
+    # Returns a AssetReportFilterResponse object.
+    def filter(asset_report_token, account_ids_to_exclude)
+      post_with_auth 'asset_report/filter',
+                     AssetReportFilterResponse,
+                     asset_report_token: asset_report_token,
+                     account_ids_to_exclude: account_ids_to_exclude
+    end
+
+    # Public: Create a new, refreshed asset report.
+    #
+    # asset_report_token - The asset report token for the asset report you want
+    #                      to refresh.
+    # days_requested     - Days of transaction history requested to be included
+    #                      in the Asset Report. Plaid will return as much data
+    #                      as possible within the implied date range, up to a
+    #                      maximum of 730 days (2 years) of history.
+    # options            - An optional object containing client-provided user
+    #                      information, a client-provided report ID, and a
+    #                      webhook. For more information, see the website
+    #                      listed above.
+    #
+    # Returns a AssetReportRefreshResponse object.
+    def refresh(asset_report_token, days_requested, options = {})
+      post_with_auth 'asset_report/refresh',
+                     AssetReportRefreshResponse,
+                     asset_report_token: asset_report_token,
                      days_requested: days_requested,
                      options: options
     end
@@ -69,6 +106,18 @@ module Plaid
                      auditor_id: auditor_id
     end
 
+    # Public: Retrieve an audit copy.
+    #
+    # audit_copy_token - The audit copy token from the `create_audit_copy`
+    #                    response.
+    #
+    # Returns a AuditCopyGetResponse object.
+    def get_audit_copy(audit_copy_token)
+      post_with_auth 'asset_report/audit_copy/get',
+                     AuditCopyGetResponse,
+                     audit_copy_token: audit_copy_token
+    end
+
     # Public: Remove an audit copy token.
     #
     # audit_copy_token - The audit copy token from the `create` response.
@@ -94,6 +143,14 @@ module Plaid
     property :asset_report_id
   end
 
+  # Public: The response wrapper for /asset_report/filter.
+  class AssetReportFilterResponse < AssetReportCreateResponse
+  end
+
+  # Public: The response wrapper for /asset_report/refresh.
+  class AssetReportRefreshResponse < AssetReportCreateResponse
+  end
+
   # Public: The response wrapper for /asset_report/get.
   class AssetReportGetResponse < Models::BaseResponse
     ##
@@ -115,7 +172,7 @@ module Plaid
     property :removed
   end
 
-  # Public: The response wrapper for /audit_copy/create.
+  # Public: The response wrapper for /asset_report/audit_copy/create.
   class AuditCopyCreateResponse < Models::BaseResponse
     ##
     # :attr_reader:
@@ -123,7 +180,11 @@ module Plaid
     property :audit_copy_token
   end
 
-  # Public: The response wrapper for /audit_copy/remove.
+  # Public: The response wrapper for /asset_report/audit_copy/get.
+  class AuditCopyGetResponse < AssetReportGetResponse
+  end
+
+  # Public: The response wrapper for /asset_report/audit_copy/remove.
   class AuditCopyRemoveResponse < Models::BaseResponse
     ##
     # :attr_reader:
