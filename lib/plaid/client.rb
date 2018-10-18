@@ -9,7 +9,7 @@ module Plaid
     attr_reader :env
 
     # Public: The client ID.
-    attr_accessor :client_id
+    attr_reader :client_id
 
     # Public: Construct a Client instance
     #
