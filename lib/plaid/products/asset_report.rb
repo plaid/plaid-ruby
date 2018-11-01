@@ -63,12 +63,17 @@ module Plaid
     # Public: Retrieve an asset report.
     #
     # asset_report_token - The asset report token from the `create` response.
+    # include_insights   - An optional boolean specifying whether we should
+    #                      retrieve the report as an "Assets + Insights"
+    #                      report. For information about Assets + Insights
+    #                      reports, see https://plaid.com/docs/#assets.
     #
     # Returns a AssetReportGetResponse object.
-    def get(asset_report_token)
+    def get(asset_report_token, include_insights = false)
       post_with_auth 'asset_report/get',
                      AssetReportGetResponse,
-                     asset_report_token: asset_report_token
+                     asset_report_token: asset_report_token,
+                     include_insights: include_insights
     end
 
     # Public: Retrieve an asset report as a PDF.
