@@ -69,7 +69,7 @@ module Plaid
     #                      reports, see https://plaid.com/docs/#assets.
     #
     # Returns a AssetReportGetResponse object.
-    def get(asset_report_token, include_insights = false)
+    def get(asset_report_token, include_insights: false)
       post_with_auth 'asset_report/get',
                      AssetReportGetResponse,
                      asset_report_token: asset_report_token,

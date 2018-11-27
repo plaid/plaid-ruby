@@ -32,6 +32,10 @@ class PlaidAssetReportTest < PlaidTest
     response = poll_for_asset_report(asset_report_token)
     refute_empty(response.report)
 
+    # Retrieve the report as an Asset Report with Insights.
+    response = @client.asset_report.get(asset_report_token, true)
+    refute_empty(response.report)
+
     # Get the asset report as a PDF.
     pdf = @client.asset_report.get_pdf(asset_report_token)
     refute_empty(pdf)

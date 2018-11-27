@@ -921,6 +921,56 @@ module Plaid
       # Public: The unofficial currency code associated with the transaction.
       # Always nil if iso_currency_code is non-nil.
       property :unofficial_currency_code
+
+      ##
+      # :attr_reader: Public: The String account owner (or nil). This field
+      # only appears in an Asset Report with Insights.
+      property :account_owner
+
+      ##
+      # :attr_reader: Public: The Array of String category (or nil). This field
+      # only appears in an Asset Report with Insights. E.g. ["Payment", "Credit
+      # Card"].
+      property :category
+
+      ##
+      # :attr_reader: Public: The String category_id (or nil). This field only
+      # appears in an Asset Report with Insights. E.g. "16001000".
+      property :category_id
+
+      ##
+      # :attr_reader: Public: The String date of the transaction (or nil). This
+      # field only appears in an Asset Report with Insights.
+      property :date_transacted
+
+      ##
+      # :attr_reader: Public: The location where transaction occurred
+      # (TransactionLocation). This field only appears in an Asset Report with
+      # Insights.
+      property :location, coerce: TransactionLocation
+
+      ##
+      # :attr_reader: Public: The String transaction name (or nil). This field
+      # only appears in an Asset Report with Insights. E.g. "CREDIT CARD 3333
+      # PAYMENT *//".
+      property :name
+
+      ##
+      # :attr_reader: Public: The payment meta information
+      # (TransactionPaymentMeta). This field only appears in an Asset Report
+      # with Insights.
+      property :payment_meta, coerce: TransactionPaymentMeta
+
+      ##
+      # :attr_reader: Public: The String pending transaction ID (or nil). This
+      # field only appears in an Asset Report with Insights.
+      property :pending_transaction_id
+
+      ##
+      # :attr_reader: Public: The String transaction type (or nil). E.g.
+      # "special", or "place". This field only appears in an Asset Report with
+      # Insights.
+      property :transaction_type
     end
 
     # Public: A representation of an asset report account.
