@@ -1,3 +1,7 @@
+# 6.2.0 28-Nov-2018
+
+* Assets + Insights reports
+
 # 6.1.0 20-Jun-2018
 
 * Add bindings for the new [assets product](https://plaid.com/docs/api/#assets).
