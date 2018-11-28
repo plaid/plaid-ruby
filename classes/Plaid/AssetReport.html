@@ -23,7 +23,7 @@
 
     <meta name="keywords" content="Plaid::AssetReport class">
   
-    <meta name="keywords" content="create, get, get_pdf, remove, create_audit_copy, remove_audit_copy">
+    <meta name="keywords" content="create, filter, refresh, get, get_pdf, remove, create_audit_copy, get_audit_copy, remove_audit_copy">
   
 </head>
 
@@ -99,6 +99,18 @@ href="https://plaid.com/docs/api/#assets">plaid.com/docs/api/#assets</a>.</p>
           </ul>
         </dd>
       
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-filter">filter</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
         <dt>G</dt>
         <dd>
           <ul>
@@ -106,6 +118,11 @@ href="https://plaid.com/docs/api/#assets">plaid.com/docs/api/#assets</a>.</p>
               
               <li>
                 <a href="#method-i-get">get</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-get_audit_copy">get_audit_copy</a>,
               </li>
             
               
@@ -119,6 +136,11 @@ href="https://plaid.com/docs/api/#assets">plaid.com/docs/api/#assets</a>.</p>
         <dt>R</dt>
         <dd>
           <ul>
+            
+              
+              <li>
+                <a href="#method-i-refresh">refresh</a>,
+              </li>
             
               
               <li>
@@ -180,7 +202,7 @@ href="https://plaid.com/docs/api/#assets">plaid.com/docs/api/#assets</a>.</p>
         <div class="method">
           <div class="title method-title" id="method-i-create">
             
-              <b>create</b>(access_tokens, days_requested, options)
+              <b>create</b>(access_tokens, days_requested, options = {})
             
             <a href="../../classes/Plaid/AssetReport.html#method-i-create" name="method-i-create" class="permalink">Link</a>
           </div>
@@ -227,7 +249,7 @@ href="AssetReportCreateResponse.html">AssetReportCreateResponse</a> object.</p>
               </p>
               <div id="method-i-create_source" class="dyn-source">
                 <pre><span class="ruby-comment"># File lib/plaid/products/asset_report.rb, line 18</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>(<span class="ruby-identifier">access_tokens</span>, <span class="ruby-identifier">days_requested</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>(<span class="ruby-identifier">access_tokens</span>, <span class="ruby-identifier">days_requested</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;asset_report/create&#39;</span>,
                  <span class="ruby-constant">AssetReportCreateResponse</span>,
                  <span class="ruby-value">access_tokens:</span> <span class="ruby-identifier">access_tokens</span>,
@@ -280,7 +302,7 @@ href="AuditCopyCreateResponse.html">AuditCopyCreateResponse</a> object.</p>
                 
               </p>
               <div id="method-i-create_audit_copy_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/asset_report.rb, line 65</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/asset_report.rb, line 107</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_audit_copy</span>(<span class="ruby-identifier">asset_report_token</span>, <span class="ruby-identifier">auditor_id</span>)
   <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;asset_report/audit_copy/create&#39;</span>,
                  <span class="ruby-constant">AuditCopyCreateResponse</span>,
@@ -293,9 +315,61 @@ href="AuditCopyCreateResponse.html">AuditCopyCreateResponse</a> object.</p>
           </div>
         
         <div class="method">
+          <div class="title method-title" id="method-i-filter">
+            
+              <b>filter</b>(asset_report_token, account_ids_to_exclude)
+            
+            <a href="../../classes/Plaid/AssetReport.html#method-i-filter" name="method-i-filter" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              <p>Create a new, filtered asset report.</p>
+<dl class="rdoc-list note-list"><dt>asset_report_token
+<dd>
+<p>The asset report token for the asset report you want to filter.</p>
+</dd><dt>account_ids_to_exclude
+<dd>
+<p>The list of account IDs to exclude from the original asset report.</p>
+</dd></dl>
+
+<h3 id="method-i-filter-label-Returns">Returns</h3>
+
+<p>Returns a <a
+href="AssetReportFilterResponse.html">AssetReportFilterResponse</a> object.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-filter_source')" id="l_method-i-filter_source">show</a>
+                
+              </p>
+              <div id="method-i-filter_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/products/asset_report.rb, line 34</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filter</span>(<span class="ruby-identifier">asset_report_token</span>, <span class="ruby-identifier">account_ids_to_exclude</span>)
+  <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;asset_report/filter&#39;</span>,
+                 <span class="ruby-constant">AssetReportFilterResponse</span>,
+                 <span class="ruby-value">asset_report_token:</span> <span class="ruby-identifier">asset_report_token</span>,
+                 <span class="ruby-value">account_ids_to_exclude:</span> <span class="ruby-identifier">account_ids_to_exclude</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
           <div class="title method-title" id="method-i-get">
             
-              <b>get</b>(asset_report_token)
+              <b>get</b>(asset_report_token, include_insights: false)
             
             <a href="../../classes/Plaid/AssetReport.html#method-i-get" name="method-i-get" class="permalink">Link</a>
           </div>
@@ -306,6 +380,12 @@ href="AuditCopyCreateResponse.html">AuditCopyCreateResponse</a> object.</p>
 <dl class="rdoc-list note-list"><dt>asset_report_token
 <dd>
 <p>The asset report token from the `create` response.</p>
+</dd><dt>include_insights
+<dd>
+<p>An optional boolean specifying whether we should retrieve the report as an
+“Assets + Insights” report. For information about Assets + Insights
+reports, see <a
+href="https://plaid.com/docs/#assets">plaid.com/docs/#assets</a>.</p>
 </dd></dl>
 
 <h3 id="method-i-get-label-Returns">Returns</h3>
@@ -329,11 +409,60 @@ object.</p>
                 
               </p>
               <div id="method-i-get_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/asset_report.rb, line 31</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get</span>(<span class="ruby-identifier">asset_report_token</span>)
+                <pre><span class="ruby-comment"># File lib/plaid/products/asset_report.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get</span>(<span class="ruby-identifier">asset_report_token</span>, <span class="ruby-value">include_insights:</span> <span class="ruby-keyword">false</span>)
   <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;asset_report/get&#39;</span>,
                  <span class="ruby-constant">AssetReportGetResponse</span>,
-                 <span class="ruby-value">asset_report_token:</span> <span class="ruby-identifier">asset_report_token</span>
+                 <span class="ruby-value">asset_report_token:</span> <span class="ruby-identifier">asset_report_token</span>,
+                 <span class="ruby-value">include_insights:</span> <span class="ruby-identifier">include_insights</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-get_audit_copy">
+            
+              <b>get_audit_copy</b>(audit_copy_token)
+            
+            <a href="../../classes/Plaid/AssetReport.html#method-i-get_audit_copy" name="method-i-get_audit_copy" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              <p>Retrieve an audit copy.</p>
+<dl class="rdoc-list note-list"><dt>audit_copy_token
+<dd>
+<p>The audit copy token from the `create_audit_copy` response.</p>
+</dd></dl>
+
+<h3 id="method-i-get_audit_copy-label-Returns">Returns</h3>
+
+<p>Returns a <a href="AuditCopyGetResponse.html">AuditCopyGetResponse</a>
+object.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-get_audit_copy_source')" id="l_method-i-get_audit_copy_source">show</a>
+                
+              </p>
+              <div id="method-i-get_audit_copy_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/products/asset_report.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_audit_copy</span>(<span class="ruby-identifier">audit_copy_token</span>)
+  <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;asset_report/audit_copy/get&#39;</span>,
+                 <span class="ruby-constant">AuditCopyGetResponse</span>,
+                 <span class="ruby-value">audit_copy_token:</span> <span class="ruby-identifier">audit_copy_token</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -376,10 +505,72 @@ object.</p>
                 
               </p>
               <div id="method-i-get_pdf_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/asset_report.rb, line 42</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/asset_report.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_pdf</span>(<span class="ruby-identifier">asset_report_token</span>)
   <span class="ruby-identifier">client</span>.<span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;asset_report/pdf/get&#39;</span>,
                         <span class="ruby-value">asset_report_token:</span> <span class="ruby-identifier">asset_report_token</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-refresh">
+            
+              <b>refresh</b>(asset_report_token, days_requested, options = {})
+            
+            <a href="../../classes/Plaid/AssetReport.html#method-i-refresh" name="method-i-refresh" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              <p>Create a new, refreshed asset report.</p>
+<dl class="rdoc-list note-list"><dt>asset_report_token
+<dd>
+<p>The asset report token for the asset report you want to refresh.</p>
+</dd><dt>days_requested
+<dd>
+<p>Days of transaction history requested to be included in the Asset Report.
+<a href="../Plaid.html">Plaid</a> will return as much data as possible
+within the implied date range, up to a maximum of 730 days (2 years) of
+history.</p>
+</dd><dt>options
+<dd>
+<p>An optional object containing client-provided user information, a
+client-provided report ID, and a webhook. For more information, see the
+website listed above.</p>
+</dd></dl>
+
+<h3 id="method-i-refresh-label-Returns">Returns</h3>
+
+<p>Returns a <a
+href="AssetReportRefreshResponse.html">AssetReportRefreshResponse</a>
+object.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-refresh_source')" id="l_method-i-refresh_source">show</a>
+                
+              </p>
+              <div id="method-i-refresh_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/products/asset_report.rb, line 55</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">refresh</span>(<span class="ruby-identifier">asset_report_token</span>, <span class="ruby-identifier">days_requested</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;asset_report/refresh&#39;</span>,
+                 <span class="ruby-constant">AssetReportRefreshResponse</span>,
+                 <span class="ruby-value">asset_report_token:</span> <span class="ruby-identifier">asset_report_token</span>,
+                 <span class="ruby-value">days_requested:</span> <span class="ruby-identifier">days_requested</span>,
+                 <span class="ruby-value">options:</span> <span class="ruby-identifier">options</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -423,7 +614,7 @@ href="AssetReportRemoveResponse.html">AssetReportRemoveResponse</a> object.</p>
                 
               </p>
               <div id="method-i-remove_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/asset_report.rb, line 52</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/asset_report.rb, line 94</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remove</span>(<span class="ruby-identifier">asset_report_token</span>)
   <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;asset_report/remove&#39;</span>,
                  <span class="ruby-constant">AssetReportRemoveResponse</span>,
@@ -471,7 +662,7 @@ href="AuditCopyRemoveResponse.html">AuditCopyRemoveResponse</a> object.</p>
                 
               </p>
               <div id="method-i-remove_audit_copy_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/asset_report.rb, line 77</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/asset_report.rb, line 131</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remove_audit_copy</span>(<span class="ruby-identifier">audit_copy_token</span>)
   <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;asset_report/audit_copy/remove&#39;</span>,
                  <span class="ruby-constant">AuditCopyRemoveResponse</span>,

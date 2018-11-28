@@ -323,6 +323,14 @@
             <td class='attr-rw'>
               [R]
             </td>
+            <td class='attr-name'>client_id</td>
+            <td class='attr-desc'><p>The client ID.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
             <td class='attr-name'>env</td>
             <td class='attr-desc'><p>The current environment in use (one of <a
 href="Client.html#ENVIRONMENTS">ENVIRONMENTS</a>).</p></td>
@@ -368,7 +376,7 @@ href="Client.html#ENVIRONMENTS">ENVIRONMENTS</a>).</p></td>
                 
               </p>
               <div id="method-c-build_default_connection_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 128</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 131</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">build_default_connection</span>(<span class="ruby-identifier">builder</span>)
   <span class="ruby-identifier">builder</span>.<span class="ruby-identifier">options</span>[<span class="ruby-value">:timeout</span>] = <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">Middleware</span><span class="ruby-operator">::</span><span class="ruby-constant">NETWORK_TIMEOUT</span>
   <span class="ruby-identifier">builder</span>.<span class="ruby-identifier">headers</span> = <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">Middleware</span><span class="ruby-operator">::</span><span class="ruby-constant">NETWORK_HEADERS</span>
@@ -399,7 +407,7 @@ options.</p>
 <dl class="rdoc-list note-list"><dt>env
 <dd>
 <p>The Symbol (:sandbox, :development, :production)</p>
-</dd><dt>client_id
+</dd><dt><a href="Client.html#attribute-i-client_id">#client_id</a>
 <dd>
 <p>The String <a href="../Plaid.html">Plaid</a> account client ID to
 authenticate requests</p>
@@ -429,7 +437,7 @@ authenticate requests</p>
                 
               </p>
               <div id="method-c-new_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 20</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 23</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-value">env:</span>, <span class="ruby-value">client_id:</span>, <span class="ruby-value">secret:</span>, <span class="ruby-value">public_key:</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-ivar">@env</span>        = <span class="ruby-identifier">env</span>.<span class="ruby-identifier">to_sym</span>
   <span class="ruby-ivar">@api_host</span>   = <span class="ruby-identifier">api_host</span>
@@ -487,7 +495,7 @@ authenticate requests</p>
                 
               </p>
               <div id="method-i-post_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 98</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 101</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">post</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">payload</span>)
   <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">post</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">payload</span>).<span class="ruby-identifier">body</span>
 <span class="ruby-keyword">end</span></pre>
@@ -535,7 +543,7 @@ authenticate requests</p>
                 
               </p>
               <div id="method-i-post_with_auth_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 108</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 111</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">post_with_auth</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">payload</span>)
   <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">post</span>(
     <span class="ruby-identifier">path</span>,
@@ -586,7 +594,7 @@ authenticate requests</p>
                 
               </p>
               <div id="method-i-post_with_public_key_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 121</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 124</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">post_with_public_key</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">payload</span>)
   <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">post</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">payload</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">public_key:</span> <span class="ruby-ivar">@public_key</span>)).<span class="ruby-identifier">body</span>
 <span class="ruby-keyword">end</span></pre>
@@ -655,7 +663,7 @@ environment is unknown.</p>
                 
               </p>
               <div id="method-i-api_host_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 150</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 153</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">api_host</span>
   <span class="ruby-keyword">unless</span> <span class="ruby-constant">ENVIRONMENTS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-ivar">@env</span>)
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>,
@@ -698,7 +706,7 @@ environment is unknown.</p>
                 
               </p>
               <div id="method-i-client_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 140</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 143</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">client</span>
   <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -738,7 +746,7 @@ Faraday.</p>
                 
               </p>
               <div id="method-i-create_connection_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 163</span>
+                <pre><span class="ruby-comment"># File lib/plaid/client.rb, line 166</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_connection</span>
   <span class="ruby-ivar">@connection</span> = <span class="ruby-constant">Faraday</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">url:</span> <span class="ruby-ivar">@api_host</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">builder</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">block_given?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">builder</span>) <span class="ruby-operator">:</span> <span class="ruby-constant">Client</span>.<span class="ruby-identifier">build_default_connection</span>(<span class="ruby-identifier">builder</span>)
