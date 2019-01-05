@@ -1,0 +1,103 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/institutions/get_by_id
+    body:
+      encoding: UTF-8
+      string: '{"institution_id":"ins_109508","options":{"include_display_data":true},"public_key":"PLAID_RUBY_PUBLIC_KEY"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v6.2.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2018-05-22'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Sat, 05 Jan 2019 02:23:56 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '513'
+      connection:
+      - close
+      plaid-version:
+      - '2018-05-22'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "institution": {
+            "brand_name": "First Platypus Bank",
+            "brand_subheading": null,
+            "colors": {
+              "dark": "#006692",
+              "darker": "#00456f",
+              "light": "#378fbe",
+              "primary": "#0075a3"
+            },
+            "credentials": [
+              {
+                "label": "Username",
+                "name": "username",
+                "type": "text"
+              },
+              {
+                "label": "Password",
+                "name": "password",
+                "type": "password"
+              }
+            ],
+            "has_mfa": true,
+            "health_status": "HEALTH_STATUS_GREEN",
+            "institution_id": "ins_109508",
+            "legacy_institution_code": "ins_109508",
+            "legacy_institution_type": null,
+            "link_health_status": "HEALTH_STATUS_GREEN",
+            "logo": null,
+            "mfa": [
+              "code",
+              "list",
+              "questions",
+              "selections"
+            ],
+            "mfa_code_type": "numeric",
+            "name": "First Platypus Bank",
+            "name_break": null,
+            "portal": null,
+            "products": [
+              "assets",
+              "auth",
+              "balance",
+              "transactions",
+              "credit_details",
+              "income",
+              "identity"
+            ],
+            "url": "https://www.plaid.com/",
+            "url_account_locked": null,
+            "url_account_setup": null,
+            "url_forgotten_password": null
+          },
+          "request_id": "FF0Y18Fj2h1gBOO"
+        }
+    http_version: 
+  recorded_at: Sat, 05 Jan 2019 02:26:53 GMT
+recorded_with: VCR 4.0.0

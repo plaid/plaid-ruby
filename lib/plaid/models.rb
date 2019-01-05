@@ -578,6 +578,90 @@ module Plaid
       # Public: The Array of String product names supported by this institution.
       # E.g. ["auth", "balance", "identity", "transactions"].
       property :products
+
+      ##
+      # :attr_reader:
+      # Public: The Brand name of this institution.
+      # E.g. "First Platypus Bank"
+      property :brand_name
+
+      ##
+      # :attr_reader:
+      # Public: The brand subheading of this institution.
+      property :brand_subheading
+
+      ##
+      # :attr_reader:
+      # Public: A string containing the name break of this institution.
+      property :name_break
+
+      ##
+      # :attr_reader:
+      # Public: ???
+      property :portal
+
+      ##
+      # :attr_reader:
+      # Public: A hash of colors associated with this institution.
+      # E.g. {"dark"=>"#006692", "darker"=>"#00456f", "light"=>"#378fbe",
+      #       "primary"=>"#0075a3"}
+      property :colors
+
+      ##
+      # :attr_reader:
+      # Public: A base64 string of the logo for this institution.
+      property :logo
+
+      ##
+      # :attr_reader:
+      # Public: A string representing the health status of this institution.
+      # E.g. "HEALTH_STATUS_GREEN
+      property :health_status
+
+      ##
+      # :attr_reader:
+      # Public: A string representing the legacy institution code of this
+      # institution.
+      # E.g. "ins_109508"
+      property :legacy_institution_code
+
+      ##
+      # :attr_reader:
+      # Public: A string representing the legacy institution type of this
+      # institution.
+      property :legacy_institution_type
+
+      ##
+      # :attr_reader:
+      # Public: A string representing the health status of the link to this
+      # institution.
+      # E.g. "HEALTH_STATUS_GREEN"
+      property :link_health_status
+
+      ##
+      # :attr_reader:
+      # Public: A string representing the url of this institution.
+      # institution.
+      # E.g. "https://www.plaid.com"
+      property :url
+
+      ##
+      # :attr_reader:
+      # Public: A string of the url to the account locked page for this
+      # institution.
+      property :url_account_locked
+
+      ##
+      # :attr_reader:
+      # Public: A string of the url to the account setup page for this
+      # institution.
+      property :url_account_setup
+
+      ##
+      # :attr_reader:
+      # Public: A string of the url to the forgotten password page for this
+      # institution.
+      property :url_forgotten_password
     end
 
     module MFA

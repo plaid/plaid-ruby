@@ -25,6 +25,14 @@ class PlaidInstitutionsTest < PlaidTest
     assert_equal(SANDBOX_INSTITUTION, response.institution.institution_id)
   end
 
+  def test_get_by_id_with_options
+    options = { include_display_data: true }
+    response = client.institutions.get_by_id(SANDBOX_INSTITUTION,
+                                             options: options)
+    assert_equal(SANDBOX_INSTITUTION_NAME,
+                 response['institution'][:brand_name])
+  end
+
   def test_get_by_id_invalid_parameters
     assert_raises(Plaid::InvalidInputError) do
       client.institutions.get_by_id(BAD_STRING)

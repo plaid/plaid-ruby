@@ -27,12 +27,16 @@ module Plaid
     # information for an institution by ID.
     #
     # institution_id - Specific institution id to fetch information for.
+    # options - Additional return options for fetching an institution.
     #
     # Returns a SingleInstitutionResponse instance.
-    def get_by_id(institution_id)
+    def get_by_id(institution_id, options: nil)
+      payload = { institution_id: institution_id }
+      payload[:options] = options unless options.nil?
+
       post_with_public_key 'institutions/get_by_id',
                            SingleInstitutionResponse,
-                           institution_id: institution_id
+                           payload
     end
 
     # Public: Get information about all available institutions matching your
