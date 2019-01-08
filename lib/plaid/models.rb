@@ -538,6 +538,29 @@ module Plaid
       property :type
     end
 
+    # Public: A representation of Institution colors.
+    class InstitutionColors < BaseModel
+      ##
+      # :attr_reader:
+      # Public: A String containining the dark color hex for an institution.
+      property :dark
+
+      ##
+      # :attr_reader:
+      # Public: A String containining the darker color hex for an institution.
+      property :darker
+
+      ##
+      # :attr_reader:
+      # Public: A String containining the light color hex for an institution.
+      property :light
+
+      ##
+      # :attr_reader:
+      # Public: A String containining the primary color hex for an institution.
+      property :primary
+    end
+
     # Public: A representation of Institution.
     class Institution < BaseModel
       ##
@@ -603,9 +626,7 @@ module Plaid
       ##
       # :attr_reader:
       # Public: A hash of colors associated with this institution.
-      # E.g. {"dark"=>"#006692", "darker"=>"#00456f", "light"=>"#378fbe",
-      #       "primary"=>"#0075a3"}
-      property :colors
+      property :colors, coerce: InstitutionColors
 
       ##
       # :attr_reader:
