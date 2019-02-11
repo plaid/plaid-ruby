@@ -47,19 +47,19 @@ module Plaid
       # Public: A user-friendly representation of the error message. nil if the
       # error is not related to user action.
       property :display_message
+
+      ##
+      # :attr_reader:
+      # Public: A list of reasons explaining why the error happened.
+      property :causes, coerce: Array[Cause]
     end
 
     # Public: A representation of a cause.
-    class Cause < BaseModel
+    class Cause < Error
       ##
       # :attr_reader:
       # Public: The item ID.
       property :item_id
-
-      ##
-      # :attr_reader:
-      # Public: The underlying error.
-      property :error, coerce: Error
     end
 
     # Public: A representation of a warning.
