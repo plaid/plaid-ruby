@@ -51,7 +51,7 @@ module Plaid
       ##
       # :attr_reader:
       # Public: A list of reasons explaining why the error happened.
-      property :causes, coerce: Array[Cause]
+      coerce_key :causes, ->(causes) { causes.map { |c| Cause.new(c) } }
     end
 
     # Public: A representation of a cause.
