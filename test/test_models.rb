@@ -76,9 +76,9 @@ class PlaidBaseModelTest < PlaidTest
     assert_equal error.causes.length, 1
 
     cause = error.causes[0]
-    assert_equal cause.item_id, '456'
-    assert_equal cause.error_type, 'API_ERROR'
-    assert_equal cause.error_code, 'INTERNAL_SERVER_ERROR'
-    assert_equal cause.error_message, 'an unexpected error occurred'
+    assert_equal '456', cause.item_id
+    assert_equal 'API_ERROR', cause.error_type
+    assert_equal 'INTERNAL_SERVER_ERROR', cause.error_code
+    assert_equal 'an unexpected error occurred', cause.error_message
   end
 end
