@@ -22,8 +22,8 @@ module Plaid
       property :request_id
     end
 
-    # Public: A representation of an error.
-    class Error < BaseModel
+    # Internal: Base error.
+    class BaseError < BaseModel
       ##
       # :attr_reader:
       # Public: The String broad categorization of the error. One of:
@@ -50,16 +50,19 @@ module Plaid
     end
 
     # Public: A representation of a cause.
-    class Cause < BaseModel
+    class Cause < BaseError
       ##
       # :attr_reader:
       # Public: The item ID.
       property :item_id
+    end
 
+    # Public: A representation of an error.
+    class Error < BaseError
       ##
       # :attr_reader:
-      # Public: The underlying error.
-      property :error, coerce: Error
+      # Public: A list of reasons explaining why the error happened.
+      property :causes, coerce: Array[Cause]
     end
 
     # Public: A representation of a warning.
