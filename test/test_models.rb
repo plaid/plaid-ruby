@@ -1,4 +1,3 @@
-require 'json'
 require_relative 'test_helper'
 
 # Internal: The test for Plaid::Models::BaseModel.
