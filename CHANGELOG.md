@@ -1,3 +1,7 @@
+# 6.2.1 14-Feb-2019
+
+* Fix error models to support assets-related errors.
+
 # 6.2.0 28-Nov-2018
 
 * Assets + Insights reports
