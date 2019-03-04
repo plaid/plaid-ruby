@@ -27,12 +27,18 @@ module Plaid
     # information for an institution by ID.
     #
     # institution_id - Specific institution id to fetch information for.
+    # options - Options for filtering institutions.
     #
     # Returns a SingleInstitutionResponse instance.
-    def get_by_id(institution_id)
+    def get_by_id(institution_id, options: nil)
+      payload = {
+        institution_id: institution_id
+      }
+      payload[:options] = options unless options.nil?
+      puts "payload #{payload}"
       post_with_public_key 'institutions/get_by_id',
                            SingleInstitutionResponse,
-                           institution_id: institution_id
+                           payload
     end
 
     # Public: Get information about all available institutions matching your
@@ -43,13 +49,20 @@ module Plaid
     #
     # query    - Search query to attempt to match institutions to.
     # products - Product supported filter (optional).
+    # options - Options for filtering institutions.
     #
     # Returns a MultipleInstitutionsResponse instance.
-    def search(query, products = nil)
+    def search(query, products = nil, options: nil)
+      payload = {
+        query: query,
+        products: products
+      }
+
+      payload[:options] = options unless options.nil?
+
       post_with_public_key 'institutions/search',
                            MultipleInstitutionsResponse,
-                           query: query,
-                           products: products
+                           payload
     end
   end
 
