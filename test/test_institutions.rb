@@ -11,7 +11,8 @@ class PlaidInstitutionsTest < PlaidTest
     response = client.institutions.get count: 3,
                                        offset: 1,
                                        options: { products: ['transactions'],
-                                       include_institution_data: true }
+                                                  include_institution_data:
+                                                  true }
     assert_equal(3, response['institutions'].length)
   end
 
