@@ -34,7 +34,8 @@ class PlaidInstitutionsTest < PlaidTest
 
   def test_get_by_id_include_institution_data
     response = client.institutions.get_by_id(SANDBOX_INSTITUTION,
-      options: { include_institution_data: true })
+                                             options:
+                                             { include_institution_data: true })
     assert_equal(SANDBOX_INSTITUTION, response.institution.institution_id)
   end
 

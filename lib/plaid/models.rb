@@ -592,10 +592,10 @@ module Plaid
       # Public: The String base 64 encoded logo for this institution.
       property :logo
 
-
       ##
       # :attr_reader:
-      # Public: The String base 64 encoded url for this institution (e.g. "https://www.plaid.com").
+      # Public: The String base 64 encoded url for this institution
+      # E.g. "https://www.plaid.com").
       property :url
     end
 
