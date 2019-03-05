@@ -10,7 +10,8 @@ class PlaidInstitutionsTest < PlaidTest
   def test_get_with_options
     response = client.institutions.get count: 3,
                                        offset: 1,
-                                       options: { products: ['transactions'], include_institution_data: true }
+                                       options: { products: ['transactions'],
+                                       include_institution_data: true }
     assert_equal(3, response['institutions'].length)
   end
 
@@ -32,7 +33,8 @@ class PlaidInstitutionsTest < PlaidTest
   end
 
   def test_get_by_id_include_institution_data
-    response = client.institutions.get_by_id(SANDBOX_INSTITUTION, options: {include_institution_data: true})
+    response = client.institutions.get_by_id(SANDBOX_INSTITUTION,
+      options: { include_institution_data: true })
     assert_equal(SANDBOX_INSTITUTION, response.institution.institution_id)
   end
 
@@ -43,7 +45,9 @@ class PlaidInstitutionsTest < PlaidTest
 
   def test_search_with_institution_data
     response = client.institutions.search SANDBOX_INSTITUTION_NAME,
-                                          [:transactions], options: {include_institution_data: true}
+                                          [:transactions],
+                                          options:
+                                          { include_institution_data: true }
     refute_empty(response.institutions)
   end
 
