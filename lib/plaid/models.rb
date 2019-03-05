@@ -581,6 +581,22 @@ module Plaid
       # Public: The Array of String product names supported by this institution.
       # E.g. ["auth", "balance", "identity", "transactions"].
       property :products
+
+      ##
+      # :attr_reader:
+      # Public: The String primary color for this institution (e.g. "#095aa6").
+      property :primary_color
+
+      ##
+      # :attr_reader:
+      # Public: The String base 64 encoded logo for this institution.
+      property :logo
+
+      ##
+      # :attr_reader:
+      # Public: The String base 64 encoded url for this institution
+      # E.g. "https://www.plaid.com").
+      property :url
     end
 
     module MFA
