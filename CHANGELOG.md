@@ -1,4 +1,4 @@
-# 6.2.1 5-Mar-2019
+# 6.3.0 5-Mar-2019
 
 * Add support for include_institution_data to /institutions/search endpoint.
 * Add support for include_institution_data to /institutions/get endpoint.
