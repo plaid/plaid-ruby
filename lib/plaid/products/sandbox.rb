@@ -21,6 +21,29 @@ module Plaid
       # Public: The Boolean reset success flag.
       property :reset_login
     end
+
+    # Public: Fires a webhook for a sandbox item
+    #
+    # Does a POST /sandbox/item/fire_webhook call.
+    #
+    # access_token - access_token of the item to fire a webhook for.
+    # webhook_code - webhook_code to fire.
+    #
+    # Returns a ResetLoginResponse object.
+    def fire_webhook(access_token, webhook_code)
+      post_with_auth 'sandbox/item/fire_webhook',
+                     FireWebhookResponse,
+                     access_token: access_token
+                     webhook_code: webhook_code
+    end
+
+    # Public: Response for /sandbox/item/reset_login.
+    class FireWebhookResponse < Models::BaseResponse
+      ##
+      # :attr_reader:
+      # Public: The Boolean webhook fired success flag.
+      property :webhook_fired
+    end
   end
 
   # Public: Class used to call the SandboxPublicToken sub-product
