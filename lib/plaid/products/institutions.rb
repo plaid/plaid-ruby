@@ -35,7 +35,6 @@ module Plaid
         institution_id: institution_id
       }
       payload[:options] = options unless options.nil?
-      puts "payload #{payload}"
       post_with_public_key 'institutions/get_by_id',
                            SingleInstitutionResponse,
                            payload
