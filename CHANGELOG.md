@@ -1,3 +1,7 @@
+# 6.3.1 20-Mar-2019
+
+* Remove unnecessary log line
+
 # 6.3.0 5-Mar-2019
 
 * Add support for include_institution_data to /institutions/search endpoint.
