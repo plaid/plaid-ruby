@@ -145,4 +145,168 @@ http_interactions:
         }
     http_version: 
   recorded_at: Fri, 16 Mar 2018 02:18:36 GMT
-recorded_with: VCR 3.0.3
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/item/create
+    body:
+      encoding: UTF-8
+      string: '{"credentials":{"username":"user_good","password":"pass_good"},"institution_id":"ins_109508","initial_products":["transactions"],"options":{},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v7.0.0-rc0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-02-14'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Wed, 20 Mar 2019 03:13:48 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '300'
+      connection:
+      - close
+      plaid-version:
+      - '2019-02-14'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "access_token": "access-sandbox-982dbf7e-1350-4b43-95b7-fbcbab7f4934",
+          "item": {
+            "available_products": [
+              "assets",
+              "auth",
+              "balance",
+              "credit_details",
+              "identity",
+              "income"
+            ],
+            "billed_products": [
+              "transactions"
+            ],
+            "error": null,
+            "institution_id": "ins_109508",
+            "item_id": "LL5ZxjVo7ZsjPVx1AMV3SxGW9aoRE1CPQx4eP",
+            "webhook": ""
+          },
+          "request_id": "l36O1hAmKijc42W"
+        }
+    http_version: 
+  recorded_at: Wed, 20 Mar 2019 03:13:48 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/item/access_token/invalidate
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-982dbf7e-1350-4b43-95b7-fbcbab7f4934","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v7.0.0-rc0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-02-14'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Wed, 20 Mar 2019 03:13:48 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '130'
+      connection:
+      - close
+      plaid-version:
+      - '2019-02-14'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "new_access_token": "access-sandbox-c820f745-982e-4923-b15d-8822a2c1be78",
+          "request_id": "nfsfbi3inIOyEjF"
+        }
+    http_version: 
+  recorded_at: Wed, 20 Mar 2019 03:13:48 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/item/remove
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-c820f745-982e-4923-b15d-8822a2c1be78","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v7.0.0-rc0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-02-14'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Wed, 20 Mar 2019 03:13:49 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '74'
+      connection:
+      - close
+      plaid-version:
+      - '2019-02-14'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "removed": true,
+          "request_id": "WMLqjddpM6a37f5"
+        }
+    http_version: 
+  recorded_at: Wed, 20 Mar 2019 03:13:49 GMT
+recorded_with: VCR 4.0.0

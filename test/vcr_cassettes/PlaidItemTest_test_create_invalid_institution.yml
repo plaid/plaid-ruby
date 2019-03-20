@@ -38,4 +38,48 @@ http_interactions:
         }
     http_version: 
   recorded_at: Fri, 16 Mar 2018 02:19:40 GMT
-recorded_with: VCR 3.0.3
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/item/create
+    body:
+      encoding: UTF-8
+      string: '{"credentials":{"username":"user_good","password":"pass_good"},"institution_id":"ABCDEFG1234567","initial_products":["transactions"],"options":{},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v7.0.0-rc0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-02-14'
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      server:
+      - nginx
+      date:
+      - Wed, 20 Mar 2019 03:13:38 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '162'
+      connection:
+      - close
+      plaid-version:
+      - '2019-02-14'
+      vary:
+      - Accept-Encoding
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "display_message": null,
+          "error_code": "INVALID_INSTITUTION",
+          "error_message": "invalid institution_id provided",
+          "error_type": "INVALID_INPUT",
+          "request_id": "1qfMuE0MA3lcCHC"
+        }
+    http_version: 
+  recorded_at: Wed, 20 Mar 2019 03:13:38 GMT
+recorded_with: VCR 4.0.0
