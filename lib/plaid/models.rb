@@ -417,7 +417,7 @@ module Plaid
 
       ##
       # :attr_reader:
-      # Public: The String country.
+      # Public: The String country, an ISO-3166-1 alpha-2 code.
       property :country
     end
 
@@ -732,7 +732,7 @@ module Plaid
 
       ##
       # :attr_reader:
-      # Public: The String country.
+      # Public: The String country, an ISO-3166-1 alpha-2 code.
       property :country
     end
 
