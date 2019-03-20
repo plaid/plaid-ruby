@@ -233,6 +233,47 @@ module Plaid
       property :institution
     end
 
+    # Public: A representation of an international account number.
+    class NumberInternational < BaseModel
+
+      ##
+      # :attr_reader:
+      # Public: The String account ID. E.g.
+      # "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D".
+      property :account_id
+
+      ##
+      # :attr_reader:
+      # Public: The account's IBAN.
+      property :iban
+
+      ##
+      # :attr_reader:
+      # Public: The account's BIC.
+      property :bic
+    end
+
+
+    # Public: A representation of an BACS (UK) account number.
+    class NumberInternational < BaseModel
+
+      ##
+      # :attr_reader:
+      # Public: The String account ID. E.g.
+      # "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D".
+      property :account_id
+
+      ##
+      # :attr_reader:
+      # Public: The account's (UK) account number.
+      property :account
+
+      ##
+      # :attr_reader:
+      # Public: The account's (UK) sort code.
+      property :sort_code
+    end
+
     # Public: A representation of a Auth Numbers response
     class Numbers < BaseModel
       ##
@@ -244,6 +285,16 @@ module Plaid
       # :attr_reader:
       # Public: The Array of NumberEFT.
       property :eft, coerce: Array[NumberEFT]
+
+      ##
+      # :attr_reader:
+      # Public: The Array of NumberInternational.
+      property :international, coerce: Array[NumberInternational]
+
+      ##
+      # :attr_reader:
+      # Public: The Array of NumberBACS.
+      property :bacs, coerce: Array[NumberBACS]
     end
 
     # Public: A representation of a transaction category.
