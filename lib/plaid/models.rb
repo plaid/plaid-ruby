@@ -720,8 +720,8 @@ module Plaid
 
       ##
       # :attr_reader:
-      # Public: The String state name (or nil).
-      property :state
+      # Public: The String region name (or nil).
+      property :region
 
       ##
       # :attr_reader:
@@ -730,8 +730,13 @@ module Plaid
 
       ##
       # :attr_reader:
-      # Public: The String ZIP code (or nil).
-      property :zip
+      # Public: The String postal code (or nil).
+      property :postal_code
+
+      ##
+      # :attr_reader:
+      # Public: The String country.
+      property :country
     end
 
     # Public: A representation of Transaction Payment meta information.
