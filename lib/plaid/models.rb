@@ -410,13 +410,18 @@ module Plaid
 
       ##
       # :attr_reader:
-      # Public: The String state name.
-      property :state
+      # Public: The String region name.
+      property :region
 
       ##
       # :attr_reader:
-      # Public: The String ZIP code.
-      property :zip
+      # Public: The String postal code.
+      property :postal_code
+
+      ##
+      # :attr_reader:
+      # Public: The String country.
+      property :country
     end
 
     # Public: A representation of Identity address data.
