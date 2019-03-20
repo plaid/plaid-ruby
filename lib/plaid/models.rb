@@ -975,6 +975,45 @@ module Plaid
       property :unofficial_currency_code
     end
 
+    # Public: A representation of Transaction location returned by asset
+    # reports.
+    class AssetReportTransactionLocation < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The String address (or nil).
+      property :address
+
+      ##
+      # :attr_reader:
+      # Public: The String city name (or nil).
+      property :city
+
+      ##
+      # :attr_reader:
+      # Public: The Numeric latitude of the place (or nil).
+      property :lat
+
+      ##
+      # :attr_reader:
+      # Public: The Numeric longitude of the place (or nil).
+      property :lon
+
+      ##
+      # :attr_reader:
+      # Public: The String state name (or nil).
+      property :state
+
+      ##
+      # :attr_reader:
+      # Public: The String store number (or nil).
+      property :store_number
+
+      ##
+      # :attr_reader:
+      # Public: The String ZIP code (or nil).
+      property :zip
+    end
+
     # Public: A representation of an asset report transaction.
     class AssetReportTransaction < BaseModel
       ##
@@ -1049,9 +1088,9 @@ module Plaid
 
       ##
       # :attr_reader: Public: The location where transaction occurred
-      # (TransactionLocation). This field only appears in an Asset Report with
-      # Insights.
-      property :location, coerce: TransactionLocation
+      # (AssetReportTransactionLocation). This field only appears in an Asset
+      # Report with Insights.
+      property :location, coerce: AssetReportTransactionLocation
 
       ##
       # :attr_reader: Public: The String transaction name (or nil). This field
