@@ -255,7 +255,7 @@ module Plaid
 
 
     # Public: A representation of an BACS (UK) account number.
-    class NumberInternational < BaseModel
+    class NumberBACS < BaseModel
 
       ##
       # :attr_reader:
