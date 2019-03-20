@@ -235,7 +235,6 @@ module Plaid
 
     # Public: A representation of an international account number.
     class NumberInternational < BaseModel
-
       ##
       # :attr_reader:
       # Public: The String account ID. E.g.
@@ -253,10 +252,8 @@ module Plaid
       property :bic
     end
 
-
     # Public: A representation of an BACS (UK) account number.
     class NumberBACS < BaseModel
-
       ##
       # :attr_reader:
       # Public: The String account ID. E.g.
