@@ -8,350 +8,7 @@ http_interactions:
       string: '{"credentials":{"username":"user_good","password":"pass_good"},"institution_id":"ins_109508","initial_products":["credit_details"],"options":{},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
     headers:
       User-Agent:
-      - Plaid Ruby v4.1.0
-      Content-Type:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: 
-    headers:
-      server:
-      - nginx
-      date:
-      - Fri, 16 Mar 2018 02:17:32 GMT
-      content-type:
-      - application/json
-      content-length:
-      - '422'
-      connection:
-      - close
-      strict-transport-security:
-      - max-age=31536000; includeSubDomains; preload
-      x-frame-options:
-      - DENY
-      x-content-type-options:
-      - nosniff
-      x-xss-protection:
-      - 1; mode=block
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-          "access_token": "access-sandbox-0e71e174-91f3-437c-9aad-7aa75d65e537",
-          "item": {
-            "available_products": [
-              "auth",
-              "balance",
-              "identity",
-              "income",
-              "transactions"
-            ],
-            "billed_products": [
-              "credit_details"
-            ],
-            "error": null,
-            "institution_id": "ins_109508",
-            "item_id": "rQX9KAzdepTZDeqW5Ge9f6x4E3AVaZH37LXay",
-            "webhook": ""
-          },
-          "request_id": "EDrW5"
-        }
-    http_version: 
-  recorded_at: Fri, 16 Mar 2018 02:17:33 GMT
-- request:
-    method: post
-    uri: https://sandbox.plaid.com/credit_details/get
-    body:
-      encoding: UTF-8
-      string: '{"access_token":"access-sandbox-0e71e174-91f3-437c-9aad-7aa75d65e537","options":{},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
-    headers:
-      User-Agent:
-      - Plaid Ruby v4.1.0
-      Content-Type:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: 
-    headers:
-      server:
-      - nginx
-      date:
-      - Fri, 16 Mar 2018 02:17:34 GMT
-      content-type:
-      - application/json
-      transfer-encoding:
-      - chunked
-      connection:
-      - close
-      strict-transport-security:
-      - max-age=31536000; includeSubDomains; preload
-      x-frame-options:
-      - DENY
-      x-content-type-options:
-      - nosniff
-      x-xss-protection:
-      - 1; mode=block
-    body:
-      encoding: ASCII-8BIT
-      string: |-
-        {
-          "accounts": [
-            {
-              "account_id": "WZwzplj5bmU68WeP7kWztp8BagDx7wter7BkG",
-              "balances": {
-                "available": 100,
-                "current": 110,
-                "limit": null
-              },
-              "mask": "0000",
-              "name": "Plaid Checking",
-              "official_name": "Plaid Gold Standard 0% Interest Checking",
-              "subtype": "checking",
-              "type": "depository"
-            },
-            {
-              "account_id": "mNWbaoRk4QU6Zl5e7ElLtdL6nB5rlbtxdAdGld",
-              "balances": {
-                "available": 200,
-                "current": 210,
-                "limit": null
-              },
-              "mask": "1111",
-              "name": "Plaid Saving",
-              "official_name": "Plaid Silver Standard 0.1% Interest Saving",
-              "subtype": "savings",
-              "type": "depository"
-            },
-            {
-              "account_id": "Mx9oRbr5LpSrznj1K9nJS6XwZgDPlWIdNpEk1",
-              "balances": {
-                "available": null,
-                "current": 1000,
-                "limit": null
-              },
-              "mask": "2222",
-              "name": "Plaid CD",
-              "official_name": "Plaid Bronze Standard 0.2% Interest CD",
-              "subtype": "cd",
-              "type": "depository"
-            },
-            {
-              "account_id": "vLbA3mdP1EUKybD6qEblI6obrqDgPRhvRyxbl",
-              "balances": {
-                "available": null,
-                "current": 410,
-                "limit": 2000
-              },
-              "mask": "3333",
-              "name": "Plaid Credit Card",
-              "official_name": "Plaid Diamond 12.5% APR Interest Credit Card",
-              "subtype": "credit card",
-              "type": "credit"
-            }
-          ],
-          "credit_details": [
-            {
-              "account_id": "vLbA3mdP1EUKybD6qEblI6obrqDgPRhvRyxbl",
-              "aprs": {
-                "balance_transfers": {
-                  "apr": 0.125,
-                  "balance_subject_to_apr": 1200,
-                  "interest_charge_amount": 150
-                },
-                "cash_advances": {
-                  "apr": 0.165,
-                  "balance_subject_to_apr": 0,
-                  "interest_charge_amount": 0
-                },
-                "purchases": {
-                  "apr": 0.125,
-                  "balance_subject_to_apr": 1650,
-                  "interest_charge_amount": 206.25
-                }
-              },
-              "last_payment_amount": 875,
-              "last_payment_date": "2016-09-13T00:00:00Z",
-              "last_statement_balance": 3450,
-              "last_statement_date": "2016-10-01T00:00:00Z",
-              "minimum_payment_amount": 800,
-              "next_bill_due_date": "2016-10-15T00:00:00Z"
-            }
-          ],
-          "item": {
-            "available_products": [
-              "auth",
-              "balance",
-              "identity",
-              "income",
-              "transactions"
-            ],
-            "billed_products": [
-              "credit_details"
-            ],
-            "error": null,
-            "institution_id": "ins_109508",
-            "item_id": "rQX9KAzdepTZDeqW5Ge9f6x4E3AVaZH37LXay",
-            "webhook": ""
-          },
-          "request_id": "m9KzP"
-        }
-    http_version: 
-  recorded_at: Fri, 16 Mar 2018 02:17:34 GMT
-- request:
-    method: post
-    uri: https://sandbox.plaid.com/credit_details/get
-    body:
-      encoding: UTF-8
-      string: '{"access_token":"access-sandbox-0e71e174-91f3-437c-9aad-7aa75d65e537","options":{"account_ids":["vLbA3mdP1EUKybD6qEblI6obrqDgPRhvRyxbl"]},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
-    headers:
-      User-Agent:
-      - Plaid Ruby v4.1.0
-      Content-Type:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: 
-    headers:
-      server:
-      - nginx
-      date:
-      - Fri, 16 Mar 2018 02:17:35 GMT
-      content-type:
-      - application/json
-      transfer-encoding:
-      - chunked
-      connection:
-      - close
-      strict-transport-security:
-      - max-age=31536000; includeSubDomains; preload
-      x-frame-options:
-      - DENY
-      x-content-type-options:
-      - nosniff
-      x-xss-protection:
-      - 1; mode=block
-    body:
-      encoding: ASCII-8BIT
-      string: |-
-        {
-          "accounts": [
-            {
-              "account_id": "vLbA3mdP1EUKybD6qEblI6obrqDgPRhvRyxbl",
-              "balances": {
-                "available": null,
-                "current": 410,
-                "limit": 2000
-              },
-              "mask": "3333",
-              "name": "Plaid Credit Card",
-              "official_name": "Plaid Diamond 12.5% APR Interest Credit Card",
-              "subtype": "credit card",
-              "type": "credit"
-            }
-          ],
-          "credit_details": [
-            {
-              "account_id": "vLbA3mdP1EUKybD6qEblI6obrqDgPRhvRyxbl",
-              "aprs": {
-                "balance_transfers": {
-                  "apr": 0.125,
-                  "balance_subject_to_apr": 1200,
-                  "interest_charge_amount": 150
-                },
-                "cash_advances": {
-                  "apr": 0.165,
-                  "balance_subject_to_apr": 0,
-                  "interest_charge_amount": 0
-                },
-                "purchases": {
-                  "apr": 0.125,
-                  "balance_subject_to_apr": 1650,
-                  "interest_charge_amount": 206.25
-                }
-              },
-              "last_payment_amount": 875,
-              "last_payment_date": "2016-09-13T00:00:00Z",
-              "last_statement_balance": 3450,
-              "last_statement_date": "2016-10-01T00:00:00Z",
-              "minimum_payment_amount": 800,
-              "next_bill_due_date": "2016-10-15T00:00:00Z"
-            }
-          ],
-          "item": {
-            "available_products": [
-              "auth",
-              "balance",
-              "identity",
-              "income",
-              "transactions"
-            ],
-            "billed_products": [
-              "credit_details"
-            ],
-            "error": null,
-            "institution_id": "ins_109508",
-            "item_id": "rQX9KAzdepTZDeqW5Ge9f6x4E3AVaZH37LXay",
-            "webhook": ""
-          },
-          "request_id": "GASRJ"
-        }
-    http_version: 
-  recorded_at: Fri, 16 Mar 2018 02:17:35 GMT
-- request:
-    method: post
-    uri: https://sandbox.plaid.com/item/remove
-    body:
-      encoding: UTF-8
-      string: '{"access_token":"access-sandbox-0e71e174-91f3-437c-9aad-7aa75d65e537","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
-    headers:
-      User-Agent:
-      - Plaid Ruby v4.1.0
-      Content-Type:
-      - application/json
-  response:
-    status:
-      code: 200
-      message: 
-    headers:
-      server:
-      - nginx
-      date:
-      - Fri, 16 Mar 2018 02:17:38 GMT
-      content-type:
-      - application/json
-      content-length:
-      - '46'
-      connection:
-      - close
-      strict-transport-security:
-      - max-age=31536000; includeSubDomains; preload
-      x-frame-options:
-      - DENY
-      x-content-type-options:
-      - nosniff
-      x-xss-protection:
-      - 1; mode=block
-    body:
-      encoding: UTF-8
-      string: |-
-        {
-          "removed": true,
-          "request_id": "pifFV"
-        }
-    http_version: 
-  recorded_at: Fri, 16 Mar 2018 02:17:38 GMT
-- request:
-    method: post
-    uri: https://sandbox.plaid.com/item/create
-    body:
-      encoding: UTF-8
-      string: '{"credentials":{"username":"user_good","password":"pass_good"},"institution_id":"ins_109508","initial_products":["credit_details"],"options":{},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
-    headers:
-      User-Agent:
-      - Plaid Ruby v7.0.0-rc0
+      - Plaid Ruby v7.0.0.rc0
       Content-Type:
       - application/json
       Plaid-Version:
@@ -364,11 +21,11 @@ http_interactions:
       server:
       - nginx
       date:
-      - Wed, 20 Mar 2019 03:14:53 GMT
+      - Wed, 20 Mar 2019 15:46:05 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
-      - '301'
+      - '302'
       connection:
       - close
       plaid-version:
@@ -387,7 +44,7 @@ http_interactions:
       encoding: ASCII-8BIT
       string: |-
         {
-          "access_token": "access-sandbox-e12bb18b-2530-4b8f-bbe5-9ebb239867b4",
+          "access_token": "access-sandbox-2b398c50-a3b6-4ab5-b85f-059d207b9c33",
           "item": {
             "available_products": [
               "assets",
@@ -402,22 +59,22 @@ http_interactions:
             ],
             "error": null,
             "institution_id": "ins_109508",
-            "item_id": "d478Kd1dXbIlyQzNmWqxUkM8XPVyxeSZKomq5",
+            "item_id": "n7gjW9ZqpAhLwgBkPAN9sVRDVPl8epf6kmyBx",
             "webhook": ""
           },
-          "request_id": "QBCaqQaUaLvjSHj"
+          "request_id": "x1AmOmJddXCVQ8o"
         }
     http_version: 
-  recorded_at: Wed, 20 Mar 2019 03:14:53 GMT
+  recorded_at: Wed, 20 Mar 2019 15:46:05 GMT
 - request:
     method: post
     uri: https://sandbox.plaid.com/credit_details/get
     body:
       encoding: UTF-8
-      string: '{"access_token":"access-sandbox-e12bb18b-2530-4b8f-bbe5-9ebb239867b4","options":{},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+      string: '{"access_token":"access-sandbox-2b398c50-a3b6-4ab5-b85f-059d207b9c33","options":{},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
     headers:
       User-Agent:
-      - Plaid Ruby v7.0.0-rc0
+      - Plaid Ruby v7.0.0.rc0
       Content-Type:
       - application/json
       Plaid-Version:
@@ -430,11 +87,11 @@ http_interactions:
       server:
       - nginx
       date:
-      - Wed, 20 Mar 2019 03:14:54 GMT
+      - Wed, 20 Mar 2019 15:46:05 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
-      - '1087'
+      - '1085'
       connection:
       - close
       plaid-version:
@@ -455,7 +112,7 @@ http_interactions:
         {
           "accounts": [
             {
-              "account_id": "JgB9zaJaxXtl34ojv5Q9UJjnvGKr9qid4VGAX",
+              "account_id": "VEV9KmbM1qT3lGNXLxJpipD7wkJwGMiWM3D3z",
               "balances": {
                 "available": 100,
                 "current": 110,
@@ -470,7 +127,7 @@ http_interactions:
               "type": "depository"
             },
             {
-              "account_id": "kZzkabvbDBsMXZND517qIaGXnPRqlLsWQy39D",
+              "account_id": "wkyor1W4AqIneL67pmPMIkwXGbPGDnUrXBQB5",
               "balances": {
                 "available": 200,
                 "current": 210,
@@ -485,7 +142,7 @@ http_interactions:
               "type": "depository"
             },
             {
-              "account_id": "lMBd4W6WD3SDWpPwLlNKud5WQR9AVzCZwD54o",
+              "account_id": "5A3jqavWx5SBqe1LwgoMi63xPdZPKBuZrq6qA",
               "balances": {
                 "available": null,
                 "current": 1000,
@@ -500,7 +157,7 @@ http_interactions:
               "type": "depository"
             },
             {
-              "account_id": "qg49eXvXDkto9RrDLnzxUMz98rRo1vsdm45EK",
+              "account_id": "JjAmoWM3aVs7GnRZdBvNClvx7jX7Z3td8VnVq",
               "balances": {
                 "available": null,
                 "current": 410,
@@ -515,7 +172,7 @@ http_interactions:
               "type": "credit"
             },
             {
-              "account_id": "K83ZBaJadXSqxZDb85GyHz8gRjJ7DlFVZ4jyx",
+              "account_id": "kNL4go7VbAUVyJbK9p5kIDnxrGmrw4uW5ymyd",
               "balances": {
                 "available": 43200,
                 "current": 43200,
@@ -530,7 +187,7 @@ http_interactions:
               "type": "depository"
             },
             {
-              "account_id": "r8N9QRvRDPSZKLzbp3MdiMeK4Vk1EWslP3XQv",
+              "account_id": "lPpN8oewWAIMXJ5v47LbigQpk5qkw1SZ3DMD7",
               "balances": {
                 "available": null,
                 "current": 320.75,
@@ -545,7 +202,7 @@ http_interactions:
               "type": "investment"
             },
             {
-              "account_id": "zyo98MvMrLTyErPj1k4xSm54vXwrAZco74KVv",
+              "account_id": "qZWQnoLzXATg1Kqde6LPiP8ylzblVBtdK4Q4R",
               "balances": {
                 "available": null,
                 "current": 22258.294,
@@ -562,7 +219,7 @@ http_interactions:
           ],
           "credit_details": [
             {
-              "account_id": "qg49eXvXDkto9RrDLnzxUMz98rRo1vsdm45EK",
+              "account_id": "JjAmoWM3aVs7GnRZdBvNClvx7jX7Z3td8VnVq",
               "aprs": {
                 "balance_transfers": {
                   "apr": 0.125,
@@ -602,22 +259,22 @@ http_interactions:
             ],
             "error": null,
             "institution_id": "ins_109508",
-            "item_id": "d478Kd1dXbIlyQzNmWqxUkM8XPVyxeSZKomq5",
+            "item_id": "n7gjW9ZqpAhLwgBkPAN9sVRDVPl8epf6kmyBx",
             "webhook": ""
           },
-          "request_id": "yfCytxZIBBzpsDA"
+          "request_id": "l3ma0Cni7AGdjWH"
         }
     http_version: 
-  recorded_at: Wed, 20 Mar 2019 03:14:54 GMT
+  recorded_at: Wed, 20 Mar 2019 15:46:06 GMT
 - request:
     method: post
     uri: https://sandbox.plaid.com/credit_details/get
     body:
       encoding: UTF-8
-      string: '{"access_token":"access-sandbox-e12bb18b-2530-4b8f-bbe5-9ebb239867b4","options":{"account_ids":["qg49eXvXDkto9RrDLnzxUMz98rRo1vsdm45EK"]},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+      string: '{"access_token":"access-sandbox-2b398c50-a3b6-4ab5-b85f-059d207b9c33","options":{"account_ids":["JjAmoWM3aVs7GnRZdBvNClvx7jX7Z3td8VnVq"]},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
     headers:
       User-Agent:
-      - Plaid Ruby v7.0.0-rc0
+      - Plaid Ruby v7.0.0.rc0
       Content-Type:
       - application/json
       Plaid-Version:
@@ -630,11 +287,11 @@ http_interactions:
       server:
       - nginx
       date:
-      - Wed, 20 Mar 2019 03:14:54 GMT
+      - Wed, 20 Mar 2019 15:46:05 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
-      - '633'
+      - '637'
       connection:
       - close
       plaid-version:
@@ -655,7 +312,7 @@ http_interactions:
         {
           "accounts": [
             {
-              "account_id": "qg49eXvXDkto9RrDLnzxUMz98rRo1vsdm45EK",
+              "account_id": "JjAmoWM3aVs7GnRZdBvNClvx7jX7Z3td8VnVq",
               "balances": {
                 "available": null,
                 "current": 410,
@@ -672,7 +329,7 @@ http_interactions:
           ],
           "credit_details": [
             {
-              "account_id": "qg49eXvXDkto9RrDLnzxUMz98rRo1vsdm45EK",
+              "account_id": "JjAmoWM3aVs7GnRZdBvNClvx7jX7Z3td8VnVq",
               "aprs": {
                 "balance_transfers": {
                   "apr": 0.125,
@@ -712,22 +369,22 @@ http_interactions:
             ],
             "error": null,
             "institution_id": "ins_109508",
-            "item_id": "d478Kd1dXbIlyQzNmWqxUkM8XPVyxeSZKomq5",
+            "item_id": "n7gjW9ZqpAhLwgBkPAN9sVRDVPl8epf6kmyBx",
             "webhook": ""
           },
-          "request_id": "5zv1RppYUUCkDxq"
+          "request_id": "hG3zY3cmiMfzXHd"
         }
     http_version: 
-  recorded_at: Wed, 20 Mar 2019 03:14:54 GMT
+  recorded_at: Wed, 20 Mar 2019 15:46:06 GMT
 - request:
     method: post
     uri: https://sandbox.plaid.com/item/remove
     body:
       encoding: UTF-8
-      string: '{"access_token":"access-sandbox-e12bb18b-2530-4b8f-bbe5-9ebb239867b4","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+      string: '{"access_token":"access-sandbox-2b398c50-a3b6-4ab5-b85f-059d207b9c33","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
     headers:
       User-Agent:
-      - Plaid Ruby v7.0.0-rc0
+      - Plaid Ruby v7.0.0.rc0
       Content-Type:
       - application/json
       Plaid-Version:
@@ -740,7 +397,7 @@ http_interactions:
       server:
       - nginx
       date:
-      - Wed, 20 Mar 2019 03:14:54 GMT
+      - Wed, 20 Mar 2019 15:46:06 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -764,8 +421,8 @@ http_interactions:
       string: |-
         {
           "removed": true,
-          "request_id": "0owjTbZtgdpNYTw"
+          "request_id": "jcJFSub82c1NJJ5"
         }
     http_version: 
-  recorded_at: Wed, 20 Mar 2019 03:14:54 GMT
+  recorded_at: Wed, 20 Mar 2019 15:46:07 GMT
 recorded_with: VCR 4.0.0
