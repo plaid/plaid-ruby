@@ -854,13 +854,37 @@ module Plaid
       property :unofficial_currency_code
     end
 
+    # Public: A representation of Identity address details returned by the
+    # assets endpoint.
+    class AssetReportAddressData < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The String street name.
+      property :street
+
+      ##
+      # :attr_reader:
+      # Public: The String name.
+      property :city
+
+      ##
+      # :attr_reader:
+      # Public: The String state name.
+      property :state
+
+      ##
+      # :attr_reader:
+      # Public: The String ZIP code.
+      property :zip
+    end
+
     # Public: A representation of an asset report address.
     class AssetReportAddress < BaseModel
       ##
       # :attr_reader:
       # Public: Data about the components comprising an address; see
-      # IdentityAddressData object for fields.
-      property :data, coerce: IdentityAddressData
+      # AssetReportAddressData object for fields.
+      property :data, coerce: AssetReportAddressData
 
       ##
       # :attr_reader:
