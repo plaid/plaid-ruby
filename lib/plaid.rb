@@ -60,5 +60,3 @@ module Plaid
     date.is_a?(String) ? date : date.to_date.strftime('%Y-%m-%d')
   end
 end
-
-puts 'test'
