@@ -233,6 +233,44 @@ module Plaid
       property :institution
     end
 
+    # Public: A representation of an international account number.
+    class NumberInternational < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The String account ID. E.g.
+      # "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D".
+      property :account_id
+
+      ##
+      # :attr_reader:
+      # Public: The account's IBAN.
+      property :iban
+
+      ##
+      # :attr_reader:
+      # Public: The account's BIC.
+      property :bic
+    end
+
+    # Public: A representation of an BACS (UK) account number.
+    class NumberBACS < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The String account ID. E.g.
+      # "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D".
+      property :account_id
+
+      ##
+      # :attr_reader:
+      # Public: The account's (UK) account number.
+      property :account
+
+      ##
+      # :attr_reader:
+      # Public: The account's (UK) sort code.
+      property :sort_code
+    end
+
     # Public: A representation of a Auth Numbers response
     class Numbers < BaseModel
       ##
@@ -244,6 +282,16 @@ module Plaid
       # :attr_reader:
       # Public: The Array of NumberEFT.
       property :eft, coerce: Array[NumberEFT]
+
+      ##
+      # :attr_reader:
+      # Public: The Array of NumberInternational.
+      property :international, coerce: Array[NumberInternational]
+
+      ##
+      # :attr_reader:
+      # Public: The Array of NumberBACS.
+      property :bacs, coerce: Array[NumberBACS]
     end
 
     # Public: A representation of a transaction category.
@@ -359,13 +407,18 @@ module Plaid
 
       ##
       # :attr_reader:
-      # Public: The String state name.
-      property :state
+      # Public: The String region name.
+      property :region
 
       ##
       # :attr_reader:
-      # Public: The String ZIP code.
-      property :zip
+      # Public: The String postal code.
+      property :postal_code
+
+      ##
+      # :attr_reader:
+      # Public: The String country, an ISO-3166-1 alpha-2 code.
+      property :country
     end
 
     # Public: A representation of Identity address data.
@@ -664,8 +717,8 @@ module Plaid
 
       ##
       # :attr_reader:
-      # Public: The String state name (or nil).
-      property :state
+      # Public: The String region name (or nil).
+      property :region
 
       ##
       # :attr_reader:
@@ -674,8 +727,13 @@ module Plaid
 
       ##
       # :attr_reader:
-      # Public: The String ZIP code (or nil).
-      property :zip
+      # Public: The String postal code (or nil).
+      property :postal_code
+
+      ##
+      # :attr_reader:
+      # Public: The String country, an ISO-3166-1 alpha-2 code.
+      property :country
     end
 
     # Public: A representation of Transaction Payment meta information.
@@ -793,13 +851,37 @@ module Plaid
       property :unofficial_currency_code
     end
 
+    # Public: A representation of Identity address details returned by the
+    # assets endpoint.
+    class AssetReportAddressData < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The String street name.
+      property :street
+
+      ##
+      # :attr_reader:
+      # Public: The String name.
+      property :city
+
+      ##
+      # :attr_reader:
+      # Public: The String state name.
+      property :state
+
+      ##
+      # :attr_reader:
+      # Public: The String ZIP code.
+      property :zip
+    end
+
     # Public: A representation of an asset report address.
     class AssetReportAddress < BaseModel
       ##
       # :attr_reader:
       # Public: Data about the components comprising an address; see
-      # IdentityAddressData object for fields.
-      property :data, coerce: IdentityAddressData
+      # AssetReportAddressData object for fields.
+      property :data, coerce: AssetReportAddressData
 
       ##
       # :attr_reader:
@@ -890,6 +972,45 @@ module Plaid
       property :unofficial_currency_code
     end
 
+    # Public: A representation of Transaction location returned by asset
+    # reports.
+    class AssetReportTransactionLocation < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The String address (or nil).
+      property :address
+
+      ##
+      # :attr_reader:
+      # Public: The String city name (or nil).
+      property :city
+
+      ##
+      # :attr_reader:
+      # Public: The Numeric latitude of the place (or nil).
+      property :lat
+
+      ##
+      # :attr_reader:
+      # Public: The Numeric longitude of the place (or nil).
+      property :lon
+
+      ##
+      # :attr_reader:
+      # Public: The String state name (or nil).
+      property :state
+
+      ##
+      # :attr_reader:
+      # Public: The String store number (or nil).
+      property :store_number
+
+      ##
+      # :attr_reader:
+      # Public: The String ZIP code (or nil).
+      property :zip
+    end
+
     # Public: A representation of an asset report transaction.
     class AssetReportTransaction < BaseModel
       ##
@@ -964,9 +1085,9 @@ module Plaid
 
       ##
       # :attr_reader: Public: The location where transaction occurred
-      # (TransactionLocation). This field only appears in an Asset Report with
-      # Insights.
-      property :location, coerce: TransactionLocation
+      # (AssetReportTransactionLocation). This field only appears in an Asset
+      # Report with Insights.
+      property :location, coerce: AssetReportTransactionLocation
 
       ##
       # :attr_reader: Public: The String transaction name (or nil). This field

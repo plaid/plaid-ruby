@@ -8,24 +8,30 @@ http_interactions:
       string: '{"credentials":{"username":"user_good","password":"pass_good"},"institution_id":"ins_109508","initial_products":["credit_details"],"options":{},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
     headers:
       User-Agent:
-      - Plaid Ruby v4.1.0
+      - Plaid Ruby v7.0.0.rc0
       Content-Type:
       - application/json
+      Plaid-Version:
+      - '2019-02-14'
   response:
     status:
       code: 200
-      message: 
+      message: OK
     headers:
       server:
       - nginx
       date:
-      - Fri, 16 Mar 2018 02:17:32 GMT
+      - Wed, 20 Mar 2019 15:46:05 GMT
       content-type:
-      - application/json
+      - application/json; charset=utf-8
       content-length:
-      - '422'
+      - '302'
       connection:
       - close
+      plaid-version:
+      - '2019-02-14'
+      vary:
+      - Accept-Encoding
       strict-transport-security:
       - max-age=31536000; includeSubDomains; preload
       x-frame-options:
@@ -35,12 +41,13 @@ http_interactions:
       x-xss-protection:
       - 1; mode=block
     body:
-      encoding: UTF-8
+      encoding: ASCII-8BIT
       string: |-
         {
-          "access_token": "access-sandbox-0e71e174-91f3-437c-9aad-7aa75d65e537",
+          "access_token": "access-sandbox-2b398c50-a3b6-4ab5-b85f-059d207b9c33",
           "item": {
             "available_products": [
+              "assets",
               "auth",
               "balance",
               "identity",
@@ -52,39 +59,45 @@ http_interactions:
             ],
             "error": null,
             "institution_id": "ins_109508",
-            "item_id": "rQX9KAzdepTZDeqW5Ge9f6x4E3AVaZH37LXay",
+            "item_id": "n7gjW9ZqpAhLwgBkPAN9sVRDVPl8epf6kmyBx",
             "webhook": ""
           },
-          "request_id": "EDrW5"
+          "request_id": "x1AmOmJddXCVQ8o"
         }
     http_version: 
-  recorded_at: Fri, 16 Mar 2018 02:17:33 GMT
+  recorded_at: Wed, 20 Mar 2019 15:46:05 GMT
 - request:
     method: post
     uri: https://sandbox.plaid.com/credit_details/get
     body:
       encoding: UTF-8
-      string: '{"access_token":"access-sandbox-0e71e174-91f3-437c-9aad-7aa75d65e537","options":{},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+      string: '{"access_token":"access-sandbox-2b398c50-a3b6-4ab5-b85f-059d207b9c33","options":{},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
     headers:
       User-Agent:
-      - Plaid Ruby v4.1.0
+      - Plaid Ruby v7.0.0.rc0
       Content-Type:
       - application/json
+      Plaid-Version:
+      - '2019-02-14'
   response:
     status:
       code: 200
-      message: 
+      message: OK
     headers:
       server:
       - nginx
       date:
-      - Fri, 16 Mar 2018 02:17:34 GMT
+      - Wed, 20 Mar 2019 15:46:05 GMT
       content-type:
-      - application/json
-      transfer-encoding:
-      - chunked
+      - application/json; charset=utf-8
+      content-length:
+      - '1085'
       connection:
       - close
+      plaid-version:
+      - '2019-02-14'
+      vary:
+      - Accept-Encoding
       strict-transport-security:
       - max-age=31536000; includeSubDomains; preload
       x-frame-options:
@@ -99,11 +112,13 @@ http_interactions:
         {
           "accounts": [
             {
-              "account_id": "WZwzplj5bmU68WeP7kWztp8BagDx7wter7BkG",
+              "account_id": "VEV9KmbM1qT3lGNXLxJpipD7wkJwGMiWM3D3z",
               "balances": {
                 "available": 100,
                 "current": 110,
-                "limit": null
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
               },
               "mask": "0000",
               "name": "Plaid Checking",
@@ -112,11 +127,13 @@ http_interactions:
               "type": "depository"
             },
             {
-              "account_id": "mNWbaoRk4QU6Zl5e7ElLtdL6nB5rlbtxdAdGld",
+              "account_id": "wkyor1W4AqIneL67pmPMIkwXGbPGDnUrXBQB5",
               "balances": {
                 "available": 200,
                 "current": 210,
-                "limit": null
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
               },
               "mask": "1111",
               "name": "Plaid Saving",
@@ -125,11 +142,13 @@ http_interactions:
               "type": "depository"
             },
             {
-              "account_id": "Mx9oRbr5LpSrznj1K9nJS6XwZgDPlWIdNpEk1",
+              "account_id": "5A3jqavWx5SBqe1LwgoMi63xPdZPKBuZrq6qA",
               "balances": {
                 "available": null,
                 "current": 1000,
-                "limit": null
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
               },
               "mask": "2222",
               "name": "Plaid CD",
@@ -138,22 +157,69 @@ http_interactions:
               "type": "depository"
             },
             {
-              "account_id": "vLbA3mdP1EUKybD6qEblI6obrqDgPRhvRyxbl",
+              "account_id": "JjAmoWM3aVs7GnRZdBvNClvx7jX7Z3td8VnVq",
               "balances": {
                 "available": null,
                 "current": 410,
-                "limit": 2000
+                "iso_currency_code": "USD",
+                "limit": 2000,
+                "unofficial_currency_code": null
               },
               "mask": "3333",
               "name": "Plaid Credit Card",
               "official_name": "Plaid Diamond 12.5% APR Interest Credit Card",
               "subtype": "credit card",
               "type": "credit"
+            },
+            {
+              "account_id": "kNL4go7VbAUVyJbK9p5kIDnxrGmrw4uW5ymyd",
+              "balances": {
+                "available": 43200,
+                "current": 43200,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "4444",
+              "name": "Plaid Money Market",
+              "official_name": "Plaid Platinum Standard 1.85% Interest Money Market",
+              "subtype": "money market",
+              "type": "depository"
+            },
+            {
+              "account_id": "lPpN8oewWAIMXJ5v47LbigQpk5qkw1SZ3DMD7",
+              "balances": {
+                "available": null,
+                "current": 320.75,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "5555",
+              "name": "Plaid IRA",
+              "official_name": null,
+              "subtype": "ira",
+              "type": "investment"
+            },
+            {
+              "account_id": "qZWQnoLzXATg1Kqde6LPiP8ylzblVBtdK4Q4R",
+              "balances": {
+                "available": null,
+                "current": 22258.294,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "6666",
+              "name": "Plaid 401k",
+              "official_name": null,
+              "subtype": "401k",
+              "type": "investment"
             }
           ],
           "credit_details": [
             {
-              "account_id": "vLbA3mdP1EUKybD6qEblI6obrqDgPRhvRyxbl",
+              "account_id": "JjAmoWM3aVs7GnRZdBvNClvx7jX7Z3td8VnVq",
               "aprs": {
                 "balance_transfers": {
                   "apr": 0.125,
@@ -181,6 +247,7 @@ http_interactions:
           ],
           "item": {
             "available_products": [
+              "assets",
               "auth",
               "balance",
               "identity",
@@ -192,39 +259,45 @@ http_interactions:
             ],
             "error": null,
             "institution_id": "ins_109508",
-            "item_id": "rQX9KAzdepTZDeqW5Ge9f6x4E3AVaZH37LXay",
+            "item_id": "n7gjW9ZqpAhLwgBkPAN9sVRDVPl8epf6kmyBx",
             "webhook": ""
           },
-          "request_id": "m9KzP"
+          "request_id": "l3ma0Cni7AGdjWH"
         }
     http_version: 
-  recorded_at: Fri, 16 Mar 2018 02:17:34 GMT
+  recorded_at: Wed, 20 Mar 2019 15:46:06 GMT
 - request:
     method: post
     uri: https://sandbox.plaid.com/credit_details/get
     body:
       encoding: UTF-8
-      string: '{"access_token":"access-sandbox-0e71e174-91f3-437c-9aad-7aa75d65e537","options":{"account_ids":["vLbA3mdP1EUKybD6qEblI6obrqDgPRhvRyxbl"]},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+      string: '{"access_token":"access-sandbox-2b398c50-a3b6-4ab5-b85f-059d207b9c33","options":{"account_ids":["JjAmoWM3aVs7GnRZdBvNClvx7jX7Z3td8VnVq"]},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
     headers:
       User-Agent:
-      - Plaid Ruby v4.1.0
+      - Plaid Ruby v7.0.0.rc0
       Content-Type:
       - application/json
+      Plaid-Version:
+      - '2019-02-14'
   response:
     status:
       code: 200
-      message: 
+      message: OK
     headers:
       server:
       - nginx
       date:
-      - Fri, 16 Mar 2018 02:17:35 GMT
+      - Wed, 20 Mar 2019 15:46:05 GMT
       content-type:
-      - application/json
-      transfer-encoding:
-      - chunked
+      - application/json; charset=utf-8
+      content-length:
+      - '637'
       connection:
       - close
+      plaid-version:
+      - '2019-02-14'
+      vary:
+      - Accept-Encoding
       strict-transport-security:
       - max-age=31536000; includeSubDomains; preload
       x-frame-options:
@@ -239,11 +312,13 @@ http_interactions:
         {
           "accounts": [
             {
-              "account_id": "vLbA3mdP1EUKybD6qEblI6obrqDgPRhvRyxbl",
+              "account_id": "JjAmoWM3aVs7GnRZdBvNClvx7jX7Z3td8VnVq",
               "balances": {
                 "available": null,
                 "current": 410,
-                "limit": 2000
+                "iso_currency_code": "USD",
+                "limit": 2000,
+                "unofficial_currency_code": null
               },
               "mask": "3333",
               "name": "Plaid Credit Card",
@@ -254,7 +329,7 @@ http_interactions:
           ],
           "credit_details": [
             {
-              "account_id": "vLbA3mdP1EUKybD6qEblI6obrqDgPRhvRyxbl",
+              "account_id": "JjAmoWM3aVs7GnRZdBvNClvx7jX7Z3td8VnVq",
               "aprs": {
                 "balance_transfers": {
                   "apr": 0.125,
@@ -282,6 +357,7 @@ http_interactions:
           ],
           "item": {
             "available_products": [
+              "assets",
               "auth",
               "balance",
               "identity",
@@ -293,39 +369,45 @@ http_interactions:
             ],
             "error": null,
             "institution_id": "ins_109508",
-            "item_id": "rQX9KAzdepTZDeqW5Ge9f6x4E3AVaZH37LXay",
+            "item_id": "n7gjW9ZqpAhLwgBkPAN9sVRDVPl8epf6kmyBx",
             "webhook": ""
           },
-          "request_id": "GASRJ"
+          "request_id": "hG3zY3cmiMfzXHd"
         }
     http_version: 
-  recorded_at: Fri, 16 Mar 2018 02:17:35 GMT
+  recorded_at: Wed, 20 Mar 2019 15:46:06 GMT
 - request:
     method: post
     uri: https://sandbox.plaid.com/item/remove
     body:
       encoding: UTF-8
-      string: '{"access_token":"access-sandbox-0e71e174-91f3-437c-9aad-7aa75d65e537","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+      string: '{"access_token":"access-sandbox-2b398c50-a3b6-4ab5-b85f-059d207b9c33","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
     headers:
       User-Agent:
-      - Plaid Ruby v4.1.0
+      - Plaid Ruby v7.0.0.rc0
       Content-Type:
       - application/json
+      Plaid-Version:
+      - '2019-02-14'
   response:
     status:
       code: 200
-      message: 
+      message: OK
     headers:
       server:
       - nginx
       date:
-      - Fri, 16 Mar 2018 02:17:38 GMT
+      - Wed, 20 Mar 2019 15:46:06 GMT
       content-type:
-      - application/json
+      - application/json; charset=utf-8
       content-length:
-      - '46'
+      - '74'
       connection:
       - close
+      plaid-version:
+      - '2019-02-14'
+      vary:
+      - Accept-Encoding
       strict-transport-security:
       - max-age=31536000; includeSubDomains; preload
       x-frame-options:
@@ -335,12 +417,12 @@ http_interactions:
       x-xss-protection:
       - 1; mode=block
     body:
-      encoding: UTF-8
+      encoding: ASCII-8BIT
       string: |-
         {
           "removed": true,
-          "request_id": "pifFV"
+          "request_id": "jcJFSub82c1NJJ5"
         }
     http_version: 
-  recorded_at: Fri, 16 Mar 2018 02:17:38 GMT
-recorded_with: VCR 3.0.3
+  recorded_at: Wed, 20 Mar 2019 15:46:07 GMT
+recorded_with: VCR 4.0.0

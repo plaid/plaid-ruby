@@ -8,34 +8,40 @@ http_interactions:
       string: '{"query":"First Platypus Bank","products":["ABCDEFG1234567"],"public_key":"PLAID_RUBY_PUBLIC_KEY"}'
     headers:
       User-Agent:
-      - Plaid Ruby v4.1.0
+      - Plaid Ruby v7.0.0.rc0
       Content-Type:
       - application/json
+      Plaid-Version:
+      - '2019-02-14'
   response:
     status:
       code: 400
-      message: 
+      message: Bad Request
     headers:
       server:
       - nginx
       date:
-      - Fri, 16 Mar 2018 02:21:03 GMT
+      - Wed, 20 Mar 2019 15:45:54 GMT
       content-type:
-      - application/json
+      - application/json; charset=utf-8
       content-length:
-      - '192'
+      - '170'
       connection:
       - close
+      plaid-version:
+      - '2019-02-14'
+      vary:
+      - Accept-Encoding
     body:
-      encoding: UTF-8
+      encoding: ASCII-8BIT
       string: |-
         {
           "display_message": null,
           "error_code": "INVALID_PRODUCT",
           "error_message": "invalid product in products: \"ABCDEFG1234567\"",
           "error_type": "INVALID_INPUT",
-          "request_id": "Yqjaf"
+          "request_id": "iZhLweIPOoF7kcb"
         }
     http_version: 
-  recorded_at: Fri, 16 Mar 2018 02:21:03 GMT
-recorded_with: VCR 3.0.3
+  recorded_at: Wed, 20 Mar 2019 15:45:55 GMT
+recorded_with: VCR 4.0.0

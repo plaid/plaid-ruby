@@ -8,24 +8,30 @@ http_interactions:
       string: '{"institution_id":"ins_109508","public_key":"PLAID_RUBY_PUBLIC_KEY"}'
     headers:
       User-Agent:
-      - Plaid Ruby v4.1.0
+      - Plaid Ruby v7.0.0.rc0
       Content-Type:
       - application/json
+      Plaid-Version:
+      - '2019-02-14'
   response:
     status:
       code: 200
-      message: 
+      message: OK
     headers:
       server:
       - nginx
       date:
-      - Fri, 16 Mar 2018 02:20:56 GMT
+      - Wed, 20 Mar 2019 15:45:55 GMT
       content-type:
-      - application/json
+      - application/json; charset=utf-8
       content-length:
-      - '604'
+      - '314'
       connection:
       - close
+      plaid-version:
+      - '2019-02-14'
+      vary:
+      - Accept-Encoding
       strict-transport-security:
       - max-age=31536000; includeSubDomains; preload
       x-frame-options:
@@ -35,7 +41,7 @@ http_interactions:
       x-xss-protection:
       - 1; mode=block
     body:
-      encoding: UTF-8
+      encoding: ASCII-8BIT
       string: |-
         {
           "institution": {
@@ -59,6 +65,7 @@ http_interactions:
               "questions",
               "selections"
             ],
+            "mfa_code_type": "numeric",
             "name": "First Platypus Bank",
             "products": [
               "assets",
@@ -66,12 +73,13 @@ http_interactions:
               "balance",
               "transactions",
               "credit_details",
+              "holdings",
               "income",
               "identity"
             ]
           },
-          "request_id": "Z3WOJ"
+          "request_id": "91TgUbkLwmamjns"
         }
     http_version: 
-  recorded_at: Fri, 16 Mar 2018 02:20:57 GMT
-recorded_with: VCR 3.0.3
+  recorded_at: Wed, 20 Mar 2019 15:45:56 GMT
+recorded_with: VCR 4.0.0
