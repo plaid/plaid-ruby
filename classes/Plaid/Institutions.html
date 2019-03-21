@@ -52,8 +52,7 @@
   
     <div class="description">
       
-<p>Class used to call the <a href="Institutions.html">Institutions</a>
-product.</p>
+<p>Class used to call the <a href="Institutions.html"><code>Institutions</code></a> product.</p>
 
     </div>
   
@@ -165,11 +164,9 @@ product.</p>
 
           
             <div class="description">
-              <p>Get information about <a href="../Plaid.html">Plaid</a> institutions.</p>
+              <p>Get information about <a href="../Plaid.html"><code>Plaid</code></a> institutions.</p>
 
-<p>Does a POST /institutions/get call pulls a list of supported <a
-href="../Plaid.html">Plaid</a> institutions with the information for each
-institution.</p>
+<p>Does a POST /institutions/get call pulls a list of supported <a href="../Plaid.html"><code>Plaid</code></a> institutions with the information for each institution.</p>
 <dl class="rdoc-list note-list"><dt>count
 <dd>
 <p>Amount of institutions to pull.</p>
@@ -183,9 +180,7 @@ institution.</p>
 
 <h3 id="method-i-get-label-Returns">Returns</h3>
 
-<p>Returns a <a
-href="MultipleInstitutionsResponse.html">MultipleInstitutionsResponse</a>
-instance.</p>
+<p>Returns a <a href="MultipleInstitutionsResponse.html"><code>MultipleInstitutionsResponse</code></a> instance.</p>
             </div>
           
 
@@ -221,28 +216,27 @@ instance.</p>
         <div class="method">
           <div class="title method-title" id="method-i-get_by_id">
             
-              <b>get_by_id</b>(institution_id)
+              <b>get_by_id</b>(institution_id, options: nil)
             
             <a href="../../classes/Plaid/Institutions.html#method-i-get_by_id" name="method-i-get_by_id" class="permalink">Link</a>
           </div>
 
           
             <div class="description">
-              <p>Get information about a <a href="../Plaid.html">Plaid</a> institution by
-ID.</p>
+              <p>Get information about a <a href="../Plaid.html"><code>Plaid</code></a> institution by ID.</p>
 
-<p>Does a POST /institutions/get_by_id call which allows you to pull
-information for an institution by ID.</p>
+<p>Does a POST /institutions/get_by_id call which allows you to pull information for an institution by ID.</p>
 <dl class="rdoc-list note-list"><dt>institution_id
 <dd>
 <p>Specific institution id to fetch information for.</p>
+</dd><dt>options
+<dd>
+<p>Options for filtering institutions.</p>
 </dd></dl>
 
 <h3 id="method-i-get_by_id-label-Returns">Returns</h3>
 
-<p>Returns a <a
-href="SingleInstitutionResponse.html">SingleInstitutionResponse</a>
-instance.</p>
+<p>Returns a <a href="SingleInstitutionResponse.html"><code>SingleInstitutionResponse</code></a> instance.</p>
             </div>
           
 
@@ -260,11 +254,15 @@ instance.</p>
                 
               </p>
               <div id="method-i-get_by_id_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/institutions.rb, line 32</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_by_id</span>(<span class="ruby-identifier">institution_id</span>)
+                <pre><span class="ruby-comment"># File lib/plaid/products/institutions.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_by_id</span>(<span class="ruby-identifier">institution_id</span>, <span class="ruby-value">options:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">payload</span> = {
+    <span class="ruby-value">institution_id:</span> <span class="ruby-identifier">institution_id</span>
+  }
+  <span class="ruby-identifier">payload</span>[<span class="ruby-value">:options</span>] = <span class="ruby-identifier">options</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-identifier">post_with_public_key</span> <span class="ruby-string">&#39;institutions/get_by_id&#39;</span>,
                        <span class="ruby-constant">SingleInstitutionResponse</span>,
-                       <span class="ruby-value">institution_id:</span> <span class="ruby-identifier">institution_id</span>
+                       <span class="ruby-identifier">payload</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -274,7 +272,7 @@ instance.</p>
         <div class="method">
           <div class="title method-title" id="method-i-search">
             
-              <b>search</b>(query, products = nil)
+              <b>search</b>(query, products = nil, options: nil)
             
             <a href="../../classes/Plaid/Institutions.html#method-i-search" name="method-i-search" class="permalink">Link</a>
           </div>
@@ -283,21 +281,21 @@ instance.</p>
             <div class="description">
               <p>Get information about all available institutions matching your query.</p>
 
-<p>Does a POST /institutions/search call which allows you to pull a list of
-institutions using a query parameter.</p>
+<p>Does a POST /institutions/search call which allows you to pull a list of institutions using a query parameter.</p>
 <dl class="rdoc-list note-list"><dt>query
 <dd>
 <p>Search query to attempt to match institutions to.</p>
 </dd><dt>products
 <dd>
 <p>Product supported filter (optional).</p>
+</dd><dt>options
+<dd>
+<p>Options for filtering institutions.</p>
 </dd></dl>
 
 <h3 id="method-i-search-label-Returns">Returns</h3>
 
-<p>Returns a <a
-href="MultipleInstitutionsResponse.html">MultipleInstitutionsResponse</a>
-instance.</p>
+<p>Returns a <a href="MultipleInstitutionsResponse.html"><code>MultipleInstitutionsResponse</code></a> instance.</p>
             </div>
           
 
@@ -315,12 +313,18 @@ instance.</p>
                 
               </p>
               <div id="method-i-search_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/institutions.rb, line 48</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search</span>(<span class="ruby-identifier">query</span>, <span class="ruby-identifier">products</span> = <span class="ruby-keyword">nil</span>)
+                <pre><span class="ruby-comment"># File lib/plaid/products/institutions.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search</span>(<span class="ruby-identifier">query</span>, <span class="ruby-identifier">products</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-value">options:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">payload</span> = {
+    <span class="ruby-value">query:</span> <span class="ruby-identifier">query</span>,
+    <span class="ruby-value">products:</span> <span class="ruby-identifier">products</span>
+  }
+
+  <span class="ruby-identifier">payload</span>[<span class="ruby-value">:options</span>] = <span class="ruby-identifier">options</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">nil?</span>
+
   <span class="ruby-identifier">post_with_public_key</span> <span class="ruby-string">&#39;institutions/search&#39;</span>,
                        <span class="ruby-constant">MultipleInstitutionsResponse</span>,
-                       <span class="ruby-value">query:</span> <span class="ruby-identifier">query</span>,
-                       <span class="ruby-value">products:</span> <span class="ruby-identifier">products</span>
+                       <span class="ruby-identifier">payload</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
