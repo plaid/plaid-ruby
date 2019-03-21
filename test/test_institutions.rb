@@ -11,7 +11,7 @@ class PlaidInstitutionsTest < PlaidTest
     response = client.institutions.get count: 3,
                                        offset: 1,
                                        options: { products: ['transactions'],
-                                                  include_institution_data:
+                                                  include_optional_metadata:
                                                   true }
     assert_equal(3, response['institutions'].length)
   end
@@ -33,10 +33,11 @@ class PlaidInstitutionsTest < PlaidTest
     end
   end
 
-  def test_get_by_id_include_institution_data
+  def test_get_by_id_include_optional_metadata
     response = client.institutions.get_by_id(SANDBOX_INSTITUTION,
                                              options:
-                                             { include_institution_data: true })
+                                             { include_optional_metadata:
+                                               true })
     assert_equal(SANDBOX_INSTITUTION, response.institution.institution_id)
   end
 
@@ -45,11 +46,11 @@ class PlaidInstitutionsTest < PlaidTest
     refute_empty(response.institutions)
   end
 
-  def test_search_with_institution_data
+  def test_search_with_include_optional_metadata
     response = client.institutions.search SANDBOX_INSTITUTION_NAME,
                                           [:transactions],
                                           options:
-                                          { include_institution_data: true }
+                                          { include_optional_metadata: true }
     refute_empty(response.institutions)
   end
 
