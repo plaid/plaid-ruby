@@ -33,7 +33,7 @@ module Plaid
     def fire_webhook(access_token, webhook_code)
       post_with_auth 'sandbox/item/fire_webhook',
                      FireWebhookResponse,
-                     access_token: access_token
+                     access_token: access_token,
                      webhook_code: webhook_code
     end
 
