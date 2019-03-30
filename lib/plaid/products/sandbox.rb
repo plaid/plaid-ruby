@@ -29,7 +29,7 @@ module Plaid
     # access_token - access_token of the item to fire a webhook for.
     # webhook_code - webhook_code to fire.
     #
-    # Returns a ResetLoginResponse object.
+    # Returns a FireWebhookResponse object.
     def fire_webhook(access_token, webhook_code)
       post_with_auth 'sandbox/item/fire_webhook',
                      FireWebhookResponse,
@@ -37,7 +37,7 @@ module Plaid
                      webhook_code: webhook_code
     end
 
-    # Public: Response for /sandbox/item/reset_login.
+    # Public: Response for /sandbox/item/fire_webhook.
     class FireWebhookResponse < Models::BaseResponse
       ##
       # :attr_reader:

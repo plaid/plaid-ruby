@@ -188,7 +188,7 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
     exchange_token_response = client.item.public_token.exchange(
       public_token_response.public_token
     )
-    fire_webhook_response = client.sandbox.fire_webhook(
+    fire_webhook_response = client.sandbox.sandbox_item.fire_webhook(
       exchange_token_response.access_token,
       'DEFAULT_UPDATE'
     )
