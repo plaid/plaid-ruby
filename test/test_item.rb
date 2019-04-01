@@ -178,6 +178,23 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
     refute_empty(public_token_response.public_token)
   end
 
+  def test_fire_webhook_sandbox
+    public_token_response = client.sandbox.sandbox_public_token.create(
+      institution_id: SANDBOX_INSTITUTION,
+      initial_products: ['transactions'],
+      webhook: 'https://httpstat.us/200'
+    )
+    refute_empty(public_token_response.public_token)
+    exchange_token_response = client.item.public_token.exchange(
+      public_token_response.public_token
+    )
+    fire_webhook_response = client.sandbox.sandbox_item.fire_webhook(
+      exchange_token_response.access_token,
+      'DEFAULT_UPDATE'
+    )
+    assert_equal true, fire_webhook_response.webhook_fired
+  end
+
   def test_access_token_invalidate
     create_item
 
