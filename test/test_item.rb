@@ -122,6 +122,11 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
 
     item = client.item.get(access_token)
     refute_empty(item.item)
+    refute_empty(item.status)
+    assert_equal('HISTORICAL_UPDATE', item.status.last_webhook.code_sent)
+    assert_equal('2019-04-22T16:51:29.57Z', item.status.last_webhook.sent_at)
+    assert_equal('2019-04-22T16:51:04.802Z', item.status.transactions.last_successful_update)
+    assert_equal('2019-04-22T16:51:29.57Z', item.status.transactions.last_failed_update)
   end
 
   def test_get_valid_access_token

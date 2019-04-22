@@ -118,6 +118,49 @@ module Plaid
       property :webhook
     end
 
+    # Public: A representation of Item webhook status
+    class ItemStatusLastWebhook < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The String last code sent (or nil).
+      # (e.g. "HISTORICAL_UPDATE").
+      property :code_sent
+
+      ##
+      # :attr_reader:
+      # Public: the String sent at date (or nil).
+      # (e.g. "2019-04-22T00:00:00Z").
+      property :sent_at
+    end
+
+    # Public: A representation of Item transaction update status
+    class ItemStatusTransactions < BaseModel
+      ##
+      # :attr_reader:
+      # Public: the String last failed update date (or nil).
+      # (e.g. "2019-04-22T00:00:00Z").
+      property :last_failed_update
+
+      ##
+      # :attr_reader:
+      # Public: the String last successful update date (or nil).
+      # (e.g. "2019-04-22T00:00:00Z").
+      property :last_successful_update
+    end
+
+    # Public: A representation of Item status
+    class ItemStatus < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The ItemStatusLastWebhook for this ItemStatus.
+      property :last_webhook, coerce: ItemStatusLastWebhook
+
+      ##
+      # :attr_reader:
+      # Public: The ItemStatusTransactions for this ItemStatus.
+      property :transactions, coerce: ItemStatusTransactions
+    end
+
     # Public: A representation of account balances.
     class Balances < BaseModel
       ##
