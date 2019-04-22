@@ -41,6 +41,23 @@ class PlaidInstitutionsTest < PlaidTest
     assert_equal(SANDBOX_INSTITUTION, response.institution.institution_id)
   end
 
+  def test_get_by_id_include_status_false
+    response = client.institutions.get_by_id(SANDBOX_INSTITUTION)
+    assert_equal(SANDBOX_INSTITUTION, response.institution.institution_id)
+    assert_nil(response.institution.status)
+  end
+
+  def test_get_by_id_include_status
+    response = client.institutions.get_by_id(SANDBOX_INSTITUTION,
+                                             options:
+                                             { include_status: true })
+    assert_equal(SANDBOX_INSTITUTION, response.institution.institution_id)
+    assert_equal('DEGRADED', response.institution.status.item_logins.status)
+    assert_equal(0.125, response.institution.status.item_logins.breakdown.error_institution)
+    assert_equal(0.063, response.institution.status.item_logins.breakdown.error_plaid)
+    assert_equal(0.813, response.institution.status.item_logins.breakdown.success)
+  end
+
   def test_search
     response = client.institutions.search(SANDBOX_INSTITUTION_NAME)
     refute_empty(response.institutions)

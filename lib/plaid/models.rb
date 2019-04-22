@@ -584,6 +584,52 @@ module Plaid
       property :type
     end
 
+    class InstitutionStatusBreakdown < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The Numeric success percentage.
+      # (e.g. 0.970)
+      property :success
+
+      ##
+      # :attr_reader:
+      # Public: The Numeric Plaid error percentage.
+      # (e.g. 0.010)
+      property :error_plaid
+
+      ##
+      # :attr_reader:
+      # Public: The Numeric Institution error percentage.
+      # (e.g. 0.020)
+      property :error_institution
+    end
+
+    class InstitutionStatusItemLogins < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The String last status change date.
+      # (e.g. "2019-04-22T20:52:00Z")
+      property :last_status_change
+
+      ##
+      # :attr_reader:
+      # Public: The String status.
+      # (e.g. one of "HEALTHY"|"DEGRADED"|"DOWN")
+      property :status
+
+      ##
+      # :attr_reader:
+      # Public: The breakdown for this Institution status.
+      property :breakdown, coerce: InstitutionStatusBreakdown
+    end
+
+    class InstitutionStatus < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The Item logins status for this InstitutionStatus.
+      property :item_logins, coerce: InstitutionStatusItemLogins
+    end
+
     # Public: A representation of Institution.
     class Institution < BaseModel
       ##
@@ -640,6 +686,11 @@ module Plaid
       # Public: The String base 64 encoded url for this institution
       # E.g. "https://www.plaid.com").
       property :url
+
+      ##
+      # :attr_reader:
+      # Public: The Status for this Institution (or nil).
+      property :status, coerce: InstitutionStatus
     end
 
     module MFA
