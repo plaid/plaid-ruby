@@ -584,6 +584,7 @@ module Plaid
       property :type
     end
 
+    # Public: A representation of Institution status breakdown.
     class InstitutionStatusBreakdown < BaseModel
       ##
       # :attr_reader:
@@ -604,6 +605,7 @@ module Plaid
       property :error_institution
     end
 
+    # Public: A representation of Institution item logins status.
     class InstitutionStatusItemLogins < BaseModel
       ##
       # :attr_reader:
@@ -623,6 +625,7 @@ module Plaid
       property :breakdown, coerce: InstitutionStatusBreakdown
     end
 
+    # Public: A representation of Institution status.
     class InstitutionStatus < BaseModel
       ##
       # :attr_reader:

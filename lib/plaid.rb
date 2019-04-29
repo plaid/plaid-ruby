@@ -26,9 +26,9 @@ module Plaid
   #
   # We support two modes for parsing response bodies.
   #
-  # Strict mode (default). Unknown attributes will cause NoMethodError.
+  # Strict mode: Unknown attributes will cause NoMethodError.
   #
-  # Relaxed mode. If a response contains an unknown
+  # Relaxed mode (default): If a response contains an unknown
   # attribute, it won't cause any error and will be accessible
   # using brackets notation: `response['unknown_attribute']`.
   #
