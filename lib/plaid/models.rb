@@ -226,6 +226,11 @@ module Plaid
       # :attr_reader:
       # Public: The String subtype, e.g. "checking".
       property :subtype
+
+      ##
+      # :attr_reader:
+      # Public: The String verification status, e.g "manually_verified" (optional).
+      property :verification_status
     end
 
     # Public: A representation of an ACH account number.
