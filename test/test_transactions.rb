@@ -22,6 +22,18 @@ class PlaidTransactionsTest < PlaidTest
                                        '2017-01-01',
                                        account_ids: [account_id])
     refute_empty(response['transactions'])
+    transactions.each do |transaction|
+      refute_empty(transaction['transaction_id'])
+      refute_empty(transaction['account_id'])
+      refute_empty(transaction['pending'])
+      refute_empty(transaction['transaction_type'])
+      refute_empty(transaction['payment_meta'])
+      refute_empty(transaction['date'])
+      refute_empty(transaction['name'])
+      refute_empty(transaction['amount'])
+      refute_empty(transaction['location'])
+      refute_empty(transaction['iso_currency_code'])
+    end
   end
 
   def test_get_date_objects

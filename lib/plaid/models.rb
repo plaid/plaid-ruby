@@ -185,6 +185,13 @@ module Plaid
       property :subtype
     end
 
+    # Public: A representation of an account with owners
+    class AccountWithOwners < Account
+      ##
+      # :attr_reader:
+      # Public: The Array of owners.
+      property :owners, coerce: Array[Identity]
+
     # Public: A representation of an ACH account number.
     class NumberACH < BaseModel
       ##
@@ -233,6 +240,45 @@ module Plaid
       property :institution
     end
 
+    # Public: A representation of an International account number.
+    class NumberInternational < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The String account ID. E.g.
+      # "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D".
+      property :account_id
+
+      ##
+      # :attr_reader:
+      # Public: The String International Bank Account Number (IBAN). E.g.
+      # "GB33BUKB20201555555555".
+      property :iban
+
+      ##
+      # :attr_reader:
+      # Public: The String Bank Identifier Code (BIC). E.g. "BUKBGB22".
+      property :bic
+    end
+
+    # Public: A representation of a BACS (British) account number.
+    class NumberBACS < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The String account ID. E.g.
+      # "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D".
+      property :account_id
+
+      ##
+      # :attr_reader:
+      # Public: The String account number. E.g. "66374958".
+      property :account
+
+      ##
+      # :attr_reader:
+      # Public: The String sort code. E.g. "089999".
+      property :sort_code
+    end
+
     # Public: A representation of a Auth Numbers response
     class Numbers < BaseModel
       ##
@@ -244,6 +290,16 @@ module Plaid
       # :attr_reader:
       # Public: The Array of NumberEFT.
       property :eft, coerce: Array[NumberEFT]
+
+      ##
+      # :attr_reader:
+      # Public: The Array of NumberInternational.
+      property :international, coerce: Array[NumberInternational]
+
+      ##
+      # :attr_reader:
+      # Public: The Array of NumberBACS.
+      property :bacs, coerce: Array[NumberBACS]
     end
 
     # Public: A representation of a transaction category.
@@ -359,23 +415,22 @@ module Plaid
 
       ##
       # :attr_reader:
-      # Public: The String state name.
-      property :state
+      # Public: The String region or state name.
+      property :region
 
       ##
       # :attr_reader:
-      # Public: The String ZIP code.
-      property :zip
+      # Public: The String postal code.
+      property :postal_code
+
+      ##
+      # :attr_reader:
+      # Public: The String country code.
+      property :country
     end
 
     # Public: A representation of Identity address data.
     class IdentityAddress < BaseModel
-      ##
-      # :attr_reader:
-      # Public: The Array of String accounts, associated with this address.
-      # E.g. ["Plaid Credit Card 3333"].
-      property :accounts
-
       ##
       # :attr_reader:
       # Public: The Boolean primary flag (true if it's the primary address).
@@ -584,6 +639,12 @@ module Plaid
 
       ##
       # :attr_reader:
+      # Public: The Array of String country codes supported by this institution.
+      # E.g. ["US", "GB"].
+      property :country_codes
+
+      ##
+      # :attr_reader:
       # Public: The String primary color for this institution (e.g. "#095aa6").
       property :primary_color
 
@@ -664,8 +725,8 @@ module Plaid
 
       ##
       # :attr_reader:
-      # Public: The String state name (or nil).
-      property :state
+      # Public: The String region or state name (or nil).
+      property :region
 
       ##
       # :attr_reader:
@@ -674,8 +735,13 @@ module Plaid
 
       ##
       # :attr_reader:
-      # Public: The String ZIP code (or nil).
-      property :zip
+      # Public: The String postal code (or nil).
+      property :postal_code
+
+      ##
+      # :attr_reader:
+      # Public: The country code (or nil).
+      property :country
     end
 
     # Public: A representation of Transaction Payment meta information.

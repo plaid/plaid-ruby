@@ -25,6 +25,7 @@ class PlaidInstitutionsTest < PlaidTest
   def test_get_by_id
     response = client.institutions.get_by_id(SANDBOX_INSTITUTION)
     assert_equal(SANDBOX_INSTITUTION, response.institution.institution_id)
+    assert_equal(['US'], response.institution.country_codes)
   end
 
   def test_get_by_id_invalid_parameters

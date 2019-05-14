@@ -1,4 +1,4 @@
 module Plaid
-  VERSION = '6.3.1'.freeze
-  API_VERSION = '2018-05-22'.freeze
+  VERSION = '7.0.0'.freeze
+  API_VERSION = '2018-06-03'.freeze
 end

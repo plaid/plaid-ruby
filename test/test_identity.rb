@@ -6,7 +6,17 @@ class PlaidIdentityTest < PlaidTest
     create_item initial_products: [:identity]
 
     response = client.identity.get(access_token)
-    refute_empty(response.identity)
+    refute_empty(response.accounts)
+
+    response.accounts.each do |account|
+      refute_empty(account.owners)
+      account.owners.each do |identity|
+        refute_empty(identity.addresses)
+        refute_empty(identity.emails)
+        refute_empty(identity.names)
+        refute_empty(identity.phone_numbers)
+      end
+    end
   end
 
   def test_get_invalid_access_token
