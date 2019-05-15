@@ -118,6 +118,49 @@ module Plaid
       property :webhook
     end
 
+    # Public: A representation of Item webhook status
+    class ItemStatusLastWebhook < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The String last code sent (or nil).
+      # (e.g. "HISTORICAL_UPDATE").
+      property :code_sent
+
+      ##
+      # :attr_reader:
+      # Public: the String sent at date (or nil).
+      # (e.g. "2019-04-22T00:00:00Z").
+      property :sent_at
+    end
+
+    # Public: A representation of Item transaction update status
+    class ItemStatusTransactions < BaseModel
+      ##
+      # :attr_reader:
+      # Public: the String last failed update date (or nil).
+      # (e.g. "2019-04-22T00:00:00Z").
+      property :last_failed_update
+
+      ##
+      # :attr_reader:
+      # Public: the String last successful update date (or nil).
+      # (e.g. "2019-04-22T00:00:00Z").
+      property :last_successful_update
+    end
+
+    # Public: A representation of Item status
+    class ItemStatus < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The ItemStatusLastWebhook for this ItemStatus.
+      property :last_webhook, coerce: ItemStatusLastWebhook
+
+      ##
+      # :attr_reader:
+      # Public: The ItemStatusTransactions for this ItemStatus.
+      property :transactions, coerce: ItemStatusTransactions
+    end
+
     # Public: A representation of account balances.
     class Balances < BaseModel
       ##
@@ -541,6 +584,55 @@ module Plaid
       property :type
     end
 
+    # Public: A representation of Institution status breakdown.
+    class InstitutionStatusBreakdown < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The Numeric success percentage.
+      # (e.g. 0.970)
+      property :success
+
+      ##
+      # :attr_reader:
+      # Public: The Numeric Plaid error percentage.
+      # (e.g. 0.010)
+      property :error_plaid
+
+      ##
+      # :attr_reader:
+      # Public: The Numeric Institution error percentage.
+      # (e.g. 0.020)
+      property :error_institution
+    end
+
+    # Public: A representation of Institution item logins status.
+    class InstitutionStatusItemLogins < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The String last status change date.
+      # (e.g. "2019-04-22T20:52:00Z")
+      property :last_status_change
+
+      ##
+      # :attr_reader:
+      # Public: The String status.
+      # (e.g. one of "HEALTHY"|"DEGRADED"|"DOWN")
+      property :status
+
+      ##
+      # :attr_reader:
+      # Public: The breakdown for this Institution status.
+      property :breakdown, coerce: InstitutionStatusBreakdown
+    end
+
+    # Public: A representation of Institution status.
+    class InstitutionStatus < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The Item logins status for this InstitutionStatus.
+      property :item_logins, coerce: InstitutionStatusItemLogins
+    end
+
     # Public: A representation of Institution.
     class Institution < BaseModel
       ##
@@ -597,6 +689,11 @@ module Plaid
       # Public: The String base 64 encoded url for this institution
       # E.g. "https://www.plaid.com").
       property :url
+
+      ##
+      # :attr_reader:
+      # Public: The Status for this Institution (or nil).
+      property :status, coerce: InstitutionStatus
     end
 
     module MFA

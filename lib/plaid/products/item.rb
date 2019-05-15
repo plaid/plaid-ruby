@@ -331,6 +331,11 @@ module Plaid
       # :attr_reader:
       # Public: The item: Plaid::Models::Item.
       property :item, coerce: Models::Item
+
+      ##
+      # :attr_reader:
+      # Public: The item status: Plaid::Models::ItemStatus.
+      property :status, coerce: Models::ItemStatus
     end
 
     # Public: Removes an item
