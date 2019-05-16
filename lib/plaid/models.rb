@@ -7,13 +7,20 @@ module Plaid
       include Hashie::Extensions::Dash::IndifferentAccess
       include Hashie::Extensions::Dash::Coercion
 
-      @@ignored_properties = []
+      @ignored_properties = []
+
+      def self.ignored_properties
+        if defined? @ignored_properties
+          @ignored_properties
+        else []
+        end
+      end
 
       # Internal: Be strict or forgiving depending on Plaid.relaxed_models
       # value.
       def assert_property_exists!(property)
         super unless Plaid.relaxed_models? ||
-          @@ignored_properties.include?(property)
+                     self.class.ignored_properties.include?(property)
       end
     end
 
@@ -644,8 +651,7 @@ module Plaid
 
     # Public: A representation of Institution.
     class Institution < BaseModel
-
-      @@ignored_properties = ['input_spec']
+      @ignored_properties = ['input_spec']
 
       ##
       # :attr_reader:
