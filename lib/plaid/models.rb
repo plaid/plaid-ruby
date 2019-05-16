@@ -12,10 +12,8 @@ module Plaid
       # Internal: Be strict or forgiving depending on Plaid.relaxed_models
       # value.
       def assert_property_exists!(property)
-        super unless (
-          Plaid.relaxed_models? or
+        super unless Plaid.relaxed_models? ||
           @@ignored_properties.include?(property)
-        )
       end
     end
 
@@ -234,7 +232,8 @@ module Plaid
 
       ##
       # :attr_reader:
-      # Public: The String verification status, e.g "manually_verified" (optional).
+      # Public: The String verification status,
+      # e.g "manually_verified" (optional).
       property :verification_status
     end
 
@@ -646,7 +645,7 @@ module Plaid
     # Public: A representation of Institution.
     class Institution < BaseModel
 
-      @@ignored_properties = ["input_spec"]
+      @@ignored_properties = ['input_spec']
 
       ##
       # :attr_reader:
