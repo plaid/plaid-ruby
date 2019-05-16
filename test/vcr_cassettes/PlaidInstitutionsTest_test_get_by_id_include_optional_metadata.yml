@@ -83,6 +83,95 @@ http_interactions:
           },
           "request_id": "GOJn4cFFiASRTVu"
         }
-    http_version:
+    http_version: 
   recorded_at: Tue, 05 Mar 2019 18:27:13 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/institutions/get_by_id
+    body:
+      encoding: UTF-8
+      string: '{"institution_id":"ins_109508","options":{"include_optional_metadata":true},"public_key":"PLAID_RUBY_PUBLIC_KEY"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v6.3.1
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2018-05-22'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 16 May 2019 06:37:31 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '391'
+      connection:
+      - close
+      plaid-version:
+      - '2018-05-22'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "institution": {
+            "country_codes": [
+              "US"
+            ],
+            "credentials": [
+              {
+                "label": "Username",
+                "name": "username",
+                "type": "text"
+              },
+              {
+                "label": "Password",
+                "name": "password",
+                "type": "password"
+              }
+            ],
+            "has_mfa": true,
+            "input_spec": "fixed",
+            "institution_id": "ins_109508",
+            "logo": null,
+            "mfa": [
+              "code",
+              "list",
+              "questions",
+              "selections"
+            ],
+            "mfa_code_type": "numeric",
+            "name": "First Platypus Bank",
+            "primary_color": "#0075a3",
+            "products": [
+              "assets",
+              "auth",
+              "balance",
+              "transactions",
+              "credit_details",
+              "holdings",
+              "income",
+              "identity"
+            ],
+            "url": "https://www.plaid.com/"
+          },
+          "request_id": "vfjHwetFvIyv2T6"
+        }
+    http_version: 
+  recorded_at: Thu, 16 May 2019 06:37:31 GMT
 recorded_with: VCR 4.0.0

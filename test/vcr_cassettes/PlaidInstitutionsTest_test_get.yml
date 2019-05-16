@@ -126,4 +126,150 @@ http_interactions:
         }
     http_version: 
   recorded_at: Fri, 16 Mar 2018 02:20:59 GMT
-recorded_with: VCR 3.0.3
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/institutions/get
+    body:
+      encoding: UTF-8
+      string: '{"count":3,"offset":1,"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v6.3.1
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2018-05-22'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 16 May 2019 06:37:20 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '431'
+      connection:
+      - close
+      plaid-version:
+      - '2018-05-22'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "institutions": [
+            {
+              "country_codes": [
+                "US"
+              ],
+              "credentials": [
+                {
+                  "label": "Login ID",
+                  "name": "username",
+                  "type": "text"
+                },
+                {
+                  "label": "Password",
+                  "name": "password",
+                  "type": "password"
+                }
+              ],
+              "has_mfa": true,
+              "input_spec": "fixed",
+              "institution_id": "ins_113968",
+              "mfa": [
+                "questions"
+              ],
+              "mfa_code_type": "numeric",
+              "name": "Amegy Bank of Texas",
+              "products": [
+                "assets",
+                "auth",
+                "balance",
+                "transactions",
+                "income"
+              ]
+            },
+            {
+              "country_codes": [
+                "US"
+              ],
+              "credentials": [
+                {
+                  "label": "User ID",
+                  "name": "username",
+                  "type": "text"
+                },
+                {
+                  "label": "Password",
+                  "name": "password",
+                  "type": "password"
+                }
+              ],
+              "has_mfa": false,
+              "input_spec": "fixed",
+              "institution_id": "ins_10",
+              "mfa": [],
+              "mfa_code_type": "numeric",
+              "name": "American Express",
+              "products": [
+                "assets",
+                "balance",
+                "transactions",
+                "income"
+              ]
+            },
+            {
+              "country_codes": [
+                "US"
+              ],
+              "credentials": [
+                {
+                  "label": "User Name",
+                  "name": "username",
+                  "type": "text"
+                },
+                {
+                  "label": "Password",
+                  "name": "password",
+                  "type": "password"
+                }
+              ],
+              "has_mfa": true,
+              "input_spec": "fixed",
+              "institution_id": "ins_114157",
+              "mfa": [
+                "code",
+                "list",
+                "questions",
+                "selections"
+              ],
+              "mfa_code_type": "numeric",
+              "name": "American Express - Personal Savings",
+              "products": [
+                "assets",
+                "balance",
+                "transactions",
+                "income"
+              ]
+            }
+          ],
+          "request_id": "Y0FInRjWZbbRrT7",
+          "total": 10277
+        }
+    http_version: 
+  recorded_at: Thu, 16 May 2019 06:37:21 GMT
+recorded_with: VCR 4.0.0

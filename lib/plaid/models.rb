@@ -7,10 +7,15 @@ module Plaid
       include Hashie::Extensions::Dash::IndifferentAccess
       include Hashie::Extensions::Dash::Coercion
 
+      @@ignored_properties = []
+
       # Internal: Be strict or forgiving depending on Plaid.relaxed_models
       # value.
       def assert_property_exists!(property)
-        super unless Plaid.relaxed_models?
+        super unless (
+          Plaid.relaxed_models? or
+          @@ignored_properties.include?(property)
+        )
       end
     end
 
@@ -640,6 +645,9 @@ module Plaid
 
     # Public: A representation of Institution.
     class Institution < BaseModel
+
+      @@ignored_properties = ["input_spec"]
+
       ##
       # :attr_reader:
       # Public: The Array of InstitutionCredential, presenting information on
@@ -699,6 +707,11 @@ module Plaid
       # :attr_reader:
       # Public: The Status for this Institution (or nil).
       property :status, coerce: InstitutionStatus
+
+      ##
+      # :attr_reader:
+      # Public: The Array of String country codes supported by this institution.
+      property :country_codes
     end
 
     module MFA

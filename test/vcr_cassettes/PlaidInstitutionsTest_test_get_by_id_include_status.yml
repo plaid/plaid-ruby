@@ -93,4 +93,101 @@ http_interactions:
         }
     http_version: 
   recorded_at: Mon, 22 Apr 2019 22:42:17 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/institutions/get_by_id
+    body:
+      encoding: UTF-8
+      string: '{"institution_id":"ins_109508","options":{"include_status":true},"public_key":"PLAID_RUBY_PUBLIC_KEY"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v6.3.1
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2018-05-22'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 16 May 2019 06:37:30 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '455'
+      connection:
+      - close
+      plaid-version:
+      - '2018-05-22'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "institution": {
+            "country_codes": [
+              "US"
+            ],
+            "credentials": [
+              {
+                "label": "Username",
+                "name": "username",
+                "type": "text"
+              },
+              {
+                "label": "Password",
+                "name": "password",
+                "type": "password"
+              }
+            ],
+            "has_mfa": true,
+            "input_spec": "fixed",
+            "institution_id": "ins_109508",
+            "mfa": [
+              "code",
+              "list",
+              "questions",
+              "selections"
+            ],
+            "mfa_code_type": "numeric",
+            "name": "First Platypus Bank",
+            "products": [
+              "assets",
+              "auth",
+              "balance",
+              "transactions",
+              "credit_details",
+              "holdings",
+              "income",
+              "identity"
+            ],
+            "status": {
+              "item_logins": {
+                "breakdown": {
+                  "error_institution": 0.125,
+                  "error_plaid": 0.063,
+                  "success": 0.813
+                },
+                "last_status_change": "2019-05-16T06:36:00Z",
+                "status": "DEGRADED"
+              }
+            }
+          },
+          "request_id": "zw38UIAZnuKmlR0"
+        }
+    http_version: 
+  recorded_at: Thu, 16 May 2019 06:37:30 GMT
 recorded_with: VCR 4.0.0
