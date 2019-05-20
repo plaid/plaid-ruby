@@ -8,32 +8,35 @@ module Plaid
   # Public: Base class for any error returned by the API
   class PlaidAPIError < PlaidError
     attr_reader :error_type, :error_code, :error_message,
-                :display_message, :request_id
+                :display_message, :suggested_action, :request_id
 
     # Internal: Initialize an error with proper attributes.
     #
-    # error_type      - A broad categorization of the error.
-    # error_code      - The particular error code.
-    # error_message   - A developer-friendly representation of the error
-    #                   message.
-    # display_message - A user-friendly representation of the error message.
-    # request_id      - The ID of the request you made, can be used to
+    # error_type       - A broad categorization of the error.
+    # error_code       - The particular error code.
+    # error_message    - A developer-friendly representation of the error
+    #                    message.
+    # display_message  - A user-friendly representation of the error message.
+    # suggested_action - The action required to resolve the error, if present.
+    # request_id       - The ID of the request you made, can be used to
     #                   escalate problems.
     def initialize(error_type, error_code, error_message, display_message,
-                   request_id)
-      @error_type      = error_type
-      @error_code      = error_code
-      @error_message   = error_message
-      @display_message = display_message
-      @request_id      = request_id
+                   suggested_action, request_id)
+      @error_type       = error_type
+      @error_code       = error_code
+      @error_message    = error_message
+      @display_message  = display_message
+      @suggested_action = suggested_action
+      @request_id       = request_id
 
       super <<-TEXT
 
-Error Type      : #{error_type}
-Error Code      : #{error_code}
-Error Message   : #{error_message}
-Display Message : #{display_message}
-Request ID      : #{request_id}
+Error Type       : #{error_type}
+Error Code       : #{error_code}
+Suggested action : #{suggested_action}
+Error Message    : #{error_message}
+Display Message  : #{display_message}
+Request ID       : #{request_id}
 TEXT
     end
   end

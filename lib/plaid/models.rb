@@ -55,6 +55,11 @@ module Plaid
 
       ##
       # :attr_reader:
+      # Public: The action required to resolve the error, if present.
+      property :suggested_Action
+
+      ##
+      # :attr_reader:
       # Public: A user-friendly representation of the error message. nil if the
       # error is not related to user action.
       property :display_message

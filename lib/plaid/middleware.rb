@@ -25,6 +25,7 @@ module Plaid
                             env.body['error_code'],
                             env.body['error_message'],
                             env.body['display_message'],
+                            env.body['suggested_action'],
                             env.body['request_id'])
     end
   end
