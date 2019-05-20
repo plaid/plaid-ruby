@@ -8,24 +8,30 @@ http_interactions:
       string: '{"count":3,"offset":1,"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
     headers:
       User-Agent:
-      - Plaid Ruby v4.1.0
+      - Plaid Ruby v7.0.0
       Content-Type:
       - application/json
+      Plaid-Version:
+      - '2019-05-29'
   response:
     status:
       code: 200
-      message: 
+      message: OK
     headers:
       server:
       - nginx
       date:
-      - Fri, 16 Mar 2018 02:20:59 GMT
+      - Mon, 20 May 2019 20:12:15 GMT
       content-type:
-      - application/json
-      transfer-encoding:
-      - chunked
+      - application/json; charset=utf-8
+      content-length:
+      - '433'
       connection:
       - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
       strict-transport-security:
       - max-age=31536000; includeSubDomains; preload
       x-frame-options:
@@ -40,6 +46,41 @@ http_interactions:
         {
           "institutions": [
             {
+              "country_codes": [
+                "US"
+              ],
+              "credentials": [
+                {
+                  "label": "Login ID",
+                  "name": "username",
+                  "type": "text"
+                },
+                {
+                  "label": "Password",
+                  "name": "password",
+                  "type": "password"
+                }
+              ],
+              "has_mfa": true,
+              "input_spec": "fixed",
+              "institution_id": "ins_113968",
+              "mfa": [
+                "questions"
+              ],
+              "mfa_code_type": "numeric",
+              "name": "Amegy Bank of Texas",
+              "products": [
+                "assets",
+                "auth",
+                "balance",
+                "transactions",
+                "income"
+              ]
+            },
+            {
+              "country_codes": [
+                "US"
+              ],
               "credentials": [
                 {
                   "label": "User ID",
@@ -53,8 +94,10 @@ http_interactions:
                 }
               ],
               "has_mfa": false,
+              "input_spec": "fixed",
               "institution_id": "ins_10",
               "mfa": [],
+              "mfa_code_type": "numeric",
               "name": "American Express",
               "products": [
                 "assets",
@@ -64,9 +107,12 @@ http_interactions:
               ]
             },
             {
+              "country_codes": [
+                "US"
+              ],
               "credentials": [
                 {
-                  "label": "Online ID",
+                  "label": "User Name",
                   "name": "username",
                   "type": "text"
                 },
@@ -77,53 +123,27 @@ http_interactions:
                 }
               ],
               "has_mfa": true,
-              "institution_id": "ins_1",
+              "input_spec": "fixed",
+              "institution_id": "ins_114157",
               "mfa": [
-                "questions(3)"
+                "code",
+                "list",
+                "questions",
+                "selections"
               ],
-              "name": "Bank of America",
+              "mfa_code_type": "numeric",
+              "name": "American Express - Personal Savings",
               "products": [
                 "assets",
-                "auth",
                 "balance",
                 "transactions",
-                "credit_details",
-                "income",
-                "identity"
-              ]
-            },
-            {
-              "credentials": [
-                {
-                  "label": "User ID",
-                  "name": "username",
-                  "type": "text"
-                },
-                {
-                  "label": "Password",
-                  "name": "password",
-                  "type": "password"
-                }
-              ],
-              "has_mfa": true,
-              "institution_id": "ins_2",
-              "mfa": [
-                "questions(3)"
-              ],
-              "name": "BB\u0026T",
-              "products": [
-                "assets",
-                "auth",
-                "balance",
-                "transactions",
-                "income",
-                "identity"
+                "income"
               ]
             }
           ],
-          "request_id": "ixj6k",
-          "total": 9729
+          "request_id": "1NcDLk3roHCpYVO",
+          "total": 10228
         }
     http_version: 
-  recorded_at: Fri, 16 Mar 2018 02:20:59 GMT
-recorded_with: VCR 3.0.3
+  recorded_at: Mon, 20 May 2019 20:12:15 GMT
+recorded_with: VCR 4.0.0

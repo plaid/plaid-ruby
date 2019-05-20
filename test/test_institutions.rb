@@ -1,5 +1,8 @@
 require_relative 'test_helper'
 
+# Using strict models to catch any new fields returned by the API
+Plaid.relaxed_models = true
+
 # Internal: The test for Plaid::Institutions.
 class PlaidInstitutionsTest < PlaidTest
   def test_get
