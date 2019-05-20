@@ -1,3 +1,7 @@
+# 7.0.0 20-May-2019
+
+* Add support for 2019-05-29 API version
+
 # 6.3.1 20-Mar-2019
 
 * Remove unnecessary log line
