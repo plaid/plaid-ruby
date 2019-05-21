@@ -8,34 +8,41 @@ http_interactions:
       string: '{"credentials":{"username":"user_good","password":"pass_good"},"institution_id":"ins_109508","initial_products":["ABCDEFG1234567"],"options":{},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
     headers:
       User-Agent:
-      - Plaid Ruby v4.1.0
+      - Plaid Ruby v6.3.1
       Content-Type:
       - application/json
+      Plaid-Version:
+      - '2018-05-22'
   response:
     status:
       code: 400
-      message: 
+      message: Bad Request
     headers:
       server:
       - nginx
       date:
-      - Fri, 16 Mar 2018 02:19:42 GMT
+      - Thu, 16 May 2019 06:49:43 GMT
       content-type:
-      - application/json
+      - application/json; charset=utf-8
       content-length:
-      - '209'
+      - '199'
       connection:
       - close
+      plaid-version:
+      - '2018-05-22'
+      vary:
+      - Accept-Encoding
     body:
-      encoding: UTF-8
+      encoding: ASCII-8BIT
       string: |-
         {
           "display_message": null,
           "error_code": "INVALID_PRODUCT",
           "error_message": "initial_products contains invalid products: [\"ABCDEFG1234567\"]",
           "error_type": "INVALID_INPUT",
-          "request_id": "OySJE"
+          "request_id": "o3zK17eZfLarCnf",
+          "suggested_action": null
         }
     http_version: 
-  recorded_at: Fri, 16 Mar 2018 02:19:42 GMT
-recorded_with: VCR 3.0.3
+  recorded_at: Thu, 16 May 2019 06:49:43 GMT
+recorded_with: VCR 4.0.0

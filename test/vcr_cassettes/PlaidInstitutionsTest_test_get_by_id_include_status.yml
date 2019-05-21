@@ -5,7 +5,7 @@ http_interactions:
     uri: https://sandbox.plaid.com/institutions/get_by_id
     body:
       encoding: UTF-8
-      string: '{"institution_id":"ins_109508","options":{"include_optional_metadata":true},"public_key":"PLAID_RUBY_PUBLIC_KEY"}'
+      string: '{"institution_id":"ins_109508","options":{"include_status":true},"public_key":"PLAID_RUBY_PUBLIC_KEY"}'
     headers:
       User-Agent:
       - Plaid Ruby v7.0.0
@@ -21,11 +21,11 @@ http_interactions:
       server:
       - nginx
       date:
-      - Tue, 21 May 2019 18:25:52 GMT
+      - Tue, 21 May 2019 18:25:51 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
-      - '391'
+      - '456'
       connection:
       - close
       plaid-version:
@@ -63,7 +63,6 @@ http_interactions:
             "has_mfa": true,
             "input_spec": "fixed",
             "institution_id": "ins_109508",
-            "logo": null,
             "mfa": [
               "code",
               "list",
@@ -72,7 +71,6 @@ http_interactions:
             ],
             "mfa_code_type": "numeric",
             "name": "First Platypus Bank",
-            "primary_color": "#0075a3",
             "products": [
               "assets",
               "auth",
@@ -83,10 +81,20 @@ http_interactions:
               "income",
               "identity"
             ],
-            "url": "https://www.plaid.com/"
+            "status": {
+              "item_logins": {
+                "breakdown": {
+                  "error_institution": 0.125,
+                  "error_plaid": 0.063,
+                  "success": 0.813
+                },
+                "last_status_change": "2019-05-21T18:24:00Z",
+                "status": "DEGRADED"
+              }
+            }
           },
-          "request_id": "7OBkWXBjga6B1fe"
+          "request_id": "I7k6QfAJilvopk5"
         }
     http_version: 
-  recorded_at: Tue, 21 May 2019 18:25:52 GMT
+  recorded_at: Tue, 21 May 2019 18:25:51 GMT
 recorded_with: VCR 4.0.0

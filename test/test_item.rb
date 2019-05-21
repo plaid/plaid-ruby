@@ -122,6 +122,7 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
 
     item = client.item.get(access_token)
     refute_empty(item.item)
+    refute_empty(item.status)
   end
 
   def test_get_valid_access_token

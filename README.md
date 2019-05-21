@@ -216,8 +216,6 @@ Any API call returns a response object which is accessible by dot notation
 and `response['foo']['bar']`. Expected keys for all types of responses are defined,
 and any attempt to access an unknown key will cause `NoMethodError` exception.
 
-These strict model checks can be disabled by setting `Plaid.relaxed_models = true`.
-
 ## Network Timeout
 
 A network timeout value is currently defaulted at 600 seconds = 10 minutes.
