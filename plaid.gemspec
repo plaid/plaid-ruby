@@ -38,7 +38,7 @@ Gem::Specification.new do |spec| # rubocop:disable Metrics/BlockLength
   spec.add_dependency 'faraday_middleware'
   spec.add_dependency 'hashie', '>= 3.4.3'
 
-  spec.add_development_dependency 'bundler', '~> 2.0'
+  spec.add_development_dependency 'bundler', '~> 1.7'
   spec.add_development_dependency 'dotenv'
   spec.add_development_dependency 'minitest', '~> 5.10'
   spec.add_development_dependency 'minitest-around', '~> 0.4.0'
