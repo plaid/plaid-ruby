@@ -8,34 +8,41 @@ http_interactions:
       string: '{"count":"ABCDEFG1234567","offset":"ABCDEFG1234567","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
     headers:
       User-Agent:
-      - Plaid Ruby v4.1.0
+      - Plaid Ruby v6.3.1
       Content-Type:
       - application/json
+      Plaid-Version:
+      - '2018-05-22'
   response:
     status:
       code: 400
-      message: 
+      message: Bad Request
     headers:
       server:
       - nginx
       date:
-      - Fri, 16 Mar 2018 02:21:05 GMT
+      - Thu, 16 May 2019 06:51:59 GMT
       content-type:
-      - application/json
+      - application/json; charset=utf-8
       content-length:
-      - '169'
+      - '171'
       connection:
       - close
+      plaid-version:
+      - '2018-05-22'
+      vary:
+      - Accept-Encoding
     body:
-      encoding: UTF-8
+      encoding: ASCII-8BIT
       string: |-
         {
           "display_message": null,
           "error_code": "INVALID_FIELD",
           "error_message": "count must be an integer",
           "error_type": "INVALID_REQUEST",
-          "request_id": "hkv1b"
+          "request_id": "uHf3YgEnTCJGOrv",
+          "suggested_action": null
         }
     http_version: 
-  recorded_at: Fri, 16 Mar 2018 02:21:06 GMT
-recorded_with: VCR 3.0.3
+  recorded_at: Thu, 16 May 2019 06:51:59 GMT
+recorded_with: VCR 4.0.0

@@ -4,27 +4,34 @@ http_interactions:
     method: post
     uri: https://sandbox.plaid.com/institutions/search
     body:
+      encoding: UTF-8
       string: '{"query":"First Platypus Bank","products":["transactions"],"options":{"include_optional_metadata":true},"public_key":"PLAID_RUBY_PUBLIC_KEY"}'
     headers:
       User-Agent:
-      - Plaid Ruby v4.1.0
+      - Plaid Ruby v6.3.1
       Content-Type:
       - application/json
+      Plaid-Version:
+      - '2018-05-22'
   response:
     status:
       code: 200
-      message:
+      message: OK
     headers:
       server:
       - nginx
       date:
-      - Fri, 16 Mar 2018 02:20:55 GMT
+      - Thu, 16 May 2019 06:52:08 GMT
       content-type:
-      - application/json
-      transfer-encoding:
-      - chunked
+      - application/json; charset=utf-8
+      content-length:
+      - '397'
       connection:
       - close
+      plaid-version:
+      - '2018-05-22'
+      vary:
+      - Accept-Encoding
       strict-transport-security:
       - max-age=31536000; includeSubDomains; preload
       x-frame-options:
@@ -39,6 +46,9 @@ http_interactions:
         {
           "institutions": [
             {
+              "country_codes": [
+                "US"
+              ],
               "credentials": [
                 {
                   "label": "Username",
@@ -52,6 +62,7 @@ http_interactions:
                 }
               ],
               "has_mfa": true,
+              "input_spec": "fixed",
               "institution_id": "ins_109508",
               "logo": null,
               "mfa": [
@@ -60,310 +71,24 @@ http_interactions:
                 "questions",
                 "selections"
               ],
+              "mfa_code_type": "numeric",
               "name": "First Platypus Bank",
-              "primary_color":  "#095aa6",
+              "primary_color": "#0075a3",
               "products": [
                 "assets",
                 "auth",
                 "balance",
                 "transactions",
                 "credit_details",
+                "holdings",
                 "income",
                 "identity"
               ],
-              "url": "https://plaid.com"
-            },
-            {
-              "credentials": [
-                {
-                  "label": "Internet Banking ID",
-                  "name": "username",
-                  "type": "text"
-                },
-                {
-                  "label": "Internet Banking Password",
-                  "name": "password",
-                  "type": "password"
-                }
-              ],
-              "has_mfa": true,
-              "institution_id": "ins_111296",
-              "logo": null,
-              "mfa": [
-                "code",
-                "list",
-                "questions",
-                "selections"
-              ],
-              "name": "First Volunteer Bank",
-              "primary_color":  "#095aa6",
-              "products": [
-                "assets",
-                "balance",
-                "transactions",
-                "identity"
-              ],
-              "url": "https://plaid.com"
-            },
-            {
-              "credentials": [
-                {
-                  "label": "Access ID",
-                  "name": "username",
-                  "type": "text"
-                },
-                {
-                  "label": "Password",
-                  "name": "password",
-                  "type": "password"
-                }
-              ],
-              "has_mfa": true,
-              "institution_id": "ins_113039",
-              "logo": null,
-              "mfa": [
-                "code",
-                "list",
-                "questions",
-                "selections"
-              ],
-              "name": "First Personal Bank",
-              "primary_color":  "#095aa6",
-              "products": [
-                "assets",
-                "auth",
-                "balance",
-                "transactions",
-                "income"
-              ],
-              "url": "https://plaid.com"
-            },
-            {
-              "credentials": [
-                {
-                  "label": "County First Express Banking ID",
-                  "name": "username",
-                  "type": "text"
-                },
-                {
-                  "label": "County First Express Banking Password",
-                  "name": "password",
-                  "type": "password"
-                }
-              ],
-              "has_mfa": true,
-              "institution_id": "ins_111205",
-              "logo": null,
-              "mfa": [
-                "code",
-                "list",
-                "questions",
-                "selections"
-              ],
-              "name": "County First Bank",
-              "primary_color":  "#095aa6",
-              "products": [
-                "assets",
-                "balance",
-                "transactions",
-                "identity"
-              ],
-              "url": "https://plaid.com"
-            },
-            {
-              "credentials": [
-                {
-                  "label": "User ID",
-                  "name": "username",
-                  "type": "text"
-                },
-                {
-                  "label": "Password",
-                  "name": "password",
-                  "type": "password"
-                }
-              ],
-              "has_mfa": true,
-              "institution_id": "ins_113628",
-              "logo": null,
-              "mfa": [
-                "code",
-                "list",
-                "questions(3)",
-                "selections(5)"
-              ],
-              "name": "First Option Bank",
-              "primary_color":  "#095aa6",
-              "products": [
-                "assets",
-                "balance",
-                "transactions",
-                "income"
-              ],
-              "url": "https://plaid.com"
-            },
-            {
-              "credentials": [
-                {
-                  "label": "User Name",
-                  "name": "username",
-                  "type": "text"
-                },
-                {
-                  "label": "Password",
-                  "name": "password",
-                  "type": "password"
-                }
-              ],
-              "has_mfa": true,
-              "logo": null,
-              "institution_id": "ins_103203",
-              "mfa": [
-                "code",
-                "list",
-                "questions",
-                "selections"
-              ],
-              "name": "First Hawaiian Bank",
-              "primary_color":  "#095aa6",
-              "products": [
-                "assets",
-                "balance",
-                "transactions"
-              ],
-              "url": "https://plaid.com"
-            },
-            {
-              "credentials": [
-                {
-                  "label": "Online Banking ID",
-                  "name": "username",
-                  "type": "text"
-                },
-                {
-                  "label": "Online Banking PIN",
-                  "name": "password",
-                  "type": "password"
-                }
-              ],
-              "has_mfa": true,
-              "institution_id": "ins_111443",
-              "logo": null,
-              "mfa": [
-                "code",
-                "list",
-                "questions",
-                "selections"
-              ],
-              "name": "Republic First bank",
-              "primary_color":  "#095aa6",
-              "products": [
-                "assets",
-                "auth",
-                "balance",
-                "transactions",
-                "identity"
-              ],
-              "url": "https://plaid.com"
-            },
-            {
-              "credentials": [
-                {
-                  "label": "Sign-On ID",
-                  "name": "username",
-                  "type": "text"
-                },
-                {
-                  "label": "Password",
-                  "name": "password",
-                  "type": "password"
-                }
-              ],
-              "has_mfa": true,
-              "institution_id": "ins_103158",
-              "logo": null,
-              "mfa": [
-                "code",
-                "list",
-                "questions",
-                "selections"
-              ],
-              "name": "First Federal Bank",
-              "primary_color":  "#095aa6",
-              "products": [
-                "assets",
-                "balance",
-                "transactions"
-              ],
-              "url": "https://plaid.com"
-            },
-            {
-              "credentials": [
-                {
-                  "label": "User ID",
-                  "name": "username",
-                  "type": "text"
-                },
-                {
-                  "label": "Password",
-                  "name": "password",
-                  "type": "password"
-                }
-              ],
-              "has_mfa": true,
-              "institution_id": "ins_110938",
-              "logo": null,
-              "mfa": [
-                "code",
-                "list",
-                "questions(3)",
-                "selections(5)"
-              ],
-              "name": "First Convenience Bank",
-              "primary_color":  "#095aa6",
-              "products": [
-                "assets",
-                "balance",
-                "transactions",
-                "income"
-              ],
-              "url": "https://plaid.com"
-            },
-            {
-              "credentials": [
-                {
-                  "label": "Access ID",
-                  "name": "username",
-                  "type": "text"
-                },
-                {
-                  "label": "Passcode",
-                  "name": "password",
-                  "type": "password"
-                }
-              ],
-              "has_mfa": true,
-              "institution_id": "ins_113474",
-              "logo": null,
-              "mfa": [
-                "code",
-                "list",
-                "questions(3)",
-                "selections(5)"
-              ],
-              "name": "First Guaranty Bank",
-              "primary_color":  "#095aa6",
-              "products": [
-                "assets",
-                "balance",
-                "transactions",
-                "income"
-              ],
-              "url": "https://plaid.com"
+              "url": "https://www.plaid.com/"
             }
           ],
-          "request_id": "UATvg"
+          "request_id": "bWcOedJUYFesP5o"
         }
-    http_version:
-  recorded_at: Fri, 16 Mar 2018 02:20:55 GMT
-recorded_with: VCR 3.0.3
+    http_version: 
+  recorded_at: Thu, 16 May 2019 06:52:08 GMT
+recorded_with: VCR 4.0.0

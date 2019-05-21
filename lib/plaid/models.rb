@@ -7,10 +7,21 @@ module Plaid
       include Hashie::Extensions::Dash::IndifferentAccess
       include Hashie::Extensions::Dash::Coercion
 
+      @ignored_properties = []
+
+      def self.property_ignored?(property)
+        if defined? @ignored_properties
+          @ignored_properties.include?(property)
+        else
+          false
+        end
+      end
+
       # Internal: Be strict or forgiving depending on Plaid.relaxed_models
       # value.
       def assert_property_exists!(property)
-        super unless Plaid.relaxed_models?
+        super unless Plaid.relaxed_models? ||
+                     self.class.property_ignored?(property)
       end
     end
 
@@ -226,6 +237,12 @@ module Plaid
       # :attr_reader:
       # Public: The String subtype, e.g. "checking".
       property :subtype
+
+      ##
+      # :attr_reader:
+      # Public: The String verification status,
+      # e.g "manually_verified" (optional).
+      property :verification_status
     end
 
     # Public: A representation of an ACH account number.
@@ -635,6 +652,8 @@ module Plaid
 
     # Public: A representation of Institution.
     class Institution < BaseModel
+      @ignored_properties = ['input_spec']
+
       ##
       # :attr_reader:
       # Public: The Array of InstitutionCredential, presenting information on
@@ -694,6 +713,11 @@ module Plaid
       # :attr_reader:
       # Public: The Status for this Institution (or nil).
       property :status, coerce: InstitutionStatus
+
+      ##
+      # :attr_reader:
+      # Public: The Array of String country codes supported by this institution.
+      property :country_codes
     end
 
     module MFA

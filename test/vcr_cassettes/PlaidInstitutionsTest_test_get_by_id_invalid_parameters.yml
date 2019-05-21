@@ -8,34 +8,41 @@ http_interactions:
       string: '{"institution_id":"ABCDEFG1234567","public_key":"PLAID_RUBY_PUBLIC_KEY"}'
     headers:
       User-Agent:
-      - Plaid Ruby v4.1.0
+      - Plaid Ruby v6.3.1
       Content-Type:
       - application/json
+      Plaid-Version:
+      - '2018-05-22'
   response:
     status:
       code: 400
-      message: 
+      message: Bad Request
     headers:
       server:
       - nginx
       date:
-      - Fri, 16 Mar 2018 02:21:00 GMT
+      - Thu, 16 May 2019 06:52:05 GMT
       content-type:
-      - application/json
+      - application/json; charset=utf-8
       content-length:
-      - '180'
+      - '176'
       connection:
       - close
+      plaid-version:
+      - '2018-05-22'
+      vary:
+      - Accept-Encoding
     body:
-      encoding: UTF-8
+      encoding: ASCII-8BIT
       string: |-
         {
           "display_message": null,
           "error_code": "INVALID_INSTITUTION",
           "error_message": "invalid institution_id provided",
           "error_type": "INVALID_INPUT",
-          "request_id": "3hcqF"
+          "request_id": "JPMtSzNBRs2Aklp",
+          "suggested_action": null
         }
     http_version: 
-  recorded_at: Fri, 16 Mar 2018 02:21:00 GMT
-recorded_with: VCR 3.0.3
+  recorded_at: Thu, 16 May 2019 06:52:06 GMT
+recorded_with: VCR 4.0.0

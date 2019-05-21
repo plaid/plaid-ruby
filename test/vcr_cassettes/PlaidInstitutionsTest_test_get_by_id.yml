@@ -8,24 +8,30 @@ http_interactions:
       string: '{"institution_id":"ins_109508","public_key":"PLAID_RUBY_PUBLIC_KEY"}'
     headers:
       User-Agent:
-      - Plaid Ruby v4.1.0
+      - Plaid Ruby v6.3.1
       Content-Type:
       - application/json
+      Plaid-Version:
+      - '2018-05-22'
   response:
     status:
       code: 200
-      message: 
+      message: OK
     headers:
       server:
       - nginx
       date:
-      - Fri, 16 Mar 2018 02:20:56 GMT
+      - Thu, 16 May 2019 06:52:09 GMT
       content-type:
-      - application/json
+      - application/json; charset=utf-8
       content-length:
-      - '604'
+      - '346'
       connection:
       - close
+      plaid-version:
+      - '2018-05-22'
+      vary:
+      - Accept-Encoding
       strict-transport-security:
       - max-age=31536000; includeSubDomains; preload
       x-frame-options:
@@ -35,10 +41,13 @@ http_interactions:
       x-xss-protection:
       - 1; mode=block
     body:
-      encoding: UTF-8
+      encoding: ASCII-8BIT
       string: |-
         {
           "institution": {
+            "country_codes": [
+              "US"
+            ],
             "credentials": [
               {
                 "label": "Username",
@@ -52,6 +61,7 @@ http_interactions:
               }
             ],
             "has_mfa": true,
+            "input_spec": "fixed",
             "institution_id": "ins_109508",
             "mfa": [
               "code",
@@ -59,6 +69,7 @@ http_interactions:
               "questions",
               "selections"
             ],
+            "mfa_code_type": "numeric",
             "name": "First Platypus Bank",
             "products": [
               "assets",
@@ -66,12 +77,13 @@ http_interactions:
               "balance",
               "transactions",
               "credit_details",
+              "holdings",
               "income",
               "identity"
             ]
           },
-          "request_id": "Z3WOJ"
+          "request_id": "vN6cI6vk6QiVqoM"
         }
     http_version: 
-  recorded_at: Fri, 16 Mar 2018 02:20:57 GMT
-recorded_with: VCR 3.0.3
+  recorded_at: Thu, 16 May 2019 06:52:09 GMT
+recorded_with: VCR 4.0.0
