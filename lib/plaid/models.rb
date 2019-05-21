@@ -9,10 +9,11 @@ module Plaid
 
       @ignored_properties = []
 
-      def self.ignored_properties
+      def self.property_ignored?(property)
         if defined? @ignored_properties
-          @ignored_properties
-        else []
+          @ignored_properties.include?(property)
+        else
+          false
         end
       end
 
@@ -20,7 +21,7 @@ module Plaid
       # value.
       def assert_property_exists!(property)
         super unless Plaid.relaxed_models? ||
-                     self.class.ignored_properties.include?(property)
+                     self.class.property_ignored?(property)
       end
     end
 
