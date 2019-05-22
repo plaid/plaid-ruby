@@ -11,6 +11,9 @@ class PlaidTransactionsTest < PlaidTest
                 transactions_await_results: true
   end
 
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
+
   def test_get
     response = client.transactions.get(access_token, '2016-01-01', '2017-01-01')
     refute_empty(response['accounts'])
@@ -35,6 +38,9 @@ class PlaidTransactionsTest < PlaidTest
       refute_nil(transaction['iso_currency_code'])
     end
   end
+
+  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/MethodLength
 
   def test_get_date_objects
     response = client.transactions.get(access_token, '2016-01-01', '2017-01-01')
