@@ -641,6 +641,8 @@ module Plaid
 
     # Public: A representation of an institution login credential.
     class InstitutionCredential < BaseModel
+      @ignored_properties = ['flexible_input_spec']
+
       ##
       # :attr_reader:
       # Public: The String label. E.g. "User ID".
