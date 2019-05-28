@@ -243,6 +243,24 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
     end
   end
 
+  def test_sandbox_reset_login
+    create_response = client.sandbox.sandbox_public_token.create(
+      institution_id: 'ins_3',
+      initial_products: ['transactions']
+    )
+    exchange_token_response = client.item.public_token.exchange(
+      create_response.public_token
+    )
+    client.sandbox.sandbox_item.reset_login(
+      exchange_token_response.access_token
+    )
+    assert_raises(Plaid::ItemError) do
+      client.auth.get(
+        exchange_token_response.access_token
+      )
+    end
+  end
+
   protected
 
   def answer_mfa(data)
