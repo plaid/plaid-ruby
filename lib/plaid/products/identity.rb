@@ -21,12 +21,7 @@ module Plaid
     ##
     # :attr_reader:
     # Public: The list of accounts: Array of Plaid::Models::Account.
-    property :accounts, coerce: Array[Models::Account]
-
-    ##
-    # :attr_reader:
-    # Public: Identity information: Plaid::Models::Identity.
-    property :identity, coerce: Models::Identity
+    property :accounts, coerce: Array[Models::AccountWithOwners]
 
     ##
     # :attr_reader:

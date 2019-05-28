@@ -26,7 +26,8 @@ Each major version of `plaid-ruby` targets a specific version of the Plaid API:
 
 | API version | plaid-ruby release |
 | ----------- | ------------------ |
-| [`2018-05-22`][api-version-2018-05-22] (**latest**) | `6.x.x` |
+| [`2019-05-29`][api-version-2019-05-29] (**latest**) | `7.x.x` |
+| [`2018-05-22`][api-version-2018-05-22] | `6.x.x` |
 | `2017-03-08` | `5.x.x` |
 
 For information about what has changed between versions and how to update your integration, head to the [version changelog][version-changelog].
@@ -237,3 +238,4 @@ If you're looking for a Ruby client that works with the legacy Plaid API, use th
 [2]: https://github.com/plaid/plaid-ruby-legacy
 [version-changelog]: https://plaid.com/docs/api-upgrades
 [api-version-2018-05-22]: https://plaid.com/docs/api-upgrades#2018-05-22
+[api-version-2019-05-29]: https://plaid.com/docs/api-upgrades#2019-05-29
