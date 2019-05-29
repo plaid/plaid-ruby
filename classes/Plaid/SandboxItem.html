@@ -23,7 +23,7 @@
 
     <meta name="keywords" content="Plaid::SandboxItem class">
   
-    <meta name="keywords" content="reset_login">
+    <meta name="keywords" content="reset_login, fire_webhook">
   
 </head>
 
@@ -80,6 +80,11 @@
       
         <li>
           <span class="type">CLASS</span>
+          <a href="SandboxItem/FireWebhookResponse.html">Plaid::SandboxItem::FireWebhookResponse</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
           <a href="SandboxItem/ResetLoginResponse.html">Plaid::SandboxItem::ResetLoginResponse</a>
         </li>
       
@@ -91,6 +96,18 @@
     <!-- Method ref -->
     <div class="sectiontitle">Methods</div>
     <dl class="methods">
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-fire_webhook">fire_webhook</a>
+              </li>
+            
+          </ul>
+        </dd>
       
         <dt>R</dt>
         <dd>
@@ -148,6 +165,59 @@
     
       <div class="sectiontitle">Instance Public methods</div>
       
+        <div class="method">
+          <div class="title method-title" id="method-i-fire_webhook">
+            
+              <b>fire_webhook</b>(access_token, webhook_code)
+            
+            <a href="../../classes/Plaid/SandboxItem.html#method-i-fire_webhook" name="method-i-fire_webhook" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              <p>Fires a webhook for a sandbox item</p>
+
+<p>Does a POST /sandbox/item/fire_webhook call.</p>
+<dl class="rdoc-list note-list"><dt>access_token
+<dd>
+<p>access_token of the item to fire a webhook for.</p>
+</dd><dt>webhook_code
+<dd>
+<p>webhook_code to fire.</p>
+</dd></dl>
+
+<h3 id="method-i-fire_webhook-label-Returns">Returns</h3>
+
+<p>Returns a <a href="SandboxItem/FireWebhookResponse.html"><code>FireWebhookResponse</code></a> object.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-fire_webhook_source')" id="l_method-i-fire_webhook_source">show</a>
+                
+              </p>
+              <div id="method-i-fire_webhook_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/products/sandbox.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fire_webhook</span>(<span class="ruby-identifier">access_token</span>, <span class="ruby-identifier">webhook_code</span>)
+  <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;sandbox/item/fire_webhook&#39;</span>,
+                 <span class="ruby-constant">FireWebhookResponse</span>,
+                 <span class="ruby-value">access_token:</span> <span class="ruby-identifier">access_token</span>,
+                 <span class="ruby-value">webhook_code:</span> <span class="ruby-identifier">webhook_code</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
         <div class="method">
           <div class="title method-title" id="method-i-reset_login">
             

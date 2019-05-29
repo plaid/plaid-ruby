@@ -23,7 +23,7 @@
 
     <meta name="keywords" content="Plaid::Models::BaseModel class">
   
-    <meta name="keywords" content="assert_property_exists!">
+    <meta name="keywords" content="property_ignored?, assert_property_exists!">
   
 </head>
 
@@ -93,6 +93,18 @@
           </ul>
         </dd>
       
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-property_ignored-3F">property_ignored?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
     </dl>
   
 
@@ -132,6 +144,50 @@
 
     <!-- Methods -->
     
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-property_ignored-3F">
+            
+              <b>property_ignored?</b>(property)
+            
+            <a href="../../../classes/Plaid/Models/BaseModel.html#method-c-property_ignored-3F" name="method-c-property_ignored-3F" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-c-property_ignored-3F_source')" id="l_method-c-property_ignored-3F_source">show</a>
+                
+              </p>
+              <div id="method-c-property_ignored-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/models.rb, line 12</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">property_ignored?</span>(<span class="ruby-identifier">property</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@ignored_properties</span>
+    <span class="ruby-ivar">@ignored_properties</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">property</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
     
     
   
@@ -183,9 +239,10 @@
                 
               </p>
               <div id="method-i-assert_property_exists-21_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/models.rb, line 12</span>
+                <pre><span class="ruby-comment"># File lib/plaid/models.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">assert_property_exists!</span>(<span class="ruby-identifier">property</span>)
-  <span class="ruby-keyword">super</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">Plaid</span>.<span class="ruby-identifier">relaxed_models?</span>
+  <span class="ruby-keyword">super</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">Plaid</span>.<span class="ruby-identifier">relaxed_models?</span> <span class="ruby-operator">||</span>
+               <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">property_ignored?</span>(<span class="ruby-identifier">property</span>)
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
