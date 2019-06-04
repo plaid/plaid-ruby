@@ -53,7 +53,8 @@ class PlaidInstitutionsTest < PlaidTest
                                              options:
                                              { include_status: true })
     assert_equal(SANDBOX_INSTITUTION, response.institution.institution_id)
-    refute_empty(response.institution.status)
+    refute_empty(response.institution.status.item_logins)
+    refute_empty(response.institution.status.transactions_updates)
   end
 
   def test_search

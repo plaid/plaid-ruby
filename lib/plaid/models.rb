@@ -678,6 +678,11 @@ module Plaid
       # Public: The Numeric Institution error percentage.
       # (e.g. 0.020)
       property :error_institution
+
+      ##
+      # :attr_reader:
+      # Public: One of "NORMAL|DELAYED|STOPPED"
+      property :refresh_interval
     end
 
     # Public: A representation of Institution item logins status.
@@ -700,12 +705,37 @@ module Plaid
       property :breakdown, coerce: InstitutionStatusBreakdown
     end
 
+    # Public: A representation of Institution Transactions updates status.
+    class InstitutionStatusTransactionsUpdates < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The String last status change date.
+      # (e.g. "2019-04-22T20:52:00Z")
+      property :last_status_change
+
+      ##
+      # :attr_reader:
+      # Public: The String status.
+      # (e.g. one of "HEALTHY"|"DEGRADED"|"DOWN")
+      property :status
+
+      ##
+      # :attr_reader:
+      # Public: The breakdown for this Institution status.
+      property :breakdown, coerce: InstitutionStatusBreakdown
+    end
+
     # Public: A representation of Institution status.
     class InstitutionStatus < BaseModel
       ##
       # :attr_reader:
-      # Public: The Item logins status for this InstitutionStatus.
+      # Public: The Item logins status.
       property :item_logins, coerce: InstitutionStatusItemLogins
+
+      ##
+      # :attr_reader:
+      # Public: The Transactions updates status.
+      property :transactions_updates, coerce: InstitutionStatusTransactionsUpdates
     end
 
     # Public: A representation of Institution.
