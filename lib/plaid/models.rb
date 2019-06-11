@@ -983,6 +983,217 @@ module Plaid
       property :unofficial_currency_code
     end
 
+    # Public: A representation of an InvestmentTransaction in an investment
+    # account.
+    class InvestmentTransaction < BaseModel
+      include Hashie::Extensions::Dash::PropertyTranslation
+
+      ##
+      # :attr_reader:
+      # Public: The String investment transaction ID.
+      property :investment_transaction_id
+
+      ##
+      # :attr_reader:
+      # Public: The String account ID.
+      property :account_id
+
+      ##
+      # :attr_reader:
+      # Public: The String security ID.
+      property :security_id
+
+      ##
+      # :attr_reader:
+      # Public: The String transaction date. E.g. "2017-01-01".
+      property :date
+
+      ##
+      # :attr_reader:
+      # Public: The String transaction name (or nil).
+      # E.g. "CREDIT CARD 3333 PAYMENT *//".
+      property :name
+
+      ##
+      # :attr_reader:
+      # Public: The Numeric quantity of the security involved (if applicable).
+      property :quantity
+
+      ##
+      # :attr_reader:
+      # Public: The Numeric amount (or nil).
+      property :amount
+
+      ##
+      # :attr_reader:
+      # Public: The Numeric price of the security that was used for the trade
+      # (if applicable).
+      property :price
+
+      ##
+      # :attr_reader:
+      # Public: The Numeric fee amount.
+      property :fees
+
+      ##
+      # :attr_reader:
+      # Public: The String transaction class (or nil). E.g. "buy" or "sell".
+      # The field is :transaction_class instead of :class since :class is
+      # reserved.
+      property :transaction_class, from: 'class'
+
+      ##
+      # :attr_reader:
+      # Public: The ISO currency code of the transaction, either USD or CAD.
+      # Always nil if unofficial_currency_code is non-nil.
+      property :iso_currency_code
+
+      ##
+      # :attr_reader:
+      # Public: The unofficial currency code associated with the transaction.
+      # Always nil if iso_currency_code is non-nil.
+      property :unofficial_currency_code
+
+      ##
+      # :attr_reader:
+      # Public: Present if the transaction class is cancel, and indicates the
+      # ID of the transaction which was cancelled.
+      property :cancel_transaction_id
+    end
+
+    # Public: A representation of a Holding in an investment account.
+    class Holding < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The String account ID.
+      property :account_id
+
+      ##
+      # :attr_reader:
+      # Public: The String security ID.
+      property :security_id
+
+      ##
+      # :attr_reader:
+      # Public: The Numeric value of the holding (price * quantity) as reported
+      # by the institution.
+      property :institution_value
+
+      ##
+      # :attr_reader:
+      # Public: The Numeric price of the holding as reported by the institution.
+      property :institution_price
+
+      ##
+      # :attr_reader:
+      # Public: The Numeric quantity.
+      property :quantity
+
+      ##
+      # :attr_reader:
+      # Public: The String date when the price reported by the institution was
+      # current. E.g. "2017-01-01".
+      property :institution_price_as_of
+
+      ##
+      # :attr_reader:
+      # Public: The Numeric cost basis.
+      property :cost_basis
+
+      ##
+      # :attr_reader:
+      # Public: The ISO currency code of the holding, either USD or CAD.
+      # Always nil if unofficial_currency_code is non-nil.
+      property :iso_currency_code
+
+      ##
+      # :attr_reader:
+      # Public: The unofficial currency code associated with the holding.
+      # Always nil if iso_currency_code is non-nil.
+      property :unofficial_currency_code
+    end
+
+    # Public: A representation of a Security.
+    class Security < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The String security ID.
+      property :security_id
+
+      ##
+      # :attr_reader:
+      # Public: The String CUSIP identitfier of this security.
+      property :cusip
+
+      ##
+      # :attr_reader:
+      # Public: The String SEDOL identifier of this security.
+      property :sedol
+
+      ##
+      # :attr_reader:
+      # Public: The String ISIN identifier of this security.
+      property :isin
+
+      ##
+      # :attr_reader:
+      # Public: The String ID of this security as reported by the institution.
+      property :institution_security_id
+
+      ##
+      # :attr_reader:
+      # Public: The String institution ID (if institution_security_id is set).
+      property :institution_id
+
+      ##
+      # :attr_reader:
+      # Public: The String security ID of the proxied security.
+      property :proxy_security_id
+
+      ##
+      # :attr_reader:
+      # Public: The String security name.
+      property :name
+
+      ##
+      # :attr_reader:
+      # Public: The String ticker symbol.
+      property :ticker_symbol
+
+      ##
+      # :attr_reader:
+      # Public: The Boolean flag indicating whether this security is
+      # cash-equivalent.
+      property :is_cash_equivalent
+
+      ##
+      # :attr_reader:
+      # Public: The String Type.
+      property :type
+
+      ##
+      # :attr_reader:
+      # Public: The Numeric close price.
+      property :close_price
+
+      ##
+      # :attr_reader:
+      # Public: The String date when the close price was current.
+      property :close_price_as_of
+
+      ##
+      # :attr_reader:
+      # Public: The ISO currency code of the security, either USD or CAD.
+      # Always nil if unofficial_currency_code is non-nil.
+      property :iso_currency_code
+
+      ##
+      # :attr_reader:
+      # Public: The unofficial currency code associated with the security.
+      # Always nil if iso_currency_code is non-nil.
+      property :unofficial_currency_code
+    end
+
     # Public: A representation of asset report address details.
     class AssetReportAddressData < BaseModel
       ##
