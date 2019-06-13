@@ -1,3 +1,7 @@
+# 7.1.0 17-Jun-2019
+
+* Add bindings for the new [investments product](https://plaid.com/docs/api/#investments).
+
 # 7.0.0 20-May-2019
 
 * Add support for 2019-05-29 API version
