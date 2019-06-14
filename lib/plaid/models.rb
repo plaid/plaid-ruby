@@ -986,8 +986,6 @@ module Plaid
     # Public: A representation of an InvestmentTransaction in an investment
     # account.
     class InvestmentTransaction < BaseModel
-      include Hashie::Extensions::Dash::PropertyTranslation
-
       ##
       # :attr_reader:
       # Public: The String investment transaction ID.
@@ -1037,10 +1035,8 @@ module Plaid
 
       ##
       # :attr_reader:
-      # Public: The String transaction class (or nil). E.g. "buy" or "sell".
-      # The field is :transaction_class instead of :class since :class is
-      # reserved.
-      property :transaction_class, from: 'class'
+      # Public: The String transaction type (or nil). E.g. "buy" or "sell".
+      property :type
 
       ##
       # :attr_reader:
