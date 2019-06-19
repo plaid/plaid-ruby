@@ -7,23 +7,40 @@ class PlaidTransactionsTest < PlaidTest
   def setup
     create_item initial_products: [:transactions],
                 transactions_start_date: '2016-01-01',
-                transactions_end_date: '2017-01-01',
-                transactions_await_results: true
+                transactions_end_date: '2017-01-01'
   end
 
-  # rubocop:disable Metrics/AbcSize
-  # rubocop:disable Metrics/MethodLength
+  # Helper method to get transactions - retry up to 5 times with
+  # a backoff delay to wait out PRODUCT_NOT_READY errors
+  def get_transactions_with_retries(access_token, start_date, end_date, count: nil, offset: nil, account_ids: nil, options: nil)
+    num_retries = 5
+    retries = 0
+    while retries < num_retries
+      retries += 1
+      begin
+        response = client.transactions.get(access_token, start_date, end_date, account_ids: account_ids,  count: count, offset: offset, options: options)
+      rescue Plaid::ItemError => e
+        if retries < num_retries
+            sleep(retries * 2)
+            next
+        else
+          raise e
+        end
+      end
+   end
+   return response
+ end
 
   def test_get
-    response = client.transactions.get(access_token, '2016-01-01', '2017-01-01')
+    response = get_transactions_with_retries(access_token, '2016-01-01', '2017-01-01')
     refute_empty(response['accounts'])
     refute_empty(response['transactions'])
 
     account_id = response['accounts'][0]['account_id']
-    response = client.transactions.get(access_token,
-                                       '2016-01-01',
-                                       '2017-01-01',
-                                       account_ids: [account_id])
+    response = get_transactions_with_retries(access_token,
+                                             '2016-01-01',
+                                             '2017-01-01',
+                                             account_ids: [account_id])
     refute_empty(response['transactions'])
     response['transactions'].each do |transaction|
       refute_nil(transaction['transaction_id'])
@@ -43,55 +60,55 @@ class PlaidTransactionsTest < PlaidTest
   # rubocop:enable Metrics/MethodLength
 
   def test_get_date_objects
-    response = client.transactions.get(access_token, '2016-01-01', '2017-01-01')
+    response = get_transactions_with_retries(access_token, '2016-01-01', '2017-01-01')
     refute_empty(response['accounts'])
     refute_empty(response['transactions'])
 
     account_id = response['accounts'][0]['account_id']
-    response = client.transactions.get(access_token,
-                                       Date.parse('2016-01-01'),
-                                       Date.parse('2017-01-01'),
-                                       account_ids: [account_id])
+    response = get_transactions_with_retries(access_token,
+                                             Date.parse('2016-01-01'),
+                                             Date.parse('2017-01-01'),
+                                             account_ids: [account_id])
     refute_empty(response['transactions'])
   end
 
   def test_get_invalid_access_token
     assert_raises(Plaid::InvalidInputError) do
-      client.transactions.get(BAD_STRING, '2016-01-01', '2017-01-01')
+      get_transactions_with_retries(BAD_STRING, '2016-01-01', '2017-01-01')
     end
   end
 
   def test_get_invalid_dates
     assert_raises(Plaid::InvalidRequestError) do
-      client.transactions.get(access_token, BAD_STRING, BAD_STRING)
+      get_transactions_with_retries(access_token, BAD_STRING, BAD_STRING)
     end
   end
 
   def test_get_with_options
-    response = client.transactions.get(access_token,
-                                       '2016-01-01',
-                                       '2017-01-01',
-                                       count: 2,
-                                       offset: 1)
+    response = get_transactions_with_retries(access_token,
+                                             '2016-01-01',
+                                             '2017-01-01',
+                                             count: 2,
+                                             offset: 1)
     assert_equal(2, response['transactions'].length)
   end
 
   def test_get_with_additional_options
-    response = client.transactions.get(access_token,
-                                       '2016-01-01',
-                                       '2017-01-01',
-                                       options: { count: 2,
-                                                  offset: 1 })
+    response = get_transactions_with_retries(access_token,
+                                            '2016-01-01',
+                                            '2017-01-01',
+                                            options: { count: 2,
+                                                       offset: 1 })
     assert_equal(2, response['transactions'].length)
   end
 
   def test_get_invalid_options
     assert_raises(Plaid::InvalidRequestError) do
-      client.transactions.get(access_token,
-                              '2016-01-01',
-                              '2017-01-01',
-                              count: BAD_STRING,
-                              offset: BAD_STRING)
+      get_transactions_with_retries(access_token,
+                                    '2016-01-01',
+                                    '2017-01-01',
+                                    count: BAD_STRING,
+                                    offset: BAD_STRING)
     end
   end
 end

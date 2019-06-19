@@ -5,6 +5,96 @@ http_interactions:
     uri: https://sandbox.plaid.com/institutions/get_by_id
     body:
       encoding: UTF-8
+      string: '{"institution_id":"ins_109508","public_key":null}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v7.1.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      server:
+      - nginx
+      date:
+      - Wed, 19 Jun 2019 17:35:24 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '195'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "display_message": null,
+          "error_code": "INVALID_FIELD",
+          "error_message": "public_key must be a properly formatted, non-empty string",
+          "error_type": "INVALID_REQUEST",
+          "request_id": "PO6PeRzoP33UMo3",
+          "suggested_action": null
+        }
+    http_version: 
+  recorded_at: Wed, 19 Jun 2019 17:35:24 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/institutions/get_by_id
+    body:
+      encoding: UTF-8
+      string: '{"institution_id":"ins_109508","public_key":"PLAID_RUBY_PUBLIC_KEY"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v7.1.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      server:
+      - nginx
+      date:
+      - Wed, 19 Jun 2019 17:40:51 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '194'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "display_message": null,
+          "error_code": "INVALID_FIELD",
+          "error_message": "public_key must be a properly formatted, non-empty string",
+          "error_type": "INVALID_REQUEST",
+          "request_id": "kacvXKzTymqT0mG",
+          "suggested_action": null
+        }
+    http_version: 
+  recorded_at: Wed, 19 Jun 2019 17:40:51 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/institutions/get_by_id
+    body:
+      encoding: UTF-8
       string: '{"institution_id":"ins_109508","public_key":"PLAID_RUBY_PUBLIC_KEY"}'
     headers:
       User-Agent:
@@ -21,11 +111,11 @@ http_interactions:
       server:
       - nginx
       date:
-      - Tue, 21 May 2019 18:25:47 GMT
+      - Wed, 19 Jun 2019 18:06:31 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
-      - '345'
+      - '360'
       connection:
       - close
       plaid-version:
@@ -79,11 +169,101 @@ http_interactions:
               "credit_details",
               "holdings",
               "income",
-              "identity"
+              "identity",
+              "investments",
+              "liabilities"
             ]
           },
-          "request_id": "T7255Oyl4K9RWmF"
+          "request_id": "88i0vGMHV7MuX9J"
         }
     http_version: 
-  recorded_at: Tue, 21 May 2019 18:25:47 GMT
+  recorded_at: Wed, 19 Jun 2019 18:06:31 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/institutions/get_by_id
+    body:
+      encoding: UTF-8
+      string: '{"institution_id":"ins_109508","public_key":"5cbfbd8ca018fb3f318df84d5ab6fe"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v7.1.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Wed, 19 Jun 2019 19:48:54 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '359'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "institution": {
+            "country_codes": [
+              "US"
+            ],
+            "credentials": [
+              {
+                "label": "Username",
+                "name": "username",
+                "type": "text"
+              },
+              {
+                "label": "Password",
+                "name": "password",
+                "type": "password"
+              }
+            ],
+            "has_mfa": true,
+            "input_spec": "fixed",
+            "institution_id": "ins_109508",
+            "mfa": [
+              "code",
+              "list",
+              "questions",
+              "selections"
+            ],
+            "mfa_code_type": "numeric",
+            "name": "First Platypus Bank",
+            "products": [
+              "assets",
+              "auth",
+              "balance",
+              "transactions",
+              "credit_details",
+              "holdings",
+              "income",
+              "identity",
+              "investments",
+              "liabilities"
+            ]
+          },
+          "request_id": "GVWIorBThkdGGOb"
+        }
+    http_version: 
+  recorded_at: Wed, 19 Jun 2019 19:48:54 GMT
 recorded_with: VCR 4.0.0

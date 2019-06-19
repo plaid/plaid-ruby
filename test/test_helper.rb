@@ -45,28 +45,35 @@ class PlaidTest < MiniTest::Test
   end
 
   # Helper used to create a test item with given products
-  def create_item(credentials: CREDENTIALS,
-                  institution_id: SANDBOX_INSTITUTION,
+  def create_item(institution_id: SANDBOX_INSTITUTION,
                   initial_products: [:transactions],
                   transactions_start_date: nil,
                   transactions_end_date: nil,
-                  transactions_await_results: nil,
                   webhook: nil,
                   options: nil)
 
-    @item = client.item.create(
-      credentials: credentials,
+    public_token_response = client.sandbox.sandbox_public_token.create(
       institution_id: institution_id,
       initial_products: initial_products,
       transactions_start_date: transactions_start_date,
       transactions_end_date: transactions_end_date,
-      transactions_await_results: transactions_await_results,
       webhook: webhook,
       options: options
     )
 
-    @access_token = item.access_token
+    # public_token must be present
+    refute_empty(public_token_response.public_token)
+
+    # exchange public_token for access_token
+    exchange_token_response = client.item.public_token.exchange(
+      public_token_response.public_token
+    )
+
+    @access_token = exchange_token_response.access_token
     refute_empty(@access_token)
+
+    @item = client.item.get(@access_token)
+    refute_empty(@item)
   end
 
   # If create_item was used, remove the item
@@ -92,21 +99,6 @@ class PlaidTest < MiniTest::Test
   BAD_STRING = 'ABCDEFG1234567'.freeze
 
   BAD_ARRAY = ['ABCDEFG1234567'].freeze
-
-  CREDENTIALS = { username: 'user_good',
-                  password: 'pass_good' }.freeze
-
-  MFA_DEVICE_CREDENTIALS = { username: 'user_good',
-                             password: 'mfa_device' }.freeze
-
-  MFA_SELECTIONS_CREDENTIALS = { username: 'user_good',
-                                 password: 'mfa_selections' }.freeze
-
-  MFA_QUESTIONS_CREDENTIALS = { username: 'user_good',
-                                password: 'mfa_questions_1_1' }.freeze
-
-  INVALID_CREDENTIALS = { username: 'user_bad',
-                          password: 'pass_bad' }.freeze
 
   SANDBOX_INSTITUTION = 'ins_109508'.freeze
 

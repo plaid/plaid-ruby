@@ -5,6 +5,96 @@ http_interactions:
     uri: https://sandbox.plaid.com/institutions/search
     body:
       encoding: UTF-8
+      string: '{"query":"First Platypus Bank","products":["transactions"],"public_key":null}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v7.1.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      server:
+      - nginx
+      date:
+      - Wed, 19 Jun 2019 17:35:25 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '196'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "display_message": null,
+          "error_code": "INVALID_FIELD",
+          "error_message": "public_key must be a properly formatted, non-empty string",
+          "error_type": "INVALID_REQUEST",
+          "request_id": "chCR8F86KMJxw8A",
+          "suggested_action": null
+        }
+    http_version: 
+  recorded_at: Wed, 19 Jun 2019 17:35:25 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/institutions/search
+    body:
+      encoding: UTF-8
+      string: '{"query":"First Platypus Bank","products":["transactions"],"public_key":"PLAID_RUBY_PUBLIC_KEY"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v7.1.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      server:
+      - nginx
+      date:
+      - Wed, 19 Jun 2019 17:40:51 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '194'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "display_message": null,
+          "error_code": "INVALID_FIELD",
+          "error_message": "public_key must be a properly formatted, non-empty string",
+          "error_type": "INVALID_REQUEST",
+          "request_id": "ZXFRWVTowcZ5AmD",
+          "suggested_action": null
+        }
+    http_version: 
+  recorded_at: Wed, 19 Jun 2019 17:40:52 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/institutions/search
+    body:
+      encoding: UTF-8
       string: '{"query":"First Platypus Bank","products":["transactions"],"public_key":"PLAID_RUBY_PUBLIC_KEY"}'
     headers:
       User-Agent:
@@ -21,11 +111,11 @@ http_interactions:
       server:
       - nginx
       date:
-      - Tue, 21 May 2019 18:25:48 GMT
+      - Wed, 19 Jun 2019 18:06:32 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
-      - '349'
+      - '364'
       connection:
       - close
       plaid-version:
@@ -80,12 +170,104 @@ http_interactions:
                 "credit_details",
                 "holdings",
                 "income",
-                "identity"
+                "identity",
+                "investments",
+                "liabilities"
               ]
             }
           ],
-          "request_id": "8Kdnh6dsPg8DHeO"
+          "request_id": "3If3xt4k8Gpax19"
         }
     http_version: 
-  recorded_at: Tue, 21 May 2019 18:25:48 GMT
+  recorded_at: Wed, 19 Jun 2019 18:06:33 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/institutions/search
+    body:
+      encoding: UTF-8
+      string: '{"query":"First Platypus Bank","products":["transactions"],"public_key":"5cbfbd8ca018fb3f318df84d5ab6fe"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v7.1.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Wed, 19 Jun 2019 19:48:54 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '364'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "institutions": [
+            {
+              "country_codes": [
+                "US"
+              ],
+              "credentials": [
+                {
+                  "label": "Username",
+                  "name": "username",
+                  "type": "text"
+                },
+                {
+                  "label": "Password",
+                  "name": "password",
+                  "type": "password"
+                }
+              ],
+              "has_mfa": true,
+              "input_spec": "fixed",
+              "institution_id": "ins_109508",
+              "mfa": [
+                "code",
+                "list",
+                "questions",
+                "selections"
+              ],
+              "mfa_code_type": "numeric",
+              "name": "First Platypus Bank",
+              "products": [
+                "assets",
+                "auth",
+                "balance",
+                "transactions",
+                "credit_details",
+                "holdings",
+                "income",
+                "identity",
+                "investments",
+                "liabilities"
+              ]
+            }
+          ],
+          "request_id": "b5gWlu4EQlizHds"
+        }
+    http_version: 
+  recorded_at: Wed, 19 Jun 2019 19:48:54 GMT
 recorded_with: VCR 4.0.0

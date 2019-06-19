@@ -53,34 +53,6 @@ module Plaid
     end
   end
 
-  # Public: Class used to call the Credentials sub-product.
-  class Credentials < BaseProduct
-    # Public: Update credentials for an access_token.
-    #
-    # Does a POST /item/credentials/update call which is used to update
-    # credentials if the credentials become no longer valid.
-    #
-    # access_token - access_token who's item to update credentials for
-    # credentials  - New credentials
-    #
-    # Returns an UpdateResponse object with either an ItemStatus or MFA
-    # response.
-    def update(access_token, credentials)
-      post_with_auth 'item/credentials/update',
-                     UpdateResponse,
-                     access_token: access_token,
-                     credentials: credentials
-    end
-
-    # Public: Response for /item/credentials/update.
-    class UpdateResponse < Models::BaseResponse
-      ##
-      # :attr_reader:
-      # Public: The item: Plaid::Models::Item.
-      property :item, coerce: Models::Item
-    end
-  end
-
   # Public: Class used to call the PublicToken sub-product
   class PublicToken < BaseProduct
     # Public: Creates a public token from an access_token.
@@ -177,11 +149,6 @@ module Plaid
 
     ##
     # :attr_reader:
-    # Public: The Plaid::Credentials product accessor.
-    subproduct :credentials
-
-    ##
-    # :attr_reader:
     # Public: The Plaid::PublicToken product accessor.
     subproduct :public_token
 
@@ -189,127 +156,6 @@ module Plaid
     # :attr_reader:
     # Public: The Plaid::Webhook product accessor.
     subproduct :webhook
-
-    # Public: Creates an item.
-    #
-    # Does a POST /item/create call which attemps to create a new item for you
-    # possibly returning a success, error, or multi-factor authentication
-    # response.
-    #
-    # credentials                - Institution credentials to create item with.
-    # institution_id             - Institution ID to create item with.
-    # initial_products           - Initial products to create the item with,
-    #                              i.e. [:transactions].
-    # transactions_start_date    - date at which to begin the item's initial
-    #                              transaction pull (optional).
-    # transactions_end_date      - date at which to end the item's initial
-    #                              transaction pull (optional).
-    # transactions_await_results - if true, the initial transaction pull will
-    #                              be performed synchronously (optional).
-    # webhook                    - webhook to associate with the item
-    #                              (optional).
-    # options                    - Additional options to merge into API
-    #                              request.
-    #
-    # Returns an ItemResponse object with item info including access_token and
-    # ItemStatus, or MFA response or error.
-    def create(credentials:,
-               institution_id:,
-               initial_products:,
-               transactions_start_date: nil,
-               transactions_end_date: nil,
-               transactions_await_results: nil,
-               webhook: nil,
-               options: nil)
-
-      options_payload = {}
-
-      txn_options = transaction_options transactions_start_date,
-                                        transactions_end_date,
-                                        transactions_await_results
-
-      options_payload[:transactions] = txn_options if txn_options != {}
-      options_payload[:webhook] = webhook unless webhook.nil?
-      options_payload = options_payload.merge(options) unless options.nil?
-
-      post_with_auth 'item/create',
-                     ItemResponse,
-                     credentials: credentials,
-                     institution_id: institution_id,
-                     initial_products: initial_products,
-                     options: options_payload
-    end
-
-    private def transaction_options(start_date, end_date, await_results)
-      {}.tap do |options|
-        options[:start_date] = Plaid.convert_to_date_string(start_date) \
-          if start_date
-
-        options[:end_date] = Plaid.convert_to_date_string(end_date) \
-          if end_date
-
-        options[:await_results] = await_results if await_results
-      end
-    end
-
-    # Public: Response for /item/create and /item/mfa endpoints.
-    class ItemResponse < Models::BaseResponse
-      ##
-      # :attr_reader:
-      # Public: The String access_token to use with API.
-      property :access_token
-
-      ##
-      # :attr_reader:
-      # Public: The Plaid::Models::Item object, returned if item has been
-      # successfully created.
-      property :item, coerce: Models::Item
-
-      ##
-      # :attr_reader:
-      # Public: The MFA/OTP device information: Plaid::Models::MFA::Device.
-      property :device, coerce: Models::MFA::Device
-
-      ##
-      # :attr_reader:
-      # Public: The list of devices to send the OTP to:
-      # Array of Plaid::Models::MFA::DeviceListElement.
-      property :device_list, coerce: Array[Models::MFA::DeviceListElement]
-
-      ##
-      # :attr_reader:
-      # Public: The String MFA type. E.g. "device_list", "device", "questions",
-      # "selections".
-      property :mfa_type
-
-      ##
-      # :attr_reader:
-      # Public: The Array of String MFA questions.
-      property :questions
-
-      ##
-      # :attr_reader:
-      # Public: The Array of MFA selections: Plaid::Models::MFA::Selection.
-      property :selections, coerce: Array[Models::MFA::Selection]
-    end
-
-    # Public: Submit an MFA step.
-    #
-    # Does a POST /item/mfa call which gives you the ability to respond to an
-    # MFA.
-    #
-    # access_token - To submit MFA step for.
-    # mfa_type     - The MFA type indicated in the MFA response.
-    # responses    - List of answers/responses to MFA.
-    #
-    # Returns an ItemResponse instance.
-    def mfa(access_token, mfa_type, responses)
-      post_with_auth 'item/mfa',
-                     ItemResponse,
-                     access_token: access_token,
-                     mfa_type: mfa_type,
-                     responses: responses
-    end
 
     # Public: Get information about an item.
     #
