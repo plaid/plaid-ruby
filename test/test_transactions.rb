@@ -18,18 +18,18 @@ class PlaidTransactionsTest < PlaidTest
     while retries < num_retries
       retries += 1
       begin
-        response = client.transactions.get(access_token, start_date, end_date, account_ids: account_ids,  count: count, offset: offset, options: options)
+        response = client.transactions.get(access_token, start_date, end_date, account_ids: account_ids, count: count, offset: offset, options: options)
       rescue Plaid::ItemError => e
         if retries < num_retries
-            sleep(retries * 2)
-            next
+          sleep(retries * 2)
+          next
         else
           raise e
         end
       end
-   end
-   return response
- end
+    end
+    response
+  end
 
   def test_get
     response = get_transactions_with_retries(access_token, '2016-01-01', '2017-01-01')
@@ -95,10 +95,10 @@ class PlaidTransactionsTest < PlaidTest
 
   def test_get_with_additional_options
     response = get_transactions_with_retries(access_token,
-                                            '2016-01-01',
-                                            '2017-01-01',
-                                            options: { count: 2,
-                                                       offset: 1 })
+                                             '2016-01-01',
+                                             '2017-01-01',
+                                             options: { count: 2,
+                                                        offset: 1 })
     assert_equal(2, response['transactions'].length)
   end
 
