@@ -3,24 +3,12 @@ require_relative 'test_helper'
 # Internal: The test for Plaid::Item.
 class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
   def test_create
-    create_item credentials: CREDENTIALS
+    create_item
     refute_empty(item.item)
 
     assert_equal(['transactions'], @item.item.billed_products)
     assert_equal(SANDBOX_INSTITUTION, @item.item.institution_id)
     refute_includes(item, 'mfa_type')
-  end
-
-  def test_create_invalid_credentials
-    assert_raises(Plaid::ItemError) do
-      create_item credentials: INVALID_CREDENTIALS
-    end
-  end
-
-  def test_create_bad_credentials
-    assert_raises(Plaid::InvalidRequestError) do
-      create_item credentials: BAD_STRING
-    end
   end
 
   def test_create_invalid_institution
@@ -44,7 +32,6 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
   def test_create_with_options
     create_item(transactions_start_date: '2016-01-01',
                 transactions_end_date: '2016-02-01',
-                transactions_await_results: true,
                 webhook: 'https://plaid.com/webhook-test')
 
     refute_empty(item.item)
@@ -53,8 +40,7 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
 
   def test_create_with_additional_options
     options = { transactions: { start_date: '2016-01-01',
-                                end_date: '2016-02-01',
-                                await_results: true },
+                                end_date: '2016-02-01' },
                 webhook: 'https://plaid.com/webhook-test' }
 
     create_item(options: options)
@@ -66,7 +52,6 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
   def test_create_with_options_date_objects
     create_item(transactions_start_date: Date.parse('2016-01-01'),
                 transactions_end_date: Date.parse('2017-01-01'),
-                transactions_await_results: true,
                 webhook: 'https://plaid.com/webhook-test')
 
     refute_empty(item.item)
@@ -77,44 +62,8 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
     assert_raises(Plaid::InvalidRequestError) do
       create_item(transactions_start_date: BAD_STRING,
                   transactions_end_date: BAD_STRING,
-                  transactions_await_results: BAD_STRING,
                   webhook: BAD_STRING)
     end
-  end
-
-  def test_mfa_device
-    create_item credentials: MFA_DEVICE_CREDENTIALS
-    assert_equal('device_list', item.mfa_type)
-
-    mfa_response = answer_mfa(item)
-    assert_equal('device', mfa_response.mfa_type)
-
-    mfa_response = answer_mfa(mfa_response)
-    refute_empty(mfa_response.item)
-  end
-
-  def test_mfa_selections
-    create_item credentials: MFA_SELECTIONS_CREDENTIALS
-    assert_equal('selections', item.mfa_type)
-
-    mfa_response = answer_mfa(item)
-    refute_empty(mfa_response.item)
-  end
-
-  def test_mfa_questions
-    create_item credentials: MFA_QUESTIONS_CREDENTIALS
-    assert_equal('questions', item.mfa_type)
-
-    mfa_response = answer_mfa(item)
-    refute_empty(mfa_response.item)
-  end
-
-  def test_credentials_update
-    create_item
-    client.sandbox.sandbox_item.reset_login(access_token)
-
-    update_response = client.item.credentials.update(access_token, CREDENTIALS)
-    refute_empty(update_response.item)
   end
 
   def test_get
@@ -241,39 +190,5 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
     assert_raises(Plaid::InvalidRequestError) do
       client.item.webhook.update(access_token, BAD_STRING)
     end
-  end
-
-  protected
-
-  def answer_mfa(data)
-    case data.mfa_type
-    when 'questions'
-      answer_questions(data.questions)
-    when 'device_list'
-      answer_device_list(data.device_list)
-    when 'selections'
-      answer_selections(data.selections)
-    when 'device'
-      answer_device(data.device)
-    end
-  end
-
-  def answer_questions(*)
-    answers = ['answer_0_0']
-    client.item.mfa(access_token, 'questions', answers)
-  end
-
-  def answer_device_list(device_list)
-    device = device_list[0].device_id
-    client.item.mfa(access_token, 'device_list', [device])
-  end
-
-  def answer_device(*)
-    client.item.mfa(access_token, 'device', ['1234'])
-  end
-
-  def answer_selections(*)
-    answers = %w[tomato ketchup]
-    client.item.mfa(access_token, 'selections', answers)
   end
 end

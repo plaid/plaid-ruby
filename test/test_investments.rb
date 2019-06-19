@@ -7,8 +7,7 @@ class PlaidInvestmentsTest < PlaidTest # rubocop:disable Metrics/ClassLength
   def setup
     create_item initial_products: [:investments],
                 transactions_start_date: '2019-05-28',
-                transactions_end_date: '2019-06-12',
-                transactions_await_results: true
+                transactions_end_date: '2019-06-12'
   end
 
   # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
