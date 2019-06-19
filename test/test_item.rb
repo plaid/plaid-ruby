@@ -40,7 +40,7 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
 
   def test_create_with_additional_options
     options = { transactions: { start_date: '2016-01-01',
-                                end_date: '2016-02-01'},
+                                end_date: '2016-02-01' },
                 webhook: 'https://plaid.com/webhook-test' }
 
     create_item(options: options)
@@ -191,5 +191,4 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
       client.item.webhook.update(access_token, BAD_STRING)
     end
   end
-
 end

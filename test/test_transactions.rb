@@ -10,6 +10,11 @@ class PlaidTransactionsTest < PlaidTest
                 transactions_end_date: '2017-01-01'
   end
 
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/LineLength
+  # rubocop:disable Style/GuardClause
+
   # Helper method to get transactions - retry up to 5 times with
   # a backoff delay to wait out PRODUCT_NOT_READY errors
   def get_transactions_with_retries(access_token, start_date, end_date, count: nil, offset: nil, account_ids: nil, options: nil)
@@ -32,7 +37,9 @@ class PlaidTransactionsTest < PlaidTest
   end
 
   def test_get
-    response = get_transactions_with_retries(access_token, '2016-01-01', '2017-01-01')
+    response = get_transactions_with_retries(access_token,
+                                             '2016-01-01',
+                                             '2017-01-01')
     refute_empty(response['accounts'])
     refute_empty(response['transactions'])
 
@@ -58,9 +65,13 @@ class PlaidTransactionsTest < PlaidTest
 
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/LineLength
+  # rubocop:enable Style/GuardClause
 
   def test_get_date_objects
-    response = get_transactions_with_retries(access_token, '2016-01-01', '2017-01-01')
+    response = get_transactions_with_retries(access_token,
+                                             '2016-01-01',
+                                             '2017-01-01')
     refute_empty(response['accounts'])
     refute_empty(response['transactions'])
 

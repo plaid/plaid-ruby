@@ -62,15 +62,15 @@ module Plaid
     # Returns a SandboxCreateResponse object with a public token and item id.
     def create(institution_id:,
                initial_products:,
-               transactions_start_date:nil,
-               transactions_end_date:nil,
+               transactions_start_date: nil,
+               transactions_end_date: nil,
                webhook: nil,
                options: nil)
 
       options_payload = {}
       options_payload[:webhook] = webhook unless webhook.nil?
       txn_options = transaction_options transactions_start_date,
-                                  transactions_end_date
+                                        transactions_end_date
       options_payload[:transactions] = txn_options if txn_options != {}
       options_payload = options_payload.merge(options) unless options.nil?
 
@@ -80,7 +80,7 @@ module Plaid
                            initial_products: initial_products,
                            options: options_payload
     end
-    
+
     private def transaction_options(start_date, end_date)
       {}.tap do |options|
         options[:start_date] = Plaid.convert_to_date_string(start_date) \
