@@ -71,6 +71,7 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
 
     item = client.item.get(access_token)
     refute_empty(item.item)
+    sleep 4 # sleep for 4 seconds to buffer sandbox webhook
     refute_empty(item.status)
   end
 
