@@ -20,12 +20,13 @@ module Plaid
     # client_id  - The String Plaid account client ID to authenticate requests
     # secret     - The String Plaid account secret to authenticate requests
     # public_key - The String Plaid account public key to authenticate requests
-    def initialize(env:, client_id:, secret:, public_key:, &block)
+    def initialize(env:, client_id:, secret:, public_key:, client_app: nil, &block)
       @env        = env.to_sym
       @api_host   = api_host
       @client_id  = client_id
       @secret     = secret
       @public_key = public_key
+      @client_app = client_app
 
       create_connection(&block)
     end

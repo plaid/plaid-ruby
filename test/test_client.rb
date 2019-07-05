@@ -17,6 +17,14 @@ class PlaidClientTest < PlaidTest
     assert_equal 'https://development.plaid.com',
                  client.instance_variable_get(:@api_host)
 
+    client = Plaid::Client.new(env: :sandbox,
+                               client_id: ENV['PLAID_RUBY_CLIENT_ID'],
+                               secret: ENV['PLAID_RUBY_SECRET'],
+                               public_key: ENV['PLAID_RUBY_PUBLIC_KEY'],
+                               client_app: 'plaid-ruby-unit-tests')
+    assert_equal 'plaid-ruby-unit-tests',
+                 client.instance_variable_get(:@client_app)
+
     assert_raises(ArgumentError) do
       Plaid::Client.new(env: :BAD_ENV,
                         client_id: ENV['PLAID_RUBY_CLIENT_ID'],
