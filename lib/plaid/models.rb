@@ -1587,5 +1587,224 @@ module Plaid
       # Asset Report; see AssetReportItem object for fields.
       property :items, coerce: Array[AssetReportItem]
     end
+
+    # Public: A representation of an eligibility for the Public Service Loan
+    # Forgiveness program.
+    class PSLFStatus < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The estimated date borrower will have completed 120 qualifying
+      # monthly payments.
+      property :estimated_eligibility_date
+
+      ##
+      # :attr_reader:
+      # Public: The number of qualifying payments that have been made.
+      property :payments_made
+
+      ##
+      # :attr_reader:
+      # Public: The number of qualifying payments that are remaining.
+      property :payments_remaining
+    end
+
+    # Public: A representation of the status of a student loan.
+    class StudentLoanStatus < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The status of the loan, e.g. "repayment", "deferment",
+      # "forbearance".
+      property :type
+
+      ##
+      # :attr_reader:
+      # Public: The date the status expires.
+      property :end_date
+    end
+
+    # Public: A representation of a student loan repayment plan.
+    class StudentLoanRepaymentPlan < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The type of repayment plan, e.g., "standard", "income".
+      property :type
+
+      ##
+      # :attr_reader:
+      # Public: The full name of the repayment plan, e.g. "Standard Repayment".
+      property :description
+    end
+
+    # Public: A representation of a student loan servicer address.
+    class StudentLoanServicerAddress < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The full city name
+      property :city
+
+      ##
+      # :attr_reader:
+      # Public: The ISO 3166-1 alpha-2 country code
+      property :country
+
+      ##
+      # :attr_reader:
+      # Public: The postal code.
+      property :postal_code
+
+      ##
+      # :attr_reader:
+      # Public: The region or state.
+      property :region
+
+      ##
+      # :attr_reader:
+      # Public: The full street address.
+      property :street
+    end
+
+    # Public: A representation of a student loan liability.
+    class StudentLoanLiability < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The String account ID. E.g.
+      # "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D".
+      property :account_id
+
+      ##
+      # :attr_reader:
+      # Public: The account number of the loan.
+      property :account_number
+
+      ##
+      # :attr_reader:
+      # Public: The dates on which loaned funds were disbursed or will be
+      # disbursed. These are often in the past.
+      property :disbursement_dates
+
+      ##
+      # :attr_reader:
+      # Public: The date when the student loan is expected to be paid off.
+      property :expected_payoff_date
+
+      ##
+      # :attr_reader:
+      # Public: The guarantor of the student loan.
+      property :guarantor
+
+      ##
+      # :attr_reader:
+      # Public: The interest rate on loans shown as a percentage.
+      property :interest_rate_percentage
+
+      ##
+      # :attr_reader:
+      # Public: True if a payment is currently overdue.
+      property :is_overdue
+
+      ##
+      # :attr_reader:
+      # Public: The amount of the last payment.
+      property :last_payment_amount
+
+      ##
+      # :attr_reader:
+      # Public: The date of the last payment.
+      property :last_payment_date
+
+      ##
+      # :attr_reader:
+      # Public: The outstanding balance on the last statement.
+      property :last_statement_balance
+
+      ##
+      # :attr_reader:
+      # Public: The date the last statement was issued.
+      property :last_statement_issue_date
+
+      ##
+      # :attr_reader:
+      # Public: The status of the loan, e.g. "Repayment", "Deferment",
+      # "Forbearance".
+      property :loan_status, coerce: StudentLoanStatus
+
+      ##
+      # :attr_reader:
+      # Public: The type of loan, e.g., "Consolidation Loans".
+      property :loan_name
+
+      ##
+      # :attr_reader:
+      # Public: The minimum payment due for the next billing cycle.
+      property :minimum_payment_amount
+
+      ##
+      # :attr_reader:
+      # Public: The due date for the next payment.
+      property :next_payment_due_date
+
+      ##
+      # :attr_reader:
+      # Public: The date on which the loan was initially lent.
+      property :origination_date
+
+      ##
+      # :attr_reader:
+      # Public: The original principal balance of the loan.
+      property :origination_principal_amount
+
+      ##
+      # :attr_reader:
+      # Public: The dollar amount of the accrued interest balance.
+      property :outstanding_interest_amount
+
+      ##
+      # :attr_reader:
+      # Public: The relevant account number that should be used to reference
+      # this loan for payments. This is sometimes different from
+      # account_number.
+      property :payment_reference_number
+
+      ##
+      # :attr_reader:
+      # Public: Information about the student's eligibility in the Public
+      # Service Loan Forgiveness program.
+      property :pslf_status, coerce: PSLFStatus
+
+      ##
+      # :attr_reader:
+      # Public: Information about the repayment plan.
+      property :repayment_plan, coerce: StudentLoanRepaymentPlan
+
+      ##
+      # :attr_reader:
+      # Public: The sequence number of the student loan.
+      property :sequence_number
+
+      ##
+      # :attr_reader:
+      # Public: The servicer address for which payments should be sent.
+      property :servicer_address, coerce: StudentLoanServicerAddress
+
+      ##
+      # :attr_reader:
+      # Public: The year to date (YTD) interest paid.
+      property :ytd_interest_paid
+
+      ##
+      # :attr_reader:
+      # Public: The year to date (YTD) principal paid.
+      property :ytd_principal_paid
+    end
+
+    # Public: A representation of someone's liabilities of all types.
+    class Liabilities < BaseModel
+      include Hashie::Extensions::IgnoreUndeclared
+
+      ##
+      # :attr_reader:
+      # Public: Student loan liabilities associated with the item.
+      property :student, coerce: Array[StudentLoanLiability]
+    end
   end
 end

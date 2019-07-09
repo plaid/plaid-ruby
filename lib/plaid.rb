@@ -19,6 +19,7 @@ require_relative 'plaid/products/processor'
 require_relative 'plaid/products/sandbox'
 require_relative 'plaid/products/transactions'
 require_relative 'plaid/products/investments'
+require_relative 'plaid/products/liabilities'
 require_relative 'plaid/client'
 
 # Public: The namespace for all the things Plaid.

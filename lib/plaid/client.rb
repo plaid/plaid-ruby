@@ -79,6 +79,11 @@ module Plaid
 
     ##
     # :attr_reader:
+    # Public: The Plaid::Liabilities product accessor.
+    subproduct :liabilities
+
+    ##
+    # :attr_reader:
     # Public: The Plaid::Processor product accessor.
     subproduct :processor
 
