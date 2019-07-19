@@ -782,6 +782,11 @@ module Plaid
       # :attr_reader:
       # Public: The Array of String country codes supported by this institution.
       property :country_codes
+
+      ##
+      # :attr_reader:
+      # Public: The array of routing numbers associated with this institution.
+      property :routing_numbers
     end
 
     module MFA
