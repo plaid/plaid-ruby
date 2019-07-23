@@ -1,3 +1,7 @@
+# 8.1.0 23-Jul-2019
+
+* Add binding for the new [liabilities product](https://plaid.com/docs/api/#liabilities)
+
 # 8.0.0 19-Jun-2019
 
 * Deprecate direct integration as it is no longer supported
