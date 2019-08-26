@@ -26,6 +26,16 @@ class PlaidProcessorTest < PlaidTest
     assert_match(/account_id must be a properly formatted/, error.error_message)
   end
 
+  def test_ocrolus_processor_token_create_invalid_account_id
+    error = assert_raises(Plaid::InvalidRequestError) do
+      client.processor.ocrolus.processor_token.create access_token,
+                                                     BAD_STRING
+    end
+
+    assert_equal 'INVALID_FIELD', error.error_code
+    assert_match(/account_id must be a properly formatted/, error.error_message)
+  end
+
   def test_apex_processor_token_create_invalid_account_id
     error = assert_raises(Plaid::InvalidRequestError) do
       client.processor.apex.processor_token.create access_token,
