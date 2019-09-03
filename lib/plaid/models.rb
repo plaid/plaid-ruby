@@ -1195,44 +1195,6 @@ module Plaid
       property :unofficial_currency_code
     end
 
-    # Public: A representation of asset report address details.
-    class AssetReportAddressData < BaseModel
-      ##
-      # :attr_reader:
-      # Public: The String street name.
-      property :street
-
-      ##
-      # :attr_reader:
-      # Public: The String name.
-      property :city
-
-      ##
-      # :attr_reader:
-      # Public: The String state name.
-      property :state
-
-      ##
-      # :attr_reader:
-      # Public: The String zip code.
-      property :zip
-    end
-
-    # Public: A representation of an asset report address.
-    class AssetReportAddress < BaseModel
-      ##
-      # :attr_reader:
-      # Public: Data about the components comprising an address; see
-      # IdentityAddressData object for fields.
-      property :data, coerce: AssetReportAddressData
-
-      ##
-      # :attr_reader:
-      # Public: When true, identifies the address as the primary address on an
-      # account.
-      property :primary
-    end
-
     # Public: A representation of an asset report owner.
     class AssetReportOwner < BaseModel
       ##
@@ -1257,8 +1219,8 @@ module Plaid
       ##
       # :attr_reader:
       # Public: Data about the various addresses associated with the account
-      # by the financial institution; see AssetReportAddress object for fields.
-      property :addresses, coerce: Array[AssetReportAddress]
+      # by the financial institution; see IdentityAddress object for fields.
+      property :addresses, coerce: Array[IdentityAddress]
     end
 
     # Public: A representation of an asset report balance.
