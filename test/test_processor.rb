@@ -29,7 +29,7 @@ class PlaidProcessorTest < PlaidTest
   def test_ocrolus_processor_token_create_invalid_account_id
     error = assert_raises(Plaid::InvalidRequestError) do
       client.processor.ocrolus.processor_token.create access_token,
-                                                     BAD_STRING
+                                                      BAD_STRING
     end
 
     assert_equal 'INVALID_FIELD', error.error_code

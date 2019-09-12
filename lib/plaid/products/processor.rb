@@ -114,9 +114,9 @@ module Plaid
       # token.
       def create(access_token, account_id)
         post_with_auth 'processor/ocrolus/processor_token/create',
-                        ProcessorTokenResponse,
-                        access_token: access_token,
-                        account_id: account_id
+                       ProcessorTokenResponse,
+                       access_token: access_token,
+                       account_id: account_id
       end
     end
 
