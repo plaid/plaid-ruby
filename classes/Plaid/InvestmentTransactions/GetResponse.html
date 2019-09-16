@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title>Plaid::Item::ItemResponse</title>
+    <title>Plaid::InvestmentTransactions::GetResponse</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
@@ -13,15 +13,15 @@
 <script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
 
 
-    <meta property="og:title" value="Plaid::Item::ItemResponse">
+    <meta property="og:title" value="Plaid::InvestmentTransactions::GetResponse">
 
   
     
-    <meta name="description" content="Response for /item/create and /item/mfa endpoints.">
-    <meta property="og:description" content="Response for /item/create and /item/mfa endpoints.">
+    <meta name="description" content="Response for /investments/transactions/get.">
+    <meta property="og:description" content="Response for /investments/transactions/get.">
   
 
-    <meta name="keywords" content="Plaid::Item::ItemResponse class">
+    <meta name="keywords" content="Plaid::InvestmentTransactions::GetResponse class">
   
 </head>
 
@@ -30,7 +30,7 @@
         
         <h1>
             <span class="type">Class</span>
-            Plaid::Item::ItemResponse
+            Plaid::InvestmentTransactions::GetResponse
             
                 <span class="parent">&lt;
                     
@@ -41,7 +41,7 @@
         </h1>
         <ul class="files">
             
-            <li><a href="../../../files/lib/plaid/products/item_rb.html">lib/plaid/products/item.rb</a></li>
+            <li><a href="../../../files/lib/plaid/products/investments_rb.html">lib/plaid/products/investments.rb</a></li>
             
         </ul>
     </div>
@@ -50,7 +50,7 @@
   
     <div class="description">
       
-<p>Response for /item/create and /item/mfa endpoints.</p>
+<p>Response for /investments/transactions/get.</p>
 
     </div>
   
@@ -90,24 +90,18 @@
             <td class='attr-rw'>
               [R]
             </td>
-            <td class='attr-name'>access_token</td>
-            <td class='attr-desc'><p>The String <a href="ItemResponse.html#attribute-i-access_token"><code>access_token</code></a> to use with API.</p></td>
+            <td class='attr-name'>accounts</td>
+            <td class='attr-desc'><p>The list of accounts: Array of <a
+href="../Models/Account.html">Plaid::Models::Account</a>.</p></td>
           </tr>
         
           <tr valign='top'>
             <td class='attr-rw'>
               [R]
             </td>
-            <td class='attr-name'>device</td>
-            <td class='attr-desc'><p>The MFA/OTP device information: <a href="../Models/MFA/Device.html"><code>Plaid::Models::MFA::Device</code></a>.</p></td>
-          </tr>
-        
-          <tr valign='top'>
-            <td class='attr-rw'>
-              [R]
-            </td>
-            <td class='attr-name'>device_list</td>
-            <td class='attr-desc'><p>The list of devices to send the OTP to: Array of <a href="../Models/MFA/DeviceListElement.html"><code>Plaid::Models::MFA::DeviceListElement</code></a>.</p></td>
+            <td class='attr-name'>investment_transactions</td>
+            <td class='attr-desc'><p>The list of investment transactions: Array of <a
+href="../Models/InvestmentTransaction.html">Plaid::Models::InvestmentTransaction</a>.</p></td>
           </tr>
         
           <tr valign='top'>
@@ -115,31 +109,24 @@
               [R]
             </td>
             <td class='attr-name'>item</td>
-            <td class='attr-desc'><p>The <a href="../Models/Item.html"><code>Plaid::Models::Item</code></a> object, returned if item has been successfully created.</p></td>
+            <td class='attr-desc'><p>The item: <a href="../Models/Item.html">Plaid::Models::Item</a>.</p></td>
           </tr>
         
           <tr valign='top'>
             <td class='attr-rw'>
               [R]
             </td>
-            <td class='attr-name'>mfa_type</td>
-            <td class='attr-desc'><p>The String MFA type. E.g. “device_list”, “device”, “questions”, “selections”.</p></td>
+            <td class='attr-name'>securities</td>
+            <td class='attr-desc'><p>The list of securities referenced by the investment transactions: Array of
+<a href="../Models/Security.html">Plaid::Models::Security</a>.</p></td>
           </tr>
         
           <tr valign='top'>
             <td class='attr-rw'>
               [R]
             </td>
-            <td class='attr-name'>questions</td>
-            <td class='attr-desc'><p>The Array of String MFA questions.</p></td>
-          </tr>
-        
-          <tr valign='top'>
-            <td class='attr-rw'>
-              [R]
-            </td>
-            <td class='attr-name'>selections</td>
-            <td class='attr-desc'><p>The Array of MFA selections: <a href="../Models/MFA/Selection.html"><code>Plaid::Models::MFA::Selection</code></a>.</p></td>
+            <td class='attr-name'>total_investment_transactions</td>
+            <td class='attr-desc'><p>The Numeric total investment transactions count.</p></td>
           </tr>
         
       </table>

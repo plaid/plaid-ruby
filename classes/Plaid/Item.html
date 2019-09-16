@@ -23,7 +23,7 @@
 
     <meta name="keywords" content="Plaid::Item class">
   
-    <meta name="keywords" content="create, mfa, get, remove">
+    <meta name="keywords" content="get, remove">
   
 </head>
 
@@ -52,7 +52,7 @@
   
     <div class="description">
       
-<p>Class used to call the <a href="Item.html"><code>Item</code></a> product.</p>
+<p>Class used to call the <a href="Item.html">Item</a> product.</p>
 
     </div>
   
@@ -85,11 +85,6 @@
       
         <li>
           <span class="type">CLASS</span>
-          <a href="Item/ItemResponse.html">Plaid::Item::ItemResponse</a>
-        </li>
-      
-        <li>
-          <span class="type">CLASS</span>
           <a href="Item/RemoveResponse.html">Plaid::Item::RemoveResponse</a>
         </li>
       
@@ -102,18 +97,6 @@
     <div class="sectiontitle">Methods</div>
     <dl class="methods">
       
-        <dt>C</dt>
-        <dd>
-          <ul>
-            
-              
-              <li>
-                <a href="#method-i-create">create</a>
-              </li>
-            
-          </ul>
-        </dd>
-      
         <dt>G</dt>
         <dd>
           <ul>
@@ -121,18 +104,6 @@
               
               <li>
                 <a href="#method-i-get">get</a>
-              </li>
-            
-          </ul>
-        </dd>
-      
-        <dt>M</dt>
-        <dd>
-          <ul>
-            
-              
-              <li>
-                <a href="#method-i-mfa">mfa</a>
               </li>
             
           </ul>
@@ -176,15 +147,7 @@
               [R]
             </td>
             <td class='attr-name'>access_token</td>
-            <td class='attr-desc'><p>The <a href="AccessToken.html"><code>Plaid::AccessToken</code></a> product accessor.</p></td>
-          </tr>
-        
-          <tr valign='top'>
-            <td class='attr-rw'>
-              [R]
-            </td>
-            <td class='attr-name'>credentials</td>
-            <td class='attr-desc'><p>The <a href="Credentials.html"><code>Plaid::Credentials</code></a> product accessor.</p></td>
+            <td class='attr-desc'><p>The <a href="AccessToken.html">Plaid::AccessToken</a> product accessor.</p></td>
           </tr>
         
           <tr valign='top'>
@@ -192,7 +155,7 @@
               [R]
             </td>
             <td class='attr-name'>public_token</td>
-            <td class='attr-desc'><p>The <a href="PublicToken.html"><code>Plaid::PublicToken</code></a> product accessor.</p></td>
+            <td class='attr-desc'><p>The <a href="PublicToken.html">Plaid::PublicToken</a> product accessor.</p></td>
           </tr>
         
           <tr valign='top'>
@@ -200,7 +163,7 @@
               [R]
             </td>
             <td class='attr-name'>webhook</td>
-            <td class='attr-desc'><p>The <a href="Webhook.html"><code>Plaid::Webhook</code></a> product accessor.</p></td>
+            <td class='attr-desc'><p>The <a href="Webhook.html">Plaid::Webhook</a> product accessor.</p></td>
           </tr>
         
       </table>
@@ -233,97 +196,6 @@
       <div class="sectiontitle">Instance Public methods</div>
       
         <div class="method">
-          <div class="title method-title" id="method-i-create">
-            
-              <b>create</b>(credentials:, institution_id:, initial_products:, transactions_start_date: nil, transactions_end_date: nil, transactions_await_results: nil, webhook: nil, options: nil)
-            
-            <a href="../../classes/Plaid/Item.html#method-i-create" name="method-i-create" class="permalink">Link</a>
-          </div>
-
-          
-            <div class="description">
-              <p>Creates an item.</p>
-
-<p>Does a POST /item/create call which attemps to create a new item for you possibly returning a success, error, or multi-factor authentication response.</p>
-<dl class="rdoc-list note-list"><dt>credentials
-<dd>
-<p>Institution credentials to create item with.</p>
-</dd><dt>institution_id
-<dd>
-<p>Institution ID to create item with.</p>
-</dd><dt>initial_products
-<dd>
-<p>Initial products to create the item with, i.e. [:transactions].</p>
-</dd><dt>transactions_start_date
-<dd>
-<p>date at which to begin the item&#39;s initial transaction pull (optional).</p>
-</dd><dt>transactions_end_date
-<dd>
-<p>date at which to end the item&#39;s initial transaction pull (optional).</p>
-</dd><dt>transactions_await_results
-<dd>
-<p>if true, the initial transaction pull will be performed synchronously (optional).</p>
-</dd><dt>webhook
-<dd>
-<p>webhook to associate with the item (optional).</p>
-</dd><dt>options
-<dd>
-<p>Additional options to merge into API request.</p>
-</dd></dl>
-
-<h3 id="method-i-create-label-Returns">Returns</h3>
-
-<p>Returns an <a href="Item/ItemResponse.html"><code>ItemResponse</code></a> object with item info including <a href="Item.html#attribute-i-access_token"><code>access_token</code></a> and ItemStatus, or MFA response or error.</p>
-            </div>
-          
-
-          
-
-          
-
-          
-            
-            <div class="sourcecode">
-              
-              <p class="source-link">
-                Source:
-                <a href="javascript:toggleSource('method-i-create_source')" id="l_method-i-create_source">show</a>
-                
-              </p>
-              <div id="method-i-create_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/item.rb, line 216</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>(<span class="ruby-value">credentials:</span>,
-           <span class="ruby-value">institution_id:</span>,
-           <span class="ruby-value">initial_products:</span>,
-           <span class="ruby-value">transactions_start_date:</span> <span class="ruby-keyword">nil</span>,
-           <span class="ruby-value">transactions_end_date:</span> <span class="ruby-keyword">nil</span>,
-           <span class="ruby-value">transactions_await_results:</span> <span class="ruby-keyword">nil</span>,
-           <span class="ruby-value">webhook:</span> <span class="ruby-keyword">nil</span>,
-           <span class="ruby-value">options:</span> <span class="ruby-keyword">nil</span>)
-
-  <span class="ruby-identifier">options_payload</span> = {}
-
-  <span class="ruby-identifier">txn_options</span> = <span class="ruby-identifier">transaction_options</span> <span class="ruby-identifier">transactions_start_date</span>,
-                                    <span class="ruby-identifier">transactions_end_date</span>,
-                                    <span class="ruby-identifier">transactions_await_results</span>
-
-  <span class="ruby-identifier">options_payload</span>[<span class="ruby-value">:transactions</span>] = <span class="ruby-identifier">txn_options</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">txn_options</span> <span class="ruby-operator">!=</span> {}
-  <span class="ruby-identifier">options_payload</span>[<span class="ruby-value">:webhook</span>] = <span class="ruby-identifier">webhook</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">webhook</span>.<span class="ruby-identifier">nil?</span>
-  <span class="ruby-identifier">options_payload</span> = <span class="ruby-identifier">options_payload</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">nil?</span>
-
-  <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;item/create&#39;</span>,
-                 <span class="ruby-constant">ItemResponse</span>,
-                 <span class="ruby-value">credentials:</span> <span class="ruby-identifier">credentials</span>,
-                 <span class="ruby-value">institution_id:</span> <span class="ruby-identifier">institution_id</span>,
-                 <span class="ruby-value">initial_products:</span> <span class="ruby-identifier">initial_products</span>,
-                 <span class="ruby-value">options:</span> <span class="ruby-identifier">options_payload</span>
-<span class="ruby-keyword">end</span></pre>
-              </div>
-            </div>
-            
-          </div>
-        
-        <div class="method">
           <div class="title method-title" id="method-i-get">
             
               <b>get</b>(access_token)
@@ -335,15 +207,18 @@
             <div class="description">
               <p>Get information about an item.</p>
 
-<p>Does a POST /item/get call which returns information about an item or ItemStatus.</p>
-<dl class="rdoc-list note-list"><dt><a href="Item.html#attribute-i-access_token"><code>access_token</code></a>
+<p>Does a POST /item/get call which returns information about an item or
+ItemStatus.</p>
+<dl class="rdoc-list note-list"><dt><a href="Item.html#attribute-i-access_token">#access_token</a>
 <dd>
-<p><a href="Item.html#attribute-i-access_token"><code>access_token</code></a> who&#39;s item to fetch status for</p>
+<p><a href="Item.html#attribute-i-access_token">#access_token</a> who&#39;s
+item to fetch status for</p>
 </dd></dl>
 
 <h3 id="method-i-get-label-Returns">Returns</h3>
 
-<p>Returns a <a href="Item/GetResponse.html"><code>GetResponse</code></a> object with item information.</p>
+<p>Returns a <a href="Item/GetResponse.html">GetResponse</a> object with item
+information.</p>
             </div>
           
 
@@ -361,68 +236,11 @@
                 
               </p>
               <div id="method-i-get_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/item.rb, line 322</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/item.rb, line 168</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get</span>(<span class="ruby-identifier">access_token</span>)
   <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;item/get&#39;</span>,
                  <span class="ruby-constant">GetResponse</span>,
                  <span class="ruby-value">access_token:</span> <span class="ruby-identifier">access_token</span>
-<span class="ruby-keyword">end</span></pre>
-              </div>
-            </div>
-            
-          </div>
-        
-        <div class="method">
-          <div class="title method-title" id="method-i-mfa">
-            
-              <b>mfa</b>(access_token, mfa_type, responses)
-            
-            <a href="../../classes/Plaid/Item.html#method-i-mfa" name="method-i-mfa" class="permalink">Link</a>
-          </div>
-
-          
-            <div class="description">
-              <p>Submit an MFA step.</p>
-
-<p>Does a POST /item/mfa call which gives you the ability to respond to an MFA.</p>
-<dl class="rdoc-list note-list"><dt><a href="Item.html#attribute-i-access_token"><code>access_token</code></a>
-<dd>
-<p>To submit MFA step for.</p>
-</dd><dt>mfa_type
-<dd>
-<p>The MFA type indicated in the MFA response.</p>
-</dd><dt>responses
-<dd>
-<p>List of answers/responses to MFA.</p>
-</dd></dl>
-
-<h3 id="method-i-mfa-label-Returns">Returns</h3>
-
-<p>Returns an <a href="Item/ItemResponse.html"><code>ItemResponse</code></a> instance.</p>
-            </div>
-          
-
-          
-
-          
-
-          
-            
-            <div class="sourcecode">
-              
-              <p class="source-link">
-                Source:
-                <a href="javascript:toggleSource('method-i-mfa_source')" id="l_method-i-mfa_source">show</a>
-                
-              </p>
-              <div id="method-i-mfa_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/item.rb, line 306</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mfa</span>(<span class="ruby-identifier">access_token</span>, <span class="ruby-identifier">mfa_type</span>, <span class="ruby-identifier">responses</span>)
-  <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;item/mfa&#39;</span>,
-                 <span class="ruby-constant">ItemResponse</span>,
-                 <span class="ruby-value">access_token:</span> <span class="ruby-identifier">access_token</span>,
-                 <span class="ruby-value">mfa_type:</span> <span class="ruby-identifier">mfa_type</span>,
-                 <span class="ruby-value">responses:</span> <span class="ruby-identifier">responses</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -442,14 +260,16 @@
               <p>Removes an item</p>
 
 <p>Does a POST /item/remove call which is used to remove an item</p>
-<dl class="rdoc-list note-list"><dt><a href="Item.html#attribute-i-access_token"><code>access_token</code></a>
+<dl class="rdoc-list note-list"><dt><a href="Item.html#attribute-i-access_token">#access_token</a>
 <dd>
-<p><a href="Item.html#attribute-i-access_token"><code>access_token</code></a> who&#39;s item to remove</p>
+<p><a href="Item.html#attribute-i-access_token">#access_token</a> who&#39;s
+item to remove</p>
 </dd></dl>
 
 <h3 id="method-i-remove-label-Returns">Returns</h3>
 
-<p>Returns a <a href="Item/RemoveResponse.html"><code>RemoveResponse</code></a> object with remove result.</p>
+<p>Returns a <a href="Item/RemoveResponse.html">RemoveResponse</a> object with
+remove result.</p>
             </div>
           
 
@@ -467,7 +287,7 @@
                 
               </p>
               <div id="method-i-remove_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/item.rb, line 348</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/item.rb, line 194</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remove</span>(<span class="ruby-identifier">access_token</span>)
   <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;item/remove&#39;</span>,
                  <span class="ruby-constant">RemoveResponse</span>,

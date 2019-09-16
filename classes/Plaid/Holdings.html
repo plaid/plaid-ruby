@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Plaid::Holdings</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <meta property="og:title" value="Plaid::Holdings">
+
+  
+    
+    <meta name="description" content="Class used to get Holdings for the Investments product.">
+    <meta property="og:description" content="Class used to get Holdings for the Investments product.">
+  
+
+    <meta name="keywords" content="Plaid::Holdings class">
+  
+    <meta name="keywords" content="get">
+  
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            <span class="type">Class</span>
+            Plaid::Holdings
+            
+                <span class="parent">&lt;
+                    
+                    <a href="BaseProduct.html">Plaid::BaseProduct</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/lib/plaid/products/investments_rb.html">lib/plaid/products/investments.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Class used to get <a href="Holdings.html">Holdings</a> for the <a
+href="Investments.html">Investments</a> product.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+    <!-- Sections -->
+    <div class="sectiontitle">Sections</div>
+    <ul>
+      
+        <li><a href="#Public">Public</a></li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Holdings/GetResponse.html">Plaid::Holdings::GetResponse</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>G</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-get">get</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+    
+  
+
+    
+      <div class="contenttitle" id="Public">
+        Public
+      </div>
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-get">
+            
+              <b>get</b>(access_token, account_ids: nil, options: nil)
+            
+            <a href="../../classes/Plaid/Holdings.html#method-i-get" name="method-i-get" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              <p>Get information about all available investment holdings.</p>
+
+<p>Does a POST /investments/holdings/get call which gives you high level
+account data along with investment holdings and associated securities from
+all investment accounts contained in the access_token&#39;s item.</p>
+<dl class="rdoc-list note-list"><dt>access_token
+<dd>
+<p>access_token who&#39;s item to fetch holdings for.</p>
+</dd><dt>account_ids
+<dd>
+<p>Specific account ids to fetch holdings for (optional).</p>
+</dd><dt>options
+<dd>
+<p>Additional options to merge into API request.</p>
+</dd></dl>
+
+<h3 id="method-i-get-label-Returns">Returns</h3>
+
+<p>Returns <a href="Holdings/GetResponse.html">GetResponse</a>.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-get_source')" id="l_method-i-get_source">show</a>
+                
+              </p>
+              <div id="method-i-get_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/products/investments.rb, line 84</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get</span>(<span class="ruby-identifier">access_token</span>, <span class="ruby-value">account_ids:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">options:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;investments/holdings/get&#39;</span>,
+                 <span class="ruby-constant">GetResponse</span>,
+                 <span class="ruby-identifier">build_payload</span>(<span class="ruby-identifier">access_token</span>,
+                               <span class="ruby-value">account_ids:</span> <span class="ruby-identifier">account_ids</span>,
+                               <span class="ruby-value">options:</span> <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

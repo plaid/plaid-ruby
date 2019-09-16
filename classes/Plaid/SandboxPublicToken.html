@@ -52,7 +52,8 @@
   
     <div class="description">
       
-<p>Class used to call the <a href="SandboxPublicToken.html"><code>SandboxPublicToken</code></a> sub-product</p>
+<p>Class used to call the <a
+href="SandboxPublicToken.html">SandboxPublicToken</a> sub-product</p>
 
     </div>
   
@@ -151,7 +152,7 @@
         <div class="method">
           <div class="title method-title" id="method-i-create">
             
-              <b>create</b>(institution_id:, initial_products:, webhook: nil, options: nil)
+              <b>create</b>(institution_id:, initial_products:, transactions_start_date: nil, transactions_end_date: nil, webhook: nil, options: nil)
             
             <a href="../../classes/Plaid/SandboxPublicToken.html#method-i-create" name="method-i-create" class="permalink">Link</a>
           </div>
@@ -160,7 +161,8 @@
             <div class="description">
               <p>Creates a public token for sandbox testing.</p>
 
-<p>Does a POST /sandbox/public_token/create call which can be used to generate a public_token given an institution and list of products.</p>
+<p>Does a POST /sandbox/public_token/create call which can be used to generate
+a public_token given an institution and list of products.</p>
 <dl class="rdoc-list note-list"><dt>institution_id
 <dd>
 <p>Specific institution id to generate token for.</p>
@@ -177,7 +179,9 @@
 
 <h3 id="method-i-create-label-Returns">Returns</h3>
 
-<p>Returns a <a href="SandboxPublicToken/SandboxCreateResponse.html"><code>SandboxCreateResponse</code></a> object with a public token and item id.</p>
+<p>Returns a <a
+href="SandboxPublicToken/SandboxCreateResponse.html">SandboxCreateResponse</a>
+object with a public token and item id.</p>
             </div>
           
 
@@ -198,11 +202,16 @@
                 <pre><span class="ruby-comment"># File lib/plaid/products/sandbox.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>(<span class="ruby-value">institution_id:</span>,
            <span class="ruby-value">initial_products:</span>,
+           <span class="ruby-value">transactions_start_date:</span> <span class="ruby-keyword">nil</span>,
+           <span class="ruby-value">transactions_end_date:</span> <span class="ruby-keyword">nil</span>,
            <span class="ruby-value">webhook:</span> <span class="ruby-keyword">nil</span>,
            <span class="ruby-value">options:</span> <span class="ruby-keyword">nil</span>)
 
   <span class="ruby-identifier">options_payload</span> = {}
   <span class="ruby-identifier">options_payload</span>[<span class="ruby-value">:webhook</span>] = <span class="ruby-identifier">webhook</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">webhook</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">txn_options</span> = <span class="ruby-identifier">transaction_options</span> <span class="ruby-identifier">transactions_start_date</span>,
+                                    <span class="ruby-identifier">transactions_end_date</span>
+  <span class="ruby-identifier">options_payload</span>[<span class="ruby-value">:transactions</span>] = <span class="ruby-identifier">txn_options</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">txn_options</span> <span class="ruby-operator">!=</span> {}
   <span class="ruby-identifier">options_payload</span> = <span class="ruby-identifier">options_payload</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">nil?</span>
 
   <span class="ruby-identifier">post_with_public_key</span> <span class="ruby-string">&#39;sandbox/public_token/create&#39;</span>,

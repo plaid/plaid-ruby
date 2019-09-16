@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title>Plaid::Credentials</title>
+    <title>Plaid::Liabilities</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
@@ -13,17 +13,17 @@
 <script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
 
 
-    <meta property="og:title" value="Plaid::Credentials">
+    <meta property="og:title" value="Plaid::Liabilities">
 
   
     
-    <meta name="description" content="Class used to call the Credentials sub-product.">
-    <meta property="og:description" content="Class used to call the Credentials sub-product.">
+    <meta name="description" content="Class used to call the Liabilities product.">
+    <meta property="og:description" content="Class used to call the Liabilities product.">
   
 
-    <meta name="keywords" content="Plaid::Credentials class">
+    <meta name="keywords" content="Plaid::Liabilities class">
   
-    <meta name="keywords" content="update">
+    <meta name="keywords" content="get">
   
 </head>
 
@@ -32,7 +32,7 @@
         
         <h1>
             <span class="type">Class</span>
-            Plaid::Credentials
+            Plaid::Liabilities
             
                 <span class="parent">&lt;
                     
@@ -43,7 +43,7 @@
         </h1>
         <ul class="files">
             
-            <li><a href="../../files/lib/plaid/products/item_rb.html">lib/plaid/products/item.rb</a></li>
+            <li><a href="../../files/lib/plaid/products/liabilities_rb.html">lib/plaid/products/liabilities.rb</a></li>
             
         </ul>
     </div>
@@ -52,7 +52,7 @@
   
     <div class="description">
       
-<p>Class used to call the <a href="Credentials.html"><code>Credentials</code></a> sub-product.</p>
+<p>Class used to call the <a href="Liabilities.html">Liabilities</a> product.</p>
 
     </div>
   
@@ -74,17 +74,6 @@
 
 
   
-    <!-- Namespace -->
-    <div class="sectiontitle">Namespace</div>
-    <ul>
-      
-        <li>
-          <span class="type">CLASS</span>
-          <a href="Credentials/UpdateResponse.html">Plaid::Credentials::UpdateResponse</a>
-        </li>
-      
-    </ul>
-  
 
 
   
@@ -92,13 +81,13 @@
     <div class="sectiontitle">Methods</div>
     <dl class="methods">
       
-        <dt>U</dt>
+        <dt>G</dt>
         <dd>
           <ul>
             
               
               <li>
-                <a href="#method-i-update">update</a>
+                <a href="#method-i-get">get</a>
               </li>
             
           </ul>
@@ -149,29 +138,31 @@
       <div class="sectiontitle">Instance Public methods</div>
       
         <div class="method">
-          <div class="title method-title" id="method-i-update">
+          <div class="title method-title" id="method-i-get">
             
-              <b>update</b>(access_token, credentials)
+              <b>get</b>(access_token, account_ids: nil)
             
-            <a href="../../classes/Plaid/Credentials.html#method-i-update" name="method-i-update" class="permalink">Link</a>
+            <a href="../../classes/Plaid/Liabilities.html#method-i-get" name="method-i-get" class="permalink">Link</a>
           </div>
 
           
             <div class="description">
-              <p>Update credentials for an access_token.</p>
+              <p>Get liabilities information.</p>
 
-<p>Does a POST /item/credentials/update call which is used to update credentials if the credentials become no longer valid.</p>
+<p>Does a POST /liabilities/get call which fetches liabilities associated with
+an access_token&#39;s item.</p>
 <dl class="rdoc-list note-list"><dt>access_token
 <dd>
-<p>access_token who&#39;s item to update credentials for</p>
-</dd><dt>credentials
+<p>access_token of an item to fetch liabilities for.</p>
+</dd><dt>account_ids
 <dd>
-<p>New credentials</p>
+<p>Specific account ids to fetch liabilities for (optional).</p>
 </dd></dl>
 
-<h3 id="method-i-update-label-Returns">Returns</h3>
+<h3 id="method-i-get-label-Returns">Returns</h3>
 
-<p>Returns an <a href="Credentials/UpdateResponse.html"><code>UpdateResponse</code></a> object with either an ItemStatus or MFA response.</p>
+<p>Returns the <a href="LiabilitiesResponse.html">LiabilitiesResponse</a>
+object with liabilities data.</p>
             </div>
           
 
@@ -185,16 +176,16 @@
               
               <p class="source-link">
                 Source:
-                <a href="javascript:toggleSource('method-i-update_source')" id="l_method-i-update_source">show</a>
+                <a href="javascript:toggleSource('method-i-get_source')" id="l_method-i-get_source">show</a>
                 
               </p>
-              <div id="method-i-update_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/item.rb, line 68</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">update</span>(<span class="ruby-identifier">access_token</span>, <span class="ruby-identifier">credentials</span>)
-  <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;item/credentials/update&#39;</span>,
-                 <span class="ruby-constant">UpdateResponse</span>,
-                 <span class="ruby-value">access_token:</span> <span class="ruby-identifier">access_token</span>,
-                 <span class="ruby-value">credentials:</span> <span class="ruby-identifier">credentials</span>
+              <div id="method-i-get_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/products/liabilities.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get</span>(<span class="ruby-identifier">access_token</span>, <span class="ruby-value">account_ids:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;liabilities/get&#39;</span>,
+                 <span class="ruby-constant">LiabilitiesResponse</span>,
+                 <span class="ruby-identifier">build_payload</span>(<span class="ruby-identifier">access_token</span>,
+                               <span class="ruby-value">account_ids:</span> <span class="ruby-identifier">account_ids</span>)
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
