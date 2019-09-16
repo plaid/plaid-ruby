@@ -1,3 +1,7 @@
+# 8.2.0 16-Sep-2019
+
+* Update Assets schema for international address support
+
 # 8.1.0 23-Jul-2019
 
 * Add binding for the new [liabilities product](https://plaid.com/docs/api/#liabilities)
