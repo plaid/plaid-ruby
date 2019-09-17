@@ -1,3 +1,7 @@
+# 8.3.0 17-Sep-2019
+
+* Add support for new [Ocrolus Partnership](https://plaid.com/docs/ocrolus/)
+
 # 8.2.0 16-Sep-2019
 
 * Update Assets schema for international address support
