@@ -1,0 +1,498 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/payment_initiation/recipient/create
+    body:
+      encoding: UTF-8
+      string: '{"name":"John Doe","iban":"GB33BUKB20201555555555","address":{"street":["Street
+        Name 999"],"city":"City","postal_code":"99999","country":"GB"},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.3.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Sat, 07 Dec 2019 01:47:05 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '121'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "recipient_id": "recipient-id-sandbox-8ccb97a8-ee08-4448-bf6d-aa88174c8048",
+          "request_id": "SEuwG6uPQastA4J"
+        }
+    http_version: 
+  recorded_at: Sat, 07 Dec 2019 01:47:05 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/payment_initiation/recipient/get
+    body:
+      encoding: UTF-8
+      string: '{"recipient_id":"recipient-id-sandbox-8ccb97a8-ee08-4448-bf6d-aa88174c8048","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.3.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Sat, 07 Dec 2019 01:47:06 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '230'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "address": {
+            "city": "City",
+            "country": "GB",
+            "postal_code": "99999",
+            "street": [
+              "Street Name 999"
+            ]
+          },
+          "iban": "GB33BUKB20201555555555",
+          "name": "John Doe",
+          "recipient_id": "recipient-id-sandbox-8ccb97a8-ee08-4448-bf6d-aa88174c8048",
+          "request_id": "WXnVz2gt85XmFHP"
+        }
+    http_version: 
+  recorded_at: Sat, 07 Dec 2019 01:47:06 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/payment_initiation/recipient/list
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.3.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Sat, 07 Dec 2019 01:47:06 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '550'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJyZWNpcGllbnRzIjogWwogICAgewogICAgICAiYWRkcmVzcyI6IHsKICAgICAgICAiY2l0eSI6ICJOYWNrYSIsCiAgICAgICAgImNvdW50cnkiOiAiU0UiLAogICAgICAgICJwb3N0YWxfY29kZSI6ICIxMzE0OCIsCiAgICAgICAgInN0cmVldCI6IFsKICAgICAgICAgICJEaWxpZ2Vuc3bDpGdlbiA5NiIKICAgICAgICBdCiAgICAgIH0sCiAgICAgICJpYmFuIjogIlNFODIzMDAwMDAwMDAwOTExMTAxNTMxMCIsCiAgICAgICJuYW1lIjogIk1hdHRpcyBLYW5jYW5zIEVubnZhbGwiLAogICAgICAicmVjaXBpZW50X2lkIjogInJlY2lwaWVudC1pZC1zYW5kYm94LWFmMDM5ZDE3LTZlMTMtNDg1Ni04NzU2LWY4ZjZkZjkzYTY0ZCIKICAgIH0sCiAgICB7CiAgICAgICJhZGRyZXNzIjogewogICAgICAgICJjaXR5IjogIk5hY2thIiwKICAgICAgICAiY291bnRyeSI6ICJTRSIsCiAgICAgICAgInBvc3RhbF9jb2RlIjogIjEzMTQ4IiwKICAgICAgICAic3RyZWV0IjogWwogICAgICAgICAgIkRpbGlnZW5zdsOkZ2VuIDk2IgogICAgICAgIF0KICAgICAgfSwKICAgICAgImliYW4iOiAiU0U4MjMwMDAwMDAwMDA5MTExMDE1MzEwIiwKICAgICAgIm5hbWUiOiAiTWF0dGlzIEthbmNhbnMgRW52YWxsIiwKICAgICAgInJlY2lwaWVudF9pZCI6ICJyZWNpcGllbnQtaWQtc2FuZGJveC1lYmFmYWY3Ny1lMDU5LTQxNDctYjczOC05OTMwYWQxMjI3NDQiCiAgICB9LAogICAgewogICAgICAiYWRkcmVzcyI6IHsKICAgICAgICAiY2l0eSI6ICJOYWNrYSIsCiAgICAgICAgImNvdW50cnkiOiAiU0UiLAogICAgICAgICJwb3N0YWxfY29kZSI6ICIxMzE0OCIsCiAgICAgICAgInN0cmVldCI6IFsKICAgICAgICAgICIiCiAgICAgICAgXQogICAgICB9LAogICAgICAiaWJhbiI6ICJTRTgyMzAwMDAwMDAwMDkxMTEwMTUzMTAiLAogICAgICAibmFtZSI6ICJNYXR0aXMgS2FuY2FucyBFbnZhbGwiLAogICAgICAicmVjaXBpZW50X2lkIjogInJlY2lwaWVudC1pZC1zYW5kYm94LWFmNjA3ZGE5LWE2NzktNGM3MS1hN2MxLTUzZmVmNWI0MTlkMCIKICAgIH0sCiAgICB7CiAgICAgICJhZGRyZXNzIjogewogICAgICAgICJjaXR5IjogIk5hY2thIiwKICAgICAgICAiY291bnRyeSI6ICJTRSIsCiAgICAgICAgInBvc3RhbF9jb2RlIjogIjEzMTQ4IiwKICAgICAgICAic3RyZWV0IjogWwogICAgICAgICAgIkRpbGlnZW5zdsOkZ2VuIDk2IgogICAgICAgIF0KICAgICAgfSwKICAgICAgImliYW4iOiAiR0IzM0JVS0IyMDIwMTU1NTU1NTU1NSIsCiAgICAgICJuYW1lIjogIkpvaG4gRG9lIiwKICAgICAgInJlY2lwaWVudF9pZCI6ICJyZWNpcGllbnQtaWQtc2FuZGJveC00NmI5MGNkOC1jNTMwLTQyZTktOWEzMC05MGY5Nzc0OWEwNDMiCiAgICB9LAogICAgewogICAgICAiYWRkcmVzcyI6IHsKICAgICAgICAiY2l0eSI6ICJDaXR5IiwKICAgICAgICAiY291bnRyeSI6ICJHQiIsCiAgICAgICAgInBvc3RhbF9jb2RlIjogIjk5OTk5IiwKICAgICAgICAic3RyZWV0IjogWwogICAgICAgICAgIlN0cmVldCBOYW1lIDk5OSIKICAgICAgICBdCiAgICAgIH0sCiAgICAgICJpYmFuIjogIkdCMzNCVUtCMjAyMDE1NTU1NTU1NTUiLAogICAgICAibmFtZSI6ICJKb2huIERvZSIsCiAgICAgICJyZWNpcGllbnRfaWQiOiAicmVjaXBpZW50LWlkLXNhbmRib3gtOGNjYjk3YTgtZWUwOC00NDQ4LWJmNmQtYWE4ODE3NGM4MDQ4IgogICAgfSwKICAgIHsKICAgICAgImFkZHJlc3MiOiB7CiAgICAgICAgImNpdHkiOiAiY2l0eSIsCiAgICAgICAgImNvdW50cnkiOiAiR0IiLAogICAgICAgICJwb3N0YWxfY29kZSI6ICI5OTk5OSIsCiAgICAgICAgInN0cmVldCI6IFsKICAgICAgICAgICJzdHJlZXQgbmFtZSA5OTkiCiAgICAgICAgXQogICAgICB9LAogICAgICAiaWJhbiI6ICJHQjMzQlVLQjIwMjAxNTU1NTU1NTU1IiwKICAgICAgIm5hbWUiOiAiSm9obiBEb2UiLAogICAgICAicmVjaXBpZW50X2lkIjogInJlY2lwaWVudC1pZC1zYW5kYm94LWFiNDc2ZjdlLTlhYWItNDIxYi1hYmFmLTNlMjFjODcwMTU5MSIKICAgIH0sCiAgICB7CiAgICAgICJhZGRyZXNzIjogewogICAgICAgICJjaXR5IjogIkxvbmRvbiIsCiAgICAgICAgImNvdW50cnkiOiAiR0IiLAogICAgICAgICJwb3N0YWxfY29kZSI6ICJOMTQgNkJQIiwKICAgICAgICAic3RyZWV0IjogWwogICAgICAgICAgIjEwMCBIaWdoIFN0cmVldCIKICAgICAgICBdCiAgICAgIH0sCiAgICAgICJpYmFuIjogIkdCMzNCVUtCMjAyMDE1NTU1NTU1NTUiLAogICAgICAibmFtZSI6ICJBbWJyb29zIGRlIFZyaWVzIiwKICAgICAgInJlY2lwaWVudF9pZCI6ICJyZWNpcGllbnQtaWQtc2FuZGJveC05ZjA2OTIyMy02ZDQ4LTQ0ZmMtYWU2Yy1lNzkxMWI2ZDNhM2MiCiAgICB9CiAgXSwKICAicmVxdWVzdF9pZCI6ICJIbVptMUtxMUI0SnJqUVkiCn0=
+    http_version: 
+  recorded_at: Sat, 07 Dec 2019 01:47:06 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/payment_initiation/payment/create
+    body:
+      encoding: UTF-8
+      string: '{"recipient_id":"recipient-id-sandbox-8ccb97a8-ee08-4448-bf6d-aa88174c8048","reference":"test_payment","amount":{"currency":"GBP","value":100.0},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.3.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Sat, 07 Dec 2019 01:47:06 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '158'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "payment_id": "payment-id-sandbox-a14ebc02-ec92-46d2-abc0-b61cb23675b9",
+          "request_id": "K82Kz6oXl7XXdgy",
+          "status": "PAYMENT_STATUS_INPUT_NEEDED"
+        }
+    http_version: 
+  recorded_at: Sat, 07 Dec 2019 01:47:06 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/payment_initiation/payment/token/create
+    body:
+      encoding: UTF-8
+      string: '{"payment_id":"payment-id-sandbox-a14ebc02-ec92-46d2-abc0-b61cb23675b9","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.3.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Sat, 07 Dec 2019 01:47:07 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '164'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "payment_token": "payment-token-sandbox-2dcae7ea-1321-49ef-886b-5671ba2df20f",
+          "payment_token_expiration_time": "2019-12-07T02:02:06Z",
+          "request_id": "0Jz1gZ930DSilXN"
+        }
+    http_version: 
+  recorded_at: Sat, 07 Dec 2019 01:47:07 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/payment_initiation/payment/get
+    body:
+      encoding: UTF-8
+      string: '{"payment_id":"payment-id-sandbox-a14ebc02-ec92-46d2-abc0-b61cb23675b9","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.3.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Sat, 07 Dec 2019 01:47:07 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '339'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "amount": {
+            "currency": "GBP",
+            "value": 100
+          },
+          "last_status_update": "2019-12-07T01:47:06Z",
+          "payment_id": "payment-id-sandbox-a14ebc02-ec92-46d2-abc0-b61cb23675b9",
+          "payment_token": "payment-token-sandbox-2dcae7ea-1321-49ef-886b-5671ba2df20f",
+          "payment_token_expiration_time": "2019-12-07T02:02:06Z",
+          "recipient_id": "recipient-id-sandbox-8ccb97a8-ee08-4448-bf6d-aa88174c8048",
+          "reference": "test_payment",
+          "request_id": "gFmZ1XZyvmzRsSl",
+          "status": "PAYMENT_STATUS_INPUT_NEEDED"
+        }
+    http_version: 
+  recorded_at: Sat, 07 Dec 2019 01:47:07 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/payment_initiation/payment/list
+    body:
+      encoding: UTF-8
+      string: '{"count":10,"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.3.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Sat, 07 Dec 2019 01:47:07 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '935'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "next_cursor": "2019-12-07T01:03:37Z",
+          "payments": [
+            {
+              "amount": {
+                "currency": "GBP",
+                "value": 100
+              },
+              "last_status_update": "2019-12-07T01:47:06Z",
+              "payment_id": "payment-id-sandbox-a14ebc02-ec92-46d2-abc0-b61cb23675b9",
+              "payment_token": "payment-token-sandbox-2dcae7ea-1321-49ef-886b-5671ba2df20f",
+              "payment_token_expiration_time": "2019-12-07T02:02:06Z",
+              "recipient_id": "recipient-id-sandbox-8ccb97a8-ee08-4448-bf6d-aa88174c8048",
+              "reference": "test_payment",
+              "status": "PAYMENT_STATUS_INPUT_NEEDED"
+            },
+            {
+              "amount": {
+                "currency": "GBP",
+                "value": 100
+              },
+              "last_status_update": "2019-12-07T01:38:45Z",
+              "payment_id": "payment-id-sandbox-27fcfa6c-92af-4a1e-9004-502be68edc16",
+              "payment_token": "payment-token-sandbox-fcf27d28-1c5b-4d47-9cc2-ede5f44d8672",
+              "payment_token_expiration_time": "2019-12-07T01:53:45Z",
+              "recipient_id": "recipient-id-sandbox-8ccb97a8-ee08-4448-bf6d-aa88174c8048",
+              "reference": "test_payment",
+              "status": "PAYMENT_STATUS_INPUT_NEEDED"
+            },
+            {
+              "amount": {
+                "currency": "GBP",
+                "value": 100
+              },
+              "last_status_update": "2019-12-07T01:35:32Z",
+              "payment_id": "payment-id-sandbox-34c44301-7817-4ac3-8bde-f6629e1a608a",
+              "payment_token": "payment-token-sandbox-deebae1d-ad71-4073-acc0-91465da9b8ef",
+              "payment_token_expiration_time": "2019-12-07T01:50:32Z",
+              "recipient_id": "recipient-id-sandbox-8ccb97a8-ee08-4448-bf6d-aa88174c8048",
+              "reference": "test_payment",
+              "status": "PAYMENT_STATUS_INPUT_NEEDED"
+            },
+            {
+              "amount": {
+                "currency": "GBP",
+                "value": 100
+              },
+              "last_status_update": "2019-12-07T01:34:34Z",
+              "payment_id": "payment-id-sandbox-4081c931-f2b1-42d6-b3ca-034aa712034a",
+              "payment_token": "payment-token-sandbox-4060011d-28b1-42fc-8513-01e1bf242e5a",
+              "payment_token_expiration_time": "2019-12-07T01:49:34Z",
+              "recipient_id": "recipient-id-sandbox-8ccb97a8-ee08-4448-bf6d-aa88174c8048",
+              "reference": "test_payment",
+              "status": "PAYMENT_STATUS_INPUT_NEEDED"
+            },
+            {
+              "amount": {
+                "currency": "GBP",
+                "value": 999.99
+              },
+              "last_status_update": "2019-12-07T01:30:20Z",
+              "payment_id": "payment-id-sandbox-64f1064c-cf89-450e-b43b-6dfecb69647d",
+              "payment_token": "payment-token-sandbox-bbfcc8b7-ed21-4c71-b432-0dd11b5e0e78",
+              "payment_token_expiration_time": "2019-12-07T01:45:20Z",
+              "recipient_id": "recipient-id-sandbox-8ccb97a8-ee08-4448-bf6d-aa88174c8048",
+              "reference": "reference",
+              "status": "PAYMENT_STATUS_INPUT_NEEDED"
+            },
+            {
+              "amount": {
+                "currency": "GBP",
+                "value": 999.99
+              },
+              "last_status_update": "2019-12-07T01:30:19Z",
+              "payment_id": "payment-id-sandbox-5bafe997-56aa-4e23-88a4-322d4c1c5d56",
+              "payment_token": "payment-token-sandbox-465598e4-cd72-4d55-8dc9-69adde08fac3",
+              "payment_token_expiration_time": "2019-12-07T01:45:19Z",
+              "recipient_id": "recipient-id-sandbox-8ccb97a8-ee08-4448-bf6d-aa88174c8048",
+              "reference": "reference",
+              "status": "PAYMENT_STATUS_INPUT_NEEDED"
+            },
+            {
+              "amount": {
+                "currency": "GBP",
+                "value": 999.99
+              },
+              "last_status_update": "2019-12-07T01:30:19Z",
+              "payment_id": "payment-id-sandbox-8365a971-38d9-466b-9223-d321692ecb6c",
+              "payment_token": "payment-token-sandbox-91c21494-fb05-4744-b987-c88bdc37a622",
+              "payment_token_expiration_time": "2019-12-07T01:45:19Z",
+              "recipient_id": "recipient-id-sandbox-8ccb97a8-ee08-4448-bf6d-aa88174c8048",
+              "reference": "reference",
+              "status": "PAYMENT_STATUS_INPUT_NEEDED"
+            },
+            {
+              "amount": {
+                "currency": "GBP",
+                "value": 999.99
+              },
+              "last_status_update": "2019-12-07T01:30:19Z",
+              "payment_id": "payment-id-sandbox-07ae43c5-26fd-43ab-9316-665a5c95257a",
+              "payment_token": "payment-token-sandbox-1a82776d-6b48-4811-908b-ee0673ba687f",
+              "payment_token_expiration_time": "2019-12-07T01:45:19Z",
+              "recipient_id": "recipient-id-sandbox-8ccb97a8-ee08-4448-bf6d-aa88174c8048",
+              "reference": "reference",
+              "status": "PAYMENT_STATUS_INPUT_NEEDED"
+            },
+            {
+              "amount": {
+                "currency": "GBP",
+                "value": 999.99
+              },
+              "last_status_update": "2019-12-07T01:03:37Z",
+              "payment_id": "payment-id-sandbox-9c6ed876-9e9f-4717-9b92-18843770aa18",
+              "payment_token": "payment-token-sandbox-2848c6c0-4d86-47f8-b3b0-edeb9f11aef2",
+              "payment_token_expiration_time": "2019-12-07T01:18:37Z",
+              "recipient_id": "recipient-id-sandbox-8ccb97a8-ee08-4448-bf6d-aa88174c8048",
+              "reference": "reference",
+              "status": "PAYMENT_STATUS_INPUT_NEEDED"
+            },
+            {
+              "amount": {
+                "currency": "GBP",
+                "value": 999.99
+              },
+              "last_status_update": "2019-12-07T01:03:37Z",
+              "payment_id": "payment-id-sandbox-66fe3fb1-1d39-4bc2-8a30-433813dbbbb4",
+              "payment_token": "payment-token-sandbox-2cbcf290-928a-487b-b729-aedd38a00605",
+              "payment_token_expiration_time": "2019-12-07T01:18:37Z",
+              "recipient_id": "recipient-id-sandbox-8ccb97a8-ee08-4448-bf6d-aa88174c8048",
+              "reference": "reference",
+              "status": "PAYMENT_STATUS_INPUT_NEEDED"
+            }
+          ],
+          "request_id": "C6xHm8twFw8wAoo"
+        }
+    http_version: 
+  recorded_at: Sat, 07 Dec 2019 01:47:07 GMT
+recorded_with: VCR 4.0.0

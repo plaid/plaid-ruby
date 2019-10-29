@@ -102,6 +102,11 @@ module Plaid
     # Public: The Plaid::Investments product accessor.
     subproduct :investments
 
+    ##
+    # :attr_reader:
+    # Public: The Plaid::PaymentInitiation product accessor.
+    subproduct :payment_initiation
+
     # Public: Make a post request
     #
     # path    - Path or URL to make the request to
