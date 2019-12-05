@@ -105,12 +105,12 @@ module Plaid
       # Public: Creates a Ocrolus processor token from an access_token.
       #
       # Does a POST /processor/ocrolus/processor_token/create call which can be
-      # used to generate a Modern Treasury processor token for a given account ID.
+      # used to generate a Ocrolus processor token for a given account ID.
       #
       # access_token - access_token to create a public token for.
       # account_id - ID of the account to create a processor token for.
       #
-      # Returns a ProcessorTokenResponse object containing a Modern Treasury processor
+      # Returns a ProcessorTokenResponse object containing a Ocrolus processor
       # token.
       def create(access_token, account_id)
         post_with_auth 'processor/ocrolus/processor_token/create',
@@ -132,14 +132,15 @@ module Plaid
     class ProcessorToken < BaseProduct
       # Public: Creates a Modern Treasury processor token from an access_token.
       #
-      # Does a POST /processor/modern_treasury/processor_token/create call which can be
-      # used to generate a Modern Treasury processor token for a given account ID.
-      #
+      # Does a POST /processor/modern_treasury/processor_token/create call which
+      # can be used to generate a Modern Treasury processor token for a given
+      # account ID.
+      # 
       # access_token - access_token to create a public token for.
       # account_id - ID of the account to create a processor token for.
       #
-      # Returns a ProcessorTokenResponse object containing a Ocrolus processor
-      # token.
+      # Returns a ProcessorTokenResponse object containing a Modern Treasury
+      # processor token.
       def create(access_token, account_id)
         post_with_auth 'processor/modern_treasury/processor_token/create',
                        ProcessorTokenResponse,
