@@ -144,8 +144,8 @@ module Plaid
       property :sent_at
     end
 
-    # Public: A representation of Item transactions health
-    class ItemStatusTransactions < BaseModel
+    # Public: A representation of Item health
+    class ItemStatusHealth < BaseModel
       ##
       # :attr_reader:
       # Public: the String last failed update date (or nil).
@@ -157,10 +157,6 @@ module Plaid
       # Public: the String last successful update date (or nil).
       # (e.g. "2019-04-22T00:00:00Z").
       property :last_successful_update
-    end
-
-    # Public: A representation of Item update status
-    class ItemStatusHealth < ItemStatusTransactions
     end
 
     # Public: A representation of Item status
