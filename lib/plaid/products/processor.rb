@@ -143,14 +143,14 @@ module Plaid
     def create(access_token, account_id, processor)
       endpoint = 'processor/token/create'
       options = {
-        'access_token' => access_token,
-        'account_id' => account_id,
-        'processor' => processor
+        access_token: access_token,
+        account_id: account_id,
+        processor: processor
       }
 
       if processor == 'stripe'
         endpoint = '/processor/stripe/bank_account_token/create'
-        options.delete('processor')
+        options.delete(:processor)
       end
 
       post_with_auth endpoint, ProcessorTokenResponse, **options
