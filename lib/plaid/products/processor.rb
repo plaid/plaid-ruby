@@ -151,6 +151,9 @@ module Plaid
       if processor == 'stripe'
         endpoint = '/processor/stripe/bank_account_token/create'
         options.delete(:processor)
+      elsif processor == 'apex'
+        endpoint = '/processor/apex/processor_token/create'
+        options.delete(:processor)
       end
 
       post_with_auth endpoint, ProcessorTokenResponse, **options
