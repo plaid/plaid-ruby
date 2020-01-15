@@ -986,6 +986,12 @@ module Plaid
       # :attr_reader:
       # Public: The String unofficial currency code for the amount
       property :unofficial_currency_code
+
+      ##
+      # :attr_reader:
+      # Public: The String channel used to make a payment, e.g.
+      # "online", "in store", or "other".
+      property :payment_channel
     end
 
     # Public: A representation of an InvestmentTransaction in an investment
