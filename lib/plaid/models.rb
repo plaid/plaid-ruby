@@ -127,6 +127,12 @@ module Plaid
       # :attr_reader:
       # Public: The String webhook URL.
       property :webhook
+
+      ##
+      # :attr_reader:
+      # Public: The String consent expiration timestamp (or nil)
+      # (e.g. "2019-04-22T00:00:00Z").
+      property :consent_expiration_time
     end
 
     # Public: A representation of Item webhook status
