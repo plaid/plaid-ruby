@@ -159,6 +159,21 @@ module Plaid
       property :last_successful_update
     end
 
+    # Public: A representation of Item investments update status
+    class ItemStatusInvestments < BaseModel
+      ##
+      # :attr_reader:
+      # Public: the String last failed update date (or nil).
+      # (e.g. "2019-04-22T00:00:00Z").
+      property :last_failed_update
+
+      ##
+      # :attr_reader:
+      # Public: the String last successful update date (or nil).
+      # (e.g. "2019-04-22T00:00:00Z").
+      property :last_successful_update
+    end
+
     # Public: A representation of Item status
     class ItemStatus < BaseModel
       ##
@@ -170,6 +185,11 @@ module Plaid
       # :attr_reader:
       # Public: The ItemStatusTransactions for this ItemStatus.
       property :transactions, coerce: ItemStatusTransactions
+
+      ##
+      # :attr_reader:
+      # Public: The ItemStatusInvestments for this ItemStatus.
+      property :investments, coerce: ItemStatusInvestments
     end
 
     # Public: A representation of account balances.
@@ -986,6 +1006,18 @@ module Plaid
       # :attr_reader:
       # Public: The String unofficial currency code for the amount
       property :unofficial_currency_code
+
+      ##
+      # :attr_reader:
+      # Public: The String channel used to make a payment, e.g.
+      # "online", "in store", or "other".
+      property :payment_channel
+
+      ##
+      # :attr_reader:
+      # Public: The String date that the transaction was authorized,
+      # e.g. "2017-01-01".
+      property :authorized_date
     end
 
     # Public: A representation of an InvestmentTransaction in an investment
