@@ -62,7 +62,6 @@ class PlaidPaymentInitiationTest < PlaidTest
       count: 10
     )
     refute_empty(list_payments_response.payments)
-    refute_empty(list_payments_response.next_cursor)
   end
   # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/AbcSize
