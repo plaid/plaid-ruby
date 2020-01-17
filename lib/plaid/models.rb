@@ -1806,5 +1806,107 @@ module Plaid
       # Public: Student loan liabilities associated with the item.
       property :student, coerce: Array[StudentLoanLiability]
     end
+
+    # Public: A representation of a payment amount.
+    class PaymentAmount < BaseModel
+      ##
+      # :attr_reader:
+      # Public: Currency for the payment amount.
+      property :currency
+
+      ##
+      # :attr_reader:
+      # Public: Value of the payment amount.
+      property :value
+    end
+
+    # Public: A representation of a payment amount.
+    class PaymentRecipientAddress < BaseModel
+      ##
+      # :attr_reader:
+      # Public: Street name.
+      property :street
+
+      ##
+      # :attr_reader:
+      # Public: City.
+      property :city
+
+      ##
+      # :attr_reader:
+      # Public: Postal code.
+      property :postal_code
+
+      ##
+      # :attr_reader:
+      # Public: Country.
+      property :country
+    end
+
+    # Public: A representation of a payment recipient.
+    class PaymentRecipient < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The recipient ID.
+      property :recipient_id
+
+      ##
+      # :attr_reader:
+      # Public: The recipient name.
+      property :name
+
+      ##
+      # :attr_reader:
+      # Public: The recipient IBAN.
+      property :iban
+
+      ##
+      # :attr_reader:
+      # Public: The recipient address.
+      property :address, coerce: PaymentRecipientAddress
+    end
+
+    # Public: A representation of a payment.
+    class Payment < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The payment ID.
+      property :payment_id
+
+      ##
+      # :attr_reader:
+      # Public: The payment token.
+      property :payment_token
+
+      ##
+      # :attr_reader:
+      # Public: The payment reference.
+      property :reference
+
+      ##
+      # :attr_reader:
+      # Public: The payment amount.
+      property :amount, coerce: PaymentAmount
+
+      ##
+      # :attr_reader:
+      # Public: The payment's status.
+      property :status
+
+      ##
+      # :attr_reader:
+      # Public: The last status update time for payment.
+      property :last_status_update
+
+      ##
+      # :attr_reader:
+      # Public: The payment token's expiration time.
+      property :payment_token_expiration_time
+
+      ##
+      # :attr_reader:
+      # Public: The recipient ID for payment.
+      property :recipient_id
+    end
   end
 end
