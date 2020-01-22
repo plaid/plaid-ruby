@@ -21,6 +21,7 @@ require_relative 'plaid/products/transactions'
 require_relative 'plaid/products/investments'
 require_relative 'plaid/products/liabilities'
 require_relative 'plaid/products/payment_initiation'
+require_relative 'plaid/products/webhooks'
 require_relative 'plaid/client'
 
 # Public: The namespace for all the things Plaid.

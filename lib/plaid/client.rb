@@ -107,6 +107,11 @@ module Plaid
     # Public: The Plaid::PaymentInitiation product accessor.
     subproduct :payment_initiation
 
+    ##
+    # :attr_reader:
+    # Public: The Plaid::Webhooks endpoint accessor.
+    subproduct :webhooks
+
     # Public: Make a post request
     #
     # path    - Path or URL to make the request to
