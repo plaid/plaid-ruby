@@ -181,10 +181,7 @@ module Plaid
       ##
       # :attr_reader:
       # Public: The item status: Plaid::Models::ItemStatus.
-      property :status, coerce: Models::ItemStatus
-    end
-
-    # Public: Removes an item
+      property :status, coerce: Models::ItemStatus end # Public: Removes an item
     #
     # Does a POST /item/remove call which is used to remove an item
     #
@@ -204,5 +201,31 @@ module Plaid
       # Public: The Boolean flag meaning successful removal.
       property :removed
     end
+
+    # Public: Import an item.
+    #
+    # Does a POST /item/import call which imports an item.
+    #
+    # products - array of products to enable
+    # user_auth - hash map of user user authentication information
+    # options - optional hash map of options
+    #
+    # Returns an access token for the item.
+    def import(products, user_auth, options)
+      post_with_auth 'item/import',
+                     ImportResponse,
+                     products: products,
+                     user_auth: user_auth,
+                     options: options
+    end
+
+    # Public: Response for /item/import.
+    class ImportResponse < Models::BaseResponse
+      ##
+      # :attr_reader:
+      # Public: The access token string
+      property :access_token
+    end
+
   end
 end

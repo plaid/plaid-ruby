@@ -97,6 +97,19 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
     end
   end
 
+  def test_import
+    import_response = client.item.import(
+      ["identity", "auth"],
+      {
+        user_id: "user_good",
+        auth_token: "pass_good"
+      },
+      {}
+    )
+    refute_empty(import_response)
+    refute_empty(import_response.access_token)
+  end
+
   def test_public_token_exchange_token
     create_item
 

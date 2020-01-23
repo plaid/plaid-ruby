@@ -59,6 +59,11 @@ module Plaid
 
     ##
     # :attr_reader:
+    # Public: The Plaid::DepositSwitch product accessor.
+    subproduct :deposit_switch
+
+    ##
+    # :attr_reader:
     # Public: The Plaid::Identity product accessor.
     subproduct :identity
 
