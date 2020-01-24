@@ -9,7 +9,7 @@ module Plaid
   # deposit_switch_id - deposit_switch_id of a deposit switch to fetch
   #                     deposit switch for
   #
-  # Returns the DepsoitSwitchResponse object with deposit switch data.
+  # Returns the DepositSwitchResponse object with deposit switch data.
     def get(deposit_switch_id)
         post_with_auth 'deposit_switch/get',
                       GetResponse,
@@ -50,12 +50,12 @@ module Plaid
 
       ##
       # :attr_reader:
-      # Public: Whether the account has multiple allocations
+      # Public: Whether the account has multiple allocations.
       property :account_has_multiple_allocations
 
       ##
       # :attr_reader:
-      # Public: The percent of pay going to the target account, if applicable
+      # Public: The percent of pay going to the target account, if applicable.
       property :percent_allocated
 
       ##
@@ -99,6 +99,7 @@ module Plaid
                     CreateTokenResponse,
                     deposit_switch_id: deposit_switch_id
     end
+
     # Public: Response wrapper for /deposit_switch/create.
     class CreateTokenResponse < Models::BaseResponse
       ##
