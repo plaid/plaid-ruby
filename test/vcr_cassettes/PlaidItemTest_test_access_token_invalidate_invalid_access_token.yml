@@ -45,4 +45,49 @@ http_interactions:
         }
     http_version: 
   recorded_at: Wed, 19 Jun 2019 19:57:27 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/item/access_token/invalidate
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"ABCDEFG1234567","client_id":"5d4db4be55135b001480afd5","secret":"4c4cd56f846ec206a4d2cf35b341d5"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.4.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 24 Jan 2020 21:39:54 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '228'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "display_message": null,
+          "error_code": "INVALID_ACCESS_TOKEN",
+          "error_message": "provided access token is in an invalid format. expected format: access-\u003cenvironment\u003e-\u003cidentifier\u003e",
+          "error_type": "INVALID_INPUT",
+          "request_id": "dHgwVbda6fB0CFl",
+          "suggested_action": null
+        }
+    http_version: 
+  recorded_at: Fri, 24 Jan 2020 21:39:54 GMT
 recorded_with: VCR 4.0.0
