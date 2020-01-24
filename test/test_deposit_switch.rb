@@ -32,7 +32,7 @@ class PlaidDepositSwitchTest < PlaidTest
     refute_empty(get_response.deposit_switch_id)
     refute_empty(get_response.target_item_id)
     refute_empty(get_response.target_account_id)
-    refute_empty(get_response.created_date)
+    refute_empty(get_response.date_created)
     refute_empty(get_response.state)
     # TODO: Determine if it makes sense to check the other fields.
 

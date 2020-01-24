@@ -41,7 +41,7 @@ module Plaid
       ##
       # :attr_reader:
       # Public: The date on which the deposit switch was created.
-      property :created_date
+      property :date_created
 
       ##
       # :attr_reader:
@@ -60,8 +60,8 @@ module Plaid
 
       ##
       # :attr_reader:
-      # Public: The date on which the deposit switch was created.
-      property :completed_date
+      # Public: The date on which the deposit switch was completed.
+      property :date_completed
     end
 
     # Public: Create Deposit Switch.
