@@ -5,10 +5,10 @@ http_interactions:
     uri: https://sandbox.plaid.com/sandbox/public_token/create
     body:
       encoding: UTF-8
-      string: '{"institution_id":"ins_109508","initial_products":["investments"],"options":{"transactions":{"start_date":"2019-05-28","end_date":"2019-06-12"}},"public_key":"PLAID_RUBY_PUBLIC_KEY"}'
+      string: '{"institution_id":"ins_109508","initial_products":["investments"],"options":{"transactions":{"start_date":"2019-05-28","end_date":"2019-06-12"}},"public_key":"f149f72f9caae670aa7e1386b10103"}'
     headers:
       User-Agent:
-      - Plaid Ruby v7.1.0
+      - Plaid Ruby v8.4.0
       Content-Type:
       - application/json
       Plaid-Version:
@@ -21,7 +21,7 @@ http_interactions:
       server:
       - nginx
       date:
-      - Wed, 19 Jun 2019 19:55:59 GMT
+      - Fri, 24 Jan 2020 22:07:34 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -42,20 +42,20 @@ http_interactions:
       encoding: ASCII-8BIT
       string: |-
         {
-          "public_token": "public-sandbox-aded7054-6509-404e-9a3f-6d8394bd0b2f",
-          "request_id": "7YoXXtt34q8IVbz"
+          "public_token": "public-sandbox-2dc09937-3745-4674-ad9f-884d66b5e6fb",
+          "request_id": "H6DLTMShI1INL66"
         }
     http_version: 
-  recorded_at: Wed, 19 Jun 2019 19:55:59 GMT
+  recorded_at: Fri, 24 Jan 2020 22:07:34 GMT
 - request:
     method: post
     uri: https://sandbox.plaid.com/item/public_token/exchange
     body:
       encoding: UTF-8
-      string: '{"public_token":"public-sandbox-aded7054-6509-404e-9a3f-6d8394bd0b2f","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+      string: '{"public_token":"public-sandbox-2dc09937-3745-4674-ad9f-884d66b5e6fb","client_id":"5d4db4be55135b001480afd5","secret":"4c4cd56f846ec206a4d2cf35b341d5"}'
     headers:
       User-Agent:
-      - Plaid Ruby v7.1.0
+      - Plaid Ruby v8.4.0
       Content-Type:
       - application/json
       Plaid-Version:
@@ -68,7 +68,7 @@ http_interactions:
       server:
       - nginx
       date:
-      - Wed, 19 Jun 2019 19:56:00 GMT
+      - Fri, 24 Jan 2020 22:07:35 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -91,840 +91,18 @@ http_interactions:
       encoding: ASCII-8BIT
       string: |-
         {
-          "access_token": "access-sandbox-9626fe1c-75ec-49d0-9730-b3fe05d30e9f",
-          "item_id": "PvJdMLv1EwhQrDlpAmbxC3Vkda3PZwC7ddzvD",
-          "request_id": "TTcyw63KuYc7X1m"
+          "access_token": "access-sandbox-962150d4-fc00-49e9-8d9f-2420aea8e297",
+          "item_id": "6r9WPlb8mwhXJj9x8v6kSzk5rAxEWkfg6QWpl",
+          "request_id": "JHKT8tUUAW2wdyJ"
         }
     http_version: 
-  recorded_at: Wed, 19 Jun 2019 19:56:00 GMT
+  recorded_at: Fri, 24 Jan 2020 22:07:35 GMT
 - request:
     method: post
     uri: https://sandbox.plaid.com/item/get
     body:
       encoding: UTF-8
-      string: '{"access_token":"access-sandbox-9626fe1c-75ec-49d0-9730-b3fe05d30e9f","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
-    headers:
-      User-Agent:
-      - Plaid Ruby v7.1.0
-      Content-Type:
-      - application/json
-      Plaid-Version:
-      - '2019-05-29'
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      server:
-      - nginx
-      date:
-      - Wed, 19 Jun 2019 19:56:00 GMT
-      content-type:
-      - application/json; charset=utf-8
-      content-length:
-      - '289'
-      connection:
-      - close
-      plaid-version:
-      - '2019-05-29'
-      vary:
-      - Accept-Encoding
-      strict-transport-security:
-      - max-age=31536000; includeSubDomains; preload
-      x-frame-options:
-      - DENY
-      x-content-type-options:
-      - nosniff
-      x-xss-protection:
-      - 1; mode=block
-    body:
-      encoding: ASCII-8BIT
-      string: |-
-        {
-          "item": {
-            "available_products": [
-              "assets",
-              "auth",
-              "balance",
-              "credit_details",
-              "holdings",
-              "identity",
-              "income",
-              "liabilities",
-              "transactions"
-            ],
-            "billed_products": [
-              "investments"
-            ],
-            "error": null,
-            "institution_id": "ins_109508",
-            "item_id": "PvJdMLv1EwhQrDlpAmbxC3Vkda3PZwC7ddzvD",
-            "webhook": "",
-            "consent_expiration_time": null
-          },
-          "request_id": "H4zVeZm6pl0kQuP",
-          "status": {
-            "last_webhook": null
-          }
-        }
-    http_version: 
-  recorded_at: Wed, 19 Jun 2019 19:56:00 GMT
-- request:
-    method: post
-    uri: https://sandbox.plaid.com/investments/transactions/get
-    body:
-      encoding: UTF-8
-      string: '{"access_token":"access-sandbox-9626fe1c-75ec-49d0-9730-b3fe05d30e9f","start_date":"2019-05-28","end_date":"2019-06-12","options":{},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
-    headers:
-      User-Agent:
-      - Plaid Ruby v7.1.0
-      Content-Type:
-      - application/json
-      Plaid-Version:
-      - '2019-05-29'
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      server:
-      - nginx
-      date:
-      - Wed, 19 Jun 2019 19:56:00 GMT
-      content-type:
-      - application/json; charset=utf-8
-      transfer-encoding:
-      - chunked
-      connection:
-      - close
-      plaid-version:
-      - '2019-05-29'
-      vary:
-      - Accept-Encoding
-      strict-transport-security:
-      - max-age=31536000; includeSubDomains; preload
-      x-frame-options:
-      - DENY
-      x-content-type-options:
-      - nosniff
-      x-xss-protection:
-      - 1; mode=block
-    body:
-      encoding: ASCII-8BIT
-      string: |-
-        {
-          "accounts": [
-            {
-              "account_id": "XvxDl3vAw9h3KgA8wvb9CoNWX8ZKPgcdAVW8v",
-              "balances": {
-                "available": 100,
-                "current": 110,
-                "iso_currency_code": "USD",
-                "limit": null,
-                "unofficial_currency_code": null
-              },
-              "mask": "0000",
-              "name": "Plaid Checking",
-              "official_name": "Plaid Gold Standard 0% Interest Checking",
-              "subtype": "checking",
-              "type": "depository"
-            },
-            {
-              "account_id": "DAJ93EAkwvcAaLWV1MEqC7BwPgGdWeivqVPGN",
-              "balances": {
-                "available": 200,
-                "current": 210,
-                "iso_currency_code": "USD",
-                "limit": null,
-                "unofficial_currency_code": null
-              },
-              "mask": "1111",
-              "name": "Plaid Saving",
-              "official_name": "Plaid Silver Standard 0.1% Interest Saving",
-              "subtype": "savings",
-              "type": "depository"
-            },
-            {
-              "account_id": "VvB78zvEg9hZNWAgBkyQUabmVQlNGkTWMx8Ny",
-              "balances": {
-                "available": null,
-                "current": 1000,
-                "iso_currency_code": "USD",
-                "limit": null,
-                "unofficial_currency_code": null
-              },
-              "mask": "2222",
-              "name": "Plaid CD",
-              "official_name": "Plaid Bronze Standard 0.2% Interest CD",
-              "subtype": "cd",
-              "type": "depository"
-            },
-            {
-              "account_id": "wMveB6Mk5of36aoZzkGjCN65J4goDbfrXk7KZ",
-              "balances": {
-                "available": null,
-                "current": 410,
-                "iso_currency_code": "USD",
-                "limit": 2000,
-                "unofficial_currency_code": null
-              },
-              "mask": "3333",
-              "name": "Plaid Credit Card",
-              "official_name": "Plaid Diamond 12.5% APR Interest Credit Card",
-              "subtype": "credit card",
-              "type": "credit"
-            },
-            {
-              "account_id": "5Pk1ZXPAVjh91v7myrRNFwmkDoGrKdCZrRPjr",
-              "balances": {
-                "available": 43200,
-                "current": 43200,
-                "iso_currency_code": "USD",
-                "limit": null,
-                "unofficial_currency_code": null
-              },
-              "mask": "4444",
-              "name": "Plaid Money Market",
-              "official_name": "Plaid Platinum Standard 1.85% Interest Money Market",
-              "subtype": "money market",
-              "type": "depository"
-            },
-            {
-              "account_id": "JvJKPyvjbmhbRoPmwADkSyB4JDpRZjfd8arwD",
-              "balances": {
-                "available": null,
-                "current": 320.76,
-                "iso_currency_code": "USD",
-                "limit": null,
-                "unofficial_currency_code": null
-              },
-              "mask": "5555",
-              "name": "Plaid IRA",
-              "official_name": null,
-              "subtype": "ira",
-              "type": "investment"
-            },
-            {
-              "account_id": "k3vr1R3Nm4unbNEd4o63hZb5aeEkwGiW5NVAb",
-              "balances": {
-                "available": null,
-                "current": 23631.9805,
-                "iso_currency_code": "USD",
-                "limit": null,
-                "unofficial_currency_code": null
-              },
-              "mask": "6666",
-              "name": "Plaid 401k",
-              "official_name": null,
-              "subtype": "401k",
-              "type": "investment"
-            },
-            {
-              "account_id": "lx6zLRxP1Nhr5PEgnVG3cor3dvMJw5cZ3jX6X",
-              "balances": {
-                "available": null,
-                "current": 65262,
-                "iso_currency_code": "USD",
-                "limit": null,
-                "unofficial_currency_code": null
-              },
-              "mask": "7777",
-              "name": "Plaid Student Loan",
-              "official_name": null,
-              "subtype": "student",
-              "type": "loan"
-            }
-          ],
-          "investment_transactions": [
-            {
-              "account_id": "k3vr1R3Nm4unbNEd4o63hZb5aeEkwGiW5NVAb",
-              "amount": -8.72,
-              "cancel_transaction_id": null,
-              "date": "2019-06-04",
-              "fees": null,
-              "investment_transaction_id": "gKoLeDKxJ3C815nym6EQTXExBPnQ9otgpzm3Z",
-              "iso_currency_code": "USD",
-              "name": "INCOME DIV DIVIDEND RECEIVED",
-              "price": 0,
-              "quantity": 0,
-              "security_id": "eW4jmnjd6AtjxXVrjmj6SX1dNEdZp3Cy8RnRQ",
-              "type": "cash",
-              "unofficial_currency_code": null
-            },
-            {
-              "account_id": "k3vr1R3Nm4unbNEd4o63hZb5aeEkwGiW5NVAb",
-              "amount": -1289.01,
-              "cancel_transaction_id": null,
-              "date": "2019-06-03",
-              "fees": null,
-              "investment_transaction_id": "o4vkg64eL7HZJqE9a7GnUQJey56VMdiReglLP",
-              "iso_currency_code": "USD",
-              "name": "SELL Matthews Pacific Tiger Fund Insti Class",
-              "price": 27.53,
-              "quantity": 47.74104242992852,
-              "security_id": "JDdP7XPMklt5vwPmDN45t3KAoWAPmjtpaW7DP",
-              "type": "sell",
-              "unofficial_currency_code": null
-            },
-            {
-              "account_id": "k3vr1R3Nm4unbNEd4o63hZb5aeEkwGiW5NVAb",
-              "amount": 7.7,
-              "cancel_transaction_id": null,
-              "date": "2019-06-02",
-              "fees": null,
-              "investment_transaction_id": "pNvd86NQXesL9KVgvmEZUw9Mn6VBrZCLMB1Rd",
-              "iso_currency_code": "USD",
-              "name": "BUY DoubleLine Total Return Bond Fund",
-              "price": 10.42,
-              "quantity": 0.7388014749727547,
-              "security_id": "NDVQrXQoqzt5v3bAe8qRt4A7mK7wvZCLEBBJk",
-              "type": "buy",
-              "unofficial_currency_code": null
-            },
-            {
-              "account_id": "k3vr1R3Nm4unbNEd4o63hZb5aeEkwGiW5NVAb",
-              "amount": -0.22,
-              "cancel_transaction_id": null,
-              "date": "2019-06-01",
-              "fees": null,
-              "investment_transaction_id": "LvJz7Aveb9hjRknXA6b8co9Qx1KRA8cPn1rDM",
-              "iso_currency_code": "USD",
-              "name": "SELL Cambiar International Equity Institutional",
-              "price": 25,
-              "quantity": 0.008902867462305952,
-              "security_id": "MD9eKXeplrt5yKRlzLqXiavwb6wrdxUb3wdnM",
-              "type": "sell",
-              "unofficial_currency_code": null
-            },
-            {
-              "account_id": "k3vr1R3Nm4unbNEd4o63hZb5aeEkwGiW5NVAb",
-              "amount": 1.1,
-              "cancel_transaction_id": null,
-              "date": "2019-05-31",
-              "fees": null,
-              "investment_transaction_id": "1dQDjAdgwaSWPRe6VN74uo1JwxWEmjc5d4JW7",
-              "iso_currency_code": "USD",
-              "name": "BUY Achillion Pharmaceuticals Inc.",
-              "price": 2.16,
-              "quantity": 0.520877874205698,
-              "security_id": "KDwjlXj1Rqt58dVvmzRguxJybmyQL8FgeWWAy",
-              "type": "buy",
-              "unofficial_currency_code": null
-            },
-            {
-              "account_id": "JvJKPyvjbmhbRoPmwADkSyB4JDpRZjfd8arwD",
-              "amount": 46.32,
-              "cancel_transaction_id": null,
-              "date": "2019-05-30",
-              "fees": null,
-              "investment_transaction_id": "o4vkg64eL7HZJqE9a7GnUQJey56VMdiReglxV",
-              "iso_currency_code": "USD",
-              "name": "BUY NFLX DERIVATIVE",
-              "price": 0.01,
-              "quantity": 4211.152345617756,
-              "security_id": "8E4L9XLl6MudjEpwPAAgivmdZRdBPJuvMPlPb",
-              "type": "buy",
-              "unofficial_currency_code": null
-            },
-            {
-              "account_id": "JvJKPyvjbmhbRoPmwADkSyB4JDpRZjfd8arwD",
-              "amount": -1200,
-              "cancel_transaction_id": null,
-              "date": "2019-05-30",
-              "fees": null,
-              "investment_transaction_id": "gKoLeDKxJ3C815nym6EQTXExBPnQ9otgpzmaN",
-              "iso_currency_code": "USD",
-              "name": "INVBANKTRAN DEP CO CONTR CURRENT YR EMPLOYER CU CO CONTR CURRENT YR EMPLOYER CUR YR",
-              "price": 0,
-              "quantity": 0,
-              "security_id": "d6ePmbPxgWCWmMVv66q9iPV94n91vMtov5Are",
-              "type": "cash",
-              "unofficial_currency_code": null
-            },
-            {
-              "account_id": "k3vr1R3Nm4unbNEd4o63hZb5aeEkwGiW5NVAb",
-              "amount": -14961.99,
-              "cancel_transaction_id": null,
-              "date": "2019-05-29",
-              "fees": null,
-              "investment_transaction_id": "MvJBenvQZmhGjAWzKX9bFWDlEzpjJxU9g3Mnl",
-              "iso_currency_code": "USD",
-              "name": "SELL Southside Bancshares Inc.",
-              "price": 34.12,
-              "quantity": 430.80867509953123,
-              "security_id": "eW4jmnjd6AtjxXVrjmj6SX1dNEdZp3Cy8RnRQ",
-              "type": "sell",
-              "unofficial_currency_code": null
-            },
-            {
-              "account_id": "JvJKPyvjbmhbRoPmwADkSyB4JDpRZjfd8arwD",
-              "amount": -2066.58,
-              "cancel_transaction_id": null,
-              "date": "2019-05-29",
-              "fees": null,
-              "investment_transaction_id": "pNvd86NQXesL9KVgvmEZUw9Mn6VBrZCLMB1yz",
-              "iso_currency_code": "USD",
-              "name": "SELL iShares Inc MSCI Brazil",
-              "price": 41.62,
-              "quantity": 49.02909689729298,
-              "security_id": "abJamDazkgfvBkVGgnnLUWXoxnomp5up8llg4",
-              "type": "sell",
-              "unofficial_currency_code": null
-            },
-            {
-              "account_id": "k3vr1R3Nm4unbNEd4o63hZb5aeEkwGiW5NVAb",
-              "amount": 466.71,
-              "cancel_transaction_id": null,
-              "date": "2019-05-28",
-              "fees": null,
-              "investment_transaction_id": "ZXaGKkXnjJhGJd4pgZkRFjX7Zaz1xLCgyMKQE",
-              "iso_currency_code": "USD",
-              "name": "BUY FIDELITY INDEX 1055",
-              "price": 13.57,
-              "quantity": 33.99208384602773,
-              "security_id": "nnmo8doZ4lfKNEDe3mPJipLGkaGw3jfPrpxoN",
-              "type": "buy",
-              "unofficial_currency_code": null
-            },
-            {
-              "account_id": "k3vr1R3Nm4unbNEd4o63hZb5aeEkwGiW5NVAb",
-              "amount": -0.1,
-              "cancel_transaction_id": null,
-              "date": "2019-05-28",
-              "fees": null,
-              "investment_transaction_id": "8eg8LoebRQIPQKJLE5wbsolLyAnNkJcwoMldv",
-              "iso_currency_code": "USD",
-              "name": "INVBANKTRAN DEP INTEREST EARNED INTEREST EARNED",
-              "price": 0,
-              "quantity": 0,
-              "security_id": "d6ePmbPxgWCWmMVv66q9iPV94n91vMtov5Are",
-              "type": "cash",
-              "unofficial_currency_code": null
-            }
-          ],
-          "item": {
-            "available_products": [
-              "assets",
-              "auth",
-              "balance",
-              "credit_details",
-              "holdings",
-              "identity",
-              "income",
-              "liabilities",
-              "transactions"
-            ],
-            "billed_products": [
-              "investments"
-            ],
-            "error": null,
-            "institution_id": "ins_109508",
-            "item_id": "PvJdMLv1EwhQrDlpAmbxC3Vkda3PZwC7ddzvD",
-            "webhook": "",
-            "consent_expiration_time": null
-          },
-          "request_id": "IYcqRvw0FIoiAxz",
-          "securities": [
-            {
-              "close_price": 0.011,
-              "close_price_as_of": null,
-              "cusip": null,
-              "institution_id": null,
-              "institution_security_id": null,
-              "is_cash_equivalent": false,
-              "isin": null,
-              "iso_currency_code": "USD",
-              "name": "Nflx Feb 01'18 $355 Call",
-              "proxy_security_id": null,
-              "security_id": "8E4L9XLl6MudjEpwPAAgivmdZRdBPJuvMPlPb",
-              "sedol": null,
-              "ticker_symbol": "NFLX180201C00355000",
-              "type": "derivative",
-              "unofficial_currency_code": null
-            },
-            {
-              "close_price": 27,
-              "close_price_as_of": null,
-              "cusip": "577130834",
-              "institution_id": null,
-              "institution_security_id": null,
-              "is_cash_equivalent": false,
-              "isin": "US5771308344",
-              "iso_currency_code": "USD",
-              "name": "Matthews Pacific Tiger Fund Insti Class",
-              "proxy_security_id": null,
-              "security_id": "JDdP7XPMklt5vwPmDN45t3KAoWAPmjtpaW7DP",
-              "sedol": null,
-              "ticker_symbol": "MIPTX",
-              "type": "mutual fund",
-              "unofficial_currency_code": null
-            },
-            {
-              "close_price": 2.11,
-              "close_price_as_of": null,
-              "cusip": "00448Q201",
-              "institution_id": null,
-              "institution_security_id": null,
-              "is_cash_equivalent": false,
-              "isin": "US00448Q2012",
-              "iso_currency_code": "USD",
-              "name": "Achillion Pharmaceuticals Inc.",
-              "proxy_security_id": null,
-              "security_id": "KDwjlXj1Rqt58dVvmzRguxJybmyQL8FgeWWAy",
-              "sedol": null,
-              "ticker_symbol": "ACHN",
-              "type": "equity",
-              "unofficial_currency_code": null
-            },
-            {
-              "close_price": 24.5,
-              "close_price_as_of": null,
-              "cusip": "00769G543",
-              "institution_id": null,
-              "institution_security_id": null,
-              "is_cash_equivalent": false,
-              "isin": "US00769G5430",
-              "iso_currency_code": "USD",
-              "name": "Cambiar International Equity Institutional",
-              "proxy_security_id": null,
-              "security_id": "MD9eKXeplrt5yKRlzLqXiavwb6wrdxUb3wdnM",
-              "sedol": null,
-              "ticker_symbol": "CAMYX",
-              "type": "mutual fund",
-              "unofficial_currency_code": null
-            },
-            {
-              "close_price": 10.42,
-              "close_price_as_of": null,
-              "cusip": "258620103",
-              "institution_id": null,
-              "institution_security_id": null,
-              "is_cash_equivalent": false,
-              "isin": "US2586201038",
-              "iso_currency_code": "USD",
-              "name": "DoubleLine Total Return Bond Fund",
-              "proxy_security_id": null,
-              "security_id": "NDVQrXQoqzt5v3bAe8qRt4A7mK7wvZCLEBBJk",
-              "sedol": null,
-              "ticker_symbol": "DBLTX",
-              "type": "mutual fund",
-              "unofficial_currency_code": null
-            },
-            {
-              "close_price": 42.15,
-              "close_price_as_of": null,
-              "cusip": "464286400",
-              "institution_id": null,
-              "institution_security_id": null,
-              "is_cash_equivalent": false,
-              "isin": "US4642864007",
-              "iso_currency_code": "USD",
-              "name": "iShares Inc MSCI Brazil",
-              "proxy_security_id": null,
-              "security_id": "abJamDazkgfvBkVGgnnLUWXoxnomp5up8llg4",
-              "sedol": null,
-              "ticker_symbol": "EWZ",
-              "type": "etf",
-              "unofficial_currency_code": null
-            },
-            {
-              "close_price": 1,
-              "close_price_as_of": null,
-              "cusip": null,
-              "institution_id": null,
-              "institution_security_id": null,
-              "is_cash_equivalent": true,
-              "isin": null,
-              "iso_currency_code": "USD",
-              "name": "U S Dollar",
-              "proxy_security_id": null,
-              "security_id": "d6ePmbPxgWCWmMVv66q9iPV94n91vMtov5Are",
-              "sedol": null,
-              "ticker_symbol": "USD",
-              "type": "cash",
-              "unofficial_currency_code": null
-            },
-            {
-              "close_price": 34.73,
-              "close_price_as_of": null,
-              "cusip": "84470P109",
-              "institution_id": null,
-              "institution_security_id": null,
-              "is_cash_equivalent": false,
-              "isin": "US84470P1093",
-              "iso_currency_code": "USD",
-              "name": "Southside Bancshares Inc.",
-              "proxy_security_id": null,
-              "security_id": "eW4jmnjd6AtjxXVrjmj6SX1dNEdZp3Cy8RnRQ",
-              "sedol": null,
-              "ticker_symbol": "SBSI",
-              "type": "equity",
-              "unofficial_currency_code": null
-            },
-            {
-              "close_price": 13.73,
-              "close_price_as_of": null,
-              "cusip": null,
-              "institution_id": "ins_109508",
-              "institution_security_id": "NHX105509",
-              "is_cash_equivalent": false,
-              "isin": null,
-              "iso_currency_code": "USD",
-              "name": "NH PORTFOLIO 1055 (FIDELITY INDEX)",
-              "proxy_security_id": null,
-              "security_id": "nnmo8doZ4lfKNEDe3mPJipLGkaGw3jfPrpxoN",
-              "sedol": null,
-              "ticker_symbol": "NHX105509",
-              "type": "etf",
-              "unofficial_currency_code": null
-            }
-          ],
-          "total_investment_transactions": 11
-        }
-    http_version: 
-  recorded_at: Wed, 19 Jun 2019 19:56:00 GMT
-- request:
-    method: post
-    uri: https://sandbox.plaid.com/investments/transactions/get
-    body:
-      encoding: UTF-8
-      string: '{"access_token":"access-sandbox-9626fe1c-75ec-49d0-9730-b3fe05d30e9f","start_date":"2019-05-28","end_date":"2019-06-12","options":{"account_ids":["JvJKPyvjbmhbRoPmwADkSyB4JDpRZjfd8arwD"]},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
-    headers:
-      User-Agent:
-      - Plaid Ruby v7.1.0
-      Content-Type:
-      - application/json
-      Plaid-Version:
-      - '2019-05-29'
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      server:
-      - nginx
-      date:
-      - Wed, 19 Jun 2019 19:56:01 GMT
-      content-type:
-      - application/json; charset=utf-8
-      content-length:
-      - '1132'
-      connection:
-      - close
-      plaid-version:
-      - '2019-05-29'
-      vary:
-      - Accept-Encoding
-      strict-transport-security:
-      - max-age=31536000; includeSubDomains; preload
-      x-frame-options:
-      - DENY
-      x-content-type-options:
-      - nosniff
-      x-xss-protection:
-      - 1; mode=block
-    body:
-      encoding: ASCII-8BIT
-      string: |-
-        {
-          "accounts": [
-            {
-              "account_id": "JvJKPyvjbmhbRoPmwADkSyB4JDpRZjfd8arwD",
-              "balances": {
-                "available": null,
-                "current": 320.76,
-                "iso_currency_code": "USD",
-                "limit": null,
-                "unofficial_currency_code": null
-              },
-              "mask": "5555",
-              "name": "Plaid IRA",
-              "official_name": null,
-              "subtype": "ira",
-              "type": "investment"
-            }
-          ],
-          "investment_transactions": [
-            {
-              "account_id": "JvJKPyvjbmhbRoPmwADkSyB4JDpRZjfd8arwD",
-              "amount": 46.32,
-              "cancel_transaction_id": null,
-              "date": "2019-05-30",
-              "fees": null,
-              "investment_transaction_id": "o4vkg64eL7HZJqE9a7GnUQJey56VMdiReglxV",
-              "iso_currency_code": "USD",
-              "name": "BUY NFLX DERIVATIVE",
-              "price": 0.01,
-              "quantity": 4211.152345617756,
-              "security_id": "8E4L9XLl6MudjEpwPAAgivmdZRdBPJuvMPlPb",
-              "type": "buy",
-              "unofficial_currency_code": null
-            },
-            {
-              "account_id": "JvJKPyvjbmhbRoPmwADkSyB4JDpRZjfd8arwD",
-              "amount": -1200,
-              "cancel_transaction_id": null,
-              "date": "2019-05-30",
-              "fees": null,
-              "investment_transaction_id": "gKoLeDKxJ3C815nym6EQTXExBPnQ9otgpzmaN",
-              "iso_currency_code": "USD",
-              "name": "INVBANKTRAN DEP CO CONTR CURRENT YR EMPLOYER CU CO CONTR CURRENT YR EMPLOYER CUR YR",
-              "price": 0,
-              "quantity": 0,
-              "security_id": "d6ePmbPxgWCWmMVv66q9iPV94n91vMtov5Are",
-              "type": "cash",
-              "unofficial_currency_code": null
-            },
-            {
-              "account_id": "JvJKPyvjbmhbRoPmwADkSyB4JDpRZjfd8arwD",
-              "amount": -2066.58,
-              "cancel_transaction_id": null,
-              "date": "2019-05-29",
-              "fees": null,
-              "investment_transaction_id": "pNvd86NQXesL9KVgvmEZUw9Mn6VBrZCLMB1yz",
-              "iso_currency_code": "USD",
-              "name": "SELL iShares Inc MSCI Brazil",
-              "price": 41.62,
-              "quantity": 49.02909689729298,
-              "security_id": "abJamDazkgfvBkVGgnnLUWXoxnomp5up8llg4",
-              "type": "sell",
-              "unofficial_currency_code": null
-            }
-          ],
-          "item": {
-            "available_products": [
-              "assets",
-              "auth",
-              "balance",
-              "credit_details",
-              "holdings",
-              "identity",
-              "income",
-              "liabilities",
-              "transactions"
-            ],
-            "billed_products": [
-              "investments"
-            ],
-            "error": null,
-            "institution_id": "ins_109508",
-            "item_id": "PvJdMLv1EwhQrDlpAmbxC3Vkda3PZwC7ddzvD",
-            "webhook": "",
-            "consent_expiration_time": null
-          },
-          "request_id": "FEEXjgGmlyVnhEt",
-          "securities": [
-            {
-              "close_price": 0.011,
-              "close_price_as_of": null,
-              "cusip": null,
-              "institution_id": null,
-              "institution_security_id": null,
-              "is_cash_equivalent": false,
-              "isin": null,
-              "iso_currency_code": "USD",
-              "name": "Nflx Feb 01'18 $355 Call",
-              "proxy_security_id": null,
-              "security_id": "8E4L9XLl6MudjEpwPAAgivmdZRdBPJuvMPlPb",
-              "sedol": null,
-              "ticker_symbol": "NFLX180201C00355000",
-              "type": "derivative",
-              "unofficial_currency_code": null
-            },
-            {
-              "close_price": 42.15,
-              "close_price_as_of": null,
-              "cusip": "464286400",
-              "institution_id": null,
-              "institution_security_id": null,
-              "is_cash_equivalent": false,
-              "isin": "US4642864007",
-              "iso_currency_code": "USD",
-              "name": "iShares Inc MSCI Brazil",
-              "proxy_security_id": null,
-              "security_id": "abJamDazkgfvBkVGgnnLUWXoxnomp5up8llg4",
-              "sedol": null,
-              "ticker_symbol": "EWZ",
-              "type": "etf",
-              "unofficial_currency_code": null
-            },
-            {
-              "close_price": 1,
-              "close_price_as_of": null,
-              "cusip": null,
-              "institution_id": null,
-              "institution_security_id": null,
-              "is_cash_equivalent": true,
-              "isin": null,
-              "iso_currency_code": "USD",
-              "name": "U S Dollar",
-              "proxy_security_id": null,
-              "security_id": "d6ePmbPxgWCWmMVv66q9iPV94n91vMtov5Are",
-              "sedol": null,
-              "ticker_symbol": "USD",
-              "type": "cash",
-              "unofficial_currency_code": null
-            }
-          ],
-          "total_investment_transactions": 3
-        }
-    http_version: 
-  recorded_at: Wed, 19 Jun 2019 19:56:01 GMT
-- request:
-    method: post
-    uri: https://sandbox.plaid.com/item/remove
-    body:
-      encoding: UTF-8
-      string: '{"access_token":"access-sandbox-9626fe1c-75ec-49d0-9730-b3fe05d30e9f","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
-    headers:
-      User-Agent:
-      - Plaid Ruby v7.1.0
-      Content-Type:
-      - application/json
-      Plaid-Version:
-      - '2019-05-29'
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      server:
-      - nginx
-      date:
-      - Wed, 19 Jun 2019 19:56:01 GMT
-      content-type:
-      - application/json; charset=utf-8
-      content-length:
-      - '74'
-      connection:
-      - close
-      plaid-version:
-      - '2019-05-29'
-      vary:
-      - Accept-Encoding
-      strict-transport-security:
-      - max-age=31536000; includeSubDomains; preload
-      x-frame-options:
-      - DENY
-      x-content-type-options:
-      - nosniff
-      x-xss-protection:
-      - 1; mode=block
-    body:
-      encoding: ASCII-8BIT
-      string: |-
-        {
-          "removed": true,
-          "request_id": "f3kQaqWyF97eboG"
-        }
-    http_version: 
-  recorded_at: Wed, 19 Jun 2019 19:56:01 GMT
-- request:
-    method: post
-    uri: https://sandbox.plaid.com/sandbox/public_token/create
-    body:
-      encoding: UTF-8
-      string: '{"institution_id":"ins_109508","initial_products":["investments"],"options":{"transactions":{"start_date":"2019-05-28","end_date":"2019-06-12"}},"public_key":"PLAID_RUBY_PUBLIC_KEY"}'
+      string: '{"access_token":"access-sandbox-962150d4-fc00-49e9-8d9f-2420aea8e297","client_id":"5d4db4be55135b001480afd5","secret":"4c4cd56f846ec206a4d2cf35b341d5"}'
     headers:
       User-Agent:
       - Plaid Ruby v8.4.0
@@ -940,108 +118,11 @@ http_interactions:
       server:
       - nginx
       date:
-      - Fri, 24 Jan 2020 21:47:53 GMT
+      - Fri, 24 Jan 2020 22:07:35 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
-      - '124'
-      connection:
-      - close
-      vary:
-      - Accept-Encoding
-      strict-transport-security:
-      - max-age=31536000; includeSubDomains; preload
-      x-frame-options:
-      - DENY
-      x-content-type-options:
-      - nosniff
-      x-xss-protection:
-      - 1; mode=block
-    body:
-      encoding: ASCII-8BIT
-      string: |-
-        {
-          "public_token": "public-sandbox-5e7beba3-fc56-4ff5-966b-b7ec86b4118d",
-          "request_id": "0a61NTDq8g3oihJ"
-        }
-    http_version: 
-  recorded_at: Fri, 24 Jan 2020 21:47:53 GMT
-- request:
-    method: post
-    uri: https://sandbox.plaid.com/item/public_token/exchange
-    body:
-      encoding: UTF-8
-      string: '{"public_token":"public-sandbox-5e7beba3-fc56-4ff5-966b-b7ec86b4118d","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
-    headers:
-      User-Agent:
-      - Plaid Ruby v8.4.0
-      Content-Type:
-      - application/json
-      Plaid-Version:
-      - '2019-05-29'
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      server:
-      - nginx
-      date:
-      - Fri, 24 Jan 2020 21:47:53 GMT
-      content-type:
-      - application/json; charset=utf-8
-      content-length:
-      - '167'
-      connection:
-      - close
-      plaid-version:
-      - '2019-05-29'
-      vary:
-      - Accept-Encoding
-      strict-transport-security:
-      - max-age=31536000; includeSubDomains; preload
-      x-frame-options:
-      - DENY
-      x-content-type-options:
-      - nosniff
-      x-xss-protection:
-      - 1; mode=block
-    body:
-      encoding: ASCII-8BIT
-      string: |-
-        {
-          "access_token": "access-sandbox-667e960f-b7a1-4fc3-a382-0802c1be4686",
-          "item_id": "eEZD797b1XFyPbg1ZEwwhKaJbdDpXasLdMnm9",
-          "request_id": "2xIuhDMqHecH6cw"
-        }
-    http_version: 
-  recorded_at: Fri, 24 Jan 2020 21:47:53 GMT
-- request:
-    method: post
-    uri: https://sandbox.plaid.com/item/get
-    body:
-      encoding: UTF-8
-      string: '{"access_token":"access-sandbox-667e960f-b7a1-4fc3-a382-0802c1be4686","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
-    headers:
-      User-Agent:
-      - Plaid Ruby v8.4.0
-      Content-Type:
-      - application/json
-      Plaid-Version:
-      - '2019-05-29'
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      server:
-      - nginx
-      date:
-      - Fri, 24 Jan 2020 21:47:54 GMT
-      content-type:
-      - application/json; charset=utf-8
-      content-length:
-      - '355'
+      - '358'
       connection:
       - close
       plaid-version:
@@ -1078,26 +159,26 @@ http_interactions:
             "consent_expiration_time": null,
             "error": null,
             "institution_id": "ins_109508",
-            "item_id": "eEZD797b1XFyPbg1ZEwwhKaJbdDpXasLdMnm9",
+            "item_id": "6r9WPlb8mwhXJj9x8v6kSzk5rAxEWkfg6QWpl",
             "webhook": ""
           },
-          "request_id": "F6agpmgtQZJlrnI",
+          "request_id": "ubnSiDkfALNAngy",
           "status": {
             "investments": {
               "last_failed_update": null,
-              "last_successful_update": "2020-01-24T21:47:53.021Z"
+              "last_successful_update": "2020-01-24T22:07:34.432Z"
             },
             "last_webhook": null
           }
         }
     http_version: 
-  recorded_at: Fri, 24 Jan 2020 21:47:54 GMT
+  recorded_at: Fri, 24 Jan 2020 22:07:35 GMT
 - request:
     method: post
     uri: https://sandbox.plaid.com/investments/transactions/get
     body:
       encoding: UTF-8
-      string: '{"access_token":"access-sandbox-667e960f-b7a1-4fc3-a382-0802c1be4686","start_date":"2019-05-28","end_date":"2019-06-12","options":{},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+      string: '{"access_token":"access-sandbox-962150d4-fc00-49e9-8d9f-2420aea8e297","start_date":"2019-05-28","end_date":"2019-06-12","options":{},"client_id":"5d4db4be55135b001480afd5","secret":"4c4cd56f846ec206a4d2cf35b341d5"}'
     headers:
       User-Agent:
       - Plaid Ruby v8.4.0
@@ -1113,7 +194,7 @@ http_interactions:
       server:
       - nginx
       date:
-      - Fri, 24 Jan 2020 21:47:54 GMT
+      - Fri, 24 Jan 2020 22:07:35 GMT
       content-type:
       - application/json; charset=utf-8
       transfer-encoding:
@@ -1138,7 +219,7 @@ http_interactions:
         {
           "accounts": [
             {
-              "account_id": "ANjWMDMqpVh1AgRqkBoohaEkmjk1y7I173oDE",
+              "account_id": "opwVjEmBXRhL5VPebMm6fB9e54ezRNcRZljBP",
               "balances": {
                 "available": 100,
                 "current": 110,
@@ -1153,7 +234,7 @@ http_interactions:
               "type": "depository"
             },
             {
-              "account_id": "GZ168r8jozUNMkBo4ADDUyqLdeLNrPI1lRnvP",
+              "account_id": "gjmVB9a5ArSGqpMZwgAPsZexPlx5amtg6moZZ",
               "balances": {
                 "available": 200,
                 "current": 210,
@@ -1168,7 +249,7 @@ http_interactions:
               "type": "depository"
             },
             {
-              "account_id": "nEW9gqgBwDFx8Bm3apnnh7DrwRrapEC6dgGRb",
+              "account_id": "8B9G7KjkwxhZVmkqla98fKXLARLz7vfwXlnQv",
               "balances": {
                 "available": null,
                 "current": 1000,
@@ -1183,7 +264,7 @@ http_interactions:
               "type": "depository"
             },
             {
-              "account_id": "bE7oNbN8gXFaQMvxNqwwh9VvpjvqzKTV5r3j7",
+              "account_id": "EMk4AeB5NzhJgzo9jpAmugjRrKRo3qfXBKyAj",
               "balances": {
                 "available": null,
                 "current": 410,
@@ -1198,7 +279,7 @@ http_interactions:
               "type": "credit"
             },
             {
-              "account_id": "myEwolorbDSB659QJWPPsKVQeAQdWNcLb8ANQ",
+              "account_id": "W6PGZNy58oUJzrDNd3QauwX93p98x1tlbmRNl",
               "balances": {
                 "available": 43200,
                 "current": 43200,
@@ -1213,7 +294,7 @@ http_interactions:
               "type": "depository"
             },
             {
-              "account_id": "yqBRvPvA5KugBZkxeKllTpW91g9yKdCy9pDmP",
+              "account_id": "A7B3gNkRQlhEwqp9a8J3Hagn71nDoyh1pX8V9",
               "balances": {
                 "available": null,
                 "current": 320.76,
@@ -1228,7 +309,7 @@ http_interactions:
               "type": "investment"
             },
             {
-              "account_id": "9rBj4b4GK7IWAEQjbKddTPd36G3WkLCRLME1y",
+              "account_id": "GLNPqZx53GSa6o1qejlPHyXBPNB4Eru1peaNG",
               "balances": {
                 "available": null,
                 "current": 23631.9805,
@@ -1243,7 +324,7 @@ http_interactions:
               "type": "investment"
             },
             {
-              "account_id": "vXKJmampADHwKDBzMWLLI4epmVp6WxtWjVXm6",
+              "account_id": "7z9Ajq5EQJU5QGPw8Wg9H7elWolZgxTg59ZzM",
               "balances": {
                 "available": null,
                 "current": 65262,
@@ -1260,12 +341,12 @@ http_interactions:
           ],
           "investment_transactions": [
             {
-              "account_id": "9rBj4b4GK7IWAEQjbKddTPd36G3WkLCRLME1y",
+              "account_id": "GLNPqZx53GSa6o1qejlPHyXBPNB4Eru1peaNG",
               "amount": -8.72,
               "cancel_transaction_id": null,
               "date": "2019-06-04",
               "fees": null,
-              "investment_transaction_id": "lE8opwpqdDFyD5pza1oohzpR8QRb1viZy6rZx",
+              "investment_transaction_id": "VRNAQ4y51XUwaKpbn9edIzWmQxmJ5MfWV8apG",
               "iso_currency_code": "USD",
               "name": "INCOME DIV DIVIDEND RECEIVED",
               "price": 0,
@@ -1275,12 +356,12 @@ http_interactions:
               "unofficial_currency_code": null
             },
             {
-              "account_id": "9rBj4b4GK7IWAEQjbKddTPd36G3WkLCRLME1y",
+              "account_id": "GLNPqZx53GSa6o1qejlPHyXBPNB4Eru1peaNG",
               "amount": -1289.01,
               "cancel_transaction_id": null,
               "date": "2019-06-03",
               "fees": null,
-              "investment_transaction_id": "kEgoLVLJkDFRMbZrPazztLxPNnP84euWBA8Wn",
+              "investment_transaction_id": "DZdaW7z5RrUXd8vjPRemS1XwgnwjklcvoP1EK",
               "iso_currency_code": "USD",
               "name": "SELL Matthews Pacific Tiger Fund Insti Class",
               "price": 27.53,
@@ -1290,12 +371,12 @@ http_interactions:
               "unofficial_currency_code": null
             },
             {
-              "account_id": "9rBj4b4GK7IWAEQjbKddTPd36G3WkLCRLME1y",
+              "account_id": "GLNPqZx53GSa6o1qejlPHyXBPNB4Eru1peaNG",
               "amount": 7.7,
               "cancel_transaction_id": null,
               "date": "2019-06-02",
               "fees": null,
-              "investment_transaction_id": "JLoWA3A19xIWlR4VKJXXTqxGPvGW3DsdEw5dj",
+              "investment_transaction_id": "XXjnMPV51NhVQXJrmqZ4TALW8nWqRwtdXWQP7",
               "iso_currency_code": "USD",
               "name": "BUY DoubleLine Total Return Bond Fund",
               "price": 10.42,
@@ -1305,12 +386,12 @@ http_interactions:
               "unofficial_currency_code": null
             },
             {
-              "account_id": "9rBj4b4GK7IWAEQjbKddTPd36G3WkLCRLME1y",
+              "account_id": "GLNPqZx53GSa6o1qejlPHyXBPNB4Eru1peaNG",
               "amount": -0.22,
               "cancel_transaction_id": null,
               "date": "2019-06-01",
               "fees": null,
-              "investment_transaction_id": "5pqa3W3L6bUQA1ZaDGxxhWx8138LBofZojpZw",
+              "investment_transaction_id": "6r9WPlb8mwhXJj9x8v6kSzk5Wp5y1efglo6bM",
               "iso_currency_code": "USD",
               "name": "SELL Cambiar International Equity Institutional",
               "price": 25,
@@ -1320,12 +401,12 @@ http_interactions:
               "unofficial_currency_code": null
             },
             {
-              "account_id": "9rBj4b4GK7IWAEQjbKddTPd36G3WkLCRLME1y",
+              "account_id": "GLNPqZx53GSa6o1qejlPHyXBPNB4Eru1peaNG",
               "amount": 1.1,
               "cancel_transaction_id": null,
               "date": "2019-05-31",
               "fees": null,
-              "investment_transaction_id": "wEr1y4ygJlFBy6XWJqNNsyXVzwVen4IrvKlrp",
+              "investment_transaction_id": "RmxgP3y5Veh8Vb4xrENzfkblNXlwK7SRqv9X1",
               "iso_currency_code": "USD",
               "name": "BUY Achillion Pharmaceuticals Inc.",
               "price": 2.16,
@@ -1335,12 +416,12 @@ http_interactions:
               "unofficial_currency_code": null
             },
             {
-              "account_id": "yqBRvPvA5KugBZkxeKllTpW91g9yKdCy9pDmP",
+              "account_id": "A7B3gNkRQlhEwqp9a8J3Hagn71nDoyh1pX8V9",
               "amount": 46.32,
               "cancel_transaction_id": null,
               "date": "2019-05-30",
               "fees": null,
-              "investment_transaction_id": "PzGA9P9moWsJ3rkNWRqqTNwngznqPZu7DVNnZ",
+              "investment_transaction_id": "xbQVolW7Bdhxq3MRmAJpfXE4wV4d9DtnzG19Z",
               "iso_currency_code": "USD",
               "name": "BUY NFLX DERIVATIVE",
               "price": 0.01,
@@ -1350,12 +431,12 @@ http_interactions:
               "unofficial_currency_code": null
             },
             {
-              "account_id": "yqBRvPvA5KugBZkxeKllTpW91g9yKdCy9pDmP",
+              "account_id": "A7B3gNkRQlhEwqp9a8J3Hagn71nDoyh1pX8V9",
               "amount": -1200,
               "cancel_transaction_id": null,
               "date": "2019-05-30",
               "fees": null,
-              "investment_transaction_id": "jEo61D1wP5F573lVwWKKTwbLDdLBW9S15lGjL",
+              "investment_transaction_id": "d4mVKE35dlSE6D5JvqnaHg6QLnQR8PfZbWkPd",
               "iso_currency_code": "USD",
               "name": "INVBANKTRAN DEP CO CONTR CURRENT YR EMPLOYER CU CO CONTR CURRENT YR EMPLOYER CUR YR",
               "price": 0,
@@ -1365,12 +446,12 @@ http_interactions:
               "unofficial_currency_code": null
             },
             {
-              "account_id": "9rBj4b4GK7IWAEQjbKddTPd36G3WkLCRLME1y",
+              "account_id": "GLNPqZx53GSa6o1qejlPHyXBPNB4Eru1peaNG",
               "amount": -14961.99,
               "cancel_transaction_id": null,
               "date": "2019-05-29",
               "fees": null,
-              "investment_transaction_id": "V4KmVMVlrLhvPNmKVrEEhz7reDrxMQiW4NnWa",
+              "investment_transaction_id": "vG8VLXWP5rhAlzJ97ZepT4dQx6QogWcWK3pnV",
               "iso_currency_code": "USD",
               "name": "SELL Southside Bancshares Inc.",
               "price": 34.12,
@@ -1380,12 +461,12 @@ http_interactions:
               "unofficial_currency_code": null
             },
             {
-              "account_id": "yqBRvPvA5KugBZkxeKllTpW91g9yKdCy9pDmP",
+              "account_id": "A7B3gNkRQlhEwqp9a8J3Hagn71nDoyh1pX8V9",
               "amount": -2066.58,
               "cancel_transaction_id": null,
               "date": "2019-05-29",
               "fees": null,
-              "investment_transaction_id": "NKWym4mAgNhKzgjNydAAhyxzwrzK43IWvk7zq",
+              "investment_transaction_id": "3l9ga1XpBWhGEyae8WXJsno15M1jXEfqj1Awx",
               "iso_currency_code": "USD",
               "name": "SELL iShares Inc MSCI Brazil",
               "price": 41.62,
@@ -1395,12 +476,12 @@ http_interactions:
               "unofficial_currency_code": null
             },
             {
-              "account_id": "9rBj4b4GK7IWAEQjbKddTPd36G3WkLCRLME1y",
+              "account_id": "GLNPqZx53GSa6o1qejlPHyXBPNB4Eru1peaNG",
               "amount": 466.71,
               "cancel_transaction_id": null,
               "date": "2019-05-28",
               "fees": null,
-              "investment_transaction_id": "D7QGplpxVqTnbaw8zGyyc1KrM5rnlgCvgGXvg",
+              "investment_transaction_id": "939nerMAVviR8j5LqpgyiPq8LW8ZrkCRvWrVB",
               "iso_currency_code": "USD",
               "name": "BUY FIDELITY INDEX 1055",
               "price": 13.57,
@@ -1410,12 +491,12 @@ http_interactions:
               "unofficial_currency_code": null
             },
             {
-              "account_id": "9rBj4b4GK7IWAEQjbKddTPd36G3WkLCRLME1y",
+              "account_id": "GLNPqZx53GSa6o1qejlPHyXBPNB4Eru1peaNG",
               "amount": -0.1,
               "cancel_transaction_id": null,
               "date": "2019-05-28",
               "fees": null,
-              "investment_transaction_id": "qwnoWzWN9DUyoqRQ5mkkhvyrn8rABmcdaBVd5",
+              "investment_transaction_id": "wn8VpEXjAzhxRWMKQ41Efyv54e5Pdnurp7Gqe",
               "iso_currency_code": "USD",
               "name": "INVBANKTRAN DEP INTEREST EARNED INTEREST EARNED",
               "price": 0,
@@ -1443,10 +524,10 @@ http_interactions:
             "consent_expiration_time": null,
             "error": null,
             "institution_id": "ins_109508",
-            "item_id": "eEZD797b1XFyPbg1ZEwwhKaJbdDpXasLdMnm9",
+            "item_id": "6r9WPlb8mwhXJj9x8v6kSzk5rAxEWkfg6QWpl",
             "webhook": ""
           },
-          "request_id": "LVj5oBF2UIwDrx2",
+          "request_id": "UohiXbf8fU8ofLk",
           "securities": [
             {
               "close_price": 0.011,
@@ -1605,13 +686,13 @@ http_interactions:
           "total_investment_transactions": 11
         }
     http_version: 
-  recorded_at: Fri, 24 Jan 2020 21:47:54 GMT
+  recorded_at: Fri, 24 Jan 2020 22:07:35 GMT
 - request:
     method: post
     uri: https://sandbox.plaid.com/investments/transactions/get
     body:
       encoding: UTF-8
-      string: '{"access_token":"access-sandbox-667e960f-b7a1-4fc3-a382-0802c1be4686","start_date":"2019-05-28","end_date":"2019-06-12","options":{"account_ids":["yqBRvPvA5KugBZkxeKllTpW91g9yKdCy9pDmP"]},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+      string: '{"access_token":"access-sandbox-962150d4-fc00-49e9-8d9f-2420aea8e297","start_date":"2019-05-28","end_date":"2019-06-12","options":{"account_ids":["A7B3gNkRQlhEwqp9a8J3Hagn71nDoyh1pX8V9"]},"client_id":"5d4db4be55135b001480afd5","secret":"4c4cd56f846ec206a4d2cf35b341d5"}'
     headers:
       User-Agent:
       - Plaid Ruby v8.4.0
@@ -1627,7 +708,7 @@ http_interactions:
       server:
       - nginx
       date:
-      - Fri, 24 Jan 2020 21:47:54 GMT
+      - Fri, 24 Jan 2020 22:07:36 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -1652,7 +733,7 @@ http_interactions:
         {
           "accounts": [
             {
-              "account_id": "yqBRvPvA5KugBZkxeKllTpW91g9yKdCy9pDmP",
+              "account_id": "A7B3gNkRQlhEwqp9a8J3Hagn71nDoyh1pX8V9",
               "balances": {
                 "available": null,
                 "current": 320.76,
@@ -1669,12 +750,12 @@ http_interactions:
           ],
           "investment_transactions": [
             {
-              "account_id": "yqBRvPvA5KugBZkxeKllTpW91g9yKdCy9pDmP",
+              "account_id": "A7B3gNkRQlhEwqp9a8J3Hagn71nDoyh1pX8V9",
               "amount": 46.32,
               "cancel_transaction_id": null,
               "date": "2019-05-30",
               "fees": null,
-              "investment_transaction_id": "PzGA9P9moWsJ3rkNWRqqTNwngznqPZu7DVNnZ",
+              "investment_transaction_id": "xbQVolW7Bdhxq3MRmAJpfXE4wV4d9DtnzG19Z",
               "iso_currency_code": "USD",
               "name": "BUY NFLX DERIVATIVE",
               "price": 0.01,
@@ -1684,12 +765,12 @@ http_interactions:
               "unofficial_currency_code": null
             },
             {
-              "account_id": "yqBRvPvA5KugBZkxeKllTpW91g9yKdCy9pDmP",
+              "account_id": "A7B3gNkRQlhEwqp9a8J3Hagn71nDoyh1pX8V9",
               "amount": -1200,
               "cancel_transaction_id": null,
               "date": "2019-05-30",
               "fees": null,
-              "investment_transaction_id": "jEo61D1wP5F573lVwWKKTwbLDdLBW9S15lGjL",
+              "investment_transaction_id": "d4mVKE35dlSE6D5JvqnaHg6QLnQR8PfZbWkPd",
               "iso_currency_code": "USD",
               "name": "INVBANKTRAN DEP CO CONTR CURRENT YR EMPLOYER CU CO CONTR CURRENT YR EMPLOYER CUR YR",
               "price": 0,
@@ -1699,12 +780,12 @@ http_interactions:
               "unofficial_currency_code": null
             },
             {
-              "account_id": "yqBRvPvA5KugBZkxeKllTpW91g9yKdCy9pDmP",
+              "account_id": "A7B3gNkRQlhEwqp9a8J3Hagn71nDoyh1pX8V9",
               "amount": -2066.58,
               "cancel_transaction_id": null,
               "date": "2019-05-29",
               "fees": null,
-              "investment_transaction_id": "NKWym4mAgNhKzgjNydAAhyxzwrzK43IWvk7zq",
+              "investment_transaction_id": "3l9ga1XpBWhGEyae8WXJsno15M1jXEfqj1Awx",
               "iso_currency_code": "USD",
               "name": "SELL iShares Inc MSCI Brazil",
               "price": 41.62,
@@ -1732,10 +813,10 @@ http_interactions:
             "consent_expiration_time": null,
             "error": null,
             "institution_id": "ins_109508",
-            "item_id": "eEZD797b1XFyPbg1ZEwwhKaJbdDpXasLdMnm9",
+            "item_id": "6r9WPlb8mwhXJj9x8v6kSzk5rAxEWkfg6QWpl",
             "webhook": ""
           },
-          "request_id": "hSPsEKG45srsSC7",
+          "request_id": "PxWdNFmWt9RYO4B",
           "securities": [
             {
               "close_price": 0.011,
@@ -1792,13 +873,13 @@ http_interactions:
           "total_investment_transactions": 3
         }
     http_version: 
-  recorded_at: Fri, 24 Jan 2020 21:47:54 GMT
+  recorded_at: Fri, 24 Jan 2020 22:07:36 GMT
 - request:
     method: post
     uri: https://sandbox.plaid.com/item/remove
     body:
       encoding: UTF-8
-      string: '{"access_token":"access-sandbox-667e960f-b7a1-4fc3-a382-0802c1be4686","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+      string: '{"access_token":"access-sandbox-962150d4-fc00-49e9-8d9f-2420aea8e297","client_id":"5d4db4be55135b001480afd5","secret":"4c4cd56f846ec206a4d2cf35b341d5"}'
     headers:
       User-Agent:
       - Plaid Ruby v8.4.0
@@ -1814,7 +895,7 @@ http_interactions:
       server:
       - nginx
       date:
-      - Fri, 24 Jan 2020 21:47:55 GMT
+      - Fri, 24 Jan 2020 22:07:36 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
@@ -1838,8 +919,8 @@ http_interactions:
       string: |-
         {
           "removed": true,
-          "request_id": "wLLL4JETl9rdkx8"
+          "request_id": "tDOTYDaZN3vTmwJ"
         }
     http_version: 
-  recorded_at: Fri, 24 Jan 2020 21:47:55 GMT
+  recorded_at: Fri, 24 Jan 2020 22:07:36 GMT
 recorded_with: VCR 4.0.0

@@ -182,7 +182,7 @@ module Plaid
       # :attr_reader:
       # Public: The item status: Plaid::Models::ItemStatus.
       property :status, coerce: Models::ItemStatus end
-    #
+
     # Public: Removes an item
     #
     # Does a POST /item/remove call which is used to remove an item
