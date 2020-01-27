@@ -27,14 +27,14 @@ module Plaid
       @display_message = display_message
       @request_id      = request_id
 
-      super <<-TEXT
+      super <<~TEXT
 
-Error Type      : #{error_type}
-Error Code      : #{error_code}
-Error Message   : #{error_message}
-Display Message : #{display_message}
-Request ID      : #{request_id}
-TEXT
+        Error Type      : #{error_type}
+        Error Code      : #{error_code}
+        Error Message   : #{error_message}
+        Display Message : #{display_message}
+        Request ID      : #{request_id}
+      TEXT
     end
   end
 
