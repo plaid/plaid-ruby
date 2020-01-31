@@ -208,8 +208,7 @@ Any methods making API calls will result in an exception raised unless the respo
 
 `Plaid::ItemError` indicates that information provided for the Item (such as credentials or MFA) may be invalid or that the Item is not supported on Plaid's platform.
 
-Read more about response codes and their meaning in the
-[Plaid documentation](https://plaid.com/docs/api).
+Read more about response codes and their meaning in the [Plaid documentation](https://plaid.com/docs/api).
 
 ## Response Objects
 
