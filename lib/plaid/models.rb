@@ -1083,6 +1083,11 @@ module Plaid
 
       ##
       # :attr_reader:
+      # Public: The String transaction type (or nil). E.g. "buy" or "sell".
+      property :subtype
+
+      ##
+      # :attr_reader:
       # Public: The ISO currency code of the transaction, either USD or CAD.
       # Always nil if unofficial_currency_code is non-nil.
       property :iso_currency_code
