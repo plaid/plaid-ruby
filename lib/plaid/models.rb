@@ -1908,5 +1908,53 @@ module Plaid
       # Public: The recipient ID for payment.
       property :recipient_id
     end
+
+    # Public: A representation of a payment amount.
+    class WebhookVerificationKey < BaseModel
+      ##
+      # :attr_reader:
+      # Public: alg.
+      property :alg
+
+      ##
+      # :attr_reader:
+      # Public: created_at.
+      property :created_at
+
+      ##
+      # :attr_reader:
+      # Public: crv.
+      property :crv
+
+      ##
+      # :attr_reader:
+      # Public: expired_at.
+      property :expired_at
+
+      ##
+      # :attr_reader:
+      # Public: kid.
+      property :kid
+
+      ##
+      # :attr_reader:
+      # Public: kty.
+      property :kty
+
+      ##
+      # :attr_reader:
+      # Public: use.
+      property :use
+
+      ##
+      # :attr_reader:
+      # Public: x.
+      property :x
+
+      ##
+      # :attr_reader:
+      # Public: y.
+      property :y
+    end
   end
 end
