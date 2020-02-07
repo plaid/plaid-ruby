@@ -59,6 +59,11 @@ module Plaid
 
     ##
     # :attr_reader:
+    # Public: The Plaid::DepositSwitch product accessor.
+    subproduct :deposit_switch
+
+    ##
+    # :attr_reader:
     # Public: The Plaid::Identity product accessor.
     subproduct :identity
 
@@ -106,6 +111,11 @@ module Plaid
     # :attr_reader:
     # Public: The Plaid::PaymentInitiation product accessor.
     subproduct :payment_initiation
+
+    ##
+    # :attr_reader:
+    # Public: The Plaid::Webhooks endpoint accessor.
+    subproduct :webhooks
 
     # Public: Make a post request
     #

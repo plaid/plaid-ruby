@@ -192,4 +192,16 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
       client.item.webhook.update(access_token, BAD_STRING)
     end
   end
+
+  def test_import_item
+    import_response = client.item.import(
+      %w[identity auth],
+      {
+        user_id: 'user_good',
+        auth_token: 'pass_good'
+      },
+      {}
+    )
+    refute_empty(import_response.access_token)
+  end
 end
