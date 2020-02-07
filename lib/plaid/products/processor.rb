@@ -126,6 +126,40 @@ module Plaid
     subproduct :processor_token, ProcessorToken
   end
 
+  # Public: Class used to call the generic ProcessorToken sub-product.
+  class ProcessorToken < BaseProduct
+    # Public: Creates a processor token from an access_token.
+    #
+    # Does a POST /processor/token/create call which can be used to
+    # generate any non-stripe processor token for a given account ID.
+    # If the processor is Stripe, the stripe endpoint will be called
+    # instead.
+    #
+    # access_token - access_token to create a public token for.
+    # account_id - ID of the account to create a processor token for.
+    # processor - name of the processor to create a token for.
+    #
+    # Returns a ProcessorTokenResponse object containing a processor token.
+    def create(access_token, account_id, processor)
+      endpoint = 'processor/token/create'
+      options = {
+        access_token: access_token,
+        account_id: account_id,
+        processor: processor
+      }
+
+      if processor == 'stripe'
+        endpoint = '/processor/stripe/bank_account_token/create'
+        options.delete(:processor)
+      elsif processor == 'apex'
+        endpoint = '/processor/apex/processor_token/create'
+        options.delete(:processor)
+      end
+
+      post_with_auth endpoint, ProcessorTokenResponse, **options
+    end
+  end
+
   # Public: Class used to call the Processor product.
   class Processor < BaseProduct
     ##
@@ -147,5 +181,10 @@ module Plaid
     # :attr_reader:
     # Public: The Plaid::Ocrolus product accessor.
     subproduct :ocrolus
+
+    ##
+    # :attr_reader:
+    # Public: The Plaid::ProcessorToken product accessor.
+    subproduct :processor_token
   end
 end
