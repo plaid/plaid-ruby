@@ -6,8 +6,7 @@ module Plaid
     # Does a POST /deposit_switch/get call which fetches deposit switch
     # associated with a deposit switch id.
     #
-    # deposit_switch_id - deposit_switch_id of a deposit switch to fetch
-    #                     deposit switch for
+    # deposit_switch_id - deposit_switch_id to fetch deposit switch
     # Returns the DepositSwitchResponse object with deposit switch data.
     def get(deposit_switch_id)
       post_with_auth 'deposit_switch/get',

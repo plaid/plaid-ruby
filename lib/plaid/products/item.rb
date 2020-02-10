@@ -210,7 +210,7 @@ module Plaid
     # Does a POST /item/import call which imports an item.
     #
     # products - array of products to enable
-    # user_auth - hash map of user user authentication information
+    # user_auth - hash map of user authentication information
     # options - optional hash map of options
     #
     # Returns an access token for the item.
