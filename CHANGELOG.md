@@ -1,3 +1,9 @@
+# 8.5.0 10-Feb-2020
+
+* Add support for deposit switch product ([#251](https://github.com/plaid/plaid-ruby/pull/251))
+* Add support for generic processor token ([#256](https://github.com/plaid/plaid-ruby/pull/256))
+* Add support for webhook verification ([#249](https://github.com/plaid/plaid-ruby/pull/249))
+
 # 8.4.0 23-Jan-2020
 
 * Add support for new UK Payment Initiation product ([#246](https://github.com/plaid/plaid-ruby/pull/246))
