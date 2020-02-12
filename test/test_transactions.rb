@@ -3,7 +3,7 @@ require 'date'
 require_relative 'test_helper'
 
 # Internal: The test for Plaid::Transactions.
-class PlaidTransactionsTest < PlaidTest
+class PlaidTransactionsTest < PlaidTest # rubocop:disable Metrics/ClassLength
   def setup
     create_item initial_products: [:transactions],
                 transactions_start_date: '2016-01-01',
@@ -121,5 +121,15 @@ class PlaidTransactionsTest < PlaidTest
                                     count: BAD_STRING,
                                     offset: BAD_STRING)
     end
+  end
+
+  def test_refresh_invalid_access_token
+    assert_raises(Plaid::InvalidInputError) do
+      client.transactions.refresh(BAD_STRING)
+    end
+  end
+
+  def test_refresh
+    client.transactions.refresh(access_token)
   end
 end
