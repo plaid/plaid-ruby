@@ -1,3 +1,8 @@
+# 8.6.0 20-Feb-2020
+
+* Add support for transactions refresh product ([#258](https://github.com/plaid/plaid-ruby/pull/258))
+  * `/transactions/refresh`
+
 # 8.5.0 10-Feb-2020
 
 * Add support for deposit switch product ([#251](https://github.com/plaid/plaid-ruby/pull/251))
