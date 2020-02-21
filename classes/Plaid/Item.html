@@ -23,7 +23,7 @@
 
     <meta name="keywords" content="Plaid::Item class">
   
-    <meta name="keywords" content="get, remove">
+    <meta name="keywords" content="get, remove, import">
   
 </head>
 
@@ -52,7 +52,7 @@
   
     <div class="description">
       
-<p>Class used to call the <a href="Item.html">Item</a> product.</p>
+<p>Class used to call the <a href="Item.html"><code>Item</code></a> product.</p>
 
     </div>
   
@@ -85,6 +85,11 @@
       
         <li>
           <span class="type">CLASS</span>
+          <a href="Item/ImportResponse.html">Plaid::Item::ImportResponse</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
           <a href="Item/RemoveResponse.html">Plaid::Item::RemoveResponse</a>
         </li>
       
@@ -104,6 +109,18 @@
               
               <li>
                 <a href="#method-i-get">get</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-import">import</a>
               </li>
             
           </ul>
@@ -147,7 +164,7 @@
               [R]
             </td>
             <td class='attr-name'>access_token</td>
-            <td class='attr-desc'><p>The <a href="AccessToken.html">Plaid::AccessToken</a> product accessor.</p></td>
+            <td class='attr-desc'><p>The <a href="AccessToken.html"><code>Plaid::AccessToken</code></a> product accessor.</p></td>
           </tr>
         
           <tr valign='top'>
@@ -155,7 +172,7 @@
               [R]
             </td>
             <td class='attr-name'>public_token</td>
-            <td class='attr-desc'><p>The <a href="PublicToken.html">Plaid::PublicToken</a> product accessor.</p></td>
+            <td class='attr-desc'><p>The <a href="PublicToken.html"><code>Plaid::PublicToken</code></a> product accessor.</p></td>
           </tr>
         
           <tr valign='top'>
@@ -163,7 +180,7 @@
               [R]
             </td>
             <td class='attr-name'>webhook</td>
-            <td class='attr-desc'><p>The <a href="Webhook.html">Plaid::Webhook</a> product accessor.</p></td>
+            <td class='attr-desc'><p>The <a href="Webhook.html"><code>Plaid::Webhook</code></a> product accessor.</p></td>
           </tr>
         
       </table>
@@ -207,18 +224,15 @@
             <div class="description">
               <p>Get information about an item.</p>
 
-<p>Does a POST /item/get call which returns information about an item or
-ItemStatus.</p>
-<dl class="rdoc-list note-list"><dt><a href="Item.html#attribute-i-access_token">#access_token</a>
+<p>Does a POST /item/get call which returns information about an item or ItemStatus.</p>
+<dl class="rdoc-list note-list"><dt><a href="Item.html#attribute-i-access_token"><code>access_token</code></a>
 <dd>
-<p><a href="Item.html#attribute-i-access_token">#access_token</a> who&#39;s
-item to fetch status for</p>
+<p><a href="Item.html#attribute-i-access_token"><code>access_token</code></a> who&#39;s item to fetch status for</p>
 </dd></dl>
 
 <h3 id="method-i-get-label-Returns">Returns</h3>
 
-<p>Returns a <a href="Item/GetResponse.html">GetResponse</a> object with item
-information.</p>
+<p>Returns a <a href="Item/GetResponse.html"><code>GetResponse</code></a> object with item information.</p>
             </div>
           
 
@@ -248,6 +262,63 @@ information.</p>
           </div>
         
         <div class="method">
+          <div class="title method-title" id="method-i-import">
+            
+              <b>import</b>(products, user_auth, options)
+            
+            <a href="../../classes/Plaid/Item.html#method-i-import" name="method-i-import" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              <p>Import an item.</p>
+
+<p>Does a POST /item/import call which imports an item.</p>
+<dl class="rdoc-list note-list"><dt>products
+<dd>
+<p>array of products to enable</p>
+</dd><dt>user_auth
+<dd>
+<p>hash map of user authentication information</p>
+</dd><dt>options
+<dd>
+<p>optional hash map of options</p>
+</dd></dl>
+
+<h3 id="method-i-import-label-Returns">Returns</h3>
+
+<p>Returns an access token for the item.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-import_source')" id="l_method-i-import_source">show</a>
+                
+              </p>
+              <div id="method-i-import_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/products/item.rb, line 217</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">import</span>(<span class="ruby-identifier">products</span>, <span class="ruby-identifier">user_auth</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;item/import&#39;</span>,
+                 <span class="ruby-constant">ImportResponse</span>,
+                 <span class="ruby-value">products:</span> <span class="ruby-identifier">products</span>,
+                 <span class="ruby-value">user_auth:</span> <span class="ruby-identifier">user_auth</span>,
+                 <span class="ruby-value">options:</span> <span class="ruby-identifier">options</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
           <div class="title method-title" id="method-i-remove">
             
               <b>remove</b>(access_token)
@@ -260,16 +331,14 @@ information.</p>
               <p>Removes an item</p>
 
 <p>Does a POST /item/remove call which is used to remove an item</p>
-<dl class="rdoc-list note-list"><dt><a href="Item.html#attribute-i-access_token">#access_token</a>
+<dl class="rdoc-list note-list"><dt><a href="Item.html#attribute-i-access_token"><code>access_token</code></a>
 <dd>
-<p><a href="Item.html#attribute-i-access_token">#access_token</a> who&#39;s
-item to remove</p>
+<p><a href="Item.html#attribute-i-access_token"><code>access_token</code></a> who&#39;s item to remove</p>
 </dd></dl>
 
 <h3 id="method-i-remove-label-Returns">Returns</h3>
 
-<p>Returns a <a href="Item/RemoveResponse.html">RemoveResponse</a> object with
-remove result.</p>
+<p>Returns a <a href="Item/RemoveResponse.html"><code>RemoveResponse</code></a> object with remove result.</p>
             </div>
           
 

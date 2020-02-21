@@ -23,7 +23,7 @@
 
     <meta name="keywords" content="Plaid::Transactions class">
   
-    <meta name="keywords" content="get">
+    <meta name="keywords" content="get, refresh">
   
 </head>
 
@@ -52,8 +52,7 @@
   
     <div class="description">
       
-<p>Class used to call the <a href="Transactions.html">Transactions</a>
-product.</p>
+<p>Class used to call the <a href="Transactions.html"><code>Transactions</code></a> product.</p>
 
     </div>
   
@@ -100,6 +99,18 @@ product.</p>
               
               <li>
                 <a href="#method-i-get">get</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-refresh">refresh</a>
               </li>
             
           </ul>
@@ -161,9 +172,7 @@ product.</p>
             <div class="description">
               <p>Get information about transactions</p>
 
-<p>Does a POST /transactions/get call which gives you high level account data
-along with transactions from all accounts contained in the
-access_token&#39;s item.</p>
+<p>Does a POST /transactions/get call which gives you high level account data along with transactions from all accounts contained in the access_token&#39;s item.</p>
 <dl class="rdoc-list note-list"><dt>access_token
 <dd>
 <p>access_token who&#39;s item to fetch transactions for.</p>
@@ -189,7 +198,7 @@ access_token&#39;s item.</p>
 
 <h3 id="method-i-get-label-Returns">Returns</h3>
 
-<p>Returns <a href="Transactions/GetResponse.html">GetResponse</a>.</p>
+<p>Returns <a href="Transactions/GetResponse.html"><code>GetResponse</code></a>.</p>
             </div>
           
 
@@ -223,6 +232,55 @@ access_token&#39;s item.</p>
                  <span class="ruby-value">start_date:</span> <span class="ruby-constant">Plaid</span>.<span class="ruby-identifier">convert_to_date_string</span>(<span class="ruby-identifier">start_date</span>),
                  <span class="ruby-value">end_date:</span> <span class="ruby-constant">Plaid</span>.<span class="ruby-identifier">convert_to_date_string</span>(<span class="ruby-identifier">end_date</span>),
                  <span class="ruby-value">options:</span> <span class="ruby-identifier">options_payload</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-refresh">
+            
+              <b>refresh</b>(access_token)
+            
+            <a href="../../classes/Plaid/Transactions.html#method-i-refresh" name="method-i-refresh" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              <p>Manually refresh transactions</p>
+
+<p>Does a POST /transactions/refresh call which kicks off a manual transactions extraction for all accounts contained in the access_token&#39;s item.</p>
+<dl class="rdoc-list note-list"><dt>access_token
+<dd>
+<p>access_token who&#39;s item to fetch transactions for.</p>
+</dd></dl>
+
+<h3 id="method-i-refresh-label-Returns">Returns</h3>
+
+<p>Returns BaseResponse.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-refresh_source')" id="l_method-i-refresh_source">show</a>
+                
+              </p>
+              <div id="method-i-refresh_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/products/transactions.rb, line 75</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">refresh</span>(<span class="ruby-identifier">access_token</span>)
+  <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;transactions/refresh&#39;</span>,
+                 <span class="ruby-constant">Models</span><span class="ruby-operator">::</span><span class="ruby-constant">BaseResponse</span>,
+                 <span class="ruby-value">access_token:</span> <span class="ruby-identifier">access_token</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>

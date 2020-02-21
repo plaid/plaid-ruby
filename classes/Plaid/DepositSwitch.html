@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Plaid::DepositSwitch</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+
+    <meta property="og:title" value="Plaid::DepositSwitch">
+
+  
+    
+    <meta name="description" content="Class used to call the Deposit Switch product.">
+    <meta property="og:description" content="Class used to call the Deposit Switch product.">
+  
+
+    <meta name="keywords" content="Plaid::DepositSwitch class">
+  
+    <meta name="keywords" content="get, create, create_token">
+  
+</head>
+
+<body>
+    <div class="banner">
+        
+        <h1>
+            <span class="type">Class</span>
+            Plaid::DepositSwitch
+            
+                <span class="parent">&lt;
+                    
+                    <a href="BaseProduct.html">Plaid::BaseProduct</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/lib/plaid/products/deposit_switch_rb.html">lib/plaid/products/deposit_switch.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Class used to call the Deposit Switch product.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+    <!-- Sections -->
+    <div class="sectiontitle">Sections</div>
+    <ul>
+      
+        <li><a href="#Public">Public</a></li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="DepositSwitch/CreateResponse.html">Plaid::DepositSwitch::CreateResponse</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="DepositSwitch/CreateTokenResponse.html">Plaid::DepositSwitch::CreateTokenResponse</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="DepositSwitch/GetResponse.html">Plaid::DepositSwitch::GetResponse</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-create">create</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-create_token">create_token</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>G</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-get">get</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+    
+  
+
+    
+      <div class="contenttitle" id="Public">
+        Public
+      </div>
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+    
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-create">
+            
+              <b>create</b>(target_account_id, target_access_token)
+            
+            <a href="../../classes/Plaid/DepositSwitch.html#method-i-create" name="method-i-create" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              <p>Create Deposit Switch.</p>
+
+<p>Does a POST /deposit_switch/create call which creates a deposit switch</p>
+<dl class="rdoc-list note-list"><dt>target_account_id
+<dd>
+<p>ID of the bank account for the deposit switch</p>
+</dd><dt>target_access_token
+<dd>
+<p>access token for the switch</p>
+</dd></dl>
+
+<h3 id="method-i-create-label-Returns">Returns</h3>
+
+<p>Returns the DepositSwitchResponse object with deposit switch data.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-create_source')" id="l_method-i-create_source">show</a>
+                
+              </p>
+              <div id="method-i-create_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/products/deposit_switch.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>(<span class="ruby-identifier">target_account_id</span>, <span class="ruby-identifier">target_access_token</span>)
+  <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;deposit_switch/create&#39;</span>,
+                 <span class="ruby-constant">CreateResponse</span>,
+                 <span class="ruby-value">target_account_id:</span> <span class="ruby-identifier">target_account_id</span>,
+                 <span class="ruby-value">target_access_token:</span> <span class="ruby-identifier">target_access_token</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-create_token">
+            
+              <b>create_token</b>(deposit_switch_id)
+            
+            <a href="../../classes/Plaid/DepositSwitch.html#method-i-create_token" name="method-i-create_token" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              <p>Create Deposit Switch token.</p>
+
+<p>Does a POST /deposit_switch/token/create call which creates a deposit switch.</p>
+<dl class="rdoc-list note-list"><dt>deposit_switch_item
+<dd>
+<p>ID of the deposit switch</p>
+</dd></dl>
+
+<h3 id="method-i-create_token-label-Returns">Returns</h3>
+
+<p>Returns the <a href="DepositSwitch/CreateTokenResponse.html"><code>CreateTokenResponse</code></a> object.</p>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-create_token_source')" id="l_method-i-create_token_source">show</a>
+                
+              </p>
+              <div id="method-i-create_token_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/products/deposit_switch.rb, line 80</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_token</span>(<span class="ruby-identifier">deposit_switch_id</span>)
+  <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;deposit_switch/token/create&#39;</span>,
+                 <span class="ruby-constant">CreateTokenResponse</span>,
+                 <span class="ruby-value">deposit_switch_id:</span> <span class="ruby-identifier">deposit_switch_id</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-get">
+            
+              <b>get</b>(deposit_switch_id)
+            
+            <a href="../../classes/Plaid/DepositSwitch.html#method-i-get" name="method-i-get" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              <p>Get Deposit Switch information.</p>
+
+<p>Does a POST /deposit_switch/get call which fetches deposit switch associated with a deposit switch id.</p>
+<dl class="rdoc-list note-list"><dt>deposit_switch_id
+<dd>
+<h3 id="method-i-get-label-Returns">Returns</h3>
+
+<p>deposit_switch_id to fetch deposit switch Returns the DepositSwitchResponse object with deposit switch data.</p>
+</dd></dl>
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-get_source')" id="l_method-i-get_source">show</a>
+                
+              </p>
+              <div id="method-i-get_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/products/deposit_switch.rb, line 11</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get</span>(<span class="ruby-identifier">deposit_switch_id</span>)
+  <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;deposit_switch/get&#39;</span>,
+                 <span class="ruby-constant">GetResponse</span>,
+                 <span class="ruby-value">deposit_switch_id:</span> <span class="ruby-identifier">deposit_switch_id</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
+    
+  
+</div>
+
+    </div>
+  </body>
+</html>

@@ -59,6 +59,8 @@
             
             <li><a href="../files/lib/plaid/products/credit_details_rb.html">lib/plaid/products/credit_details.rb</a></li>
             
+            <li><a href="../files/lib/plaid/products/deposit_switch_rb.html">lib/plaid/products/deposit_switch.rb</a></li>
+            
             <li><a href="../files/lib/plaid/products/identity_rb.html">lib/plaid/products/identity.rb</a></li>
             
             <li><a href="../files/lib/plaid/products/income_rb.html">lib/plaid/products/income.rb</a></li>
@@ -71,11 +73,15 @@
             
             <li><a href="../files/lib/plaid/products/liabilities_rb.html">lib/plaid/products/liabilities.rb</a></li>
             
+            <li><a href="../files/lib/plaid/products/payment_initiation_rb.html">lib/plaid/products/payment_initiation.rb</a></li>
+            
             <li><a href="../files/lib/plaid/products/processor_rb.html">lib/plaid/products/processor.rb</a></li>
             
             <li><a href="../files/lib/plaid/products/sandbox_rb.html">lib/plaid/products/sandbox.rb</a></li>
             
             <li><a href="../files/lib/plaid/products/transactions_rb.html">lib/plaid/products/transactions.rb</a></li>
+            
+            <li><a href="../files/lib/plaid/products/webhooks_rb.html">lib/plaid/products/webhooks.rb</a></li>
             
             <li><a href="../files/lib/plaid/version_rb.html">lib/plaid/version.rb</a></li>
             
@@ -86,9 +92,9 @@
   
     <div class="description">
       
-<p>The namespace for all the things <a href="Plaid.html">Plaid</a>.</p>
+<p>The namespace for all the things <a href="Plaid.html"><code>Plaid</code></a>.</p>
 
-<p>The <a href="Plaid.html">Plaid</a> namespace.</p>
+<p>The <a href="Plaid.html"><code>Plaid</code></a> namespace.</p>
 
     </div>
   
@@ -248,6 +254,11 @@
       
         <li>
           <span class="type">CLASS</span>
+          <a href="Plaid/DepositSwitch.html">Plaid::DepositSwitch</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
           <a href="Plaid/Dwolla.html">Plaid::Dwolla</a>
         </li>
       
@@ -338,6 +349,46 @@
       
         <li>
           <span class="type">CLASS</span>
+          <a href="Plaid/PaymentCreateResponse.html">Plaid::PaymentCreateResponse</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Plaid/PaymentGetResponse.html">Plaid::PaymentGetResponse</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Plaid/PaymentInitiation.html">Plaid::PaymentInitiation</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Plaid/PaymentListResponse.html">Plaid::PaymentListResponse</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Plaid/PaymentRecipientCreateResponse.html">Plaid::PaymentRecipientCreateResponse</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Plaid/PaymentRecipientGetResponse.html">Plaid::PaymentRecipientGetResponse</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Plaid/PaymentRecipientListResponse.html">Plaid::PaymentRecipientListResponse</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Plaid/PaymentTokenCreateResponse.html">Plaid::PaymentTokenCreateResponse</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
           <a href="Plaid/PlaidAPIError.html">Plaid::PlaidAPIError</a>
         </li>
       
@@ -354,6 +405,11 @@
         <li>
           <span class="type">CLASS</span>
           <a href="Plaid/Processor.html">Plaid::Processor</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Plaid/ProcessorToken.html">Plaid::ProcessorToken</a>
         </li>
       
         <li>
@@ -404,6 +460,11 @@
         <li>
           <span class="type">CLASS</span>
           <a href="Plaid/Webhook.html">Plaid::Webhook</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Plaid/Webhooks.html">Plaid::Webhooks</a>
         </li>
       
     </ul>
@@ -465,7 +526,7 @@
           <tr valign='top'>
             <td class="attr-name">VERSION</td>
             <td>=</td>
-            <td class="attr-value">&#39;8.3.0&#39;.freeze</td>
+            <td class="attr-value">&#39;8.6.0&#39;.freeze</td>
           </tr>
           
             <tr valign='top'>
@@ -525,7 +586,7 @@
                 
               </p>
               <div id="method-c-relaxed_models-3D_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid.rb, line 47</span>
+                <pre><span class="ruby-comment"># File lib/plaid.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">relaxed_models=</span>(<span class="ruby-identifier">value</span>)
   <span class="ruby-ivar">@relaxed_models</span> = <span class="ruby-identifier">value</span>
 <span class="ruby-keyword">end</span></pre>
@@ -550,9 +611,7 @@
 
 <p>Strict mode: Unknown attributes will cause NoMethodError.</p>
 
-<p>Relaxed mode (default): If a response contains an unknown attribute, it
-won&#39;t cause any error and will be accessible using brackets notation:
-`<a href="'unknown_attribute'">response</a>`.</p>
+<p>Relaxed mode (default): If a response contains an unknown attribute, it won&#39;t cause any error and will be accessible using brackets notation: `<a href="'unknown_attribute'">response</a>`.</p>
 
 <h3 id="method-c-relaxed_models-3F-label-Returns">Returns</h3>
 
@@ -574,7 +633,7 @@ won&#39;t cause any error and will be accessible using brackets notation:
                 
               </p>
               <div id="method-c-relaxed_models-3F_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid.rb, line 38</span>
+                <pre><span class="ruby-comment"># File lib/plaid.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">relaxed_models?</span>
   <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@relaxed_models</span>)
     <span class="ruby-ivar">@relaxed_models</span>
@@ -642,8 +701,7 @@ won&#39;t cause any error and will be accessible using brackets notation:
             <div class="description">
               <p>Converts date objects to strings if needed.</p>
 
-<p>Takes in a string or a Date object and performs necessary operations to
-return a string representation of the Date.</p>
+<p>Takes in a string or a Date object and performs necessary operations to return a string representation of the Date.</p>
 <dl class="rdoc-list note-list"><dt>date
 <dd>
 <p>Date in Date object form or string form (YYYY-MM-DD).</p>
@@ -669,7 +727,7 @@ return a string representation of the Date.</p>
                 
               </p>
               <div id="method-c-convert_to_date_string_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid.rb, line 61</span>
+                <pre><span class="ruby-comment"># File lib/plaid.rb, line 64</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">convert_to_date_string</span>(<span class="ruby-identifier">date</span>)
   <span class="ruby-identifier">date</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">date</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">date</span>.<span class="ruby-identifier">to_date</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&#39;%Y-%m-%d&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
