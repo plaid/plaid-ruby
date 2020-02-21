@@ -62,5 +62,20 @@ module Plaid
       # Public: The Numeric total transactions count.
       property :total_transactions
     end
+
+    # Public: Manually refresh transactions
+    #
+    # Does a POST /transactions/refresh call which kicks off a manual
+    # transactions extraction for all accounts contained in the access_token's
+    # item.
+    #
+    # access_token - access_token who's item to fetch transactions for.
+    #
+    # Returns BaseResponse.
+    def refresh(access_token)
+      post_with_auth 'transactions/refresh',
+                     Models::BaseResponse,
+                     access_token: access_token
+    end
   end
 end

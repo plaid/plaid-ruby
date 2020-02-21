@@ -1347,4 +1347,4052 @@ http_interactions:
         }
     http_version: 
   recorded_at: Wed, 19 Jun 2019 19:56:21 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/sandbox/public_token/create
+    body:
+      encoding: UTF-8
+      string: '{"institution_id":"ins_109508","initial_products":["transactions"],"options":{"transactions":{"start_date":"2016-01-01","end_date":"2017-01-01"}},"public_key":"PLAID_RUBY_PUBLIC_KEY"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.5.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Wed, 12 Feb 2020 21:42:58 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '124'
+      connection:
+      - close
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "public_token": "public-sandbox-e70645a5-b764-4e0d-8c24-eb8d7a29ef18",
+          "request_id": "8NVKKiYJ9rvWfAh"
+        }
+    http_version: 
+  recorded_at: Wed, 12 Feb 2020 21:42:58 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/item/public_token/exchange
+    body:
+      encoding: UTF-8
+      string: '{"public_token":"public-sandbox-e70645a5-b764-4e0d-8c24-eb8d7a29ef18","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.5.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Wed, 12 Feb 2020 21:42:59 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '169'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "access_token": "access-sandbox-34fd1a65-a4cc-4878-b3a5-5367db651366",
+          "item_id": "zq6r54wyG8FlKmj55bJvUZdbL7egxnuo7eVLy",
+          "request_id": "A3ghEtT8BR0XP90"
+        }
+    http_version: 
+  recorded_at: Wed, 12 Feb 2020 21:42:59 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/item/get
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-34fd1a65-a4cc-4878-b3a5-5367db651366","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.5.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Wed, 12 Feb 2020 21:42:59 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '326'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "item": {
+            "available_products": [
+              "assets",
+              "auth",
+              "balance",
+              "credit_details",
+              "identity",
+              "income",
+              "investments",
+              "liabilities"
+            ],
+            "billed_products": [
+              "transactions"
+            ],
+            "consent_expiration_time": null,
+            "error": null,
+            "institution_id": "ins_109508",
+            "item_id": "zq6r54wyG8FlKmj55bJvUZdbL7egxnuo7eVLy",
+            "webhook": ""
+          },
+          "request_id": "XRhmtgOTiXyEzIi",
+          "status": {
+            "last_webhook": null,
+            "transactions": {
+              "last_failed_update": null,
+              "last_successful_update": null
+            }
+          }
+        }
+    http_version: 
+  recorded_at: Wed, 12 Feb 2020 21:42:59 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/transactions/get
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-34fd1a65-a4cc-4878-b3a5-5367db651366","start_date":"2016-01-01","end_date":"2017-01-01","options":{"count":2,"offset":1},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.5.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      server:
+      - nginx
+      date:
+      - Wed, 12 Feb 2020 21:43:00 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '214'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "display_message": null,
+          "error_code": "PRODUCT_NOT_READY",
+          "error_message": "the requested product is not yet ready. please provide a webhook or try the request again later",
+          "error_type": "ITEM_ERROR",
+          "request_id": "Pt9VPabWv2k5iVS",
+          "suggested_action": null
+        }
+    http_version: 
+  recorded_at: Wed, 12 Feb 2020 21:43:00 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/transactions/get
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-34fd1a65-a4cc-4878-b3a5-5367db651366","start_date":"2016-01-01","end_date":"2017-01-01","options":{"count":2,"offset":1},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.5.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Wed, 12 Feb 2020 21:43:02 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '1394'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "accounts": [
+            {
+              "account_id": "BxoZ5qKeM8i87rvbbz6Jfaxek7QQvxIwW74Mx",
+              "balances": {
+                "available": 100,
+                "current": 110,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "0000",
+              "name": "Plaid Checking",
+              "official_name": "Plaid Gold Standard 0% Interest Checking",
+              "subtype": "checking",
+              "type": "depository"
+            },
+            {
+              "account_id": "3gZbvWXlratbQ6zqqdaPhnBv9XRReBtqrwZlg",
+              "balances": {
+                "available": 200,
+                "current": 210,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "1111",
+              "name": "Plaid Saving",
+              "official_name": "Plaid Silver Standard 0.1% Interest Saving",
+              "subtype": "savings",
+              "type": "depository"
+            },
+            {
+              "account_id": "xV6qXdWbGofWEBn77VMliXxR89vvPxcn7964P",
+              "balances": {
+                "available": null,
+                "current": 1000,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "2222",
+              "name": "Plaid CD",
+              "official_name": "Plaid Bronze Standard 0.2% Interest CD",
+              "subtype": "cd",
+              "type": "depository"
+            },
+            {
+              "account_id": "dVRXJl34kKfPR7N99o5dSgxbN877ZxtZMPJEE",
+              "balances": {
+                "available": null,
+                "current": 410,
+                "iso_currency_code": "USD",
+                "limit": 2000,
+                "unofficial_currency_code": null
+              },
+              "mask": "3333",
+              "name": "Plaid Credit Card",
+              "official_name": "Plaid Diamond 12.5% APR Interest Credit Card",
+              "subtype": "credit card",
+              "type": "credit"
+            },
+            {
+              "account_id": "aVRX3Erx8AfD7RPggAEZuNy6Qegg4yC7aRZ5m",
+              "balances": {
+                "available": 43200,
+                "current": 43200,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "4444",
+              "name": "Plaid Money Market",
+              "official_name": "Plaid Platinum Standard 1.85% Interest Money Market",
+              "subtype": "money market",
+              "type": "depository"
+            },
+            {
+              "account_id": "48AbV3kqz4FAlyeKKp6kiMaw6ZooJaSdrgJbQ",
+              "balances": {
+                "available": null,
+                "current": 320.76,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "5555",
+              "name": "Plaid IRA",
+              "official_name": null,
+              "subtype": "ira",
+              "type": "investment"
+            },
+            {
+              "account_id": "N1LNnejkBdTRq8GJJWLMty91b8WWd9CWjry61",
+              "balances": {
+                "available": null,
+                "current": 23631.9805,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "6666",
+              "name": "Plaid 401k",
+              "official_name": null,
+              "subtype": "401k",
+              "type": "investment"
+            },
+            {
+              "account_id": "PpLWEyZnx4FQ7L1mmldZtNey4AMMJeC7kwo6M",
+              "balances": {
+                "available": null,
+                "current": 65262,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "7777",
+              "name": "Plaid Student Loan",
+              "official_name": null,
+              "subtype": "student",
+              "type": "loan"
+            }
+          ],
+          "item": {
+            "available_products": [
+              "assets",
+              "auth",
+              "balance",
+              "credit_details",
+              "identity",
+              "income",
+              "investments",
+              "liabilities"
+            ],
+            "billed_products": [
+              "transactions"
+            ],
+            "consent_expiration_time": null,
+            "error": null,
+            "institution_id": "ins_109508",
+            "item_id": "zq6r54wyG8FlKmj55bJvUZdbL7egxnuo7eVLy",
+            "webhook": ""
+          },
+          "request_id": "5TJuZJB7Ouki5zS",
+          "total_transactions": 202,
+          "transactions": [
+            {
+              "account_id": "3gZbvWXlratbQ6zqqdaPhnBv9XRReBtqrwZlg",
+              "account_owner": null,
+              "amount": 25,
+              "authorized_date": null,
+              "category": [
+                "Payment",
+                "Credit Card"
+              ],
+              "category_id": "16001000",
+              "date": "2017-01-01",
+              "iso_currency_code": "USD",
+              "location": {
+                "address": null,
+                "city": null,
+                "country": null,
+                "lat": null,
+                "lon": null,
+                "postal_code": null,
+                "region": null,
+                "store_number": null
+              },
+              "name": "CREDIT CARD 3333 PAYMENT *//",
+              "payment_channel": "other",
+              "payment_meta": {
+                "by_order_of": null,
+                "payee": null,
+                "payer": null,
+                "payment_method": null,
+                "payment_processor": null,
+                "ppd_id": null,
+                "reason": null,
+                "reference_number": null
+              },
+              "pending": false,
+              "pending_transaction_id": null,
+              "transaction_id": "lVRD1XQMG4frXkwVVEbQHzDXqv3anMCZ5p9aV",
+              "transaction_type": "special",
+              "unofficial_currency_code": null
+            },
+            {
+              "account_id": "xV6qXdWbGofWEBn77VMliXxR89vvPxcn7964P",
+              "account_owner": null,
+              "amount": 1000,
+              "authorized_date": null,
+              "category": [
+                "Transfer",
+                "Deposit"
+              ],
+              "category_id": "21007000",
+              "date": "2016-12-31",
+              "iso_currency_code": "USD",
+              "location": {
+                "address": null,
+                "city": null,
+                "country": null,
+                "lat": null,
+                "lon": null,
+                "postal_code": null,
+                "region": null,
+                "store_number": null
+              },
+              "name": "CD DEPOSIT .INITIAL.",
+              "payment_channel": "other",
+              "payment_meta": {
+                "by_order_of": null,
+                "payee": null,
+                "payer": null,
+                "payment_method": null,
+                "payment_processor": null,
+                "ppd_id": null,
+                "reason": null,
+                "reference_number": null
+              },
+              "pending": false,
+              "pending_transaction_id": null,
+              "transaction_id": "zq6r54wyG8FlKmj55bJvUZdBqJGzbjCoKlPwq",
+              "transaction_type": "special",
+              "unofficial_currency_code": null
+            }
+          ]
+        }
+    http_version: 
+  recorded_at: Wed, 12 Feb 2020 21:43:02 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/transactions/get
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-34fd1a65-a4cc-4878-b3a5-5367db651366","start_date":"2016-01-01","end_date":"2017-01-01","options":{"count":2,"offset":1},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.5.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Wed, 12 Feb 2020 21:43:02 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '1394'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "accounts": [
+            {
+              "account_id": "BxoZ5qKeM8i87rvbbz6Jfaxek7QQvxIwW74Mx",
+              "balances": {
+                "available": 100,
+                "current": 110,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "0000",
+              "name": "Plaid Checking",
+              "official_name": "Plaid Gold Standard 0% Interest Checking",
+              "subtype": "checking",
+              "type": "depository"
+            },
+            {
+              "account_id": "3gZbvWXlratbQ6zqqdaPhnBv9XRReBtqrwZlg",
+              "balances": {
+                "available": 200,
+                "current": 210,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "1111",
+              "name": "Plaid Saving",
+              "official_name": "Plaid Silver Standard 0.1% Interest Saving",
+              "subtype": "savings",
+              "type": "depository"
+            },
+            {
+              "account_id": "xV6qXdWbGofWEBn77VMliXxR89vvPxcn7964P",
+              "balances": {
+                "available": null,
+                "current": 1000,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "2222",
+              "name": "Plaid CD",
+              "official_name": "Plaid Bronze Standard 0.2% Interest CD",
+              "subtype": "cd",
+              "type": "depository"
+            },
+            {
+              "account_id": "dVRXJl34kKfPR7N99o5dSgxbN877ZxtZMPJEE",
+              "balances": {
+                "available": null,
+                "current": 410,
+                "iso_currency_code": "USD",
+                "limit": 2000,
+                "unofficial_currency_code": null
+              },
+              "mask": "3333",
+              "name": "Plaid Credit Card",
+              "official_name": "Plaid Diamond 12.5% APR Interest Credit Card",
+              "subtype": "credit card",
+              "type": "credit"
+            },
+            {
+              "account_id": "aVRX3Erx8AfD7RPggAEZuNy6Qegg4yC7aRZ5m",
+              "balances": {
+                "available": 43200,
+                "current": 43200,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "4444",
+              "name": "Plaid Money Market",
+              "official_name": "Plaid Platinum Standard 1.85% Interest Money Market",
+              "subtype": "money market",
+              "type": "depository"
+            },
+            {
+              "account_id": "48AbV3kqz4FAlyeKKp6kiMaw6ZooJaSdrgJbQ",
+              "balances": {
+                "available": null,
+                "current": 320.76,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "5555",
+              "name": "Plaid IRA",
+              "official_name": null,
+              "subtype": "ira",
+              "type": "investment"
+            },
+            {
+              "account_id": "N1LNnejkBdTRq8GJJWLMty91b8WWd9CWjry61",
+              "balances": {
+                "available": null,
+                "current": 23631.9805,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "6666",
+              "name": "Plaid 401k",
+              "official_name": null,
+              "subtype": "401k",
+              "type": "investment"
+            },
+            {
+              "account_id": "PpLWEyZnx4FQ7L1mmldZtNey4AMMJeC7kwo6M",
+              "balances": {
+                "available": null,
+                "current": 65262,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "7777",
+              "name": "Plaid Student Loan",
+              "official_name": null,
+              "subtype": "student",
+              "type": "loan"
+            }
+          ],
+          "item": {
+            "available_products": [
+              "assets",
+              "auth",
+              "balance",
+              "credit_details",
+              "identity",
+              "income",
+              "investments",
+              "liabilities"
+            ],
+            "billed_products": [
+              "transactions"
+            ],
+            "consent_expiration_time": null,
+            "error": null,
+            "institution_id": "ins_109508",
+            "item_id": "zq6r54wyG8FlKmj55bJvUZdbL7egxnuo7eVLy",
+            "webhook": ""
+          },
+          "request_id": "cb2v9mc0hGkHdb4",
+          "total_transactions": 202,
+          "transactions": [
+            {
+              "account_id": "3gZbvWXlratbQ6zqqdaPhnBv9XRReBtqrwZlg",
+              "account_owner": null,
+              "amount": 25,
+              "authorized_date": null,
+              "category": [
+                "Payment",
+                "Credit Card"
+              ],
+              "category_id": "16001000",
+              "date": "2017-01-01",
+              "iso_currency_code": "USD",
+              "location": {
+                "address": null,
+                "city": null,
+                "country": null,
+                "lat": null,
+                "lon": null,
+                "postal_code": null,
+                "region": null,
+                "store_number": null
+              },
+              "name": "CREDIT CARD 3333 PAYMENT *//",
+              "payment_channel": "other",
+              "payment_meta": {
+                "by_order_of": null,
+                "payee": null,
+                "payer": null,
+                "payment_method": null,
+                "payment_processor": null,
+                "ppd_id": null,
+                "reason": null,
+                "reference_number": null
+              },
+              "pending": false,
+              "pending_transaction_id": null,
+              "transaction_id": "lVRD1XQMG4frXkwVVEbQHzDXqv3anMCZ5p9aV",
+              "transaction_type": "special",
+              "unofficial_currency_code": null
+            },
+            {
+              "account_id": "xV6qXdWbGofWEBn77VMliXxR89vvPxcn7964P",
+              "account_owner": null,
+              "amount": 1000,
+              "authorized_date": null,
+              "category": [
+                "Transfer",
+                "Deposit"
+              ],
+              "category_id": "21007000",
+              "date": "2016-12-31",
+              "iso_currency_code": "USD",
+              "location": {
+                "address": null,
+                "city": null,
+                "country": null,
+                "lat": null,
+                "lon": null,
+                "postal_code": null,
+                "region": null,
+                "store_number": null
+              },
+              "name": "CD DEPOSIT .INITIAL.",
+              "payment_channel": "other",
+              "payment_meta": {
+                "by_order_of": null,
+                "payee": null,
+                "payer": null,
+                "payment_method": null,
+                "payment_processor": null,
+                "ppd_id": null,
+                "reason": null,
+                "reference_number": null
+              },
+              "pending": false,
+              "pending_transaction_id": null,
+              "transaction_id": "zq6r54wyG8FlKmj55bJvUZdBqJGzbjCoKlPwq",
+              "transaction_type": "special",
+              "unofficial_currency_code": null
+            }
+          ]
+        }
+    http_version: 
+  recorded_at: Wed, 12 Feb 2020 21:43:02 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/transactions/get
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-34fd1a65-a4cc-4878-b3a5-5367db651366","start_date":"2016-01-01","end_date":"2017-01-01","options":{"count":2,"offset":1},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.5.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Wed, 12 Feb 2020 21:43:03 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '1394'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "accounts": [
+            {
+              "account_id": "BxoZ5qKeM8i87rvbbz6Jfaxek7QQvxIwW74Mx",
+              "balances": {
+                "available": 100,
+                "current": 110,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "0000",
+              "name": "Plaid Checking",
+              "official_name": "Plaid Gold Standard 0% Interest Checking",
+              "subtype": "checking",
+              "type": "depository"
+            },
+            {
+              "account_id": "3gZbvWXlratbQ6zqqdaPhnBv9XRReBtqrwZlg",
+              "balances": {
+                "available": 200,
+                "current": 210,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "1111",
+              "name": "Plaid Saving",
+              "official_name": "Plaid Silver Standard 0.1% Interest Saving",
+              "subtype": "savings",
+              "type": "depository"
+            },
+            {
+              "account_id": "xV6qXdWbGofWEBn77VMliXxR89vvPxcn7964P",
+              "balances": {
+                "available": null,
+                "current": 1000,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "2222",
+              "name": "Plaid CD",
+              "official_name": "Plaid Bronze Standard 0.2% Interest CD",
+              "subtype": "cd",
+              "type": "depository"
+            },
+            {
+              "account_id": "dVRXJl34kKfPR7N99o5dSgxbN877ZxtZMPJEE",
+              "balances": {
+                "available": null,
+                "current": 410,
+                "iso_currency_code": "USD",
+                "limit": 2000,
+                "unofficial_currency_code": null
+              },
+              "mask": "3333",
+              "name": "Plaid Credit Card",
+              "official_name": "Plaid Diamond 12.5% APR Interest Credit Card",
+              "subtype": "credit card",
+              "type": "credit"
+            },
+            {
+              "account_id": "aVRX3Erx8AfD7RPggAEZuNy6Qegg4yC7aRZ5m",
+              "balances": {
+                "available": 43200,
+                "current": 43200,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "4444",
+              "name": "Plaid Money Market",
+              "official_name": "Plaid Platinum Standard 1.85% Interest Money Market",
+              "subtype": "money market",
+              "type": "depository"
+            },
+            {
+              "account_id": "48AbV3kqz4FAlyeKKp6kiMaw6ZooJaSdrgJbQ",
+              "balances": {
+                "available": null,
+                "current": 320.76,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "5555",
+              "name": "Plaid IRA",
+              "official_name": null,
+              "subtype": "ira",
+              "type": "investment"
+            },
+            {
+              "account_id": "N1LNnejkBdTRq8GJJWLMty91b8WWd9CWjry61",
+              "balances": {
+                "available": null,
+                "current": 23631.9805,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "6666",
+              "name": "Plaid 401k",
+              "official_name": null,
+              "subtype": "401k",
+              "type": "investment"
+            },
+            {
+              "account_id": "PpLWEyZnx4FQ7L1mmldZtNey4AMMJeC7kwo6M",
+              "balances": {
+                "available": null,
+                "current": 65262,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "7777",
+              "name": "Plaid Student Loan",
+              "official_name": null,
+              "subtype": "student",
+              "type": "loan"
+            }
+          ],
+          "item": {
+            "available_products": [
+              "assets",
+              "auth",
+              "balance",
+              "credit_details",
+              "identity",
+              "income",
+              "investments",
+              "liabilities"
+            ],
+            "billed_products": [
+              "transactions"
+            ],
+            "consent_expiration_time": null,
+            "error": null,
+            "institution_id": "ins_109508",
+            "item_id": "zq6r54wyG8FlKmj55bJvUZdbL7egxnuo7eVLy",
+            "webhook": ""
+          },
+          "request_id": "ASOctnlSMPBFOc3",
+          "total_transactions": 202,
+          "transactions": [
+            {
+              "account_id": "3gZbvWXlratbQ6zqqdaPhnBv9XRReBtqrwZlg",
+              "account_owner": null,
+              "amount": 25,
+              "authorized_date": null,
+              "category": [
+                "Payment",
+                "Credit Card"
+              ],
+              "category_id": "16001000",
+              "date": "2017-01-01",
+              "iso_currency_code": "USD",
+              "location": {
+                "address": null,
+                "city": null,
+                "country": null,
+                "lat": null,
+                "lon": null,
+                "postal_code": null,
+                "region": null,
+                "store_number": null
+              },
+              "name": "CREDIT CARD 3333 PAYMENT *//",
+              "payment_channel": "other",
+              "payment_meta": {
+                "by_order_of": null,
+                "payee": null,
+                "payer": null,
+                "payment_method": null,
+                "payment_processor": null,
+                "ppd_id": null,
+                "reason": null,
+                "reference_number": null
+              },
+              "pending": false,
+              "pending_transaction_id": null,
+              "transaction_id": "lVRD1XQMG4frXkwVVEbQHzDXqv3anMCZ5p9aV",
+              "transaction_type": "special",
+              "unofficial_currency_code": null
+            },
+            {
+              "account_id": "xV6qXdWbGofWEBn77VMliXxR89vvPxcn7964P",
+              "account_owner": null,
+              "amount": 1000,
+              "authorized_date": null,
+              "category": [
+                "Transfer",
+                "Deposit"
+              ],
+              "category_id": "21007000",
+              "date": "2016-12-31",
+              "iso_currency_code": "USD",
+              "location": {
+                "address": null,
+                "city": null,
+                "country": null,
+                "lat": null,
+                "lon": null,
+                "postal_code": null,
+                "region": null,
+                "store_number": null
+              },
+              "name": "CD DEPOSIT .INITIAL.",
+              "payment_channel": "other",
+              "payment_meta": {
+                "by_order_of": null,
+                "payee": null,
+                "payer": null,
+                "payment_method": null,
+                "payment_processor": null,
+                "ppd_id": null,
+                "reason": null,
+                "reference_number": null
+              },
+              "pending": false,
+              "pending_transaction_id": null,
+              "transaction_id": "zq6r54wyG8FlKmj55bJvUZdBqJGzbjCoKlPwq",
+              "transaction_type": "special",
+              "unofficial_currency_code": null
+            }
+          ]
+        }
+    http_version: 
+  recorded_at: Wed, 12 Feb 2020 21:43:03 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/transactions/get
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-34fd1a65-a4cc-4878-b3a5-5367db651366","start_date":"2016-01-01","end_date":"2017-01-01","options":{"count":2,"offset":1},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.5.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Wed, 12 Feb 2020 21:43:03 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '1395'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "accounts": [
+            {
+              "account_id": "BxoZ5qKeM8i87rvbbz6Jfaxek7QQvxIwW74Mx",
+              "balances": {
+                "available": 100,
+                "current": 110,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "0000",
+              "name": "Plaid Checking",
+              "official_name": "Plaid Gold Standard 0% Interest Checking",
+              "subtype": "checking",
+              "type": "depository"
+            },
+            {
+              "account_id": "3gZbvWXlratbQ6zqqdaPhnBv9XRReBtqrwZlg",
+              "balances": {
+                "available": 200,
+                "current": 210,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "1111",
+              "name": "Plaid Saving",
+              "official_name": "Plaid Silver Standard 0.1% Interest Saving",
+              "subtype": "savings",
+              "type": "depository"
+            },
+            {
+              "account_id": "xV6qXdWbGofWEBn77VMliXxR89vvPxcn7964P",
+              "balances": {
+                "available": null,
+                "current": 1000,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "2222",
+              "name": "Plaid CD",
+              "official_name": "Plaid Bronze Standard 0.2% Interest CD",
+              "subtype": "cd",
+              "type": "depository"
+            },
+            {
+              "account_id": "dVRXJl34kKfPR7N99o5dSgxbN877ZxtZMPJEE",
+              "balances": {
+                "available": null,
+                "current": 410,
+                "iso_currency_code": "USD",
+                "limit": 2000,
+                "unofficial_currency_code": null
+              },
+              "mask": "3333",
+              "name": "Plaid Credit Card",
+              "official_name": "Plaid Diamond 12.5% APR Interest Credit Card",
+              "subtype": "credit card",
+              "type": "credit"
+            },
+            {
+              "account_id": "aVRX3Erx8AfD7RPggAEZuNy6Qegg4yC7aRZ5m",
+              "balances": {
+                "available": 43200,
+                "current": 43200,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "4444",
+              "name": "Plaid Money Market",
+              "official_name": "Plaid Platinum Standard 1.85% Interest Money Market",
+              "subtype": "money market",
+              "type": "depository"
+            },
+            {
+              "account_id": "48AbV3kqz4FAlyeKKp6kiMaw6ZooJaSdrgJbQ",
+              "balances": {
+                "available": null,
+                "current": 320.76,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "5555",
+              "name": "Plaid IRA",
+              "official_name": null,
+              "subtype": "ira",
+              "type": "investment"
+            },
+            {
+              "account_id": "N1LNnejkBdTRq8GJJWLMty91b8WWd9CWjry61",
+              "balances": {
+                "available": null,
+                "current": 23631.9805,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "6666",
+              "name": "Plaid 401k",
+              "official_name": null,
+              "subtype": "401k",
+              "type": "investment"
+            },
+            {
+              "account_id": "PpLWEyZnx4FQ7L1mmldZtNey4AMMJeC7kwo6M",
+              "balances": {
+                "available": null,
+                "current": 65262,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "7777",
+              "name": "Plaid Student Loan",
+              "official_name": null,
+              "subtype": "student",
+              "type": "loan"
+            }
+          ],
+          "item": {
+            "available_products": [
+              "assets",
+              "auth",
+              "balance",
+              "credit_details",
+              "identity",
+              "income",
+              "investments",
+              "liabilities"
+            ],
+            "billed_products": [
+              "transactions"
+            ],
+            "consent_expiration_time": null,
+            "error": null,
+            "institution_id": "ins_109508",
+            "item_id": "zq6r54wyG8FlKmj55bJvUZdbL7egxnuo7eVLy",
+            "webhook": ""
+          },
+          "request_id": "W6a28HcUXR4tpyJ",
+          "total_transactions": 202,
+          "transactions": [
+            {
+              "account_id": "3gZbvWXlratbQ6zqqdaPhnBv9XRReBtqrwZlg",
+              "account_owner": null,
+              "amount": 25,
+              "authorized_date": null,
+              "category": [
+                "Payment",
+                "Credit Card"
+              ],
+              "category_id": "16001000",
+              "date": "2017-01-01",
+              "iso_currency_code": "USD",
+              "location": {
+                "address": null,
+                "city": null,
+                "country": null,
+                "lat": null,
+                "lon": null,
+                "postal_code": null,
+                "region": null,
+                "store_number": null
+              },
+              "name": "CREDIT CARD 3333 PAYMENT *//",
+              "payment_channel": "other",
+              "payment_meta": {
+                "by_order_of": null,
+                "payee": null,
+                "payer": null,
+                "payment_method": null,
+                "payment_processor": null,
+                "ppd_id": null,
+                "reason": null,
+                "reference_number": null
+              },
+              "pending": false,
+              "pending_transaction_id": null,
+              "transaction_id": "lVRD1XQMG4frXkwVVEbQHzDXqv3anMCZ5p9aV",
+              "transaction_type": "special",
+              "unofficial_currency_code": null
+            },
+            {
+              "account_id": "xV6qXdWbGofWEBn77VMliXxR89vvPxcn7964P",
+              "account_owner": null,
+              "amount": 1000,
+              "authorized_date": null,
+              "category": [
+                "Transfer",
+                "Deposit"
+              ],
+              "category_id": "21007000",
+              "date": "2016-12-31",
+              "iso_currency_code": "USD",
+              "location": {
+                "address": null,
+                "city": null,
+                "country": null,
+                "lat": null,
+                "lon": null,
+                "postal_code": null,
+                "region": null,
+                "store_number": null
+              },
+              "name": "CD DEPOSIT .INITIAL.",
+              "payment_channel": "other",
+              "payment_meta": {
+                "by_order_of": null,
+                "payee": null,
+                "payer": null,
+                "payment_method": null,
+                "payment_processor": null,
+                "ppd_id": null,
+                "reason": null,
+                "reference_number": null
+              },
+              "pending": false,
+              "pending_transaction_id": null,
+              "transaction_id": "zq6r54wyG8FlKmj55bJvUZdBqJGzbjCoKlPwq",
+              "transaction_type": "special",
+              "unofficial_currency_code": null
+            }
+          ]
+        }
+    http_version: 
+  recorded_at: Wed, 12 Feb 2020 21:43:03 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/item/remove
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-34fd1a65-a4cc-4878-b3a5-5367db651366","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.5.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Wed, 12 Feb 2020 21:43:03 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '74'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "removed": true,
+          "request_id": "Tcu5b6hbMGRIPvv"
+        }
+    http_version: 
+  recorded_at: Wed, 12 Feb 2020 21:43:04 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/sandbox/public_token/create
+    body:
+      encoding: UTF-8
+      string: '{"institution_id":"ins_109508","initial_products":["transactions"],"options":{"transactions":{"start_date":"2018-01-01","end_date":"2019-01-01"}},"public_key":"PLAID_RUBY_PUBLIC_KEY"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.6.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 21 Feb 2020 01:06:15 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '124'
+      connection:
+      - close
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "public_token": "public-sandbox-89d74514-53d9-4cd2-b7ef-83f7560b17d1",
+          "request_id": "TQr0ADnmiTsPD3R"
+        }
+    http_version: 
+  recorded_at: Fri, 21 Feb 2020 01:06:15 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/item/public_token/exchange
+    body:
+      encoding: UTF-8
+      string: '{"public_token":"public-sandbox-89d74514-53d9-4cd2-b7ef-83f7560b17d1","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.6.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 21 Feb 2020 01:06:15 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '168'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "access_token": "access-sandbox-1af0bb93-4298-4609-a245-6809f905db87",
+          "item_id": "rknG1Ea5x3Uy7X788KMDU6qPonxrpmclxnPzo",
+          "request_id": "JCZXX0kF24YZ959"
+        }
+    http_version: 
+  recorded_at: Fri, 21 Feb 2020 01:06:15 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/item/get
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-1af0bb93-4298-4609-a245-6809f905db87","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.6.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 21 Feb 2020 01:06:16 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '350'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "item": {
+            "available_products": [
+              "assets",
+              "auth",
+              "balance",
+              "credit_details",
+              "identity",
+              "income",
+              "investments",
+              "liabilities"
+            ],
+            "billed_products": [
+              "transactions"
+            ],
+            "consent_expiration_time": null,
+            "error": null,
+            "institution_id": "ins_109508",
+            "item_id": "rknG1Ea5x3Uy7X788KMDU6qPonxrpmclxnPzo",
+            "webhook": ""
+          },
+          "request_id": "DNyd1BpgjfLVw1M",
+          "status": {
+            "last_webhook": null,
+            "transactions": {
+              "last_failed_update": null,
+              "last_successful_update": "2020-02-21T01:06:15.595Z"
+            }
+          }
+        }
+    http_version: 
+  recorded_at: Fri, 21 Feb 2020 01:06:16 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/transactions/get
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-1af0bb93-4298-4609-a245-6809f905db87","start_date":"2018-01-01","end_date":"2019-01-01","options":{"count":2,"offset":1},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.6.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 21 Feb 2020 01:06:16 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '995'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "accounts": [
+            {
+              "account_id": "NvDB6KxnEGHnoVo994mEhK6ygdKvmyIWpv6e6",
+              "balances": {
+                "available": 100,
+                "current": 110,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "0000",
+              "name": "Plaid Checking",
+              "official_name": "Plaid Gold Standard 0% Interest Checking",
+              "subtype": "checking",
+              "type": "depository"
+            },
+            {
+              "account_id": "MvDz6q3Z8AHkpZpVVaxzs6Dqjo6dbqt9pB6nW",
+              "balances": {
+                "available": 200,
+                "current": 210,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "1111",
+              "name": "Plaid Saving",
+              "official_name": "Plaid Silver Standard 0.1% Interest Saving",
+              "subtype": "savings",
+              "type": "depository"
+            },
+            {
+              "account_id": "1dEq5ZkwRGUlQvQ55an6UD1pEnDklpt5XgjWK",
+              "balances": {
+                "available": null,
+                "current": 1000,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "2222",
+              "name": "Plaid CD",
+              "official_name": "Plaid Bronze Standard 0.2% Interest CD",
+              "subtype": "cd",
+              "type": "depository"
+            },
+            {
+              "account_id": "LvDr6lBbkWHZLwLxxdvXFD9NRBDn3NtPKbjD8",
+              "balances": {
+                "available": null,
+                "current": 410,
+                "iso_currency_code": "USD",
+                "limit": 2000,
+                "unofficial_currency_code": null
+              },
+              "mask": "3333",
+              "name": "Plaid Credit Card",
+              "official_name": "Plaid Diamond 12.5% APR Interest Credit Card",
+              "subtype": "credit card",
+              "type": "credit"
+            },
+            {
+              "account_id": "pNnyZwxXBzTbR4RooPNgSQ9KBeQRvKhLj4oRG",
+              "balances": {
+                "available": 43200,
+                "current": 43200,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "4444",
+              "name": "Plaid Money Market",
+              "official_name": "Plaid Platinum Standard 1.85% Interest Money Market",
+              "subtype": "money market",
+              "type": "depository"
+            },
+            {
+              "account_id": "o4nGQE3LzrTLb4bppRM9F4JBVW4mvBtR5aqLm",
+              "balances": {
+                "available": null,
+                "current": 320.76,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "5555",
+              "name": "Plaid IRA",
+              "official_name": null,
+              "subtype": "ira",
+              "type": "investment"
+            },
+            {
+              "account_id": "gKWGd9yJg8UGwdwjjRgyhlEZQLlNjZigRb83G",
+              "balances": {
+                "available": null,
+                "current": 23631.9805,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "6666",
+              "name": "Plaid 401k",
+              "official_name": null,
+              "subtype": "401k",
+              "type": "investment"
+            },
+            {
+              "account_id": "8eEdAK1Rr3SZlMl77WaLFRlKN6RPZKtwpA3dQ",
+              "balances": {
+                "available": null,
+                "current": 65262,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "7777",
+              "name": "Plaid Student Loan",
+              "official_name": null,
+              "subtype": "student",
+              "type": "loan"
+            }
+          ],
+          "item": {
+            "available_products": [
+              "assets",
+              "auth",
+              "balance",
+              "credit_details",
+              "identity",
+              "income",
+              "investments",
+              "liabilities"
+            ],
+            "billed_products": [
+              "transactions"
+            ],
+            "consent_expiration_time": null,
+            "error": null,
+            "institution_id": "ins_109508",
+            "item_id": "rknG1Ea5x3Uy7X788KMDU6qPonxrpmclxnPzo",
+            "webhook": ""
+          },
+          "request_id": "gnNyc1nY9DVNAmQ",
+          "total_transactions": 0,
+          "transactions": []
+        }
+    http_version: 
+  recorded_at: Fri, 21 Feb 2020 01:06:16 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/transactions/get
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-1af0bb93-4298-4609-a245-6809f905db87","start_date":"2018-01-01","end_date":"2019-01-01","options":{"count":2,"offset":1},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.6.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 21 Feb 2020 01:06:17 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '996'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "accounts": [
+            {
+              "account_id": "NvDB6KxnEGHnoVo994mEhK6ygdKvmyIWpv6e6",
+              "balances": {
+                "available": 100,
+                "current": 110,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "0000",
+              "name": "Plaid Checking",
+              "official_name": "Plaid Gold Standard 0% Interest Checking",
+              "subtype": "checking",
+              "type": "depository"
+            },
+            {
+              "account_id": "MvDz6q3Z8AHkpZpVVaxzs6Dqjo6dbqt9pB6nW",
+              "balances": {
+                "available": 200,
+                "current": 210,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "1111",
+              "name": "Plaid Saving",
+              "official_name": "Plaid Silver Standard 0.1% Interest Saving",
+              "subtype": "savings",
+              "type": "depository"
+            },
+            {
+              "account_id": "1dEq5ZkwRGUlQvQ55an6UD1pEnDklpt5XgjWK",
+              "balances": {
+                "available": null,
+                "current": 1000,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "2222",
+              "name": "Plaid CD",
+              "official_name": "Plaid Bronze Standard 0.2% Interest CD",
+              "subtype": "cd",
+              "type": "depository"
+            },
+            {
+              "account_id": "LvDr6lBbkWHZLwLxxdvXFD9NRBDn3NtPKbjD8",
+              "balances": {
+                "available": null,
+                "current": 410,
+                "iso_currency_code": "USD",
+                "limit": 2000,
+                "unofficial_currency_code": null
+              },
+              "mask": "3333",
+              "name": "Plaid Credit Card",
+              "official_name": "Plaid Diamond 12.5% APR Interest Credit Card",
+              "subtype": "credit card",
+              "type": "credit"
+            },
+            {
+              "account_id": "pNnyZwxXBzTbR4RooPNgSQ9KBeQRvKhLj4oRG",
+              "balances": {
+                "available": 43200,
+                "current": 43200,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "4444",
+              "name": "Plaid Money Market",
+              "official_name": "Plaid Platinum Standard 1.85% Interest Money Market",
+              "subtype": "money market",
+              "type": "depository"
+            },
+            {
+              "account_id": "o4nGQE3LzrTLb4bppRM9F4JBVW4mvBtR5aqLm",
+              "balances": {
+                "available": null,
+                "current": 320.76,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "5555",
+              "name": "Plaid IRA",
+              "official_name": null,
+              "subtype": "ira",
+              "type": "investment"
+            },
+            {
+              "account_id": "gKWGd9yJg8UGwdwjjRgyhlEZQLlNjZigRb83G",
+              "balances": {
+                "available": null,
+                "current": 23631.9805,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "6666",
+              "name": "Plaid 401k",
+              "official_name": null,
+              "subtype": "401k",
+              "type": "investment"
+            },
+            {
+              "account_id": "8eEdAK1Rr3SZlMl77WaLFRlKN6RPZKtwpA3dQ",
+              "balances": {
+                "available": null,
+                "current": 65262,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "7777",
+              "name": "Plaid Student Loan",
+              "official_name": null,
+              "subtype": "student",
+              "type": "loan"
+            }
+          ],
+          "item": {
+            "available_products": [
+              "assets",
+              "auth",
+              "balance",
+              "credit_details",
+              "identity",
+              "income",
+              "investments",
+              "liabilities"
+            ],
+            "billed_products": [
+              "transactions"
+            ],
+            "consent_expiration_time": null,
+            "error": null,
+            "institution_id": "ins_109508",
+            "item_id": "rknG1Ea5x3Uy7X788KMDU6qPonxrpmclxnPzo",
+            "webhook": ""
+          },
+          "request_id": "gxD2rYCA1NbQ73I",
+          "total_transactions": 0,
+          "transactions": []
+        }
+    http_version: 
+  recorded_at: Fri, 21 Feb 2020 01:06:17 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/transactions/get
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-1af0bb93-4298-4609-a245-6809f905db87","start_date":"2018-01-01","end_date":"2019-01-01","options":{"count":2,"offset":1},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.6.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 21 Feb 2020 01:06:17 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '996'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "accounts": [
+            {
+              "account_id": "NvDB6KxnEGHnoVo994mEhK6ygdKvmyIWpv6e6",
+              "balances": {
+                "available": 100,
+                "current": 110,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "0000",
+              "name": "Plaid Checking",
+              "official_name": "Plaid Gold Standard 0% Interest Checking",
+              "subtype": "checking",
+              "type": "depository"
+            },
+            {
+              "account_id": "MvDz6q3Z8AHkpZpVVaxzs6Dqjo6dbqt9pB6nW",
+              "balances": {
+                "available": 200,
+                "current": 210,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "1111",
+              "name": "Plaid Saving",
+              "official_name": "Plaid Silver Standard 0.1% Interest Saving",
+              "subtype": "savings",
+              "type": "depository"
+            },
+            {
+              "account_id": "1dEq5ZkwRGUlQvQ55an6UD1pEnDklpt5XgjWK",
+              "balances": {
+                "available": null,
+                "current": 1000,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "2222",
+              "name": "Plaid CD",
+              "official_name": "Plaid Bronze Standard 0.2% Interest CD",
+              "subtype": "cd",
+              "type": "depository"
+            },
+            {
+              "account_id": "LvDr6lBbkWHZLwLxxdvXFD9NRBDn3NtPKbjD8",
+              "balances": {
+                "available": null,
+                "current": 410,
+                "iso_currency_code": "USD",
+                "limit": 2000,
+                "unofficial_currency_code": null
+              },
+              "mask": "3333",
+              "name": "Plaid Credit Card",
+              "official_name": "Plaid Diamond 12.5% APR Interest Credit Card",
+              "subtype": "credit card",
+              "type": "credit"
+            },
+            {
+              "account_id": "pNnyZwxXBzTbR4RooPNgSQ9KBeQRvKhLj4oRG",
+              "balances": {
+                "available": 43200,
+                "current": 43200,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "4444",
+              "name": "Plaid Money Market",
+              "official_name": "Plaid Platinum Standard 1.85% Interest Money Market",
+              "subtype": "money market",
+              "type": "depository"
+            },
+            {
+              "account_id": "o4nGQE3LzrTLb4bppRM9F4JBVW4mvBtR5aqLm",
+              "balances": {
+                "available": null,
+                "current": 320.76,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "5555",
+              "name": "Plaid IRA",
+              "official_name": null,
+              "subtype": "ira",
+              "type": "investment"
+            },
+            {
+              "account_id": "gKWGd9yJg8UGwdwjjRgyhlEZQLlNjZigRb83G",
+              "balances": {
+                "available": null,
+                "current": 23631.9805,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "6666",
+              "name": "Plaid 401k",
+              "official_name": null,
+              "subtype": "401k",
+              "type": "investment"
+            },
+            {
+              "account_id": "8eEdAK1Rr3SZlMl77WaLFRlKN6RPZKtwpA3dQ",
+              "balances": {
+                "available": null,
+                "current": 65262,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "7777",
+              "name": "Plaid Student Loan",
+              "official_name": null,
+              "subtype": "student",
+              "type": "loan"
+            }
+          ],
+          "item": {
+            "available_products": [
+              "assets",
+              "auth",
+              "balance",
+              "credit_details",
+              "identity",
+              "income",
+              "investments",
+              "liabilities"
+            ],
+            "billed_products": [
+              "transactions"
+            ],
+            "consent_expiration_time": null,
+            "error": null,
+            "institution_id": "ins_109508",
+            "item_id": "rknG1Ea5x3Uy7X788KMDU6qPonxrpmclxnPzo",
+            "webhook": ""
+          },
+          "request_id": "4aC8b6OiIjZNJl7",
+          "total_transactions": 0,
+          "transactions": []
+        }
+    http_version: 
+  recorded_at: Fri, 21 Feb 2020 01:06:17 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/transactions/get
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-1af0bb93-4298-4609-a245-6809f905db87","start_date":"2018-01-01","end_date":"2019-01-01","options":{"count":2,"offset":1},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.6.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 21 Feb 2020 01:06:17 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '1400'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "accounts": [
+            {
+              "account_id": "NvDB6KxnEGHnoVo994mEhK6ygdKvmyIWpv6e6",
+              "balances": {
+                "available": 100,
+                "current": 110,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "0000",
+              "name": "Plaid Checking",
+              "official_name": "Plaid Gold Standard 0% Interest Checking",
+              "subtype": "checking",
+              "type": "depository"
+            },
+            {
+              "account_id": "MvDz6q3Z8AHkpZpVVaxzs6Dqjo6dbqt9pB6nW",
+              "balances": {
+                "available": 200,
+                "current": 210,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "1111",
+              "name": "Plaid Saving",
+              "official_name": "Plaid Silver Standard 0.1% Interest Saving",
+              "subtype": "savings",
+              "type": "depository"
+            },
+            {
+              "account_id": "1dEq5ZkwRGUlQvQ55an6UD1pEnDklpt5XgjWK",
+              "balances": {
+                "available": null,
+                "current": 1000,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "2222",
+              "name": "Plaid CD",
+              "official_name": "Plaid Bronze Standard 0.2% Interest CD",
+              "subtype": "cd",
+              "type": "depository"
+            },
+            {
+              "account_id": "LvDr6lBbkWHZLwLxxdvXFD9NRBDn3NtPKbjD8",
+              "balances": {
+                "available": null,
+                "current": 410,
+                "iso_currency_code": "USD",
+                "limit": 2000,
+                "unofficial_currency_code": null
+              },
+              "mask": "3333",
+              "name": "Plaid Credit Card",
+              "official_name": "Plaid Diamond 12.5% APR Interest Credit Card",
+              "subtype": "credit card",
+              "type": "credit"
+            },
+            {
+              "account_id": "pNnyZwxXBzTbR4RooPNgSQ9KBeQRvKhLj4oRG",
+              "balances": {
+                "available": 43200,
+                "current": 43200,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "4444",
+              "name": "Plaid Money Market",
+              "official_name": "Plaid Platinum Standard 1.85% Interest Money Market",
+              "subtype": "money market",
+              "type": "depository"
+            },
+            {
+              "account_id": "o4nGQE3LzrTLb4bppRM9F4JBVW4mvBtR5aqLm",
+              "balances": {
+                "available": null,
+                "current": 320.76,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "5555",
+              "name": "Plaid IRA",
+              "official_name": null,
+              "subtype": "ira",
+              "type": "investment"
+            },
+            {
+              "account_id": "gKWGd9yJg8UGwdwjjRgyhlEZQLlNjZigRb83G",
+              "balances": {
+                "available": null,
+                "current": 23631.9805,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "6666",
+              "name": "Plaid 401k",
+              "official_name": null,
+              "subtype": "401k",
+              "type": "investment"
+            },
+            {
+              "account_id": "8eEdAK1Rr3SZlMl77WaLFRlKN6RPZKtwpA3dQ",
+              "balances": {
+                "available": null,
+                "current": 65262,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "7777",
+              "name": "Plaid Student Loan",
+              "official_name": null,
+              "subtype": "student",
+              "type": "loan"
+            }
+          ],
+          "item": {
+            "available_products": [
+              "assets",
+              "auth",
+              "balance",
+              "credit_details",
+              "identity",
+              "income",
+              "investments",
+              "liabilities"
+            ],
+            "billed_products": [
+              "transactions"
+            ],
+            "consent_expiration_time": null,
+            "error": null,
+            "institution_id": "ins_109508",
+            "item_id": "rknG1Ea5x3Uy7X788KMDU6qPonxrpmclxnPzo",
+            "webhook": ""
+          },
+          "request_id": "HOKWaLi9OXO49F5",
+          "total_transactions": 173,
+          "transactions": [
+            {
+              "account_id": "LvDr6lBbkWHZLwLxxdvXFD9NRBDn3NtPKbjD8",
+              "account_owner": null,
+              "amount": 500,
+              "authorized_date": null,
+              "category": [
+                "Food and Drink",
+                "Restaurants",
+                "Fast Food"
+              ],
+              "category_id": "13005032",
+              "date": "2018-12-31",
+              "iso_currency_code": "USD",
+              "location": {
+                "address": null,
+                "city": null,
+                "country": null,
+                "lat": null,
+                "lon": null,
+                "postal_code": null,
+                "region": null,
+                "store_number": null
+              },
+              "name": "KFC",
+              "payment_channel": "in store",
+              "payment_meta": {
+                "by_order_of": null,
+                "payee": null,
+                "payer": null,
+                "payment_method": null,
+                "payment_processor": null,
+                "ppd_id": null,
+                "reason": null,
+                "reference_number": null
+              },
+              "pending": false,
+              "pending_transaction_id": null,
+              "transaction_id": "yLnXyqQb7jSWpDpbb8M7IyQjPQwVWdTy7xk9P",
+              "transaction_type": "place",
+              "unofficial_currency_code": null
+            },
+            {
+              "account_id": "LvDr6lBbkWHZLwLxxdvXFD9NRBDn3NtPKbjD8",
+              "account_owner": null,
+              "amount": 500,
+              "authorized_date": null,
+              "category": [
+                "Shops",
+                "Sporting Goods"
+              ],
+              "category_id": "19046000",
+              "date": "2018-12-31",
+              "iso_currency_code": "USD",
+              "location": {
+                "address": null,
+                "city": null,
+                "country": null,
+                "lat": null,
+                "lon": null,
+                "postal_code": null,
+                "region": null,
+                "store_number": null
+              },
+              "name": "Madison Bicycle Shop",
+              "payment_channel": "in store",
+              "payment_meta": {
+                "by_order_of": null,
+                "payee": null,
+                "payer": null,
+                "payment_method": null,
+                "payment_processor": null,
+                "ppd_id": null,
+                "reason": null,
+                "reference_number": null
+              },
+              "pending": false,
+              "pending_transaction_id": null,
+              "transaction_id": "mdnG7yz9KqUVb4b11r3ZFd5J65ZGVNFLV6RbQ",
+              "transaction_type": "place",
+              "unofficial_currency_code": null
+            }
+          ]
+        }
+    http_version: 
+  recorded_at: Fri, 21 Feb 2020 01:06:17 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/transactions/get
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-1af0bb93-4298-4609-a245-6809f905db87","start_date":"2018-01-01","end_date":"2019-01-01","options":{"count":2,"offset":1},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.6.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 21 Feb 2020 01:06:18 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '1401'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "accounts": [
+            {
+              "account_id": "NvDB6KxnEGHnoVo994mEhK6ygdKvmyIWpv6e6",
+              "balances": {
+                "available": 100,
+                "current": 110,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "0000",
+              "name": "Plaid Checking",
+              "official_name": "Plaid Gold Standard 0% Interest Checking",
+              "subtype": "checking",
+              "type": "depository"
+            },
+            {
+              "account_id": "MvDz6q3Z8AHkpZpVVaxzs6Dqjo6dbqt9pB6nW",
+              "balances": {
+                "available": 200,
+                "current": 210,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "1111",
+              "name": "Plaid Saving",
+              "official_name": "Plaid Silver Standard 0.1% Interest Saving",
+              "subtype": "savings",
+              "type": "depository"
+            },
+            {
+              "account_id": "1dEq5ZkwRGUlQvQ55an6UD1pEnDklpt5XgjWK",
+              "balances": {
+                "available": null,
+                "current": 1000,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "2222",
+              "name": "Plaid CD",
+              "official_name": "Plaid Bronze Standard 0.2% Interest CD",
+              "subtype": "cd",
+              "type": "depository"
+            },
+            {
+              "account_id": "LvDr6lBbkWHZLwLxxdvXFD9NRBDn3NtPKbjD8",
+              "balances": {
+                "available": null,
+                "current": 410,
+                "iso_currency_code": "USD",
+                "limit": 2000,
+                "unofficial_currency_code": null
+              },
+              "mask": "3333",
+              "name": "Plaid Credit Card",
+              "official_name": "Plaid Diamond 12.5% APR Interest Credit Card",
+              "subtype": "credit card",
+              "type": "credit"
+            },
+            {
+              "account_id": "pNnyZwxXBzTbR4RooPNgSQ9KBeQRvKhLj4oRG",
+              "balances": {
+                "available": 43200,
+                "current": 43200,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "4444",
+              "name": "Plaid Money Market",
+              "official_name": "Plaid Platinum Standard 1.85% Interest Money Market",
+              "subtype": "money market",
+              "type": "depository"
+            },
+            {
+              "account_id": "o4nGQE3LzrTLb4bppRM9F4JBVW4mvBtR5aqLm",
+              "balances": {
+                "available": null,
+                "current": 320.76,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "5555",
+              "name": "Plaid IRA",
+              "official_name": null,
+              "subtype": "ira",
+              "type": "investment"
+            },
+            {
+              "account_id": "gKWGd9yJg8UGwdwjjRgyhlEZQLlNjZigRb83G",
+              "balances": {
+                "available": null,
+                "current": 23631.9805,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "6666",
+              "name": "Plaid 401k",
+              "official_name": null,
+              "subtype": "401k",
+              "type": "investment"
+            },
+            {
+              "account_id": "8eEdAK1Rr3SZlMl77WaLFRlKN6RPZKtwpA3dQ",
+              "balances": {
+                "available": null,
+                "current": 65262,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "7777",
+              "name": "Plaid Student Loan",
+              "official_name": null,
+              "subtype": "student",
+              "type": "loan"
+            }
+          ],
+          "item": {
+            "available_products": [
+              "assets",
+              "auth",
+              "balance",
+              "credit_details",
+              "identity",
+              "income",
+              "investments",
+              "liabilities"
+            ],
+            "billed_products": [
+              "transactions"
+            ],
+            "consent_expiration_time": null,
+            "error": null,
+            "institution_id": "ins_109508",
+            "item_id": "rknG1Ea5x3Uy7X788KMDU6qPonxrpmclxnPzo",
+            "webhook": ""
+          },
+          "request_id": "UOPYRR1k1ngFKOa",
+          "total_transactions": 173,
+          "transactions": [
+            {
+              "account_id": "LvDr6lBbkWHZLwLxxdvXFD9NRBDn3NtPKbjD8",
+              "account_owner": null,
+              "amount": 500,
+              "authorized_date": null,
+              "category": [
+                "Food and Drink",
+                "Restaurants",
+                "Fast Food"
+              ],
+              "category_id": "13005032",
+              "date": "2018-12-31",
+              "iso_currency_code": "USD",
+              "location": {
+                "address": null,
+                "city": null,
+                "country": null,
+                "lat": null,
+                "lon": null,
+                "postal_code": null,
+                "region": null,
+                "store_number": null
+              },
+              "name": "KFC",
+              "payment_channel": "in store",
+              "payment_meta": {
+                "by_order_of": null,
+                "payee": null,
+                "payer": null,
+                "payment_method": null,
+                "payment_processor": null,
+                "ppd_id": null,
+                "reason": null,
+                "reference_number": null
+              },
+              "pending": false,
+              "pending_transaction_id": null,
+              "transaction_id": "yLnXyqQb7jSWpDpbb8M7IyQjPQwVWdTy7xk9P",
+              "transaction_type": "place",
+              "unofficial_currency_code": null
+            },
+            {
+              "account_id": "LvDr6lBbkWHZLwLxxdvXFD9NRBDn3NtPKbjD8",
+              "account_owner": null,
+              "amount": 500,
+              "authorized_date": null,
+              "category": [
+                "Shops",
+                "Sporting Goods"
+              ],
+              "category_id": "19046000",
+              "date": "2018-12-31",
+              "iso_currency_code": "USD",
+              "location": {
+                "address": null,
+                "city": null,
+                "country": null,
+                "lat": null,
+                "lon": null,
+                "postal_code": null,
+                "region": null,
+                "store_number": null
+              },
+              "name": "Madison Bicycle Shop",
+              "payment_channel": "in store",
+              "payment_meta": {
+                "by_order_of": null,
+                "payee": null,
+                "payer": null,
+                "payment_method": null,
+                "payment_processor": null,
+                "ppd_id": null,
+                "reason": null,
+                "reference_number": null
+              },
+              "pending": false,
+              "pending_transaction_id": null,
+              "transaction_id": "mdnG7yz9KqUVb4b11r3ZFd5J65ZGVNFLV6RbQ",
+              "transaction_type": "place",
+              "unofficial_currency_code": null
+            }
+          ]
+        }
+    http_version: 
+  recorded_at: Fri, 21 Feb 2020 01:06:18 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/item/remove
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-1af0bb93-4298-4609-a245-6809f905db87","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.6.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 21 Feb 2020 01:06:18 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '74'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "removed": true,
+          "request_id": "Hij4D4yN4MEbrSe"
+        }
+    http_version: 
+  recorded_at: Fri, 21 Feb 2020 01:06:18 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/sandbox/public_token/create
+    body:
+      encoding: UTF-8
+      string: '{"institution_id":"ins_109508","initial_products":["transactions"],"options":{"transactions":{"start_date":"2017-01-01","end_date":"2019-01-01"}},"public_key":"PLAID_RUBY_PUBLIC_KEY"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.6.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 21 Feb 2020 01:22:07 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '124'
+      connection:
+      - close
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "public_token": "public-sandbox-56bbb40e-b2cc-45be-ac92-620f07f48e2d",
+          "request_id": "MVWavS6eoFVBe9S"
+        }
+    http_version: 
+  recorded_at: Fri, 21 Feb 2020 01:22:07 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/item/public_token/exchange
+    body:
+      encoding: UTF-8
+      string: '{"public_token":"public-sandbox-56bbb40e-b2cc-45be-ac92-620f07f48e2d","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.6.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 21 Feb 2020 01:22:08 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '169'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "access_token": "access-sandbox-64189697-7c8e-4bda-8a2d-fa08d5068a35",
+          "item_id": "ZZVX6LrzL3cJq4GyKwNxCNJgWp35gWCgEvb4z",
+          "request_id": "t08RH8OQU6mIYUS"
+        }
+    http_version: 
+  recorded_at: Fri, 21 Feb 2020 01:22:08 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/item/get
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-64189697-7c8e-4bda-8a2d-fa08d5068a35","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.6.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 21 Feb 2020 01:22:08 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '353'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "item": {
+            "available_products": [
+              "assets",
+              "auth",
+              "balance",
+              "credit_details",
+              "identity",
+              "income",
+              "investments",
+              "liabilities"
+            ],
+            "billed_products": [
+              "transactions"
+            ],
+            "consent_expiration_time": null,
+            "error": null,
+            "institution_id": "ins_109508",
+            "item_id": "ZZVX6LrzL3cJq4GyKwNxCNJgWp35gWCgEvb4z",
+            "webhook": ""
+          },
+          "request_id": "EBBgBqM9KeT1qzQ",
+          "status": {
+            "last_webhook": null,
+            "transactions": {
+              "last_failed_update": null,
+              "last_successful_update": "2020-02-21T01:22:08.204Z"
+            }
+          }
+        }
+    http_version: 
+  recorded_at: Fri, 21 Feb 2020 01:22:08 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/transactions/get
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-64189697-7c8e-4bda-8a2d-fa08d5068a35","start_date":"2017-01-01","end_date":"2019-01-01","options":{"count":2,"offset":1},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.6.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 21 Feb 2020 01:22:09 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '997'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "accounts": [
+            {
+              "account_id": "zGqpV8Ro83SoKblDkqdmTk7na16g7Bco4zQ15",
+              "balances": {
+                "available": 100,
+                "current": 110,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "0000",
+              "name": "Plaid Checking",
+              "official_name": "Plaid Gold Standard 0% Interest Checking",
+              "subtype": "checking",
+              "type": "depository"
+            },
+            {
+              "account_id": "BMxEA81y87tQ7z8ZEBqrsKlMDp5GlqIwDQgNG",
+              "balances": {
+                "available": 200,
+                "current": 210,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "1111",
+              "name": "Plaid Saving",
+              "official_name": "Plaid Silver Standard 0.1% Interest Saving",
+              "subtype": "savings",
+              "type": "depository"
+            },
+            {
+              "account_id": "3rg4oazkamiZQdbERBr6FMgEz8pPg7HqdBEe1",
+              "balances": {
+                "available": null,
+                "current": 1000,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "2222",
+              "name": "Plaid CD",
+              "official_name": "Plaid Bronze Standard 0.2% Interest CD",
+              "subtype": "cd",
+              "type": "depository"
+            },
+            {
+              "account_id": "xGV1yo9kozSQEVWqPwvBsVqDJ1omqAFndqeRo",
+              "balances": {
+                "available": null,
+                "current": 410,
+                "iso_currency_code": "USD",
+                "limit": 2000,
+                "unofficial_currency_code": null
+              },
+              "mask": "3333",
+              "name": "Plaid Credit Card",
+              "official_name": "Plaid Diamond 12.5% APR Interest Credit Card",
+              "subtype": "credit card",
+              "type": "credit"
+            },
+            {
+              "account_id": "dkVvBKj7KQtpRoP6Wjw7Un1PD3dy1XtZLmRxk",
+              "balances": {
+                "available": 43200,
+                "current": 43200,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "4444",
+              "name": "Plaid Money Market",
+              "official_name": "Plaid Platinum Standard 1.85% Interest Money Market",
+              "subtype": "money market",
+              "type": "depository"
+            },
+            {
+              "account_id": "a8VvKA4NAjta7ADNvmJRTnmW19K8mVt7AzDxE",
+              "balances": {
+                "available": null,
+                "current": 320.76,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "5555",
+              "name": "Plaid IRA",
+              "official_name": null,
+              "subtype": "ira",
+              "type": "investment"
+            },
+            {
+              "account_id": "4z8ND4By4lFJlpAWEjQyC1GzBPp7GqHdjZLwr",
+              "balances": {
+                "available": null,
+                "current": 23631.9805,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "6666",
+              "name": "Plaid 401k",
+              "official_name": null,
+              "subtype": "401k",
+              "type": "investment"
+            },
+            {
+              "account_id": "NB1v6dmadWcgqWRB5Za8hKw4ElBDwaIWPgQqZ",
+              "balances": {
+                "available": null,
+                "current": 65262,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "7777",
+              "name": "Plaid Student Loan",
+              "official_name": null,
+              "subtype": "student",
+              "type": "loan"
+            }
+          ],
+          "item": {
+            "available_products": [
+              "assets",
+              "auth",
+              "balance",
+              "credit_details",
+              "identity",
+              "income",
+              "investments",
+              "liabilities"
+            ],
+            "billed_products": [
+              "transactions"
+            ],
+            "consent_expiration_time": null,
+            "error": null,
+            "institution_id": "ins_109508",
+            "item_id": "ZZVX6LrzL3cJq4GyKwNxCNJgWp35gWCgEvb4z",
+            "webhook": ""
+          },
+          "request_id": "faJuQfAJkziiO2I",
+          "total_transactions": 0,
+          "transactions": []
+        }
+    http_version: 
+  recorded_at: Fri, 21 Feb 2020 01:22:09 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/transactions/get
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-64189697-7c8e-4bda-8a2d-fa08d5068a35","start_date":"2017-01-01","end_date":"2019-01-01","options":{"count":2,"offset":1},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.6.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 21 Feb 2020 01:22:09 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '996'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "accounts": [
+            {
+              "account_id": "zGqpV8Ro83SoKblDkqdmTk7na16g7Bco4zQ15",
+              "balances": {
+                "available": 100,
+                "current": 110,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "0000",
+              "name": "Plaid Checking",
+              "official_name": "Plaid Gold Standard 0% Interest Checking",
+              "subtype": "checking",
+              "type": "depository"
+            },
+            {
+              "account_id": "BMxEA81y87tQ7z8ZEBqrsKlMDp5GlqIwDQgNG",
+              "balances": {
+                "available": 200,
+                "current": 210,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "1111",
+              "name": "Plaid Saving",
+              "official_name": "Plaid Silver Standard 0.1% Interest Saving",
+              "subtype": "savings",
+              "type": "depository"
+            },
+            {
+              "account_id": "3rg4oazkamiZQdbERBr6FMgEz8pPg7HqdBEe1",
+              "balances": {
+                "available": null,
+                "current": 1000,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "2222",
+              "name": "Plaid CD",
+              "official_name": "Plaid Bronze Standard 0.2% Interest CD",
+              "subtype": "cd",
+              "type": "depository"
+            },
+            {
+              "account_id": "xGV1yo9kozSQEVWqPwvBsVqDJ1omqAFndqeRo",
+              "balances": {
+                "available": null,
+                "current": 410,
+                "iso_currency_code": "USD",
+                "limit": 2000,
+                "unofficial_currency_code": null
+              },
+              "mask": "3333",
+              "name": "Plaid Credit Card",
+              "official_name": "Plaid Diamond 12.5% APR Interest Credit Card",
+              "subtype": "credit card",
+              "type": "credit"
+            },
+            {
+              "account_id": "dkVvBKj7KQtpRoP6Wjw7Un1PD3dy1XtZLmRxk",
+              "balances": {
+                "available": 43200,
+                "current": 43200,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "4444",
+              "name": "Plaid Money Market",
+              "official_name": "Plaid Platinum Standard 1.85% Interest Money Market",
+              "subtype": "money market",
+              "type": "depository"
+            },
+            {
+              "account_id": "a8VvKA4NAjta7ADNvmJRTnmW19K8mVt7AzDxE",
+              "balances": {
+                "available": null,
+                "current": 320.76,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "5555",
+              "name": "Plaid IRA",
+              "official_name": null,
+              "subtype": "ira",
+              "type": "investment"
+            },
+            {
+              "account_id": "4z8ND4By4lFJlpAWEjQyC1GzBPp7GqHdjZLwr",
+              "balances": {
+                "available": null,
+                "current": 23631.9805,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "6666",
+              "name": "Plaid 401k",
+              "official_name": null,
+              "subtype": "401k",
+              "type": "investment"
+            },
+            {
+              "account_id": "NB1v6dmadWcgqWRB5Za8hKw4ElBDwaIWPgQqZ",
+              "balances": {
+                "available": null,
+                "current": 65262,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "7777",
+              "name": "Plaid Student Loan",
+              "official_name": null,
+              "subtype": "student",
+              "type": "loan"
+            }
+          ],
+          "item": {
+            "available_products": [
+              "assets",
+              "auth",
+              "balance",
+              "credit_details",
+              "identity",
+              "income",
+              "investments",
+              "liabilities"
+            ],
+            "billed_products": [
+              "transactions"
+            ],
+            "consent_expiration_time": null,
+            "error": null,
+            "institution_id": "ins_109508",
+            "item_id": "ZZVX6LrzL3cJq4GyKwNxCNJgWp35gWCgEvb4z",
+            "webhook": ""
+          },
+          "request_id": "PAVItgt1dExMQJE",
+          "total_transactions": 0,
+          "transactions": []
+        }
+    http_version: 
+  recorded_at: Fri, 21 Feb 2020 01:22:09 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/transactions/get
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-64189697-7c8e-4bda-8a2d-fa08d5068a35","start_date":"2017-01-01","end_date":"2019-01-01","options":{"count":2,"offset":1},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.6.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 21 Feb 2020 01:22:09 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '997'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "accounts": [
+            {
+              "account_id": "zGqpV8Ro83SoKblDkqdmTk7na16g7Bco4zQ15",
+              "balances": {
+                "available": 100,
+                "current": 110,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "0000",
+              "name": "Plaid Checking",
+              "official_name": "Plaid Gold Standard 0% Interest Checking",
+              "subtype": "checking",
+              "type": "depository"
+            },
+            {
+              "account_id": "BMxEA81y87tQ7z8ZEBqrsKlMDp5GlqIwDQgNG",
+              "balances": {
+                "available": 200,
+                "current": 210,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "1111",
+              "name": "Plaid Saving",
+              "official_name": "Plaid Silver Standard 0.1% Interest Saving",
+              "subtype": "savings",
+              "type": "depository"
+            },
+            {
+              "account_id": "3rg4oazkamiZQdbERBr6FMgEz8pPg7HqdBEe1",
+              "balances": {
+                "available": null,
+                "current": 1000,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "2222",
+              "name": "Plaid CD",
+              "official_name": "Plaid Bronze Standard 0.2% Interest CD",
+              "subtype": "cd",
+              "type": "depository"
+            },
+            {
+              "account_id": "xGV1yo9kozSQEVWqPwvBsVqDJ1omqAFndqeRo",
+              "balances": {
+                "available": null,
+                "current": 410,
+                "iso_currency_code": "USD",
+                "limit": 2000,
+                "unofficial_currency_code": null
+              },
+              "mask": "3333",
+              "name": "Plaid Credit Card",
+              "official_name": "Plaid Diamond 12.5% APR Interest Credit Card",
+              "subtype": "credit card",
+              "type": "credit"
+            },
+            {
+              "account_id": "dkVvBKj7KQtpRoP6Wjw7Un1PD3dy1XtZLmRxk",
+              "balances": {
+                "available": 43200,
+                "current": 43200,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "4444",
+              "name": "Plaid Money Market",
+              "official_name": "Plaid Platinum Standard 1.85% Interest Money Market",
+              "subtype": "money market",
+              "type": "depository"
+            },
+            {
+              "account_id": "a8VvKA4NAjta7ADNvmJRTnmW19K8mVt7AzDxE",
+              "balances": {
+                "available": null,
+                "current": 320.76,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "5555",
+              "name": "Plaid IRA",
+              "official_name": null,
+              "subtype": "ira",
+              "type": "investment"
+            },
+            {
+              "account_id": "4z8ND4By4lFJlpAWEjQyC1GzBPp7GqHdjZLwr",
+              "balances": {
+                "available": null,
+                "current": 23631.9805,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "6666",
+              "name": "Plaid 401k",
+              "official_name": null,
+              "subtype": "401k",
+              "type": "investment"
+            },
+            {
+              "account_id": "NB1v6dmadWcgqWRB5Za8hKw4ElBDwaIWPgQqZ",
+              "balances": {
+                "available": null,
+                "current": 65262,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "7777",
+              "name": "Plaid Student Loan",
+              "official_name": null,
+              "subtype": "student",
+              "type": "loan"
+            }
+          ],
+          "item": {
+            "available_products": [
+              "assets",
+              "auth",
+              "balance",
+              "credit_details",
+              "identity",
+              "income",
+              "investments",
+              "liabilities"
+            ],
+            "billed_products": [
+              "transactions"
+            ],
+            "consent_expiration_time": null,
+            "error": null,
+            "institution_id": "ins_109508",
+            "item_id": "ZZVX6LrzL3cJq4GyKwNxCNJgWp35gWCgEvb4z",
+            "webhook": ""
+          },
+          "request_id": "uaiAHuyERZAPpUd",
+          "total_transactions": 0,
+          "transactions": []
+        }
+    http_version: 
+  recorded_at: Fri, 21 Feb 2020 01:22:09 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/transactions/get
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-64189697-7c8e-4bda-8a2d-fa08d5068a35","start_date":"2017-01-01","end_date":"2019-01-01","options":{"count":2,"offset":1},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.6.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 21 Feb 2020 01:22:10 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '1384'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "accounts": [
+            {
+              "account_id": "zGqpV8Ro83SoKblDkqdmTk7na16g7Bco4zQ15",
+              "balances": {
+                "available": 100,
+                "current": 110,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "0000",
+              "name": "Plaid Checking",
+              "official_name": "Plaid Gold Standard 0% Interest Checking",
+              "subtype": "checking",
+              "type": "depository"
+            },
+            {
+              "account_id": "BMxEA81y87tQ7z8ZEBqrsKlMDp5GlqIwDQgNG",
+              "balances": {
+                "available": 200,
+                "current": 210,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "1111",
+              "name": "Plaid Saving",
+              "official_name": "Plaid Silver Standard 0.1% Interest Saving",
+              "subtype": "savings",
+              "type": "depository"
+            },
+            {
+              "account_id": "3rg4oazkamiZQdbERBr6FMgEz8pPg7HqdBEe1",
+              "balances": {
+                "available": null,
+                "current": 1000,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "2222",
+              "name": "Plaid CD",
+              "official_name": "Plaid Bronze Standard 0.2% Interest CD",
+              "subtype": "cd",
+              "type": "depository"
+            },
+            {
+              "account_id": "xGV1yo9kozSQEVWqPwvBsVqDJ1omqAFndqeRo",
+              "balances": {
+                "available": null,
+                "current": 410,
+                "iso_currency_code": "USD",
+                "limit": 2000,
+                "unofficial_currency_code": null
+              },
+              "mask": "3333",
+              "name": "Plaid Credit Card",
+              "official_name": "Plaid Diamond 12.5% APR Interest Credit Card",
+              "subtype": "credit card",
+              "type": "credit"
+            },
+            {
+              "account_id": "dkVvBKj7KQtpRoP6Wjw7Un1PD3dy1XtZLmRxk",
+              "balances": {
+                "available": 43200,
+                "current": 43200,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "4444",
+              "name": "Plaid Money Market",
+              "official_name": "Plaid Platinum Standard 1.85% Interest Money Market",
+              "subtype": "money market",
+              "type": "depository"
+            },
+            {
+              "account_id": "a8VvKA4NAjta7ADNvmJRTnmW19K8mVt7AzDxE",
+              "balances": {
+                "available": null,
+                "current": 320.76,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "5555",
+              "name": "Plaid IRA",
+              "official_name": null,
+              "subtype": "ira",
+              "type": "investment"
+            },
+            {
+              "account_id": "4z8ND4By4lFJlpAWEjQyC1GzBPp7GqHdjZLwr",
+              "balances": {
+                "available": null,
+                "current": 23631.9805,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "6666",
+              "name": "Plaid 401k",
+              "official_name": null,
+              "subtype": "401k",
+              "type": "investment"
+            },
+            {
+              "account_id": "NB1v6dmadWcgqWRB5Za8hKw4ElBDwaIWPgQqZ",
+              "balances": {
+                "available": null,
+                "current": 65262,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "7777",
+              "name": "Plaid Student Loan",
+              "official_name": null,
+              "subtype": "student",
+              "type": "loan"
+            }
+          ],
+          "item": {
+            "available_products": [
+              "assets",
+              "auth",
+              "balance",
+              "credit_details",
+              "identity",
+              "income",
+              "investments",
+              "liabilities"
+            ],
+            "billed_products": [
+              "transactions"
+            ],
+            "consent_expiration_time": null,
+            "error": null,
+            "institution_id": "ins_109508",
+            "item_id": "ZZVX6LrzL3cJq4GyKwNxCNJgWp35gWCgEvb4z",
+            "webhook": ""
+          },
+          "request_id": "ww9wyka24XYU1xG",
+          "total_transactions": 173,
+          "transactions": [
+            {
+              "account_id": "xGV1yo9kozSQEVWqPwvBsVqDJ1omqAFndqeRo",
+              "account_owner": null,
+              "amount": 500,
+              "authorized_date": null,
+              "category": [
+                "Food and Drink",
+                "Restaurants",
+                "Fast Food"
+              ],
+              "category_id": "13005032",
+              "date": "2018-12-31",
+              "iso_currency_code": "USD",
+              "location": {
+                "address": null,
+                "city": null,
+                "country": null,
+                "lat": null,
+                "lon": null,
+                "postal_code": null,
+                "region": null,
+                "store_number": null
+              },
+              "name": "KFC",
+              "payment_channel": "in store",
+              "payment_meta": {
+                "by_order_of": null,
+                "payee": null,
+                "payer": null,
+                "payment_method": null,
+                "payment_processor": null,
+                "ppd_id": null,
+                "reason": null,
+                "reference_number": null
+              },
+              "pending": false,
+              "pending_transaction_id": null,
+              "transaction_id": "Pxpv649N4Gur7lQE5vwLTqgvy9Xeqps7p9AeV",
+              "transaction_type": "place",
+              "unofficial_currency_code": null
+            },
+            {
+              "account_id": "xGV1yo9kozSQEVWqPwvBsVqDJ1omqAFndqeRo",
+              "account_owner": null,
+              "amount": 500,
+              "authorized_date": null,
+              "category": [
+                "Shops",
+                "Sporting Goods"
+              ],
+              "category_id": "19046000",
+              "date": "2018-12-31",
+              "iso_currency_code": "USD",
+              "location": {
+                "address": null,
+                "city": null,
+                "country": null,
+                "lat": null,
+                "lon": null,
+                "postal_code": null,
+                "region": null,
+                "store_number": null
+              },
+              "name": "Madison Bicycle Shop",
+              "payment_channel": "in store",
+              "payment_meta": {
+                "by_order_of": null,
+                "payee": null,
+                "payer": null,
+                "payment_method": null,
+                "payment_processor": null,
+                "ppd_id": null,
+                "reason": null,
+                "reference_number": null
+              },
+              "pending": false,
+              "pending_transaction_id": null,
+              "transaction_id": "NB1v6dmadWcgqWRB5Za8hKwk1qX9KpsWPgQGa",
+              "transaction_type": "place",
+              "unofficial_currency_code": null
+            }
+          ]
+        }
+    http_version: 
+  recorded_at: Fri, 21 Feb 2020 01:22:10 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/transactions/get
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-64189697-7c8e-4bda-8a2d-fa08d5068a35","start_date":"2017-01-01","end_date":"2019-01-01","options":{"count":2,"offset":1},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.6.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 21 Feb 2020 01:22:10 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '1383'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "accounts": [
+            {
+              "account_id": "zGqpV8Ro83SoKblDkqdmTk7na16g7Bco4zQ15",
+              "balances": {
+                "available": 100,
+                "current": 110,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "0000",
+              "name": "Plaid Checking",
+              "official_name": "Plaid Gold Standard 0% Interest Checking",
+              "subtype": "checking",
+              "type": "depository"
+            },
+            {
+              "account_id": "BMxEA81y87tQ7z8ZEBqrsKlMDp5GlqIwDQgNG",
+              "balances": {
+                "available": 200,
+                "current": 210,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "1111",
+              "name": "Plaid Saving",
+              "official_name": "Plaid Silver Standard 0.1% Interest Saving",
+              "subtype": "savings",
+              "type": "depository"
+            },
+            {
+              "account_id": "3rg4oazkamiZQdbERBr6FMgEz8pPg7HqdBEe1",
+              "balances": {
+                "available": null,
+                "current": 1000,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "2222",
+              "name": "Plaid CD",
+              "official_name": "Plaid Bronze Standard 0.2% Interest CD",
+              "subtype": "cd",
+              "type": "depository"
+            },
+            {
+              "account_id": "xGV1yo9kozSQEVWqPwvBsVqDJ1omqAFndqeRo",
+              "balances": {
+                "available": null,
+                "current": 410,
+                "iso_currency_code": "USD",
+                "limit": 2000,
+                "unofficial_currency_code": null
+              },
+              "mask": "3333",
+              "name": "Plaid Credit Card",
+              "official_name": "Plaid Diamond 12.5% APR Interest Credit Card",
+              "subtype": "credit card",
+              "type": "credit"
+            },
+            {
+              "account_id": "dkVvBKj7KQtpRoP6Wjw7Un1PD3dy1XtZLmRxk",
+              "balances": {
+                "available": 43200,
+                "current": 43200,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "4444",
+              "name": "Plaid Money Market",
+              "official_name": "Plaid Platinum Standard 1.85% Interest Money Market",
+              "subtype": "money market",
+              "type": "depository"
+            },
+            {
+              "account_id": "a8VvKA4NAjta7ADNvmJRTnmW19K8mVt7AzDxE",
+              "balances": {
+                "available": null,
+                "current": 320.76,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "5555",
+              "name": "Plaid IRA",
+              "official_name": null,
+              "subtype": "ira",
+              "type": "investment"
+            },
+            {
+              "account_id": "4z8ND4By4lFJlpAWEjQyC1GzBPp7GqHdjZLwr",
+              "balances": {
+                "available": null,
+                "current": 23631.9805,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "6666",
+              "name": "Plaid 401k",
+              "official_name": null,
+              "subtype": "401k",
+              "type": "investment"
+            },
+            {
+              "account_id": "NB1v6dmadWcgqWRB5Za8hKw4ElBDwaIWPgQqZ",
+              "balances": {
+                "available": null,
+                "current": 65262,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "7777",
+              "name": "Plaid Student Loan",
+              "official_name": null,
+              "subtype": "student",
+              "type": "loan"
+            }
+          ],
+          "item": {
+            "available_products": [
+              "assets",
+              "auth",
+              "balance",
+              "credit_details",
+              "identity",
+              "income",
+              "investments",
+              "liabilities"
+            ],
+            "billed_products": [
+              "transactions"
+            ],
+            "consent_expiration_time": null,
+            "error": null,
+            "institution_id": "ins_109508",
+            "item_id": "ZZVX6LrzL3cJq4GyKwNxCNJgWp35gWCgEvb4z",
+            "webhook": ""
+          },
+          "request_id": "0YcAs6H1Hi06Zc1",
+          "total_transactions": 173,
+          "transactions": [
+            {
+              "account_id": "xGV1yo9kozSQEVWqPwvBsVqDJ1omqAFndqeRo",
+              "account_owner": null,
+              "amount": 500,
+              "authorized_date": null,
+              "category": [
+                "Food and Drink",
+                "Restaurants",
+                "Fast Food"
+              ],
+              "category_id": "13005032",
+              "date": "2018-12-31",
+              "iso_currency_code": "USD",
+              "location": {
+                "address": null,
+                "city": null,
+                "country": null,
+                "lat": null,
+                "lon": null,
+                "postal_code": null,
+                "region": null,
+                "store_number": null
+              },
+              "name": "KFC",
+              "payment_channel": "in store",
+              "payment_meta": {
+                "by_order_of": null,
+                "payee": null,
+                "payer": null,
+                "payment_method": null,
+                "payment_processor": null,
+                "ppd_id": null,
+                "reason": null,
+                "reference_number": null
+              },
+              "pending": false,
+              "pending_transaction_id": null,
+              "transaction_id": "Pxpv649N4Gur7lQE5vwLTqgvy9Xeqps7p9AeV",
+              "transaction_type": "place",
+              "unofficial_currency_code": null
+            },
+            {
+              "account_id": "xGV1yo9kozSQEVWqPwvBsVqDJ1omqAFndqeRo",
+              "account_owner": null,
+              "amount": 500,
+              "authorized_date": null,
+              "category": [
+                "Shops",
+                "Sporting Goods"
+              ],
+              "category_id": "19046000",
+              "date": "2018-12-31",
+              "iso_currency_code": "USD",
+              "location": {
+                "address": null,
+                "city": null,
+                "country": null,
+                "lat": null,
+                "lon": null,
+                "postal_code": null,
+                "region": null,
+                "store_number": null
+              },
+              "name": "Madison Bicycle Shop",
+              "payment_channel": "in store",
+              "payment_meta": {
+                "by_order_of": null,
+                "payee": null,
+                "payer": null,
+                "payment_method": null,
+                "payment_processor": null,
+                "ppd_id": null,
+                "reason": null,
+                "reference_number": null
+              },
+              "pending": false,
+              "pending_transaction_id": null,
+              "transaction_id": "NB1v6dmadWcgqWRB5Za8hKwk1qX9KpsWPgQGa",
+              "transaction_type": "place",
+              "unofficial_currency_code": null
+            }
+          ]
+        }
+    http_version: 
+  recorded_at: Fri, 21 Feb 2020 01:22:10 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/item/remove
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-64189697-7c8e-4bda-8a2d-fa08d5068a35","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v8.6.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Fri, 21 Feb 2020 01:22:10 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '74'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "removed": true,
+          "request_id": "cgbxBDJXQ4Jb58T"
+        }
+    http_version: 
+  recorded_at: Fri, 21 Feb 2020 01:22:10 GMT
 recorded_with: VCR 4.0.0
