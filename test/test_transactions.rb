@@ -6,8 +6,8 @@ require_relative 'test_helper'
 class PlaidTransactionsTest < PlaidTest # rubocop:disable Metrics/ClassLength
   def setup
     create_item initial_products: [:transactions],
-                transactions_start_date: '2016-01-01',
-                transactions_end_date: '2017-01-01'
+                transactions_start_date: '2018-01-01',
+                transactions_end_date: '2019-01-01'
   end
 
   # rubocop:disable Metrics/AbcSize
@@ -38,15 +38,15 @@ class PlaidTransactionsTest < PlaidTest # rubocop:disable Metrics/ClassLength
 
   def test_get
     response = get_transactions_with_retries(access_token,
-                                             '2016-01-01',
-                                             '2017-01-01')
+                                             '2018-01-01',
+                                             '2019-01-01')
     refute_empty(response['accounts'])
     refute_empty(response['transactions'])
 
     account_id = response['accounts'][0]['account_id']
     response = get_transactions_with_retries(access_token,
-                                             '2016-01-01',
-                                             '2017-01-01',
+                                             '2018-01-01',
+                                             '2019-01-01',
                                              account_ids: [account_id])
     refute_empty(response['transactions'])
     response['transactions'].each do |transaction|
@@ -70,22 +70,22 @@ class PlaidTransactionsTest < PlaidTest # rubocop:disable Metrics/ClassLength
 
   def test_get_date_objects
     response = get_transactions_with_retries(access_token,
-                                             '2016-01-01',
-                                             '2017-01-01')
+                                             '2018-01-01',
+                                             '2019-01-01')
     refute_empty(response['accounts'])
     refute_empty(response['transactions'])
 
     account_id = response['accounts'][0]['account_id']
     response = get_transactions_with_retries(access_token,
-                                             Date.parse('2016-01-01'),
-                                             Date.parse('2017-01-01'),
+                                             Date.parse('2018-01-01'),
+                                             Date.parse('2019-01-01'),
                                              account_ids: [account_id])
     refute_empty(response['transactions'])
   end
 
   def test_get_invalid_access_token
     assert_raises(Plaid::InvalidInputError) do
-      get_transactions_with_retries(BAD_STRING, '2016-01-01', '2017-01-01')
+      get_transactions_with_retries(BAD_STRING, '2018-01-01', '2019-01-01')
     end
   end
 
@@ -97,8 +97,8 @@ class PlaidTransactionsTest < PlaidTest # rubocop:disable Metrics/ClassLength
 
   def test_get_with_options
     response = get_transactions_with_retries(access_token,
-                                             '2016-01-01',
-                                             '2017-01-01',
+                                             '2018-01-01',
+                                             '2019-01-01',
                                              count: 2,
                                              offset: 1)
     assert_equal(2, response['transactions'].length)
@@ -106,8 +106,8 @@ class PlaidTransactionsTest < PlaidTest # rubocop:disable Metrics/ClassLength
 
   def test_get_with_additional_options
     response = get_transactions_with_retries(access_token,
-                                             '2016-01-01',
-                                             '2017-01-01',
+                                             '2018-01-01',
+                                             '2019-01-01',
                                              options: { count: 2,
                                                         offset: 1 })
     assert_equal(2, response['transactions'].length)
@@ -116,8 +116,8 @@ class PlaidTransactionsTest < PlaidTest # rubocop:disable Metrics/ClassLength
   def test_get_invalid_options
     assert_raises(Plaid::InvalidRequestError) do
       get_transactions_with_retries(access_token,
-                                    '2016-01-01',
-                                    '2017-01-01',
+                                    '2018-01-01',
+                                    '2019-01-01',
                                     count: BAD_STRING,
                                     offset: BAD_STRING)
     end
