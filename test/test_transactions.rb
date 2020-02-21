@@ -21,7 +21,7 @@ class PlaidTransactionsTest < PlaidTest # rubocop:disable Metrics/ClassLength
   # Helper method to get transactions - retry up to 5 times with
   # a backoff delay to wait out PRODUCT_NOT_READY errors
   def get_transactions_with_retries(access_token, start_date, end_date, count: nil, offset: nil, account_ids: nil, options: nil)
-    num_retries = 5
+    num_retries = 8
     retries = 0
     while retries < num_retries
       retries += 1
@@ -73,14 +73,14 @@ class PlaidTransactionsTest < PlaidTest # rubocop:disable Metrics/ClassLength
 
   def test_get_date_objects
     response = get_transactions_with_retries(access_token,
-                                             '2017-01-01',
+                                             '2016-01-01',
                                              '2019-01-01')
     refute_empty(response['accounts'])
     refute_empty(response['transactions'])
 
     account_id = response['accounts'][0]['account_id']
     response = get_transactions_with_retries(access_token,
-                                             Date.parse('2017-01-01'),
+                                             Date.parse('2016-01-01'),
                                              Date.parse('2019-01-01'),
                                              account_ids: [account_id])
     refute_empty(response['transactions'])
@@ -100,7 +100,7 @@ class PlaidTransactionsTest < PlaidTest # rubocop:disable Metrics/ClassLength
 
   def test_get_with_options
     response = get_transactions_with_retries(access_token,
-                                             '2017-01-01',
+                                             '2016-01-01',
                                              '2019-01-01',
                                              count: 2,
                                              offset: 1)
@@ -109,7 +109,7 @@ class PlaidTransactionsTest < PlaidTest # rubocop:disable Metrics/ClassLength
 
   def test_get_with_additional_options
     response = get_transactions_with_retries(access_token,
-                                             '2017-01-01',
+                                             '2016-01-01',
                                              '2019-01-01',
                                              options: { count: 2,
                                                         offset: 1 })
