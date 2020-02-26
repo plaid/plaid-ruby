@@ -813,6 +813,11 @@ module Plaid
       # :attr_reader:
       # Public: The array of routing numbers associated with this institution.
       property :routing_numbers
+
+      ##
+      # :attr_reader:
+      # Public: Indicates that the institution has an OAuth login flow.
+      property :oauth
     end
 
     module MFA
