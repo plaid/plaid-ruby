@@ -1029,6 +1029,12 @@ module Plaid
       # Public: The String date that the transaction was authorized,
       # e.g. "2017-01-01".
       property :authorized_date
+
+      ##
+      # :attr_reader:
+      # Public: The String transaction code,
+      # e.g. "TRANSACTION_CODE_DIRECT_DEBIT".
+      property :transaction_code
     end
 
     # Public: A representation of an InvestmentTransaction in an investment
