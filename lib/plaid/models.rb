@@ -1032,7 +1032,7 @@ module Plaid
 
       ##
       # :attr_reader:
-      # Public: The String transaction code, e.g. "DIRECT_DEBIT".
+      # Public: The String transaction code, e.g. "direct debit".
       property :transaction_code
     end
 
