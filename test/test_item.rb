@@ -115,6 +115,12 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
     end
   end
 
+  def test_add_token_create
+    add_token_response = client.item.add_token.create()
+    refute_empty(add_token_response.add_token)
+    refute_empty(add_token_response.expiration)
+  end
+
   def test_exchange_token_invalid_public_token
     assert_raises(Plaid::InvalidInputError) do
       client.item.public_token.exchange(BAD_STRING)
