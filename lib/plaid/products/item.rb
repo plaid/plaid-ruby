@@ -56,10 +56,11 @@ module Plaid
   # Public: Class used to call the AddToken sub-product.
   # BETA
   class AddToken < BaseProduct
-    def create()
+    def create
       post_with_auth 'item/add_token/create', CreateResponse, {}
     end
 
+    # Public: Response for /item/add_token/create.
     class CreateResponse < Models::BaseResponse
       ##
       # :attr_reader:

@@ -116,7 +116,7 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
   end
 
   def test_add_token_create
-    add_token_response = client.item.add_token.create()
+    add_token_response = client.item.add_token.create
     refute_empty(add_token_response.add_token)
     refute_empty(add_token_response.expiration)
   end
