@@ -40,6 +40,8 @@ class PlaidTransactionsTest < PlaidTest # rubocop:disable Metrics/ClassLength
   end
 
   def test_get
+    skip 'skipping flaky test'
+
     response = get_transactions_with_retries(access_token,
                                              '2017-01-01',
                                              '2019-01-01')
@@ -72,6 +74,8 @@ class PlaidTransactionsTest < PlaidTest # rubocop:disable Metrics/ClassLength
   # rubocop:enable Style/GuardClause
 
   def test_get_date_objects
+    skip 'skipping flaky test'
+
     response = get_transactions_with_retries(access_token,
                                              '2017-01-01',
                                              '2019-01-01')
@@ -99,6 +103,8 @@ class PlaidTransactionsTest < PlaidTest # rubocop:disable Metrics/ClassLength
   end
 
   def test_get_with_options
+    skip 'skipping flaky test'
+
     response = get_transactions_with_retries(access_token,
                                              '2017-01-01',
                                              '2019-01-01',
@@ -108,6 +114,8 @@ class PlaidTransactionsTest < PlaidTest # rubocop:disable Metrics/ClassLength
   end
 
   def test_get_with_additional_options
+    skip 'skipping flaky test'
+
     response = get_transactions_with_retries(access_token,
                                              '2017-01-01',
                                              '2019-01-01',
