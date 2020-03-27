@@ -1,3 +1,8 @@
+# 8.7.0 05-Mar-2020
+
+* Add transaction_code to Transaction class ([#264](https://github.com/plaid/plaid-ruby/pull/264))
+* Add OAuth support to /institutions endpoints ([#261](https://github.com/plaid/plaid-ruby/pull/261))
+
 # 8.6.0 20-Feb-2020
 
 * Add support for transactions refresh product ([#258](https://github.com/plaid/plaid-ruby/pull/258))
