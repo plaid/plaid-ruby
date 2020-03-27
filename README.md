@@ -26,7 +26,7 @@ Each major version of `plaid-ruby` targets a specific version of the Plaid API:
 
 | API version | plaid-ruby release |
 | ----------- | ------------------ |
-| [`2019-05-29`][api-version-2019-05-29] (**latest**) | `7.x.x` |
+| [`2019-05-29`][api-version-2019-05-29] (**latest**) | `8.x.x`, `7.x.x` |
 | [`2018-05-22`][api-version-2018-05-22] | `6.x.x` |
 | `2017-03-08` | `5.x.x` |
 
@@ -172,6 +172,8 @@ There are also a number of other methods you can use to retrieve data:
 * `client.identity.get(access_token, ...)`: identity
 * `client.transactions.get(access_token, ...)`: transactions
 * `client.credit_details.get(access_token, ...)`: credit details
+* `client.investments.transactions.get(access_token, ...)`: investment-account transactions
+* `client.investments.holdings.get(access_token, ...)`: investment-account holdings
 
 All of these methods return appropriate data. More information can be found on the [API documentation](https://plaid.com/docs/api).
 

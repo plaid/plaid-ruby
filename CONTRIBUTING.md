@@ -44,6 +44,13 @@ changes in API you'll need to update the pre-recorded responses. Here's how:
    stubbed ones used by `STUB_API=1 rake test`.
 4. Run `STUB_API=1 rake test` and verify that everything works.
 
+
+## Running lint
+
+```bash
+bundle exec rubocop
+```
+
 ## Contributing
 
 1.  Make one or more atomic commits, and ensure that each commit has a

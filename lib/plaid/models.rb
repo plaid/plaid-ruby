@@ -127,6 +127,12 @@ module Plaid
       # :attr_reader:
       # Public: The String webhook URL.
       property :webhook
+
+      ##
+      # :attr_reader:
+      # Public: The String consent expiration timestamp (or nil)
+      # (e.g. "2019-04-22T00:00:00Z").
+      property :consent_expiration_time
     end
 
     # Public: A representation of Item webhook status
@@ -159,6 +165,21 @@ module Plaid
       property :last_successful_update
     end
 
+    # Public: A representation of Item investments update status
+    class ItemStatusInvestments < BaseModel
+      ##
+      # :attr_reader:
+      # Public: the String last failed update date (or nil).
+      # (e.g. "2019-04-22T00:00:00Z").
+      property :last_failed_update
+
+      ##
+      # :attr_reader:
+      # Public: the String last successful update date (or nil).
+      # (e.g. "2019-04-22T00:00:00Z").
+      property :last_successful_update
+    end
+
     # Public: A representation of Item status
     class ItemStatus < BaseModel
       ##
@@ -170,6 +191,11 @@ module Plaid
       # :attr_reader:
       # Public: The ItemStatusTransactions for this ItemStatus.
       property :transactions, coerce: ItemStatusTransactions
+
+      ##
+      # :attr_reader:
+      # Public: The ItemStatusInvestments for this ItemStatus.
+      property :investments, coerce: ItemStatusInvestments
     end
 
     # Public: A representation of account balances.
@@ -812,6 +838,16 @@ module Plaid
       # :attr_reader:
       # Public: The Array of String country codes supported by this institution.
       property :country_codes
+
+      ##
+      # :attr_reader:
+      # Public: The array of routing numbers associated with this institution.
+      property :routing_numbers
+
+      ##
+      # :attr_reader:
+      # Public: Indicates that the institution has an OAuth login flow.
+      property :oauth
     end
 
     module MFA
@@ -1011,44 +1047,235 @@ module Plaid
       # :attr_reader:
       # Public: The String unofficial currency code for the amount
       property :unofficial_currency_code
+
+      ##
+      # :attr_reader:
+      # Public: The String channel used to make a payment, e.g.
+      # "online", "in store", or "other".
+      property :payment_channel
+
+      ##
+      # :attr_reader:
+      # Public: The String date that the transaction was authorized,
+      # e.g. "2017-01-01".
+      property :authorized_date
+
+      ##
+      # :attr_reader:
+      # Public: The String transaction code, e.g. "direct debit".
+      property :transaction_code
     end
 
-    # Public: A representation of asset report address details.
-    class AssetReportAddressData < BaseModel
+    # Public: A representation of an InvestmentTransaction in an investment
+    # account.
+    class InvestmentTransaction < BaseModel
       ##
       # :attr_reader:
-      # Public: The String street name.
-      property :street
+      # Public: The String investment transaction ID.
+      property :investment_transaction_id
 
       ##
       # :attr_reader:
-      # Public: The String name.
-      property :city
+      # Public: The String account ID.
+      property :account_id
 
       ##
       # :attr_reader:
-      # Public: The String state name.
-      property :state
+      # Public: The String security ID.
+      property :security_id
 
       ##
       # :attr_reader:
-      # Public: The String zip code.
-      property :zip
+      # Public: The String transaction date. E.g. "2017-01-01".
+      property :date
+
+      ##
+      # :attr_reader:
+      # Public: The String transaction name (or nil).
+      # E.g. "CREDIT CARD 3333 PAYMENT *//".
+      property :name
+
+      ##
+      # :attr_reader:
+      # Public: The Numeric quantity of the security involved (if applicable).
+      property :quantity
+
+      ##
+      # :attr_reader:
+      # Public: The Numeric amount (or nil).
+      property :amount
+
+      ##
+      # :attr_reader:
+      # Public: The Numeric price of the security that was used for the trade
+      # (if applicable).
+      property :price
+
+      ##
+      # :attr_reader:
+      # Public: The Numeric fee amount.
+      property :fees
+
+      ##
+      # :attr_reader:
+      # Public: The String transaction type (or nil). E.g. "buy" or "sell".
+      property :type
+
+      ##
+      # :attr_reader:
+      # Public: The String transaction type (or nil). E.g. "buy" or "sell".
+      property :subtype
+
+      ##
+      # :attr_reader:
+      # Public: The ISO currency code of the transaction, either USD or CAD.
+      # Always nil if unofficial_currency_code is non-nil.
+      property :iso_currency_code
+
+      ##
+      # :attr_reader:
+      # Public: The unofficial currency code associated with the transaction.
+      # Always nil if iso_currency_code is non-nil.
+      property :unofficial_currency_code
+
+      ##
+      # :attr_reader:
+      # Public: Present if the transaction class is cancel, and indicates the
+      # ID of the transaction which was cancelled.
+      property :cancel_transaction_id
     end
 
-    # Public: A representation of an asset report address.
-    class AssetReportAddress < BaseModel
+    # Public: A representation of a Holding in an investment account.
+    class Holding < BaseModel
       ##
       # :attr_reader:
-      # Public: Data about the components comprising an address; see
-      # IdentityAddressData object for fields.
-      property :data, coerce: AssetReportAddressData
+      # Public: The String account ID.
+      property :account_id
 
       ##
       # :attr_reader:
-      # Public: When true, identifies the address as the primary address on an
-      # account.
-      property :primary
+      # Public: The String security ID.
+      property :security_id
+
+      ##
+      # :attr_reader:
+      # Public: The Numeric value of the holding (price * quantity) as reported
+      # by the institution.
+      property :institution_value
+
+      ##
+      # :attr_reader:
+      # Public: The Numeric price of the holding as reported by the institution.
+      property :institution_price
+
+      ##
+      # :attr_reader:
+      # Public: The Numeric quantity.
+      property :quantity
+
+      ##
+      # :attr_reader:
+      # Public: The String date when the price reported by the institution was
+      # current. E.g. "2017-01-01".
+      property :institution_price_as_of
+
+      ##
+      # :attr_reader:
+      # Public: The Numeric cost basis.
+      property :cost_basis
+
+      ##
+      # :attr_reader:
+      # Public: The ISO currency code of the holding, either USD or CAD.
+      # Always nil if unofficial_currency_code is non-nil.
+      property :iso_currency_code
+
+      ##
+      # :attr_reader:
+      # Public: The unofficial currency code associated with the holding.
+      # Always nil if iso_currency_code is non-nil.
+      property :unofficial_currency_code
+    end
+
+    # Public: A representation of a Security.
+    class Security < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The String security ID.
+      property :security_id
+
+      ##
+      # :attr_reader:
+      # Public: The String CUSIP identitfier of this security.
+      property :cusip
+
+      ##
+      # :attr_reader:
+      # Public: The String SEDOL identifier of this security.
+      property :sedol
+
+      ##
+      # :attr_reader:
+      # Public: The String ISIN identifier of this security.
+      property :isin
+
+      ##
+      # :attr_reader:
+      # Public: The String ID of this security as reported by the institution.
+      property :institution_security_id
+
+      ##
+      # :attr_reader:
+      # Public: The String institution ID (if institution_security_id is set).
+      property :institution_id
+
+      ##
+      # :attr_reader:
+      # Public: The String security ID of the proxied security.
+      property :proxy_security_id
+
+      ##
+      # :attr_reader:
+      # Public: The String security name.
+      property :name
+
+      ##
+      # :attr_reader:
+      # Public: The String ticker symbol.
+      property :ticker_symbol
+
+      ##
+      # :attr_reader:
+      # Public: The Boolean flag indicating whether this security is
+      # cash-equivalent.
+      property :is_cash_equivalent
+
+      ##
+      # :attr_reader:
+      # Public: The String Type.
+      property :type
+
+      ##
+      # :attr_reader:
+      # Public: The Numeric close price.
+      property :close_price
+
+      ##
+      # :attr_reader:
+      # Public: The String date when the close price was current.
+      property :close_price_as_of
+
+      ##
+      # :attr_reader:
+      # Public: The ISO currency code of the security, either USD or CAD.
+      # Always nil if unofficial_currency_code is non-nil.
+      property :iso_currency_code
+
+      ##
+      # :attr_reader:
+      # Public: The unofficial currency code associated with the security.
+      # Always nil if iso_currency_code is non-nil.
+      property :unofficial_currency_code
     end
 
     # Public: A representation of an asset report owner.
@@ -1075,8 +1302,8 @@ module Plaid
       ##
       # :attr_reader:
       # Public: Data about the various addresses associated with the account
-      # by the financial institution; see AssetReportAddress object for fields.
-      property :addresses, coerce: Array[AssetReportAddress]
+      # by the financial institution; see IdentityAddress object for fields.
+      property :addresses, coerce: Array[IdentityAddress]
     end
 
     # Public: A representation of an asset report balance.
@@ -1404,6 +1631,375 @@ module Plaid
       # Public: Data returned by Plaid about each of the Items included in the
       # Asset Report; see AssetReportItem object for fields.
       property :items, coerce: Array[AssetReportItem]
+    end
+
+    # Public: A representation of an eligibility for the Public Service Loan
+    # Forgiveness program.
+    class PSLFStatus < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The estimated date borrower will have completed 120 qualifying
+      # monthly payments.
+      property :estimated_eligibility_date
+
+      ##
+      # :attr_reader:
+      # Public: The number of qualifying payments that have been made.
+      property :payments_made
+
+      ##
+      # :attr_reader:
+      # Public: The number of qualifying payments that are remaining.
+      property :payments_remaining
+    end
+
+    # Public: A representation of the status of a student loan.
+    class StudentLoanStatus < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The status of the loan, e.g. "repayment", "deferment",
+      # "forbearance".
+      property :type
+
+      ##
+      # :attr_reader:
+      # Public: The date the status expires.
+      property :end_date
+    end
+
+    # Public: A representation of a student loan repayment plan.
+    class StudentLoanRepaymentPlan < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The type of repayment plan, e.g., "standard", "income".
+      property :type
+
+      ##
+      # :attr_reader:
+      # Public: The full name of the repayment plan, e.g. "Standard Repayment".
+      property :description
+    end
+
+    # Public: A representation of a student loan servicer address.
+    class StudentLoanServicerAddress < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The full city name
+      property :city
+
+      ##
+      # :attr_reader:
+      # Public: The ISO 3166-1 alpha-2 country code
+      property :country
+
+      ##
+      # :attr_reader:
+      # Public: The postal code.
+      property :postal_code
+
+      ##
+      # :attr_reader:
+      # Public: The region or state.
+      property :region
+
+      ##
+      # :attr_reader:
+      # Public: The full street address.
+      property :street
+    end
+
+    # Public: A representation of a student loan liability.
+    class StudentLoanLiability < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The String account ID. E.g.
+      # "vzeNDwK7KQIm4yEog683uElbp9GRLEFXGK98D".
+      property :account_id
+
+      ##
+      # :attr_reader:
+      # Public: The account number of the loan.
+      property :account_number
+
+      ##
+      # :attr_reader:
+      # Public: The dates on which loaned funds were disbursed or will be
+      # disbursed. These are often in the past.
+      property :disbursement_dates
+
+      ##
+      # :attr_reader:
+      # Public: The date when the student loan is expected to be paid off.
+      property :expected_payoff_date
+
+      ##
+      # :attr_reader:
+      # Public: The guarantor of the student loan.
+      property :guarantor
+
+      ##
+      # :attr_reader:
+      # Public: The interest rate on loans shown as a percentage.
+      property :interest_rate_percentage
+
+      ##
+      # :attr_reader:
+      # Public: True if a payment is currently overdue.
+      property :is_overdue
+
+      ##
+      # :attr_reader:
+      # Public: The amount of the last payment.
+      property :last_payment_amount
+
+      ##
+      # :attr_reader:
+      # Public: The date of the last payment.
+      property :last_payment_date
+
+      ##
+      # :attr_reader:
+      # Public: The outstanding balance on the last statement.
+      property :last_statement_balance
+
+      ##
+      # :attr_reader:
+      # Public: The date the last statement was issued.
+      property :last_statement_issue_date
+
+      ##
+      # :attr_reader:
+      # Public: The status of the loan, e.g. "Repayment", "Deferment",
+      # "Forbearance".
+      property :loan_status, coerce: StudentLoanStatus
+
+      ##
+      # :attr_reader:
+      # Public: The type of loan, e.g., "Consolidation Loans".
+      property :loan_name
+
+      ##
+      # :attr_reader:
+      # Public: The minimum payment due for the next billing cycle.
+      property :minimum_payment_amount
+
+      ##
+      # :attr_reader:
+      # Public: The due date for the next payment.
+      property :next_payment_due_date
+
+      ##
+      # :attr_reader:
+      # Public: The date on which the loan was initially lent.
+      property :origination_date
+
+      ##
+      # :attr_reader:
+      # Public: The original principal balance of the loan.
+      property :origination_principal_amount
+
+      ##
+      # :attr_reader:
+      # Public: The dollar amount of the accrued interest balance.
+      property :outstanding_interest_amount
+
+      ##
+      # :attr_reader:
+      # Public: The relevant account number that should be used to reference
+      # this loan for payments. This is sometimes different from
+      # account_number.
+      property :payment_reference_number
+
+      ##
+      # :attr_reader:
+      # Public: Information about the student's eligibility in the Public
+      # Service Loan Forgiveness program.
+      property :pslf_status, coerce: PSLFStatus
+
+      ##
+      # :attr_reader:
+      # Public: Information about the repayment plan.
+      property :repayment_plan, coerce: StudentLoanRepaymentPlan
+
+      ##
+      # :attr_reader:
+      # Public: The sequence number of the student loan.
+      property :sequence_number
+
+      ##
+      # :attr_reader:
+      # Public: The servicer address for which payments should be sent.
+      property :servicer_address, coerce: StudentLoanServicerAddress
+
+      ##
+      # :attr_reader:
+      # Public: The year to date (YTD) interest paid.
+      property :ytd_interest_paid
+
+      ##
+      # :attr_reader:
+      # Public: The year to date (YTD) principal paid.
+      property :ytd_principal_paid
+    end
+
+    # Public: A representation of someone's liabilities of all types.
+    class Liabilities < BaseModel
+      include Hashie::Extensions::IgnoreUndeclared
+
+      ##
+      # :attr_reader:
+      # Public: Student loan liabilities associated with the item.
+      property :student, coerce: Array[StudentLoanLiability]
+    end
+
+    # Public: A representation of a payment amount.
+    class PaymentAmount < BaseModel
+      ##
+      # :attr_reader:
+      # Public: Currency for the payment amount.
+      property :currency
+
+      ##
+      # :attr_reader:
+      # Public: Value of the payment amount.
+      property :value
+    end
+
+    # Public: A representation of a payment amount.
+    class PaymentRecipientAddress < BaseModel
+      ##
+      # :attr_reader:
+      # Public: Street name.
+      property :street
+
+      ##
+      # :attr_reader:
+      # Public: City.
+      property :city
+
+      ##
+      # :attr_reader:
+      # Public: Postal code.
+      property :postal_code
+
+      ##
+      # :attr_reader:
+      # Public: Country.
+      property :country
+    end
+
+    # Public: A representation of a payment recipient.
+    class PaymentRecipient < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The recipient ID.
+      property :recipient_id
+
+      ##
+      # :attr_reader:
+      # Public: The recipient name.
+      property :name
+
+      ##
+      # :attr_reader:
+      # Public: The recipient IBAN.
+      property :iban
+
+      ##
+      # :attr_reader:
+      # Public: The recipient address.
+      property :address, coerce: PaymentRecipientAddress
+    end
+
+    # Public: A representation of a payment.
+    class Payment < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The payment ID.
+      property :payment_id
+
+      ##
+      # :attr_reader:
+      # Public: The payment token.
+      property :payment_token
+
+      ##
+      # :attr_reader:
+      # Public: The payment reference.
+      property :reference
+
+      ##
+      # :attr_reader:
+      # Public: The payment amount.
+      property :amount, coerce: PaymentAmount
+
+      ##
+      # :attr_reader:
+      # Public: The payment's status.
+      property :status
+
+      ##
+      # :attr_reader:
+      # Public: The last status update time for payment.
+      property :last_status_update
+
+      ##
+      # :attr_reader:
+      # Public: The payment token's expiration time.
+      property :payment_token_expiration_time
+
+      ##
+      # :attr_reader:
+      # Public: The recipient ID for payment.
+      property :recipient_id
+    end
+
+    # Public: A representation of a payment amount.
+    class WebhookVerificationKey < BaseModel
+      ##
+      # :attr_reader:
+      # Public: alg.
+      property :alg
+
+      ##
+      # :attr_reader:
+      # Public: created_at.
+      property :created_at
+
+      ##
+      # :attr_reader:
+      # Public: crv.
+      property :crv
+
+      ##
+      # :attr_reader:
+      # Public: expired_at.
+      property :expired_at
+
+      ##
+      # :attr_reader:
+      # Public: kid.
+      property :kid
+
+      ##
+      # :attr_reader:
+      # Public: kty.
+      property :kty
+
+      ##
+      # :attr_reader:
+      # Public: use.
+      property :use
+
+      ##
+      # :attr_reader:
+      # Public: x.
+      property :x
+
+      ##
+      # :attr_reader:
+      # Public: y.
+      property :y
     end
   end
 end

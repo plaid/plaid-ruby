@@ -1,3 +1,52 @@
+# 8.7.0 05-Mar-2020
+
+* Add transaction_code to Transaction class ([#264](https://github.com/plaid/plaid-ruby/pull/264))
+* Add OAuth support to /institutions endpoints ([#261](https://github.com/plaid/plaid-ruby/pull/261))
+
+# 8.6.0 20-Feb-2020
+
+* Add support for transactions refresh product ([#258](https://github.com/plaid/plaid-ruby/pull/258))
+  * `/transactions/refresh`
+
+# 8.5.0 10-Feb-2020
+
+* Add support for deposit switch product ([#251](https://github.com/plaid/plaid-ruby/pull/251))
+* Add support for generic processor token ([#256](https://github.com/plaid/plaid-ruby/pull/256))
+* Add support for webhook verification ([#249](https://github.com/plaid/plaid-ruby/pull/249))
+
+# 8.4.0 23-Jan-2020
+
+* Add support for new UK Payment Initiation product ([#246](https://github.com/plaid/plaid-ruby/pull/246))
+  * `/payment_initiation/recipient/create`
+  * `/payment_initiation/recipient/get`
+  * `/payment_initiation/recipient/list`
+  * `/payment_initiation/payment/create`
+  * `/payment_initiation/payment/token/create`
+  * `/payment_initiation/payment/get`
+  * `/payment_initiation/payment/list`
+* Add `consent_expiration_time` to the Item interface ([#247](https://github.com/plaid/plaid-ruby/pull/247))
+
+
+# 8.3.0 17-Sep-2019
+
+* Add support for new [Ocrolus Partnership](https://plaid.com/docs/ocrolus/)
+
+# 8.2.0 16-Sep-2019
+
+* Update Assets schema for international address support
+
+# 8.1.0 23-Jul-2019
+
+* Add binding for the new [liabilities product](https://plaid.com/docs/api/#liabilities)
+
+# 8.0.0 19-Jun-2019
+
+* Deprecate direct integration as it is no longer supported
+
+# 7.1.0 17-Jun-2019
+
+* Add bindings for the new [investments product](https://plaid.com/docs/api/#investments).
+
 # 7.0.0 20-May-2019
 
 * Add support for 2019-05-29 API version
