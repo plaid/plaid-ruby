@@ -53,6 +53,27 @@ module Plaid
     end
   end
 
+  # Public: Class used to call the AddToken sub-product.
+  # BETA
+  class AddToken < BaseProduct
+    def create
+      post_with_auth 'item/add_token/create', CreateResponse, {}
+    end
+
+    # Public: Response for /item/add_token/create.
+    class CreateResponse < Models::BaseResponse
+      ##
+      # :attr_reader:
+      # Public: The String token.
+      property :add_token
+
+      ##
+      # :attr_reader:
+      # Public: The String token expiration time.
+      property :expiration
+    end
+  end
+
   # Public: Class used to call the PublicToken sub-product
   class PublicToken < BaseProduct
     # Public: Creates a public token from an access_token.
@@ -151,6 +172,11 @@ module Plaid
     # :attr_reader:
     # Public: The Plaid::PublicToken product accessor.
     subproduct :public_token
+
+    ##
+    # :attr_reader:
+    # Public: The Plaid::AddToken product accessor.
+    subproduct :add_token
 
     ##
     # :attr_reader:
