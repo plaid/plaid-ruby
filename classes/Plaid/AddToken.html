@@ -3,7 +3,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title>Plaid::Webhook</title>
+    <title>Plaid::AddToken</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
@@ -13,17 +13,17 @@
 <script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
 
 
-    <meta property="og:title" value="Plaid::Webhook">
+    <meta property="og:title" value="Plaid::AddToken">
 
   
     
-    <meta name="description" content="Class used to call the Webhook sub-product.">
-    <meta property="og:description" content="Class used to call the Webhook sub-product.">
+    <meta name="description" content="Class used to call the AddToken sub-product.">
+    <meta property="og:description" content="Class used to call the AddToken sub-product.">
   
 
-    <meta name="keywords" content="Plaid::Webhook class">
+    <meta name="keywords" content="Plaid::AddToken class">
   
-    <meta name="keywords" content="update">
+    <meta name="keywords" content="create">
   
 </head>
 
@@ -32,7 +32,7 @@
         
         <h1>
             <span class="type">Class</span>
-            Plaid::Webhook
+            Plaid::AddToken
             
                 <span class="parent">&lt;
                     
@@ -52,7 +52,7 @@
   
     <div class="description">
       
-<p>Class used to call the <a href="Webhook.html"><code>Webhook</code></a> sub-product</p>
+<p>Class used to call the <a href="AddToken.html"><code>AddToken</code></a> sub-product. BETA</p>
 
     </div>
   
@@ -80,7 +80,7 @@
       
         <li>
           <span class="type">CLASS</span>
-          <a href="Webhook/UpdateResponse.html">Plaid::Webhook::UpdateResponse</a>
+          <a href="AddToken/CreateResponse.html">Plaid::AddToken::CreateResponse</a>
         </li>
       
     </ul>
@@ -92,13 +92,13 @@
     <div class="sectiontitle">Methods</div>
     <dl class="methods">
       
-        <dt>U</dt>
+        <dt>C</dt>
         <dd>
           <ul>
             
               
               <li>
-                <a href="#method-i-update">update</a>
+                <a href="#method-i-create">create</a>
               </li>
             
           </ul>
@@ -126,6 +126,46 @@
     <!-- Methods -->
     
     
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-create">
+            
+              <b>create</b>()
+            
+            <a href="../../classes/Plaid/AddToken.html#method-i-create" name="method-i-create" class="permalink">Link</a>
+          </div>
+
+          
+            <div class="description">
+              
+            </div>
+          
+
+          
+
+          
+
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source:
+                <a href="javascript:toggleSource('method-i-create_source')" id="l_method-i-create_source">show</a>
+                
+              </p>
+              <div id="method-i-create_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File lib/plaid/products/item.rb, line 59</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create</span>
+  <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;item/add_token/create&#39;</span>, <span class="ruby-constant">CreateResponse</span>, {}
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+      
     
   
 
@@ -146,62 +186,6 @@
     <!-- Methods -->
     
     
-      <div class="sectiontitle">Instance Public methods</div>
-      
-        <div class="method">
-          <div class="title method-title" id="method-i-update">
-            
-              <b>update</b>(access_token, webhook)
-            
-            <a href="../../classes/Plaid/Webhook.html#method-i-update" name="method-i-update" class="permalink">Link</a>
-          </div>
-
-          
-            <div class="description">
-              <p>Update webhook for an access_token.</p>
-
-<p>Does a POST /item/webhook/update call which is used to update webhook for a particular access_token. <a href="Webhooks.html"><code>Webhooks</code></a> are used to be notified when transactions for an item are updated and ready.</p>
-<dl class="rdoc-list note-list"><dt>access_token
-<dd>
-<p>The access_token of an item to update webhook for.</p>
-</dd><dt>webhook
-<dd>
-<p>The new webhook link.</p>
-</dd></dl>
-
-<h3 id="method-i-update-label-Returns">Returns</h3>
-
-<p>Returns an <a href="Webhook/UpdateResponse.html"><code>UpdateResponse</code></a> object with either an ItemStatus or MFA response.</p>
-            </div>
-          
-
-          
-
-          
-
-          
-            
-            <div class="sourcecode">
-              
-              <p class="source-link">
-                Source:
-                <a href="javascript:toggleSource('method-i-update_source')" id="l_method-i-update_source">show</a>
-                
-              </p>
-              <div id="method-i-update_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/item.rb, line 148</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">update</span>(<span class="ruby-identifier">access_token</span>, <span class="ruby-identifier">webhook</span>)
-  <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;item/webhook/update&#39;</span>,
-                 <span class="ruby-constant">UpdateResponse</span>,
-                 <span class="ruby-value">access_token:</span> <span class="ruby-identifier">access_token</span>,
-                 <span class="ruby-value">webhook:</span> <span class="ruby-identifier">webhook</span>
-<span class="ruby-keyword">end</span></pre>
-              </div>
-            </div>
-            
-          </div>
-        
-      
     
   
 </div>
