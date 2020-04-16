@@ -1,3 +1,7 @@
+# 8.9.0 16-Apr-2020
+
+- Add client_user_id to Item add token endpoint ([#274](https://github.com/plaid/plaid-ruby/pull/274))
+
 # 8.8.0 02-Apr-2020
 
 - Add support for Item add token endpoint (BETA) ([#269](https://github.com/plaid/plaid-ruby/pull/269))
