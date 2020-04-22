@@ -28,21 +28,21 @@ Another mode employs pre-recorded API responses using the
 In case you're adding new API endpoints or when there were any substantial
 changes in API you'll need to update the pre-recorded responses. Here's how:
 
-1. Make sure that `STUB_API=1 rake test` fails. It will fail saying something
+1. Make sure that `STUB_API=2 rake test` fails. It will fail saying something
    like "... An HTTP request has been made that VCR does not know how to
    handle".
-2. Run `RECORD_MODE=all STUB_API=1 rake test`. This will run the whole suite
+2. Run `RECORD_MODE=all STUB_API=2 rake test`. This will run the whole suite
    and re-record everything. If you only need to update data for one test class,
    use this:
 
    ```
-   RECORD_MODE=all STUB_API=1 ruby -w -I"lib:test" -rminitest/pride -rdotenv/load test/test_which_fails.rb
+   RECORD_MODE=all STUB_API=2 ruby -w -I"lib:test" -rminitest/pride -rdotenv/load test/test_which_fails.rb
    ```
 3. Run `rake vcr_hide_credentials`. This step is essential, because
    newly recorded files will contain your real `client_id` and friends. This
    Rake task will go over all recorded files and replace real values with
-   stubbed ones used by `STUB_API=1 rake test`.
-4. Run `STUB_API=1 rake test` and verify that everything works.
+   stubbed ones used by `STUB_API=2 rake test`.
+4. Run `STUB_API=2 rake test` and verify that everything works.
 
 
 ## Running lint
