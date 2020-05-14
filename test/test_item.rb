@@ -167,12 +167,6 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
     end
   end
 
-  def test_access_token_update_version_invalid_access_token
-    assert_raises(Plaid::InvalidRequestError) do
-      client.item.access_token.update_version(BAD_STRING)
-    end
-  end
-
   def test_webhook_update
     create_item
 
