@@ -23,41 +23,14 @@ module Plaid
       # Public: The String new access token.
       property :new_access_token
     end
-
-    # Public: Generate a new API access_token for a legacy access_token
-    #
-    # Does a POST /item/access_token/update_version call which will give you
-    # an access_token for the new API.
-    #
-    # access_token_v1 - legacy access_token
-    #
-    # Returns an UpdateVersionResponse object with new access_token and item
-    # ID.
-    def update_version(access_token_v1)
-      post_with_auth 'item/access_token/update_version',
-                     UpdateVersionResponse,
-                     access_token_v1: access_token_v1
-    end
-
-    # Public: Response for /item/access_token/update_version.
-    class UpdateVersionResponse < Models::BaseResponse
-      ##
-      # :attr_reader:
-      # Public: The String new access token for use.
-      property :access_token
-
-      ##
-      # :attr_reader:
-      # Public: The String item ID.
-      property :item_id
-    end
   end
 
   # Public: Class used to call the AddToken sub-product.
-  # BETA
   class AddToken < BaseProduct
-    def create
-      post_with_auth 'item/add_token/create', CreateResponse, {}
+    def create(user)
+      post_with_auth 'item/add_token/create',
+                     CreateResponse,
+                     user: user
     end
 
     # Public: Response for /item/add_token/create.
