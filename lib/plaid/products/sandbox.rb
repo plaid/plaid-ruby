@@ -57,7 +57,7 @@ module Plaid
     # Returns a Models::BaseResponse object.
     def set_verification_status(access_token, account_id, verification_status)
       post_with_auth '/sandbox/item/set_verification_status',
-                     FireWebhookResponse,
+                     Models::BaseResponse,
                      access_token: access_token,
                      account_id: account_id,
                      verification_status: verification_status
