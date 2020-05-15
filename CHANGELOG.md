@@ -1,6 +1,7 @@
 # 9.0.0
 
-- Removes support for the `/item/access_token/update_version` endpoint
+- Adds support for `/sandbox/item/set_verification_status`
+- Removes support for deprecated `/item/access_token/update_version` endpoint
 
 BREAKING CHANGES:
 
