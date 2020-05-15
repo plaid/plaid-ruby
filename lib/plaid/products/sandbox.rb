@@ -44,6 +44,24 @@ module Plaid
       # Public: The Boolean webhook fired success flag.
       property :webhook_fired
     end
+
+    # Public: Sets the verification status for an item
+    # created via automated microdeposits
+    #
+    # Does a POST /sandbox/item/set_verification_status call.
+    #
+    # access_token - access_token of the item
+    # account_id - id of the account to verify
+    # verification_status - status to set
+    #
+    # Returns a Models::BaseResponse object.
+    def set_verification_status(access_token, account_id, verification_status)
+      post_with_auth '/sandbox/item/set_verification_status',
+                     Models::BaseResponse,
+                     access_token: access_token,
+                     account_id: account_id,
+                     verification_status: verification_status
+    end
   end
 
   # Public: Class used to call the SandboxPublicToken sub-product
