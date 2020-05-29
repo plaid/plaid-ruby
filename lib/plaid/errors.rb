@@ -63,7 +63,7 @@ TEXT
     ERROR_TYPE_MAP = {
       'INVALID_REQUEST' => Plaid::InvalidRequestError,
       'INVALID_INPUT' => Plaid::InvalidInputError,
-      'RATE_LIMIT_EXCEEDED_ERROR' => Plaid::RateLimitExceededError,
+      'RATE_LIMIT_EXCEEDED' => Plaid::RateLimitExceededError,
       'API_ERROR' => Plaid::APIError,
       'ITEM_ERROR' => Plaid::ItemError
     }.freeze
