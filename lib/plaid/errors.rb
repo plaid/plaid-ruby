@@ -58,6 +58,10 @@ TEXT
   # Plaid's platform.
   class ItemError              < PlaidAPIError; end
 
+  # Public: Returned when there are errors for the requested financial
+  # institution.
+  class InstitutionError       < PlaidAPIError; end
+
   # Internal: A module that provides utilities for errors.
   module Error
     ERROR_TYPE_MAP = {
@@ -65,7 +69,8 @@ TEXT
       'INVALID_INPUT' => Plaid::InvalidInputError,
       'RATE_LIMIT_EXCEEDED' => Plaid::RateLimitExceededError,
       'API_ERROR' => Plaid::APIError,
-      'ITEM_ERROR' => Plaid::ItemError
+      'ITEM_ERROR' => Plaid::ItemError,
+      'INSTITUTION_ERROR' => Plaid::InstitutionError
     }.freeze
 
     # Internal: Map error_type to PlaidAPIError.
