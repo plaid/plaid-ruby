@@ -5,12 +5,13 @@ class PlaidLiabilitiesTest < PlaidTest
   # rubocop:disable Metrics/AbcSize
 
   def test_get
-    create_item initial_products: [:liabilities]
+    create_item initial_products: [:liabilities], institution_id: 'ins_1'
 
     response = client.liabilities.get(access_token)
     refute_empty(response.accounts)
     refute_empty(response.liabilities)
     refute_empty(response.liabilities.student)
+    refute_empty(response.liabilities.credit)
 
     account_id = response.accounts[7].account_id
     response = client.liabilities.get(

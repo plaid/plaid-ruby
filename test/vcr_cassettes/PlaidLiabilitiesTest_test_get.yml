@@ -2001,4 +2001,679 @@ http_interactions:
         }
     http_version: 
   recorded_at: Tue, 09 Jul 2019 01:09:57 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/sandbox/public_token/create
+    body:
+      encoding: UTF-8
+      string: '{"institution_id":"ins_1","initial_products":["liabilities"],"options":{},"public_key":"PLAID_RUBY_PUBLIC_KEY"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v9.0.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Tue, 02 Jun 2020 00:43:53 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '124'
+      connection:
+      - keep-alive
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "public_token": "public-sandbox-93b408bb-23ed-46d2-bcee-03f3f81dd39f",
+          "request_id": "k9sVEE3IoQtrOpq"
+        }
+    http_version: 
+  recorded_at: Tue, 02 Jun 2020 00:43:53 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/item/public_token/exchange
+    body:
+      encoding: UTF-8
+      string: '{"public_token":"public-sandbox-93b408bb-23ed-46d2-bcee-03f3f81dd39f","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v9.0.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Tue, 02 Jun 2020 00:43:53 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '169'
+      connection:
+      - keep-alive
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "access_token": "access-sandbox-ec39d17e-21b0-4686-816d-ecc8ae8667a9",
+          "item_id": "QB3XNNke59H5DZPweeZdTV1qxmoQJVCpQJn5w",
+          "request_id": "GSx39GMTGPcYQwF"
+        }
+    http_version: 
+  recorded_at: Tue, 02 Jun 2020 00:43:53 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/item/get
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-ec39d17e-21b0-4686-816d-ecc8ae8667a9","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v9.0.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Tue, 02 Jun 2020 00:43:54 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '284'
+      connection:
+      - keep-alive
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "item": {
+            "available_products": [
+              "assets",
+              "auth",
+              "balance",
+              "credit_details",
+              "identity",
+              "income",
+              "transactions"
+            ],
+            "billed_products": [
+              "liabilities"
+            ],
+            "consent_expiration_time": null,
+            "error": null,
+            "institution_id": "ins_1",
+            "item_id": "QB3XNNke59H5DZPweeZdTV1qxmoQJVCpQJn5w",
+            "webhook": ""
+          },
+          "request_id": "K1XCpp1quIxHdwy",
+          "status": {
+            "last_webhook": null
+          }
+        }
+    http_version: 
+  recorded_at: Tue, 02 Jun 2020 00:43:54 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/liabilities/get
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-ec39d17e-21b0-4686-816d-ecc8ae8667a9","options":{},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v9.0.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Tue, 02 Jun 2020 00:43:54 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '1931'
+      connection:
+      - keep-alive
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "accounts": [
+            {
+              "account_id": "eEmPrrzq5btjqQ7wGGQyHmPyR9w5E5UL4oR3K",
+              "balances": {
+                "available": 100,
+                "current": 110,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "0000",
+              "name": "Plaid Checking",
+              "official_name": "Plaid Gold Standard 0% Interest Checking",
+              "subtype": "checking",
+              "type": "depository"
+            },
+            {
+              "account_id": "QB3XNNke59H5DZPweeZdTV1qpQexKxip5q4lr",
+              "balances": {
+                "available": 200,
+                "current": 210,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "1111",
+              "name": "Plaid Saving",
+              "official_name": "Plaid Silver Standard 0.1% Interest Saving",
+              "subtype": "savings",
+              "type": "depository"
+            },
+            {
+              "account_id": "Z7m8LLJx5dcKNWxjkkW1sa34eyjzNzsg6dA18",
+              "balances": {
+                "available": null,
+                "current": 1000,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "2222",
+              "name": "Plaid CD",
+              "official_name": "Plaid Bronze Standard 0.2% Interest CD",
+              "subtype": "cd",
+              "type": "depository"
+            },
+            {
+              "account_id": "MqKjxxm15ES5Boge99o6TzLPXeWp6pt9JdwR9",
+              "balances": {
+                "available": null,
+                "current": 410,
+                "iso_currency_code": "USD",
+                "limit": 2000,
+                "unofficial_currency_code": null
+              },
+              "mask": "3333",
+              "name": "Plaid Credit Card",
+              "official_name": "Plaid Diamond 12.5% APR Interest Credit Card",
+              "subtype": "credit card",
+              "type": "credit"
+            },
+            {
+              "account_id": "ANBxggmlRqIZnXQoKKX1F7MoDbpW1Wh1QnKx3",
+              "balances": {
+                "available": 43200,
+                "current": 43200,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "4444",
+              "name": "Plaid Money Market",
+              "official_name": "Plaid Platinum Standard 1.85% Interest Money Market",
+              "subtype": "money market",
+              "type": "depository"
+            },
+            {
+              "account_id": "GZNyqqmG5jU5xbRDKKbNTP9E4WpANAt15zr7j",
+              "balances": {
+                "available": null,
+                "current": 320.76,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "5555",
+              "name": "Plaid IRA",
+              "official_name": null,
+              "subtype": "ira",
+              "type": "investment"
+            },
+            {
+              "account_id": "nE8MPPjXzBtK6RrnGGRxsEV51Wn6a6h6jLpMp",
+              "balances": {
+                "available": null,
+                "current": 23631.9805,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "6666",
+              "name": "Plaid 401k",
+              "official_name": null,
+              "subtype": "401k",
+              "type": "investment"
+            },
+            {
+              "account_id": "bEm6llqaJ8t43j7wGGjaUKEaRGw5q5FVXMy6R",
+              "balances": {
+                "available": null,
+                "current": 65262,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "7777",
+              "name": "Plaid Student Loan",
+              "official_name": null,
+              "subtype": "student",
+              "type": "loan"
+            },
+            {
+              "account_id": "my8gNNPekrUqDAKPEEABINprLyPodoiLDVwQV",
+              "balances": {
+                "available": null,
+                "current": 56302.06,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "8888",
+              "name": "Plaid Mortgage",
+              "official_name": null,
+              "subtype": "mortgage",
+              "type": "loan"
+            }
+          ],
+          "item": {
+            "available_products": [
+              "assets",
+              "auth",
+              "balance",
+              "credit_details",
+              "identity",
+              "income",
+              "transactions"
+            ],
+            "billed_products": [
+              "liabilities"
+            ],
+            "consent_expiration_time": null,
+            "error": null,
+            "institution_id": "ins_1",
+            "item_id": "QB3XNNke59H5DZPweeZdTV1qxmoQJVCpQJn5w",
+            "webhook": ""
+          },
+          "liabilities": {
+            "credit": [
+              {
+                "account_id": "MqKjxxm15ES5Boge99o6TzLPXeWp6pt9JdwR9",
+                "aprs": [
+                  {
+                    "apr_percentage": 15.24,
+                    "apr_type": "balance_transfer_apr",
+                    "balance_subject_to_apr": 1562.32,
+                    "interest_charge_amount": 130.22
+                  },
+                  {
+                    "apr_percentage": 27.95,
+                    "apr_type": "cash_apr",
+                    "balance_subject_to_apr": 56.22,
+                    "interest_charge_amount": 14.81
+                  },
+                  {
+                    "apr_percentage": 12.5,
+                    "apr_type": "purchase_apr",
+                    "balance_subject_to_apr": 157.01,
+                    "interest_charge_amount": 25.66
+                  },
+                  {
+                    "apr_percentage": 0,
+                    "apr_type": "special",
+                    "balance_subject_to_apr": 1000,
+                    "interest_charge_amount": 0
+                  }
+                ],
+                "is_overdue": false,
+                "last_payment_amount": 168.25,
+                "last_payment_date": "2019-05-22",
+                "last_statement_balance": 1708.77,
+                "last_statement_issue_date": "2019-05-28",
+                "minimum_payment_amount": 20,
+                "next_payment_due_date": "2020-05-28"
+              }
+            ],
+            "mortgage": [
+              {
+                "account_id": "my8gNNPekrUqDAKPEEABINprLyPodoiLDVwQV",
+                "account_number": "3120194154",
+                "current_late_fee": 25,
+                "escrow_balance": 3141.54,
+                "has_pmi": true,
+                "has_prepayment_penalty": true,
+                "interest_rate": {
+                  "percentage": 3.99,
+                  "type": "fixed"
+                },
+                "last_payment_amount": 3141.54,
+                "last_payment_date": "2019-08-01",
+                "loan_term": "30 year",
+                "loan_type_description": "conventional",
+                "maturity_date": "2045-07-31",
+                "next_monthly_payment": 3141.54,
+                "next_payment_due_date": null,
+                "origination_date": "2015-08-01",
+                "origination_principal_amount": 425000,
+                "past_due_amount": 2304,
+                "property_address": {
+                  "city": "Malakoff",
+                  "country": "US",
+                  "postal_code": null,
+                  "region": "NY",
+                  "street": "2992 Cameron Road"
+                },
+                "ytd_interest_paid": 12300.4,
+                "ytd_principal_paid": 12340.5
+              }
+            ],
+            "student": [
+              {
+                "account_id": "bEm6llqaJ8t43j7wGGjaUKEaRGw5q5FVXMy6R",
+                "account_number": "4277075694",
+                "disbursement_dates": [
+                  "2002-08-28"
+                ],
+                "expected_payoff_date": "2032-07-28",
+                "guarantor": "DEPT OF ED",
+                "interest_rate_percentage": 5.25,
+                "is_overdue": false,
+                "last_payment_amount": 138.05,
+                "last_payment_date": "2019-04-22",
+                "last_statement_balance": 138.05,
+                "last_statement_issue_date": "2019-04-28",
+                "loan_name": "Consolidation",
+                "loan_status": {
+                  "end_date": "2032-07-28",
+                  "type": "repayment"
+                },
+                "minimum_payment_amount": 25,
+                "next_payment_due_date": "2019-05-28",
+                "origination_date": "2002-08-28",
+                "origination_principal_amount": 25000,
+                "outstanding_interest_amount": 6227.36,
+                "payment_reference_number": "4277075694",
+                "pslf_status": {
+                  "estimated_eligibility_date": "2021-01-01",
+                  "payments_made": 200,
+                  "payments_remaining": 160
+                },
+                "repayment_plan": {
+                  "description": "Standard Repayment",
+                  "type": "standard"
+                },
+                "sequence_number": "1",
+                "servicer_address": {
+                  "city": "San Matias",
+                  "country": "US",
+                  "postal_code": "99415",
+                  "region": "CA",
+                  "street": "123 Relaxation Road"
+                },
+                "ytd_interest_paid": 280.55,
+                "ytd_principal_paid": 271.65
+              }
+            ]
+          },
+          "request_id": "2z68mvRwsEWlFnp"
+        }
+    http_version: 
+  recorded_at: Tue, 02 Jun 2020 00:43:54 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/liabilities/get
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-ec39d17e-21b0-4686-816d-ecc8ae8667a9","options":{"account_ids":["bEm6llqaJ8t43j7wGGjaUKEaRGw5q5FVXMy6R"]},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v9.0.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Tue, 02 Jun 2020 00:43:54 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '944'
+      connection:
+      - keep-alive
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "accounts": [
+            {
+              "account_id": "bEm6llqaJ8t43j7wGGjaUKEaRGw5q5FVXMy6R",
+              "balances": {
+                "available": null,
+                "current": 65262,
+                "iso_currency_code": "USD",
+                "limit": null,
+                "unofficial_currency_code": null
+              },
+              "mask": "7777",
+              "name": "Plaid Student Loan",
+              "official_name": null,
+              "subtype": "student",
+              "type": "loan"
+            }
+          ],
+          "item": {
+            "available_products": [
+              "assets",
+              "auth",
+              "balance",
+              "credit_details",
+              "identity",
+              "income",
+              "transactions"
+            ],
+            "billed_products": [
+              "liabilities"
+            ],
+            "consent_expiration_time": null,
+            "error": null,
+            "institution_id": "ins_1",
+            "item_id": "QB3XNNke59H5DZPweeZdTV1qxmoQJVCpQJn5w",
+            "webhook": ""
+          },
+          "liabilities": {
+            "credit": null,
+            "mortgage": null,
+            "student": [
+              {
+                "account_id": "bEm6llqaJ8t43j7wGGjaUKEaRGw5q5FVXMy6R",
+                "account_number": "4277075694",
+                "disbursement_dates": [
+                  "2002-08-28"
+                ],
+                "expected_payoff_date": "2032-07-28",
+                "guarantor": "DEPT OF ED",
+                "interest_rate_percentage": 5.25,
+                "is_overdue": false,
+                "last_payment_amount": 138.05,
+                "last_payment_date": "2019-04-22",
+                "last_statement_balance": 138.05,
+                "last_statement_issue_date": "2019-04-28",
+                "loan_name": "Consolidation",
+                "loan_status": {
+                  "end_date": "2032-07-28",
+                  "type": "repayment"
+                },
+                "minimum_payment_amount": 25,
+                "next_payment_due_date": "2019-05-28",
+                "origination_date": "2002-08-28",
+                "origination_principal_amount": 25000,
+                "outstanding_interest_amount": 6227.36,
+                "payment_reference_number": "4277075694",
+                "pslf_status": {
+                  "estimated_eligibility_date": "2021-01-01",
+                  "payments_made": 200,
+                  "payments_remaining": 160
+                },
+                "repayment_plan": {
+                  "description": "Standard Repayment",
+                  "type": "standard"
+                },
+                "sequence_number": "1",
+                "servicer_address": {
+                  "city": "San Matias",
+                  "country": "US",
+                  "postal_code": "99415",
+                  "region": "CA",
+                  "street": "123 Relaxation Road"
+                },
+                "ytd_interest_paid": 280.55,
+                "ytd_principal_paid": 271.65
+              }
+            ]
+          },
+          "request_id": "fjixVn263GvfCj1"
+        }
+    http_version: 
+  recorded_at: Tue, 02 Jun 2020 00:43:54 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/item/remove
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"access-sandbox-ec39d17e-21b0-4686-816d-ecc8ae8667a9","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v9.0.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Tue, 02 Jun 2020 00:43:55 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '74'
+      connection:
+      - keep-alive
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "removed": true,
+          "request_id": "xAxzQLRGqPQ9qYR"
+        }
+    http_version: 
+  recorded_at: Tue, 02 Jun 2020 00:43:55 GMT
 recorded_with: VCR 4.0.0
