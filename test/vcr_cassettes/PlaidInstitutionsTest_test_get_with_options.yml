@@ -159,6 +159,180 @@ http_interactions:
           "request_id": "KkYN4iXlFZPG81d",
           "total": 10248
         }
-    http_version:
+    http_version: 
   recorded_at: Fri, 19 Jul 2019 21:23:34 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/institutions/get
+    body:
+      encoding: UTF-8
+      string: '{"count":3,"offset":1,"options":{"products":["transactions"],"include_optional_metadata":true},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v9.0.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Wed, 03 Jun 2020 23:39:23 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "institutions": [
+            {
+              "country_codes": [
+                "US"
+              ],
+              "credentials": [
+                {
+                  "label": "Username",
+                  "name": "username",
+                  "type": "text"
+                },
+                {
+                  "label": "Password",
+                  "name": "password",
+                  "type": "password"
+                }
+              ],
+              "has_mfa": true,
+              "input_spec": "fixed",
+              "institution_id": "ins_112062",
+              "logo": "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",
+              "mfa": [
+                "code",
+                "list",
+                "questions",
+                "selections"
+              ],
+              "mfa_code_type": "numeric",
+              "name": "1st Constitution Bank - Personal",
+              "oauth": false,
+              "primary_color": "#246f99",
+              "products": [
+                "assets",
+                "auth",
+                "balance",
+                "transactions",
+                "income",
+                "identity"
+              ],
+              "routing_numbers": [],
+              "url": "http://www.1stconstitution.com"
+            },
+            {
+              "country_codes": [
+                "US"
+              ],
+              "credentials": [
+                {
+                  "label": "Username",
+                  "name": "username",
+                  "type": "text"
+                },
+                {
+                  "label": "Password",
+                  "name": "password",
+                  "type": "password"
+                }
+              ],
+              "has_mfa": true,
+              "input_spec": "fixed",
+              "institution_id": "ins_116872",
+              "logo": "iVBORw0KGgoAAAANSUhEUgAAAJgAAACYCAMAAAAvHNATAAAAY1BMVEVHcEz////////////////////////////////////////////////////////////+/v1niH0DLVr29/eQp6Hp7ezP2Nd1k4nc4+KDnZXBzsu1xMKcsaumuLgvUnZRb41qgp0WKV5qAAAAD3RSTlMA7UJj4Kl+FJon0cC6ysa3FGuCAAAJ7klEQVR42tVciXqzKhBtms20/TtYFlFA8/5PeWfABTS2TZuk3Pm+NsYFTs6soPL09Es5nraHYv/2/rLbMLbZvby/7YvD9nR8+kM5bYu3HazI7q3Ynv4E1H4VU4Ru/1hwz8U3QHlhCK54fhBXh++imog73J234/Yf/Ej+be/pDqeCwY+FFaccYRGy+0A77X8HK2Db3xracQ83kv1Nbe2wgZvJ5nC7sPUCN5WX2wS2YwG3FlbcQJ/PG7iDbH5N2gHuJL+ztOMr3E3ej7mp8ffqPMCd5YfqLODuUvwE1x4eIPuszD6W1ytd4PgCD5KXq5Add/Aw2R1z5Ivy0xWcvcJD5TUrf/yBbxbwcCmyiPc/zAHP8CfyZd48bv4G2OYr13yHP5LXDA3sG2b2DH8oz/kZ2JdmVsCfSpGlIj9T5stfA3vJziOHQuOQn+V/Yv97yEAu1BknyEJOeRJ2gbITywMYO+UVW1ejbC6ELSjLhjBgCWXHbAhDZHEs20JGso2A/csJ2L/sgusyyB7yAjal8l1ewHbZFIhrBeMQxFgkwKB1yZ6HSBr9dzNgCIpJzlp7v67TyDU/upv5ZH+ISaa789m0nbo5Isa1Mk6cz+cOBT+EU5JP4BK/HKMr7WZKtB2cO+CsC6rkv/gXgWJSubpr24+ltGenR1qiGDtWYkyaM13YQdO2Brob2Bj3nXHlzimiBb7OMBiBsX0aLIazO2xKfOgJGIcf/gMCJbrQcNuda2sapbUk0apBnU4IOwUjY7vUxCZgTjUt2pmeq+RKo2LaeVAIqTelpeH3WiIxwOLgPyVwKVUbgJlzrUCdzUXtjIx8to+oqtvegPg8GKXmx10PrUkSeVyKsXOvysEVEvNN6Qt7Fh36UxAV8dCejWTrmCJqXVA2j+vYtyieQA/M99CYZuxLG6NGMEGUaThDs3ZLCrRAVJ3TF0CtgQy6Gil7SxLlDFhVVrJvB0RZkitwo8cebFlx4PVwEh9V6LqPD6TqElPQNHwilkc6AEU9n6N0eYQVYLIqy6aPLrSNwLgt67ElR9tgytLEGteowu4SKn+dKksFl0IK/XbS5YjlGNdiS2B2+KGlByZFLQdTC8AYUjlhZU330bo1VER4ZWDF00FjzzaqybYrwEBXky4FbltKoZPneWB4khhIIOdqz2qOiq99mzk242hlKnLLwxpjqnKDLmVlPDCf3ns/YoaAmUr2RwiWlX0zk7PCENBZ4uhxag5bFN8nr8RisVhjrKl0FXQ5da8aFWh3wgnSYe3ICZBXhFXhrzACwXH8r3vPtsIgSxKNXlpDnzLoXAgfJLkTwppgH+2Hi8e9+zXGTM1F0CWvHbqoALKo2rdWCzRA3NaoRjRo03RdY8pKCdqr6X+FyECJ2hsqughxXio8lxArW5PRolNhD3SJ9DbWRUXRPgpjM8ZcTTavqP1Ss7oHJvCQRbgY1xGYq7z9tx0GIPRPoXVNyKQjX8HrFPoLtUHHCLgHhs0qRidqZhpMmv5k8ko9pSQMZO9rjFkBQYFgEU1NkICAYX/eqMjGUJPAz21HTRpCQPyha3G6kNcUT7ANR7+wAaPxKDLJK6Jd1RSffa++VdkaiBh7jydeU2ACuxcURCUZj1eiB4abTQ8MqcSMKgJ8Q52im/q4JnCXRpKxUeK68Ux52Bq/uCm10l6KjkDdRcBe4hFSAsyz4VloEBzzpk7AiAIfHxCYrbk9a2/+Hhg6JR5tSC8IrCkrgVIJRZvewD1jYgrJaBFWWK8NnRbeu6fNGjCMhV6XrLa+p6oH1hswxrEKO8aTgqKWwBB5g6IYDMDoWokUDsDQ+K0xyLhgDFJgmye2Akx6hYmgLxaCggfW9BEVbbYUwdEr1DMBCyYVARvqnZgxTK+2B4ZWyLwqxWKowtaAgfYOib1VlHIiYCpkR/DJCPok4D1vBqyZcu2MsT6h4Nc6lAMC5sjYqioDUbrsYVhv2r2NERM85PW+A0/QBMwbP25WOrRsRsawVedDG/XnyYcYWKTKFePHtkJs9aHSk6IhOLajgIXRpxorBV/8xDbmgZGyK6Ol0gOwEC6oOhAKy2Wp6QTV1BcY262FC/wZMnwE/XtthQCLxQ81SPXY0BwVPz0wzzD4vvyJZYXlxgAshA0KrmgHGMfITqtGBGA8DRdrAVYrb0D4u3zXWtGGUpr8R1F602osGjEHao7MYNPcn9efCMpZP2SUSrHQmiKDxRRqDTWPGw1PWpoC7GpKGuuAqByYagJgs6E95mfFo6EA/tcOuBy+a8Ir5XC95LBoNWbsLUniAN1HqCOvGtGGlG+dHbrt+1CYbQXjOhSo5KzWRzBvu34UuRwHTEk8Knu4tmEYJdSVo0kwtacGsx8yEXiRmOcZl5gUJY+AcdpHR1GjnjbOJF8yVsSFoplG7O46zgIBiM+hSVuswYDbWogalJU+J03ArBO15UxglsUTGhxR4Q61MP5DXFo37ShD0uCz8Qy/sM8PVmQAVmlGrNQSqzlmvSqVHxOMwITgslKsVvgfU76WWAOZadgwWNU2HozwSK6aHJiAUbFjncOSseltDINDYmN0AP9qrQTxaCSNHEZg0RzB8eIE2sXu+do+RBOSjwfWaK35HBgR6dGNwJpLwKLhWzLgXTei+UAsHfJgaYT+IgkYE1gy4yil5twGYD4OQ4P1s0JiB2CDKrUfa80Z282mCGZhgF/WJ198Rfus0dhl4wefArGR8TuLoRi4qP3IBAcKaORg6Q+JQ+PHK8j4sRQVc8bekkmVBT1JjOGXZn2i86SkYDFs+WAadnAZ9C376MBor/8YdvBJAdGkyvayJmOL6reBL+2Mx3M20agz/klpDokOwerU8Ta5X7McHdMOfmGCLJzH7zDdHs8O71LKgPcUJezMqUq+81tA4jPbjyeHAw3AVqyJLzgdyfsCG4+3+HwaanL59Jb9dm5jEV+TdX0V0eKswC+lh8/Bc7acTj+t29icvoiziCy4ogphn1+S3hjcLWxsZCpyRW97Yc5wOLRC6PfwTYRGyklvv8U3uaLfwmP3/pKWIUZdSBkps/xrryzS24KLDLiIW8OO8LlGF1+mjE99OgmV6XNku+hm0sW7BN9/BODTc9nig/UbLD6wy//Wc7Y367N9vCHfB0IyeoSGJY/QZPTQ0ew5rWwf08r2wbZ8HwXM9uHJfB83zfYB3Xwfac4hlR/+X4/N5/uiQbavZuT7Mku2r//k+8LUw9/5nOT1//pSXravMeb74me+r8rm+3Jxvq9jP/YF9qte+s/1lf98F0nId1mJfBfiyHjpknwXe8l3eZz7usDr79aHynQJpowXrbrLMl9Q3GbZtkwXRst4KbmMF9/Ld7nCWyzwmOvak/eDlfEiohkvu3rtQrXwwIVqc17adwSX4WLIkzvcafno/wCoTGxrOy/hGQAAAABJRU5ErkJggg==",
+              "mfa": [
+                "code",
+                "list",
+                "questions",
+                "selections"
+              ],
+              "mfa_code_type": "numeric",
+              "name": "1st MidAmerica Credit Union",
+              "oauth": false,
+              "primary_color": "#709279",
+              "products": [
+                "assets",
+                "auth",
+                "balance",
+                "transactions",
+                "income",
+                "identity"
+              ],
+              "routing_numbers": [],
+              "url": "https://www.1stmidamericaonline.org/tob/live/usp-core/app/login/consumer"
+            },
+            {
+              "country_codes": [
+                "US"
+              ],
+              "credentials": [
+                {
+                  "label": "Username",
+                  "name": "username",
+                  "type": "text"
+                },
+                {
+                  "label": "Password",
+                  "name": "password",
+                  "type": "password"
+                }
+              ],
+              "has_mfa": true,
+              "input_spec": "fixed",
+              "institution_id": "ins_109795",
+              "logo": "iVBORw0KGgoAAAANSUhEUgAAAJgAAACYCAMAAAAvHNATAAAAdVBMVEVHcEwCJU////8BJE////////////8IJ1L///8BJU8BJE4HGz////+BgaG4vcsDJlD////////////9/f0BJE7////4+/8JHUDa4e/y9fooOVgSKEv6+vrp7fdAUW9WY32/xdJ6hp+NlqrQ1uOco7drd5CvuMvO2ChmAAAAE3RSTlMAdbHH5JvKHx2g5Pg7BAtFgWxbD04//wAABxBJREFUeNrNnIl2qjAQhpEdDyoaCgTCvrz/I3YCiEulBsKSv7e3Uj36dbZkAkGSOHU2LgfLUhTleHTd4xEeWNbhYpylHWUcLAVoPuuoWAdjH6hRpie6jeEuLFAPuMtWtppA1bOtbzfjoLizpKzKZljufEWWISJWq1XQ+LFWQVsGa3G00yFyF1N0OC1WthR3USkXwby4rD8vR3cFHS/c0eWuJL5IMxR3NSmGaG7kdud6bhzcOQ/McleXNcNcpw24gGxyCpwVdxMpZ3HSkSc5jaO7mY6GeH6c6s3TplxAxpgB2+TjjKqxORcb2fr1fuYYcHF30UWkQjGlaGydkKypuU+AMYTZxd1RF/EC7GuYWe6usoR05D/O3C8jv2Tmwd1dHzPTiPYHiwzxIn80/g1XCBn7T8IYTSaIwf6azBIFzBLUYO8ms8QBswQ12GstOwgE9lL+FZHAlEcNE8mTL+F/EAvs4cujWGBHYSaIYxNGSzQwS0xPDr40XOFkiJiTj7y0xAOzxAyxPsgEDLEuyA4igh3EDLEuyOSfT/JW1c83yQCmfnwGkaevl4PPX9Ne8BVMlaTz52fQqvoK9nOWbDawH15NfDdbuokJdpMcMcEcSRMTTBupFruDyeKC6WKC6eKCqWKCqfPB0MpgiB2MEOJ5uFMcBITMHrsY/o5JYDiOyzJrirxO0yQtMZo7rLKAsbsSlXUShlEUub4P/8LS+1kPbEqMkSz1fT8CKhCABd68yQhTSKpTykVc5eDF8D7LLPGKYJPqGPyHvDj1e7BnixEC+dAJQ37AYZspHn3kESqaNfQwJoxgE4ak9ieuP4F5cVbUCSitq8yLCQ7ijhT3P+EYvuGYsIGxjpWPJ3DxDgbWKIsk9O8KS+RV4WclBcKMYNpEMK+J3sA83KSQElGSV1WdwIPMw2kPGXV/hR9F/S9SzGYxjXGi+GSx7B0M52CtKKwCGlNlEUUNjkPgTPOqqZL21VFaVVWehhHkMpvFHMap9eOJuHwFI7gKobIlRRfkNDkKXPkhHIPitAPLgRp7QRH6FRvYjbEZebJYGb6AYSDx4ZNjRLkwwVlSeTXAdX/GAwzy0osL8CUTmM3Yvo2DeQ09jgrcVgjKBglYpfE7GH0W46Au2MDOow3vaPAHb2BF+9F10IHhflTtJx/PFuuwMWIr/GNLBGNg6A9Y3n50kkOMtWgvb/MOhghbHaNLBBqnxfLuOKwbGu4Yj4FNmr9pAHadBkbewFAV9qUqTIvyfcFkLtgVwExOi2WJP6wehWkVLwJmSmPLPexgOI8eZFBXodCSobzPBFPbNViNy5XEy9LoCcwP6xICHXGBae25txuXxaAANPXLtSR+HSBOi91ai5lcYIjAnKZI+oltZ7X8yZXuHDCzOzWi8tSx9qUwG6MjdM/mJyXiAUNqfy5J47FYvzAaByWw9Wh+5XFZTOvBbD6L9WgwQ83q0G8blRpzgdn3E5bqPIuht84cETqvoWQpF5g6nOF15lns70d5ZdsR+AmXK50BzFzCYt2kqIqoK1MuMHO4iuBDD8dcYHGW4ceH4oYOA37xF4x9wUh/uu7iyu5KPIB1DW+ZDosYg8XCzPtTYBnbtn4AH3yJWFeNnmKsacGCJCruqxg/pIR22I/qYSTH/XBFhylGLmI+X9yjsYDRWTt+TK0L2nTTTi3Jy7bnJl6Q0z4ubUExQo9mJG3atnxKERsx2QcwqO8V7cLuYLQlK7K4jqCjbEracWcFTIH8pMIe9Tkps6zp2jeY4GZZFrCAIfP1AjLtOxj4qe2m74NiRA/qsqBdZVLnRZHT0g8tZEyok0lcJ2kS3l+bpGkRTzaYdDJZwNrViVflQZl3q2atwjTPcOczEqfDq9pHbGDm+0WK8vcYw+CbNzUltLFZUxVgL/iumiz2UHfeD6HXlzdZwLS+/y57HOz5l/+tD789/ZrNjBML+++FsNp3sPUlf7hy2CT7gxHz08XW1/3Brp93vOkbgP37jvrIhhZ7bzB7bAuEti+YNrpnxFT3BFPN8W1J9p5g9n8bk5z9wJz/95jpM051LHEuCelfdn/ew2xrsH8C7DXMtgazv2/8dPYAcySGfbza9mAa2yZeeWswmXU7tr4pGNKZN4rDcL4hmD7hdgSmuhkY+looXsn0rcD0SVzUm9uA6ZPvOXeWtwCT59wLT1sfTJNmyVkbzJl7GxpbXRNMtaW5Oq2VnH06ctzs6OSs1ak5vDf7stU1sDjcOKzPmtryXJopLSFbXxZLt6WFdL6S5bDIdbFbydGxU15sPceUltUyaJotLS2aBZwdJtJMaQ1xolGsk7SWzOvMDNWvprSuTqYzueSqztpUnUclW5vAptKAP0lbybyxwKnazZQ21okGnCaP0qmyRsPqJO2ls31zNFnWdRUmb6qq67KsOTeb+/bRv7b0uV5AHJR1AAAAAElFTkSuQmCC",
+              "mfa": [
+                "code",
+                "list",
+                "questions",
+                "selections"
+              ],
+              "mfa_code_type": "numeric",
+              "name": "1st Security Bank of Washington",
+              "oauth": false,
+              "primary_color": "#00668f",
+              "products": [
+                "assets",
+                "auth",
+                "balance",
+                "transactions",
+                "income",
+                "identity"
+              ],
+              "routing_numbers": [],
+              "url": "https://www.fsbwa.com/"
+            }
+          ],
+          "request_id": "n2xA1rbVUDKsOSh",
+          "total": 11344
+        }
+    http_version: 
+  recorded_at: Wed, 03 Jun 2020 23:39:23 GMT
 recorded_with: VCR 4.0.0

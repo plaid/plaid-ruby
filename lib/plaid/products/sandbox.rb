@@ -102,11 +102,11 @@ module Plaid
       end
       options_payload = options_payload.merge(options) unless options.nil?
 
-      post_with_public_key 'sandbox/public_token/create',
-                           SandboxCreateResponse,
-                           institution_id: institution_id,
-                           initial_products: initial_products,
-                           options: options_payload
+      post_with_auth 'sandbox/public_token/create',
+                     SandboxCreateResponse,
+                     institution_id: institution_id,
+                     initial_products: initial_products,
+                     options: options_payload
     end
 
     private def transaction_options(start_date, end_date)
