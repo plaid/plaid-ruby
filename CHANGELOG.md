@@ -1,6 +1,6 @@
 # 10.0.0
 
-- add support for optional user fields for `/item/add_token/create` endpoint ([278](https://github.com/plaid/plaid-ruby/pull/278/files))
+- Add support for optional user fields for `/item/add_token/create` endpoint ([278](https://github.com/plaid/plaid-ruby/pull/278))
 - add support for credit card liabilities ([286](https://github.com/plaid/plaid-ruby/pull/286))
 
 BREAKING CHANGES:
