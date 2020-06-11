@@ -13,12 +13,10 @@ class PlaidPaymentInitiationTest < PlaidTest
         street:      ['Street Name 999'],
         city:        'City',
         postal_code: '99999',
-        country:     'GB',
+        country:     'GB'
       },
-      {
-        account: '5555555',
-        sort_code: '020155'
-      }
+      account: '5555555',
+      sort_code: '020155'
     )
     recipient_id = create_recipient_response.recipient_id
     refute_empty(recipient_id)
