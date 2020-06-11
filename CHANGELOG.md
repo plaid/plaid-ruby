@@ -5,7 +5,7 @@
 
 BREAKING CHANGES:
 
-- `RATE_LIMIT_EXCEEDED` Plaid error types will be correctly mapped to `RateLimitExceededError` ([285](https://github.com/plaid/plaid-ruby/pull/285/files))
+- `RATE_LIMIT_EXCEEDED` Plaid error types will be correctly mapped to `RateLimitExceededError` ([285](https://github.com/plaid/plaid-ruby/pull/285))
 - `INSTITUTION_ERROR` Plaid error types will be correctly mapped to `InstitutionError` ([275](https://github.com/plaid/plaid-ruby/pull/275))
 - enable payment recipient to be created with BACS ([288](https://github.com/plaid/plaid-ruby/pull/288))
 
