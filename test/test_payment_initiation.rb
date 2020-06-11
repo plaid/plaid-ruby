@@ -16,8 +16,8 @@ class PlaidPaymentInitiationTest < PlaidTest
         country:     'GB',
       },
       {
-        "account": "5555555",
-        "sort_code": "020155"
+        account: '5555555',
+        sort_code: '020155'
       }
     )
     recipient_id = create_recipient_response.recipient_id
