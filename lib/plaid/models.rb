@@ -1867,7 +1867,7 @@ module Plaid
 
       ##
       # :attr_reader:
-      # Public: Sort Code.
+      # Public: The String sort code. E.g. "089999".
       property :sort_code
     end
 
