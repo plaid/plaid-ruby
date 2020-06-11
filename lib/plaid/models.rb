@@ -1858,7 +1858,7 @@ module Plaid
       property :country
     end
 
-     # Public: A representation of a payment recipient BACS number.
+    # Public: A representation of a payment recipient BACS number.
     class PaymentRecipientBACS < BaseModel
       ##
       # :attr_reader:
