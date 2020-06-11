@@ -1,3 +1,14 @@
+# 10.0.0
+
+- add support for optional user fields for `/item/add_token/create` endpoint ([278](https://github.com/plaid/plaid-ruby/pull/278/files))
+- add support for credit card liabilities ([286](https://github.com/plaid/plaid-ruby/pull/286))
+
+BREAKING CHANGES:
+
+- `RATE_LIMIT_EXCEEDED` Plaid error types will be correctly mapped to `RateLimitExceededError` ([285](https://github.com/plaid/plaid-ruby/pull/285/files))
+- `INSTITUTION_ERROR` Plaid error types will be correctly mapped to `InstitutionError` ([275](https://github.com/plaid/plaid-ruby/pull/275))
+- enable payment recipient to be created with BACS ([288](https://github.com/plaid/plaid-ruby/pull/288))
+
 # 9.0.0
 
 - Adds support for `/sandbox/item/set_verification_status`
