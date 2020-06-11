@@ -30,6 +30,7 @@ class PlaidPaymentInitiationTest < PlaidTest
     refute_empty(get_recipient_response.recipient_id)
     refute_empty(get_recipient_response.name)
     refute_empty(get_recipient_response.iban)
+    refute_empty(get_recipient_response.bacs)
     refute_empty(get_recipient_response.address)
 
     # list recipients
