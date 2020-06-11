@@ -1862,7 +1862,7 @@ module Plaid
     class PaymentRecipientBACS < BaseModel
       ##
       # :attr_reader:
-      # Public: Account number.
+      # Public: The String account number. E.g. "66374958".
       property :account
 
       ##
