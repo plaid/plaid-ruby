@@ -495,4 +495,550 @@ http_interactions:
         }
     http_version: 
   recorded_at: Sat, 07 Dec 2019 01:47:07 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/payment_initiation/recipient/create
+    body:
+      encoding: UTF-8
+      string: '{"name":"John Doe","iban":"GB33BUKB20201555555555","bacs":{"account":"5555555","sort":"020155"},"address":{"street":["Street
+        Name 999"],"city":"City","postal_code":"99999","country":"GB"},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v9.0.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 11 Jun 2020 01:35:24 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '261'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "display_message": null,
+          "documentation_url": "https://plaid.com/docs/?ref=error#invalid-request-errors",
+          "error_code": "UNKNOWN_FIELDS",
+          "error_message": "the following fields are not recognized by this endpoint: bacs.sort",
+          "error_type": "INVALID_REQUEST",
+          "request_id": "QqIphRdK0Ha5U8P",
+          "suggested_action": null
+        }
+    http_version: 
+  recorded_at: Thu, 11 Jun 2020 01:35:24 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/payment_initiation/recipient/create
+    body:
+      encoding: UTF-8
+      string: '{"name":"John Doe","iban":"GB33BUKB20201555555555","bacs":{"account":"5555555","sort_code":"020155"},"address":{"street":["Street
+        Name 999"],"city":"City","postal_code":"99999","country":"GB"},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v9.0.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 11 Jun 2020 01:37:17 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '121'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "recipient_id": "recipient-id-sandbox-26ef348a-896f-4f31-b35d-a43ebb181dd9",
+          "request_id": "pf0Jqc6Flm3oJDO"
+        }
+    http_version: 
+  recorded_at: Thu, 11 Jun 2020 01:37:17 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/payment_initiation/recipient/get
+    body:
+      encoding: UTF-8
+      string: '{"recipient_id":"recipient-id-sandbox-26ef348a-896f-4f31-b35d-a43ebb181dd9","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v9.0.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 11 Jun 2020 01:37:18 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '251'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "address": {
+            "city": "City",
+            "country": "GB",
+            "postal_code": "99999",
+            "street": [
+              "Street Name 999"
+            ]
+          },
+          "bacs": {
+            "account": "5555555",
+            "sort_code": "020155"
+          },
+          "iban": "GB33BUKB20201555555555",
+          "name": "John Doe",
+          "recipient_id": "recipient-id-sandbox-26ef348a-896f-4f31-b35d-a43ebb181dd9",
+          "request_id": "OMRNsrET81faTMx"
+        }
+    http_version: 
+  recorded_at: Thu, 11 Jun 2020 01:37:18 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/payment_initiation/recipient/list
+    body:
+      encoding: UTF-8
+      string: '{"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v9.0.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 11 Jun 2020 01:37:18 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '604'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJyZWNpcGllbnRzIjogWwogICAgewogICAgICAiYWRkcmVzcyI6IHsKICAgICAgICAiY2l0eSI6ICJOYWNrYSIsCiAgICAgICAgImNvdW50cnkiOiAiU0UiLAogICAgICAgICJwb3N0YWxfY29kZSI6ICIxMzE0OCIsCiAgICAgICAgInN0cmVldCI6IFsKICAgICAgICAgICJEaWxpZ2Vuc3bDpGdlbiA5NiIKICAgICAgICBdCiAgICAgIH0sCiAgICAgICJiYWNzIjogbnVsbCwKICAgICAgImliYW4iOiAiU0U4MjMwMDAwMDAwMDA5MTExMDE1MzEwIiwKICAgICAgIm5hbWUiOiAiTWF0dGlzIEthbmNhbnMgRW52YWxsIiwKICAgICAgInJlY2lwaWVudF9pZCI6ICJyZWNpcGllbnQtaWQtc2FuZGJveC05YjZiNDY3OS05MTRiLTQ0NWItOTQ1MC1lZmJkYjgwMjk2ZjYiCiAgICB9LAogICAgewogICAgICAiYWRkcmVzcyI6IHsKICAgICAgICAiY2l0eSI6ICJMb25kb24iLAogICAgICAgICJjb3VudHJ5IjogIkdCIiwKICAgICAgICAicG9zdGFsX2NvZGUiOiAiTjE0IDZCUCIsCiAgICAgICAgInN0cmVldCI6IFsKICAgICAgICAgICIxMDAgSGlnaCBTdHJlZXQiCiAgICAgICAgXQogICAgICB9LAogICAgICAiYmFjcyI6IG51bGwsCiAgICAgICJpYmFuIjogIkdCMzNCVUtCMjAyMDE1NTU1NTU1NTUiLAogICAgICAibmFtZSI6ICJBbWJyb29zIGRlIFZyaWVzIiwKICAgICAgInJlY2lwaWVudF9pZCI6ICJyZWNpcGllbnQtaWQtc2FuZGJveC03MzZkOWRhOC02MjFmLTQ5YzUtOGY2My1iYTBlMmUzM2YyM2QiCiAgICB9LAogICAgewogICAgICAiYWRkcmVzcyI6IG51bGwsCiAgICAgICJiYWNzIjogbnVsbCwKICAgICAgImliYW4iOiAiTkw5MUFCTkEwNDE3MTY0MzAwIiwKICAgICAgIm5hbWUiOiAiQW1icm9vcyBkZSBWcmllcywgSnIuIiwKICAgICAgInJlY2lwaWVudF9pZCI6ICJyZWNpcGllbnQtaWQtc2FuZGJveC1iYzQ1MmUxZC1mNzM4LTQxY2YtOGMxNC1jZDE2ZDhmNmU4YTEiCiAgICB9LAogICAgewogICAgICAiYWRkcmVzcyI6IHsKICAgICAgICAiY2l0eSI6ICJiYXIiLAogICAgICAgICJjb3VudHJ5IjogIlVTIiwKICAgICAgICAicG9zdGFsX2NvZGUiOiAiMTMzNyIsCiAgICAgICAgInN0cmVldCI6IFsKICAgICAgICAgICJGb28iCiAgICAgICAgXQogICAgICB9LAogICAgICAiYmFjcyI6IG51bGwsCiAgICAgICJpYmFuIjogIk5MOTFBQk5BMDQxNzE2NDMwMCIsCiAgICAgICJuYW1lIjogIkFtYnJvb3MgZGUgVnJpZXMsIEpyLiIsCiAgICAgICJyZWNpcGllbnRfaWQiOiAicmVjaXBpZW50LWlkLXNhbmRib3gtM2FmZWU4MTctMTcwYi00Mjg2LWEyODUtOTQxODhiNGJmZTk4IgogICAgfSwKICAgIHsKICAgICAgImFkZHJlc3MiOiBudWxsLAogICAgICAiYmFjcyI6IG51bGwsCiAgICAgICJpYmFuIjogIk5MOTFBQk5BMDQxNzE2NDMwMCIsCiAgICAgICJuYW1lIjogIkFtYnJvb3MgZGUgVnJpZXMgSUlJIiwKICAgICAgInJlY2lwaWVudF9pZCI6ICJyZWNpcGllbnQtaWQtc2FuZGJveC1lOTFiMzQ3OC1hMzc0LTRhZDEtYWIwNy0xMzJlYTRiNTlkZTgiCiAgICB9LAogICAgewogICAgICAiYWRkcmVzcyI6IHsKICAgICAgICAiY2l0eSI6ICJDaXR5IiwKICAgICAgICAiY291bnRyeSI6ICJHQiIsCiAgICAgICAgInBvc3RhbF9jb2RlIjogIjk5OTk5IiwKICAgICAgICAic3RyZWV0IjogWwogICAgICAgICAgIlN0cmVldCBOYW1lIDk5OSIKICAgICAgICBdCiAgICAgIH0sCiAgICAgICJiYWNzIjogewogICAgICAgICJhY2NvdW50IjogIjU1NTU1NTUiLAogICAgICAgICJzb3J0X2NvZGUiOiAiMDIwMTU1IgogICAgICB9LAogICAgICAiaWJhbiI6ICJHQjMzQlVLQjIwMjAxNTU1NTU1NTU1IiwKICAgICAgIm5hbWUiOiAiSm9obiBEb2UiLAogICAgICAicmVjaXBpZW50X2lkIjogInJlY2lwaWVudC1pZC1zYW5kYm94LTI2ZWYzNDhhLTg5NmYtNGYzMS1iMzVkLWE0M2ViYjE4MWRkOSIKICAgIH0KICBdLAogICJyZXF1ZXN0X2lkIjogIjMxa2dSeEpOck9Genp6ViIKfQ==
+    http_version: 
+  recorded_at: Thu, 11 Jun 2020 01:37:18 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/payment_initiation/payment/create
+    body:
+      encoding: UTF-8
+      string: '{"recipient_id":"recipient-id-sandbox-26ef348a-896f-4f31-b35d-a43ebb181dd9","reference":"test_payment","amount":{"currency":"GBP","value":100.0},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v9.0.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 11 Jun 2020 01:37:19 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '158'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "payment_id": "payment-id-sandbox-80f01a64-b4a3-46a9-8fae-cf95f5b2b8c7",
+          "request_id": "B95gy7XoYnWKmcS",
+          "status": "PAYMENT_STATUS_INPUT_NEEDED"
+        }
+    http_version: 
+  recorded_at: Thu, 11 Jun 2020 01:37:19 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/payment_initiation/payment/token/create
+    body:
+      encoding: UTF-8
+      string: '{"payment_id":"payment-id-sandbox-80f01a64-b4a3-46a9-8fae-cf95f5b2b8c7","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v9.0.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 11 Jun 2020 01:37:19 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '165'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "payment_token": "payment-token-sandbox-4af06995-a228-4492-9075-7ec72f72c817",
+          "payment_token_expiration_time": "2020-06-11T01:52:19Z",
+          "request_id": "tZggdhJKyBNoSf2"
+        }
+    http_version: 
+  recorded_at: Thu, 11 Jun 2020 01:37:19 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/payment_initiation/payment/get
+    body:
+      encoding: UTF-8
+      string: '{"payment_id":"payment-id-sandbox-80f01a64-b4a3-46a9-8fae-cf95f5b2b8c7","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v9.0.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 11 Jun 2020 01:37:20 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '334'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "amount": {
+            "currency": "GBP",
+            "value": 100
+          },
+          "last_status_update": "2020-06-11T01:37:19Z",
+          "payment_id": "payment-id-sandbox-80f01a64-b4a3-46a9-8fae-cf95f5b2b8c7",
+          "payment_token": "payment-token-sandbox-4af06995-a228-4492-9075-7ec72f72c817",
+          "payment_token_expiration_time": "2020-06-11T01:52:19Z",
+          "recipient_id": "recipient-id-sandbox-26ef348a-896f-4f31-b35d-a43ebb181dd9",
+          "reference": "test_payment",
+          "request_id": "U1Es9Q6WizC55S7",
+          "status": "PAYMENT_STATUS_INPUT_NEEDED"
+        }
+    http_version: 
+  recorded_at: Thu, 11 Jun 2020 01:37:20 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/payment_initiation/payment/list
+    body:
+      encoding: UTF-8
+      string: '{"count":10,"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v9.0.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 11 Jun 2020 01:37:20 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '974'
+      connection:
+      - close
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "next_cursor": "2020-06-11T01:02:50Z",
+          "payments": [
+            {
+              "amount": {
+                "currency": "GBP",
+                "value": 100
+              },
+              "last_status_update": "2020-06-11T01:37:19Z",
+              "payment_id": "payment-id-sandbox-80f01a64-b4a3-46a9-8fae-cf95f5b2b8c7",
+              "payment_token": "payment-token-sandbox-4af06995-a228-4492-9075-7ec72f72c817",
+              "payment_token_expiration_time": "2020-06-11T01:52:19Z",
+              "recipient_id": "recipient-id-sandbox-26ef348a-896f-4f31-b35d-a43ebb181dd9",
+              "reference": "test_payment",
+              "status": "PAYMENT_STATUS_INPUT_NEEDED"
+            },
+            {
+              "amount": {
+                "currency": "EUR",
+                "value": 10.32
+              },
+              "last_status_update": "2020-06-11T01:03:06Z",
+              "payment_id": "payment-id-sandbox-58db4686-d9d9-439a-96c9-a1df4268db05",
+              "payment_token": "payment-token-sandbox-7ca7a7d4-b233-41fe-a6d5-27d0218b20b5",
+              "payment_token_expiration_time": "2020-06-11T01:18:06Z",
+              "recipient_id": "recipient-id-sandbox-736d9da8-621f-49c5-8f63-ba0e2e33f23d",
+              "reference": "End2End Tests - TXID 123456",
+              "status": "PAYMENT_STATUS_INPUT_NEEDED"
+            },
+            {
+              "amount": {
+                "currency": "EUR",
+                "value": 10.32
+              },
+              "last_status_update": "2020-06-11T01:03:04Z",
+              "payment_id": "payment-id-sandbox-81b69982-930f-4ebd-9305-6d76b47cd1e8",
+              "payment_token": "payment-token-sandbox-3b88937e-f5f0-4436-8218-2c4b0395cb94",
+              "payment_token_expiration_time": "2020-06-11T01:18:04Z",
+              "recipient_id": "recipient-id-sandbox-736d9da8-621f-49c5-8f63-ba0e2e33f23d",
+              "reference": "End2End Tests - TXID 123456",
+              "status": "PAYMENT_STATUS_INPUT_NEEDED"
+            },
+            {
+              "amount": {
+                "currency": "EUR",
+                "value": 10.32
+              },
+              "last_status_update": "2020-06-11T01:03:02Z",
+              "payment_id": "payment-id-sandbox-2289a67c-41f5-4f29-935e-67b0585e001c",
+              "payment_token": "payment-token-sandbox-4edefb7a-0702-4ca4-b1a2-a6e88e44e79c",
+              "payment_token_expiration_time": "2020-06-11T01:18:02Z",
+              "recipient_id": "recipient-id-sandbox-736d9da8-621f-49c5-8f63-ba0e2e33f23d",
+              "reference": "End2End Tests - TXID 123456",
+              "status": "PAYMENT_STATUS_INPUT_NEEDED"
+            },
+            {
+              "amount": {
+                "currency": "EUR",
+                "value": 10.32
+              },
+              "last_status_update": "2020-06-11T01:03:00Z",
+              "payment_id": "payment-id-sandbox-1b236b10-7b6a-4651-9d10-ef58b2317f42",
+              "payment_token": "payment-token-sandbox-97caeb8a-82b2-4a2f-bc9a-473f0a4dbf68",
+              "payment_token_expiration_time": "2020-06-11T01:18:00Z",
+              "recipient_id": "recipient-id-sandbox-736d9da8-621f-49c5-8f63-ba0e2e33f23d",
+              "reference": "End2End Tests - TXID 123456",
+              "status": "PAYMENT_STATUS_INPUT_NEEDED"
+            },
+            {
+              "amount": {
+                "currency": "EUR",
+                "value": 10.32
+              },
+              "last_status_update": "2020-06-11T01:02:58Z",
+              "payment_id": "payment-id-sandbox-06690c25-c738-4c6f-b681-8a5e87590c65",
+              "payment_token": "payment-token-sandbox-202f8030-c913-4bb1-b0a6-d8c4b7084ccf",
+              "payment_token_expiration_time": "2020-06-11T01:17:58Z",
+              "recipient_id": "recipient-id-sandbox-736d9da8-621f-49c5-8f63-ba0e2e33f23d",
+              "reference": "End2End Tests - TXID 123456",
+              "status": "PAYMENT_STATUS_INPUT_NEEDED"
+            },
+            {
+              "amount": {
+                "currency": "EUR",
+                "value": 10.32
+              },
+              "last_status_update": "2020-06-11T01:02:56Z",
+              "payment_id": "payment-id-sandbox-94afb6db-ae42-49f1-9afb-f1ae9fce2bba",
+              "payment_token": "payment-token-sandbox-cdc2d425-08cb-4339-bcbc-2730b68af83e",
+              "payment_token_expiration_time": "2020-06-11T01:17:56Z",
+              "recipient_id": "recipient-id-sandbox-736d9da8-621f-49c5-8f63-ba0e2e33f23d",
+              "reference": "End2End Tests - TXID 123456",
+              "status": "PAYMENT_STATUS_INPUT_NEEDED"
+            },
+            {
+              "amount": {
+                "currency": "EUR",
+                "value": 10.32
+              },
+              "last_status_update": "2020-06-11T01:02:54Z",
+              "payment_id": "payment-id-sandbox-d3dcca7a-7cdf-4c2f-969c-1d53cc0a780b",
+              "payment_token": "payment-token-sandbox-919c89bc-026f-45f6-88ef-ff51122c8304",
+              "payment_token_expiration_time": "2020-06-11T01:17:54Z",
+              "recipient_id": "recipient-id-sandbox-736d9da8-621f-49c5-8f63-ba0e2e33f23d",
+              "reference": "End2End Tests - TXID 123456",
+              "status": "PAYMENT_STATUS_INPUT_NEEDED"
+            },
+            {
+              "amount": {
+                "currency": "EUR",
+                "value": 10.32
+              },
+              "last_status_update": "2020-06-11T01:02:52Z",
+              "payment_id": "payment-id-sandbox-9bf8de98-c01b-4943-9ce5-72886436b161",
+              "payment_token": "payment-token-sandbox-97f8041f-c95a-4e3a-b9ee-719f0ddba0be",
+              "payment_token_expiration_time": "2020-06-11T01:17:52Z",
+              "recipient_id": "recipient-id-sandbox-736d9da8-621f-49c5-8f63-ba0e2e33f23d",
+              "reference": "End2End Tests - TXID 123456",
+              "status": "PAYMENT_STATUS_INPUT_NEEDED"
+            },
+            {
+              "amount": {
+                "currency": "EUR",
+                "value": 10.32
+              },
+              "last_status_update": "2020-06-11T01:02:50Z",
+              "payment_id": "payment-id-sandbox-89bfca62-0e7d-4d26-a0c2-dba6f057c122",
+              "payment_token": "payment-token-sandbox-daf5c843-d960-4069-9e67-b6e31c02ed65",
+              "payment_token_expiration_time": "2020-06-11T01:17:50Z",
+              "recipient_id": "recipient-id-sandbox-736d9da8-621f-49c5-8f63-ba0e2e33f23d",
+              "reference": "End2End Tests - TXID 123456",
+              "status": "PAYMENT_STATUS_INPUT_NEEDED"
+            }
+          ],
+          "request_id": "Qtv4gwTm2KMa3P5"
+        }
+    http_version: 
+  recorded_at: Thu, 11 Jun 2020 01:37:20 GMT
 recorded_with: VCR 4.0.0
