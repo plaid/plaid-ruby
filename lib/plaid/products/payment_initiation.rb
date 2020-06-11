@@ -6,13 +6,15 @@ module Plaid
     # name    - Recipient name.
     # iban    - Recipient IBAN.
     # address - Recipient address.
+    # bacs    - Recipient BACS (hash with "account" and "sort_code" keys)
     #
     # Returns a PaymentRecipientCreateResponse object.
-    def create_recipient(name, iban, address)
+    def create_recipient(name, iban, address, bacs)
       post_with_auth 'payment_initiation/recipient/create',
                      PaymentRecipientCreateResponse,
                      name: name,
                      iban: iban,
+                     bacs: bacs,
                      address: address
     end
 
@@ -111,6 +113,11 @@ module Plaid
     # :attr_reader:
     # Public: The recipient IBAN.
     property :iban
+
+    ##
+    # :attr_reader:
+    # Public: The recipient IBAN.
+    property :bacs, coerce: Models::PaymentRecipientBACS
 
     ##
     # :attr_reader:

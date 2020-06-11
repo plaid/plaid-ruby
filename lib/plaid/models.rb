@@ -1858,6 +1858,19 @@ module Plaid
       property :country
     end
 
+     # Public: A representation of a payment recipient BACS number.
+    class PaymentRecipientBACS < BaseModel
+      ##
+      # :attr_reader:
+      # Public: Account number.
+      property :account
+
+      ##
+      # :attr_reader:
+      # Public: Sort Code.
+      property :sort_code
+    end
+
     # Public: A representation of a payment recipient.
     class PaymentRecipient < BaseModel
       ##
@@ -1874,6 +1887,11 @@ module Plaid
       # :attr_reader:
       # Public: The recipient IBAN.
       property :iban
+
+      ##
+      # :attr_reader:
+      # Public: The recipient BACS number .
+      property :bacs, coerce: PaymentRecipientBACS
 
       ##
       # :attr_reader:
