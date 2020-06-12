@@ -94,8 +94,12 @@ module Plaid
       txn_options = transaction_options transactions_start_date,
                                         transactions_end_date
       options_payload[:transactions] = txn_options if txn_options != {}
-      options_payload[:override_username] = override_username unless override_username.nil?
-      options_payload[:override_password] = override_password unless override_password.nil?
+      unless override_username.nil?
+        options_payload[:override_username] = override_username
+      end
+      unless override_password.nil?
+        options_payload[:override_password] = override_password
+      end
       options_payload = options_payload.merge(options) unless options.nil?
 
       post_with_public_key 'sandbox/public_token/create',
