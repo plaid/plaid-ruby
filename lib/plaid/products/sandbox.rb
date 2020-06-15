@@ -72,10 +72,12 @@ module Plaid
     # to generate a public_token given an institution and list of
     # products.
     #
-    # institution_id   - Specific institution id to generate token for.
-    # initial_products - Products for which generated token is valid for.
-    # webhook          - webhook to associate with the item (optional).
-    # options          - Additional options to merge into API request.
+    # institution_id    - Specific institution id to generate token for.
+    # initial_products  - Products for which generated token is valid for.
+    # webhook           - webhook to associate with the item (optional).
+    # override_username - Specific test credential username to use
+    # override_password - Specific test credential password to use
+    # options           - Additional options to merge into API request.
     #
     # Returns a SandboxCreateResponse object with a public token and item id.
     def create(institution_id:,
@@ -83,6 +85,8 @@ module Plaid
                transactions_start_date: nil,
                transactions_end_date: nil,
                webhook: nil,
+               override_username: nil,
+               override_password: nil,
                options: nil)
 
       options_payload = {}
@@ -90,6 +94,12 @@ module Plaid
       txn_options = transaction_options transactions_start_date,
                                         transactions_end_date
       options_payload[:transactions] = txn_options if txn_options != {}
+      unless override_username.nil?
+        options_payload[:override_username] = override_username
+      end
+      unless override_password.nil?
+        options_payload[:override_password] = override_password
+      end
       options_payload = options_payload.merge(options) unless options.nil?
 
       post_with_public_key 'sandbox/public_token/create',
