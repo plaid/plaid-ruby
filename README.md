@@ -26,7 +26,7 @@ Each major version of `plaid-ruby` targets a specific version of the Plaid API:
 
 | API version | plaid-ruby release |
 | ----------- | ------------------ |
-| [`2019-05-29`][api-version-2019-05-29] (**latest**) | `8.x.x`, `7.x.x` |
+| [`2019-05-29`][api-version-2019-05-29] (**latest**) | `9.x.x`, `8.x.x`, `7.x.x` |
 | [`2018-05-22`][api-version-2018-05-22] | `6.x.x` |
 | `2017-03-08` | `5.x.x` |
 
@@ -207,6 +207,8 @@ Any methods making API calls will result in an exception raised unless the respo
 `Plaid::APIError` is returned during planned maintenance windows and in response to API internal server errors.
 
 `Plaid::ItemError` indicates that information provided for the Item (such as credentials or MFA) may be invalid or that the Item is not supported on Plaid's platform.
+
+`Plaid::InstitutionError` is returned when there are errors for the requested financial institution.
 
 Read more about response codes and their meaning in the
 [Plaid documentation](https://plaid.com/docs/api).

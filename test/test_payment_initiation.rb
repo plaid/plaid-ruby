@@ -9,10 +9,14 @@ class PlaidPaymentInitiationTest < PlaidTest
     create_recipient_response = client.payment_initiation.create_recipient(
       'John Doe',
       'GB33BUKB20201555555555',
-      street:      ['Street Name 999'],
-      city:        'City',
-      postal_code: '99999',
-      country:     'GB'
+      {
+        street:      ['Street Name 999'],
+        city:        'City',
+        postal_code: '99999',
+        country:     'GB'
+      },
+      account: '5555555',
+      sort_code: '020155'
     )
     recipient_id = create_recipient_response.recipient_id
     refute_empty(recipient_id)
@@ -24,6 +28,7 @@ class PlaidPaymentInitiationTest < PlaidTest
     refute_empty(get_recipient_response.recipient_id)
     refute_empty(get_recipient_response.name)
     refute_empty(get_recipient_response.iban)
+    refute_empty(get_recipient_response.bacs)
     refute_empty(get_recipient_response.address)
 
     # list recipients

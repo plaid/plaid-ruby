@@ -116,7 +116,22 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
   end
 
   def test_add_token_create
-    add_token_response = client.item.add_token.create
+    add_token_response = client.item.add_token.create(
+      client_user_id: '123-fake-user-id'
+    )
+    refute_empty(add_token_response.add_token)
+    refute_empty(add_token_response.expiration)
+  end
+
+  def test_add_token_create_with_user_fields
+    add_token_response = client.item.add_token.create(
+      client_user_id: '123-fake-user-id',
+      legal_name: 'John Doe',
+      phone_number: '+1 415 555 0123',
+      phone_number_verified_time: '2020-01-01T00:00:00Z',
+      email_address: 'example@plaid.com',
+      email_address_verified_time: '2020-01-01T00:00:00Z'
+    )
     refute_empty(add_token_response.add_token)
     refute_empty(add_token_response.expiration)
   end
@@ -164,12 +179,6 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
   def test_access_token_invalidate_invalid_access_token
     assert_raises(Plaid::InvalidInputError) do
       client.item.access_token.invalidate(BAD_STRING)
-    end
-  end
-
-  def test_access_token_update_version_invalid_access_token
-    assert_raises(Plaid::InvalidRequestError) do
-      client.item.access_token.update_version(BAD_STRING)
     end
   end
 

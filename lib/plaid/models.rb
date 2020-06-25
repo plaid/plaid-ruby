@@ -1842,6 +1842,84 @@ module Plaid
       property :ytd_principal_paid
     end
 
+    # Public: A representation of a credit card liability APR
+    class CreditCardLiabilityAPRs < BaseModel
+      ##
+      # :attr_reader:
+      # Public: Annual Percentage Rate applied.
+      property :apr_percentage
+
+      ##
+      # :attr_reader:
+      # Public: Enumerated response from the following options:
+      # "balance_transfer_apr", "cash_apr", "purchase_apr", or
+      # "special".
+      property :apr_type
+
+      ##
+      # :attr_reader:
+      # Public: Amount of money that is subjected to the APR if a
+      # balance was carried beyond payment due date. How it is
+      # calculated can vary by card issuer. It is often calculated as
+      # an average daily balance.
+      property :balance_subject_to_apr
+
+      ##
+      # :attr_reader:
+      # Public: Amount of money charged due to interest from last
+      # statement.
+      property :interest_charge_amount
+    end
+
+    # Public: A representation of a credit card liability
+    class CreditCardLiability < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The ID of the account that this liability belongs to.
+      property :account_id
+
+      ##
+      # :attr_reader:
+      # Public: See the APR object schema
+      property :aprs, coerce: Array[CreditCardLiabilityAPRs]
+
+      ##
+      # :attr_reader:
+      # Public: true if a payment is currently overdue.
+      property :is_overdue
+
+      ##
+      # :attr_reader:
+      # Public: The amount of the last payment.
+      property :last_payment_amount
+
+      ##
+      # :attr_reader:
+      # Public: The date of the last payment.
+      property :last_payment_date
+
+      ##
+      # :attr_reader:
+      # Public: The outstanding balance on the last statement.
+      property :last_statement_balance
+
+      ##
+      # :attr_reader:
+      # Public: The date of the last statement.
+      property :last_statement_issue_date
+
+      ##
+      # :attr_reader:
+      # Public: The minimum payment due for the next billing cycle.
+      property :minimum_payment_amount
+
+      ##
+      # :attr_reader:
+      # Public: The due date for the next payment. The due date is null
+      # if a payment is not expected.
+      property :next_payment_due_date
+    end
+
     # Public: A representation of someone's liabilities of all types.
     class Liabilities < BaseModel
       include Hashie::Extensions::IgnoreUndeclared
@@ -1850,6 +1928,11 @@ module Plaid
       # :attr_reader:
       # Public: Student loan liabilities associated with the item.
       property :student, coerce: Array[StudentLoanLiability]
+
+      ##
+      # :attr_reader:
+      # Public: Credit card liabilities associated with the item.
+      property :credit, coerce: Array[CreditCardLiability]
     end
 
     # Public: A representation of a payment amount.
@@ -1888,6 +1971,19 @@ module Plaid
       property :country
     end
 
+    # Public: A representation of a payment recipient BACS number.
+    class PaymentRecipientBACS < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The String account number. E.g. "66374958".
+      property :account
+
+      ##
+      # :attr_reader:
+      # Public: The String sort code. E.g. "089999".
+      property :sort_code
+    end
+
     # Public: A representation of a payment recipient.
     class PaymentRecipient < BaseModel
       ##
@@ -1904,6 +2000,11 @@ module Plaid
       # :attr_reader:
       # Public: The recipient IBAN.
       property :iban
+
+      ##
+      # :attr_reader:
+      # Public: The recipient BACS number .
+      property :bacs, coerce: PaymentRecipientBACS
 
       ##
       # :attr_reader:
