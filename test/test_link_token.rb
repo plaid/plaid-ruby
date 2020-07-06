@@ -1,12 +1,10 @@
 require_relative 'test_helper'
 
 # Internal: The test for Plaid::Item.
-class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
+class PlaidLinkTokenTest < PlaidTest # rubocop:disable Metrics/ClassLength
   def test_link_token_create_required
     link_token_response = client.link_token.create(
-      user: {
-        client_user_id: '123-fake-user-id',
-      },
+      user: { client_user_id: '123-fake-user-id' },
       client_name: 'Plaid Test',
       products: ["auth", "transactions"],
     )
