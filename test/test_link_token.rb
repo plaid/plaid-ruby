@@ -6,13 +6,13 @@ class PlaidLinkTokenTest < PlaidTest
     link_token_response = client.link_token.create(
       user: { client_user_id: '123-fake-user-id' },
       client_name: 'Plaid Test',
-      products: %w(auth transactions)
+      products: %w[auth transactions]
     )
     refute_empty(link_token_response.token)
     refute_empty(link_token_response.expiration)
   end
 
-  def test_create_optional
+  def test_create_optional # rubocop:disable Metrics/MethodLength
     link_token_response = client.link_token.create(
       user: {
         client_user_id: '123-fake-user-id',
@@ -23,14 +23,14 @@ class PlaidLinkTokenTest < PlaidTest
         email_address_verified_time: '2020-01-01T00:00:00Z'
       },
       client_name: 'Plaid Test',
-      products: %w(auth transactions),
+      products: %w[auth transactions],
       country_codes: ['GB'],
       language: 'en',
       webhook: 'https://sample-webhook.com',
       link_customization_name: 'default',
       account_filters: {
         depository: {
-          account_subtypes: %w(checking savings)
+          account_subtypes: %w[checking savings]
         }
       }
     )
