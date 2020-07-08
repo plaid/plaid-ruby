@@ -15,7 +15,7 @@ module Plaid
                      link_customization_name: configs[:link_configuration_name],
                      redirect_uri: configs[:redirect_uri],
                      android_package_name: configs[:android_package_name],
-                     institution_id: configs[:inistitution_id],
+                     institution_id: configs[:institution_id],
                      account_filters: configs[:account_filters],
                      cross_app_item_add: configs[:cross_app_item_add],
                      payment_initiation: configs[:payment_initiation]
