@@ -1,0 +1,55 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/link/token/create
+    body:
+      encoding: UTF-8
+      string: '{"user":{"client_user_id":"123-fake-user-id","legal_name":"John Doe","phone_number":"+1
+        415 555 0123","phone_number_verified_time":"2020-01-01T00:00:00Z","email_address":"example@plaid.com","email_address_verified_time":"2020-01-01T00:00:00Z"},"client_name":"Plaid
+        Test","products":["auth","transactions"],"country_codes":["GB"],"language":"en","locale":null,"webhook":"https://sample-webhook.com","access_token":null,"link_customization_name":null,"redirect_uri":null,"android_package_name":null,"institution_id":null,"account_filters":{"depository":{"account_subtypes":["checking","savings"]}},"cross_app_item_add":null,"payment_initiation":null,"client_id":"58c07d9e4e95b83268321242","secret":"67ec85d024f3512101a1ba5a4ef00f"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v10.1.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Wed, 08 Jul 2020 02:22:36 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '150'
+      connection:
+      - keep-alive
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "expiration": "2020-07-09T02:22:36Z",
+          "request_id": "XYaE8qHOKb3Kvk2",
+          "token": "link-sandbox-bdd28c1d-3634-4db3-b53a-2d50a6c7c77e"
+        }
+    http_version: 
+  recorded_at: Wed, 08 Jul 2020 02:22:36 GMT
+recorded_with: VCR 4.0.0

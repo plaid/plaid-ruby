@@ -28,7 +28,6 @@ class PlaidLinkTokenTest < PlaidTest # rubocop:disable Metrics/ClassLength
       language: 'en',
       webhook: 'https://sample-webhook.com',
       link_customization_name: 'default',
-      redirect_uri: 'https://sample-redirect-uri.com',
       account_filters: {
         depository: {
           account_subtypes: ['checking', 'savings'],
