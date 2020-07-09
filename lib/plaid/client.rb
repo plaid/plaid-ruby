@@ -115,6 +115,11 @@ module Plaid
     # Public: The Plaid::Webhooks endpoint accessor.
     subproduct :webhooks
 
+    ##
+    ## :attr_reader:
+    ## Public: The Plaid::LinkToken endpoint accessor.
+    subproduct :link_token
+
     # Public: Make a post request
     #
     # path    - Path or URL to make the request to
