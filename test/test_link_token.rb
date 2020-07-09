@@ -8,7 +8,7 @@ class PlaidLinkTokenTest < PlaidTest
       client_name: 'Plaid Test',
       products: %w[auth transactions]
     )
-    refute_empty(link_token_response.token)
+    refute_empty(link_token_response.link_token)
     refute_empty(link_token_response.expiration)
   end
 
@@ -34,7 +34,7 @@ class PlaidLinkTokenTest < PlaidTest
         }
       }
     )
-    refute_empty(link_token_response.token)
+    refute_empty(link_token_response.link_token)
     refute_empty(link_token_response.expiration)
   end
 end

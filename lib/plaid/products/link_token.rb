@@ -1,17 +1,17 @@
-$link_token_field_names = [
-   :user,
-   :client_name,
-   :products,
-   :country_codes,
-   :language,
-   :webhook,
-   :access_token,
-   :link_customization_name,
-   :redirect_uri,
-   :android_package_name,
-   :account_filters,
-   :cross_app_item_add,
-   :payment_initiation
+LINK_TOKEN_FIELD_NAMES = %i[
+   user
+   client_name
+   products
+   country_codes
+   language
+   webhook
+   access_token
+   link_customization_name
+   redirect_uri
+   android_package_name
+   account_filters
+   cross_app_item_add
+   payment_initiation
 ]
 
 module Plaid
@@ -20,7 +20,7 @@ module Plaid
     def create(configs)
       body = {}
 
-      for field in $link_token_field_names do
+      LINK_TOKEN_FIELD_NAMES.each do |field|
         body[field] = configs[field]
       end
 
