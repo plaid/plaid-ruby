@@ -41,15 +41,14 @@ The RubyDoc for the gem is available [here](http://plaid.github.io/plaid-ruby/).
 
 ### Creating a Plaid client
 
-Create an instance of the client using the `client_id`, `secret`, and `public_key` from your Plaid dashboard along with your environment of choice:
+Create an instance of the client using the `client_id` and `secret` from your Plaid dashboard along with your environment of choice:
 
 ```ruby
 require 'plaid'
 
 client = Plaid::Client.new(env: :sandbox,
                            client_id: '***',
-                           secret: '***',
-                           public_key: '***')
+                           secret: '***')
 ```
 
 The `env` field is the environment which the client will be running in. Your choices for the `env` field include:
@@ -63,7 +62,7 @@ The `env` field is the environment which the client will be running in. Your cho
 The gem uses Faraday to wrap HTTPS connections, which allows you to tune certain params:
 
 ```ruby
-client = Plaid::Client.new(env: :sandbox, client_id: '***', secret: '***', public_key: '***') do |builder|
+client = Plaid::Client.new(env: :sandbox, client_id: '***', secret: '***') do |builder|
   Plaid::Client.build_default_connection(builder)
 
   # Increase network timeout
@@ -91,8 +90,7 @@ require 'plaid'
 
 client = Plaid::Client.new(env: :sandbox,
                            client_id: '***',
-                           secret: '***',
-                           public_key: '***')
+                           secret: '***')
 
 exchange_token_response = client.item.public_token.exchange('[Plaid Link public_token]')
 access_token = exchange_token_response.access_token
@@ -107,8 +105,7 @@ require 'plaid'
 
 client = Plaid::Client.new(env: :sandbox,
                            client_id: '***',
-                           secret: '***',
-                           public_key: '***')
+                           secret: '***')
 
 exchange_token_response = client.item.public_token.exchange('[Plaid Link public_token]')
 access_token = exchange_token_response.access_token
@@ -136,8 +133,7 @@ require 'plaid'
 
 client = Plaid::Client.new(env: :sandbox,
                            client_id: '***',
-                           secret: '***',
-                           public_key: '***')
+                           secret: '***')
 
 exchange_token_response = client.item.public_token.exchange('[Plaid Link public_token]')
 access_token = exchange_token_response.access_token
@@ -154,8 +150,7 @@ require 'plaid'
 
 client = Plaid::Client.new(env: :sandbox,
                            client_id: '***',
-                           secret: '***',
-                           public_key: '***')
+                           secret: '***')
 
 exchange_token_response = client.item.public_token.exchange('[Plaid Link public_token]')
 access_token = exchange_token_response.access_token

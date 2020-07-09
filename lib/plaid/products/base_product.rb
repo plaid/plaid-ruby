@@ -60,10 +60,5 @@ module Plaid
     def post_with_auth(path, response_class, payload)
       response_class.new(client.post_with_auth(path, payload))
     end
-
-    # Internal: Do a POST to API and capture it into a response object.
-    def post_with_public_key(path, response_class, payload)
-      response_class.new(client.post_with_public_key(path, payload))
-    end
   end
 end

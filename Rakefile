@@ -54,7 +54,7 @@ end
 
 desc 'Hide real credentials in VCR cassettes'
 task :vcr_hide_credentials do
-  all_creds = %w[PLAID_RUBY_CLIENT_ID PLAID_RUBY_SECRET PLAID_RUBY_PUBLIC_KEY]
+  all_creds = %w[PLAID_RUBY_CLIENT_ID PLAID_RUBY_SECRET]
 
   all_creds.each do |cred|
     raise "#{cred} is not set" unless ENV[cred]

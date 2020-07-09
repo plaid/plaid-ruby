@@ -35,9 +35,9 @@ module Plaid
         institution_id: institution_id
       }
       payload[:options] = options unless options.nil?
-      post_with_public_key 'institutions/get_by_id',
-                           SingleInstitutionResponse,
-                           payload
+      post_with_auth 'institutions/get_by_id',
+                     SingleInstitutionResponse,
+                     payload
     end
 
     # Public: Get information about all available institutions matching your
@@ -59,9 +59,9 @@ module Plaid
 
       payload[:options] = options unless options.nil?
 
-      post_with_public_key 'institutions/search',
-                           MultipleInstitutionsResponse,
-                           payload
+      post_with_auth 'institutions/search',
+                     MultipleInstitutionsResponse,
+                     payload
     end
   end
 
