@@ -1,3 +1,8 @@
+# 11.0.0
+
+- Add Merchant Name to Transaction  (#294)
+- Add link/token/create support  (#293)
+
 # 10.1.0
 
 - Add support for more options (`override_username`, `override_password`) in the `/sandbox/public_token/create` endpoint ([219](https://github.com/plaid/plaid-ruby/pull/219))
