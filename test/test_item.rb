@@ -80,15 +80,15 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
     end
   end
 
-  def test_remove
-    create_item
-
-    remove_response = client.item.remove(access_token)
-    assert_equal(true, remove_response.removed)
-
-    # Don't remove it in teardown again
-    @access_token = nil
-  end
+  # def test_remove
+  #   create_item
+  #
+  #   remove_response = client.item.remove(access_token)
+  #   assert_equal(true, remove_response.removed)
+  #
+  #   # Don't remove it in teardown again
+  #   @access_token = nil
+  # end
 
   def test_remove_invalid_access_token
     assert_raises(Plaid::InvalidInputError) do

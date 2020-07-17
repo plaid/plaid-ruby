@@ -73,9 +73,6 @@ class PlaidTest < MiniTest::Test
     refute_empty(@item)
   end
 
-  def teardown
-  end
-
   # This method is called around every test method.
   def around
     create_client
