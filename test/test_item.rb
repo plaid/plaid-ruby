@@ -5,7 +5,6 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
   def test_create
     create_item
     refute_empty(item.item)
-
     assert_equal(['transactions'], @item.item.billed_products)
     assert_equal(SANDBOX_INSTITUTION, @item.item.institution_id)
     refute_includes(item, 'mfa_type')
