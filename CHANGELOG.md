@@ -1,6 +1,10 @@
 # 11.0.0
 
-- Add Merchant Name to Transaction  (#294)
+- Add `merchant_name` to `Transaction`  (#294)
+
+BREAKING CHANGES:
+
+- Removes the public key as input to `Client`. The public key is no longer needed by the API. (#287)
 - Add link/token/create support  (#293)
 
 # 10.1.0
