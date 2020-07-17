@@ -8,14 +8,13 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 The gem test suite can be run in two modes. By default, it runs against the
 live sandbox environment, creating items on the fly and calling various API
-endpoints for them. For this to work you'll need real `client_id`, `secret`,
-and `public_key` from your Plaid dashboard. Create a file named `.env`
-based on `.env.sample` which is provided:
+endpoints for them. For this to work you'll need real `client_id` and `secret`
+from your Plaid dashboard. Create a file named `.env` based on `.env.sample`
+which is provided:
 
 ```text
 PLAID_RUBY_CLIENT_ID=the_real_client_id
 PLAID_RUBY_SECRET=the_real_secret
-PLAID_RUBY_PUBLIC_KEY=the_real_public_key
 ```
 This file will be loaded during the tests.
 

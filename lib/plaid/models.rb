@@ -1008,6 +1008,12 @@ module Plaid
 
       ##
       # :attr_reader:
+      # Public: The String merchant name (or nil).
+      # E.g. "Burger King".
+      property :merchant_name
+
+      ##
+      # :attr_reader:
       # Public: The String transaction name (or nil).
       # E.g. "CREDIT CARD 3333 PAYMENT *//".
       property :name

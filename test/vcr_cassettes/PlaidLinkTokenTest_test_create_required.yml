@@ -2,13 +2,14 @@
 http_interactions:
 - request:
     method: post
-    uri: https://sandbox.plaid.com/item/add_token/create
+    uri: https://sandbox.plaid.com/link/token/create
     body:
       encoding: UTF-8
-      string: '{"user":{"client_user_id":"123-fake-user-id"},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+      string: '{"user":{"client_user_id":"123-fake-user-id"},"client_name":"Plaid
+        Test","products":["auth","transactions"],"country_codes":null,"language":null,"locale":null,"webhook":null,"access_token":null,"link_customization_name":null,"redirect_uri":null,"android_package_name":null,"institution_id":null,"account_filters":null,"cross_app_item_add":null,"payment_initiation":null,"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
     headers:
       User-Agent:
-      - Plaid Ruby v8.7.0
+      - Plaid Ruby v10.1.0
       Content-Type:
       - application/json
       Plaid-Version:
@@ -21,61 +22,11 @@ http_interactions:
       server:
       - nginx
       date:
-      - Wed, 18 Mar 2020 04:52:51 GMT
+      - Wed, 08 Jul 2020 03:14:17 GMT
       content-type:
       - application/json; charset=utf-8
       content-length:
-      - '162'
-      connection:
-      - close
-      plaid-version:
-      - '2019-05-29'
-      vary:
-      - Accept-Encoding
-      strict-transport-security:
-      - max-age=31536000; includeSubDomains; preload
-      x-frame-options:
-      - DENY
-      x-content-type-options:
-      - nosniff
-      x-xss-protection:
-      - 1; mode=block
-    body:
-      encoding: ASCII-8BIT
-      string: |-
-        {
-          "add_token": "item-add-sandbox-ed01b40a-5572-46c6-8df8-3466d46d3b0a",
-          "expiration": "2020-03-19T04:52:51.808167609Z",
-          "request_id": "KNXc4GUtdi1dWPx"
-        }
-    http_version: 
-  recorded_at: Wed, 18 Mar 2020 04:52:51 GMT
-- request:
-    method: post
-    uri: https://sandbox.plaid.com/item/add_token/create
-    body:
-      encoding: UTF-8
-      string: '{"user":{"client_user_id":"123-fake-user-id"},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
-    headers:
-      User-Agent:
-      - Plaid Ruby v9.0.0
-      Content-Type:
-      - application/json
-      Plaid-Version:
-      - '2019-05-29'
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      server:
-      - nginx
-      date:
-      - Wed, 03 Jun 2020 23:38:38 GMT
-      content-type:
-      - application/json; charset=utf-8
-      content-length:
-      - '161'
+      - '152'
       connection:
       - keep-alive
       plaid-version:
@@ -94,10 +45,61 @@ http_interactions:
       encoding: ASCII-8BIT
       string: |-
         {
-          "add_token": "item-add-sandbox-4f5b4746-6918-4e34-811f-5eee218b94b1",
-          "expiration": "2020-06-04T23:38:38.158820031Z",
-          "request_id": "ouI5TYZp9oh3z3Z"
+          "expiration": "2020-07-09T03:14:18Z",
+          "request_id": "0Ab4GBlNaRXv9tG",
+          "token": "link-sandbox-1d9353d6-8ea5-41a7-b4a9-cf0926ea4bcd"
         }
     http_version: 
-  recorded_at: Wed, 03 Jun 2020 23:38:38 GMT
+  recorded_at: Wed, 08 Jul 2020 03:14:17 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/link/token/create
+    body:
+      encoding: UTF-8
+      string: '{"user":{"client_user_id":"123-fake-user-id"},"client_name":"Plaid
+        Test","products":["auth","transactions"],"country_codes":null,"language":null,"webhook":null,"access_token":null,"link_customization_name":null,"redirect_uri":null,"android_package_name":null,"account_filters":null,"cross_app_item_add":null,"payment_initiation":null,"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v10.1.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2019-05-29'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 09 Jul 2020 17:35:05 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '153'
+      connection:
+      - keep-alive
+      plaid-version:
+      - '2019-05-29'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "expiration": "2020-07-10T17:35:06Z",
+          "link_token": "link-sandbox-33d6abcf-5508-4208-8e38-583cf4bf9154",
+          "request_id": "zfim2zCmCpo2o8I"
+        }
+    http_version: 
+  recorded_at: Thu, 09 Jul 2020 17:35:05 GMT
 recorded_with: VCR 4.0.0

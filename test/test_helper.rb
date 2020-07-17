@@ -28,20 +28,17 @@ class PlaidTest < MiniTest::Test
   def create_client
     client_id = ENV['PLAID_RUBY_CLIENT_ID']
     secret = ENV['PLAID_RUBY_SECRET']
-    public_key = ENV['PLAID_RUBY_PUBLIC_KEY']
 
     if STUB_API && RECORD_MODE == :none
       # In non-recording mode we use stubs for auth
       # (see also task :vcr_hide_credentials in Rakefile)
       client_id = 'PLAID_RUBY_CLIENT_ID'
       secret = 'PLAID_RUBY_SECRET'
-      public_key = 'PLAID_RUBY_PUBLIC_KEY'
     end
 
     @client = Plaid::Client.new(env: :sandbox,
                                 client_id: client_id,
-                                secret: secret,
-                                public_key: public_key)
+                                secret: secret)
   end
 
   # Helper used to create a test item with given products
