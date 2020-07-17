@@ -73,9 +73,7 @@ class PlaidTest < MiniTest::Test
     refute_empty(@item)
   end
 
-  # If create_item was used, remove the item
   def teardown
-    client.item.remove(access_token) if access_token
   end
 
   # This method is called around every test method.
