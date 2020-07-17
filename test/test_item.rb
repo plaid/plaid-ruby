@@ -5,6 +5,7 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
   def test_create
     create_item
     refute_empty(item.item)
+
     assert_equal(['transactions'], @item.item.billed_products)
     assert_equal(SANDBOX_INSTITUTION, @item.item.institution_id)
     refute_includes(item, 'mfa_type')
@@ -80,15 +81,15 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
     end
   end
 
-  # def test_remove
-  #   create_item
-  #
-  #   remove_response = client.item.remove(access_token)
-  #   assert_equal(true, remove_response.removed)
-  #
-  #   # Don't remove it in teardown again
-  #   @access_token = nil
-  # end
+  def test_remove
+    create_item
+
+    remove_response = client.item.remove(access_token)
+    assert_equal(true, remove_response.removed)
+
+    # Don't remove it in teardown again
+    @access_token = nil
+  end
 
   def test_remove_invalid_access_token
     assert_raises(Plaid::InvalidInputError) do
