@@ -6,7 +6,9 @@ class PlaidLinkTokenTest < PlaidTest
     link_token_response = client.link_token.create(
       user: { client_user_id: '123-fake-user-id' },
       client_name: 'Plaid Test',
-      products: %w[auth transactions]
+      products: %w[auth transactions],
+      country_codes: ['GB'],
+      language: 'en'
     )
     refute_empty(link_token_response.link_token)
     refute_empty(link_token_response.expiration)
