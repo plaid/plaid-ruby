@@ -72,18 +72,7 @@ end
 
 ## Examples
 
-### Exchanging a Link public_token for a Plaid access_token
-
-If you have a [Link](https://github.com/plaid/link) `public token`, use this function to get an `access_token`: `client.item.public_token.exchange(public_token)`
-
-An example of the function's usage if you have a `public_token` in hand:
-
-```ruby
-response = client.item.public_token.exchange(public_token)
-access_token = response.access_token
-```
-
-### Create a new link token
+### Create a new link_token
 
 ```ruby
 # Grab the client_user_id by searching for the current user in your database
@@ -100,7 +89,19 @@ link_token_response = client.link_token.create(
 )
 
 # Pass the result to your client-side app to initialize Link
+#  and retrieve a public_token
 link_token = link_token_response.link_token
+```
+
+### Exchanging a Link public_token for a Plaid access_token
+
+If you have a [Link](https://github.com/plaid/link) `public token`, use this function to get an `access_token`: `client.item.public_token.exchange(public_token)`
+
+An example of the function's usage if you have a `public_token` in hand:
+
+```ruby
+response = client.item.public_token.exchange(public_token)
+access_token = response.access_token
 ```
 
 
