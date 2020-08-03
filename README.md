@@ -72,6 +72,27 @@ end
 
 ## Examples
 
+### Create a new link_token
+
+```ruby
+# Grab the client_user_id by searching for the current user in your database
+user = User.find_by!(email: '***')
+client_user_id = user.id
+
+# Create the link_token with all of your configurations
+link_token_response = client.link_token.create(
+  user: { client_user_id: client_user_id.to_s },
+  client_name: 'My app',
+  products: %w[auth transactions],
+  country_codes: ['US'],
+  language: 'en'
+)
+
+# Pass the result to your client-side app to initialize Link
+#  and retrieve a public_token
+link_token = link_token_response.link_token
+```
+
 ### Exchanging a Link public_token for a Plaid access_token
 
 If you have a [Link](https://github.com/plaid/link) `public token`, use this function to get an `access_token`: `client.item.public_token.exchange(public_token)`
@@ -82,6 +103,7 @@ An example of the function's usage if you have a `public_token` in hand:
 response = client.item.public_token.exchange(public_token)
 access_token = response.access_token
 ```
+
 
 ### Deleting an item
 
