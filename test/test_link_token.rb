@@ -39,4 +39,21 @@ class PlaidLinkTokenTest < PlaidTest
     refute_empty(link_token_response.link_token)
     refute_empty(link_token_response.expiration)
   end
+
+  def test_create_and_get
+    create_link_token_response = client.link_token.create(
+      user: { client_user_id: '123-fake-user-id' },
+      client_name: 'Plaid Test',
+      products: %w[auth transactions],
+      country_codes: ['GB'],
+      language: 'en'
+    )
+    refute_empty(create_link_token_response.link_token)
+    refute_empty(create_link_token_response.expiration)
+
+    get_link_token_response = client.link_token.get(create_link_token_response.link_token)
+    refute_empty(get_link_token_response.link_token)
+    refute_empty(get_link_token_response.expiration)
+    assert_equal('Plaid Test', get_link_token_response.metadata.client_name)
+  end
 end

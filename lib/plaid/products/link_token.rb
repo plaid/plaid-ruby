@@ -28,6 +28,12 @@ module Plaid
                      CreateResponse,
                      body
     end
+
+    def get(link_token)
+      post_with_auth 'link/token/get',
+                     GetResponse,
+                     { link_token: link_token }
+    end
   end
 
   # Public: Response for /link/token/create.
@@ -42,4 +48,28 @@ module Plaid
     # Public: The String token expiration time.
     property :expiration
   end
+
+  # Public: Response for /link/token/get.
+  class GetResponse < Models::BaseResponse
+    ##
+    # :attr_reader:
+    # Public: The String token.
+    property :link_token
+
+    ##
+    # :attr_reader:
+    # Public: The link token expiration time.
+    property :expiration
+
+    ##
+    # :attr_reader:
+    # Public: The link token created time.
+    property :created_at
+
+    ##
+    # :attr_reader:
+    # Public: The metadata associated with the link token.
+    property :metadata, coerce: Models::LinkTokenMetadata
+  end
+
 end

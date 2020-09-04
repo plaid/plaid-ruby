@@ -38,7 +38,7 @@ class PlaidPaymentInitiationTest < PlaidTest
     # create payment
     create_payment_response = client.payment_initiation.create_payment(
       recipient_id,
-      'test_payment',
+      'testpayment',
       currency: 'GBP',
       value:    100.00
     )
