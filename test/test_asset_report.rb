@@ -84,7 +84,7 @@ end
 
 def poll_for_asset_report(asset_report_token)
   response = nil
-  20.times do
+  50.times do
     begin
       response = @client.asset_report.get(asset_report_token)
       break
