@@ -12,8 +12,6 @@ class PlaidTransactionsTest < PlaidTest # rubocop:disable Metrics/ClassLength
                 transactions_start_date: '2017-01-01',
                 transactions_end_date: '2019-01-01'
   end
-
-  # rubocop:disable Metrics/AbcSize
   # rubocop:disable Metrics/MethodLength
   # rubocop:disable Metrics/LineLength
   # rubocop:disable Style/GuardClause
@@ -68,7 +66,6 @@ class PlaidTransactionsTest < PlaidTest # rubocop:disable Metrics/ClassLength
     end
   end
 
-  # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/LineLength
   # rubocop:enable Style/GuardClause

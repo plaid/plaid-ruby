@@ -2031,6 +2031,44 @@ module Plaid
       property :recipient_id
     end
 
+    # Public: Metadata associated with a link token.
+    class LinkTokenMetadata < BaseModel
+      ##
+      # :attr_reader:
+      # Public: List of products associated with the link token.
+      property :initial_products
+
+      ##
+      # :attr_reader:
+      # Public: The webhook associated with the link token.
+      property :webhook
+
+      ##
+      # :attr_reader:
+      # Public: The country codes associated with the link token.
+      property :country_codes
+
+      ##
+      # :attr_reader:
+      # Public: The language associated with the link token.
+      property :language
+
+      ##
+      # :attr_reader:
+      # Public: The account filters associated with the link token.
+      property :account_filters
+
+      ##
+      # :attr_reader:
+      # Public: The redirect URI associated with the link token.
+      property :redirect_uri
+
+      ##
+      # :attr_reader:
+      # Public: The client name associated with the link token.
+      property :client_name
+    end
+
     # Public: A representation of a payment amount.
     class WebhookVerificationKey < BaseModel
       ##
