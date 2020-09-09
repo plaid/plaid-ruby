@@ -2,8 +2,6 @@ require_relative 'test_helper'
 
 # Internal: The test for Plaid::Liabilities.
 class PlaidLiabilitiesTest < PlaidTest
-  # rubocop:disable Metrics/AbcSize
-
   def test_get
     create_item initial_products: [:liabilities], institution_id: 'ins_1'
 
@@ -20,8 +18,6 @@ class PlaidLiabilitiesTest < PlaidTest
     )
     assert_equal(1, response.liabilities.student.size)
   end
-
-  # rubocop:enable Metrics/AbcSize
 
   def test_get_invalid_access_token
     assert_raises(Plaid::InvalidInputError) do

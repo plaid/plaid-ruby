@@ -64,11 +64,19 @@ class PlaidLinkTokenTest < PlaidTest
     refute_empty(get_link_token_response.link_token)
     refute_empty(get_link_token_response.expiration)
     assert_equal('Plaid Test', get_link_token_response.metadata.client_name)
-    assert_equal(%w[auth transactions], get_link_token_response.metadata.initial_products)
+    assert_equal(%w[auth transactions],
+                 get_link_token_response.metadata.initial_products)
     assert_equal('en', get_link_token_response.metadata.language)
-    assert_equal('https://sample-webhook.com', get_link_token_response.metadata.webhook)
-    assert_equal(["depository"], get_link_token_response.metadata.account_filters.keys)
-    assert_equal(["account_subtypes"], get_link_token_response.metadata.account_filters['depository'].keys)
-    assert_equal(["checking", "savings"], get_link_token_response.metadata.account_filters['depository']['account_subtypes'])
+    assert_equal('https://sample-webhook.com',
+                 get_link_token_response.metadata.webhook)
+    assert_equal(['depository'],
+                 get_link_token_response.metadata.account_filters.keys)
+    assert_equal(['account_subtypes'],
+                 get_link_token_response.metadata
+.account_filters['depository'].keys)
+    assert_equal(%w[checking savings],
+                 get_link_token_response.metadata
+.account_filters['depository']['account_subtypes'])
   end
+  # rubocop:enable Metrics/MethodLength
 end

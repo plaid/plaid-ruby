@@ -2,7 +2,7 @@ require_relative 'test_helper'
 
 # Internal: The test for Plaid::AssetReport.
 class PlaidAssetReportTest < PlaidTest
-  def test_full_flow # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+  def test_full_flow # rubocop:disable Metrics/MethodLength
     # Create an item with the "assets" product.
     create_item initial_products: [:assets]
 

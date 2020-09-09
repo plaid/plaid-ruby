@@ -6,8 +6,6 @@ class PlaidAuthTest < PlaidTest
     create_item initial_products: [:auth]
   end
 
-  # rubocop:disable Metrics/AbcSize
-
   def test_get
     response = client.auth.get(access_token)
     refute_empty(response.accounts)
@@ -21,8 +19,6 @@ class PlaidAuthTest < PlaidTest
                                options: { account_ids: [account_id] })
     assert_equal 1, response.numbers.ach.size
   end
-
-  # rubocop:enable Metrics/AbcSize
 
   def test_get_invalid_access_token
     assert_raises(Plaid::InvalidInputError) do
