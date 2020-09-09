@@ -51,7 +51,8 @@ class PlaidLinkTokenTest < PlaidTest
     refute_empty(create_link_token_response.link_token)
     refute_empty(create_link_token_response.expiration)
 
-    get_link_token_response = client.link_token.get(create_link_token_response.link_token)
+    get_link_token_response = client.link_token
+                                    .get(create_link_token_response.link_token)
     refute_empty(get_link_token_response.link_token)
     refute_empty(get_link_token_response.expiration)
     assert_equal('Plaid Test', get_link_token_response.metadata.client_name)

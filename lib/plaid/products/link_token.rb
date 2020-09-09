@@ -32,7 +32,7 @@ module Plaid
     def get(link_token)
       post_with_auth 'link/token/get',
                      GetResponse,
-                     { link_token: link_token }
+                     link_token: link_token
     end
   end
 
@@ -71,5 +71,4 @@ module Plaid
     # Public: The metadata associated with the link token.
     property :metadata, coerce: Models::LinkTokenMetadata
   end
-
 end
