@@ -67,7 +67,8 @@ class PlaidLinkTokenTest < PlaidTest
     assert_equal(%w[auth transactions], get_link_token_response.metadata.initial_products)
     assert_equal('en', get_link_token_response.metadata.language)
     assert_equal('https://sample-webhook.com', get_link_token_response.metadata.webhook)
-    assert_equal({ depository: { account_subtypes: %w[checking savings] } },
-                 get_link_token_response.metadata.account_filters)
+    assert_equal(["depository"], get_link_token_response.metadata.account_filters.keys)
+    assert_equal(["account_subtypes"], get_link_token_response.metadata.account_filters['depository'].keys)
+    assert_equal(["checking", "savings"], get_link_token_response.metadata.account_filters['depository']['account_subtypes'])
   end
 end
