@@ -2,8 +2,6 @@ require_relative 'test_helper'
 
 # Internal: The test for Plaid::Identity.
 class PlaidIdentityTest < PlaidTest
-  # rubocop:disable Metrics/AbcSize
-
   def test_get
     create_item initial_products: [:identity]
 
@@ -20,8 +18,6 @@ class PlaidIdentityTest < PlaidTest
       end
     end
   end
-
-  # rubocop:enable Metrics/AbcSize
 
   def test_get_invalid_access_token
     assert_raises(Plaid::InvalidInputError) do

@@ -1,11 +1,16 @@
+# 11.1.0
+
+- Add support for Link Token get endpoint ([#301](https://github.com/plaid/plaid-ruby/pull/301))
+  - `link/token/get`
+
 # 11.0.0
 
-- Add `merchant_name` to `Transaction`  (#294)
+- Add `merchant_name` to `Transaction` (#294)
 
 BREAKING CHANGES:
 
 - Removes the public key as input to `Client`. The public key is no longer needed by the API. (#287)
-- Add link/token/create support  (#293)
+- Add link/token/create support (#293)
 
 # 10.1.0
 

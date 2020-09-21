@@ -10,7 +10,7 @@ class PlaidInvestmentsTest < PlaidTest # rubocop:disable Metrics/ClassLength
                 transactions_end_date: '2019-06-12'
   end
 
-  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+  # rubocop:disable Metrics/MethodLength
 
   def test_investment_transactions_get
     response = client.investments.transactions.get(access_token,
@@ -37,8 +37,7 @@ class PlaidInvestmentsTest < PlaidTest # rubocop:disable Metrics/ClassLength
     end
   end
 
-  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
-  # rubocop:disable Metrics/AbcSize
+  # rubocop:enable Metrics/MethodLength
 
   def test_investment_transactions_get_date_objects
     response = client.investments.transactions.get(access_token,
@@ -57,8 +56,6 @@ class PlaidInvestmentsTest < PlaidTest # rubocop:disable Metrics/ClassLength
                                                    account_ids: account_ids)
     refute_empty(response['investment_transactions'])
   end
-
-  # rubocop:enable Metrics/AbcSize
 
   def test_investment_transactions_get_invalid_access_token
     assert_raises(Plaid::InvalidInputError) do
@@ -102,8 +99,6 @@ class PlaidInvestmentsTest < PlaidTest # rubocop:disable Metrics/ClassLength
     end
   end
 
-  # rubocop:disable Metrics/AbcSize
-
   def test_holdings_get
     response = client.investments.holdings.get(access_token)
     refute_empty(response.accounts)
@@ -127,8 +122,6 @@ class PlaidInvestmentsTest < PlaidTest # rubocop:disable Metrics/ClassLength
       assert_equal account_id, holding.account_id
     end
   end
-
-  # rubocop:enable Metrics/AbcSize
 
   def test_holdings_get_invalid_access_token
     assert_raises(Plaid::InvalidInputError) do

@@ -6,8 +6,6 @@ class PlaidAccountsTest < PlaidTest
     create_item initial_products: [:transactions]
   end
 
-  # rubocop:disable Metrics/AbcSize
-
   def test_get
     response = client.accounts.get(access_token)
     refute_empty(response)
@@ -49,8 +47,6 @@ class PlaidAccountsTest < PlaidTest
     )
     assert_equal 1, response.accounts.size
   end
-
-  # rubocop:enable Metrics/AbcSize
 
   def test_balance_get_invalid_access_token
     assert_raises(Plaid::InvalidInputError) do

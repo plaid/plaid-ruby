@@ -1,7 +1,6 @@
 require_relative 'test_helper'
 
 class PlaidDepositSwitchTest < PlaidTest
-  # rubocop:disable Metrics/AbcSize
   # rubocop:disable Metrics/MethodLength
   def test_all_routes
     # import item
@@ -48,5 +47,4 @@ class PlaidDepositSwitchTest < PlaidTest
   end
 end
 
-# rubocop:enable Metrics/AbcSize
 # rubocop:enable Metrics/MethodLength
