@@ -52,7 +52,9 @@ class PlaidPaymentInitiationTest < PlaidTest
         products: %w[payment_initiation],
         country_codes: ['GB'],
         language: 'en',
-        payment_id: payment_id
+        payment_initiation: {
+          payment_id: payment_id,
+        },
       })
     refute_empty(create_link_token_response.link_token)
     refute_empty(create_link_token_response.expiration)

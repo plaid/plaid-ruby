@@ -91,6 +91,7 @@ module Plaid
     # :attr_reader:
     # Public: The Plaid::AccessToken product accessor.
     subproduct :access_token
+
     ##
     # :attr_reader:
     # Public: The Plaid::PublicToken product accessor.
@@ -143,6 +144,10 @@ module Plaid
 
     # Public: Response for /item/remove.
     class RemoveResponse < Models::BaseResponse
+      ##
+      # :attr_reader:
+      # Public: The Boolean flag meaning successful removal.
+      property :removed
     end
 
     # Public: Import an item.
