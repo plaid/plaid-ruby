@@ -49,7 +49,7 @@ class PlaidPaymentInitiationTest < PlaidTest
       client.link_token.create({
         user: { client_user_id: '123-fake-user-id' },
         client_name: 'Plaid Test',
-        products: %w[auth transactions],
+        products: %w[payment_initiation],
         country_codes: ['GB'],
         language: 'en',
         payment_id: payment_id
