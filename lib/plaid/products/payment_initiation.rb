@@ -53,17 +53,6 @@ module Plaid
                      amount: amount
     end
 
-    # Public: Create a payment token.
-    #
-    # payment_id - Payment ID that the token will be created for.
-    #
-    # Returns a PaymentTokenCreateResponse object.
-    def create_payment_token(payment_id)
-      post_with_auth 'payment_initiation/payment/token/create',
-                     PaymentTokenCreateResponse,
-                     payment_id: payment_id
-    end
-
     # Public: Retrieve a payment.
     #
     # payment_id - The payment ID from the `create_payment` response.
@@ -146,30 +135,12 @@ module Plaid
     property :status
   end
 
-  # Public: The response wrapper for /payment_initiation/payment/token/create.
-  class PaymentTokenCreateResponse < Models::BaseResponse
-    ##
-    # :attr_reader:
-    # Public: The payment token.
-    property :payment_token
-
-    ##
-    # :attr_reader:
-    # Public: The payment token's expiration time.
-    property :payment_token_expiration_time
-  end
-
   # Public: The response wrapper for /payment_initiation/payment/get.
   class PaymentGetResponse < Models::BaseResponse
     ##
     # :attr_reader:
     # Public: The payment ID.
     property :payment_id
-
-    ##
-    # :attr_reader:
-    # Public: The payment token.
-    property :payment_token
 
     ##
     # :attr_reader:
@@ -190,11 +161,6 @@ module Plaid
     # :attr_reader:
     # Public: The last status update time for payment.
     property :last_status_update
-
-    ##
-    # :attr_reader:
-    # Public: The payment token's expiration time.
-    property :payment_token_expiration_time
 
     ##
     # :attr_reader:
