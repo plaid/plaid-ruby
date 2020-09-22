@@ -85,7 +85,6 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
     create_item
 
     remove_response = client.item.remove(access_token)
-    assert_equal({}, remove_response)
 
     # Don't remove it in teardown again
     @access_token = nil
