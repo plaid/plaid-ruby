@@ -168,19 +168,18 @@ auth = auth_response.auth
 
 Exchange a Plaid Link `public_token` for an API `access_token` and a Stripe `bank_account_token`:
 ```ruby
-require 'plaid'
-
+# Change sandbox to development to test with live users and change
+# to production when you're ready to go live!
 client = Plaid::Client.new(env: :sandbox,
-                           client_id: '***',
-                           secret: '***')
+                           client_id: PLAID_CLIENT_ID,
+                           secret: PLAID_SECRET)
 
 exchange_token_response = client.item.public_token.exchange('[Plaid Link public_token]')
-access_token = exchange_token_response.access_token
+access_token = exchange_response['access_token']
 
-stripe_response = client.processor.stripe.bank_account_token.create(access_token, '[Account ID]')
-bank_account_token = stripe_response.stripe_bank_account_token
+stripe_response = client.processor.stripeBankAccountTokenCreate(access_token, '[Account ID'])
+bank_account_token = stripe_response['stripe_bank_account_token']
 ```
-
 There are also a number of other methods you can use to retrieve data:
 
 * `client.accounts.get(access_token, ...)`: accounts
