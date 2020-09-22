@@ -144,6 +144,11 @@ module Plaid
 
     ##
     # :attr_reader:
+    # Public: The payment token.
+    property :payment_token
+
+    ##
+    # :attr_reader:
     # Public: The payment reference.
     property :reference
 
@@ -161,6 +166,11 @@ module Plaid
     # :attr_reader:
     # Public: The last status update time for payment.
     property :last_status_update
+
+    ##
+    # :attr_reader:
+    # Public: The payment token's expiration time.
+    property :payment_token_expiration_time
 
     ##
     # :attr_reader:
