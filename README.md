@@ -26,7 +26,7 @@ Each major version of `plaid-ruby` targets a specific version of the Plaid API:
 
 | API version | plaid-ruby release |
 | ----------- | ------------------ |
-| [`2019-05-29`][api-version-2019-05-29] (**latest**) | `9.x.x`, `8.x.x`, `7.x.x` |
+| [`2019-05-29`][api-version-2019-05-29] (**latest**) | `11.x.x`, `10.x.x`, `9.x.x`, `8.x.x`, `7.x.x` |
 | [`2018-05-22`][api-version-2018-05-22] | `6.x.x` |
 | `2017-03-08` | `5.x.x` |
 
