@@ -14,8 +14,7 @@ module Plaid
     def get(count:, offset:, country_codes:, options: nil)
       payload = { count: count,
                   offset: offset,
-                  country_codes: country_codes
-                }
+                  country_codes: country_codes }
       payload[:options] = options unless options.nil?
 
       post_with_auth 'institutions/get',
@@ -54,7 +53,7 @@ module Plaid
     # options - Options for filtering institutions.
     #
     # Returns a MultipleInstitutionsResponse instance.
-    def search(query, products = nil, country_codes, options: nil)
+    def search(query, country_codes, products = nil, options: nil)
       payload = {
         query: query,
         products: products,

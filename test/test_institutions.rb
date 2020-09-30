@@ -57,8 +57,8 @@ class PlaidInstitutionsTest < PlaidTest
 
   def test_search_with_include_optional_metadata
     response = client.institutions.search SANDBOX_INSTITUTION_NAME,
-                                          [:transactions],
                                           ['US'],
+                                          [:transactions],
                                           options:
                                           { include_optional_metadata: true }
     refute_empty(response.institutions)
@@ -66,20 +66,24 @@ class PlaidInstitutionsTest < PlaidTest
 
   def test_search_with_products
     response = client.institutions.search SANDBOX_INSTITUTION_NAME,
-                                          [:transactions],
-                                          ['US']
+                                          ['US'],
+                                          [:transactions]
     refute_empty(response.institutions)
   end
 
   def test_search_invalid_products
     assert_raises(Plaid::InvalidInputError) do
-      client.institutions.search(SANDBOX_INSTITUTION_NAME, BAD_ARRAY, ['US'])
+      client.institutions.search(SANDBOX_INSTITUTION_NAME,
+                                ['US'],
+                                BAD_ARRAY)
     end
   end
 
   def test_search_bad_products
     assert_raises(Plaid::InvalidInputError) do
-      client.institutions.search(SANDBOX_INSTITUTION_NAME, BAD_STRING, ['US'])
+      client.institutions.search(SANDBOX_INSTITUTION_NAME,
+                                ['US'],
+                                BAD_STRING)
     end
   end
 end
