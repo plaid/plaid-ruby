@@ -181,4 +181,75 @@ http_interactions:
         }
     http_version: 
   recorded_at: Wed, 03 Jun 2020 23:39:25 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/institutions/get_by_id
+    body:
+      encoding: UTF-8
+      string: '{"institution_id":"ins_109508","country_codes":["US"],"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v11.1.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2020-09-14'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Wed, 30 Sep 2020 23:29:38 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '274'
+      connection:
+      - keep-alive
+      plaid-version:
+      - '2020-09-14'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "institution": {
+            "country_codes": [
+              "US"
+            ],
+            "institution_id": "ins_109508",
+            "name": "First Platypus Bank",
+            "oauth": false,
+            "products": [
+              "assets",
+              "auth",
+              "balance",
+              "transactions",
+              "credit_details",
+              "income",
+              "identity",
+              "investments",
+              "investments_auth",
+              "liabilities",
+              "liabilities_report",
+              "sba_verification"
+            ],
+            "routing_numbers": []
+          },
+          "request_id": "jV1OBTR7h4dhnRV"
+        }
+    http_version: 
+  recorded_at: Wed, 30 Sep 2020 23:29:38 GMT
 recorded_with: VCR 4.0.0
