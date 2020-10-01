@@ -3,7 +3,9 @@ require_relative 'test_helper'
 # Internal: The test for Plaid::Institutions.
 class PlaidInstitutionsTest < PlaidTest
   def test_get
-    response = client.institutions.get(count: 3, offset: 1, country_codes: ['US'])
+    response = client.institutions.get(count: 3,
+                                       offset: 1,
+                                       country_codes: ['US'])
     assert_equal(3, response.institutions.length)
   end
 
@@ -19,7 +21,9 @@ class PlaidInstitutionsTest < PlaidTest
 
   def test_get_invalid_parameters
     assert_raises(Plaid::InvalidRequestError) do
-      client.institutions.get(count: BAD_STRING, offset: BAD_STRING, country_codes: ['US'])
+      client.institutions.get(count: BAD_STRING,
+                              offset: BAD_STRING,
+                              country_codes: ['US'])
     end
   end
 
@@ -74,16 +78,16 @@ class PlaidInstitutionsTest < PlaidTest
   def test_search_invalid_products
     assert_raises(Plaid::InvalidInputError) do
       client.institutions.search(SANDBOX_INSTITUTION_NAME,
-                                ['US'],
-                                BAD_ARRAY)
+                                 ['US'],
+                                 BAD_ARRAY)
     end
   end
 
   def test_search_bad_products
     assert_raises(Plaid::InvalidInputError) do
       client.institutions.search(SANDBOX_INSTITUTION_NAME,
-                                ['US'],
-                                BAD_STRING)
+                                 ['US'],
+                                 BAD_STRING)
     end
   end
 end
