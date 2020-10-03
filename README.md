@@ -149,7 +149,7 @@ end
 
 ### Obtaining Item-related data
 
-If you have an `access_token`, you can use following code to retreive data:
+If you have an `access_token`, you can use following code to retrieve data:
 ```ruby
 require 'plaid'
 
@@ -235,7 +235,7 @@ Read more about response codes and their meaning in the
 Any API call returns a response object which is accessible by dot notation
 (`response.foo.bar`) or Symbols and Strings as keys: `response[:foo][:bar]`
 and `response['foo']['bar']`. Expected keys for all types of responses are defined,
-and any attempt to access an unknown key will cause `NoMethodError` exception.
+and any attempt to access an unknown key will cause a `NoMethodError` exception.
 
 ## Network Timeout
 
