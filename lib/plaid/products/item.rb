@@ -25,57 +25,8 @@ module Plaid
     end
   end
 
-  # Public: Class used to call the AddToken sub-product.
-  class AddToken < BaseProduct
-    def create(user)
-      post_with_auth 'item/add_token/create',
-                     CreateResponse,
-                     user: user
-    end
-
-    # Public: Response for /item/add_token/create.
-    class CreateResponse < Models::BaseResponse
-      ##
-      # :attr_reader:
-      # Public: The String token.
-      property :add_token
-
-      ##
-      # :attr_reader:
-      # Public: The String token expiration time.
-      property :expiration
-    end
-  end
-
   # Public: Class used to call the PublicToken sub-product
   class PublicToken < BaseProduct
-    # Public: Creates a public token from an access_token.
-    #
-    # Does a POST /item/public_token/create call which can be used to
-    # initialize Link in update mode.
-    #
-    # access_token - access_token to create a public token for
-    #
-    # Returns a CreateResponse object with a public token and expiration info.
-    def create(access_token)
-      post_with_auth 'item/public_token/create',
-                     CreateResponse,
-                     access_token: access_token
-    end
-
-    # Public: Response for /item/public_token/create.
-    class CreateResponse < Models::BaseResponse
-      ##
-      # :attr_reader:
-      # Public: The String token.
-      property :public_token
-
-      ##
-      # :attr_reader:
-      # Public: The String token expiration time.
-      property :expiration
-    end
-
     # Public: Exchange a public token for an access_token
     #
     # Does a POST /item/public_token/exchange call helps you exchange a public
@@ -145,11 +96,6 @@ module Plaid
     # :attr_reader:
     # Public: The Plaid::PublicToken product accessor.
     subproduct :public_token
-
-    ##
-    # :attr_reader:
-    # Public: The Plaid::AddToken product accessor.
-    subproduct :add_token
 
     ##
     # :attr_reader:

@@ -44,21 +44,30 @@ class PlaidPaymentInitiationTest < PlaidTest
     payment_id = create_payment_response.payment_id
     refute_empty(payment_id)
 
-    # create payment token
-    create_payment_token_response =
-      client.payment_initiation.create_payment_token(payment_id)
-    refute_empty(create_payment_token_response.payment_token)
-    refute_empty(create_payment_token_response.payment_token_expiration_time)
+    # create link token
+    create_link_token_response =
+      client.link_token.create(
+        user: {
+          client_user_id: '123-fake-user-id'
+        },
+        client_name: 'Plaid Test',
+        products: %w[payment_initiation],
+        country_codes: ['GB'],
+        language: 'en',
+        payment_initiation: {
+          payment_id: payment_id
+        }
+      )
+    refute_empty(create_link_token_response.link_token)
+    refute_empty(create_link_token_response.expiration)
 
     # get payment
     get_payment_response = client.payment_initiation.get_payment(payment_id)
     refute_empty(get_payment_response.payment_id)
-    refute_empty(get_payment_response.payment_token)
     refute_empty(get_payment_response.reference)
     refute_empty(get_payment_response.amount)
     refute_empty(get_payment_response.status)
     refute_empty(get_payment_response.last_status_update)
-    refute_empty(get_payment_response.payment_token_expiration_time)
     refute_empty(get_payment_response.recipient_id)
 
     # list payments

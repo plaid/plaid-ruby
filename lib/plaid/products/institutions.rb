@@ -11,9 +11,10 @@ module Plaid
     # options - Options for filtering institutions.
     #
     # Returns a MultipleInstitutionsResponse instance.
-    def get(count:, offset:, options: nil)
+    def get(count:, offset:, country_codes:, options: nil)
       payload = { count: count,
-                  offset: offset }
+                  offset: offset,
+                  country_codes: country_codes }
       payload[:options] = options unless options.nil?
 
       post_with_auth 'institutions/get',
@@ -30,9 +31,10 @@ module Plaid
     # options - Options for filtering institutions.
     #
     # Returns a SingleInstitutionResponse instance.
-    def get_by_id(institution_id, options: nil)
+    def get_by_id(institution_id, country_codes, options: nil)
       payload = {
-        institution_id: institution_id
+        institution_id: institution_id,
+        country_codes: country_codes
       }
       payload[:options] = options unless options.nil?
       post_with_auth 'institutions/get_by_id',
@@ -51,10 +53,11 @@ module Plaid
     # options - Options for filtering institutions.
     #
     # Returns a MultipleInstitutionsResponse instance.
-    def search(query, products = nil, options: nil)
+    def search(query, country_codes, products = nil, options: nil)
       payload = {
         query: query,
-        products: products
+        products: products,
+        country_codes: country_codes
       }
 
       payload[:options] = options unless options.nil?
