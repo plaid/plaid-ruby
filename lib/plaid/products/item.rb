@@ -25,30 +25,6 @@ module Plaid
     end
   end
 
-  # Public: Class used to call the AddToken sub-product.	
-  class AddToken < BaseProduct	
-    def create(user)	
-      puts 'Warning: this method will be deprecated in a future version. To replace the item_add_token, look into the link_token at https://plaid.com/docs/api/tokens/#linktokencreate.'
-
-      post_with_auth 'item/add_token/create',	
-                     CreateResponse,	
-                     user: user	
-    end	
-
-    # Public: Response for /item/add_token/create.	
-    class CreateResponse < Models::BaseResponse	
-      ##	
-      # :attr_reader:	
-      # Public: The String token.	
-      property :add_token	
-
-      ##	
-      # :attr_reader:	
-      # Public: The String token expiration time.	
-      property :expiration	
-    end	
-  end
-
   # Public: Class used to call the PublicToken sub-product
   class PublicToken < BaseProduct
     # Public: Creates a public token from an access_token.	
@@ -149,11 +125,6 @@ module Plaid
     # :attr_reader:
     # Public: The Plaid::PublicToken product accessor.
     subproduct :public_token
-
-    ##	
-    # :attr_reader:	
-    # Public: The Plaid::AddToken product accessor.	
-    subproduct :add_token
 
     ##
     # :attr_reader:
