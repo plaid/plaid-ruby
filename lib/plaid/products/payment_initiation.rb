@@ -59,7 +59,9 @@ module Plaid
     #
     # Returns a PaymentTokenCreateResponse object.
     def create_payment_token(payment_id)
-      puts 'Warning: this method will be deprecated in a future version. To replace the payment_token, look into the link_token at https://plaid.com/docs/api/tokens/#linktokencreate.'
+      puts 'Warning: this method will be deprecated in a future version. '\
+           'To replace the payment_token, look into the link_token at '\
+           'https://plaid.com/docs/api/tokens/#linktokencreate.'
 
       post_with_auth 'payment_initiation/payment/token/create',
                      PaymentTokenCreateResponse,
@@ -148,19 +150,18 @@ module Plaid
     property :status
   end
 
-  # Public: The response wrapper for /payment_initiation/payment/token/create.	
-  class PaymentTokenCreateResponse < Models::BaseResponse	
-    ##	
-    # :attr_reader:	
-    # Public: The payment token.	
-    property :payment_token	
+  # Public: The response wrapper for /payment_initiation/payment/token/create.
+  class PaymentTokenCreateResponse < Models::BaseResponse
+    ##
+    # :attr_reader:
+    # Public: The payment token.
+    property :payment_token
 
-    ##	
-    # :attr_reader:	
-    # Public: The payment token's expiration time.	
-    property :payment_token_expiration_time	
-  end	
-
+    ##
+    # :attr_reader:
+    # Public: The payment token's expiration time.
+    property :payment_token_expiration_time
+  end
 
   # Public: The response wrapper for /payment_initiation/payment/get.
   class PaymentGetResponse < Models::BaseResponse

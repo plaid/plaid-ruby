@@ -36,7 +36,9 @@ module Plaid
     #
     # Returns a CreateResponse object with a public token and expiration info.
     def create(access_token)
-      puts 'Warning: this method will be deprecated in a future version. To replace the public_token for initializing Link, look into the link_token at https://plaid.com/docs/api/tokens/#linktokencreate.'
+      puts 'Warning: this method will be deprecated in a future version. '\
+           'To replace the public_token for initializing Link, look into '\
+           'the link_token at https://plaid.com/docs/api/tokens/#linktokencreate.'
 
       post_with_auth 'item/public_token/create',
                      CreateResponse,
@@ -45,7 +47,7 @@ module Plaid
 
     # Public: Response for /item/public_token/create.
     class CreateResponse < Models::BaseResponse
-      ##	
+      ##
       # :attr_reader:
       # Public: The String token.
       property :public_token

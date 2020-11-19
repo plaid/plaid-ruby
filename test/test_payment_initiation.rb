@@ -62,7 +62,8 @@ class PlaidPaymentInitiationTest < PlaidTest
     refute_empty(create_link_token_response.expiration)
 
     # create legacy payment_token (deprecated)
-    create_payment_token_response = client.payment_initiation.create_payment_token(payment_id)
+    create_payment_token_response =
+      client.payment_initiation.create_payment_token(payment_id)
     refute_empty(create_payment_token_response.payment_token)
     refute_empty(create_payment_token_response.payment_token_expiration_time)
 
