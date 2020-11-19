@@ -53,17 +53,17 @@ module Plaid
                      amount: amount
     end
 
-    # Public: Create a payment token.	
-    #	
-    # payment_id - Payment ID that the token will be created for.	
-    #	
-    # Returns a PaymentTokenCreateResponse object.	
-    def create_payment_token(payment_id)	
+    # Public: Create a payment token.
+    #
+    # payment_id - Payment ID that the token will be created for.
+    #
+    # Returns a PaymentTokenCreateResponse object.
+    def create_payment_token(payment_id)
       puts 'Warning: this method will be deprecated in a future version. To replace the payment_token, look into the link_token at https://plaid.com/docs/api/tokens/#linktokencreate.'
 
-      post_with_auth 'payment_initiation/payment/token/create',	
-                     PaymentTokenCreateResponse,	
-                     payment_id: payment_id	
+      post_with_auth 'payment_initiation/payment/token/create',
+                     PaymentTokenCreateResponse,
+                     payment_id: payment_id
     end
 
     # Public: Retrieve a payment.
