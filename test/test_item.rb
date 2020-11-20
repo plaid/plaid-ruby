@@ -115,6 +115,12 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
     end
   end
 
+  def test_public_token_invalid_access_token
+    assert_raises(Plaid::InvalidInputError) do
+      client.item.public_token.create(BAD_STRING)
+    end
+  end
+
   def test_public_token_sandbox
     public_token_response = client.sandbox.sandbox_public_token.create(
       institution_id: SANDBOX_INSTITUTION,
