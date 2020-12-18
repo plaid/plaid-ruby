@@ -1934,7 +1934,7 @@ module Plaid
       ##
       # :attr_reader:
       # Public: Day or the week or day of the month to execute
-      # the satnding order.
+      # the standing order.
       property :interval_execution_day
 
       ##
