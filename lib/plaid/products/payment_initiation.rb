@@ -43,14 +43,24 @@ module Plaid
     # recipient_id - Recipient ID that the payment will be initiated for.
     # reference    - Payment reference.
     # amount       - Payment amount.
+    # schedule     - Payment schedule.
     #
     # Returns a PaymentCreateResponse object.
-    def create_payment(recipient_id, reference, amount)
-      post_with_auth 'payment_initiation/payment/create',
-                     PaymentCreateResponse,
-                     recipient_id: recipient_id,
-                     reference: reference,
-                     amount: amount
+    def create_payment(recipient_id, reference, amount, schedule: nil)
+      if schedule.nil?
+        post_with_auth 'payment_initiation/payment/create',
+                       PaymentCreateResponse,
+                       recipient_id: recipient_id,
+                       reference: reference,
+                       amount: amount
+      else
+        post_with_auth 'payment_initiation/payment/create',
+                       PaymentCreateResponse,
+                       recipient_id: recipient_id,
+                       reference: reference,
+                       amount: amount,
+                       schedule: schedule
+      end
     end
 
     # Public: Create a payment token.
@@ -184,6 +194,11 @@ module Plaid
     # :attr_reader:
     # Public: The payment amount.
     property :amount, coerce: Models::PaymentAmount
+
+    ##
+    # :attr_reader:
+    # Public: The payment schedule.
+    property :schedule, coerce: Models::PaymentSchedule
 
     ##
     # :attr_reader:
