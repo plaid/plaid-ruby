@@ -1925,6 +1925,25 @@ module Plaid
     end
 
     # Public: A representation of a payment amount.
+    class PaymentSchedule < BaseModel
+      ##
+      # :attr_reader:
+      # Public: Interval for the standing order.
+      property :interval
+
+      ##
+      # :attr_reader:
+      # Public: Day or the week or day of the month to execute
+      # the satnding order.
+      property :interval_execution_day
+
+      ##
+      # :attr_reader:
+      # Public: Start date for the standing order.
+      property :start_date
+    end
+
+    # Public: A representation of a payment amount.
     class PaymentRecipientAddress < BaseModel
       ##
       # :attr_reader:
@@ -2009,6 +2028,11 @@ module Plaid
       # :attr_reader:
       # Public: The payment amount.
       property :amount, coerce: PaymentAmount
+
+      ##
+      # :attr_reader:
+      # Public: The payment schedule.
+      property :schedule, coerce: PaymentSchedule
 
       ##
       # :attr_reader:

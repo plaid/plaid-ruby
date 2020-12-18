@@ -34,7 +34,7 @@ class PlaidPaymentInitiationTest < PlaidTest
     list_recipients_response = client.payment_initiation.list_recipients
     refute_empty(list_recipients_response.recipients)
 
-    # create payment
+    # create single immediate payment
     create_payment_response = client.payment_initiation.create_payment(
       recipient_id,
       'testpayment',
@@ -72,6 +72,37 @@ class PlaidPaymentInitiationTest < PlaidTest
     refute_empty(get_payment_response.payment_id)
     refute_empty(get_payment_response.reference)
     refute_empty(get_payment_response.amount)
+    assert_nil(get_payment_response.schedule)
+    refute_empty(get_payment_response.status)
+    refute_empty(get_payment_response.last_status_update)
+    refute_empty(get_payment_response.recipient_id)
+
+    # create standing order
+    standing_order_create_payment_response =
+      client.payment_initiation.create_payment(
+        recipient_id,
+        'testpayment',
+        {
+          currency: 'GBP',
+          value: 100.00
+        },
+        schedule: {
+          interval: 'MONTHLY',
+          interval_execution_day: 1,
+          start_date: (Date.today + 7).to_s
+        }
+      )
+    standing_order_payment_id =
+      standing_order_create_payment_response.payment_id
+    refute_empty(standing_order_payment_id)
+
+    # get payment
+    get_payment_response =
+      client.payment_initiation.get_payment(standing_order_payment_id)
+    refute_empty(get_payment_response.payment_id)
+    refute_empty(get_payment_response.reference)
+    refute_empty(get_payment_response.amount)
+    refute_empty(get_payment_response.schedule)
     refute_empty(get_payment_response.status)
     refute_empty(get_payment_response.last_status_update)
     refute_empty(get_payment_response.recipient_id)
