@@ -1,3 +1,12 @@
+# 13.0.0
+- Add support for providing a payment initiation schedule
+- Add back the (now deprecated) `/item/public_token/create` endpoint
+- Add back the (now deprecated) `/payment_initiation/payment/token/create` endpoint
+
+BREAKING CHANGES:
+
+- Update minimum required Ruby version to 2.4
+
 # 12.0.0
 
 - The library has been pinned to the '2020-09-14' API release. Visit the [docs](https://plaid.com/docs/api/versioning/) to see what changed.
