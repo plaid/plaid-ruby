@@ -14,8 +14,8 @@ class PlaidPaymentInitiationTest < PlaidTest
         postal_code: '99999',
         country:     'GB'
       },
-      account: '5555555',
-      sort_code: '020155'
+      account: '26207729',
+      sort_code: '560029'
     )
     recipient_id = create_recipient_response.recipient_id
     refute_empty(recipient_id)
