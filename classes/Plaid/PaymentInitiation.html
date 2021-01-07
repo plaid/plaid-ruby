@@ -184,7 +184,7 @@
         <div class="method">
           <div class="title method-title" id="method-i-create_payment">
             
-              <b>create_payment</b>(recipient_id, reference, amount)
+              <b>create_payment</b>(recipient_id, reference, amount, schedule: nil)
             
             <a href="../../classes/Plaid/PaymentInitiation.html#method-i-create_payment" name="method-i-create_payment" class="permalink">Link</a>
           </div>
@@ -201,11 +201,15 @@
 </dd><dt>amount
 <dd>
 <p>Payment amount.</p>
+</dd><dt>schedule
+<dd>
+<p>Payment schedule.</p>
 </dd></dl>
 
 <h3 id="method-i-create_payment-label-Returns">Returns</h3>
 
-<p>Returns a <a href="PaymentCreateResponse.html"><code>PaymentCreateResponse</code></a> object.</p>
+<p>Returns a <a href="PaymentCreateResponse.html">PaymentCreateResponse</a>
+object.</p>
             </div>
           
 
@@ -223,13 +227,22 @@
                 
               </p>
               <div id="method-i-create_payment_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 46</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_payment</span>(<span class="ruby-identifier">recipient_id</span>, <span class="ruby-identifier">reference</span>, <span class="ruby-identifier">amount</span>)
-  <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;payment_initiation/payment/create&#39;</span>,
-                 <span class="ruby-constant">PaymentCreateResponse</span>,
-                 <span class="ruby-value">recipient_id:</span> <span class="ruby-identifier">recipient_id</span>,
-                 <span class="ruby-value">reference:</span> <span class="ruby-identifier">reference</span>,
-                 <span class="ruby-value">amount:</span> <span class="ruby-identifier">amount</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 49</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_payment</span>(<span class="ruby-identifier">recipient_id</span>, <span class="ruby-identifier">reference</span>, <span class="ruby-identifier">amount</span>, <span class="ruby-value">schedule:</span> <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;payment_initiation/payment/create&#39;</span>,
+                   <span class="ruby-constant">PaymentCreateResponse</span>,
+                   <span class="ruby-value">recipient_id:</span> <span class="ruby-identifier">recipient_id</span>,
+                   <span class="ruby-value">reference:</span> <span class="ruby-identifier">reference</span>,
+                   <span class="ruby-value">amount:</span> <span class="ruby-identifier">amount</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;payment_initiation/payment/create&#39;</span>,
+                   <span class="ruby-constant">PaymentCreateResponse</span>,
+                   <span class="ruby-value">recipient_id:</span> <span class="ruby-identifier">recipient_id</span>,
+                   <span class="ruby-value">reference:</span> <span class="ruby-identifier">reference</span>,
+                   <span class="ruby-value">amount:</span> <span class="ruby-identifier">amount</span>,
+                   <span class="ruby-value">schedule:</span> <span class="ruby-identifier">schedule</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -254,7 +267,9 @@
 
 <h3 id="method-i-create_payment_token-label-Returns">Returns</h3>
 
-<p>Returns a <a href="PaymentTokenCreateResponse.html"><code>PaymentTokenCreateResponse</code></a> object.</p>
+<p>Returns a <a
+href="PaymentTokenCreateResponse.html">PaymentTokenCreateResponse</a>
+object.</p>
             </div>
           
 
@@ -272,8 +287,12 @@
                 
               </p>
               <div id="method-i-create_payment_token_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 59</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_payment_token</span>(<span class="ruby-identifier">payment_id</span>)
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;Warning: this method will be deprecated in a future version. &#39;</span>\
+       <span class="ruby-string">&#39;To replace the payment_token, look into the link_token at &#39;</span>\
+       <span class="ruby-string">&#39;https://plaid.com/docs/api/tokens/#linktokencreate.&#39;</span>
+
   <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;payment_initiation/payment/token/create&#39;</span>,
                  <span class="ruby-constant">PaymentTokenCreateResponse</span>,
                  <span class="ruby-value">payment_id:</span> <span class="ruby-identifier">payment_id</span>
@@ -286,7 +305,7 @@
         <div class="method">
           <div class="title method-title" id="method-i-create_recipient">
             
-              <b>create_recipient</b>(name, iban, address)
+              <b>create_recipient</b>(name, iban, address, bacs)
             
             <a href="../../classes/Plaid/PaymentInitiation.html#method-i-create_recipient" name="method-i-create_recipient" class="permalink">Link</a>
           </div>
@@ -303,11 +322,16 @@
 </dd><dt>address
 <dd>
 <p>Recipient address.</p>
+</dd><dt>bacs
+<dd>
+<p>Recipient BACS (hash with “account” and “sort_code” keys)</p>
 </dd></dl>
 
 <h3 id="method-i-create_recipient-label-Returns">Returns</h3>
 
-<p>Returns a <a href="PaymentRecipientCreateResponse.html"><code>PaymentRecipientCreateResponse</code></a> object.</p>
+<p>Returns a <a
+href="PaymentRecipientCreateResponse.html">PaymentRecipientCreateResponse</a>
+object.</p>
             </div>
           
 
@@ -325,12 +349,13 @@
                 
               </p>
               <div id="method-i-create_recipient_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 11</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_recipient</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">iban</span>, <span class="ruby-identifier">address</span>)
+                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 12</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_recipient</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">iban</span>, <span class="ruby-identifier">address</span>, <span class="ruby-identifier">bacs</span>)
   <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;payment_initiation/recipient/create&#39;</span>,
                  <span class="ruby-constant">PaymentRecipientCreateResponse</span>,
                  <span class="ruby-value">name:</span> <span class="ruby-identifier">name</span>,
                  <span class="ruby-value">iban:</span> <span class="ruby-identifier">iban</span>,
+                 <span class="ruby-value">bacs:</span> <span class="ruby-identifier">bacs</span>,
                  <span class="ruby-value">address:</span> <span class="ruby-identifier">address</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
@@ -356,7 +381,7 @@
 
 <h3 id="method-i-get_payment-label-Returns">Returns</h3>
 
-<p>Returns a <a href="PaymentGetResponse.html"><code>PaymentGetResponse</code></a> object.</p>
+<p>Returns a <a href="PaymentGetResponse.html">PaymentGetResponse</a> object.</p>
             </div>
           
 
@@ -374,7 +399,7 @@
                 
               </p>
               <div id="method-i-get_payment_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 70</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 86</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_payment</span>(<span class="ruby-identifier">payment_id</span>)
   <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;payment_initiation/payment/get&#39;</span>,
                  <span class="ruby-constant">PaymentGetResponse</span>,
@@ -403,7 +428,9 @@
 
 <h3 id="method-i-get_recipient-label-Returns">Returns</h3>
 
-<p>Returns a <a href="PaymentRecipientGetResponse.html"><code>PaymentRecipientGetResponse</code></a> object.</p>
+<p>Returns a <a
+href="PaymentRecipientGetResponse.html">PaymentRecipientGetResponse</a>
+object.</p>
             </div>
           
 
@@ -421,7 +448,7 @@
                 
               </p>
               <div id="method-i-get_recipient_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 24</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 26</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_recipient</span>(<span class="ruby-identifier">recipient_id</span>)
   <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;payment_initiation/recipient/get&#39;</span>,
                  <span class="ruby-constant">PaymentRecipientGetResponse</span>,
@@ -445,12 +472,16 @@
               <p>List all payments.</p>
 <dl class="rdoc-list note-list"><dt>options
 <dd>
-<p>Object to specify optional parameters &#39;count&#39; and &#39;cursor&#39;. e.g {count: 10, cursor: &#39;2019-12-06T22:35:49Z&#39;} returns 10 payments initiated before 2019-12-06T22:35:49Z.</p>
+<p><a href="../Object.html">Object</a> to specify optional parameters
+&#39;count&#39; and &#39;cursor&#39;. e.g {count: 10, cursor:
+&#39;2019-12-06T22:35:49Z&#39;} returns 10 payments initiated before
+2019-12-06T22:35:49Z.</p>
 </dd></dl>
 
 <h3 id="method-i-list_payments-label-Returns">Returns</h3>
 
-<p>Returns a <a href="PaymentListResponse.html"><code>PaymentListResponse</code></a> object.</p>
+<p>Returns a <a href="PaymentListResponse.html">PaymentListResponse</a>
+object.</p>
             </div>
           
 
@@ -468,7 +499,7 @@
                 
               </p>
               <div id="method-i-list_payments_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 83</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 99</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list_payments</span>(<span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;payment_initiation/payment/list&#39;</span>,
                  <span class="ruby-constant">PaymentListResponse</span>,
@@ -493,7 +524,9 @@
 
 <h3 id="method-i-list_recipients-label-Returns">Returns</h3>
 
-<p>Returns a <a href="PaymentRecipientListResponse.html"><code>PaymentRecipientListResponse</code></a> object.</p>
+<p>Returns a <a
+href="PaymentRecipientListResponse.html">PaymentRecipientListResponse</a>
+object.</p>
             </div>
           
 
@@ -511,7 +544,7 @@
                 
               </p>
               <div id="method-i-list_recipients_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 33</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list_recipients</span>
   <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;payment_initiation/recipient/list&#39;</span>,
                  <span class="ruby-constant">PaymentRecipientListResponse</span>,

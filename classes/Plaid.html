@@ -73,6 +73,8 @@
             
             <li><a href="../files/lib/plaid/products/liabilities_rb.html">lib/plaid/products/liabilities.rb</a></li>
             
+            <li><a href="../files/lib/plaid/products/link_token_rb.html">lib/plaid/products/link_token.rb</a></li>
+            
             <li><a href="../files/lib/plaid/products/payment_initiation_rb.html">lib/plaid/products/payment_initiation.rb</a></li>
             
             <li><a href="../files/lib/plaid/products/processor_rb.html">lib/plaid/products/processor.rb</a></li>
@@ -92,9 +94,9 @@
   
     <div class="description">
       
-<p>The namespace for all the things <a href="Plaid.html"><code>Plaid</code></a>.</p>
+<p>The namespace for all the things <a href="Plaid.html">Plaid</a>.</p>
 
-<p>The <a href="Plaid.html"><code>Plaid</code></a> namespace.</p>
+<p>The <a href="Plaid.html">Plaid</a> namespace.</p>
 
     </div>
   
@@ -155,11 +157,6 @@
         <li>
           <span class="type">CLASS</span>
           <a href="Plaid/AccountsResponse.html">Plaid::AccountsResponse</a>
-        </li>
-      
-        <li>
-          <span class="type">CLASS</span>
-          <a href="Plaid/AddToken.html">Plaid::AddToken</a>
         </li>
       
         <li>
@@ -249,6 +246,11 @@
       
         <li>
           <span class="type">CLASS</span>
+          <a href="Plaid/CreateResponse.html">Plaid::CreateResponse</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
           <a href="Plaid/CreditDetails.html">Plaid::CreditDetails</a>
         </li>
       
@@ -265,6 +267,11 @@
         <li>
           <span class="type">CLASS</span>
           <a href="Plaid/Dwolla.html">Plaid::Dwolla</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Plaid/GetResponse.html">Plaid::GetResponse</a>
         </li>
       
         <li>
@@ -290,6 +297,11 @@
         <li>
           <span class="type">CLASS</span>
           <a href="Plaid/IncomeResponse.html">Plaid::IncomeResponse</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Plaid/InstitutionError.html">Plaid::InstitutionError</a>
         </li>
       
         <li>
@@ -335,6 +347,11 @@
         <li>
           <span class="type">CLASS</span>
           <a href="Plaid/LiabilitiesResponse.html">Plaid::LiabilitiesResponse</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Plaid/LinkToken.html">Plaid::LinkToken</a>
         </li>
       
         <li>
@@ -531,7 +548,7 @@
           <tr valign='top'>
             <td class="attr-name">VERSION</td>
             <td>=</td>
-            <td class="attr-value">&#39;8.9.0&#39;.freeze</td>
+            <td class="attr-value">&#39;13.0.0&#39;.freeze</td>
           </tr>
           
             <tr valign='top'>
@@ -543,7 +560,7 @@
           <tr valign='top'>
             <td class="attr-name">API_VERSION</td>
             <td>=</td>
-            <td class="attr-value">&#39;2019-05-29&#39;.freeze</td>
+            <td class="attr-value">&#39;2020-09-14&#39;.freeze</td>
           </tr>
           
             <tr valign='top'>
@@ -591,7 +608,7 @@
                 
               </p>
               <div id="method-c-relaxed_models-3D_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid.rb, line 50</span>
+                <pre><span class="ruby-comment"># File lib/plaid.rb, line 51</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">relaxed_models=</span>(<span class="ruby-identifier">value</span>)
   <span class="ruby-ivar">@relaxed_models</span> = <span class="ruby-identifier">value</span>
 <span class="ruby-keyword">end</span></pre>
@@ -616,7 +633,9 @@
 
 <p>Strict mode: Unknown attributes will cause NoMethodError.</p>
 
-<p>Relaxed mode (default): If a response contains an unknown attribute, it won&#39;t cause any error and will be accessible using brackets notation: `<a href="'unknown_attribute'">response</a>`.</p>
+<p>Relaxed mode (default): If a response contains an unknown attribute, it
+won&#39;t cause any error and will be accessible using brackets notation:
+`<a href="'unknown_attribute'">response</a>`.</p>
 
 <h3 id="method-c-relaxed_models-3F-label-Returns">Returns</h3>
 
@@ -638,7 +657,7 @@
                 
               </p>
               <div id="method-c-relaxed_models-3F_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid.rb, line 41</span>
+                <pre><span class="ruby-comment"># File lib/plaid.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">relaxed_models?</span>
   <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@relaxed_models</span>)
     <span class="ruby-ivar">@relaxed_models</span>
@@ -706,7 +725,8 @@
             <div class="description">
               <p>Converts date objects to strings if needed.</p>
 
-<p>Takes in a string or a Date object and performs necessary operations to return a string representation of the Date.</p>
+<p>Takes in a string or a Date object and performs necessary operations to
+return a string representation of the Date.</p>
 <dl class="rdoc-list note-list"><dt>date
 <dd>
 <p>Date in Date object form or string form (YYYY-MM-DD).</p>
@@ -732,7 +752,7 @@
                 
               </p>
               <div id="method-c-convert_to_date_string_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid.rb, line 64</span>
+                <pre><span class="ruby-comment"># File lib/plaid.rb, line 65</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">convert_to_date_string</span>(<span class="ruby-identifier">date</span>)
   <span class="ruby-identifier">date</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">date</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">date</span>.<span class="ruby-identifier">to_date</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&#39;%Y-%m-%d&#39;</span>)
 <span class="ruby-keyword">end</span></pre>

@@ -52,7 +52,8 @@
   
     <div class="description">
       
-<p>Class used to call the <a href="Institutions.html"><code>Institutions</code></a> product.</p>
+<p>Class used to call the <a href="Institutions.html">Institutions</a>
+product.</p>
 
     </div>
   
@@ -157,16 +158,18 @@
         <div class="method">
           <div class="title method-title" id="method-i-get">
             
-              <b>get</b>(count:, offset:, options: nil)
+              <b>get</b>(count:, offset:, country_codes:, options: nil)
             
             <a href="../../classes/Plaid/Institutions.html#method-i-get" name="method-i-get" class="permalink">Link</a>
           </div>
 
           
             <div class="description">
-              <p>Get information about <a href="../Plaid.html"><code>Plaid</code></a> institutions.</p>
+              <p>Get information about <a href="../Plaid.html">Plaid</a> institutions.</p>
 
-<p>Does a POST /institutions/get call pulls a list of supported <a href="../Plaid.html"><code>Plaid</code></a> institutions with the information for each institution.</p>
+<p>Does a POST /institutions/get call pulls a list of supported <a
+href="../Plaid.html">Plaid</a> institutions with the information for each
+institution.</p>
 <dl class="rdoc-list note-list"><dt>count
 <dd>
 <p>Amount of institutions to pull.</p>
@@ -180,7 +183,9 @@
 
 <h3 id="method-i-get-label-Returns">Returns</h3>
 
-<p>Returns a <a href="MultipleInstitutionsResponse.html"><code>MultipleInstitutionsResponse</code></a> instance.</p>
+<p>Returns a <a
+href="MultipleInstitutionsResponse.html">MultipleInstitutionsResponse</a>
+instance.</p>
             </div>
           
 
@@ -199,9 +204,10 @@
               </p>
               <div id="method-i-get_source" class="dyn-source">
                 <pre><span class="ruby-comment"># File lib/plaid/products/institutions.rb, line 14</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get</span>(<span class="ruby-value">count:</span>, <span class="ruby-value">offset:</span>, <span class="ruby-value">options:</span> <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get</span>(<span class="ruby-value">count:</span>, <span class="ruby-value">offset:</span>, <span class="ruby-value">country_codes:</span>, <span class="ruby-value">options:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">payload</span> = { <span class="ruby-value">count:</span> <span class="ruby-identifier">count</span>,
-              <span class="ruby-value">offset:</span> <span class="ruby-identifier">offset</span> }
+              <span class="ruby-value">offset:</span> <span class="ruby-identifier">offset</span>,
+              <span class="ruby-value">country_codes:</span> <span class="ruby-identifier">country_codes</span> }
   <span class="ruby-identifier">payload</span>[<span class="ruby-value">:options</span>] = <span class="ruby-identifier">options</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">nil?</span>
 
   <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;institutions/get&#39;</span>,
@@ -216,16 +222,18 @@
         <div class="method">
           <div class="title method-title" id="method-i-get_by_id">
             
-              <b>get_by_id</b>(institution_id, options: nil)
+              <b>get_by_id</b>(institution_id, country_codes, options: nil)
             
             <a href="../../classes/Plaid/Institutions.html#method-i-get_by_id" name="method-i-get_by_id" class="permalink">Link</a>
           </div>
 
           
             <div class="description">
-              <p>Get information about a <a href="../Plaid.html"><code>Plaid</code></a> institution by ID.</p>
+              <p>Get information about a <a href="../Plaid.html">Plaid</a> institution by
+ID.</p>
 
-<p>Does a POST /institutions/get_by_id call which allows you to pull information for an institution by ID.</p>
+<p>Does a POST /institutions/get_by_id call which allows you to pull
+information for an institution by ID.</p>
 <dl class="rdoc-list note-list"><dt>institution_id
 <dd>
 <p>Specific institution id to fetch information for.</p>
@@ -236,7 +244,9 @@
 
 <h3 id="method-i-get_by_id-label-Returns">Returns</h3>
 
-<p>Returns a <a href="SingleInstitutionResponse.html"><code>SingleInstitutionResponse</code></a> instance.</p>
+<p>Returns a <a
+href="SingleInstitutionResponse.html">SingleInstitutionResponse</a>
+instance.</p>
             </div>
           
 
@@ -254,15 +264,16 @@
                 
               </p>
               <div id="method-i-get_by_id_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/institutions.rb, line 33</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_by_id</span>(<span class="ruby-identifier">institution_id</span>, <span class="ruby-value">options:</span> <span class="ruby-keyword">nil</span>)
+                <pre><span class="ruby-comment"># File lib/plaid/products/institutions.rb, line 34</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_by_id</span>(<span class="ruby-identifier">institution_id</span>, <span class="ruby-identifier">country_codes</span>, <span class="ruby-value">options:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">payload</span> = {
-    <span class="ruby-value">institution_id:</span> <span class="ruby-identifier">institution_id</span>
+    <span class="ruby-value">institution_id:</span> <span class="ruby-identifier">institution_id</span>,
+    <span class="ruby-value">country_codes:</span> <span class="ruby-identifier">country_codes</span>
   }
   <span class="ruby-identifier">payload</span>[<span class="ruby-value">:options</span>] = <span class="ruby-identifier">options</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">nil?</span>
-  <span class="ruby-identifier">post_with_public_key</span> <span class="ruby-string">&#39;institutions/get_by_id&#39;</span>,
-                       <span class="ruby-constant">SingleInstitutionResponse</span>,
-                       <span class="ruby-identifier">payload</span>
+  <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;institutions/get_by_id&#39;</span>,
+                 <span class="ruby-constant">SingleInstitutionResponse</span>,
+                 <span class="ruby-identifier">payload</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -272,7 +283,7 @@
         <div class="method">
           <div class="title method-title" id="method-i-search">
             
-              <b>search</b>(query, products = nil, options: nil)
+              <b>search</b>(query, country_codes, products = nil, options: nil)
             
             <a href="../../classes/Plaid/Institutions.html#method-i-search" name="method-i-search" class="permalink">Link</a>
           </div>
@@ -281,7 +292,8 @@
             <div class="description">
               <p>Get information about all available institutions matching your query.</p>
 
-<p>Does a POST /institutions/search call which allows you to pull a list of institutions using a query parameter.</p>
+<p>Does a POST /institutions/search call which allows you to pull a list of
+institutions using a query parameter.</p>
 <dl class="rdoc-list note-list"><dt>query
 <dd>
 <p>Search query to attempt to match institutions to.</p>
@@ -295,7 +307,9 @@
 
 <h3 id="method-i-search-label-Returns">Returns</h3>
 
-<p>Returns a <a href="MultipleInstitutionsResponse.html"><code>MultipleInstitutionsResponse</code></a> instance.</p>
+<p>Returns a <a
+href="MultipleInstitutionsResponse.html">MultipleInstitutionsResponse</a>
+instance.</p>
             </div>
           
 
@@ -313,18 +327,19 @@
                 
               </p>
               <div id="method-i-search_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/institutions.rb, line 54</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search</span>(<span class="ruby-identifier">query</span>, <span class="ruby-identifier">products</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-value">options:</span> <span class="ruby-keyword">nil</span>)
+                <pre><span class="ruby-comment"># File lib/plaid/products/institutions.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search</span>(<span class="ruby-identifier">query</span>, <span class="ruby-identifier">country_codes</span>, <span class="ruby-identifier">products</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-value">options:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">payload</span> = {
     <span class="ruby-value">query:</span> <span class="ruby-identifier">query</span>,
-    <span class="ruby-value">products:</span> <span class="ruby-identifier">products</span>
+    <span class="ruby-value">products:</span> <span class="ruby-identifier">products</span>,
+    <span class="ruby-value">country_codes:</span> <span class="ruby-identifier">country_codes</span>
   }
 
   <span class="ruby-identifier">payload</span>[<span class="ruby-value">:options</span>] = <span class="ruby-identifier">options</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">nil?</span>
 
-  <span class="ruby-identifier">post_with_public_key</span> <span class="ruby-string">&#39;institutions/search&#39;</span>,
-                       <span class="ruby-constant">MultipleInstitutionsResponse</span>,
-                       <span class="ruby-identifier">payload</span>
+  <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;institutions/search&#39;</span>,
+                 <span class="ruby-constant">MultipleInstitutionsResponse</span>,
+                 <span class="ruby-identifier">payload</span>
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>

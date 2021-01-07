@@ -111,9 +111,10 @@
             <td class="attr-value">{
 &#39;INVALID_REQUEST&#39; =&gt; Plaid::InvalidRequestError,
 &#39;INVALID_INPUT&#39; =&gt; Plaid::InvalidInputError,
-&#39;RATE_LIMIT_EXCEEDED_ERROR&#39; =&gt; Plaid::RateLimitExceededError,
+&#39;RATE_LIMIT_EXCEEDED&#39; =&gt; Plaid::RateLimitExceededError,
 &#39;API_ERROR&#39; =&gt; Plaid::APIError,
-&#39;ITEM_ERROR&#39; =&gt; Plaid::ItemError
+&#39;ITEM_ERROR&#39; =&gt; Plaid::ItemError,
+&#39;INSTITUTION_ERROR&#39; =&gt; Plaid::InstitutionError
 }.freeze</td>
           </tr>
           
@@ -164,9 +165,10 @@
 
           
             <div class="description">
-              <p>Map error_type to <a href="PlaidAPIError.html"><code>PlaidAPIError</code></a>.</p>
+              <p>Map error_type to <a href="PlaidAPIError.html">PlaidAPIError</a>.</p>
 
-<p>Maps an error_type from an error HTTP response to an actual <a href="PlaidAPIError.html"><code>PlaidAPIError</code></a> class instance.</p>
+<p>Maps an error_type from an error HTTP response to an actual <a
+href="PlaidAPIError.html">PlaidAPIError</a> class instance.</p>
 <dl class="rdoc-list note-list"><dt>error_type
 <dd>
 <p>The type of the error as indicated by the error response body.</p>
@@ -192,7 +194,7 @@
                 
               </p>
               <div id="method-c-error_from_type_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/errors.rb, line 80</span>
+                <pre><span class="ruby-comment"># File lib/plaid/errors.rb, line 85</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">error_from_type</span>(<span class="ruby-identifier">error_type</span>)
   <span class="ruby-constant">ERROR_TYPE_MAP</span>[<span class="ruby-identifier">error_type</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">Plaid</span><span class="ruby-operator">::</span><span class="ruby-constant">PlaidAPIError</span>
 <span class="ruby-keyword">end</span></pre>
