@@ -5,7 +5,8 @@ module Plaid
     #
     # name    - Recipient name.
     # iban    - Recipient IBAN. Should be nil if using bacs.
-    # address - Recipient address (hash with "street", "city", "postal_code" and "country")
+    # address - Recipient address (hash with "street", "city", "postal_code" and "country").
+    #           Best practice is to set it as nil.
     # bacs    - Recipient BACS (hash with "account" and "sort_code" keys). Should be nil if using iban.
     #
     # Returns a PaymentRecipientCreateResponse object.

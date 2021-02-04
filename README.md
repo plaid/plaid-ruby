@@ -258,6 +258,7 @@ amount = {
 
 create_payment_response = client.payment_initiation.create_payment(recipient_id, reference, amount)
 payment_id =  create_payment_response.payment_id
+status = create_payment_response.status
 ```
 
 Create Link Token (for Payment Initiation only)
