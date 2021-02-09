@@ -14,10 +14,11 @@ module Plaid
 
     # Internal: Default read timeout for HTTP calls in seconds.
     NETWORK_TIMEOUT = 600
+    # Internal: Status codes recognized as client or server errors.
+    ERROR_STATUSES = 400...600
 
     def on_complete(env)
-      return unless Faraday::Response::RaiseError::ClientErrorStatuses
-                    .include?(env[:status])
+      return unless ERROR_STATUSES.include?(env[:status])
 
       error_class = Plaid::Error.error_from_type(env.body['error_type'])
 
