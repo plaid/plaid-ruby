@@ -18,6 +18,10 @@ class PlaidTest < MiniTest::Test
     configuration.api_key["PLAID-SECRET"] = ENV["PLAID_RUBY_SECRET"]
     configuration.api_key["Plaid-Version"] = "2020-09-14"
 
+    puts "INFO HERE!!!!!"
+    puts ENV["PLAID_RUBY_CLIENT_ID"]
+    puts ENV["PLAID_RUBY_SECRET"]
+
     api_client = Plaid::ApiClient.new(
       configuration
     )
