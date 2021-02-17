@@ -4,10 +4,9 @@ require_relative "test_helper"
 
 # Internal: The test for Plaid::Transactions.
 class PlaidTransactionsTest < PlaidTest # rubocop:disable Metrics/ClassLength
-  TWO_YEARS_AGO = 2.year.ago
-  NOW = 2.minutes.ago
-  START_DATE = TWO_YEARS_AGO.strftime("%F")
-  END_DATE = NOW.strftime("%F")
+
+  START_DATE = (Date.today - 365)
+  END_DATE = Date.today
 
   def setup
     create_item initial_products: [:transactions],
