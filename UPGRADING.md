@@ -1,3 +1,7 @@
+## Upgrading from 13.0.0 to 14.0.0
+
+See the [CHANGELOG](CHANGELOG.md) for what needs to be updated.
+
 ## Upgrading from 3.x.x to 4.0.0
 
 Version 4.0.0 supports [Plaid's new API](https://blog.plaid.com/improving-our-api/).  Use the [transition guide](https://plaid.com/docs/link/transition-guide) to update your integration.
