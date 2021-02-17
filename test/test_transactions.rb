@@ -5,7 +5,7 @@ require_relative "test_helper"
 # Internal: The test for Plaid::Transactions.
 class PlaidTransactionsTest < PlaidTest # rubocop:disable Metrics/ClassLength
 
-  START_DATE = "2020-01-01".freeze
+  START_DATE = "2019-01-01".freeze
   END_DATE = "2021-01-01".freeze
 
   def setup
