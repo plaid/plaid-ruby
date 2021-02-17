@@ -1,44 +1,29 @@
-require 'minitest/autorun'
-require 'minitest/around/unit'
+require "minitest/autorun"
+require "minitest/around/unit"
+require "json"
 
-require_relative '../lib/plaid'
+require_relative "../lib/plaid"
 
-STUB_API = !ENV['STUB_API'].nil?
-
-if STUB_API
-  require 'vcr'
-
-  VCR.configure do |config|
-    config.cassette_library_dir = 'test/vcr_cassettes'
-    config.hook_into :faraday
-  end
-end
-
-# We support "all" and "none" here. "once" and "new_episodes" won't work due to
-# need to hide auth params (the client will use real client_id and secret, but
-# cassettes will hold stubbed values).
-RECORD_MODE = (ENV['RECORD_MODE'] || 'none').to_sym
-
-# Using strict models to catch any new fields returned by the API
-Plaid.relaxed_models = false
+# Internal: Default read timeout for HTTP calls in seconds.
+NETWORK_TIMEOUT = 600
 
 class PlaidTest < MiniTest::Test
   attr_reader :client, :item, :access_token
 
   def create_client
-    client_id = ENV['PLAID_RUBY_CLIENT_ID']
-    secret = ENV['PLAID_RUBY_SECRET']
+    configuration = Plaid::Configuration.new
+    configuration.server_index = Plaid::Configuration::Environment["sandbox"]
+    configuration.timeout = NETWORK_TIMEOUT
+    configuration.api_key["PLAID-CLIENT-ID"] = ENV["PLAID_RUBY_CLIENT_ID"]
+    configuration.api_key["PLAID-SECRET"] = ENV["PLAID_RUBY_SECRET"]
+    configuration.api_key["Plaid-Version"] = "2020-09-14"
 
-    if STUB_API && RECORD_MODE == :none
-      # In non-recording mode we use stubs for auth
-      # (see also task :vcr_hide_credentials in Rakefile)
-      client_id = 'PLAID_RUBY_CLIENT_ID'
-      secret = 'PLAID_RUBY_SECRET'
-    end
+    api_client = Plaid::ApiClient.new(
+      configuration
+    )
 
-    @client = Plaid::Client.new(env: :sandbox,
-                                client_id: client_id,
-                                secret: secret)
+    @client = Plaid::PlaidApi.new(api_client)
+    @client_id = ENV["PLAID_RUBY_CLIENT_ID"]
   end
 
   # Helper used to create a test item with given products
@@ -48,59 +33,77 @@ class PlaidTest < MiniTest::Test
                   transactions_end_date: nil,
                   webhook: nil,
                   options: nil)
+    sandbox_public_token_create_request = Plaid::SandboxPublicTokenCreateRequest.new
 
-    public_token_response = client.sandbox.sandbox_public_token.create(
-      institution_id: institution_id,
-      initial_products: initial_products,
-      transactions_start_date: transactions_start_date,
-      transactions_end_date: transactions_end_date,
-      webhook: webhook,
-      options: options
-    )
+    options_payload = {}
+    options_payload[:webhook] = webhook unless webhook.nil?
+    options_payload[:transactions] = {
+      start_date: transactions_start_date.is_a?(String) ? transactions_start_date : transactions_start_date.to_date.strftime("%Y-%m-%d"),
+      end_date: transactions_end_date.is_a?(String) ? transactions_end_date : transactions_end_date.to_date.strftime("%Y-%m-%d"),
+    } unless transactions_start_date.nil? || transactions_end_date.nil?
+    options_payload = options_payload.merge(options) unless options.nil?
+
+    sandbox_public_token_create_request.options = options_payload
+    sandbox_public_token_create_request.institution_id = institution_id
+    sandbox_public_token_create_request.initial_products = initial_products
+
+    begin
+      public_token_response = @client.sandbox_public_token_create(sandbox_public_token_create_request)
+    end
 
     # public_token must be present
-    refute_empty(public_token_response.public_token)
+    refute_empty(public_token_response.to_hash)
+
+    public_token = public_token_response.public_token
 
     # exchange public_token for access_token
-    exchange_token_response = client.item.public_token.exchange(
-      public_token_response.public_token
-    )
+    item_public_token_exchange_request = Plaid::ItemPublicTokenExchangeRequest.new
+    item_public_token_exchange_request.public_token = public_token
+
+    exchange_token_response = client.item_public_token_exchange(item_public_token_exchange_request)
 
     @access_token = exchange_token_response.access_token
     refute_empty(@access_token)
 
-    @item = client.item.get(@access_token)
-    refute_empty(@item)
+    item_get_request = Plaid::ItemGetRequest.new
+    item_get_request.access_token = @access_token
+
+    @item = client.item_get(item_get_request)
+    refute_empty(@item.to_hash)
   end
 
   # If create_item was used, remove the item
   def teardown
-    client.item.remove(access_token) if access_token
+    if access_token
+      item_remove_request = Plaid::ItemRemoveRequest.new
+      item_remove_request.access_token = access_token
+
+      begin
+        @client.item_remove(item_remove_request)
+      end
+    end
   end
 
   # This method is called around every test method.
   def around
     create_client
-
-    if STUB_API
-      cassette = "#{self.class}_#{name}"
-      VCR.use_cassette(cassette, record: RECORD_MODE,
-                                 match_requests_on: %i[method uri body]) do
-        yield
-      end
-    else
-      yield
-    end
+    yield
   end
 
-  BAD_STRING = 'ABCDEFG1234567'.freeze
+  BAD_STRING = "ABCDEFG1234567".freeze
 
-  BAD_ARRAY = ['ABCDEFG1234567'].freeze
+  BAD_ARRAY = ["ABCDEFG1234567"].freeze
 
-  SANDBOX_INSTITUTION = 'ins_109508'.freeze
+  SANDBOX_INSTITUTION = "ins_109508".freeze
 
-  SANDBOX_INSTITUTION_NAME = 'First Platypus Bank'.freeze
+  SANDBOX_INSTITUTION_NAME = "First Platypus Bank".freeze
 
   SANDBOX_INSTITUTIONS = %w[ins_109508 ins_109509 ins_109510
                             ins_109511 ins_109512].freeze
+
+  # NOTE: Data is only generated over the past 2 years.  Ensure that the date
+  # range used for transactions/get is within 2 years old or otherwise the tests will not work properly
+
+  START_DATE = "2020-01-01".freeze
+  END_DATE = "2021-01-01".freeze
 end
