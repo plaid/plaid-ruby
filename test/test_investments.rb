@@ -80,8 +80,8 @@ class PlaidInvestmentsTest < PlaidTest # rubocop:disable Metrics/ClassLength
     investments_transactions_get_request = Plaid::InvestmentsTransactionsGetRequest.new
     investments_transactions_get_request.access_token = access_token
     investments_transactions_get_request.options = options_payload
-    investments_transactions_get_request.start_date = Date.parse(START_DATE)
-    investments_transactions_get_request.end_date = Date.parse(END_DATE)
+    investments_transactions_get_request.start_date = START_DATE
+    investments_transactions_get_request.end_date = END_DATE
 
     response = client.investments_transactions_get(investments_transactions_get_request)
     refute_empty(response.investment_transactions)
