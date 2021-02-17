@@ -89,7 +89,7 @@ class PlaidPaymentInitiationTest < PlaidTest
         schedule: {
           interval: 'MONTHLY',
           interval_execution_day: 1,
-          start_date: (Date.today + 7).to_s
+          start_date: '2021-01-14'
         }
       )
     standing_order_payment_id =
