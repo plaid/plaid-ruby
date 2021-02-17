@@ -4,6 +4,9 @@ require_relative "test_helper"
 
 # Internal: The test for Plaid::Investments.
 class PlaidInvestmentsTest < PlaidTest # rubocop:disable Metrics/ClassLength
+  START_DATE = (Date.today - 365)
+  END_DATE = Date.today
+
   def setup
     create_item initial_products: [:investments],
                 transactions_start_date: START_DATE,

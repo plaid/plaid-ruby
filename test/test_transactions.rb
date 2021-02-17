@@ -4,7 +4,6 @@ require_relative "test_helper"
 
 # Internal: The test for Plaid::Transactions.
 class PlaidTransactionsTest < PlaidTest # rubocop:disable Metrics/ClassLength
-
   START_DATE = (Date.today - 365)
   END_DATE = Date.today
 
@@ -93,8 +92,8 @@ class PlaidTransactionsTest < PlaidTest # rubocop:disable Metrics/ClassLength
 
     account_id = response.accounts[0].account_id
     response = get_transactions_with_retries(access_token,
-                                             Date.parse(START_DATE),
-                                             Date.parse(END_DATE),
+                                             START_DATE,
+                                             END_DATE,
                                              account_ids: [account_id])
     refute_empty(response.transactions)
   end
