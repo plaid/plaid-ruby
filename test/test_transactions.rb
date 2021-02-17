@@ -4,7 +4,7 @@ require_relative "test_helper"
 
 # Internal: The test for Plaid::Transactions.
 class PlaidTransactionsTest < PlaidTest # rubocop:disable Metrics/ClassLength
-  TWO_YEARS_AGO = 2.years.ago
+  TWO_YEARS_AGO = 2.year.ago
   NOW = 2.minutes.ago
   START_DATE = TWO_YEARS_AGO.strftime("%F")
   END_DATE = NOW.strftime("%F")
