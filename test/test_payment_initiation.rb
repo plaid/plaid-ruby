@@ -73,6 +73,7 @@ class PlaidPaymentInitiationTest < PlaidTest
         schedule: {
           interval: 'MONTHLY',
           interval_execution_day: 1,
+          # Fixed date in the long future to avoid breaking VCR recordings
           start_date: '9999-01-01'
         }
       )
