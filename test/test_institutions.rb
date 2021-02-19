@@ -1,93 +1,159 @@
-require_relative 'test_helper'
+require_relative "test_helper"
 
 # Internal: The test for Plaid::Institutions.
 class PlaidInstitutionsTest < PlaidTest
   def test_get
-    response = client.institutions.get(count: 3,
-                                       offset: 1,
-                                       country_codes: ['US'])
-    assert_equal(3, response.institutions.length)
+    institutions_get_request = Plaid::InstitutionsGetRequest.new({
+      :count => 3,
+      :offset => 1,
+      :country_codes => ["US"],
+    })
+
+    response = client.institutions_get(institutions_get_request)
+    assert_equal(3, response.to_hash[:institutions].length)
   end
 
   def test_get_with_options
-    response = client.institutions.get count: 3,
-                                       offset: 1,
-                                       country_codes: ['US'],
-                                       options: { products: ['transactions'],
-                                                  include_optional_metadata:
-                                                  true }
-    assert_equal(3, response['institutions'].length)
+    institutions_get_request = Plaid::InstitutionsGetRequest.new({
+      :count => 3,
+      :offset => 1,
+      :country_codes => ["US"],
+      :options => {
+        products: ["transactions"],
+        include_optional_metadata: true,
+      },
+    })
+    response = client.institutions_get institutions_get_request
+
+    assert_kind_of(Plaid::InstitutionsGetResponse, response)
+    assert_equal(3, response.institutions.length)
   end
 
   def test_get_invalid_parameters
-    assert_raises(Plaid::InvalidRequestError) do
-      client.institutions.get(count: BAD_STRING,
-                              offset: BAD_STRING,
-                              country_codes: ['US'])
+    assert_raises(ArgumentError) do
+      institutions_get_request = Plaid::InstitutionsGetRequest.new({
+        :count => BAD_STRING,
+        :offset => BAD_STRING,
+        :country_codes => ["XX"],
+      })
     end
   end
 
   def test_get_by_id
-    response = client.institutions.get_by_id(SANDBOX_INSTITUTION, ['US'])
+    institutions_get_by_id_request = Plaid::InstitutionsGetByIdRequest.new({
+      :institution_id => SANDBOX_INSTITUTION,
+      :country_codes => ["US"],
+    })
+
+    response = client.institutions_get_by_id(institutions_get_by_id_request)
+
     assert_equal(SANDBOX_INSTITUTION, response.institution.institution_id)
-    assert_equal(['US'], response.institution.country_codes)
+    assert_equal(["US"], response.institution.country_codes)
+    assert_kind_of(Plaid::InstitutionsGetByIdResponse, response)
   end
 
   def test_get_by_id_invalid_parameters
-    assert_raises(Plaid::InvalidInputError) do
-      client.institutions.get_by_id(BAD_STRING, ['US'])
+    institutions_get_by_id_request = Plaid::InstitutionsGetByIdRequest.new({
+      :institution_id => BAD_STRING,
+      :country_codes => ["US"],
+    })
+
+    begin
+      client.institutions_get_by_id institutions_get_by_id_request
+    rescue Plaid::ApiError => e
+      json_response = JSON.parse(e.response_body)
+      assert_equal(json_response["error_code"], "INVALID_INSTITUTION")
     end
   end
 
   def test_get_by_id_include_optional_metadata
-    response = client.institutions.get_by_id(SANDBOX_INSTITUTION,
-                                             ['US'],
-                                             options:
-                                             { include_optional_metadata:
-                                               true })
+    institutions_get_by_id_request = Plaid::InstitutionsGetByIdRequest.new({
+      :institution_id => SANDBOX_INSTITUTION,
+      :country_codes => ["US"],
+      :options => { include_optional_metadata: true },
+    })
+
+    response = client.institutions_get_by_id(institutions_get_by_id_request)
     assert_equal(SANDBOX_INSTITUTION, response.institution.institution_id)
+    assert_kind_of(Plaid::InstitutionsGetByIdResponse, response)
   end
 
   def test_get_by_id_include_status_false
-    response = client.institutions.get_by_id(SANDBOX_INSTITUTION, ['US'])
+    institutions_get_by_id_request = Plaid::InstitutionsGetByIdRequest.new({
+      :institution_id => SANDBOX_INSTITUTION,
+      :country_codes => ["US"],
+    })
+
+    response = client.institutions_get_by_id(institutions_get_by_id_request)
     assert_equal(SANDBOX_INSTITUTION, response.institution.institution_id)
     assert_nil(response.institution.status)
+    assert_kind_of(Plaid::InstitutionsGetByIdResponse, response)
   end
 
   def test_search
-    response = client.institutions.search(SANDBOX_INSTITUTION_NAME, ['US'])
+    institutions_search_request = Plaid::InstitutionsSearchRequest.new({
+      :query => SANDBOX_INSTITUTION_NAME,
+      :products => [:transactions],
+      :country_codes => ["US"],
+    })
+
+    response = client.institutions_search(institutions_search_request)
     refute_empty(response.institutions)
+    assert_kind_of(Plaid::InstitutionsSearchResponse, response)
   end
 
   def test_search_with_include_optional_metadata
-    response = client.institutions.search SANDBOX_INSTITUTION_NAME,
-                                          ['US'],
-                                          [:transactions],
-                                          options:
-                                          { include_optional_metadata: true }
+    institutions_search_request = Plaid::InstitutionsSearchRequest.new({
+      :query => SANDBOX_INSTITUTION_NAME,
+      :products => [:transactions],
+      :country_codes => ["US"],
+      :options => { include_optional_metadata: true },
+    })
+
+    response = client.institutions_search institutions_search_request
     refute_empty(response.institutions)
+    assert_kind_of(Plaid::InstitutionsSearchResponse, response)
   end
 
   def test_search_with_products
-    response = client.institutions.search SANDBOX_INSTITUTION_NAME,
-                                          ['US'],
-                                          [:transactions]
+    institutions_search_request = Plaid::InstitutionsSearchRequest.new({
+      :query => SANDBOX_INSTITUTION_NAME,
+      :products => [:transactions],
+      :country_codes => ["US"],
+    })
+
+    response = client.institutions_search institutions_search_request
     refute_empty(response.institutions)
+    assert_kind_of(Plaid::InstitutionsSearchResponse, response)
   end
 
   def test_search_invalid_products
-    assert_raises(Plaid::InvalidInputError) do
-      client.institutions.search(SANDBOX_INSTITUTION_NAME,
-                                 ['US'],
-                                 BAD_ARRAY)
+    institutions_search_request = Plaid::InstitutionsSearchRequest.new({
+      :query => SANDBOX_INSTITUTION_NAME,
+      :products => BAD_ARRAY,
+      :country_codes => ["XX"],
+    })
+
+    begin
+      client.institutions_search institutions_search_request
+    rescue Plaid::ApiError => e
+      json_response = JSON.parse(e.response_body)
+      assert_equal(json_response["error_code"], "INVALID_PRODUCT")
     end
   end
 
   def test_search_bad_products
-    assert_raises(Plaid::InvalidInputError) do
-      client.institutions.search(SANDBOX_INSTITUTION_NAME,
-                                 ['US'],
-                                 BAD_STRING)
+    institutions_search_request = Plaid::InstitutionsSearchRequest.new({
+      :query => SANDBOX_INSTITUTION_NAME,
+      :products => BAD_STRING,
+      :country_codes => ["XX"],
+    })
+
+    begin
+      client.institutions_search institutions_search_request
+    rescue Plaid::ApiError => e
+      json_response = JSON.parse(e.response_body)
+      assert_equal(json_response["error_type"], "INVALID_REQUEST")
     end
   end
 end

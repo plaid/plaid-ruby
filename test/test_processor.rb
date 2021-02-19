@@ -1,4 +1,4 @@
-require_relative 'test_helper'
+require_relative "test_helper"
 
 # Internal: The test for Plaid::Processor.
 class PlaidProcessorTest < PlaidTest
@@ -7,42 +7,61 @@ class PlaidProcessorTest < PlaidTest
   end
 
   def test_stripe_bank_account_token_create_invalid_account_id
-    error = assert_raises(Plaid::InvalidRequestError) do
-      client.processor.stripe.bank_account_token.create access_token,
-                                                        BAD_STRING
-    end
+    processor_token_create_request = Plaid::ProcessorStripeBankAccountTokenCreateRequest.new
+    processor_token_create_request.access_token = access_token
+    processor_token_create_request.account_id = BAD_STRING
 
-    assert_equal 'INVALID_FIELD', error.error_code
-    assert_match(/account_id must be a properly formatted/, error.error_message)
+    begin
+      client.processor_stripe_bank_account_token_create processor_token_create_request
+    rescue Plaid::ApiError => e
+      json_response = JSON.parse(e.response_body)
+      assert_equal(json_response["error_code"], "INVALID_FIELD")
+      assert_equal(json_response["error_message"], "account_id must be a valid account ID")
+    end
   end
 
   def test_dwolla_processor_token_create_invalid_account_id
-    error = assert_raises(Plaid::InvalidRequestError) do
-      client.processor.dwolla.processor_token.create access_token,
-                                                     BAD_STRING
-    end
+    processor_token_create_request = Plaid::ProcessorTokenCreateRequest.new
+    processor_token_create_request.access_token = access_token
+    processor_token_create_request.account_id = BAD_STRING
+    processor_token_create_request.processor = "dwolla"
 
-    assert_equal 'INVALID_FIELD', error.error_code
-    assert_match(/account_id must be a properly formatted/, error.error_message)
+    begin
+      client.processor_token_create processor_token_create_request
+    rescue Plaid::ApiError => e
+      json_response = JSON.parse(e.response_body)
+      assert_equal(json_response["error_code"], "INVALID_FIELD")
+      assert_equal(json_response["error_message"], "account_id must be a valid account ID")
+    end
   end
 
   def test_ocrolus_processor_token_create_invalid_account_id
-    error = assert_raises(Plaid::InvalidRequestError) do
-      client.processor.ocrolus.processor_token.create access_token,
-                                                      BAD_STRING
-    end
+    processor_token_create_request = Plaid::ProcessorTokenCreateRequest.new
+    processor_token_create_request.access_token = access_token
+    processor_token_create_request.account_id = BAD_STRING
+    processor_token_create_request.processor = "ocrolus"
 
-    assert_equal 'INVALID_FIELD', error.error_code
-    assert_match(/account_id must be a properly formatted/, error.error_message)
+    begin
+      client.processor_token_create processor_token_create_request
+    rescue Plaid::ApiError => e
+      json_response = JSON.parse(e.response_body)
+      assert_equal(json_response["error_code"], "INVALID_FIELD")
+      assert_equal(json_response["error_message"], "account_id must be a valid account ID")
+    end
   end
 
   def test_apex_processor_token_create_invalid_account_id
-    error = assert_raises(Plaid::InvalidRequestError) do
-      client.processor.apex.processor_token.create access_token,
-                                                   BAD_STRING
-    end
+    processor_token_create_request = Plaid::ProcessorTokenCreateRequest.new
+    processor_token_create_request.access_token = access_token
+    processor_token_create_request.account_id = BAD_STRING
+    processor_token_create_request.processor = "apex"
 
-    assert_equal 'INVALID_FIELD', error.error_code
-    assert_match(/account_id must be a properly formatted/, error.error_message)
+    begin
+      client.processor_token_create processor_token_create_request
+    rescue Plaid::ApiError => e
+      json_response = JSON.parse(e.response_body)
+      assert_equal(json_response["error_code"], "INVALID_FIELD")
+      assert_equal(json_response["error_message"], "account_id must be a valid account ID")
+    end
   end
 end
