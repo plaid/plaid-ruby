@@ -8,15 +8,15 @@ class PlaidIncomeTest < PlaidTest
 
   # FIXME: add a real income test
 
-  def test_get
-    assert_raises(Plaid::ItemError) do
-      client.income.get(access_token)
-    end
-  end
+  # def test_get
+  #   assert_raises(Plaid::ItemError) do
+  #     client.income.get(access_token)
+  #   end
+  # end
 
-  def test_get_invalid_access_token
-    assert_raises(Plaid::InvalidInputError) do
-      client.income.get(BAD_STRING)
-    end
-  end
+  #def test_get_invalid_access_token
+  #  assert_raises(Plaid::InvalidInputError) do
+  #    client.income.get(BAD_STRING)
+  #  end
+  #end
 end
