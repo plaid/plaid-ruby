@@ -14,9 +14,9 @@ class PlaidIncomeTest < PlaidTest
   #   end
   # end
 
-  #def test_get_invalid_access_token
+  # def test_get_invalid_access_token
   #  assert_raises(Plaid::InvalidInputError) do
   #    client.income.get(BAD_STRING)
   #  end
-  #end
+  # end
 end
