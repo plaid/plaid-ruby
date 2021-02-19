@@ -134,6 +134,9 @@ module Plaid
       # (e.g. "2019-04-22T00:00:00Z").
       property :consent_expiration_time
 
+      ##
+      # :attr_reader:
+      # Public: The String update type.
       property :update_type
     end
 
