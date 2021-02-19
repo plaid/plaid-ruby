@@ -14,7 +14,7 @@ class PlaidProcessorTest < PlaidTest
 
     assert_equal 'INVALID_FIELD', error.error_code
     assert_match(/account_id must be a properly formatted|
-                  account_id must be a valid account ID/, error.error_message)
+                  account_id must be a valid account ID/x, error.error_message)
   end
 
   def test_dwolla_processor_token_create_invalid_account_id
@@ -45,6 +45,6 @@ class PlaidProcessorTest < PlaidTest
 
     assert_equal 'INVALID_FIELD', error.error_code
     assert_match(/account_id must be a properly formatted|
-                 account_id must be a valid account ID/, error.error_message)
+                  account_id must be a valid account ID/x, error.error_message)
   end
 end
