@@ -1,5 +1,7 @@
 # plaid-ruby [![Circle CI](https://circleci.com/gh/plaid/plaid-ruby.svg?style=svg&circle-token=30ee002ac2021da5b5b5a701d45fe2888af124a5)](https://circleci.com/gh/plaid/plaid-ruby) [![Gem Version](https://badge.fury.io/rb/plaid.svg)](http://badge.fury.io/rb/plaid)
 
+:warning: This major version of the library will only receive critical security patches after 7/12/21. Please consider trying out our new [beta version](https://github.com/plaid/plaid-ruby/tree/14.0.0-beta-release).
+
 The official Ruby bindings for the [Plaid API](https://plaid.com/docs).
 
 ## Installation
