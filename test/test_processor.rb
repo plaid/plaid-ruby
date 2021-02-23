@@ -13,8 +13,8 @@ class PlaidProcessorTest < PlaidTest
     end
 
     assert_equal 'INVALID_FIELD', error.error_code
-    assert_match(/account_id must be a properly formatted/, error.error_message)
-    # assert_match(/account_id must be a valid account ID/, error.error_message)
+    # assert_match(/account_id must be a properly formatted/, error.error_message)
+    assert_match(/account_id must be a valid account ID/, error.error_message)
     # first = /account_id must be a properly formatted/
     # second = /account_id must be a valid account ID/
 
@@ -48,8 +48,8 @@ class PlaidProcessorTest < PlaidTest
     end
 
     assert_equal 'INVALID_FIELD', error.error_code
-    assert_match(/account_id must be a properly formatted/, error.error_message)
-    # assert_match(/account_id must be a valid account ID/, error.error_message)
+    # assert_match(/account_id must be a properly formatted/, error.error_message)
+    assert_match(/account_id must be a valid account ID/, error.error_message)
     # first = /account_id must be a properly formatted/
     # second = /account_id must be a valid account ID/
 
