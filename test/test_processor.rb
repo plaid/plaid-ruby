@@ -24,7 +24,7 @@ class PlaidProcessorTest < PlaidTest
 
     assert_equal 'INVALID_FIELD', error.error_code
     assert_equal('account_id must be a properly formatted, non-empty string',
-      error.error_message)
+                 error.error_message)
   end
 
   def test_ocrolus_processor_token_create_invalid_account_id
@@ -35,7 +35,7 @@ class PlaidProcessorTest < PlaidTest
 
     assert_equal 'INVALID_FIELD', error.error_code
     assert_equal('account_id must be a properly formatted, non-empty string',
-      error.error_message)
+                 error.error_message)
   end
 
   def test_apex_processor_token_create_invalid_account_id
