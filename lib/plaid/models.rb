@@ -125,6 +125,11 @@ module Plaid
 
       ##
       # :attr_reader:
+      # Public: The String update type.
+      property :update_type
+
+      ##
+      # :attr_reader:
       # Public: The String webhook URL.
       property :webhook
 
