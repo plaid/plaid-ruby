@@ -7,7 +7,6 @@ class PlaidProcessorTest < PlaidTest
   end
 
   def test_stripe_bank_account_token_create_invalid_account_id
-    skip 'Passes locally but not in circle, works in beta'
     error = assert_raises(Plaid::InvalidRequestError) do
       client.processor.stripe.bank_account_token.create access_token,
                                                         BAD_STRING
@@ -38,7 +37,6 @@ class PlaidProcessorTest < PlaidTest
   end
 
   def test_apex_processor_token_create_invalid_account_id
-    skip 'Passes locally but not in circle, works in beta'
     error = assert_raises(Plaid::InvalidRequestError) do
       client.processor.apex.processor_token.create access_token,
                                                    BAD_STRING
