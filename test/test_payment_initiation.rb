@@ -61,12 +61,6 @@ class PlaidPaymentInitiationTest < PlaidTest
     refute_empty(create_link_token_response.link_token)
     refute_empty(create_link_token_response.expiration)
 
-    # create legacy payment_token (deprecated)
-    create_payment_token_response =
-      client.payment_initiation.create_payment_token(payment_id)
-    refute_empty(create_payment_token_response.payment_token)
-    refute_empty(create_payment_token_response.payment_token_expiration_time)
-
     # get payment
     get_payment_response = client.payment_initiation.get_payment(payment_id)
     refute_empty(get_payment_response.payment_id)
@@ -89,7 +83,8 @@ class PlaidPaymentInitiationTest < PlaidTest
         schedule: {
           interval: 'MONTHLY',
           interval_execution_day: 1,
-          start_date: (Date.today + 7).to_s
+          # Fixed date in the long future to avoid breaking VCR recordings
+          start_date: '9999-01-01'
         }
       )
     standing_order_payment_id =
