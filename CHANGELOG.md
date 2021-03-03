@@ -1,3 +1,6 @@
+# 13.0.1
+- Add `update_type` to `Item` model.
+
 # 13.0.0
 - Add support for providing a payment initiation schedule
 - Add back the (now deprecated) `/item/public_token/create` endpoint
