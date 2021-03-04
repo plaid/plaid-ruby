@@ -227,7 +227,7 @@ object.</p>
                 
               </p>
               <div id="method-i-create_payment_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 49</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 51</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_payment</span>(<span class="ruby-identifier">recipient_id</span>, <span class="ruby-identifier">reference</span>, <span class="ruby-identifier">amount</span>, <span class="ruby-value">schedule:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">nil?</span>
     <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;payment_initiation/payment/create&#39;</span>,
@@ -287,7 +287,7 @@ object.</p>
                 
               </p>
               <div id="method-i-create_payment_token_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 71</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_payment_token</span>(<span class="ruby-identifier">payment_id</span>)
   <span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;Warning: this method will be deprecated in a future version. &#39;</span>\
        <span class="ruby-string">&#39;To replace the payment_token, look into the link_token at &#39;</span>\
@@ -318,13 +318,15 @@ object.</p>
 <p>Recipient name.</p>
 </dd><dt>iban
 <dd>
-<p>Recipient IBAN.</p>
+<p>Recipient IBAN. Should be nil if using bacs.</p>
 </dd><dt>address
 <dd>
-<p>Recipient address.</p>
+<p>Recipient address (hash with “street”, “city”, “postal_code” and
+“country”). Best practice is to set it as nil.</p>
 </dd><dt>bacs
 <dd>
-<p>Recipient BACS (hash with “account” and “sort_code” keys)</p>
+<p>Recipient BACS (hash with “account” and “sort_code” keys). Should be nil if
+using iban.</p>
 </dd></dl>
 
 <h3 id="method-i-create_recipient-label-Returns">Returns</h3>
@@ -349,7 +351,7 @@ object.</p>
                 
               </p>
               <div id="method-i-create_recipient_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 12</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 14</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_recipient</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">iban</span>, <span class="ruby-identifier">address</span>, <span class="ruby-identifier">bacs</span>)
   <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;payment_initiation/recipient/create&#39;</span>,
                  <span class="ruby-constant">PaymentRecipientCreateResponse</span>,
@@ -399,7 +401,7 @@ object.</p>
                 
               </p>
               <div id="method-i-get_payment_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 86</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 88</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_payment</span>(<span class="ruby-identifier">payment_id</span>)
   <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;payment_initiation/payment/get&#39;</span>,
                  <span class="ruby-constant">PaymentGetResponse</span>,
@@ -448,7 +450,7 @@ object.</p>
                 
               </p>
               <div id="method-i-get_recipient_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 26</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_recipient</span>(<span class="ruby-identifier">recipient_id</span>)
   <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;payment_initiation/recipient/get&#39;</span>,
                  <span class="ruby-constant">PaymentRecipientGetResponse</span>,
@@ -499,7 +501,7 @@ object.</p>
                 
               </p>
               <div id="method-i-list_payments_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 99</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 101</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list_payments</span>(<span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;payment_initiation/payment/list&#39;</span>,
                  <span class="ruby-constant">PaymentListResponse</span>,
@@ -544,7 +546,7 @@ object.</p>
                 
               </p>
               <div id="method-i-list_recipients_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 35</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 37</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list_recipients</span>
   <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;payment_initiation/recipient/list&#39;</span>,
                  <span class="ruby-constant">PaymentRecipientListResponse</span>,
