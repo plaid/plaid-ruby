@@ -16,9 +16,9 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install plaid
+    $ gem install plaid --pre
 
-The gem supports Ruby 2.7.1+ only.
+The gem supports Ruby 2.4.0+ only.
 
 ### Versioning
 
