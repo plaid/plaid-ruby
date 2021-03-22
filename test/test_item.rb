@@ -18,7 +18,7 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
   end
 
   def test_create_invalid_initial_products
-    assert_raises(Plaid::InvalidInputError) do
+    assert_raises(Plaid::ItemError) do
       create_item initial_products: BAD_ARRAY
     end
   end
