@@ -1,3 +1,7 @@
+# 14.0.0.beta.4
+See full changelog [here](https://github.com/plaid/plaid-openapi/blob/master/CHANGELOG.md).
+- Remove validation for `maxProperties` due to generator bug.
+
 # 14.0.0.beta.3
 Type fixes, see full changelog [here](https://github.com/plaid/plaid-openapi/blob/master/CHANGELOG.md).
 
