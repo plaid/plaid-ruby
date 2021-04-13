@@ -876,7 +876,7 @@ module Plaid
       # Public: Specifies metadata related to the payment_initiation product
       # (or nil).
       property :payment_initiation_metadata,
-        coerce: InstitutionPaymentInitiationMetadata
+               coerce: InstitutionPaymentInitiationMetadata
     end
 
     module MFA
