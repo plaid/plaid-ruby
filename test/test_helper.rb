@@ -99,6 +99,8 @@ class PlaidTest < MiniTest::Test
 
   SANDBOX_INSTITUTION = 'ins_109508'.freeze
 
+  PAYMENT_INITIATION_METADATA_SANDBOX_INSTITUTION = 'ins_117650'.freeze
+
   SANDBOX_INSTITUTION_NAME = 'First Platypus Bank'.freeze
 
   SANDBOX_INSTITUTIONS = %w[ins_109508 ins_109509 ins_109510

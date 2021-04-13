@@ -1,0 +1,81 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/institutions/get_by_id
+    body:
+      encoding: UTF-8
+      string: '{"institution_id":"ins_117650","country_codes":["GB"],"options":{"include_payment_initiation_metadata":true},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v13.0.1
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2020-09-14'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Tue, 13 Apr 2021 21:45:37 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '370'
+      connection:
+      - keep-alive
+      plaid-version:
+      - '2020-09-14'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "institution": {
+            "country_codes": [
+              "GB"
+            ],
+            "institution_id": "ins_117650",
+            "name": "Royal Bank of Plaid",
+            "oauth": false,
+            "payment_initiation_metadata": {
+              "standing_order_metadata": {
+                "supports_standing_order_end_date": true,
+                "supports_standing_order_negative_execution_days": true,
+                "valid_standing_order_intervals": [
+                  "WEEKLY",
+                  "MONTHLY"
+                ]
+              },
+              "supports_international_payments": true,
+              "supports_refund_details": true
+            },
+            "products": [
+              "assets",
+              "auth",
+              "balance",
+              "transactions",
+              "identity",
+              "payment_initiation",
+              "standing_orders"
+            ],
+            "routing_numbers": []
+          },
+          "request_id": "jXLOQRfzHNzGz9n"
+        }
+    http_version:
+  recorded_at: Tue, 13 Apr 2021 21:45:37 GMT
+recorded_with: VCR 4.0.0
