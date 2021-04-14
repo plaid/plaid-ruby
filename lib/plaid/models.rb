@@ -770,6 +770,13 @@ module Plaid
     class InstitutionPaymentInitiationMetadata < BaseModel
       ##
       # :attr_reader:
+      # Public: The map of maximum payment amount per currency for this
+      # institution.
+      # E.g. {"GBP"=>"1000000"}.
+      property :maximum_payment_amount
+
+      ##
+      # :attr_reader:
       # Public: The standing order metadata for this institution.
       property :standing_order_metadata, coerce: StandingOrderMetadata
 
