@@ -48,6 +48,19 @@ class PlaidInstitutionsTest < PlaidTest
     assert_equal(SANDBOX_INSTITUTION, response.institution.institution_id)
   end
 
+  def test_get_by_id_include_payment_initiation_metadata
+    response = client.institutions.get_by_id(
+      PAYMENT_INITIATION_METADATA_SANDBOX_INSTITUTION,
+      ['GB'],
+      options: { include_payment_initiation_metadata: true }
+    )
+    assert_equal(
+      PAYMENT_INITIATION_METADATA_SANDBOX_INSTITUTION,
+      response.institution.institution_id
+    )
+    refute_empty(response.institution.payment_initiation_metadata)
+  end
+
   def test_get_by_id_include_status_false
     response = client.institutions.get_by_id(SANDBOX_INSTITUTION, ['US'])
     assert_equal(SANDBOX_INSTITUTION, response.institution.institution_id)

@@ -744,6 +744,55 @@ module Plaid
       property :item_logins, coerce: InstitutionStatusItemLogins
     end
 
+    # Public: A representation of standing order metadata for an institution.
+    class StandingOrderMetadata < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The Boolean flag indicating if the institution supports
+      # end date for standing orders.
+      property :supports_standing_order_end_date
+
+      ##
+      # :attr_reader:
+      # Public: The Boolean flag indicating if the institution supports
+      # negative execution days for standing orders.
+      property :supports_standing_order_negative_execution_days
+
+      ##
+      # :attr_reader:
+      # Public: The Array of valid standing order intervals for
+      # this institution.
+      # E.g. ["WEEKLY", "MONTHLY"].
+      property :valid_standing_order_intervals
+    end
+
+    # Public: A representation of an institution's payment initiation metadata.
+    class InstitutionPaymentInitiationMetadata < BaseModel
+      ##
+      # :attr_reader:
+      # Public: The map of maximum payment amount per currency for this
+      # institution.
+      # E.g. {"GBP"=>"1000000"}.
+      property :maximum_payment_amount
+
+      ##
+      # :attr_reader:
+      # Public: The standing order metadata for this institution.
+      property :standing_order_metadata, coerce: StandingOrderMetadata
+
+      ##
+      # :attr_reader:
+      # Public: The Boolean flag indicating if the institution supports
+      # international payments.
+      property :supports_international_payments
+
+      ##
+      # :attr_reader:
+      # Public: The Boolean flag indicating if the institution supports
+      # refund details.
+      property :supports_refund_details
+    end
+
     # Public: A representation of Institution.
     class Institution < BaseModel
       @ignored_properties = ['input_spec']
@@ -828,6 +877,13 @@ module Plaid
       # :attr_reader:
       # Public: Indicates that the institution has an OAuth login flow.
       property :oauth
+
+      ##
+      # :attr_reader:
+      # Public: Specifies metadata related to the payment_initiation product
+      # (or nil).
+      property :payment_initiation_metadata,
+               coerce: InstitutionPaymentInitiationMetadata
     end
 
     module MFA
