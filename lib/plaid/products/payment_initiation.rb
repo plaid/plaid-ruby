@@ -46,23 +46,24 @@ module Plaid
     # reference    - Payment reference.
     # amount       - Payment amount.
     # schedule     - Payment schedule.
+    # options      - Payment options.
     #
     # Returns a PaymentCreateResponse object.
-    def create_payment(recipient_id, reference, amount, schedule: nil)
-      if schedule.nil?
-        post_with_auth 'payment_initiation/payment/create',
-                       PaymentCreateResponse,
-                       recipient_id: recipient_id,
-                       reference: reference,
-                       amount: amount
-      else
-        post_with_auth 'payment_initiation/payment/create',
-                       PaymentCreateResponse,
-                       recipient_id: recipient_id,
-                       reference: reference,
-                       amount: amount,
-                       schedule: schedule
-      end
+    def create_payment(
+      recipient_id, reference, amount, schedule: nil, options: nil
+    )
+      create_payment = {
+        'recipient_id': recipient_id,
+        'reference': reference,
+        'amount': amount
+      }
+
+      create_payment['schedule'] = schedule unless schedule.nil?
+      create_payment['options'] = options unless options.nil?
+
+      post_with_auth('payment_initiation/payment/create',
+                     PaymentCreateResponse,
+                     create_payment)
     end
 
     # Public: Create a payment token.
@@ -221,6 +222,17 @@ module Plaid
     # :attr_reader:
     # Public: The recipient ID for payment.
     property :recipient_id
+
+    ##
+    # :attr_reader:
+    # Public: An object containing a BACS account number and sort code
+    # for the payer's account.
+    property :bacs
+
+    ##
+    # :attr_reader:
+    # Public: A string containing the IBAN for the payer's account.
+    property :iban
   end
 
   # Public: The response wrapper for /payment_initiation/payment/list.

@@ -109,4 +109,100 @@ class PlaidPaymentInitiationTest < PlaidTest
     refute_empty(list_payments_response.payments)
   end
   # rubocop:enable Metrics/MethodLength
+
+  # rubocop:disable Metrics/MethodLength
+  def test_payment_with_bacs_options
+    # create recipient
+    create_recipient_response = client.payment_initiation.create_recipient(
+      'John Doe',
+      'GB33BUKB20201555555555',
+      {
+        street:      ['Street Name 999'],
+        city:        'City',
+        postal_code: '99999',
+        country:     'GB'
+      },
+      account: '26207729',
+      sort_code: '560029'
+    )
+    recipient_id = create_recipient_response.recipient_id
+    refute_empty(recipient_id)
+
+    # get recipient
+    get_recipient_response = client.payment_initiation.get_recipient(
+      recipient_id
+    )
+    refute_empty(get_recipient_response.recipient_id)
+    # create single immediate payment
+    create_payment_response = client.payment_initiation.create_payment(
+      recipient_id,
+      'testpayment',
+      {
+        currency: 'GBP',
+        value:    100.00
+      },
+      schedule: nil,
+      options: {
+        request_refund_details: true,
+        bacs: {
+          account: '1234567890',
+          sort_code: '000000'
+        }
+      }
+    )
+    payment_id = create_payment_response.payment_id
+    refute_empty(payment_id)
+
+    # get payment
+    get_payment_response = client.payment_initiation.get_payment(payment_id)
+    refute_empty(get_payment_response.payment_id)
+    refute_empty(get_payment_response.bacs)
+  end
+  # rubocop:enable Metrics/MethodLength
+  # rubocop:disable Metrics/MethodLength
+  def test_payment_with_iban_options
+    # create recipient
+    create_recipient_response = client.payment_initiation.create_recipient(
+      'John Doe',
+      'GB33BUKB20201555555555',
+      {
+        street:      ['Street Name 999'],
+        city:        'City',
+        postal_code: '99999',
+        country:     'GB'
+      },
+      account: '26207729',
+      sort_code: '560029'
+    )
+    recipient_id = create_recipient_response.recipient_id
+    refute_empty(recipient_id)
+
+    # get recipient
+    get_recipient_response = client.payment_initiation.get_recipient(
+      recipient_id
+    )
+    refute_empty(get_recipient_response.recipient_id)
+    # create single immediate payment
+    create_payment_response = client.payment_initiation.create_payment(
+      recipient_id,
+      'testpayment',
+      {
+        currency: 'GBP',
+        value:    100.00
+      },
+      schedule: nil,
+      options: {
+        request_refund_details: true,
+        iban: 'iban'
+      }
+    )
+    payment_id = create_payment_response.payment_id
+    refute_empty(payment_id)
+
+    # get payment
+    get_payment_response = client.payment_initiation.get_payment(payment_id)
+    refute_empty(get_payment_response.payment_id)
+    refute_empty(get_payment_response.iban)
+  end
+  # rubocop:enable Metrics/MethodLength
 end
