@@ -1,0 +1,284 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/payment_initiation/payment/get
+    body:
+      encoding: UTF-8
+      string: '{"payment_id":"payment-id-sandbox-53f9b6cd-9a53-41a4-a9a1-5a477af5d43a","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v13.1.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2020-09-14'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 06 May 2021 22:06:23 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '303'
+      connection:
+      - keep-alive
+      plaid-version:
+      - '2020-09-14'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "amount": {
+            "currency": "GBP",
+            "value": 100
+          },
+          "bacs": null,
+          "iban": "iban",
+          "last_status_update": "2021-05-06T22:06:22.992195Z",
+          "payment_id": "payment-id-sandbox-53f9b6cd-9a53-41a4-a9a1-5a477af5d43a",
+          "recipient_id": "recipient-id-sandbox-39c0a74c-6f03-447b-ad6a-b07d09f21169",
+          "reference": "testpayment",
+          "request_id": "lJXjnFgIMlIVkAs",
+          "status": "PAYMENT_STATUS_INPUT_NEEDED"
+        }
+    http_version:
+  recorded_at: Thu, 06 May 2021 22:06:23 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/payment_initiation/recipient/create
+    body:
+      encoding: UTF-8
+      string: '{"name":"John Doe","iban":"GB33BUKB20201555555555","bacs":{"account":"26207729","sort_code":"560029"},"address":{"street":["Street
+        Name 999"],"city":"City","postal_code":"99999","country":"GB"},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v13.1.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2020-09-14'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 06 May 2021 22:10:08 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '121'
+      connection:
+      - keep-alive
+      plaid-version:
+      - '2020-09-14'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "recipient_id": "recipient-id-sandbox-39c0a74c-6f03-447b-ad6a-b07d09f21169",
+          "request_id": "qQaciKquAXsbwrN"
+        }
+    http_version:
+  recorded_at: Thu, 06 May 2021 22:10:08 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/payment_initiation/recipient/get
+    body:
+      encoding: UTF-8
+      string: '{"recipient_id":"recipient-id-sandbox-39c0a74c-6f03-447b-ad6a-b07d09f21169","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v13.1.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2020-09-14'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 06 May 2021 22:10:08 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '260'
+      connection:
+      - keep-alive
+      plaid-version:
+      - '2020-09-14'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "address": {
+            "city": "City",
+            "country": "GB",
+            "postal_code": "99999",
+            "street": [
+              "Street Name 999"
+            ]
+          },
+          "bacs": {
+            "account": "26207729",
+            "sort_code": "560029"
+          },
+          "iban": "GB33BUKB20201555555555",
+          "name": "John Doe",
+          "recipient_id": "recipient-id-sandbox-39c0a74c-6f03-447b-ad6a-b07d09f21169",
+          "request_id": "zvLSaVRj6TFB1vS"
+        }
+    http_version:
+  recorded_at: Thu, 06 May 2021 22:10:08 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/payment_initiation/payment/create
+    body:
+      encoding: UTF-8
+      string: '{"recipient_id":"recipient-id-sandbox-39c0a74c-6f03-447b-ad6a-b07d09f21169","reference":"testpayment","amount":{"currency":"GBP","value":100.0},"options":{"request_refund_details":true,"iban":"iban"},"client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v13.1.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2020-09-14'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 06 May 2021 22:10:09 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '158'
+      connection:
+      - keep-alive
+      plaid-version:
+      - '2020-09-14'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "payment_id": "payment-id-sandbox-fb40f16f-8147-4a1e-8357-46be8535a0df",
+          "request_id": "idjStvCw8xh7GE3",
+          "status": "PAYMENT_STATUS_INPUT_NEEDED"
+        }
+    http_version:
+  recorded_at: Thu, 06 May 2021 22:10:09 GMT
+- request:
+    method: post
+    uri: https://sandbox.plaid.com/payment_initiation/payment/get
+    body:
+      encoding: UTF-8
+      string: '{"payment_id":"payment-id-sandbox-fb40f16f-8147-4a1e-8357-46be8535a0df","client_id":"PLAID_RUBY_CLIENT_ID","secret":"PLAID_RUBY_SECRET"}'
+    headers:
+      User-Agent:
+      - Plaid Ruby v13.1.0
+      Content-Type:
+      - application/json
+      Plaid-Version:
+      - '2020-09-14'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx
+      date:
+      - Thu, 06 May 2021 22:10:09 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '302'
+      connection:
+      - keep-alive
+      plaid-version:
+      - '2020-09-14'
+      vary:
+      - Accept-Encoding
+      strict-transport-security:
+      - max-age=31536000; includeSubDomains; preload
+      x-frame-options:
+      - DENY
+      x-content-type-options:
+      - nosniff
+      x-xss-protection:
+      - 1; mode=block
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {
+          "amount": {
+            "currency": "GBP",
+            "value": 100
+          },
+          "bacs": null,
+          "iban": "iban",
+          "last_status_update": "2021-05-06T22:10:09.081417Z",
+          "payment_id": "payment-id-sandbox-fb40f16f-8147-4a1e-8357-46be8535a0df",
+          "recipient_id": "recipient-id-sandbox-39c0a74c-6f03-447b-ad6a-b07d09f21169",
+          "reference": "testpayment",
+          "request_id": "DtchfftFj3vxKcJ",
+          "status": "PAYMENT_STATUS_INPUT_NEEDED"
+        }
+    http_version:
+  recorded_at: Thu, 06 May 2021 22:10:09 GMT
+recorded_with: VCR 4.0.0

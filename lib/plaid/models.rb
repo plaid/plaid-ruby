@@ -2119,6 +2119,17 @@ module Plaid
       # :attr_reader:
       # Public: The recipient ID for payment.
       property :recipient_id
+
+      ##
+      # :attr_reader:
+      # Public: An object containing a BACS account number and sort code
+      # for the payer's account.
+      property :bacs
+
+      ##
+      # :attr_reader:
+      # Public: A string containing the IBAN for the payer's account.
+      property :iban
     end
 
     # Public: Metadata associated with a link token.
