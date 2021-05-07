@@ -1,6 +1,7 @@
 require_relative 'test_helper'
 
 # Internal: The test for Plaid::PaymentInitiation.
+# rubocop:disable Metrics/ClassLength
 class PlaidPaymentInitiationTest < PlaidTest
   # rubocop:disable Metrics/MethodLength
   def test_all_routes
@@ -159,6 +160,7 @@ class PlaidPaymentInitiationTest < PlaidTest
     refute_empty(get_payment_response.bacs)
   end
   # rubocop:enable Metrics/MethodLength
+
   # rubocop:disable Metrics/MethodLength
   def test_payment_with_iban_options
     # create recipient
@@ -206,3 +208,4 @@ class PlaidPaymentInitiationTest < PlaidTest
   end
   # rubocop:enable Metrics/MethodLength
 end
+# rubocop:enable Metrics/ClassLength
