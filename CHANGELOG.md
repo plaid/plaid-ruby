@@ -1,8 +1,82 @@
-# 13.1.0
-- Add Standing Orders support to Payment Initiation
+# 14.0.0.beta.4
+See full changelog [here](https://github.com/plaid/plaid-openapi/blob/master/CHANGELOG.md).
+- Remove validation for `maxProperties` due to generator bug.
 
-# 13.0.1
-- Add `update_type` to `Item` model.
+# 14.0.0.beta.3
+Type fixes, see full changelog [here](https://github.com/plaid/plaid-openapi/blob/master/CHANGELOG.md).
+
+# 14.0.0.beta.1
+
+This version represents a transition in how we maintain our external client libraries. We are now using an [API spec](https://github.com/plaid/plaid-openapi) written in `OpenAPI 3.0.0` and running our definition file through [OpenAPITool's `python` generator](https://github.com/OpenAPITools/openapi-generator).
+
+The minimum required ruby version is 2.7.1.
+
+**Ruby Migration Guide:**
+
+### Client initialization
+From:
+```ruby
+client = Plaid::Client.new(env: :sandbox,
+                            client_id: client_id,
+                            secret: secret)
+```
+
+To:
+```ruby
+configuration = Plaid::Configuration.new
+configuration.server_index = Plaid::Configuration::Environment["sandbox"]
+configuration.api_key["PLAID-CLIENT-ID"] = ENV["PLAID_RUBY_CLIENT_ID"]
+configuration.api_key["PLAID-SECRET"] = ENV["PLAID_RUBY_SECRET"]
+configuration.api_key["Plaid-Version"] = "2020-09-14"
+
+api_client = Plaid::ApiClient.new(
+  configuration
+)
+
+client = Plaid::PlaidApi.new(api_client)
+```
+
+### Endpoints
+All endpoint requests now take a request model and the functions have been renamed to include `_`.
+
+From:
+```ruby
+response = client.auth.get(access_token)
+```
+
+To:
+```ruby
+auth_get_request = Plaid::AuthGetRequest.new
+auth_get_request.access_token = access_token
+
+or
+
+auth_get_request = Plaid::AuthGetRequest.new({:access_token => access_token})
+
+response = client.auth_get(auth_get_request)
+```
+
+### Errors
+
+From:
+```ruby
+begin
+  client.auth.get(auth_get_request)
+rescue Plaid::PlaidAPIError => e
+  raise e if e.error_code != 'PRODUCT_NOT_READY'
+  sleep 1
+end
+```
+
+To:
+```ruby
+begin
+  client.auth_get(auth_get_request)
+rescue Plaid::ApiError => e
+  json_response = JSON.parse(e.response_body)
+  if json_response["error_code"] != "PRODUCT_NOT_READY"
+end
+```
 
 # 13.0.0
 - Add support for providing a payment initiation schedule
