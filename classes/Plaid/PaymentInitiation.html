@@ -184,7 +184,7 @@
         <div class="method">
           <div class="title method-title" id="method-i-create_payment">
             
-              <b>create_payment</b>(recipient_id, reference, amount, schedule: nil)
+              <b>create_payment</b>( recipient_id, reference, amount, schedule: nil, options: nil )
             
             <a href="../../classes/Plaid/PaymentInitiation.html#method-i-create_payment" name="method-i-create_payment" class="permalink">Link</a>
           </div>
@@ -204,6 +204,9 @@
 </dd><dt>schedule
 <dd>
 <p>Payment schedule.</p>
+</dd><dt>options
+<dd>
+<p>Payment options.</p>
 </dd></dl>
 
 <h3 id="method-i-create_payment-label-Returns">Returns</h3>
@@ -227,22 +230,22 @@ object.</p>
                 
               </p>
               <div id="method-i-create_payment_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 51</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_payment</span>(<span class="ruby-identifier">recipient_id</span>, <span class="ruby-identifier">reference</span>, <span class="ruby-identifier">amount</span>, <span class="ruby-value">schedule:</span> <span class="ruby-keyword">nil</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;payment_initiation/payment/create&#39;</span>,
-                   <span class="ruby-constant">PaymentCreateResponse</span>,
-                   <span class="ruby-value">recipient_id:</span> <span class="ruby-identifier">recipient_id</span>,
-                   <span class="ruby-value">reference:</span> <span class="ruby-identifier">reference</span>,
-                   <span class="ruby-value">amount:</span> <span class="ruby-identifier">amount</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;payment_initiation/payment/create&#39;</span>,
-                   <span class="ruby-constant">PaymentCreateResponse</span>,
-                   <span class="ruby-value">recipient_id:</span> <span class="ruby-identifier">recipient_id</span>,
-                   <span class="ruby-value">reference:</span> <span class="ruby-identifier">reference</span>,
-                   <span class="ruby-value">amount:</span> <span class="ruby-identifier">amount</span>,
-                   <span class="ruby-value">schedule:</span> <span class="ruby-identifier">schedule</span>
-  <span class="ruby-keyword">end</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_payment</span>(
+  <span class="ruby-identifier">recipient_id</span>, <span class="ruby-identifier">reference</span>, <span class="ruby-identifier">amount</span>, <span class="ruby-value">schedule:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">options:</span> <span class="ruby-keyword">nil</span>
+)
+  <span class="ruby-identifier">create_payment</span> = {
+    <span class="ruby-value">&#39;recipient_id&#39;:</span> <span class="ruby-identifier">recipient_id</span>,
+    <span class="ruby-value">&#39;reference&#39;:</span> <span class="ruby-identifier">reference</span>,
+    <span class="ruby-value">&#39;amount&#39;:</span> <span class="ruby-identifier">amount</span>
+  }
+
+  <span class="ruby-identifier">create_payment</span>[<span class="ruby-string">&#39;schedule&#39;</span>] = <span class="ruby-identifier">schedule</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">schedule</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">create_payment</span>[<span class="ruby-string">&#39;options&#39;</span>] = <span class="ruby-identifier">options</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">nil?</span>
+
+  <span class="ruby-identifier">post_with_auth</span>(<span class="ruby-string">&#39;payment_initiation/payment/create&#39;</span>,
+                 <span class="ruby-constant">PaymentCreateResponse</span>,
+                 <span class="ruby-identifier">create_payment</span>)
 <span class="ruby-keyword">end</span></pre>
               </div>
             </div>
@@ -287,7 +290,7 @@ object.</p>
                 
               </p>
               <div id="method-i-create_payment_token_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 73</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 74</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_payment_token</span>(<span class="ruby-identifier">payment_id</span>)
   <span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;Warning: this method will be deprecated in a future version. &#39;</span>\
        <span class="ruby-string">&#39;To replace the payment_token, look into the link_token at &#39;</span>\
@@ -401,7 +404,7 @@ object.</p>
                 
               </p>
               <div id="method-i-get_payment_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 88</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 89</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_payment</span>(<span class="ruby-identifier">payment_id</span>)
   <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;payment_initiation/payment/get&#39;</span>,
                  <span class="ruby-constant">PaymentGetResponse</span>,
@@ -501,7 +504,7 @@ object.</p>
                 
               </p>
               <div id="method-i-list_payments_source" class="dyn-source">
-                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 101</span>
+                <pre><span class="ruby-comment"># File lib/plaid/products/payment_initiation.rb, line 102</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list_payments</span>(<span class="ruby-identifier">options</span>)
   <span class="ruby-identifier">post_with_auth</span> <span class="ruby-string">&#39;payment_initiation/payment/list&#39;</span>,
                  <span class="ruby-constant">PaymentListResponse</span>,
