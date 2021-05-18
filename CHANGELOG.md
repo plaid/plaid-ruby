@@ -1,3 +1,9 @@
+## 13.2.0
+- Add support for `options` to `/payment_initiation/payment/create`
+
+# 13.1.0
+- Add Standing Orders support to Payment Initiation
+
 # 13.0.1
 - Add `update_type` to `Item` model.
 
