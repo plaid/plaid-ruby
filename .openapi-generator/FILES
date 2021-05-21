@@ -16,7 +16,9 @@ docs/AccountsGetRequestOptions.md
 docs/AccountsGetResponse.md
 docs/Address.md
 docs/AddressData.md
-docs/Amount.md
+docs/Application.md
+docs/ApplicationGetRequest.md
+docs/ApplicationGetResponse.md
 docs/AssetReport.md
 docs/AssetReportAuditCopyCreateRequest.md
 docs/AssetReportAuditCopyCreateResponse.md
@@ -102,6 +104,8 @@ docs/EmployerIncomeSummaryFieldString.md
 docs/EmployersSearchRequest.md
 docs/EmployersSearchResponse.md
 docs/Error.md
+docs/ExternalPaymentOptions.md
+docs/ExternalPaymentRefundDetails.md
 docs/ExternalPaymentSchedule.md
 docs/ExternalPaymentScheduleGet.md
 docs/HealthIncident.md
@@ -138,6 +142,7 @@ docs/InstitutionsGetRequest.md
 docs/InstitutionsGetRequestOptions.md
 docs/InstitutionsGetResponse.md
 docs/InstitutionsSearchAccountFilter.md
+docs/InstitutionsSearchPaymentInitiationOptions.md
 docs/InstitutionsSearchRequest.md
 docs/InstitutionsSearchRequestOptions.md
 docs/InstitutionsSearchResponse.md
@@ -172,6 +177,7 @@ docs/ItemWebhookUpdateRequest.md
 docs/ItemWebhookUpdateResponse.md
 docs/JWKPublicKey.md
 docs/JWTHeader.md
+docs/LiabilitiesDefaultUpdateWebhook.md
 docs/LiabilitiesGetRequest.md
 docs/LiabilitiesGetRequestOptions.md
 docs/LiabilitiesGetResponse.md
@@ -218,6 +224,9 @@ docs/PayFrequency.md
 docs/PayPeriodDetails.md
 docs/PaymentAmount.md
 docs/PaymentInitiationAddress.md
+docs/PaymentInitiationMetadata.md
+docs/PaymentInitiationOptionalRestrictionBacs.md
+docs/PaymentInitiationPayment.md
 docs/PaymentInitiationPaymentCreateRequest.md
 docs/PaymentInitiationPaymentCreateResponse.md
 docs/PaymentInitiationPaymentGetRequest.md
@@ -231,9 +240,12 @@ docs/PaymentInitiationRecipientCreateRequest.md
 docs/PaymentInitiationRecipientCreateResponse.md
 docs/PaymentInitiationRecipientGetRequest.md
 docs/PaymentInitiationRecipientGetResponse.md
+docs/PaymentInitiationRecipientGetResponseAllOf.md
 docs/PaymentInitiationRecipientListRequest.md
 docs/PaymentInitiationRecipientListResponse.md
+docs/PaymentInitiationStandingOrderMetadata.md
 docs/PaymentMeta.md
+docs/PaymentScheduleInterval.md
 docs/PaymentStatusUpdateWebhook.md
 docs/Paystub.md
 docs/PaystubDeduction.md
@@ -329,7 +341,9 @@ lib/plaid/models/accounts_get_response.rb
 lib/plaid/models/ach_class.rb
 lib/plaid/models/address.rb
 lib/plaid/models/address_data.rb
-lib/plaid/models/amount.rb
+lib/plaid/models/application.rb
+lib/plaid/models/application_get_request.rb
+lib/plaid/models/application_get_response.rb
 lib/plaid/models/apr.rb
 lib/plaid/models/asset_report.rb
 lib/plaid/models/asset_report_audit_copy_create_request.rb
@@ -416,6 +430,8 @@ lib/plaid/models/employer_income_summary_field_string.rb
 lib/plaid/models/employers_search_request.rb
 lib/plaid/models/employers_search_response.rb
 lib/plaid/models/error.rb
+lib/plaid/models/external_payment_options.rb
+lib/plaid/models/external_payment_refund_details.rb
 lib/plaid/models/external_payment_schedule.rb
 lib/plaid/models/external_payment_schedule_get.rb
 lib/plaid/models/health_incident.rb
@@ -452,6 +468,7 @@ lib/plaid/models/institutions_get_request.rb
 lib/plaid/models/institutions_get_request_options.rb
 lib/plaid/models/institutions_get_response.rb
 lib/plaid/models/institutions_search_account_filter.rb
+lib/plaid/models/institutions_search_payment_initiation_options.rb
 lib/plaid/models/institutions_search_request.rb
 lib/plaid/models/institutions_search_request_options.rb
 lib/plaid/models/institutions_search_response.rb
@@ -486,6 +503,7 @@ lib/plaid/models/item_webhook_update_request.rb
 lib/plaid/models/item_webhook_update_response.rb
 lib/plaid/models/jwk_public_key.rb
 lib/plaid/models/jwt_header.rb
+lib/plaid/models/liabilities_default_update_webhook.rb
 lib/plaid/models/liabilities_get_request.rb
 lib/plaid/models/liabilities_get_request_options.rb
 lib/plaid/models/liabilities_get_response.rb
@@ -531,6 +549,9 @@ lib/plaid/models/pay_frequency.rb
 lib/plaid/models/pay_period_details.rb
 lib/plaid/models/payment_amount.rb
 lib/plaid/models/payment_initiation_address.rb
+lib/plaid/models/payment_initiation_metadata.rb
+lib/plaid/models/payment_initiation_optional_restriction_bacs.rb
+lib/plaid/models/payment_initiation_payment.rb
 lib/plaid/models/payment_initiation_payment_create_request.rb
 lib/plaid/models/payment_initiation_payment_create_response.rb
 lib/plaid/models/payment_initiation_payment_get_request.rb
@@ -544,9 +565,12 @@ lib/plaid/models/payment_initiation_recipient_create_request.rb
 lib/plaid/models/payment_initiation_recipient_create_response.rb
 lib/plaid/models/payment_initiation_recipient_get_request.rb
 lib/plaid/models/payment_initiation_recipient_get_response.rb
+lib/plaid/models/payment_initiation_recipient_get_response_all_of.rb
 lib/plaid/models/payment_initiation_recipient_list_request.rb
 lib/plaid/models/payment_initiation_recipient_list_response.rb
+lib/plaid/models/payment_initiation_standing_order_metadata.rb
 lib/plaid/models/payment_meta.rb
+lib/plaid/models/payment_schedule_interval.rb
 lib/plaid/models/payment_status_update_webhook.rb
 lib/plaid/models/paystub.rb
 lib/plaid/models/paystub_deduction.rb
