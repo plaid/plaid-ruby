@@ -1,3 +1,6 @@
+# 14.0.0.beta.5
+Generated from OAS version 2020-09-14_1.16.4. See full changelog [here](https://github.com/plaid/plaid-openapi/blob/master/CHANGELOG.md).
+
 # 14.0.0.beta.4
 See full changelog [here](https://github.com/plaid/plaid-openapi/blob/master/CHANGELOG.md).
 - Remove validation for `maxProperties` due to generator bug.
