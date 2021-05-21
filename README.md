@@ -241,7 +241,7 @@ response = client.institutions_get(institutions_get_request)
 Any methods making API calls will result in an exception raised unless the response code is "200: Success" or
 "210: MFA Required".
 
-`Plaid::Error` is returned in response to API internal server errors.
+`Plaid::ApiError` is returned in response to API internal server errors.
 
 Read more about response codes and their meaning in the
 [Plaid documentation](https://plaid.com/docs/api).
