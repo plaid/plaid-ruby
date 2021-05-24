@@ -31,7 +31,6 @@ class PlaidBankTransfersTest < PlaidTest
         :user => {
           legal_name: "Firstname Lastname",
         },
-        :metadata => {}
       }
     )
 

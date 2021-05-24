@@ -76,7 +76,6 @@ class PlaidPaymentInitiationTest < PlaidTest
     refute_empty(get_payment_response.amount.to_hash)
     assert_kind_of(Plaid::PaymentAmount, get_payment_response.amount)
     refute_empty(get_payment_response.status)
-    refute_empty(get_payment_response.last_status_update)
     refute_empty(get_payment_response.recipient_id)
     assert_kind_of(Plaid::PaymentInitiationPaymentGetResponse, get_payment_response)
 
