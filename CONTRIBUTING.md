@@ -1,6 +1,6 @@
 # Contributing
 
-Instructions for contributing to [plaid-ruby][1]. A ruby client library for the [Plaid API][2]. This library is fully generated from the [Plaid OpenAPI spec](3).
+Instructions for contributing to [plaid-ruby][1]. A ruby client library for the [Plaid API][2]. This library is fully generated from the [Plaid OpenAPI spec][3].
 
 ## Setup
 
