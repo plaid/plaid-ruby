@@ -114,7 +114,7 @@ An example of the function's usage if you have a `public_token` in hand:
 request = Plaid::ItemPublicTokenExchangeRequest.new
 request.public_token = public_token
 
-response = client.item.public_token_exchange(request)
+response = client.item_public_token_exchange(request)
 access_token = response.access_token
 ```
 
