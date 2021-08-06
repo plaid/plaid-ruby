@@ -10,6 +10,7 @@ LINK_TOKEN_FIELD_NAMES = %i[
   redirect_uri
   android_package_name
   account_filters
+  institution_id
   cross_app_item_add
   payment_initiation
 ].freeze
