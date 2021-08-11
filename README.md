@@ -49,7 +49,6 @@ configuration = Plaid::Configuration.new
 configuration.server_index = Plaid::Configuration::Environment["sandbox"]
 configuration.api_key["PLAID-CLIENT-ID"] = "***"
 configuration.api_key["PLAID-SECRET"] = "***"
-configuration.api_key["Plaid-Version"] = "2020-09-14"
 
 api_client = Plaid::ApiClient.new(
   configuration
