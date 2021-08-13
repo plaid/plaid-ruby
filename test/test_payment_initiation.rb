@@ -37,7 +37,7 @@ class PlaidPaymentInitiationTest < PlaidTest
     refute_empty(get_recipient_response.name)
     refute_empty(get_recipient_response.iban)
     refute_empty(get_recipient_response.bacs.to_hash)
-    assert_kind_of(Plaid::NullableRecipientBACS, get_recipient_response.bacs)
+    assert_kind_of(Plaid::RecipientBACSNullable, get_recipient_response.bacs)
     refute_empty(get_recipient_response.address.to_hash)
     assert_kind_of(Plaid::PaymentInitiationAddress, get_recipient_response.address)
     assert_kind_of(Plaid::PaymentInitiationRecipientGetResponse, get_recipient_response)

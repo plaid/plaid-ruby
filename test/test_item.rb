@@ -19,15 +19,6 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
     end
   end
 
-  def test_create_invalid_initial_products
-    begin
-      create_item initial_products: BAD_ARRAY
-    rescue Plaid::ApiError => e
-      json_response = JSON.parse(e.response_body)
-      assert_equal(json_response["error_code"], "PRODUCTS_NOT_SUPPORTED")
-    end
-  end
-
   def test_create_bad_initial_products
     begin
       create_item initial_products: BAD_STRING
