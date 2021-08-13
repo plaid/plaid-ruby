@@ -1,6 +1,6 @@
 # plaid-ruby [![Circle CI](https://circleci.com/gh/plaid/plaid-ruby.svg?style=svg&circle-token=30ee002ac2021da5b5b5a701d45fe2888af124a5)](https://circleci.com/gh/plaid/plaid-ruby) [![Gem Version](https://badge.fury.io/rb/plaid.svg)](http://badge.fury.io/rb/plaid)
 
-The official Ruby bindings for the [Plaid API](https://plaid.com/docs).
+The official Ruby bindings for the [Plaid API](https://plaid.com/docs). It's generated from our [OpenAPI schema](https://github.com/plaid/plaid-openapi).
 
 ## Installation
 
@@ -16,11 +16,13 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install plaid --pre
+    $ gem install plaid
 
 The gem supports Ruby 2.4.0+ only.
 
 ### Versioning
+
+Versions > 14 are generated from our OpenAPI schema. For previous non-generated versions, check out [13.2.0](https://github.com/plaid/plaid-ruby/releases/tag/v13.2.0).
 
 Each major version of `plaid-ruby` targets a specific version of the Plaid API:
 
@@ -254,7 +256,7 @@ and any attempt to access an unknown key will cause `NoMethodError` exception.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/plaid/plaid-ruby. See also [contributing guidelines](CONTRIBUTING.md).
+Bug reports are welcome on GitHub at https://github.com/plaid/plaid-ruby. See also [contributing guidelines](CONTRIBUTING.md). As the library is auto-generated, pull requests are automatically closed.
 
 ## License
 
