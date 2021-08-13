@@ -209,7 +209,7 @@ class PlaidBankTransfersTest < PlaidTest
       refute_nil(event_list_response)
       assert_kind_of(Plaid::BankTransferEventListResponse, event_list_response)
       refute_nil(event_list_response.bank_transfer_events)
-      assert_equal(2, event_list_response.bank_transfer_events.length)
+      assert_equal(1, event_list_response.bank_transfer_events.length)
       event_list_response.bank_transfer_events.each do |event|
         assert_equal(bank_transfer.id, event.bank_transfer_id)
       end
