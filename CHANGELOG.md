@@ -1,3 +1,11 @@
+See full changelog for the OpenAPI schema [here](https://github.com/plaid/plaid-openapi/blob/master/CHANGELOG.md).
+
+# 14.0.0
+
+The official release of the `plaid-ruby` generated library. Refer to the beta migration guide for tips on migrating from older version of the libraries.
+
+This particular version is pinned to OpenAPI version `2020-09-14_1.20.6`.
+
 # 14.0.0.beta.5
 Generated from OAS version 2020-09-14_1.16.4. See full changelog [here](https://github.com/plaid/plaid-openapi/blob/master/CHANGELOG.md).
 

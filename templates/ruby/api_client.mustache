@@ -27,10 +27,12 @@ module {{moduleName}}
     # @option config [Configuration] Configuration for initializing the object, default to Configuration.default
     def initialize(config = Configuration.default)
       @config = config
+      {{! Modified by plaid - adding default headers }}
       @user_agent = "{{#httpUserAgent}}{{{.}}}{{/httpUserAgent}}{{^httpUserAgent}}Plaid Ruby v#{VERSION}{{/httpUserAgent}}"
       @default_headers = {
         'Content-Type' => 'application/json',
         'User-Agent' => @user_agent,
+        'Plaid-Version' => '{{{plaidApiVersion}}}',
       }
     end
 
