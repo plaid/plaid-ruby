@@ -89,6 +89,15 @@ rescue Plaid::ApiError => e
 end
 ```
 
+# 13.2.0
+- Add support for `options` to `/payment_initiation/payment/create`
+
+# 13.1.0
+- Add Standing Orders support to Payment Initiation
+
+# 13.0.1
+- Add `update_type` to `Item` model.
+
 # 13.0.0
 - Add support for providing a payment initiation schedule
 - Add back the (now deprecated) `/item/public_token/create` endpoint
