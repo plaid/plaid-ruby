@@ -1,4 +1,95 @@
-## 13.2.0
+See full changelog for the OpenAPI schema [here](https://github.com/plaid/plaid-openapi/blob/master/CHANGELOG.md).
+
+# 14.0.0
+
+The official release of the `plaid-ruby` generated library. Refer to the beta migration guide for tips on migrating from older version of the libraries.
+
+This particular version is pinned to OpenAPI version `2020-09-14_1.20.6`.
+
+# 14.0.0.beta.5
+Generated from OAS version 2020-09-14_1.16.4. See full changelog [here](https://github.com/plaid/plaid-openapi/blob/master/CHANGELOG.md).
+
+# 14.0.0.beta.4
+See full changelog [here](https://github.com/plaid/plaid-openapi/blob/master/CHANGELOG.md).
+- Remove validation for `maxProperties` due to generator bug.
+
+# 14.0.0.beta.3
+Type fixes, see full changelog [here](https://github.com/plaid/plaid-openapi/blob/master/CHANGELOG.md).
+
+# 14.0.0.beta.1
+
+This version represents a transition in how we maintain our external client libraries. We are now using an [API spec](https://github.com/plaid/plaid-openapi) written in `OpenAPI 3.0.0` and running our definition file through [OpenAPITool's `python` generator](https://github.com/OpenAPITools/openapi-generator).
+
+The minimum required ruby version is 2.7.1.
+
+**Ruby Migration Guide:**
+
+### Client initialization
+From:
+```ruby
+client = Plaid::Client.new(env: :sandbox,
+                            client_id: client_id,
+                            secret: secret)
+```
+
+To:
+```ruby
+configuration = Plaid::Configuration.new
+configuration.server_index = Plaid::Configuration::Environment["sandbox"]
+configuration.api_key["PLAID-CLIENT-ID"] = ENV["PLAID_RUBY_CLIENT_ID"]
+configuration.api_key["PLAID-SECRET"] = ENV["PLAID_RUBY_SECRET"]
+configuration.api_key["Plaid-Version"] = "2020-09-14"
+
+api_client = Plaid::ApiClient.new(
+  configuration
+)
+
+client = Plaid::PlaidApi.new(api_client)
+```
+
+### Endpoints
+All endpoint requests now take a request model and the functions have been renamed to include `_`.
+
+From:
+```ruby
+response = client.auth.get(access_token)
+```
+
+To:
+```ruby
+auth_get_request = Plaid::AuthGetRequest.new
+auth_get_request.access_token = access_token
+
+or
+
+auth_get_request = Plaid::AuthGetRequest.new({:access_token => access_token})
+
+response = client.auth_get(auth_get_request)
+```
+
+### Errors
+
+From:
+```ruby
+begin
+  client.auth.get(auth_get_request)
+rescue Plaid::PlaidAPIError => e
+  raise e if e.error_code != 'PRODUCT_NOT_READY'
+  sleep 1
+end
+```
+
+To:
+```ruby
+begin
+  client.auth_get(auth_get_request)
+rescue Plaid::ApiError => e
+  json_response = JSON.parse(e.response_body)
+  if json_response["error_code"] != "PRODUCT_NOT_READY"
+end
+```
+
+# 13.2.0
 - Add support for `options` to `/payment_initiation/payment/create`
 
 # 13.1.0

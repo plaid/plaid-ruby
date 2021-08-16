@@ -1,8 +1,6 @@
 # plaid-ruby [![Circle CI](https://circleci.com/gh/plaid/plaid-ruby.svg?style=svg&circle-token=30ee002ac2021da5b5b5a701d45fe2888af124a5)](https://circleci.com/gh/plaid/plaid-ruby) [![Gem Version](https://badge.fury.io/rb/plaid.svg)](http://badge.fury.io/rb/plaid)
 
-:warning: After 8/16/21, this major version of the library will only receive critical security patches. Please consider trying out our new [beta version](https://github.com/plaid/plaid-ruby/tree/14.0.0-beta-release).
-
-The official Ruby bindings for the [Plaid API](https://plaid.com/docs).
+The official Ruby bindings for the [Plaid API](https://plaid.com/docs). It's generated from our [OpenAPI schema](https://github.com/plaid/plaid-openapi).
 
 ## Installation
 
@@ -20,16 +18,18 @@ Or install it yourself as:
 
     $ gem install plaid
 
-The gem supports Ruby 2.2+ only.
+The gem supports Ruby 2.4.0+ only.
 
 ### Versioning
+
+Versions > 14 are generated from our OpenAPI schema. For previous non-generated versions, check out [13.2.0](https://github.com/plaid/plaid-ruby/releases/tag/v13.2.0).
 
 Each major version of `plaid-ruby` targets a specific version of the Plaid API:
 
 | API version | plaid-ruby release |
 | ----------- | ------------------ |
-| [`2020-09-14`][api-version-2020-09-14] (**latest**) | `12.x.x` |
-| [`2019-05-29`][api-version-2019-05-29] (**latest**) | `11.x.x`, `10.x.x`, `9.x.x`, `8.x.x`, `7.x.x` |
+| [`2020-09-14`][api-version-2020-09-14] (**latest**) | `12.x.x`, `13.x.x`, `14.x.x` |
+| [`2019-05-29`][api-version-2019-05-29] | `11.x.x`, `10.x.x`, `9.x.x`, `8.x.x`, `7.x.x` |
 | [`2018-05-22`][api-version-2018-05-22] | `6.x.x` |
 | `2017-03-08` | `5.x.x` |
 
@@ -38,9 +38,7 @@ For information about what has changed between versions and how to update your i
 
 ## Usage
 
-This gem wraps the Plaid API, which is fully described in the [documentation](https://plaid.com/docs/api).
-
-The RubyDoc for the gem is available [here](http://plaid.github.io/plaid-ruby/).
+This gem wraps the Plaid API, which is fully described in the [documentation](https://plaid.com/docs/api) and in the [plaid-openapi](https://github.com/plaid/plaid-openapi) spec.
 
 ### Creating a Plaid client
 
@@ -49,24 +47,31 @@ Create an instance of the client using the `client_id` and `secret` from your Pl
 ```ruby
 require 'plaid'
 
-client = Plaid::Client.new(env: :sandbox,
-                           client_id: '***',
-                           secret: '***')
+configuration = Plaid::Configuration.new
+configuration.server_index = Plaid::Configuration::Environment["sandbox"]
+configuration.api_key["PLAID-CLIENT-ID"] = "***"
+configuration.api_key["PLAID-SECRET"] = "***"
+
+api_client = Plaid::ApiClient.new(
+  configuration
+)
+
+client = Plaid::PlaidApi.new(api_client)
 ```
 
-The `env` field is the environment which the client will be running in. Your choices for the `env` field include:
+The `server_index` field is the environment which the client will be running in. Your choices for the `server_index` field include:
 
-- `:sandbox` allows you to do your initial integrations tests against preloaded data without being billed or making expensive API calls. More information about using the API sandbox can be found on the [API Sandbox documentation](https://plaid.com/docs/api#sandbox).
-- `:development` allows you to test against both real and test accounts without being billed. More information about Plaid test accounts can be found in our [API documentation](https://plaid.com/docs/api/#sandbox).
-- `:production` is the production environment where you can launch your production ready application and be charged for your Plaid usage.
+- `Plaid::Configuration::Environment["sandbox"]` allows you to do your initial integrations tests against preloaded data without being billed or making expensive API calls. More information about using the API sandbox can be found on the [API Sandbox documentation](https://plaid.com/docs/api#sandbox).
+- `Plaid::Configuration::Environment["development"]` allows you to test against both real and test accounts without being billed. More information about Plaid test accounts can be found in our [API documentation](https://plaid.com/docs/api/#sandbox).
+- `Plaid::Configuration::Environment["production"]` is the production environment where you can launch your production ready application and be charged for your Plaid usage.
 
 ### Tuning Faraday
 
 The gem uses Faraday to wrap HTTPS connections, which allows you to tune certain params:
 
 ```ruby
-client = Plaid::Client.new(env: :sandbox, client_id: '***', secret: '***') do |builder|
-  Plaid::Client.build_default_connection(builder)
+client = Plaid::Configuration.new do |builder|
+  Plaid::Configuration.default()
 
   # Increase network timeout
   builder.options[:timeout] = 60*20    # 20 minutes
@@ -83,12 +88,16 @@ user = User.find_by!(email: '***')
 client_user_id = user.id
 
 # Create the link_token with all of your configurations
-link_token_response = client.link_token.create(
-  user: { client_user_id: client_user_id.to_s },
-  client_name: 'My app',
-  products: %w[auth transactions],
-  country_codes: ['US'],
-  language: 'en'
+link_token_create_request = Plaid::LinkTokenCreateRequest.new({
+  :user => { :client_user_id => client_user_id.to_s },
+  :client_name => 'My app',
+  :products => %w[auth transactions],
+  :country_codes => ['US'],
+  :language => 'en'
+})
+
+link_token_response = client.link_token_create(
+  link_token_create_request
 )
 
 # Pass the result to your client-side app to initialize Link
@@ -98,53 +107,62 @@ link_token = link_token_response.link_token
 
 ### Exchanging a Link public_token for a Plaid access_token
 
-If you have a [Link](https://github.com/plaid/link) `public token`, use this function to get an `access_token`: `client.item.public_token.exchange(public_token)`
+If you have a [Link](https://github.com/plaid/link) `public token`, use this function to get an `access_token`: `client.item_public_token_exchange(request)`
 
 An example of the function's usage if you have a `public_token` in hand:
 
 ```ruby
-response = client.item.public_token.exchange(public_token)
+request = Plaid::ItemPublicTokenExchangeRequest.new
+request.public_token = public_token
+
+response = client.item.public_token_exchange(request)
 access_token = response.access_token
 ```
-
 
 ### Deleting an item
 
 ```ruby
-require 'plaid'
+request = Plaid::ItemPublicTokenExchangeRequest.new
+request.public_token = public_token
 
-client = Plaid::Client.new(env: :sandbox,
-                           client_id: '***',
-                           secret: '***')
-
-exchange_token_response = client.item.public_token.exchange('[Plaid Link public_token]')
-access_token = exchange_token_response.access_token
+response = client.item.public_token_exchange(request)
+access_token = response.access_token
 
 # Provide the access_token for the Item you want to remove
-client.item.remove(access_token)
+item_remove_request = Plaid::ItemRemoveRequest.new
+item_remove_request.access_token = access_token
+
+client.item_remove(item_remove_request)
 ```
 
 ### Get paginated transactions
 ```ruby
-require 'plaid'
+request = Plaid::ItemPublicTokenExchangeRequest.new
+request.public_token = public_token
 
-client = Plaid::Client.new(env: :sandbox,
-                           client_id: '***',
-                           secret: '***')
+response = client.item.public_token_exchange(request)
+access_token = response.access_token
 
-exchange_token_response = client.item.public_token.exchange('[Plaid Link public_token]')
-access_token = exchange_token_response.access_token
+transactions_get_request = Plaid::TransactionsGetRequest.new
+transactions_get_request.access_token = access_token
+transactions_get_request.start_date = "2020-01-01"
+transactions_get_request.end_date = "2021-01-01"
 
-transaction_response = client.transactions.get(access_token, '2016-07-12', '2017-01-09')
+transaction_response = client.transactions_get(transactions_get_request)
 transactions = transaction_response.transactions
 
 # the transactions in the response are paginated, so make multiple calls while
 # increasing the offset to retrieve all transactions
 while transactions.length < transaction_response['total_transactions']
-  transaction_response = client.transactions.get(access_token,
-                                                 '2016-07-12',
-                                                 '2017-01-09',
-                                                 offset: transactions.length)
+  options_payload = {}
+  options_payload[:offset] = transactions.length
+
+  transactions_get_request = Plaid::TransactionsGetRequest.new
+  transactions_get_request.access_token = access_token
+  transactions_get_request.start_date = "2020-01-01"
+  transactions_get_request.end_date = "2021-01-01"
+
+  transaction_response = client.transactions_get(transactions_get_request)
   transactions += transaction_response.transactions
 end
 
@@ -154,55 +172,55 @@ end
 
 If you have an `access_token`, you can use following code to retreive data:
 ```ruby
-require 'plaid'
+request = Plaid::ItemPublicTokenExchangeRequest.new
+request.public_token = public_token
 
-client = Plaid::Client.new(env: :sandbox,
-                           client_id: '***',
-                           secret: '***')
+response = client.item.public_token_exchange(request)
+access_token = response.access_token
 
-exchange_token_response = client.item.public_token.exchange('[Plaid Link public_token]')
-access_token = exchange_token_response.access_token
+auth_get_request = Plaid::AuthGetRequest.new
+auth_get_request.access_token = access_token
 
-auth_response = client.auth.get(access_token)
+auth_response = client.auth_get(access_token)
 auth = auth_response.auth
 ```
+
+There are also a number of other methods you can use to retrieve data:
+
+* `client.accounts_get(Plaid::AccountsGetRequest({:access_token => access_token, ...}))`: accounts
+* `client.accounts_balance_get(Plaid::AccountsBalanceGetRequest({:access_token => access_token, ...}))`: real-time balances
+* `client.auth_get(Plaid::AuthGetRequest({:access_token => access_token, ...}))`: auth
+* `client.identity_get(Plaid::IdentityGetRequest({:access_token => access_token, ...}))`: identity
+* `client.transactions_get(Plaid::TransactionsGetRequest({:access_token => access_token, ...}))`: transactions
+* `client.investments_transactions_get(Plaid::InvestmentsTransactionsGetRequest({:access_token => access_token, ...}))`: investment-account transactions
+* `client.investments_holdings_get(Plaid::InvestmentsHoldingsGetRequest({:access_token => access_token, ...}))`: investment-account holdings
+
+All of these methods return appropriate data. More information can be found on the [API documentation](https://plaid.com/docs/api).
 
 ### Create a Stripe bank_account_token
 
 Exchange a Plaid Link `public_token` for an API `access_token` and a Stripe `bank_account_token`:
 ```ruby
-require 'plaid'
+request = Plaid::ItemPublicTokenExchangeRequest.new
+request.public_token = public_token
 
-client = Plaid::Client.new(env: :sandbox,
-                           client_id: '***',
-                           secret: '***')
+response = client.item.public_token.exchange(request)
+access_token = response.access_token
 
-exchange_token_response = client.item.public_token.exchange('[Plaid Link public_token]')
-access_token = exchange_token_response.access_token
+processor_token_create_request = Plaid::ProcessorStripeBankAccountTokenCreateRequest.new
+processor_token_create_request.access_token = access_token
+processor_token_create_request.account_id = '[Account ID]'
 
-stripe_response = client.processor.stripe.bank_account_token.create(access_token, '[Account ID]')
+stripe_response = client.processor_stripe_bank_account_token_create(processor_token_create_request)
 bank_account_token = stripe_response.stripe_bank_account_token
 ```
-
-There are also a number of other methods you can use to retrieve data:
-
-* `client.accounts.get(access_token, ...)`: accounts
-* `client.accounts.balance.get(access_token, ...)`: real-time balances
-* `client.auth.get(access_token, ...)`: auth
-* `client.identity.get(access_token, ...)`: identity
-* `client.transactions.get(access_token, ...)`: transactions
-* `client.credit_details.get(access_token, ...)`: credit details
-* `client.investments.transactions.get(access_token, ...)`: investment-account transactions
-* `client.investments.holdings.get(access_token, ...)`: investment-account holdings
-
-All of these methods return appropriate data. More information can be found on the [API documentation](https://plaid.com/docs/api).
 
 ### Categories
 
 You can request category information:
 
 ```ruby
-categories = client.categories.get             # Array of all known categories
+categories = client.categories_get             # Array of all known categories
 ```
 
 ### Institutions
@@ -210,7 +228,13 @@ categories = client.categories.get             # Array of all known categories
 Financial institution information is available as shown below where the function arguments represent count and offset:
 
 ```ruby
-institutions = client.institutions.get(count: 3, offset: 1)
+institutions_get_request = Plaid::InstitutionsGetRequest.new({
+  :count => 3,
+  :offset => 1,
+  :country_codes => ["US"],
+})
+
+response = client.institutions_get(institutions_get_request)
 ```
 
 ## Errors
@@ -218,17 +242,7 @@ institutions = client.institutions.get(count: 3, offset: 1)
 Any methods making API calls will result in an exception raised unless the response code is "200: Success" or
 "210: MFA Required".
 
-`Plaid::InvalidRequestError` is returned when the request is malformed and cannot be processed.
-
-`Plaid::InvalidInputError` is returned when all fields are provided and are in the correct format, but the values provided are incorrect in some way.
-
-`Plaid::RateLimitExceededError` returned when the request is valid but has exceeded established rate limits.
-
-`Plaid::APIError` is returned during planned maintenance windows and in response to API internal server errors.
-
-`Plaid::ItemError` indicates that information provided for the Item (such as credentials or MFA) may be invalid or that the Item is not supported on Plaid's platform.
-
-`Plaid::InstitutionError` is returned when there are errors for the requested financial institution.
+`Plaid::ApiError` is returned in response to API internal server errors.
 
 Read more about response codes and their meaning in the
 [Plaid documentation](https://plaid.com/docs/api).
@@ -240,16 +254,9 @@ Any API call returns a response object which is accessible by dot notation
 and `response['foo']['bar']`. Expected keys for all types of responses are defined,
 and any attempt to access an unknown key will cause `NoMethodError` exception.
 
-## Network Timeout
-
-A network timeout value is currently defaulted at 600 seconds = 10 minutes.
-Some requests from the Plaid API may take longer than others and we want to
-make sure that all valid requests have a chance to complete. Adjust this value
-if necessary (see "Tuning Faraday").
-
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/plaid/plaid-ruby. See also [contributing guidelines](CONTRIBUTING.md).
+Bug reports are welcome on GitHub at https://github.com/plaid/plaid-ruby. See also [contributing guidelines](CONTRIBUTING.md). As the library is auto-generated, pull requests are automatically closed.
 
 ## License
 
