@@ -179,7 +179,7 @@ module Plaid
       return false if @balances.nil?
       return false if @name.nil?
       return false if @type.nil?
-      verification_status_validator = EnumAttributeValidator.new('String', ["pending_automatic_verification", "pending_manual_verification", "manually_verified", "verification_expired", "verification_failed"])
+      verification_status_validator = EnumAttributeValidator.new('String', ["automatically_verified", "pending_automatic_verification", "pending_manual_verification", "manually_verified", "verification_expired", "verification_failed"])
       return false unless verification_status_validator.valid?(@verification_status)
       true
     end
@@ -187,7 +187,7 @@ module Plaid
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] verification_status Object to be assigned
     def verification_status=(verification_status)
-      validator = EnumAttributeValidator.new('String', ["pending_automatic_verification", "pending_manual_verification", "manually_verified", "verification_expired", "verification_failed"])
+      validator = EnumAttributeValidator.new('String', ["automatically_verified", "pending_automatic_verification", "pending_manual_verification", "manually_verified", "verification_expired", "verification_failed"])
       unless validator.valid?(verification_status)
         fail ArgumentError, "invalid value for \"verification_status\", must be one of #{validator.allowable_values}."
       end
