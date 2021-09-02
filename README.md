@@ -115,7 +115,7 @@ An example of the function's usage if you have a `public_token` in hand:
 request = Plaid::ItemPublicTokenExchangeRequest.new
 request.public_token = public_token
 
-response = client.item.public_token_exchange(request)
+response = client.item_public_token_exchange(request)
 access_token = response.access_token
 ```
 
@@ -125,7 +125,7 @@ access_token = response.access_token
 request = Plaid::ItemPublicTokenExchangeRequest.new
 request.public_token = public_token
 
-response = client.item.public_token_exchange(request)
+response = client.item_public_token_exchange(request)
 access_token = response.access_token
 
 # Provide the access_token for the Item you want to remove
@@ -140,7 +140,7 @@ client.item_remove(item_remove_request)
 request = Plaid::ItemPublicTokenExchangeRequest.new
 request.public_token = public_token
 
-response = client.item.public_token_exchange(request)
+response = client.item_public_token_exchange(request)
 access_token = response.access_token
 
 transactions_get_request = Plaid::TransactionsGetRequest.new
@@ -175,7 +175,7 @@ If you have an `access_token`, you can use following code to retreive data:
 request = Plaid::ItemPublicTokenExchangeRequest.new
 request.public_token = public_token
 
-response = client.item.public_token_exchange(request)
+response = client.item_public_token_exchange(request)
 access_token = response.access_token
 
 auth_get_request = Plaid::AuthGetRequest.new
@@ -204,7 +204,7 @@ Exchange a Plaid Link `public_token` for an API `access_token` and a Stripe `ban
 request = Plaid::ItemPublicTokenExchangeRequest.new
 request.public_token = public_token
 
-response = client.item.public_token.exchange(request)
+response = client.item_public_token.exchange(request)
 access_token = response.access_token
 
 processor_token_create_request = Plaid::ProcessorStripeBankAccountTokenCreateRequest.new
