@@ -53,6 +53,8 @@ docs/AuthGetNumbers.md
 docs/AuthGetRequest.md
 docs/AuthGetRequestOptions.md
 docs/AuthGetResponse.md
+docs/AuthMetadata.md
+docs/AuthSupportedMethods.md
 docs/AutomaticallyVerifiedWebhook.md
 docs/BankInitiatedReturnRisk.md
 docs/BankTransfer.md
@@ -84,6 +86,8 @@ docs/BankTransferSweep.md
 docs/BankTransferSweepAccount.md
 docs/BankTransferSweepGetRequest.md
 docs/BankTransferSweepGetResponse.md
+docs/BankTransferSweepListRequest.md
+docs/BankTransferSweepListResponse.md
 docs/BankTransferType.md
 docs/BankTransferUser.md
 docs/BankTransfersEventsUpdateWebhook.md
@@ -148,8 +152,14 @@ docs/IncomeVerificationCreateResponse.md
 docs/IncomeVerificationDocumentsDownloadRequest.md
 docs/IncomeVerificationDocumentsDownloadResponse.md
 docs/IncomeVerificationPaystubGetRequest.md
+docs/IncomeVerificationPaystubGetResponse.md
 docs/IncomeVerificationPaystubsGetRequest.md
 docs/IncomeVerificationPaystubsGetResponse.md
+docs/IncomeVerificationPrecheckEmployer.md
+docs/IncomeVerificationPrecheckMilitaryInfo.md
+docs/IncomeVerificationPrecheckRequest.md
+docs/IncomeVerificationPrecheckResponse.md
+docs/IncomeVerificationPrecheckUser.md
 docs/IncomeVerificationRefreshRequest.md
 docs/IncomeVerificationRefreshResponse.md
 docs/IncomeVerificationStatusWebhook.md
@@ -269,6 +279,8 @@ docs/PaymentInitiationPaymentGetRequest.md
 docs/PaymentInitiationPaymentGetResponse.md
 docs/PaymentInitiationPaymentListRequest.md
 docs/PaymentInitiationPaymentListResponse.md
+docs/PaymentInitiationPaymentReverseRequest.md
+docs/PaymentInitiationPaymentReverseResponse.md
 docs/PaymentInitiationPaymentTokenCreateRequest.md
 docs/PaymentInitiationPaymentTokenCreateResponse.md
 docs/PaymentInitiationRecipient.md
@@ -279,6 +291,7 @@ docs/PaymentInitiationRecipientGetResponse.md
 docs/PaymentInitiationRecipientGetResponseAllOf.md
 docs/PaymentInitiationRecipientListRequest.md
 docs/PaymentInitiationRecipientListResponse.md
+docs/PaymentInitiationRefund.md
 docs/PaymentInitiationStandingOrderMetadata.md
 docs/PaymentMeta.md
 docs/PaymentScheduleInterval.md
@@ -290,6 +303,7 @@ docs/PaystubDetails.md
 docs/PaystubEmployer.md
 docs/PaystubYTDDetails.md
 docs/PendingExpirationWebhook.md
+docs/PersonalFinanceCategory.md
 docs/PhoneNumber.md
 docs/PlaidApi.md
 docs/ProcessorApexProcessorTokenCreateRequest.md
@@ -390,7 +404,6 @@ docs/TransferCancelRequest.md
 docs/TransferCancelResponse.md
 docs/TransferCreateRequest.md
 docs/TransferCreateResponse.md
-docs/TransferDirection.md
 docs/TransferEvent.md
 docs/TransferEventListRequest.md
 docs/TransferEventListResponse.md
@@ -403,7 +416,6 @@ docs/TransferGetResponse.md
 docs/TransferListRequest.md
 docs/TransferListResponse.md
 docs/TransferNetwork.md
-docs/TransferReceiverDetails.md
 docs/TransferStatus.md
 docs/TransferType.md
 docs/TransferUserAddressInRequest.md
@@ -485,6 +497,8 @@ lib/plaid/models/auth_get_numbers.rb
 lib/plaid/models/auth_get_request.rb
 lib/plaid/models/auth_get_request_options.rb
 lib/plaid/models/auth_get_response.rb
+lib/plaid/models/auth_metadata.rb
+lib/plaid/models/auth_supported_methods.rb
 lib/plaid/models/automatically_verified_webhook.rb
 lib/plaid/models/bank_initiated_return_risk.rb
 lib/plaid/models/bank_transfer.rb
@@ -516,6 +530,8 @@ lib/plaid/models/bank_transfer_sweep.rb
 lib/plaid/models/bank_transfer_sweep_account.rb
 lib/plaid/models/bank_transfer_sweep_get_request.rb
 lib/plaid/models/bank_transfer_sweep_get_response.rb
+lib/plaid/models/bank_transfer_sweep_list_request.rb
+lib/plaid/models/bank_transfer_sweep_list_response.rb
 lib/plaid/models/bank_transfer_type.rb
 lib/plaid/models/bank_transfer_user.rb
 lib/plaid/models/bank_transfers_events_update_webhook.rb
@@ -580,8 +596,14 @@ lib/plaid/models/income_verification_create_response.rb
 lib/plaid/models/income_verification_documents_download_request.rb
 lib/plaid/models/income_verification_documents_download_response.rb
 lib/plaid/models/income_verification_paystub_get_request.rb
+lib/plaid/models/income_verification_paystub_get_response.rb
 lib/plaid/models/income_verification_paystubs_get_request.rb
 lib/plaid/models/income_verification_paystubs_get_response.rb
+lib/plaid/models/income_verification_precheck_employer.rb
+lib/plaid/models/income_verification_precheck_military_info.rb
+lib/plaid/models/income_verification_precheck_request.rb
+lib/plaid/models/income_verification_precheck_response.rb
+lib/plaid/models/income_verification_precheck_user.rb
 lib/plaid/models/income_verification_refresh_request.rb
 lib/plaid/models/income_verification_refresh_response.rb
 lib/plaid/models/income_verification_status_webhook.rb
@@ -700,6 +722,8 @@ lib/plaid/models/payment_initiation_payment_get_request.rb
 lib/plaid/models/payment_initiation_payment_get_response.rb
 lib/plaid/models/payment_initiation_payment_list_request.rb
 lib/plaid/models/payment_initiation_payment_list_response.rb
+lib/plaid/models/payment_initiation_payment_reverse_request.rb
+lib/plaid/models/payment_initiation_payment_reverse_response.rb
 lib/plaid/models/payment_initiation_payment_token_create_request.rb
 lib/plaid/models/payment_initiation_payment_token_create_response.rb
 lib/plaid/models/payment_initiation_recipient.rb
@@ -710,6 +734,7 @@ lib/plaid/models/payment_initiation_recipient_get_response.rb
 lib/plaid/models/payment_initiation_recipient_get_response_all_of.rb
 lib/plaid/models/payment_initiation_recipient_list_request.rb
 lib/plaid/models/payment_initiation_recipient_list_response.rb
+lib/plaid/models/payment_initiation_refund.rb
 lib/plaid/models/payment_initiation_standing_order_metadata.rb
 lib/plaid/models/payment_meta.rb
 lib/plaid/models/payment_schedule_interval.rb
@@ -721,6 +746,7 @@ lib/plaid/models/paystub_details.rb
 lib/plaid/models/paystub_employer.rb
 lib/plaid/models/paystub_ytd_details.rb
 lib/plaid/models/pending_expiration_webhook.rb
+lib/plaid/models/personal_finance_category.rb
 lib/plaid/models/phone_number.rb
 lib/plaid/models/processor_apex_processor_token_create_request.rb
 lib/plaid/models/processor_auth_get_request.rb
@@ -821,7 +847,6 @@ lib/plaid/models/transfer_cancel_request.rb
 lib/plaid/models/transfer_cancel_response.rb
 lib/plaid/models/transfer_create_request.rb
 lib/plaid/models/transfer_create_response.rb
-lib/plaid/models/transfer_direction.rb
 lib/plaid/models/transfer_event.rb
 lib/plaid/models/transfer_event_list_request.rb
 lib/plaid/models/transfer_event_list_response.rb
@@ -834,7 +859,6 @@ lib/plaid/models/transfer_get_response.rb
 lib/plaid/models/transfer_list_request.rb
 lib/plaid/models/transfer_list_response.rb
 lib/plaid/models/transfer_network.rb
-lib/plaid/models/transfer_receiver_details.rb
 lib/plaid/models/transfer_status.rb
 lib/plaid/models/transfer_type.rb
 lib/plaid/models/transfer_user_address_in_request.rb

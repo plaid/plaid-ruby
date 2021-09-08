@@ -28,7 +28,8 @@
           else
             fail ApiError.new(:code => response.status,
                               :response_headers => response.headers,
-                              :response_body => response.body),
+                              :response_body => response.body,
+                              :data => JSON.parse(response.body)),
                  response.reason_phrase
           end
         end
