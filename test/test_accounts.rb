@@ -31,8 +31,7 @@ class PlaidAccountsTest < PlaidTest
     begin
       client.accounts_get(accounts_get_request)
     rescue Plaid::ApiError => e
-      json_response = JSON.parse(e.response_body)
-      assert_equal(json_response["error_code"], "INVALID_ACCESS_TOKEN")
+      assert_equal(e.data["error_code"], "INVALID_ACCESS_TOKEN")
     end
   end
 
@@ -47,8 +46,7 @@ class PlaidAccountsTest < PlaidTest
     begin
       client.accounts_get(accounts_get_request)
     rescue Plaid::ApiError => e
-      json_response = JSON.parse(e.response_body)
-      assert_equal(json_response["error_code"], "INVALID_FIELD")
+      assert_equal(e.data["error_code"], "INVALID_FIELD")
     end
   end
 
@@ -80,8 +78,7 @@ class PlaidAccountsTest < PlaidTest
     begin
       client.accounts_balance_get(accounts_balance_get_request)
     rescue Plaid::ApiError => e
-      json_response = JSON.parse(e.response_body)
-      assert_equal(json_response["error_code"], "INVALID_ACCESS_TOKEN")
+      assert_equal(e.data["error_code"], "INVALID_ACCESS_TOKEN")
     end
   end
 
@@ -96,8 +93,7 @@ class PlaidAccountsTest < PlaidTest
     begin
       client.accounts_balance_get(accounts_balance_get_request)
     rescue Plaid::ApiError => e
-      json_response = JSON.parse(e.response_body)
-      assert_equal(json_response["error_code"], "INVALID_FIELD")
+      assert_equal(e.data["error_code"], "INVALID_FIELD")
     end
   end
 end

@@ -73,7 +73,6 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
 
     item = client.item_get(item_get_request)
     refute_empty(item.item.to_hash)
-    refute_empty(item.status.to_hash)
     assert_kind_of(Plaid::ItemGetResponse, item)
   end
 
