@@ -58,7 +58,7 @@ module Plaid
         :'employer' => :'Employer',
         :'employee' => :'Employee',
         :'pay_period_details' => :'PayPeriodDetails',
-        :'income_breakdown' => :'IncomeBreakdown',
+        :'income_breakdown' => :'Array<IncomeBreakdown>',
         :'ytd_earnings' => :'PaystubYTDDetails'
       }
     end

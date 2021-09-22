@@ -11,5 +11,5 @@ OpenAPI Generator version: 5.1.0
 =end
 
 module Plaid
-  VERSION = '14.0.0.beta.5'
+  VERSION = '14.0.0.beta.5-plural-income-breakdown'
 end

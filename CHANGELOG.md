@@ -1,3 +1,7 @@
+# 14.0.0.beta.5-plural-income-breakdown
+Manually change IncomeBreakdown to Array<IncomeBreakdown> in the Paystub class.
+*This change was not auto-generated and will only be available on this release and Gem versions >=14.1.0*
+
 # 14.0.0.beta.5
 Generated from OAS version 2020-09-14_1.16.4. See full changelog [here](https://github.com/plaid/plaid-openapi/blob/master/CHANGELOG.md).
 
