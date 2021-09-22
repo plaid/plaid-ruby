@@ -1,5 +1,11 @@
 See full changelog for the OpenAPI schema (OAS) [here](https://github.com/plaid/plaid-openapi/blob/master/CHANGELOG.md).
 
+# 14.4.0
+- Updating to OAS 2020-09-14_1.34.1
+- Fixed an issue with enums in this library. The library is supposed to be able to gracefully handle
+    new enum values being returned from endpoints. Previously, if there were new enum values
+    endpoint calls would fail.
+ 
 # 14.3.0
 Updating to OAS 2020-09-14_1.33.0.
 
