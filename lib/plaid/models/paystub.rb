@@ -106,7 +106,9 @@ module Plaid
       end
 
       if attributes.key?(:'income_breakdown')
-        self.income_breakdown = attributes[:'income_breakdown']
+        if (value = attributes[:'income_breakdown']).is_a?(Array)
+          self.income_breakdown = value
+        end
       end
 
       if attributes.key?(:'ytd_earnings')
