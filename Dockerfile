@@ -1,4 +1,4 @@
-FROM ruby:2.7.1
+FROM ruby:2.7
 
 # Create app directory
 WORKDIR /usr/src/app
