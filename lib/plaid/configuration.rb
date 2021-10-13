@@ -88,7 +88,6 @@ module Plaid
     attr_accessor :temp_folder_path
 
     # The time limit for HTTP request in seconds.
-    # Default to 0 (never times out).
     attr_accessor :timeout
 
     # Set this to false to skip client side validation in the operation.
@@ -149,7 +148,7 @@ module Plaid
         'Plaid-Version' => '2020-09-14',
       }
       @api_key_prefix = {}
-      @timeout = 0
+      @timeout = 60
       @client_side_validation = true
       @ssl_verify = true
       @ssl_verify_mode = nil
