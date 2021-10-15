@@ -1,5 +1,8 @@
 See full changelog for the OpenAPI schema (OAS) [here](https://github.com/plaid/plaid-openapi/blob/master/CHANGELOG.md).
 
+# 14.5.0
+- Updating to OAS 2020-09-14_1.36.4
+
 # 14.4.0
 - Updating to OAS 2020-09-14_1.34.1
 - Fixed an issue with enums in this library. The library is supposed to be able to gracefully handle
@@ -32,9 +35,9 @@ Type fixes, see full changelog [here](https://github.com/plaid/plaid-openapi/blo
 
 # 14.0.0.beta.1
 
-This version represents a transition in how we maintain our external client libraries. We are now using an [API spec](https://github.com/plaid/plaid-openapi) written in `OpenAPI 3.0.0` and running our definition file through [OpenAPITool's `python` generator](https://github.com/OpenAPITools/openapi-generator).
+This version represents a transition in how we maintain our external client libraries. We are now using an [API spec](https://github.com/plaid/plaid-openapi) written in `OpenAPI 3.0.0` and running our definition file through [OpenAPITool's `ruby` generator](https://github.com/OpenAPITools/openapi-generator).
 
-The minimum required ruby version is 2.7.1.
+The minimum required ruby version is 2.4.0.
 
 **Ruby Migration Guide:**
 

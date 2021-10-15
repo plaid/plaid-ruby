@@ -5,9 +5,10 @@ The module is published to [RubyGems][1] under the gem name [plaid][2].
 Prepare release:
 
 1. Update `Makefile -> RUBY_PACKAGE_VERSION`, and `CHANGELOG.md` files.
-2. Run `bundle` to bump the version in `Gemfile.lock`.
-3. Create and merge a PR with the changes from 1 and 2.
-4. Authenticate with rubygems with `gem signin` or manually set up your `~/.gem/credentials`.
+2. Regenerate the Ruby client library with the new package version.
+3. Run `bundle` to bump the version in `Gemfile.lock`.
+4. Create and merge a PR with the changes from 1 and 2.
+5. Authenticate with rubygems with `gem signin` or manually set up your `~/.gem/credentials`.
 
 Publish:
 
