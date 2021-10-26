@@ -1,5 +1,8 @@
 See full changelog for the OpenAPI schema (OAS) [here](https://github.com/plaid/plaid-openapi/blob/master/CHANGELOG.md).
 
+# 14.6.0
+- Updating to OAS 2020-09-14_1.40.3
+
 # 14.5.0
 - Updating to OAS 2020-09-14_1.36.4
 
