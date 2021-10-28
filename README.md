@@ -249,9 +249,8 @@ Read more about response codes and their meaning in the
 
 ## Response Objects
 
-Any API call returns a response object which is accessible by dot notation
-(`response.foo.bar`) or Symbols and Strings as keys: `response[:foo][:bar]`
-and `response['foo']['bar']`. Expected keys for all types of responses are defined,
+Any API call returns a response object which is accessible only by dot notation
+(`response.foo.bar`) and not by bracket notation. Expected keys for all types of responses are defined,
 and any attempt to access an unknown key will cause `NoMethodError` exception.
 
 ## Contributing
