@@ -153,7 +153,7 @@ transactions = transaction_response.transactions
 
 # the transactions in the response are paginated, so make multiple calls while
 # increasing the offset to retrieve all transactions
-while transactions.length < transaction_response['total_transactions']
+while transactions.length < transaction_response.total_transactions
   options_payload = {}
   options_payload[:offset] = transactions.length
 
