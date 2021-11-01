@@ -26,14 +26,15 @@ Versions > 14 are generated from our OpenAPI schema. For previous non-generated 
 
 Each major version of `plaid-ruby` targets a specific version of the Plaid API:
 
-| API version                                         | plaid-ruby release                            |
-| --------------------------------------------------- | --------------------------------------------- |
-| [`2020-09-14`][api-version-2020-09-14] (**latest**) | `12.x.x`, `13.x.x`, `14.x.x`                  |
-| [`2019-05-29`][api-version-2019-05-29]              | `11.x.x`, `10.x.x`, `9.x.x`, `8.x.x`, `7.x.x` |
-| [`2018-05-22`][api-version-2018-05-22]              | `6.x.x`                                       |
-| `2017-03-08`                                        | `5.x.x`                                       |
+| API version | plaid-ruby release |
+| ----------- | ------------------ |
+| [`2020-09-14`][api-version-2020-09-14] (**latest**) | `12.x.x`, `13.x.x`, `14.x.x` |
+| [`2019-05-29`][api-version-2019-05-29] | `11.x.x`, `10.x.x`, `9.x.x`, `8.x.x`, `7.x.x` |
+| [`2018-05-22`][api-version-2018-05-22] | `6.x.x` |
+| `2017-03-08` | `5.x.x` |
 
 For information about what has changed between versions and how to update your integration, head to the [version changelog][version-changelog].
+
 
 ## Usage
 
@@ -135,7 +136,6 @@ client.item_remove(item_remove_request)
 ```
 
 ### Get paginated transactions
-
 ```ruby
 request = Plaid::ItemPublicTokenExchangeRequest.new
 request.public_token = public_token
@@ -153,7 +153,7 @@ transactions = transaction_response.transactions
 
 # the transactions in the response are paginated, so make multiple calls while
 # increasing the offset to retrieve all transactions
-while transactions.length < transaction_response.total_transactions
+while transactions.length < transaction_response['total_transactions']
   options_payload = {}
   options_payload[:offset] = transactions.length
 
@@ -171,7 +171,6 @@ end
 ### Obtaining Item-related data
 
 If you have an `access_token`, you can use following code to retreive data:
-
 ```ruby
 request = Plaid::ItemPublicTokenExchangeRequest.new
 request.public_token = public_token
@@ -188,20 +187,19 @@ auth = auth_response.auth
 
 There are also a number of other methods you can use to retrieve data:
 
-- `client.accounts_get(Plaid::AccountsGetRequest({:access_token => access_token, ...}))`: accounts
-- `client.accounts_balance_get(Plaid::AccountsBalanceGetRequest({:access_token => access_token, ...}))`: real-time balances
-- `client.auth_get(Plaid::AuthGetRequest({:access_token => access_token, ...}))`: auth
-- `client.identity_get(Plaid::IdentityGetRequest({:access_token => access_token, ...}))`: identity
-- `client.transactions_get(Plaid::TransactionsGetRequest({:access_token => access_token, ...}))`: transactions
-- `client.investments_transactions_get(Plaid::InvestmentsTransactionsGetRequest({:access_token => access_token, ...}))`: investment-account transactions
-- `client.investments_holdings_get(Plaid::InvestmentsHoldingsGetRequest({:access_token => access_token, ...}))`: investment-account holdings
+* `client.accounts_get(Plaid::AccountsGetRequest({:access_token => access_token, ...}))`: accounts
+* `client.accounts_balance_get(Plaid::AccountsBalanceGetRequest({:access_token => access_token, ...}))`: real-time balances
+* `client.auth_get(Plaid::AuthGetRequest({:access_token => access_token, ...}))`: auth
+* `client.identity_get(Plaid::IdentityGetRequest({:access_token => access_token, ...}))`: identity
+* `client.transactions_get(Plaid::TransactionsGetRequest({:access_token => access_token, ...}))`: transactions
+* `client.investments_transactions_get(Plaid::InvestmentsTransactionsGetRequest({:access_token => access_token, ...}))`: investment-account transactions
+* `client.investments_holdings_get(Plaid::InvestmentsHoldingsGetRequest({:access_token => access_token, ...}))`: investment-account holdings
 
 All of these methods return appropriate data. More information can be found on the [API documentation](https://plaid.com/docs/api).
 
 ### Create a Stripe bank_account_token
 
 Exchange a Plaid Link `public_token` for an API `access_token` and a Stripe `bank_account_token`:
-
 ```ruby
 request = Plaid::ItemPublicTokenExchangeRequest.new
 request.public_token = public_token
@@ -251,8 +249,9 @@ Read more about response codes and their meaning in the
 
 ## Response Objects
 
-Any API call returns a response object which is accessible only by dot notation
-(`response.foo.bar`) and not bracket notation. Expected keys for all types of responses are defined,
+Any API call returns a response object which is accessible by dot notation
+(`response.foo.bar`) or Symbols and Strings as keys: `response[:foo][:bar]`
+and `response['foo']['bar']`. Expected keys for all types of responses are defined,
 and any attempt to access an unknown key will cause `NoMethodError` exception.
 
 ## Contributing
