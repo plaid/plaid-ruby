@@ -35,6 +35,7 @@ Each major version of `plaid-ruby` targets a specific version of the Plaid API:
 
 For information about what has changed between versions and how to update your integration, head to the [version changelog][version-changelog].
 
+The plaid-ruby client library is typically updated on a biweekly basis. The canonical source for the latest version number is the [client library changelog](https://github.com/plaid/plaid-ruby/blob/master/CHANGELOG.md).
 
 ## Usage
 
@@ -153,7 +154,7 @@ transactions = transaction_response.transactions
 
 # the transactions in the response are paginated, so make multiple calls while
 # increasing the offset to retrieve all transactions
-while transactions.length < transaction_response['total_transactions']
+while transactions.length < transaction_response.total_transactions
   options_payload = {}
   options_payload[:offset] = transactions.length
 
@@ -249,9 +250,8 @@ Read more about response codes and their meaning in the
 
 ## Response Objects
 
-Any API call returns a response object which is accessible by dot notation
-(`response.foo.bar`) or Symbols and Strings as keys: `response[:foo][:bar]`
-and `response['foo']['bar']`. Expected keys for all types of responses are defined,
+All API calls return a response object that is accessible only with dot notation
+(i.e., `response.foo.bar`) and not with bracket notation. Expected keys for all types of responses are defined,
 and any attempt to access an unknown key will cause `NoMethodError` exception.
 
 ## Contributing
