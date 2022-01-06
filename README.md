@@ -78,6 +78,10 @@ client = Plaid::Configuration.new do |builder|
   builder.options[:timeout] = 60*20    # 20 minutes
 end
 ```
+## Data type differences from API and from previous versions
+
+### Dates
+Dates and date times in requests and responses, which are represented as strings in the API and in previous client library versions, are represented in this version of the library as Ruby `Date` or `DateTime` objects. 
 
 ## Examples
 
@@ -162,6 +166,7 @@ while transactions.length < transaction_response.total_transactions
   transactions_get_request.access_token = access_token
   transactions_get_request.start_date = "2020-01-01"
   transactions_get_request.end_date = "2021-01-01"
+  transactions_get_request.options = options_payload
 
   transaction_response = client.transactions_get(transactions_get_request)
   transactions += transaction_response.transactions
