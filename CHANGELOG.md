@@ -1,5 +1,8 @@
 See full changelog for the OpenAPI schema (OAS) [here](https://github.com/plaid/plaid-openapi/blob/master/CHANGELOG.md).
 
+# 14.11.1
+- Added a release step to the `Makefile` to purge previously released version of plaid-ruby in the current release.
+
 # 14.11.0
 - Updating to OAS 2020-09-14_1.61.0
 

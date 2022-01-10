@@ -30,7 +30,7 @@ module Plaid
     # @option config [Configuration] Configuration for initializing the object, default to Configuration.default
     def initialize(config = Configuration.default)
       @config = config
-      @user_agent = "Plaid Ruby v14.11.0"
+      @user_agent = "Plaid Ruby v14.11.1"
       @default_headers = {
         'Content-Type' => 'application/json',
         'User-Agent' => @user_agent,
