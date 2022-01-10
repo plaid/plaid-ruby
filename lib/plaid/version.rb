@@ -11,5 +11,5 @@ OpenAPI Generator version: 5.1.0
 =end
 
 module Plaid
-  VERSION = '14.11.0'
+  VERSION = '14.11.1'
 end

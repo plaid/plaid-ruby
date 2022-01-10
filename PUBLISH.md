@@ -14,7 +14,7 @@ Publish:
 
 1. `git checkout master` and `git pull` (makes sure your `HEAD` is up-to-date).
 2. Check that tests are passing on latest `master` build and (optional) `docker build -t plaid-ruby . && docker run -e PLAID_RUBY_CLIENT_ID=$(CLIENT_ID) -e PLAID_RUBY_SECRET=$(SECRET) plaid-ruby)` run tests locally.
-3. `bundle exec rake release` (builds the gem, creates a tag, pushes the gem to RubyGems and tag to GitHub). **NOTE:** if this step hangs indefinitely, you need to set your MFA settings to "UI Only" [here](https://rubygems.org/profile/edit).
+3. Run `make release` which runs `bundle exec rake release` (builds the gem, creates a tag, pushes the gem to RubyGems and tag to GitHub). **NOTE:** if this step hangs indefinitely, you need to set your MFA settings to "UI Only" [here](https://rubygems.org/profile/edit).
 
 [1]: https://rubygems.org/
 [2]: https://rubygems.org/gems/plaid
