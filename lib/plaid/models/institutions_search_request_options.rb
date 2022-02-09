@@ -16,7 +16,7 @@ require 'time'
 module Plaid
   # An optional object to filter `/institutions/search` results.
   class InstitutionsSearchRequestOptions
-    # Limit results to institutions with or without OAuth login flows. This is primarily relevant to institutions with European country codes
+    # Limit results to institutions with or without OAuth login flows.
     attr_accessor :oauth
 
     # When true, return the institution's homepage URL, logo and primary brand color.
