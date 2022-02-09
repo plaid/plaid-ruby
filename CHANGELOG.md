@@ -1,5 +1,89 @@
 See full changelog for the OpenAPI schema (OAS) [here](https://github.com/plaid/plaid-openapi/blob/master/CHANGELOG.md).
 
+# 14.12.1
+- Updating to OAS 2020-09-14_1.64.13
+- Fix issue where library did not correctly detect if app is a Rails app.
+
+## OpenAPI Schema Changes
+### 2020-09-14_1.64.13
+- Deprecate `idempotency_key` parameter in transfer/create
+
+### 2020-09-14_1.64.12
+- Removed the unused `required_product_access` and `optional_product_access` parameters from `RequestedScopes`
+
+### 2020-09-14_1.64.11
+- Fix some examples that were not consistent with their schemas
+- Add `adjustments` as an investments transaction type to make OpenAPI file consistent with values returned by the API
+- Clarify description field for `marital_status` to reflect possible values
+
+### 2020-09-14_1.64.10
+- Updated the external docs URL for Bank Transfers sandbox endpoints
+
+### 2020-09-14_1.64.9
+- De-anonymized the object filters under `LinkTokenCreateRequestAccountSubtypes`, as anonymous objects aren't compatible with the generated CLibs.
+- De-anonymized some misc. objects
+  - `PaymentInitiationMetadata/properties/maximum_payment_amount`
+  - `PaystubOverride/properties/employer`
+  - `PaystubOverride/properties/employee`
+  - `PaystubOverride/properties/employee/properties/address`
+  - `LiabilitiesDefaultUpdateWebhook/properties/account_ids_with_updated_liabilities`
+
+### 2020-09-14_1.64.8
+- Updated the description of the historical_balances array
+
+### 2020-09-14_1.64.7
+- Add new possible enums for income verification earnings breakdown canonical description
+
+### 2020-09-14_1.64.6
+- Hid a few product enum values that are deprecated or no longer valid for certain request fields. This affects the documentation only.
+
+### 2020-09-14_1.64.5
+- Make guarantee fields required in Transfer endpoints
+
+### 2020-09-14_1.64.4
+- Updated description for `failure_reason` field in Transfer endpoints
+
+### 2020-09-14_1.64.3
+- Make `repayment_id` required in `/transfer/repayment/return/list` endpoint
+
+### 2020-09-14_1.64.2
+- Update description for legal name field in `BankTransferUser` 
+
+### 2020-09-14_1.64.1
+- Update descriptions for `/transfer/repayment/list` and `/transfer/repayment/return/list` endpoints
+
+### 2020-09-14_1.64.0
+- Remove `scheme_automatic_downgrade` from `/payment_initiation/payment/create`
+
+### 2020-09-14_1.63.1
+- Update description for `/sandbox/transfer/sweep/simulate` endpoint
+
+### 2020-09-14_1.63.0
+- Refactor account subtype enums for greater specificity. This has no changes to the API but is a major semver change for Python, Node, Go, and Java client library interfaces to the AccountSubtype object within account filtering contexts in `/link/token/create`. The `AccountSubtype` namespace in this context is now prefixed with the AccountType. (Example for Node: Old: `AccountSubtype.checking` New: `DepositoryAccountSubtype.checking`)
+
+### 2020-09-14_1.62.7
+- Update description for `datetime` and `authorized_datetime` fields in Transactions endpoints
+
+### 2020-09-14_1.62.6
+- Make `sweep_id` / `sweep_amount` fields on Transfer Event nullable
+
+### 2020-09-14_1.62.6
+- Set `institution_status` to be nullable in `InstitutionsGetResponse`
+
+### 2020-09-14_1.62.5
+- Update external docs URLs for Transfer and Bank Transfer endpoints
+- Update description for `ach_return_code` field in Transfer endpoints
+
+### 2020-09-14_1.62.4
+- Add `join_date` to `/application/get` and `/item/application/list`
+- Remove `created_at` from `/application/get`
+
+### 2020-09-14_1.62.3
+- Updated various description fields for Income
+
+### 2020-09-14_1.62.2
+- Add `employment` as an available product in Product array.
+
 # 14.12.0
 - Updating to OAS 2020-09-14_1.62.1
 
@@ -32,7 +116,7 @@ See full changelog for the OpenAPI schema (OAS) [here](https://github.com/plaid/
 - Fixed an issue with enums in this library. The library is supposed to be able to gracefully handle
     new enum values being returned from endpoints. Previously, if there were new enum values
     endpoint calls would fail.
- 
+
 # 14.3.0
 Updating to OAS 2020-09-14_1.33.0.
 
