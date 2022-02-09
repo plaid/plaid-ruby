@@ -7,7 +7,7 @@ Prepare release:
 1. Update `Makefile -> RUBY_PACKAGE_VERSION`, and `CHANGELOG.md` files.
 2. Regenerate the Ruby client library with the new package version.
 3. Run `bundle` to bump the version in `Gemfile.lock`.
-4. Create and merge a PR with the changes from 1 and 2.
+4. Create and merge a PR with the changes from steps 1-3.
 5. Authenticate with rubygems with `gem signin` or manually set up your `~/.gem/credentials`.
 
 Publish:

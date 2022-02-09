@@ -14,35 +14,30 @@ require 'date'
 require 'time'
 
 module Plaid
-  # An optional object to filter `/institutions/get` results.
-  class InstitutionsGetRequestOptions
-    # Filter the Institutions based on which products they support. 
-    attr_accessor :products
+  # Fired when a change to identity data has been detected on an Item.
+  class IdentityDefaultUpdateWebhook
+    # `IDENTITY`
+    attr_accessor :webhook_type
 
-    # Specify an array of routing numbers to filter institutions. The response will only return institutions that match all of the routing numbers in the array. Routing number records used for this matching are not comprehensive; failure to match a given routing number to an institution does not mean that the institution is unsupported by Plaid.
-    attr_accessor :routing_numbers
+    # `DEFAULT_UPDATE`
+    attr_accessor :webhook_code
 
-    # Limit results to institutions with or without OAuth login flows.
-    attr_accessor :oauth
+    # The `item_id` of the Item associated with this webhook, warning, or error
+    attr_accessor :item_id
 
-    # When `true`, return the institution's homepage URL, logo and primary brand color.  Note that Plaid does not own any of the logos shared by the API, and that by accessing or using these logos, you agree that you are doing so at your own risk and will, if necessary, obtain all required permissions from the appropriate rights holders and adhere to any applicable usage guidelines. Plaid disclaims all express or implied warranties with respect to the logos.
-    attr_accessor :include_optional_metadata
+    # An object with keys of `account_id`'s that are mapped to their respective identity attributes that changed.  Example: `{ \"XMBvvyMGQ1UoLbKByoMqH3nXMj84ALSdE5B58\": [\"PHONES\"] }` 
+    attr_accessor :account_ids_with_updated_identity
 
-    # When `true`, returns metadata related to the Auth product indicating which auth methods are supported.
-    attr_accessor :include_auth_metadata
-
-    # When `true`, returns metadata related to the Payment Initiation product indicating which payment configurations are supported.
-    attr_accessor :include_payment_initiation_metadata
+    attr_accessor :error
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'products' => :'products',
-        :'routing_numbers' => :'routing_numbers',
-        :'oauth' => :'oauth',
-        :'include_optional_metadata' => :'include_optional_metadata',
-        :'include_auth_metadata' => :'include_auth_metadata',
-        :'include_payment_initiation_metadata' => :'include_payment_initiation_metadata'
+        :'webhook_type' => :'webhook_type',
+        :'webhook_code' => :'webhook_code',
+        :'item_id' => :'item_id',
+        :'account_ids_with_updated_identity' => :'account_ids_with_updated_identity',
+        :'error' => :'error'
       }
     end
 
@@ -54,21 +49,17 @@ module Plaid
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'products' => :'Array<Products>',
-        :'routing_numbers' => :'Array<String>',
-        :'oauth' => :'Boolean',
-        :'include_optional_metadata' => :'Boolean',
-        :'include_auth_metadata' => :'Boolean',
-        :'include_payment_initiation_metadata' => :'Boolean'
+        :'webhook_type' => :'String',
+        :'webhook_code' => :'String',
+        :'item_id' => :'String',
+        :'account_ids_with_updated_identity' => :'Hash<String, Array<IdentityUpdateTypes>>',
+        :'error' => :'PlaidError'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'products',
-        :'routing_numbers',
-        :'oauth',
       ])
     end
 
@@ -76,47 +67,37 @@ module Plaid
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Plaid::InstitutionsGetRequestOptions` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Plaid::IdentityDefaultUpdateWebhook` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Plaid::InstitutionsGetRequestOptions`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Plaid::IdentityDefaultUpdateWebhook`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'products')
-        if (value = attributes[:'products']).is_a?(Array)
-          self.products = value
+      if attributes.key?(:'webhook_type')
+        self.webhook_type = attributes[:'webhook_type']
+      end
+
+      if attributes.key?(:'webhook_code')
+        self.webhook_code = attributes[:'webhook_code']
+      end
+
+      if attributes.key?(:'item_id')
+        self.item_id = attributes[:'item_id']
+      end
+
+      if attributes.key?(:'account_ids_with_updated_identity')
+        if (value = attributes[:'account_ids_with_updated_identity']).is_a?(Hash)
+          self.account_ids_with_updated_identity = value
         end
       end
 
-      if attributes.key?(:'routing_numbers')
-        if (value = attributes[:'routing_numbers']).is_a?(Array)
-          self.routing_numbers = value
-        end
-      end
-
-      if attributes.key?(:'oauth')
-        self.oauth = attributes[:'oauth']
-      end
-
-      if attributes.key?(:'include_optional_metadata')
-        self.include_optional_metadata = attributes[:'include_optional_metadata']
-      end
-
-      if attributes.key?(:'include_auth_metadata')
-        self.include_auth_metadata = attributes[:'include_auth_metadata']
-      else
-        self.include_auth_metadata = false
-      end
-
-      if attributes.key?(:'include_payment_initiation_metadata')
-        self.include_payment_initiation_metadata = attributes[:'include_payment_initiation_metadata']
-      else
-        self.include_payment_initiation_metadata = false
+      if attributes.key?(:'error')
+        self.error = attributes[:'error']
       end
     end
 
@@ -124,9 +105,24 @@ module Plaid
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @webhook_type.nil?
+        invalid_properties.push('invalid value for "webhook_type", webhook_type cannot be nil.')
+      end
 
-      if !@products.nil? && @products.length < 1
-        invalid_properties.push('invalid value for "products", number of items must be greater than or equal to 1.')
+      if @webhook_code.nil?
+        invalid_properties.push('invalid value for "webhook_code", webhook_code cannot be nil.')
+      end
+
+      if @item_id.nil?
+        invalid_properties.push('invalid value for "item_id", item_id cannot be nil.')
+      end
+
+      if @account_ids_with_updated_identity.nil?
+        invalid_properties.push('invalid value for "account_ids_with_updated_identity", account_ids_with_updated_identity cannot be nil.')
+      end
+
+      if @error.nil?
+        invalid_properties.push('invalid value for "error", error cannot be nil.')
       end
 
       invalid_properties
@@ -135,19 +131,12 @@ module Plaid
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@products.nil? && @products.length < 1
+      return false if @webhook_type.nil?
+      return false if @webhook_code.nil?
+      return false if @item_id.nil?
+      return false if @account_ids_with_updated_identity.nil?
+      return false if @error.nil?
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] products Value to be assigned
-    def products=(products)
-
-      if !products.nil? && products.length < 1
-        fail ArgumentError, 'invalid value for "products", number of items must be greater than or equal to 1.'
-      end
-
-      @products = products
     end
 
     # Checks equality by comparing each attribute.
@@ -155,12 +144,11 @@ module Plaid
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          products == o.products &&
-          routing_numbers == o.routing_numbers &&
-          oauth == o.oauth &&
-          include_optional_metadata == o.include_optional_metadata &&
-          include_auth_metadata == o.include_auth_metadata &&
-          include_payment_initiation_metadata == o.include_payment_initiation_metadata
+          webhook_type == o.webhook_type &&
+          webhook_code == o.webhook_code &&
+          item_id == o.item_id &&
+          account_ids_with_updated_identity == o.account_ids_with_updated_identity &&
+          error == o.error
     end
 
     # @see the `==` method
@@ -172,7 +160,7 @@ module Plaid
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [products, routing_numbers, oauth, include_optional_metadata, include_auth_metadata, include_payment_initiation_metadata].hash
+      [webhook_type, webhook_code, item_id, account_ids_with_updated_identity, error].hash
     end
 
     # Builds the object from hash

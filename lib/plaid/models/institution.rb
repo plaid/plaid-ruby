@@ -22,7 +22,7 @@ module Plaid
     # The official name of the institution
     attr_accessor :name
 
-    # A list of the Plaid products supported by the institution. Note that only institutions that support Instant Auth will return `auth` in the product array; institutions that do not list `auth` may still support other Auth methods such as Instant Match or Automated Micro-deposit Verification. For more details, see [Full Auth coverage](https://plaid.com/docs/auth/coverage/).
+    # A list of the Plaid products supported by the institution. Note that only institutions that support Instant Auth will return `auth` in the product array; institutions that do not list `auth` may still support other Auth methods such as Instant Match or Automated Micro-deposit Verification. To identify institutions that support those methods, use the `auth_metadata` object. For more details, see [Full Auth coverage](https://plaid.com/docs/auth/coverage/).
     attr_accessor :products
 
     # A list of the country codes supported by the institution.
@@ -40,7 +40,7 @@ module Plaid
     # A partial list of routing numbers associated with the institution. This list is provided for the purpose of looking up institutions by routing number. It is not comprehensive and should never be used as a complete list of routing numbers for an institution.
     attr_accessor :routing_numbers
 
-    # Indicates that the institution has an OAuth login flow. This is primarily relevant to institutions with European country codes.
+    # Indicates that the institution has an OAuth login flow.
     attr_accessor :oauth
 
     attr_accessor :status
