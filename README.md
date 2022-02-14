@@ -187,19 +187,19 @@ access_token = response.access_token
 auth_get_request = Plaid::AuthGetRequest.new
 auth_get_request.access_token = access_token
 
-auth_response = client.auth_get(access_token)
+auth_response = client.auth_get(auth_get_request)
 auth = auth_response.auth
 ```
 
 There are also a number of other methods you can use to retrieve data:
 
-* `client.accounts_get(Plaid::AccountsGetRequest({:access_token => access_token, ...}))`: accounts
-* `client.accounts_balance_get(Plaid::AccountsBalanceGetRequest({:access_token => access_token, ...}))`: real-time balances
-* `client.auth_get(Plaid::AuthGetRequest({:access_token => access_token, ...}))`: auth
-* `client.identity_get(Plaid::IdentityGetRequest({:access_token => access_token, ...}))`: identity
-* `client.transactions_get(Plaid::TransactionsGetRequest({:access_token => access_token, ...}))`: transactions
-* `client.investments_transactions_get(Plaid::InvestmentsTransactionsGetRequest({:access_token => access_token, ...}))`: investment-account transactions
-* `client.investments_holdings_get(Plaid::InvestmentsHoldingsGetRequest({:access_token => access_token, ...}))`: investment-account holdings
+* `client.accounts_get(Plaid::AccountsGetRequest.new({:access_token => access_token, ...}))`: accounts
+* `client.accounts_balance_get(Plaid::AccountsBalanceGetRequest.new({:access_token => access_token, ...}))`: real-time balances
+* `client.auth_get(Plaid::AuthGetRequest.new({:access_token => access_token, ...}))`: auth
+* `client.identity_get(Plaid::IdentityGetRequest.new({:access_token => access_token, ...}))`: identity
+* `client.transactions_get(Plaid::TransactionsGetRequest.new({:access_token => access_token, ...}))`: transactions
+* `client.investments_transactions_get(Plaid::InvestmentsTransactionsGetRequest.new({:access_token => access_token, ...}))`: investment-account transactions
+* `client.investments_holdings_get(Plaid::InvestmentsHoldingsGetRequest.new({:access_token => access_token, ...}))`: investment-account holdings
 
 All of these methods return appropriate data. More information can be found on the [API documentation](https://plaid.com/docs/api).
 
