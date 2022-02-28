@@ -49,11 +49,6 @@ class PlaidIncomeVerificationTest < PlaidTest
     assert_kind_of(Plaid::IncomeVerificationCreateResponse, response)
     verification_id = response.income_verification_id
 
-    request = Plaid::IncomeVerificationSummaryGetRequest.new
-    request.income_verification_id = verification_id
-    response = client.income_verification_summary_get(request)
-    assert_kind_of(Plaid::IncomeVerificationSummaryGetResponse, response)
-
     request = Plaid::IncomeVerificationPaystubsGetRequest.new
     request.income_verification_id = verification_id
     response = client.income_verification_paystubs_get(request)
