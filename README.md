@@ -35,7 +35,7 @@ Each major version of `plaid-ruby` targets a specific version of the Plaid API:
 
 For information about what has changed between versions and how to update your integration, head to the [version changelog][version-changelog].
 
-The plaid-ruby client library is typically updated on a biweekly basis. The canonical source for the latest version number is the [client library changelog](https://github.com/plaid/plaid-ruby/blob/master/CHANGELOG.md).
+The plaid-ruby client library is typically updated on a monthly basis. The canonical source for the latest version number is the [client library changelog](https://github.com/plaid/plaid-ruby/blob/master/CHANGELOG.md).
 
 ## Usage
 
