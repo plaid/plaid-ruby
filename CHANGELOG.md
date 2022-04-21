@@ -1,5 +1,68 @@
 See full changelog for the OpenAPI schema (OAS) [here](https://github.com/plaid/plaid-openapi/blob/master/CHANGELOG.md).
 
+# 15.4.0
+- Updating to OAS 2020-09-14_1.105.1
+- Expose Faraday::Connection object for additional configuration options
+
+## OpenAPI Schema Changes
+### 2020-09-14_1.105.1
+- Removed `client_id` and `secret` as required fields from `/transfer/intent/{get,create}` to match actual API behavior.
+
+### 2020-09-14_1.105.0
+- Add `/credit/payroll_income/refresh` endpoint
+
+### 2020-09-14_1.104.0
+- Added `/signal/prepare`
+
+### 2020-09-14_1.103.0
+- Add `/transactions/recurring/deactivate` endpoint
+
+### 2020-09-14_1.102.0
+- Added `/watchlist_screening/individual/list` (currently private)
+- Added `/watchlist_screening/individual/create` (currently private)
+- Added `/watchlist_screening/individual/get` (currently private)
+- Added `/watchlist_screening/individual/update` (currently private)
+- Added `/watchlist_screening/individual/history/list` (currently private)
+- Added `/watchlist_screening/individual/review/list` (currently private)
+- Added `/watchlist_screening/individual/review/create` (currently private)
+- Added `/watchlist_screening/individual/hit/list` (currently private)
+- Added `/watchlist_screening/entity/list` (currently private)
+- Added `/watchlist_screening/entity/create` (currently private)
+- Added `/watchlist_screening/entity/get` (currently private)
+- Added `/watchlist_screening/entity/update` (currently private)
+- Added `/watchlist_screening/entity/history/list` (currently private)
+- Added `/watchlist_screening/entity/hit/list` (currently private)
+- Added `/watchlist_screening/entity/review/list` (currently private)
+- Added `/watchlist_screening/entity/review/create` (currently private)
+- Added `/watchlist_screening/individual/program/list` (currently private)
+- Added `/watchlist_screening/individual/program/get` (currently private)
+- Added `/watchlist_screening/entity/program/list` (currently private)
+- Added `/watchlist_screening/entity/program/get` (currently private)
+- Added `/dashboard_user/list` (currently private)
+- Added `/dashboard_user/get` (currently private)
+- Added `/identity_verification/list` (currently private)
+- Added `/identity_verification/get` (currently private)
+- Added `/identity_verification/retry` (currently private)
+- Modified `/identity_verification/create` (currently private)
+
+### 2020-09-14_1.101.0
+- Add endpoint for `/credit/bank_income/refresh`
+
+### 2020-09-14_1.100.0
+- Add `include_original_description`, `include_personal_finance_category` options to `/transactions/sync` request.
+
+### 2020-09-14_1.99.0
+- API changes for /credit/employment/get
+
+### 2020-09-14_1.98.1
+- Add `gusto` as processor partner
+
+### 2020-09-14_1.98.0
+- Add `user_token` as a request parameter for `/sandbox/public_token/create`
+
+### 2020-09-14_1.97.1
+- Remove `auth`, `transactions_updates`, `investments_updates`, and `identity` as required fields from Item status to match actual API behavior.
+
 # 15.3.0
 - Updating to OAS 2020-09-14_1.97.0
 

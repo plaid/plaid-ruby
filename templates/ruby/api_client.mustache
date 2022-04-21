@@ -23,6 +23,9 @@ module {{moduleName}}
     # @return [Hash]
     attr_accessor :default_headers
 
+    # The Faraday::Connection object for fine tuning configuration options.
+    attr_reader :connection
+
     # Initializes the ApiClient
     # @option config [Configuration] Configuration for initializing the object, default to Configuration.default
     def initialize(config = Configuration.default)
@@ -33,6 +36,13 @@ module {{moduleName}}
         'Content-Type' => 'application/json',
         'User-Agent' => @user_agent,
       }
+      @connection = create_connection
+    end
+
+    def create_connection
+      connection = Faraday.new(url: config.base_url) do |conn|
+        conn.adapter(Faraday.default_adapter)
+      end
     end
 
     def self.default

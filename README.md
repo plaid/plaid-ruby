@@ -71,12 +71,11 @@ The `server_index` field is the environment which the client will be running in.
 The gem uses Faraday to wrap HTTPS connections, which allows you to tune certain params:
 
 ```ruby
-client = Plaid::Configuration.new do |builder|
-  Plaid::Configuration.default()
-
-  # Increase network timeout
-  builder.options[:timeout] = 60*20    # 20 minutes
-end
+configuration = Plaid::Configuration.new
+api_client = Plaid::ApiClient.new(
+  configuration
+)
+api_client.connection.options[:timeout] = 60*20 # 20 minutes
 ```
 ## Data type differences from API and from previous versions
 
