@@ -40,8 +40,8 @@ module {{moduleName}}
     end
 
     def create_connection
-      connection = Faraday.new(url: config.base_url) do |conn|
-        conn.adapter(Faraday.default_adapter)
+      @connection = Faraday.new(url: config.base_url) do |builder|
+        block_given? ? yield(builder) : builder.adapter(Faraday.default_adapter)
       end
     end
 

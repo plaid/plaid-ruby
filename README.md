@@ -77,10 +77,45 @@ api_client = Plaid::ApiClient.new(
 )
 api_client.connection.options[:timeout] = 60*20 # 20 minutes
 ```
+
+To use custom middleware, reinitialize the Faraday::Connection object:
+```
+configuration = Plaid::Configuration.new
+api_client = Plaid::ApiClient.new(configuration)
+api_client.create_connection do |builder|
+  builder.use Faraday::Response::Logger
+end
+```
 ## Data type differences from API and from previous versions
 
 ### Dates
-Dates and date times in requests and responses, which are represented as strings in the API and in previous client library versions, are represented in this version of the library as Ruby `Date` or `DateTime` objects. 
+
+Dates and datetimes in requests, which are represented as strings in the API and in previous client library versions, are represented in this version of the Ruby client library as Ruby `Date` or `DateTime` objects. 
+
+Time zone information is required for request fields that accept datetimes. Failing to include time zone information (or passing in a string, instead of a `Date` or `DateTime` object) will result in an error. See the following examples for guidance on `Date` and `DateTime` usage.
+
+If the API reference documentation for a field specifies `format: date`, any of following are acceptable:
+
+```rb
+require 'date'
+
+# Not an exhaustive list of possible options
+a = Date.new(2022, 5, 5)
+b = Date.new(2022, 5, 5).to_date
+c = Date.parse('2022-05-05')
+d = Date.parse('2022-05-05').to_date
+e = Date.today
+```
+
+If the API reference documentation for a field specifies `format: date-time`, either of the following are acceptable:
+
+```rb
+require 'time'
+
+# Not an exhaustive list of possible options
+a = Time.parse("2022-05-06T22:35:49Z").to_datetime
+b = Date.parse("2022-05-06T22:35:49Z").to_datetime
+```
 
 ## Examples
 
