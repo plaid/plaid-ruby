@@ -1,5 +1,16 @@
 See full changelog for the OpenAPI schema (OAS) [here](https://github.com/plaid/plaid-openapi/blob/master/CHANGELOG.md).
 
+# 15.8.0
+- Updating to OAS 2020-09-14_1.128.4
+
+## OpenAPI Schema Changes
+### 2020-09-14_1.128.4
+- Add `identity_verification` as a new optional parameter for `/link/token/create`
+
+### 2020-09-14_1.128.3
+- Add category rules beta to `personal_finance_category` field description
+in `/transactions/get`
+
 # 15.7.0
 - Updating to OAS 2020-09-14_1.128.2
 

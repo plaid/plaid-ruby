@@ -14,27 +14,19 @@ require 'date'
 require 'time'
 
 module Plaid
-  # Fired when the status of a deposit switch request has changed.
-  class DepositSwitchStateUpdateWebhook
-    # `\"DEPOSIT_SWITCH\"`
-    attr_accessor :webhook_type
+  # Specifies option for initializing Link for use with the Identity Verification product.
+  class LinkTokenCreateRequestIdentityVerification
+    # ID of the associated Identity Verification template.
+    attr_accessor :template_id
 
-    # `\"SWITCH_STATE_UPDATE\"`
-    attr_accessor :webhook_code
-
-    #  The state, or status, of the deposit switch.  `initialized`: The deposit switch has been initialized with the user entering the information required to submit the deposit switch request.  `processing`: The deposit switch request has been submitted and is being processed.  `completed`: The user's employer has fulfilled and completed the deposit switch request.  `error`: There was an error processing the deposit switch request.  For more information, see the [Deposit Switch API reference](/docs/deposit-switch/reference#deposit_switchget).
-    attr_accessor :state
-
-    # The ID of the deposit switch.
-    attr_accessor :deposit_switch_id
+    # A flag specifying whether the end user has already agreed to a privacy policy specifying that their data will be shared with Plaid for verification purposes.  If `gave_consent` is set to `true`, the `accept_tos` step will be marked as `skipped` and the end user's session will start at the next step requirement.
+    attr_accessor :consent
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'webhook_type' => :'webhook_type',
-        :'webhook_code' => :'webhook_code',
-        :'state' => :'state',
-        :'deposit_switch_id' => :'deposit_switch_id'
+        :'template_id' => :'template_id',
+        :'consent' => :'consent'
       }
     end
 
@@ -46,10 +38,8 @@ module Plaid
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'webhook_type' => :'String',
-        :'webhook_code' => :'String',
-        :'state' => :'String',
-        :'deposit_switch_id' => :'String'
+        :'template_id' => :'String',
+        :'consent' => :'Boolean'
       }
     end
 
@@ -63,31 +53,25 @@ module Plaid
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Plaid::DepositSwitchStateUpdateWebhook` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Plaid::LinkTokenCreateRequestIdentityVerification` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Plaid::DepositSwitchStateUpdateWebhook`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Plaid::LinkTokenCreateRequestIdentityVerification`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'webhook_type')
-        self.webhook_type = attributes[:'webhook_type']
+      if attributes.key?(:'template_id')
+        self.template_id = attributes[:'template_id']
       end
 
-      if attributes.key?(:'webhook_code')
-        self.webhook_code = attributes[:'webhook_code']
-      end
-
-      if attributes.key?(:'state')
-        self.state = attributes[:'state']
-      end
-
-      if attributes.key?(:'deposit_switch_id')
-        self.deposit_switch_id = attributes[:'deposit_switch_id']
+      if attributes.key?(:'consent')
+        self.consent = attributes[:'consent']
+      else
+        self.consent = true
       end
     end
 
@@ -95,12 +79,17 @@ module Plaid
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @template_id.nil?
+        invalid_properties.push('invalid value for "template_id", template_id cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @template_id.nil?
       true
     end
 
@@ -109,10 +98,8 @@ module Plaid
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          webhook_type == o.webhook_type &&
-          webhook_code == o.webhook_code &&
-          state == o.state &&
-          deposit_switch_id == o.deposit_switch_id
+          template_id == o.template_id &&
+          consent == o.consent
     end
 
     # @see the `==` method
@@ -124,7 +111,7 @@ module Plaid
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [webhook_type, webhook_code, state, deposit_switch_id].hash
+      [template_id, consent].hash
     end
 
     # Builds the object from hash
