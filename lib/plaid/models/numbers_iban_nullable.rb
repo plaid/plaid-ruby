@@ -14,15 +14,11 @@ require 'date'
 require 'time'
 
 module Plaid
-  # Defines the response schema for `/sandbox/transfer/repayment/simulate`
-  class SandboxTransferRepaymentSimulateResponse
-    # A unique identifier for the request, which can be used for troubleshooting. This identifier, like all Plaid identifiers, is case sensitive.
-    attr_accessor :request_id
-
+  # International Bank Account Number (IBAN).
+  class NumbersIBANNullable
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'request_id' => :'request_id'
       }
     end
 
@@ -34,7 +30,6 @@ module Plaid
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'request_id' => :'String'
       }
     end
 
@@ -48,37 +43,28 @@ module Plaid
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `Plaid::SandboxTransferRepaymentSimulateResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `Plaid::NumbersIBANNullable` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `Plaid::SandboxTransferRepaymentSimulateResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `Plaid::NumbersIBANNullable`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
-
-      if attributes.key?(:'request_id')
-        self.request_id = attributes[:'request_id']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @request_id.nil?
-        invalid_properties.push('invalid value for "request_id", request_id cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @request_id.nil?
       true
     end
 
@@ -86,8 +72,7 @@ module Plaid
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
-      self.class == o.class &&
-          request_id == o.request_id
+      self.class == o.class
     end
 
     # @see the `==` method
@@ -99,7 +84,7 @@ module Plaid
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [request_id].hash
+      [].hash
     end
 
     # Builds the object from hash
