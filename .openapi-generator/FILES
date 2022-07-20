@@ -116,6 +116,8 @@ docs/CreateIndividualWatchlistScreeningReviewRequest.md
 docs/CreditAccountSubtype.md
 docs/CreditAuditCopyTokenCreateRequest.md
 docs/CreditAuditCopyTokenCreateResponse.md
+docs/CreditAuditCopyTokenRemoveRequest.md
+docs/CreditAuditCopyTokenRemoveResponse.md
 docs/CreditBankIncome.md
 docs/CreditBankIncomeAccount.md
 docs/CreditBankIncomeAccountType.md
@@ -270,6 +272,10 @@ docs/IdentityDefaultUpdateWebhook.md
 docs/IdentityGetRequest.md
 docs/IdentityGetRequestOptions.md
 docs/IdentityGetResponse.md
+docs/IdentityMatchRequest.md
+docs/IdentityMatchRequestOptions.md
+docs/IdentityMatchResponse.md
+docs/IdentityMatchUser.md
 docs/IdentityUpdateTypes.md
 docs/IdentityVerification.md
 docs/IdentityVerificationCreateRequest.md
@@ -410,6 +416,7 @@ docs/LinkTokenCreateRequestPaymentInitiation.md
 docs/LinkTokenCreateRequestTransfer.md
 docs/LinkTokenCreateRequestUpdate.md
 docs/LinkTokenCreateRequestUser.md
+docs/LinkTokenCreateRequestUserStatedIncomeSource.md
 docs/LinkTokenCreateResponse.md
 docs/LinkTokenEUConfig.md
 docs/LinkTokenGetMetadataResponse.md
@@ -449,6 +456,7 @@ docs/NumbersEFT.md
 docs/NumbersEFTNullable.md
 docs/NumbersIBANNullable.md
 docs/NumbersInternational.md
+docs/NumbersInternationalIBAN.md
 docs/NumbersInternationalNullable.md
 docs/OverrideAccountType.md
 docs/OverrideAccounts.md
@@ -526,6 +534,13 @@ docs/PaymentInitiationRecipientListResponse.md
 docs/PaymentInitiationRefundStatus.md
 docs/PaymentInitiationStandingOrderMetadata.md
 docs/PaymentMeta.md
+docs/PaymentProfileCreateRequest.md
+docs/PaymentProfileCreateResponse.md
+docs/PaymentProfileGetRequest.md
+docs/PaymentProfileGetResponse.md
+docs/PaymentProfileRemoveRequest.md
+docs/PaymentProfileRemoveResponse.md
+docs/PaymentProfileStatus.md
 docs/PaymentScheduleInterval.md
 docs/PaymentScheme.md
 docs/PaymentStatusUpdateWebhook.md
@@ -765,6 +780,9 @@ docs/UserCustomPassword.md
 docs/UserIDNumber.md
 docs/UserName.md
 docs/UserPermissionRevokedWebhook.md
+docs/UserStatedIncomeSourceCategory.md
+docs/UserStatedIncomeSourceFrequency.md
+docs/UserStatedIncomeSourcePayType.md
 docs/VerificationAttribute.md
 docs/VerificationExpiredWebhook.md
 docs/VerificationRefreshStatus.md
@@ -786,6 +804,7 @@ docs/WalletTransaction.md
 docs/WalletTransactionAmount.md
 docs/WalletTransactionCounterparty.md
 docs/WalletTransactionCounterpartyBACS.md
+docs/WalletTransactionCounterpartyInternational.md
 docs/WalletTransactionCounterpartyNumbers.md
 docs/WalletTransactionExecuteRequest.md
 docs/WalletTransactionExecuteResponse.md
@@ -939,6 +958,8 @@ lib/plaid/models/create_individual_watchlist_screening_review_request.rb
 lib/plaid/models/credit_account_subtype.rb
 lib/plaid/models/credit_audit_copy_token_create_request.rb
 lib/plaid/models/credit_audit_copy_token_create_response.rb
+lib/plaid/models/credit_audit_copy_token_remove_request.rb
+lib/plaid/models/credit_audit_copy_token_remove_response.rb
 lib/plaid/models/credit_bank_income.rb
 lib/plaid/models/credit_bank_income_account.rb
 lib/plaid/models/credit_bank_income_account_type.rb
@@ -1093,6 +1114,10 @@ lib/plaid/models/identity_default_update_webhook.rb
 lib/plaid/models/identity_get_request.rb
 lib/plaid/models/identity_get_request_options.rb
 lib/plaid/models/identity_get_response.rb
+lib/plaid/models/identity_match_request.rb
+lib/plaid/models/identity_match_request_options.rb
+lib/plaid/models/identity_match_response.rb
+lib/plaid/models/identity_match_user.rb
 lib/plaid/models/identity_update_types.rb
 lib/plaid/models/identity_verification.rb
 lib/plaid/models/identity_verification_create_request.rb
@@ -1233,6 +1258,7 @@ lib/plaid/models/link_token_create_request_payment_initiation.rb
 lib/plaid/models/link_token_create_request_transfer.rb
 lib/plaid/models/link_token_create_request_update.rb
 lib/plaid/models/link_token_create_request_user.rb
+lib/plaid/models/link_token_create_request_user_stated_income_source.rb
 lib/plaid/models/link_token_create_response.rb
 lib/plaid/models/link_token_eu_config.rb
 lib/plaid/models/link_token_get_metadata_response.rb
@@ -1272,6 +1298,7 @@ lib/plaid/models/numbers_eft.rb
 lib/plaid/models/numbers_eft_nullable.rb
 lib/plaid/models/numbers_iban_nullable.rb
 lib/plaid/models/numbers_international.rb
+lib/plaid/models/numbers_international_iban.rb
 lib/plaid/models/numbers_international_nullable.rb
 lib/plaid/models/override_account_type.rb
 lib/plaid/models/override_accounts.rb
@@ -1347,6 +1374,13 @@ lib/plaid/models/payment_initiation_recipient_list_response.rb
 lib/plaid/models/payment_initiation_refund_status.rb
 lib/plaid/models/payment_initiation_standing_order_metadata.rb
 lib/plaid/models/payment_meta.rb
+lib/plaid/models/payment_profile_create_request.rb
+lib/plaid/models/payment_profile_create_response.rb
+lib/plaid/models/payment_profile_get_request.rb
+lib/plaid/models/payment_profile_get_response.rb
+lib/plaid/models/payment_profile_remove_request.rb
+lib/plaid/models/payment_profile_remove_response.rb
+lib/plaid/models/payment_profile_status.rb
 lib/plaid/models/payment_schedule_interval.rb
 lib/plaid/models/payment_scheme.rb
 lib/plaid/models/payment_status_update_webhook.rb
@@ -1587,6 +1621,9 @@ lib/plaid/models/user_custom_password.rb
 lib/plaid/models/user_id_number.rb
 lib/plaid/models/user_name.rb
 lib/plaid/models/user_permission_revoked_webhook.rb
+lib/plaid/models/user_stated_income_source_category.rb
+lib/plaid/models/user_stated_income_source_frequency.rb
+lib/plaid/models/user_stated_income_source_pay_type.rb
 lib/plaid/models/verification_attribute.rb
 lib/plaid/models/verification_expired_webhook.rb
 lib/plaid/models/verification_refresh_status.rb
@@ -1608,6 +1645,7 @@ lib/plaid/models/wallet_transaction.rb
 lib/plaid/models/wallet_transaction_amount.rb
 lib/plaid/models/wallet_transaction_counterparty.rb
 lib/plaid/models/wallet_transaction_counterparty_bacs.rb
+lib/plaid/models/wallet_transaction_counterparty_international.rb
 lib/plaid/models/wallet_transaction_counterparty_numbers.rb
 lib/plaid/models/wallet_transaction_execute_request.rb
 lib/plaid/models/wallet_transaction_execute_response.rb
