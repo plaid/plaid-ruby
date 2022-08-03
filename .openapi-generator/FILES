@@ -113,6 +113,10 @@ docs/CountryCode.md
 docs/CreateEntityScreeningRequest.md
 docs/CreateEntityWatchlistScreeningReviewRequest.md
 docs/CreateIndividualWatchlistScreeningReviewRequest.md
+docs/Credit1099.md
+docs/Credit1099Filer.md
+docs/Credit1099Payer.md
+docs/Credit1099Recipient.md
 docs/CreditAccountSubtype.md
 docs/CreditAuditCopyTokenCreateRequest.md
 docs/CreditAuditCopyTokenCreateResponse.md
@@ -129,6 +133,7 @@ docs/CreditBankIncomeGetRequestOptions.md
 docs/CreditBankIncomeGetResponse.md
 docs/CreditBankIncomeHistoricalSummary.md
 docs/CreditBankIncomeItem.md
+docs/CreditBankIncomePDFGetRequest.md
 docs/CreditBankIncomePayFrequency.md
 docs/CreditBankIncomeRefreshRequest.md
 docs/CreditBankIncomeRefreshRequestOptions.md
@@ -166,6 +171,11 @@ docs/CreditPayrollIncomeRiskSignalsGetResponse.md
 docs/CreditPlatformIds.md
 docs/CreditRelayCreateRequest.md
 docs/CreditRelayCreateResponse.md
+docs/CreditRelayGetRequest.md
+docs/CreditRelayRefreshRequest.md
+docs/CreditRelayRefreshResponse.md
+docs/CreditRelayRemoveRequest.md
+docs/CreditRelayRemoveResponse.md
 docs/CreditW2.md
 docs/CustomerInitiatedReturnRisk.md
 docs/DashboardUser.md
@@ -254,6 +264,7 @@ docs/ExternalPaymentRefundDetails.md
 docs/ExternalPaymentScheduleBase.md
 docs/ExternalPaymentScheduleGet.md
 docs/ExternalPaymentScheduleRequest.md
+docs/Form1099Type.md
 docs/GenericScreeningHitLocationItems.md
 docs/GetDashboardUserRequest.md
 docs/GetEntityWatchlistScreeningRequest.md
@@ -474,6 +485,9 @@ docs/PaginatedIndividualWatchlistProgramListResponse.md
 docs/PaginatedIndividualWatchlistScreeningHitListResponse.md
 docs/PaginatedIndividualWatchlistScreeningListResponse.md
 docs/PaginatedIndividualWatchlistScreeningReviewListResponse.md
+docs/PartnerCustomersCreateRequest.md
+docs/PartnerCustomersCreateResponse.md
+docs/PartnerEndCustomerClient.md
 docs/Pay.md
 docs/PayFrequency.md
 docs/PayFrequencyValue.md
@@ -599,9 +613,11 @@ docs/RecaptchaRequiredError.md
 docs/RecipientBACS.md
 docs/RecipientBACSNullable.md
 docs/RecurringTransactionFrequency.md
+docs/RecurringTransactionsUpdateWebhook.md
 docs/RelayEvent.md
 docs/RemovedTransaction.md
 docs/ReportToken.md
+docs/ReportType.md
 docs/RiskSignalDocumentReference.md
 docs/SandboxBankTransferFireWebhookRequest.md
 docs/SandboxBankTransferFireWebhookResponse.md
@@ -719,6 +735,7 @@ docs/TransferAuthorizationGuaranteeDecision.md
 docs/TransferAuthorizationGuaranteeDecisionRationale.md
 docs/TransferAuthorizationGuaranteeDecisionRationaleCode.md
 docs/TransferAuthorizationProposedTransfer.md
+docs/TransferAuthorizationUserInRequest.md
 docs/TransferCancelRequest.md
 docs/TransferCancelResponse.md
 docs/TransferCreateRequest.md
@@ -955,6 +972,10 @@ lib/plaid/models/country_code.rb
 lib/plaid/models/create_entity_screening_request.rb
 lib/plaid/models/create_entity_watchlist_screening_review_request.rb
 lib/plaid/models/create_individual_watchlist_screening_review_request.rb
+lib/plaid/models/credit1099.rb
+lib/plaid/models/credit1099_filer.rb
+lib/plaid/models/credit1099_payer.rb
+lib/plaid/models/credit1099_recipient.rb
 lib/plaid/models/credit_account_subtype.rb
 lib/plaid/models/credit_audit_copy_token_create_request.rb
 lib/plaid/models/credit_audit_copy_token_create_response.rb
@@ -972,6 +993,7 @@ lib/plaid/models/credit_bank_income_get_response.rb
 lib/plaid/models/credit_bank_income_historical_summary.rb
 lib/plaid/models/credit_bank_income_item.rb
 lib/plaid/models/credit_bank_income_pay_frequency.rb
+lib/plaid/models/credit_bank_income_pdf_get_request.rb
 lib/plaid/models/credit_bank_income_refresh_request.rb
 lib/plaid/models/credit_bank_income_refresh_request_options.rb
 lib/plaid/models/credit_bank_income_refresh_response.rb
@@ -1008,6 +1030,11 @@ lib/plaid/models/credit_payroll_income_risk_signals_get_response.rb
 lib/plaid/models/credit_platform_ids.rb
 lib/plaid/models/credit_relay_create_request.rb
 lib/plaid/models/credit_relay_create_response.rb
+lib/plaid/models/credit_relay_get_request.rb
+lib/plaid/models/credit_relay_refresh_request.rb
+lib/plaid/models/credit_relay_refresh_response.rb
+lib/plaid/models/credit_relay_remove_request.rb
+lib/plaid/models/credit_relay_remove_response.rb
 lib/plaid/models/credit_w2.rb
 lib/plaid/models/customer_initiated_return_risk.rb
 lib/plaid/models/dashboard_user.rb
@@ -1096,6 +1123,7 @@ lib/plaid/models/external_payment_refund_details.rb
 lib/plaid/models/external_payment_schedule_base.rb
 lib/plaid/models/external_payment_schedule_get.rb
 lib/plaid/models/external_payment_schedule_request.rb
+lib/plaid/models/form1099_type.rb
 lib/plaid/models/generic_screening_hit_location_items.rb
 lib/plaid/models/get_dashboard_user_request.rb
 lib/plaid/models/get_entity_watchlist_screening_request.rb
@@ -1314,6 +1342,9 @@ lib/plaid/models/paginated_individual_watchlist_program_list_response.rb
 lib/plaid/models/paginated_individual_watchlist_screening_hit_list_response.rb
 lib/plaid/models/paginated_individual_watchlist_screening_list_response.rb
 lib/plaid/models/paginated_individual_watchlist_screening_review_list_response.rb
+lib/plaid/models/partner_customers_create_request.rb
+lib/plaid/models/partner_customers_create_response.rb
+lib/plaid/models/partner_end_customer_client.rb
 lib/plaid/models/pay.rb
 lib/plaid/models/pay_frequency.rb
 lib/plaid/models/pay_frequency_value.rb
@@ -1440,9 +1471,11 @@ lib/plaid/models/recaptcha_required_error.rb
 lib/plaid/models/recipient_bacs.rb
 lib/plaid/models/recipient_bacs_nullable.rb
 lib/plaid/models/recurring_transaction_frequency.rb
+lib/plaid/models/recurring_transactions_update_webhook.rb
 lib/plaid/models/relay_event.rb
 lib/plaid/models/removed_transaction.rb
 lib/plaid/models/report_token.rb
+lib/plaid/models/report_type.rb
 lib/plaid/models/risk_signal_document_reference.rb
 lib/plaid/models/sandbox_bank_transfer_fire_webhook_request.rb
 lib/plaid/models/sandbox_bank_transfer_fire_webhook_response.rb
@@ -1560,6 +1593,7 @@ lib/plaid/models/transfer_authorization_guarantee_decision.rb
 lib/plaid/models/transfer_authorization_guarantee_decision_rationale.rb
 lib/plaid/models/transfer_authorization_guarantee_decision_rationale_code.rb
 lib/plaid/models/transfer_authorization_proposed_transfer.rb
+lib/plaid/models/transfer_authorization_user_in_request.rb
 lib/plaid/models/transfer_cancel_request.rb
 lib/plaid/models/transfer_cancel_response.rb
 lib/plaid/models/transfer_create_request.rb
