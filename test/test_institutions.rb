@@ -5,7 +5,7 @@ class PlaidInstitutionsTest < PlaidTest
   def test_get
     institutions_get_request = Plaid::InstitutionsGetRequest.new({
       :count => 3,
-      :offset => 1,
+      :offset => 4,
       :country_codes => ["US"],
     })
 
@@ -16,7 +16,7 @@ class PlaidInstitutionsTest < PlaidTest
   def test_get_with_options
     institutions_get_request = Plaid::InstitutionsGetRequest.new({
       :count => 3,
-      :offset => 1,
+      :offset => 4,
       :country_codes => ["US"],
       :options => {
         products: ["transactions"],
