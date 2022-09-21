@@ -174,7 +174,33 @@ item_remove_request.access_token = access_token
 client.item_remove(item_remove_request)
 ```
 
-### Get paginated transactions
+### Get paginated transactions (preferred method)
+```ruby
+request = Plaid::ItemPublicTokenExchangeRequest.new
+request.public_token = public_token
+
+response = client.item_public_token_exchange(request)
+access_token = response.access_token
+
+transactions_sync_request = Plaid::TransactionsSyncRequest.new
+transactions_sync_request.access_token = access_token
+
+transaction_response = client.transactions_sync(transactions_sync_request)
+transactions = transaction_response.transactions
+
+# the transactions in the response are paginated, so make multiple calls while
+# updating the cursor to retrieve all transactions
+while transaction_response.has_more
+  transactions_sync_request = Plaid::TransactionsSyncRequest.new
+  transactions_sync_request.access_token = access_token
+  transactions_sync_request.cursor = transaction_response.next_cursor
+
+  transaction_response = client.transactions_sync(transactions_sync_request)
+  transactions += transaction_response.transactions
+end
+```
+
+### Get paginated transactions (older method)
 ```ruby
 request = Plaid::ItemPublicTokenExchangeRequest.new
 request.public_token = public_token
