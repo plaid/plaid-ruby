@@ -15,6 +15,7 @@ require 'json'
 require 'logger'
 require 'tempfile'
 require 'faraday'
+require 'faraday/multipart'
 
 module Plaid
   class ApiClient
@@ -154,7 +155,7 @@ module Plaid
           case value
           when ::File, ::Tempfile
             # TODO hardcode to application/octet-stream, need better way to detect content type
-            data[key] = Faraday::UploadIO.new(value.path, 'application/octet-stream', value.path)
+            Faraday::Multipart::Post::UploadIO.new(value.path, 'application/octet-stream', value.path)
           when ::Array, nil
             # let Faraday handle Array and nil parameters
             data[key] = value
