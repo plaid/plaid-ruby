@@ -1,4 +1,6 @@
 require 'faraday'
+require 'faraday/multipart'
+
 
 require_relative "test_helper"
 
