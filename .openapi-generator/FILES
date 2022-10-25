@@ -192,7 +192,10 @@ docs/CreditRelayRemoveResponse.md
 docs/CreditSession.md
 docs/CreditSessionBankIncomeResult.md
 docs/CreditSessionBankIncomeStatus.md
+docs/CreditSessionDocumentIncomeResult.md
+docs/CreditSessionError.md
 docs/CreditSessionItemAddResult.md
+docs/CreditSessionPayrollIncomeResult.md
 docs/CreditSessionResults.md
 docs/CreditSessionsGetRequest.md
 docs/CreditSessionsGetResponse.md
@@ -277,7 +280,6 @@ docs/EntityWatchlistScreeningHit.md
 docs/EntityWatchlistScreeningReview.md
 docs/EntityWatchlistScreeningSearchTerms.md
 docs/EntityWatchlistSearchTerms.md
-docs/Error.md
 docs/ExpirationDate.md
 docs/ExternalPaymentInitiationConsentOptions.md
 docs/ExternalPaymentOptions.md
@@ -450,6 +452,8 @@ docs/LinkDeliveryDeliveryMethod.md
 docs/LinkDeliveryGetRequest.md
 docs/LinkDeliveryGetResponse.md
 docs/LinkDeliverySessionStatus.md
+docs/LinkOAuthCorrelationIdExchangeRequest.md
+docs/LinkOAuthCorrelationIdExchangeResponse.md
 docs/LinkTokenAccountFilters.md
 docs/LinkTokenCreateCreditFilter.md
 docs/LinkTokenCreateDepositoryFilter.md
@@ -515,6 +519,8 @@ docs/PSLFStatus.md
 docs/Parties.md
 docs/PartnerCustomerCreateRequest.md
 docs/PartnerCustomerCreateResponse.md
+docs/PartnerCustomerEnableRequest.md
+docs/PartnerCustomerEnableResponse.md
 docs/PartnerCustomerGetRequest.md
 docs/PartnerCustomerGetResponse.md
 docs/PartnerEndCustomer.md
@@ -524,6 +530,7 @@ docs/PartnerEndCustomerSecrets.md
 docs/PartnerEndCustomerStatus.md
 docs/PartnerEndCustomerTechnicalContact.md
 docs/PartnerEndCustomerWithSecrets.md
+docs/PartnerEndCustomerWithSecretsAllOf.md
 docs/Party.md
 docs/PartyIndividual.md
 docs/PartyRoleType.md
@@ -623,6 +630,7 @@ docs/PhysicalDocumentExtractedDataAnalysis.md
 docs/PhysicalDocumentImages.md
 docs/PlaidApi.md
 docs/PlaidError.md
+docs/PlaidErrorType.md
 docs/PlatformIds.md
 docs/ProcessorApexProcessorTokenCreateRequest.md
 docs/ProcessorAuthGetRequest.md
@@ -670,11 +678,15 @@ docs/SandboxItemResetLoginResponse.md
 docs/SandboxItemSetVerificationStatusRequest.md
 docs/SandboxItemSetVerificationStatusResponse.md
 docs/SandboxOauthSelectAccountsRequest.md
+docs/SandboxPaymentProfileResetLoginRequest.md
+docs/SandboxPaymentProfileResetLoginResponse.md
 docs/SandboxProcessorTokenCreateRequest.md
 docs/SandboxProcessorTokenCreateRequestOptions.md
 docs/SandboxProcessorTokenCreateResponse.md
 docs/SandboxPublicTokenCreateRequest.md
+docs/SandboxPublicTokenCreateRequestIncomeVerificationBankIncome.md
 docs/SandboxPublicTokenCreateRequestOptions.md
+docs/SandboxPublicTokenCreateRequestOptionsIncomeVerification.md
 docs/SandboxPublicTokenCreateRequestOptionsTransactions.md
 docs/SandboxPublicTokenCreateResponse.md
 docs/SandboxTransferFireWebhookRequest.md
@@ -1140,7 +1152,10 @@ lib/plaid/models/credit_relay_remove_response.rb
 lib/plaid/models/credit_session.rb
 lib/plaid/models/credit_session_bank_income_result.rb
 lib/plaid/models/credit_session_bank_income_status.rb
+lib/plaid/models/credit_session_document_income_result.rb
+lib/plaid/models/credit_session_error.rb
 lib/plaid/models/credit_session_item_add_result.rb
+lib/plaid/models/credit_session_payroll_income_result.rb
 lib/plaid/models/credit_session_results.rb
 lib/plaid/models/credit_sessions_get_request.rb
 lib/plaid/models/credit_sessions_get_response.rb
@@ -1225,7 +1240,6 @@ lib/plaid/models/entity_watchlist_screening_hit.rb
 lib/plaid/models/entity_watchlist_screening_review.rb
 lib/plaid/models/entity_watchlist_screening_search_terms.rb
 lib/plaid/models/entity_watchlist_search_terms.rb
-lib/plaid/models/error.rb
 lib/plaid/models/expiration_date.rb
 lib/plaid/models/external_payment_initiation_consent_options.rb
 lib/plaid/models/external_payment_options.rb
@@ -1398,6 +1412,8 @@ lib/plaid/models/link_delivery_delivery_method.rb
 lib/plaid/models/link_delivery_get_request.rb
 lib/plaid/models/link_delivery_get_response.rb
 lib/plaid/models/link_delivery_session_status.rb
+lib/plaid/models/link_o_auth_correlation_id_exchange_request.rb
+lib/plaid/models/link_o_auth_correlation_id_exchange_response.rb
 lib/plaid/models/link_token_account_filters.rb
 lib/plaid/models/link_token_create_credit_filter.rb
 lib/plaid/models/link_token_create_depository_filter.rb
@@ -1461,6 +1477,8 @@ lib/plaid/models/ownership_type.rb
 lib/plaid/models/parties.rb
 lib/plaid/models/partner_customer_create_request.rb
 lib/plaid/models/partner_customer_create_response.rb
+lib/plaid/models/partner_customer_enable_request.rb
+lib/plaid/models/partner_customer_enable_response.rb
 lib/plaid/models/partner_customer_get_request.rb
 lib/plaid/models/partner_customer_get_response.rb
 lib/plaid/models/partner_end_customer.rb
@@ -1470,6 +1488,7 @@ lib/plaid/models/partner_end_customer_secrets.rb
 lib/plaid/models/partner_end_customer_status.rb
 lib/plaid/models/partner_end_customer_technical_contact.rb
 lib/plaid/models/partner_end_customer_with_secrets.rb
+lib/plaid/models/partner_end_customer_with_secrets_all_of.rb
 lib/plaid/models/party.rb
 lib/plaid/models/party_individual.rb
 lib/plaid/models/party_role_type.rb
@@ -1568,6 +1587,7 @@ lib/plaid/models/physical_document_extracted_data.rb
 lib/plaid/models/physical_document_extracted_data_analysis.rb
 lib/plaid/models/physical_document_images.rb
 lib/plaid/models/plaid_error.rb
+lib/plaid/models/plaid_error_type.rb
 lib/plaid/models/platform_ids.rb
 lib/plaid/models/po_box_status.rb
 lib/plaid/models/processor_apex_processor_token_create_request.rb
@@ -1617,11 +1637,15 @@ lib/plaid/models/sandbox_item_reset_login_response.rb
 lib/plaid/models/sandbox_item_set_verification_status_request.rb
 lib/plaid/models/sandbox_item_set_verification_status_response.rb
 lib/plaid/models/sandbox_oauth_select_accounts_request.rb
+lib/plaid/models/sandbox_payment_profile_reset_login_request.rb
+lib/plaid/models/sandbox_payment_profile_reset_login_response.rb
 lib/plaid/models/sandbox_processor_token_create_request.rb
 lib/plaid/models/sandbox_processor_token_create_request_options.rb
 lib/plaid/models/sandbox_processor_token_create_response.rb
 lib/plaid/models/sandbox_public_token_create_request.rb
+lib/plaid/models/sandbox_public_token_create_request_income_verification_bank_income.rb
 lib/plaid/models/sandbox_public_token_create_request_options.rb
+lib/plaid/models/sandbox_public_token_create_request_options_income_verification.rb
 lib/plaid/models/sandbox_public_token_create_request_options_transactions.rb
 lib/plaid/models/sandbox_public_token_create_response.rb
 lib/plaid/models/sandbox_transfer_fire_webhook_request.rb
