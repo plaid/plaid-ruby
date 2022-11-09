@@ -77,10 +77,13 @@ module Plaid
             fail ApiError.new(:code => 0,
                               :message => response.return_message)
           else
+            raw_body = response.body
+            # Gracefully handle malformed body which is possible during API outage/maintanance
+            parsed_body = JSON.parse(raw_body) rescure nil
             fail ApiError.new(:code => response.status,
                               :response_headers => response.headers,
-                              :response_body => response.body,
-                              :data => JSON.parse(response.body)),
+                              :response_body => raw_body,
+                              :data => parsed_body),
                  response.reason_phrase
           end
         end
