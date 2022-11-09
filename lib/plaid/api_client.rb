@@ -79,7 +79,12 @@ module Plaid
           else
             raw_body = response.body
             # Gracefully handle malformed body which is possible during API outage/maintanance
-            parsed_body = JSON.parse(raw_body) rescue nil
+            parsed_body = begin
+                JSON.parse(raw_body)
+              rescue JSON::ParserError
+                nil
+              end
+
             fail ApiError.new(:code => response.status,
                               :response_headers => response.headers,
                               :response_body => raw_body,
