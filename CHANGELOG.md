@@ -1,6 +1,216 @@
 See full changelog for the OpenAPI schema (OAS) [here](https://github.com/plaid/plaid-openapi/blob/master/CHANGELOG.md).
 
+# 17.2.0
+- Updating to OAS 2020-09-14_1.210.4
+
+## OpenAPI Schema Changes
+### 2020-09-14_1.210.4
+- Add `recurring_transfer_id` to Transfer
+
+### 2020-09-14_1.210.3
+- Make `id_numbers` field hidden in `/user/create` request 
+
+### 2020-09-14_1.210.2
+- Make `transfer_ids` required in RecurringTransfer
+
+### 2020-09-14_1.210.1
+- Change the `/transactions/enrich` `options.include_legacy_categories` field to `options.include_legacy_category`
+- Make documentation for the `/transactions/enrich` `options.include_legacy_category` request field visible
+- Make documentation for the `/transactions/enrich` `legacy_category` and `legacy_category_id` response fields visible
+- Add `direction` to required fields for `ClientProvidedTransaction`
+
+### 2020-09-14_1.210.0
+- Add `/transfer/capabilities/get` endpoint to fetch RTP eligibility for a linked plaid item
+
+### 2020-09-14_1.209.2
+- Renamed the `NullableRecurringTransfer` type to `RecurringTransferNullable` type
+
+### 2020-09-14_1.209.1
+Add `nullable` property to `date_of_birth`, `phone_number_verified_time`, and `email_address_verified_time` fields within `LinkTokenCreateRequestUser` to resolve undesireable client library behavior in certain languages.
+
+### 2020-09-14_1.209.0
+- add `NullableRecurringTransfer` field
+- replace `RecurringTransfer` with `NullableRecurringTransfer` for `TransferRecurringCreateResponse`
+- and `Decision` in required fields for `TransferRecurringCreateResponse`
+- add required fields for `TransferRecurringSchedule`
+
+### 2020-09-14_1.208.0
+- Add `total_amounts` field to `/credit/bank_income/get` response
+- Deprecate `amount`, `iso_currency_code`, and `unofficial_currency_code` at top levels in `/credit/bank_income/get` response
+
+### 2020-09-14_1.207.0
+- Add `id_numbers` field to `/user/create` request
+
+### 2020-09-14_1.206.11
+- Add `RECURRING_NEW_TRANSFER` webhook event.
+- Add `RECURRING_TRANSFER_SKIPPED` webhook event.
+- Add `RECURRING_CANCELLED` webhook event.
+
+### 2020-09-14_1.206.10
+- make `idempotency_key` field for `/transfer/recurring/create` non-nullable
+
+### 2020-09-14_1.206.9
+- Add `description` field for `RecurringTransfer` object
+- Make `TransferRecurringStatus` non-nullable
+
+### 2020-09-14_1.206.8
+- Make all mentions of relay tokens lowercase
+
+### 2020-09-14_1.206.7
+- Updated external URLs for Credit Relay endpoints, and marked them as beta in the summary
+
+### 2020-09-14_1.206.6
+- Add more enums values to `pay_rate` field in `/credit/payroll_income/get` response
+- Add `pay_basis` field to `/credit/payroll_income/get`
+
+### 2020-09-14_1.206.5
+- Updated Credit Relay Token descriptions
+
+### 2020-09-14_1.206.4
+- Add `FUNDS_SWEEP` as a `type` enum for the `WalletTransaction` object
+
+### 2020-09-14_1.206.3
+- Make `test_clock_id` non-nullable in `test_clock`.
+
+### 2020-09-14_1.206.2
+- Update `CounterpartyType` to rename `delivery_marketplace` to `marketplace`
+- Update `CounterpartyType` to add `payment_terminal`
+
+### 2020-09-14_1.206.1
+- Update the `transactions/enrich` transaction description example to match the request.
+
+### 2020-09-14_1.206.0
+- Add `/sandbox/transfer/test_clock/list` for recurring transfer
+- rm `decision` and `decision_rationale` from `RecurringTransfer`
+- add `decision` and `decision_rationale` in `TransferRecurringCreateResponse`
+- rename `frozen_timestamp` to `virtual_time`
+- not requiring `client_id` and `secret` for recurring transfer APIs
+
+### 2020-09-14_1.205.9
+- Use a nested `options` field for optional request params to `transactions/enrich`
+- Make nullable fields required for `transactions/enrich`
+
+### 2020-09-14_1.205.8
+- Update supported payment scheme options for `/payment_initiation/payment/create`
+–	Update description of `/payment_initiation/recipient/create` to mention non-Eurozone countries.
+–	Update `/payment_initiation/payment/create` mentioning new currencies and non-Eurozone markets.
+–	Removed `CHF` and `CZK` from the list of supported currencies.
+
+### 2020-09-14_1.205.7
+- Add website and logo_url to the `Counterparty` object for the Enrich product.
+- Update descriptions for logo_url field in `Counterparty`, `TransactionCounterparty`, `Enrichments` and `Enhancements`.
+
+### 2020-09-14_1.205.6
+- Update field descriptions and response examples for `transactions/enrich`
+
+### 2020-09-14_1.205.5
+- Add support for optional request parameters in /transactions/enrich
+- Add `location` field to `ClientProvidedTransaction` object
+- Add `mcc` field to `ClientProvidedTransaction` object
+- Add `date_posted` field to `ClientProvidedTransaction` object
+
+### 2020-09-14_1.205.4
+- Document partial refunds
+- Update description for `/payment_initiation/payment/reverse` endpoint
+- Update description for `/payment_initiation/payment/get` endpoint
+
 # 17.1.0
+- Updating to OAS 2020-09-14_1.205.3
+
+## OpenAPI Schema Changes
+### 2020-09-14_1.205.3
+- Update description for `/signal/evaluate` endpoint
+
+### 2020-09-14_1.205.2
+- Update response examples, descriptions, and formatting for `/transactions/enrich` endpoint
+
+### 2020-09-14_1.205.1
+- Update descriptions for `CUSIP` and `ISIN` fields in the investments `Security` type to reflect CGS license requirements
+
+### 2020-09-14_1.205.0
+- Add `/transactions/enrich` endpoint, the EA version of `/beta/transactions/v1/enhance`.
+
+### 2020-09-14_1.204.0
+- Remove `/income/verification/refresh` endpoint
+
+### 2020-09-14_1.203.0
+- Add 7 brand new recurring transfer APIs
+- Add `/transfer/recurring/create`
+- Add `/transfer/recurring/list`
+- Add `/transfer/recurring/get`
+- Add `/transfer/recurring/cancel`
+- Add `/sandbox/transfer/test_clock/create`
+- Add `/sandbox/transfer/test_clock/advance`
+- Add `/sandbox/transfer/test_clock/get`
+
+### 2020-09-14_1.202.6
+- IdentityMatchResponse `PhoneNumberMatchScore` and `EmailAddressMatchScore` use `score` instead of `scores`
+
+### 2020-09-14_1.202.5
+- Add `/partner/customer/remove` endpoint
+
+### 2020-09-14_1.202.4
+- Internal changes
+
+### 2020-09-14_1.202.3
+- New Transfer API routes for hosted onboarding of TPS end-customers
+
+### 2020-09-14_1.202.0
+- Add `refunds` field to `Transfer` object
+- Add `refund_id` field to `TransferEvent` object
+- Fix typo for `transfer/get` and `transfer/refund/get`
+
+### 2020-09-14_1.201.0
+- Add support for partial refunds
+- Add `amount` field to `/payment_initiation/payment/reverse` request
+- Add `amount_refunded` field to `/payment_initiation/payment/get` and `/payment_initiation/payment/list` responses
+
+### 2020-09-14_1.200.0
+- Add `risk_summary` and `page_number` to `/beta/credit/payroll_income/risk_signals/get`
+
+### 2020-09-14_1.199.0
+- Renamed `/wallet/transactions/list` into `/wallet/transaction/list` as endpoint
+
+### 2020-09-14_1.198.8
+- `/transfer/authorization/create` and `/transfer/create` may not return `account_id` in response.
+
+### 2020-09-14_1.198.7
+- Add `SYNC_UPDATES_AVAILABLE` support to `/sandbox/item/fire_webhook`
+
+### 2020-09-14_1.198.6
+- Make `ProductStatus` object nullable to reflect Sandbox-specific behavior.
+- Clarify documentation for `SYNC_UPDATES_AVAILABLE` webhook.
+
+### 2020-09-14_1.198.5
+- Internal changes
+
+### 2020-09-14_1.198.4
+- Add `deleted_at` to `/payment_profile/get` response.
+
+### 2020-09-14_1.198.3
+- Change `start_date` to `start_time` for `/wallet/transaction/list` response.
+
+### 2020-09-14_1.198.2
+- Update list of available products for `/partner/customer/create`.
+
+### 2020-09-14_1.198.1
+- Add `institution_name` and `institution_id` fields to `/credit/payroll_income/get` response.
+
+### 2020-09-14_1.198.0
+- Add `options.start_date` and `options.end_date` to `/wallet/transaction/list` endpoint.
+- Add `last_status_update` and `payment_id` field to `WalletTransaction`.
+- Add `transaction_id` field to `PaymentInitiationPayment`
+
+### 2020-09-14_1.197.6
+- Add `originator_client_id` to Transfer API endpoints
+
+### 2020-09-14_1.197.5
+- Deprecate `origination_account_id` from `/transfer/authorization/create` endpoint.
+
+### 2020-09-14_1.197.4
+- Add `asset_under_management` field to `PartnerCustomerCreateRequest`.
+
+# 17.0.0
 - Updating to OAS 2020-09-14_1.205.3
 
 ## OpenAPI Schema Changes

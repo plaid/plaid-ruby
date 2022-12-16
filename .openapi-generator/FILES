@@ -124,6 +124,7 @@ docs/ClientProvidedEnhancedTransaction.md
 docs/ClientProvidedEnrichedTransaction.md
 docs/ClientProvidedRawTransaction.md
 docs/ClientProvidedTransaction.md
+docs/ClientProvidedTransactionLocation.md
 docs/ConnectedApplication.md
 docs/Counterparty.md
 docs/CounterpartyType.md
@@ -133,6 +134,7 @@ docs/Credit1099Filer.md
 docs/Credit1099Payer.md
 docs/Credit1099Recipient.md
 docs/CreditAccountSubtype.md
+docs/CreditAmountWithCurrency.md
 docs/CreditAuditCopyTokenCreateRequest.md
 docs/CreditAuditCopyTokenCreateResponse.md
 docs/CreditAuditCopyTokenRemoveRequest.md
@@ -175,6 +177,7 @@ docs/CreditPayStubEarnings.md
 docs/CreditPayStubEmployee.md
 docs/CreditPayStubEmployer.md
 docs/CreditPayStubNetPay.md
+docs/CreditPayStubPayBasisType.md
 docs/CreditPayrollIncomeGetRequest.md
 docs/CreditPayrollIncomeGetResponse.md
 docs/CreditPayrollIncomePrecheckRequest.md
@@ -229,7 +232,6 @@ docs/DepositSwitchTokenCreateRequest.md
 docs/DepositSwitchTokenCreateResponse.md
 docs/DepositoryAccountSubtype.md
 docs/DepositoryFilter.md
-docs/DisbursementLimits.md
 docs/DistributionBreakdown.md
 docs/DocType.md
 docs/DocumentAnalysis.md
@@ -382,6 +384,7 @@ docs/InflowModel.md
 docs/InitialUpdateWebhook.md
 docs/Institution.md
 docs/InstitutionStatus.md
+docs/InstitutionSupportedNetworks.md
 docs/InstitutionsGetByIdRequest.md
 docs/InstitutionsGetByIdRequestOptions.md
 docs/InstitutionsGetByIdResponse.md
@@ -534,6 +537,7 @@ docs/PartnerEndCustomer.md
 docs/PartnerEndCustomerAddress.md
 docs/PartnerEndCustomerAssetsUnderManagement.md
 docs/PartnerEndCustomerBillingContact.md
+docs/PartnerEndCustomerCustomerSupportInfo.md
 docs/PartnerEndCustomerSecrets.md
 docs/PartnerEndCustomerStatus.md
 docs/PartnerEndCustomerTechnicalContact.md
@@ -602,7 +606,6 @@ docs/PaymentInitiationRecipientGetResponseAllOf.md
 docs/PaymentInitiationRecipientListRequest.md
 docs/PaymentInitiationRecipientListResponse.md
 docs/PaymentInitiationStandingOrderMetadata.md
-docs/PaymentLimits.md
 docs/PaymentMeta.md
 docs/PaymentProfileCreateRequest.md
 docs/PaymentProfileCreateResponse.md
@@ -668,9 +671,13 @@ docs/ProjectedIncomeSummaryFieldNumber.md
 docs/RecaptchaRequiredError.md
 docs/RecipientBACS.md
 docs/RecipientBACSNullable.md
+docs/RecurringCancelledWebhook.md
+docs/RecurringNewTransferWebhook.md
 docs/RecurringTransactionFrequency.md
 docs/RecurringTransactionsUpdateWebhook.md
 docs/RecurringTransfer.md
+docs/RecurringTransferNullable.md
+docs/RecurringTransferSkippedWebhook.md
 docs/RemovedTransaction.md
 docs/ReportType.md
 docs/ReportingInformation.md
@@ -716,6 +723,8 @@ docs/SandboxTransferTestClockCreateRequest.md
 docs/SandboxTransferTestClockCreateResponse.md
 docs/SandboxTransferTestClockGetRequest.md
 docs/SandboxTransferTestClockGetResponse.md
+docs/SandboxTransferTestClockListRequest.md
+docs/SandboxTransferTestClockListResponse.md
 docs/Scopes.md
 docs/ScopesContext.md
 docs/ScopesNullable.md
@@ -775,8 +784,8 @@ docs/Transaction.md
 docs/TransactionAllOf.md
 docs/TransactionBase.md
 docs/TransactionCode.md
+docs/TransactionCounterparty.md
 docs/TransactionData.md
-docs/TransactionFrequency.md
 docs/TransactionOverride.md
 docs/TransactionStream.md
 docs/TransactionStreamAmount.md
@@ -786,6 +795,7 @@ docs/TransactionsEnhanceGetRequest.md
 docs/TransactionsEnhanceGetResponse.md
 docs/TransactionsEnrichGetRequest.md
 docs/TransactionsEnrichGetResponse.md
+docs/TransactionsEnrichRequestOptions.md
 docs/TransactionsGetRequest.md
 docs/TransactionsGetRequestOptions.md
 docs/TransactionsGetResponse.md
@@ -822,6 +832,9 @@ docs/TransferAuthorizationProposedTransfer.md
 docs/TransferAuthorizationUserInRequest.md
 docs/TransferCancelRequest.md
 docs/TransferCancelResponse.md
+docs/TransferCapabilitiesGetRTP.md
+docs/TransferCapabilitiesGetRequest.md
+docs/TransferCapabilitiesGetResponse.md
 docs/TransferCreateRequest.md
 docs/TransferCreateResponse.md
 docs/TransferDevice.md
@@ -1140,6 +1153,7 @@ lib/plaid/models/client_provided_enhanced_transaction.rb
 lib/plaid/models/client_provided_enriched_transaction.rb
 lib/plaid/models/client_provided_raw_transaction.rb
 lib/plaid/models/client_provided_transaction.rb
+lib/plaid/models/client_provided_transaction_location.rb
 lib/plaid/models/connected_application.rb
 lib/plaid/models/counterparty.rb
 lib/plaid/models/counterparty_type.rb
@@ -1149,6 +1163,7 @@ lib/plaid/models/credit1099_filer.rb
 lib/plaid/models/credit1099_payer.rb
 lib/plaid/models/credit1099_recipient.rb
 lib/plaid/models/credit_account_subtype.rb
+lib/plaid/models/credit_amount_with_currency.rb
 lib/plaid/models/credit_audit_copy_token_create_request.rb
 lib/plaid/models/credit_audit_copy_token_create_response.rb
 lib/plaid/models/credit_audit_copy_token_remove_request.rb
@@ -1191,6 +1206,7 @@ lib/plaid/models/credit_pay_stub_earnings.rb
 lib/plaid/models/credit_pay_stub_employee.rb
 lib/plaid/models/credit_pay_stub_employer.rb
 lib/plaid/models/credit_pay_stub_net_pay.rb
+lib/plaid/models/credit_pay_stub_pay_basis_type.rb
 lib/plaid/models/credit_payroll_income_get_request.rb
 lib/plaid/models/credit_payroll_income_get_response.rb
 lib/plaid/models/credit_payroll_income_precheck_request.rb
@@ -1245,7 +1261,6 @@ lib/plaid/models/deposit_switch_token_create_request.rb
 lib/plaid/models/deposit_switch_token_create_response.rb
 lib/plaid/models/depository_account_subtype.rb
 lib/plaid/models/depository_filter.rb
-lib/plaid/models/disbursement_limits.rb
 lib/plaid/models/distribution_breakdown.rb
 lib/plaid/models/doc_type.rb
 lib/plaid/models/document_analysis.rb
@@ -1398,6 +1413,7 @@ lib/plaid/models/inflow_model.rb
 lib/plaid/models/initial_update_webhook.rb
 lib/plaid/models/institution.rb
 lib/plaid/models/institution_status.rb
+lib/plaid/models/institution_supported_networks.rb
 lib/plaid/models/institutions_get_by_id_request.rb
 lib/plaid/models/institutions_get_by_id_request_options.rb
 lib/plaid/models/institutions_get_by_id_response.rb
@@ -1548,6 +1564,7 @@ lib/plaid/models/partner_end_customer.rb
 lib/plaid/models/partner_end_customer_address.rb
 lib/plaid/models/partner_end_customer_assets_under_management.rb
 lib/plaid/models/partner_end_customer_billing_contact.rb
+lib/plaid/models/partner_end_customer_customer_support_info.rb
 lib/plaid/models/partner_end_customer_secrets.rb
 lib/plaid/models/partner_end_customer_status.rb
 lib/plaid/models/partner_end_customer_technical_contact.rb
@@ -1616,7 +1633,6 @@ lib/plaid/models/payment_initiation_recipient_get_response_all_of.rb
 lib/plaid/models/payment_initiation_recipient_list_request.rb
 lib/plaid/models/payment_initiation_recipient_list_response.rb
 lib/plaid/models/payment_initiation_standing_order_metadata.rb
-lib/plaid/models/payment_limits.rb
 lib/plaid/models/payment_meta.rb
 lib/plaid/models/payment_profile_create_request.rb
 lib/plaid/models/payment_profile_create_response.rb
@@ -1683,9 +1699,13 @@ lib/plaid/models/pslf_status.rb
 lib/plaid/models/recaptcha_required_error.rb
 lib/plaid/models/recipient_bacs.rb
 lib/plaid/models/recipient_bacs_nullable.rb
+lib/plaid/models/recurring_cancelled_webhook.rb
+lib/plaid/models/recurring_new_transfer_webhook.rb
 lib/plaid/models/recurring_transaction_frequency.rb
 lib/plaid/models/recurring_transactions_update_webhook.rb
 lib/plaid/models/recurring_transfer.rb
+lib/plaid/models/recurring_transfer_nullable.rb
+lib/plaid/models/recurring_transfer_skipped_webhook.rb
 lib/plaid/models/removed_transaction.rb
 lib/plaid/models/report_type.rb
 lib/plaid/models/reporting_information.rb
@@ -1731,6 +1751,8 @@ lib/plaid/models/sandbox_transfer_test_clock_create_request.rb
 lib/plaid/models/sandbox_transfer_test_clock_create_response.rb
 lib/plaid/models/sandbox_transfer_test_clock_get_request.rb
 lib/plaid/models/sandbox_transfer_test_clock_get_response.rb
+lib/plaid/models/sandbox_transfer_test_clock_list_request.rb
+lib/plaid/models/sandbox_transfer_test_clock_list_response.rb
 lib/plaid/models/scopes.rb
 lib/plaid/models/scopes_context.rb
 lib/plaid/models/scopes_nullable.rb
@@ -1790,8 +1812,8 @@ lib/plaid/models/transaction.rb
 lib/plaid/models/transaction_all_of.rb
 lib/plaid/models/transaction_base.rb
 lib/plaid/models/transaction_code.rb
+lib/plaid/models/transaction_counterparty.rb
 lib/plaid/models/transaction_data.rb
-lib/plaid/models/transaction_frequency.rb
 lib/plaid/models/transaction_override.rb
 lib/plaid/models/transaction_stream.rb
 lib/plaid/models/transaction_stream_amount.rb
@@ -1801,6 +1823,7 @@ lib/plaid/models/transactions_enhance_get_request.rb
 lib/plaid/models/transactions_enhance_get_response.rb
 lib/plaid/models/transactions_enrich_get_request.rb
 lib/plaid/models/transactions_enrich_get_response.rb
+lib/plaid/models/transactions_enrich_request_options.rb
 lib/plaid/models/transactions_get_request.rb
 lib/plaid/models/transactions_get_request_options.rb
 lib/plaid/models/transactions_get_response.rb
@@ -1837,6 +1860,9 @@ lib/plaid/models/transfer_authorization_proposed_transfer.rb
 lib/plaid/models/transfer_authorization_user_in_request.rb
 lib/plaid/models/transfer_cancel_request.rb
 lib/plaid/models/transfer_cancel_response.rb
+lib/plaid/models/transfer_capabilities_get_request.rb
+lib/plaid/models/transfer_capabilities_get_response.rb
+lib/plaid/models/transfer_capabilities_get_rtp.rb
 lib/plaid/models/transfer_create_request.rb
 lib/plaid/models/transfer_create_response.rb
 lib/plaid/models/transfer_device.rb
