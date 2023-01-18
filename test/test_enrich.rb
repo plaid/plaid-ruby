@@ -6,32 +6,32 @@ class PlaidEnrichTest < PlaidTest
     sample_transactions_to_enrich = [
       Plaid::ClientProvidedTransaction.new({
         id: "1",
-        description: "DDA PURCHASE *XXXX XXXXXXXX FAMILY DOLLAR",
+        description: "TST *JETTIES BAGELS",
         amount: 10.00,
         direction: Plaid::EnrichTransactionDirection::OUTFLOW,
         location: Plaid::ClientProvidedTransactionLocation.new({
-          city: "Philadelphia",
-          region: "PA",
+          city: "Ipswich",
+          region: "MA",
         }),
         iso_currency_code: "USD",
       }),
       Plaid::ClientProvidedTransaction.new({
         id: "2",
-        description: "PURCHASE JUNIATA SUPE PHILADELPHIA PA CARDXXXX",
+        description: "AMAZON.COM*MJ3LO9AN2",
         amount: 10.00,
         direction: Plaid::EnrichTransactionDirection::OUTFLOW,
         iso_currency_code: "USD",
       }),
       Plaid::ClientProvidedTransaction.new({
         id: "3",
-        description: "DEBIT CARD PURCHASE",
+        description: "GOOGLE *FRESHBOOKS",
         amount: 10.00,
         direction: Plaid::EnrichTransactionDirection::OUTFLOW,
         iso_currency_code: "USD",
       }),
       Plaid::ClientProvidedTransaction.new({
         id: "4",
-        description: "DIRECT DEP* UBER.COM",
+        description: "EARNIN TRANSFER",
         amount: 100.00,
         direction: Plaid::EnrichTransactionDirection::INFLOW,
         iso_currency_code: "USD",

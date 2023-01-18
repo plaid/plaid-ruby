@@ -45,8 +45,8 @@ class PlaidPaymentInitiationTest < PlaidTest
     # list recipients
     payment_initiation_recipient_list_request = Plaid::PaymentInitiationRecipientListRequest.new
 
-    list_recipients_response = client.payment_initiation_payment_list(payment_initiation_recipient_list_request)
-    refute_empty(list_recipients_response.payments)
+    list_recipients_response = client.payment_initiation_recipient_list(payment_initiation_recipient_list_request)
+    refute_empty(list_recipients_response.recipients)
 
     # create payment
     payment_initiation_payment_create_request = Plaid::PaymentInitiationPaymentCreateRequest.new
