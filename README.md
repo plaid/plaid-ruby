@@ -28,7 +28,7 @@ Each major version of `plaid-ruby` targets a specific version of the Plaid API:
 
 | API version | plaid-ruby release |
 | ----------- | ------------------ |
-| [`2020-09-14`][api-version-2020-09-14] (**latest**) | `12.x.x`, `13.x.x`, `14.x.x` |
+| [`2020-09-14`][api-version-2020-09-14] (**latest**) | `12.x.x` and higher |
 | [`2019-05-29`][api-version-2019-05-29] | `11.x.x`, `10.x.x`, `9.x.x`, `8.x.x`, `7.x.x` |
 | [`2018-05-22`][api-version-2018-05-22] | `6.x.x` |
 | `2017-03-08` | `5.x.x` |
@@ -146,7 +146,7 @@ link_token = link_token_response.link_token
 
 ### Exchanging a Link public_token for a Plaid access_token
 
-If you have a [Link](https://github.com/plaid/link) `public token`, use this function to get an `access_token`: `client.item_public_token_exchange(request)`
+If you have a [Link](https://plaid.com/docs/link/) `public token`, use this function to get an `access_token`: `client.item_public_token_exchange(request)`
 
 An example of the function's usage if you have a `public_token` in hand:
 
