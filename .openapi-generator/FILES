@@ -230,6 +230,7 @@ docs/CreditPayrollIncomeGetResponse.md
 docs/CreditPayrollIncomePrecheckRequest.md
 docs/CreditPayrollIncomePrecheckResponse.md
 docs/CreditPayrollIncomeRefreshRequest.md
+docs/CreditPayrollIncomeRefreshRequestOptions.md
 docs/CreditPayrollIncomeRefreshResponse.md
 docs/CreditPayrollIncomeRiskSignalsGetRequest.md
 docs/CreditPayrollIncomeRiskSignalsGetResponse.md
@@ -242,6 +243,8 @@ docs/CreditRelayRefreshResponse.md
 docs/CreditRelayRemoveRequest.md
 docs/CreditRelayRemoveResponse.md
 docs/CreditSession.md
+docs/CreditSessionBankEmploymentResult.md
+docs/CreditSessionBankEmploymentStatus.md
 docs/CreditSessionBankIncomeResult.md
 docs/CreditSessionBankIncomeStatus.md
 docs/CreditSessionDocumentIncomeResult.md
@@ -387,6 +390,8 @@ docs/IdentityVerificationGetResponse.md
 docs/IdentityVerificationListRequest.md
 docs/IdentityVerificationListResponse.md
 docs/IdentityVerificationRequestUser.md
+docs/IdentityVerificationRequestUserName.md
+docs/IdentityVerificationResponseUserName.md
 docs/IdentityVerificationRetriedWebhook.md
 docs/IdentityVerificationRetryRequest.md
 docs/IdentityVerificationRetryRequestStepsObject.md
@@ -479,6 +484,7 @@ docs/ItemImportRequest.md
 docs/ItemImportRequestOptions.md
 docs/ItemImportRequestUserAuth.md
 docs/ItemImportResponse.md
+docs/ItemLoginRepairedWebhook.md
 docs/ItemProductReadyWebhook.md
 docs/ItemPublicTokenCreateRequest.md
 docs/ItemPublicTokenCreateResponse.md
@@ -501,6 +507,7 @@ docs/KYCCheckDetails.md
 docs/KYCCheckIDNumberSummary.md
 docs/KYCCheckNameSummary.md
 docs/KYCCheckPhoneSummary.md
+docs/LastDataAccessTimes.md
 docs/LiabilitiesDefaultUpdateWebhook.md
 docs/LiabilitiesGetRequest.md
 docs/LiabilitiesGetRequestOptions.md
@@ -518,10 +525,14 @@ docs/LinkDeliveryGetRequest.md
 docs/LinkDeliveryGetResponse.md
 docs/LinkDeliveryInstitution.md
 docs/LinkDeliveryMetadata.md
+docs/LinkDeliveryOptions.md
+docs/LinkDeliveryRecipient.md
 docs/LinkDeliverySessionStatus.md
 docs/LinkDeliveryVerificationStatus.md
+docs/LinkDeliveryWebhookCallbackType.md
 docs/LinkDeliveryWebhookCommunicationMethod.md
 docs/LinkDeliveryWebhookDeliveryStatus.md
+docs/LinkEventName.md
 docs/LinkOAuthCorrelationIdExchangeRequest.md
 docs/LinkOAuthCorrelationIdExchangeResponse.md
 docs/LinkTokenAccountFilters.md
@@ -749,6 +760,7 @@ docs/ProductStatusBreakdown.md
 docs/Products.md
 docs/ProgramNameSensitivity.md
 docs/ProjectedIncomeSummaryFieldNumber.md
+docs/ProxyType.md
 docs/RecaptchaRequiredError.md
 docs/RecipientBACS.md
 docs/RecipientBACSNullable.md
@@ -762,6 +774,20 @@ docs/RecurringTransferSkippedWebhook.md
 docs/RemovedTransaction.md
 docs/ReportType.md
 docs/ReportingInformation.md
+docs/RiskCheckBehavior.md
+docs/RiskCheckBehaviorBotDetectedLabel.md
+docs/RiskCheckBehaviorFraudRingDetectedLabel.md
+docs/RiskCheckBehaviorUserInteractionsLabel.md
+docs/RiskCheckDetails.md
+docs/RiskCheckDevice.md
+docs/RiskCheckEmail.md
+docs/RiskCheckEmailDomainIsCustom.md
+docs/RiskCheckEmailDomainIsDisposable.md
+docs/RiskCheckEmailDomainIsFreeProvider.md
+docs/RiskCheckEmailIsDeliverableStatus.md
+docs/RiskCheckEmailTopLevelDomainIsSuspicious.md
+docs/RiskCheckLinkedService.md
+docs/RiskCheckPhone.md
 docs/RiskSignalDocumentReference.md
 docs/Role.md
 docs/RoleDetail.md
@@ -840,6 +866,7 @@ docs/SignalReturnReportRequest.md
 docs/SignalReturnReportResponse.md
 docs/SignalScores.md
 docs/SignalUser.md
+docs/SignalWarning.md
 docs/SimulatedTransferSweep.md
 docs/SingleDocumentRiskSignal.md
 docs/Source.md
@@ -916,6 +943,8 @@ docs/TransferCancelResponse.md
 docs/TransferCapabilitiesGetRTP.md
 docs/TransferCapabilitiesGetRequest.md
 docs/TransferCapabilitiesGetResponse.md
+docs/TransferConfigurationGetRequest.md
+docs/TransferConfigurationGetResponse.md
 docs/TransferCreateRequest.md
 docs/TransferCreateResponse.md
 docs/TransferDevice.md
@@ -944,6 +973,8 @@ docs/TransferIntentGetResponse.md
 docs/TransferIntentStatus.md
 docs/TransferListRequest.md
 docs/TransferListResponse.md
+docs/TransferMetricsGetRequest.md
+docs/TransferMetricsGetResponse.md
 docs/TransferMigrateAccountRequest.md
 docs/TransferMigrateAccountResponse.md
 docs/TransferNetwork.md
@@ -1001,7 +1032,6 @@ docs/UserCreateRequest.md
 docs/UserCreateResponse.md
 docs/UserCustomPassword.md
 docs/UserIDNumber.md
-docs/UserName.md
 docs/UserPermissionRevokedWebhook.md
 docs/UserStatedIncomeSourceCategory.md
 docs/UserStatedIncomeSourceFrequency.md
@@ -1342,6 +1372,7 @@ lib/plaid/models/credit_payroll_income_get_response.rb
 lib/plaid/models/credit_payroll_income_precheck_request.rb
 lib/plaid/models/credit_payroll_income_precheck_response.rb
 lib/plaid/models/credit_payroll_income_refresh_request.rb
+lib/plaid/models/credit_payroll_income_refresh_request_options.rb
 lib/plaid/models/credit_payroll_income_refresh_response.rb
 lib/plaid/models/credit_payroll_income_risk_signals_get_request.rb
 lib/plaid/models/credit_payroll_income_risk_signals_get_response.rb
@@ -1354,6 +1385,8 @@ lib/plaid/models/credit_relay_refresh_response.rb
 lib/plaid/models/credit_relay_remove_request.rb
 lib/plaid/models/credit_relay_remove_response.rb
 lib/plaid/models/credit_session.rb
+lib/plaid/models/credit_session_bank_employment_result.rb
+lib/plaid/models/credit_session_bank_employment_status.rb
 lib/plaid/models/credit_session_bank_income_result.rb
 lib/plaid/models/credit_session_bank_income_status.rb
 lib/plaid/models/credit_session_document_income_result.rb
@@ -1499,6 +1532,8 @@ lib/plaid/models/identity_verification_get_response.rb
 lib/plaid/models/identity_verification_list_request.rb
 lib/plaid/models/identity_verification_list_response.rb
 lib/plaid/models/identity_verification_request_user.rb
+lib/plaid/models/identity_verification_request_user_name.rb
+lib/plaid/models/identity_verification_response_user_name.rb
 lib/plaid/models/identity_verification_retried_webhook.rb
 lib/plaid/models/identity_verification_retry_request.rb
 lib/plaid/models/identity_verification_retry_request_steps_object.rb
@@ -1591,6 +1626,7 @@ lib/plaid/models/item_import_request.rb
 lib/plaid/models/item_import_request_options.rb
 lib/plaid/models/item_import_request_user_auth.rb
 lib/plaid/models/item_import_response.rb
+lib/plaid/models/item_login_repaired_webhook.rb
 lib/plaid/models/item_product_ready_webhook.rb
 lib/plaid/models/item_public_token_create_request.rb
 lib/plaid/models/item_public_token_create_response.rb
@@ -1613,6 +1649,7 @@ lib/plaid/models/kyc_check_details.rb
 lib/plaid/models/kyc_check_id_number_summary.rb
 lib/plaid/models/kyc_check_name_summary.rb
 lib/plaid/models/kyc_check_phone_summary.rb
+lib/plaid/models/last_data_access_times.rb
 lib/plaid/models/liabilities_default_update_webhook.rb
 lib/plaid/models/liabilities_get_request.rb
 lib/plaid/models/liabilities_get_request_options.rb
@@ -1630,10 +1667,14 @@ lib/plaid/models/link_delivery_get_request.rb
 lib/plaid/models/link_delivery_get_response.rb
 lib/plaid/models/link_delivery_institution.rb
 lib/plaid/models/link_delivery_metadata.rb
+lib/plaid/models/link_delivery_options.rb
+lib/plaid/models/link_delivery_recipient.rb
 lib/plaid/models/link_delivery_session_status.rb
 lib/plaid/models/link_delivery_verification_status.rb
+lib/plaid/models/link_delivery_webhook_callback_type.rb
 lib/plaid/models/link_delivery_webhook_communication_method.rb
 lib/plaid/models/link_delivery_webhook_delivery_status.rb
+lib/plaid/models/link_event_name.rb
 lib/plaid/models/link_o_auth_correlation_id_exchange_request.rb
 lib/plaid/models/link_o_auth_correlation_id_exchange_response.rb
 lib/plaid/models/link_token_account_filters.rb
@@ -1859,6 +1900,7 @@ lib/plaid/models/product_status_breakdown.rb
 lib/plaid/models/products.rb
 lib/plaid/models/program_name_sensitivity.rb
 lib/plaid/models/projected_income_summary_field_number.rb
+lib/plaid/models/proxy_type.rb
 lib/plaid/models/pslf_status.rb
 lib/plaid/models/recaptcha_required_error.rb
 lib/plaid/models/recipient_bacs.rb
@@ -1873,6 +1915,20 @@ lib/plaid/models/recurring_transfer_skipped_webhook.rb
 lib/plaid/models/removed_transaction.rb
 lib/plaid/models/report_type.rb
 lib/plaid/models/reporting_information.rb
+lib/plaid/models/risk_check_behavior.rb
+lib/plaid/models/risk_check_behavior_bot_detected_label.rb
+lib/plaid/models/risk_check_behavior_fraud_ring_detected_label.rb
+lib/plaid/models/risk_check_behavior_user_interactions_label.rb
+lib/plaid/models/risk_check_details.rb
+lib/plaid/models/risk_check_device.rb
+lib/plaid/models/risk_check_email.rb
+lib/plaid/models/risk_check_email_domain_is_custom.rb
+lib/plaid/models/risk_check_email_domain_is_disposable.rb
+lib/plaid/models/risk_check_email_domain_is_free_provider.rb
+lib/plaid/models/risk_check_email_is_deliverable_status.rb
+lib/plaid/models/risk_check_email_top_level_domain_is_suspicious.rb
+lib/plaid/models/risk_check_linked_service.rb
+lib/plaid/models/risk_check_phone.rb
 lib/plaid/models/risk_signal_document_reference.rb
 lib/plaid/models/role.rb
 lib/plaid/models/role_detail.rb
@@ -1951,6 +2007,7 @@ lib/plaid/models/signal_return_report_request.rb
 lib/plaid/models/signal_return_report_response.rb
 lib/plaid/models/signal_scores.rb
 lib/plaid/models/signal_user.rb
+lib/plaid/models/signal_warning.rb
 lib/plaid/models/simulated_transfer_sweep.rb
 lib/plaid/models/single_document_risk_signal.rb
 lib/plaid/models/source.rb
@@ -2027,6 +2084,8 @@ lib/plaid/models/transfer_cancel_response.rb
 lib/plaid/models/transfer_capabilities_get_request.rb
 lib/plaid/models/transfer_capabilities_get_response.rb
 lib/plaid/models/transfer_capabilities_get_rtp.rb
+lib/plaid/models/transfer_configuration_get_request.rb
+lib/plaid/models/transfer_configuration_get_response.rb
 lib/plaid/models/transfer_create_request.rb
 lib/plaid/models/transfer_create_response.rb
 lib/plaid/models/transfer_device.rb
@@ -2055,6 +2114,8 @@ lib/plaid/models/transfer_intent_get_response.rb
 lib/plaid/models/transfer_intent_status.rb
 lib/plaid/models/transfer_list_request.rb
 lib/plaid/models/transfer_list_response.rb
+lib/plaid/models/transfer_metrics_get_request.rb
+lib/plaid/models/transfer_metrics_get_response.rb
 lib/plaid/models/transfer_migrate_account_request.rb
 lib/plaid/models/transfer_migrate_account_response.rb
 lib/plaid/models/transfer_network.rb
@@ -2112,7 +2173,6 @@ lib/plaid/models/user_create_request.rb
 lib/plaid/models/user_create_response.rb
 lib/plaid/models/user_custom_password.rb
 lib/plaid/models/user_id_number.rb
-lib/plaid/models/user_name.rb
 lib/plaid/models/user_permission_revoked_webhook.rb
 lib/plaid/models/user_stated_income_source_category.rb
 lib/plaid/models/user_stated_income_source_frequency.rb
