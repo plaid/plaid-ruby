@@ -12,6 +12,7 @@ LINK_TOKEN_FIELD_NAMES = %i[
   account_filters
   cross_app_item_add
   payment_initiation
+  institution_id
 ].freeze
 
 module Plaid

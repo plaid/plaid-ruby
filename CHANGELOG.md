@@ -1,3 +1,6 @@
+# 11.1.1
+- Add support for Link token parameter `institution_id`
+
 # 11.1.0
 
 - Add support for Link Token get endpoint ([#301](https://github.com/plaid/plaid-ruby/pull/301))
