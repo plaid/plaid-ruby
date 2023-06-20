@@ -85,6 +85,9 @@ docs/AuthGetResponse.md
 docs/AuthMetadata.md
 docs/AuthSupportedMethods.md
 docs/AutomaticallyVerifiedWebhook.md
+docs/BankIncomeRefreshCompleteResult.md
+docs/BankIncomeRefreshCompleteWebhook.md
+docs/BankIncomeRefreshUpdateWebhook.md
 docs/BankInitiatedReturnRisk.md
 docs/BankTransfer.md
 docs/BankTransferBalance.md
@@ -138,6 +141,7 @@ docs/Credit1099.md
 docs/Credit1099Filer.md
 docs/Credit1099Payer.md
 docs/Credit1099Recipient.md
+docs/CreditACHClass.md
 docs/CreditAccountSubtype.md
 docs/CreditAmountWithCurrency.md
 docs/CreditAuditCopyTokenCreateRequest.md
@@ -176,6 +180,16 @@ docs/CreditBankIncomeTransaction.md
 docs/CreditBankIncomeWarning.md
 docs/CreditBankIncomeWarningCode.md
 docs/CreditBankIncomeWarningType.md
+docs/CreditBankIncomeWebhookUpdateRequest.md
+docs/CreditBankStatementUploadAccountOwner.md
+docs/CreditBankStatementUploadAccountOwnerAddress.md
+docs/CreditBankStatementUploadBankAccount.md
+docs/CreditBankStatementUploadBankAccountPeriod.md
+docs/CreditBankStatementUploadItem.md
+docs/CreditBankStatementUploadObject.md
+docs/CreditBankStatementUploadTransaction.md
+docs/CreditBankStatementsUploadsGetRequest.md
+docs/CreditBankStatementsUploadsGetResponse.md
 docs/CreditCardLiability.md
 docs/CreditCategory.md
 docs/CreditDocumentMetadata.md
@@ -381,6 +395,8 @@ docs/IdentityMatchRequest.md
 docs/IdentityMatchRequestOptions.md
 docs/IdentityMatchResponse.md
 docs/IdentityMatchUser.md
+docs/IdentityRefreshRequest.md
+docs/IdentityRefreshResponse.md
 docs/IdentityUpdateTypes.md
 docs/IdentityVerification.md
 docs/IdentityVerificationCreateRequest.md
@@ -460,6 +476,11 @@ docs/InvestmentHoldingsGetRequestOptions.md
 docs/InvestmentTransaction.md
 docs/InvestmentTransactionSubtype.md
 docs/InvestmentTransactionType.md
+docs/InvestmentsAuthGetNumbers.md
+docs/InvestmentsAuthGetRequest.md
+docs/InvestmentsAuthGetRequestOptions.md
+docs/InvestmentsAuthGetResponse.md
+docs/InvestmentsAuthOwner.md
 docs/InvestmentsDefaultUpdateWebhook.md
 docs/InvestmentsHoldingsGetRequest.md
 docs/InvestmentsHoldingsGetResponse.md
@@ -568,6 +589,7 @@ docs/LinkTokenGetMetadataResponse.md
 docs/LinkTokenGetRequest.md
 docs/LinkTokenGetResponse.md
 docs/LinkTokenInvestments.md
+docs/LinkTokenInvestmentsAuth.md
 docs/LinkUserDeliveryStatusWebhook.md
 docs/Loan.md
 docs/LoanAccountSubtype.md
@@ -589,6 +611,7 @@ docs/NameMatchScore.md
 docs/NetPay.md
 docs/NewAccountsAvailableWebhook.md
 docs/Numbers.md
+docs/NumbersACATS.md
 docs/NumbersACH.md
 docs/NumbersACHNullable.md
 docs/NumbersBACS.md
@@ -776,6 +799,8 @@ docs/ProcessorTransactionsRefreshResponse.md
 docs/ProcessorTransactionsSyncRequest.md
 docs/ProcessorTransactionsSyncResponse.md
 docs/ProductAccess.md
+docs/ProductPermissionsRequiredAuthWebhook.md
+docs/ProductPermissionsRequiredIdentityWebhook.md
 docs/ProductStatus.md
 docs/ProductStatusBreakdown.md
 docs/Products.md
@@ -1097,6 +1122,7 @@ docs/WalletISOCurrencyCode.md
 docs/WalletListRequest.md
 docs/WalletListResponse.md
 docs/WalletNumbers.md
+docs/WalletPaymentScheme.md
 docs/WalletStatus.md
 docs/WalletTransaction.md
 docs/WalletTransactionAmount.md
@@ -1268,6 +1294,9 @@ lib/plaid/models/auth_get_response.rb
 lib/plaid/models/auth_metadata.rb
 lib/plaid/models/auth_supported_methods.rb
 lib/plaid/models/automatically_verified_webhook.rb
+lib/plaid/models/bank_income_refresh_complete_result.rb
+lib/plaid/models/bank_income_refresh_complete_webhook.rb
+lib/plaid/models/bank_income_refresh_update_webhook.rb
 lib/plaid/models/bank_initiated_return_risk.rb
 lib/plaid/models/bank_transfer.rb
 lib/plaid/models/bank_transfer_balance.rb
@@ -1322,6 +1351,7 @@ lib/plaid/models/credit1099_filer.rb
 lib/plaid/models/credit1099_payer.rb
 lib/plaid/models/credit1099_recipient.rb
 lib/plaid/models/credit_account_subtype.rb
+lib/plaid/models/credit_ach_class.rb
 lib/plaid/models/credit_amount_with_currency.rb
 lib/plaid/models/credit_audit_copy_token_create_request.rb
 lib/plaid/models/credit_audit_copy_token_create_response.rb
@@ -1359,6 +1389,16 @@ lib/plaid/models/credit_bank_income_transaction.rb
 lib/plaid/models/credit_bank_income_warning.rb
 lib/plaid/models/credit_bank_income_warning_code.rb
 lib/plaid/models/credit_bank_income_warning_type.rb
+lib/plaid/models/credit_bank_income_webhook_update_request.rb
+lib/plaid/models/credit_bank_statement_upload_account_owner.rb
+lib/plaid/models/credit_bank_statement_upload_account_owner_address.rb
+lib/plaid/models/credit_bank_statement_upload_bank_account.rb
+lib/plaid/models/credit_bank_statement_upload_bank_account_period.rb
+lib/plaid/models/credit_bank_statement_upload_item.rb
+lib/plaid/models/credit_bank_statement_upload_object.rb
+lib/plaid/models/credit_bank_statement_upload_transaction.rb
+lib/plaid/models/credit_bank_statements_uploads_get_request.rb
+lib/plaid/models/credit_bank_statements_uploads_get_response.rb
 lib/plaid/models/credit_card_liability.rb
 lib/plaid/models/credit_category.rb
 lib/plaid/models/credit_document_metadata.rb
@@ -1564,6 +1604,8 @@ lib/plaid/models/identity_match_request.rb
 lib/plaid/models/identity_match_request_options.rb
 lib/plaid/models/identity_match_response.rb
 lib/plaid/models/identity_match_user.rb
+lib/plaid/models/identity_refresh_request.rb
+lib/plaid/models/identity_refresh_response.rb
 lib/plaid/models/identity_update_types.rb
 lib/plaid/models/identity_verification.rb
 lib/plaid/models/identity_verification_create_request.rb
@@ -1643,6 +1685,11 @@ lib/plaid/models/investment_holdings_get_request_options.rb
 lib/plaid/models/investment_transaction.rb
 lib/plaid/models/investment_transaction_subtype.rb
 lib/plaid/models/investment_transaction_type.rb
+lib/plaid/models/investments_auth_get_numbers.rb
+lib/plaid/models/investments_auth_get_request.rb
+lib/plaid/models/investments_auth_get_request_options.rb
+lib/plaid/models/investments_auth_get_response.rb
+lib/plaid/models/investments_auth_owner.rb
 lib/plaid/models/investments_default_update_webhook.rb
 lib/plaid/models/investments_holdings_get_request.rb
 lib/plaid/models/investments_holdings_get_response.rb
@@ -1751,6 +1798,7 @@ lib/plaid/models/link_token_get_metadata_response.rb
 lib/plaid/models/link_token_get_request.rb
 lib/plaid/models/link_token_get_response.rb
 lib/plaid/models/link_token_investments.rb
+lib/plaid/models/link_token_investments_auth.rb
 lib/plaid/models/link_user_delivery_status_webhook.rb
 lib/plaid/models/loan.rb
 lib/plaid/models/loan_account_subtype.rb
@@ -1772,6 +1820,7 @@ lib/plaid/models/name_match_score.rb
 lib/plaid/models/net_pay.rb
 lib/plaid/models/new_accounts_available_webhook.rb
 lib/plaid/models/numbers.rb
+lib/plaid/models/numbers_acats.rb
 lib/plaid/models/numbers_ach.rb
 lib/plaid/models/numbers_ach_nullable.rb
 lib/plaid/models/numbers_bacs.rb
@@ -1957,6 +2006,8 @@ lib/plaid/models/processor_transactions_refresh_response.rb
 lib/plaid/models/processor_transactions_sync_request.rb
 lib/plaid/models/processor_transactions_sync_response.rb
 lib/plaid/models/product_access.rb
+lib/plaid/models/product_permissions_required_auth_webhook.rb
+lib/plaid/models/product_permissions_required_identity_webhook.rb
 lib/plaid/models/product_status.rb
 lib/plaid/models/product_status_breakdown.rb
 lib/plaid/models/products.rb
@@ -2279,6 +2330,7 @@ lib/plaid/models/wallet_iso_currency_code.rb
 lib/plaid/models/wallet_list_request.rb
 lib/plaid/models/wallet_list_response.rb
 lib/plaid/models/wallet_numbers.rb
+lib/plaid/models/wallet_payment_scheme.rb
 lib/plaid/models/wallet_status.rb
 lib/plaid/models/wallet_transaction.rb
 lib/plaid/models/wallet_transaction_amount.rb
