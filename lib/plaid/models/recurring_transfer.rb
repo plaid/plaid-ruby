@@ -366,7 +366,11 @@ module Plaid
       when :Time
         Time.parse(value)
       when :Date
-        Date.parse(value)
+        begin
+          Date.parse(value)
+        rescue
+          value
+        end
       when :String
         value.to_s
       when :Integer
