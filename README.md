@@ -186,7 +186,7 @@ transactions_sync_request = Plaid::TransactionsSyncRequest.new
 transactions_sync_request.access_token = access_token
 
 transaction_response = client.transactions_sync(transactions_sync_request)
-transactions = transaction_response.transactions
+transactions = transaction_response.added
 
 # the transactions in the response are paginated, so make multiple calls while
 # updating the cursor to retrieve all transactions
@@ -196,7 +196,7 @@ while transaction_response.has_more
   transactions_sync_request.cursor = transaction_response.next_cursor
 
   transaction_response = client.transactions_sync(transactions_sync_request)
-  transactions += transaction_response.transactions
+  transactions += transaction_response.added
 end
 ```
 
