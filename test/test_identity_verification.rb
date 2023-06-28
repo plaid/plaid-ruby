@@ -4,13 +4,14 @@ require_relative 'test_helper'
 
 TEMPLATE_ID = "flwtmp_aWogUuKsL6NEHU"
 CLIENT_USER_ID = "idv-user-" + Time.now.to_i.to_s
+EMAIL = CLIENT_USER_ID + "@example.com"
 class PlaidIdentityVerificationTest < PlaidTest
   def test_all_routes
-    user = Plaid::IdentityVerificationRequestUser.new({
-        :client_user_id => CLIENT_USER_ID,
-        :email_address => CLIENT_USER_ID + "@example.com",
+    user = Plaid::IdentityVerificationCreateRequestUser.new({
+        :email_address => EMAIL,
     })
     identity_verification_create_request = Plaid::IdentityVerificationCreateRequest.new({
+        :client_user_id => CLIENT_USER_ID,
         :is_shareable => true,
         :template_id => TEMPLATE_ID,
         :gave_consent => true,
@@ -21,10 +22,14 @@ class PlaidIdentityVerificationTest < PlaidTest
     refute_nil(response.shareable_url)
     assert_equal("active", response.status)
 
+    retry_user = Plaid::IdentityVerificationRequestUser.new({
+         :email_address => EMAIL,
+     })
     identity_verification_retry_request = Plaid::IdentityVerificationRetryRequest.new({
         :template_id => TEMPLATE_ID,
         :client_user_id => CLIENT_USER_ID,
         :strategy => Plaid::Strategy::RESET,
+        :user => retry_user,
     })
     response = client.identity_verification_retry(identity_verification_retry_request)
     assert_kind_of(Plaid::IdentityVerificationRetryResponse, response)
