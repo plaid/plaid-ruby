@@ -1,3 +1,4 @@
+.gitlab-ci.yml
 docs/ACHClass.md
 docs/APR.md
 docs/AccountAccess.md
@@ -483,6 +484,7 @@ docs/InvestmentsAuthGetRequestOptions.md
 docs/InvestmentsAuthGetResponse.md
 docs/InvestmentsAuthOwner.md
 docs/InvestmentsDefaultUpdateWebhook.md
+docs/InvestmentsHistoricalUpdateWebhook.md
 docs/InvestmentsHoldingsGetRequest.md
 docs/InvestmentsHoldingsGetResponse.md
 docs/InvestmentsRefreshRequest.md
@@ -583,6 +585,9 @@ docs/LinkTokenCreateRequestPaymentInitiation.md
 docs/LinkTokenCreateRequestTransfer.md
 docs/LinkTokenCreateRequestUpdate.md
 docs/LinkTokenCreateRequestUser.md
+docs/LinkTokenCreateRequestUserAddress.md
+docs/LinkTokenCreateRequestUserIdNumber.md
+docs/LinkTokenCreateRequestUserName.md
 docs/LinkTokenCreateRequestUserStatedIncomeSource.md
 docs/LinkTokenCreateResponse.md
 docs/LinkTokenEUConfig.md
@@ -772,11 +777,15 @@ docs/ProcessorBalanceGetRequestOptions.md
 docs/ProcessorBalanceGetResponse.md
 docs/ProcessorBankTransferCreateRequest.md
 docs/ProcessorBankTransferCreateResponse.md
+docs/ProcessorDefaultUpdateWebhook.md
+docs/ProcessorHistoricalUpdateWebhook.md
 docs/ProcessorIdentityGetRequest.md
 docs/ProcessorIdentityGetResponse.md
 docs/ProcessorIdentityMatchRequest.md
 docs/ProcessorIdentityMatchResponse.md
+docs/ProcessorInitialUpdateWebhook.md
 docs/ProcessorNumber.md
+docs/ProcessorRecurringTransactionsUpdateWebhook.md
 docs/ProcessorSignalDecisionReportRequest.md
 docs/ProcessorSignalDecisionReportResponse.md
 docs/ProcessorSignalEvaluateRequest.md
@@ -785,6 +794,7 @@ docs/ProcessorSignalReturnReportRequest.md
 docs/ProcessorSignalReturnReportResponse.md
 docs/ProcessorStripeBankAccountTokenCreateRequest.md
 docs/ProcessorStripeBankAccountTokenCreateResponse.md
+docs/ProcessorSyncUpdatesAvailableWebhook.md
 docs/ProcessorTokenCreateRequest.md
 docs/ProcessorTokenCreateResponse.md
 docs/ProcessorTokenPermissionsGetRequest.md
@@ -797,6 +807,7 @@ docs/ProcessorTransactionsRecurringGetRequest.md
 docs/ProcessorTransactionsRecurringGetResponse.md
 docs/ProcessorTransactionsRefreshRequest.md
 docs/ProcessorTransactionsRefreshResponse.md
+docs/ProcessorTransactionsRemovedWebhook.md
 docs/ProcessorTransactionsSyncRequest.md
 docs/ProcessorTransactionsSyncResponse.md
 docs/ProductAccess.md
@@ -943,6 +954,7 @@ docs/StudentLoan.md
 docs/StudentLoanRepaymentModel.md
 docs/StudentLoanStatus.md
 docs/StudentRepaymentPlan.md
+docs/SweepStatus.md
 docs/SyncUpdatesAvailableWebhook.md
 docs/Taxform.md
 docs/TaxpayerID.md
@@ -1704,6 +1716,7 @@ lib/plaid/models/investments_auth_get_request_options.rb
 lib/plaid/models/investments_auth_get_response.rb
 lib/plaid/models/investments_auth_owner.rb
 lib/plaid/models/investments_default_update_webhook.rb
+lib/plaid/models/investments_historical_update_webhook.rb
 lib/plaid/models/investments_holdings_get_request.rb
 lib/plaid/models/investments_holdings_get_response.rb
 lib/plaid/models/investments_refresh_request.rb
@@ -1804,6 +1817,9 @@ lib/plaid/models/link_token_create_request_payment_initiation.rb
 lib/plaid/models/link_token_create_request_transfer.rb
 lib/plaid/models/link_token_create_request_update.rb
 lib/plaid/models/link_token_create_request_user.rb
+lib/plaid/models/link_token_create_request_user_address.rb
+lib/plaid/models/link_token_create_request_user_id_number.rb
+lib/plaid/models/link_token_create_request_user_name.rb
 lib/plaid/models/link_token_create_request_user_stated_income_source.rb
 lib/plaid/models/link_token_create_response.rb
 lib/plaid/models/link_token_eu_config.rb
@@ -1991,11 +2007,15 @@ lib/plaid/models/processor_balance_get_request_options.rb
 lib/plaid/models/processor_balance_get_response.rb
 lib/plaid/models/processor_bank_transfer_create_request.rb
 lib/plaid/models/processor_bank_transfer_create_response.rb
+lib/plaid/models/processor_default_update_webhook.rb
+lib/plaid/models/processor_historical_update_webhook.rb
 lib/plaid/models/processor_identity_get_request.rb
 lib/plaid/models/processor_identity_get_response.rb
 lib/plaid/models/processor_identity_match_request.rb
 lib/plaid/models/processor_identity_match_response.rb
+lib/plaid/models/processor_initial_update_webhook.rb
 lib/plaid/models/processor_number.rb
+lib/plaid/models/processor_recurring_transactions_update_webhook.rb
 lib/plaid/models/processor_signal_decision_report_request.rb
 lib/plaid/models/processor_signal_decision_report_response.rb
 lib/plaid/models/processor_signal_evaluate_request.rb
@@ -2004,6 +2024,7 @@ lib/plaid/models/processor_signal_return_report_request.rb
 lib/plaid/models/processor_signal_return_report_response.rb
 lib/plaid/models/processor_stripe_bank_account_token_create_request.rb
 lib/plaid/models/processor_stripe_bank_account_token_create_response.rb
+lib/plaid/models/processor_sync_updates_available_webhook.rb
 lib/plaid/models/processor_token_create_request.rb
 lib/plaid/models/processor_token_create_response.rb
 lib/plaid/models/processor_token_permissions_get_request.rb
@@ -2016,6 +2037,7 @@ lib/plaid/models/processor_transactions_recurring_get_request.rb
 lib/plaid/models/processor_transactions_recurring_get_response.rb
 lib/plaid/models/processor_transactions_refresh_request.rb
 lib/plaid/models/processor_transactions_refresh_response.rb
+lib/plaid/models/processor_transactions_removed_webhook.rb
 lib/plaid/models/processor_transactions_sync_request.rb
 lib/plaid/models/processor_transactions_sync_response.rb
 lib/plaid/models/product_access.rb
@@ -2163,6 +2185,7 @@ lib/plaid/models/student_loan.rb
 lib/plaid/models/student_loan_repayment_model.rb
 lib/plaid/models/student_loan_status.rb
 lib/plaid/models/student_repayment_plan.rb
+lib/plaid/models/sweep_status.rb
 lib/plaid/models/sync_updates_available_webhook.rb
 lib/plaid/models/taxform.rb
 lib/plaid/models/taxpayer_id.rb
