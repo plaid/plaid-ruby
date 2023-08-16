@@ -87,6 +87,8 @@ docs/AuthGetResponse.md
 docs/AuthMetadata.md
 docs/AuthSupportedMethods.md
 docs/AutomaticallyVerifiedWebhook.md
+docs/BankIncomeCompleteResult.md
+docs/BankIncomeCompleteWebhook.md
 docs/BankIncomeRefreshCompleteResult.md
 docs/BankIncomeRefreshCompleteWebhook.md
 docs/BankIncomeRefreshUpdateWebhook.md
@@ -436,6 +438,7 @@ docs/HistoricalUpdateWebhook.md
 docs/Holding.md
 docs/HoldingsDefaultUpdateWebhook.md
 docs/HoldingsOverride.md
+docs/HostedLinkDeliveryMethod.md
 docs/IDNumberType.md
 docs/ISOCurrencyCode.md
 docs/IdentityDefaultUpdateWebhook.md
@@ -617,9 +620,19 @@ docs/LinkEventName.md
 docs/LinkEventsWebhook.md
 docs/LinkOAuthCorrelationIdExchangeRequest.md
 docs/LinkOAuthCorrelationIdExchangeResponse.md
+docs/LinkSessionExit.md
+docs/LinkSessionExitMetadata.md
+docs/LinkSessionExitMetadataInstitution.md
+docs/LinkSessionFinishedWebhook.md
+docs/LinkSessionSuccess.md
+docs/LinkSessionSuccessMetadata.md
+docs/LinkSessionSuccessMetadataAccount.md
+docs/LinkSessionSuccessMetadataInstitution.md
+docs/LinkSessionSuccessMetadataTransferStatus.md
 docs/LinkTokenAccountFilters.md
 docs/LinkTokenCreateCreditFilter.md
 docs/LinkTokenCreateDepositoryFilter.md
+docs/LinkTokenCreateHostedLink.md
 docs/LinkTokenCreateInstitutionData.md
 docs/LinkTokenCreateInvestmentFilter.md
 docs/LinkTokenCreateLoanFilter.md
@@ -635,6 +648,7 @@ docs/LinkTokenCreateRequestIncomeVerification.md
 docs/LinkTokenCreateRequestIncomeVerificationBankIncome.md
 docs/LinkTokenCreateRequestIncomeVerificationPayrollIncome.md
 docs/LinkTokenCreateRequestPaymentInitiation.md
+docs/LinkTokenCreateRequestStatements.md
 docs/LinkTokenCreateRequestTransfer.md
 docs/LinkTokenCreateRequestUpdate.md
 docs/LinkTokenCreateRequestUser.md
@@ -647,6 +661,7 @@ docs/LinkTokenEUConfig.md
 docs/LinkTokenGetMetadataResponse.md
 docs/LinkTokenGetRequest.md
 docs/LinkTokenGetResponse.md
+docs/LinkTokenGetSessionsResponse.md
 docs/LinkTokenInvestments.md
 docs/LinkTokenInvestmentsAuth.md
 docs/LinkUserDeliveryStatusWebhook.md
@@ -1385,6 +1400,8 @@ lib/plaid/models/auth_get_response.rb
 lib/plaid/models/auth_metadata.rb
 lib/plaid/models/auth_supported_methods.rb
 lib/plaid/models/automatically_verified_webhook.rb
+lib/plaid/models/bank_income_complete_result.rb
+lib/plaid/models/bank_income_complete_webhook.rb
 lib/plaid/models/bank_income_refresh_complete_result.rb
 lib/plaid/models/bank_income_refresh_complete_webhook.rb
 lib/plaid/models/bank_income_refresh_update_webhook.rb
@@ -1734,6 +1751,7 @@ lib/plaid/models/historical_update_webhook.rb
 lib/plaid/models/holding.rb
 lib/plaid/models/holdings_default_update_webhook.rb
 lib/plaid/models/holdings_override.rb
+lib/plaid/models/hosted_link_delivery_method.rb
 lib/plaid/models/id_number_type.rb
 lib/plaid/models/identity_default_update_webhook.rb
 lib/plaid/models/identity_get_request.rb
@@ -1915,9 +1933,19 @@ lib/plaid/models/link_event_name.rb
 lib/plaid/models/link_events_webhook.rb
 lib/plaid/models/link_o_auth_correlation_id_exchange_request.rb
 lib/plaid/models/link_o_auth_correlation_id_exchange_response.rb
+lib/plaid/models/link_session_exit.rb
+lib/plaid/models/link_session_exit_metadata.rb
+lib/plaid/models/link_session_exit_metadata_institution.rb
+lib/plaid/models/link_session_finished_webhook.rb
+lib/plaid/models/link_session_success.rb
+lib/plaid/models/link_session_success_metadata.rb
+lib/plaid/models/link_session_success_metadata_account.rb
+lib/plaid/models/link_session_success_metadata_institution.rb
+lib/plaid/models/link_session_success_metadata_transfer_status.rb
 lib/plaid/models/link_token_account_filters.rb
 lib/plaid/models/link_token_create_credit_filter.rb
 lib/plaid/models/link_token_create_depository_filter.rb
+lib/plaid/models/link_token_create_hosted_link.rb
 lib/plaid/models/link_token_create_institution_data.rb
 lib/plaid/models/link_token_create_investment_filter.rb
 lib/plaid/models/link_token_create_loan_filter.rb
@@ -1933,6 +1961,7 @@ lib/plaid/models/link_token_create_request_income_verification.rb
 lib/plaid/models/link_token_create_request_income_verification_bank_income.rb
 lib/plaid/models/link_token_create_request_income_verification_payroll_income.rb
 lib/plaid/models/link_token_create_request_payment_initiation.rb
+lib/plaid/models/link_token_create_request_statements.rb
 lib/plaid/models/link_token_create_request_transfer.rb
 lib/plaid/models/link_token_create_request_update.rb
 lib/plaid/models/link_token_create_request_user.rb
@@ -1945,6 +1974,7 @@ lib/plaid/models/link_token_eu_config.rb
 lib/plaid/models/link_token_get_metadata_response.rb
 lib/plaid/models/link_token_get_request.rb
 lib/plaid/models/link_token_get_response.rb
+lib/plaid/models/link_token_get_sessions_response.rb
 lib/plaid/models/link_token_investments.rb
 lib/plaid/models/link_token_investments_auth.rb
 lib/plaid/models/link_user_delivery_status_webhook.rb
