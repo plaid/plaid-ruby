@@ -1,5 +1,5 @@
 # Ruby embeds the version in the generator where as others don't so it's not possible to cat for it.
-RUBY_PACKAGE_VERSION=21.2.0
+RUBY_PACKAGE_VERSION=21.3.0
 
 .PHONY: release
 release:
