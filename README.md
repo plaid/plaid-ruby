@@ -1,6 +1,21 @@
-# plaid-ruby [![Circle CI](https://circleci.com/gh/plaid/plaid-ruby.svg?style=svg&circle-token=30ee002ac2021da5b5b5a701d45fe2888af124a5)](https://circleci.com/gh/plaid/plaid-ruby) [![Gem Version](https://badge.fury.io/rb/plaid.svg)](http://badge.fury.io/rb/plaid)
+# plaid-ruby [![Gem Version](https://badge.fury.io/rb/plaid.svg)](http://badge.fury.io/rb/plaid)
 
 The official Ruby bindings for the [Plaid API](https://plaid.com/docs). It's generated from our [OpenAPI schema](https://github.com/plaid/plaid-openapi).
+
+## Table of Contents
+
+* [Installation](#installation)
+* [Versioning](#versioning)
+* [Getting Started](#getting-started)
+  + [Create a client](#create-a-client)
+  + [Tuning Faraday](#tuning-faraday)
+  + [Dates](#dates)
+* [Examples](#examples)
+* [Errors](#errors)
+* [Response objects](#response-objects)
+* [Migration Guide](#migration-guide)
+* [Contributing](#contributing)
+* [License](#license)
 
 ## Installation
 
@@ -22,7 +37,7 @@ The gem supports Ruby 3.0.0+ only.
 
 ### Versioning
 
-Versions > 14 are generated from our OpenAPI schema. For previous non-generated versions, check out [13.2.0](https://github.com/plaid/plaid-ruby/releases/tag/v13.2.0).
+Versions > 14 are generated from our OpenAPI schema. 
 
 Each major version of `plaid-ruby` targets a specific version of the Plaid API:
 
@@ -35,13 +50,14 @@ Each major version of `plaid-ruby` targets a specific version of the Plaid API:
 
 For information about what has changed between versions and how to update your integration, head to the [version changelog][version-changelog].
 
-The plaid-ruby client library is typically updated on a monthly basis. The canonical source for the latest version number is the [client library changelog](https://github.com/plaid/plaid-ruby/blob/master/CHANGELOG.md).
+The plaid-ruby client library is typically updated on a monthly basis. The canonical source for the latest version number is the [client library changelog](https://github.com/plaid/plaid-ruby/blob/master/CHANGELOG.md). New versions are published as [GitHub tags](https://github.com/plaid/plaid-ruby/tags), not as Releases. New versions are also published on [RubyGems.org](https://rubygems.org/gems/plaid/).
 
-## Usage
 
-This gem wraps the Plaid API, which is fully described in the [documentation](https://plaid.com/docs/api) and in the [plaid-openapi](https://github.com/plaid/plaid-openapi) spec.
+All users are strongly recommended to use a recent version of the library, as older versions do not contain support for new endpoints and fields. For more details, see the [Migration Guide](#migration-guide).
 
-### Creating a Plaid client
+## Getting started
+
+### Create a client
 
 Create an instance of the client using the `client_id` and `secret` from your Plaid dashboard along with your environment of choice:
 
@@ -86,11 +102,10 @@ api_client.create_connection do |builder|
   builder.use Faraday::Response::Logger
 end
 ```
-## Data type differences from API and from previous versions
 
 ### Dates
 
-Dates and datetimes in requests, which are represented as strings in the API and in previous client library versions, are represented in this version of the Ruby client library as Ruby `Date` or `DateTime` objects. 
+Dates and datetimes in requests, which are represented as strings in the API and previous versions of the client library, are represented in this version of the Ruby client library as Ruby `Date` or `DateTime` objects. 
 
 Time zone information is required for request fields that accept datetimes. Failing to include time zone information (or passing in a string, instead of a `Date` or `DateTime` object) will result in an error. See the following examples for guidance on `Date` and `DateTime` usage.
 
@@ -117,7 +132,10 @@ a = Time.parse("2022-05-06T22:35:49Z").to_datetime
 b = Date.parse("2022-05-06T22:35:49Z").to_datetime
 ```
 
+
 ## Examples
+
+For more examples, see the [test suites](https://github.com/plaid/plaid-ruby/tree/master/test), [Quickstart](https://github.com/plaid/quickstart/tree/master/ruby), or [API Reference documentation](https://plaid.com/docs/api/).
 
 ### Create a new link_token
 
@@ -231,12 +249,10 @@ while transactions.length < transaction_response.total_transactions
   transaction_response = client.transactions_get(transactions_get_request)
   transactions += transaction_response.transactions
 end
-
 ```
 
-### Obtaining Item-related data
+### Get Auth data
 
-If you have an `access_token`, you can use following code to retreive data:
 ```ruby
 request = Plaid::ItemPublicTokenExchangeRequest.new
 request.public_token = public_token
@@ -249,45 +265,6 @@ auth_get_request.access_token = access_token
 
 auth_response = client.auth_get(auth_get_request)
 auth = auth_response.auth
-```
-
-There are also a number of other methods you can use to retrieve data:
-
-* `client.accounts_get(Plaid::AccountsGetRequest.new({:access_token => access_token, ...}))`: accounts
-* `client.accounts_balance_get(Plaid::AccountsBalanceGetRequest.new({:access_token => access_token, ...}))`: real-time balances
-* `client.auth_get(Plaid::AuthGetRequest.new({:access_token => access_token, ...}))`: auth
-* `client.identity_get(Plaid::IdentityGetRequest.new({:access_token => access_token, ...}))`: identity
-* `client.transactions_get(Plaid::TransactionsGetRequest.new({:access_token => access_token, ...}))`: transactions
-* `client.investments_transactions_get(Plaid::InvestmentsTransactionsGetRequest.new({:access_token => access_token, ...}))`: investment-account transactions
-* `client.investments_holdings_get(Plaid::InvestmentsHoldingsGetRequest.new({:access_token => access_token, ...}))`: investment-account holdings
-
-
-All of these methods return appropriate data. More information can be found on the [API documentation](https://plaid.com/docs/api).
-
-### Create a Stripe bank_account_token
-
-Exchange a Plaid Link `public_token` for an API `access_token` and a Stripe `bank_account_token`:
-```ruby
-request = Plaid::ItemPublicTokenExchangeRequest.new
-request.public_token = public_token
-
-response = client.item_public_token_exchange(request)
-access_token = response.access_token
-
-processor_token_create_request = Plaid::ProcessorStripeBankAccountTokenCreateRequest.new
-processor_token_create_request.access_token = access_token
-processor_token_create_request.account_id = '[Account ID]'
-
-stripe_response = client.processor_stripe_bank_account_token_create(processor_token_create_request)
-bank_account_token = stripe_response.stripe_bank_account_token
-```
-
-### Categories
-
-You can request category information:
-
-```ruby
-categories = client.categories_get             # Array of all known categories
 ```
 
 ### Institutions
@@ -320,19 +297,97 @@ All API calls return a response object that is accessible only with dot notation
 (i.e., `response.foo.bar`) and not with bracket notation. Expected keys for all types of responses are defined,
 and any attempt to access an unknown key will cause `NoMethodError` exception.
 
+
+## Migration guide
+
+### 14.0.0 or later to latest
+
+Migrating from a version released on or after August 2021 to a recent version should involve very minor integration changes. Many customers will not need to make changes to their integrations at all. To see a list of all potentially-breaking changes since your current version, see the [client library changelog](https://github.com/plaid/plaid-ruby/blob/master/CHANGELOG.md) and search for "Breaking changes in this version". Breaking changes are annotated at the top of each major version header.
+
+### Pre-14.0.0 to latest
+
+Version 14.0.0 of the client library was released in August 2021 and contains multiple interface changes, as described below.
+
+
+#### Client initialization
+From:
+```ruby
+client = Plaid::Client.new(env: :sandbox,
+                            client_id: client_id,
+                            secret: secret)
+```
+
+To:
+```ruby
+configuration = Plaid::Configuration.new
+configuration.server_index = Plaid::Configuration::Environment["sandbox"]
+configuration.api_key["PLAID-CLIENT-ID"] = ENV["PLAID_RUBY_CLIENT_ID"]
+configuration.api_key["PLAID-SECRET"] = ENV["PLAID_RUBY_SECRET"]
+configuration.api_key["Plaid-Version"] = "2020-09-14"
+
+api_client = Plaid::ApiClient.new(
+  configuration
+)
+
+client = Plaid::PlaidApi.new(api_client)
+```
+
+#### Endpoints
+All endpoint requests now take a request model and the functions have been renamed to include `_`.
+
+From:
+```ruby
+response = client.auth.get(access_token)
+```
+
+To:
+```ruby
+auth_get_request = Plaid::AuthGetRequest.new
+auth_get_request.access_token = access_token
+
+or
+
+auth_get_request = Plaid::AuthGetRequest.new({:access_token => access_token})
+
+response = client.auth_get(auth_get_request)
+```
+
+#### Errors
+
+From:
+```ruby
+begin
+  client.auth.get(auth_get_request)
+rescue Plaid::PlaidAPIError => e
+  raise e if e.error_code != 'PRODUCT_NOT_READY'
+  sleep 1
+end
+```
+
+To:
+```ruby
+begin
+  client.auth_get(auth_get_request)
+rescue Plaid::ApiError => e
+  json_response = JSON.parse(e.response_body)
+  if json_response["error_code"] != "PRODUCT_NOT_READY"
+end
+```
+
+
+#### Date type differences
+
+See [Dates](#dates) for information on updates to date formats.
+
+
 ## Contributing
 
-Bug reports are welcome on GitHub at https://github.com/plaid/plaid-ruby. See also [contributing guidelines](CONTRIBUTING.md). As the library is auto-generated, pull requests are automatically closed.
+Bug reports are welcome on GitHub. See also [contributing guidelines](CONTRIBUTING.md).
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+The gem is available as open source under the terms of the [MIT License](LICENSE.txt).
 
-### Legacy API
-
-If you're looking for a Ruby client that works with the legacy Plaid API, use the [`plaid-legacy` gem][2].
-
-[2]: https://github.com/plaid/plaid-ruby-legacy
 [version-changelog]: https://plaid.com/docs/api/versioning/
 [api-version-2018-05-22]: https://plaid.com/docs/api/versioning/#2018-05-22
 [api-version-2019-05-29]: https://plaid.com/docs/api/versioning/#2019-05-29
