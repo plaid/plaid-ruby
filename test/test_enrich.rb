@@ -38,13 +38,13 @@ class PlaidEnrichTest < PlaidTest
       })
     ]
 
-    transactions_enrich_get_request = Plaid::TransactionsEnrichGetRequest.new
+    transactions_enrich_get_request = Plaid::TransactionsEnrichRequest.new
 
     transactions_enrich_get_request.account_type = "depository"
     transactions_enrich_get_request.transactions = sample_transactions_to_enrich
 
     response = client.transactions_enrich(transactions_enrich_get_request)
-    assert_kind_of(Plaid::TransactionsEnrichGetResponse, response)
+    assert_kind_of(Plaid::TransactionsEnrichResponse, response)
 
     refute_empty(response.enriched_transactions)
     assert_equal(sample_transactions_to_enrich.length, response.enriched_transactions.length)
