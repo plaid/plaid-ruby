@@ -133,8 +133,11 @@ docs/BankTransfersEventsUpdateWebhook.md
 docs/BankTransfersEventsUpdateWebhookForAuth.md
 docs/BaseReport.md
 docs/BaseReportAccount.md
+docs/BaseReportAccountBalances.md
+docs/BaseReportAccountBalancesAllOf.md
 docs/BaseReportAccountInsights.md
 docs/BaseReportAverageFlowInsights.md
+docs/BaseReportAverageMonthlyBalances.md
 docs/BaseReportGetRequest.md
 docs/BaseReportGetResponse.md
 docs/BaseReportItem.md
@@ -160,7 +163,6 @@ docs/BeaconReportSyndicationListResponse.md
 docs/BeaconReportSyndicationOriginalReport.md
 docs/BeaconReportType.md
 docs/BeaconUserAddress.md
-docs/BeaconUserCreateEmbeddedReport.md
 docs/BeaconUserCreateRequest.md
 docs/BeaconUserCreateResponse.md
 docs/BeaconUserData.md
@@ -170,7 +172,9 @@ docs/BeaconUserIDNumber.md
 docs/BeaconUserName.md
 docs/BeaconUserRequestAddress.md
 docs/BeaconUserRequestData.md
+docs/BeaconUserReviewRequest.md
 docs/BeaconUserStatus.md
+docs/BeaconUserStatusUpdatedWebhook.md
 docs/CategoriesGetResponse.md
 docs/Category.md
 docs/CategoryInsightDetails.md
@@ -510,6 +514,7 @@ docs/IncomeVerificationPrecheckPayrollInstitution.md
 docs/IncomeVerificationPrecheckRequest.md
 docs/IncomeVerificationPrecheckResponse.md
 docs/IncomeVerificationPrecheckUser.md
+docs/IncomeVerificationRefreshReconnectNeededWebhook.md
 docs/IncomeVerificationRiskSignalsStatusWebhook.md
 docs/IncomeVerificationSourceType.md
 docs/IncomeVerificationStatusWebhook.md
@@ -569,6 +574,8 @@ docs/ItemApplicationListResponse.md
 docs/ItemApplicationListUserAuth.md
 docs/ItemApplicationScopesUpdateRequest.md
 docs/ItemApplicationScopesUpdateResponse.md
+docs/ItemApplicationUnlinkRequest.md
+docs/ItemApplicationUnlinkResponse.md
 docs/ItemErrorWebhook.md
 docs/ItemGetRequest.md
 docs/ItemGetResponse.md
@@ -711,6 +718,8 @@ docs/NumbersInternationalNullable.md
 docs/OmittableTransferType.md
 docs/Originator.md
 docs/OriginatorExpectedTransferFrequency.md
+docs/OtherAccountSubtype.md
+docs/OtherFilter.md
 docs/OverrideAccountType.md
 docs/OverrideAccounts.md
 docs/Owner.md
@@ -873,6 +882,8 @@ docs/ProcessorSignalDecisionReportRequest.md
 docs/ProcessorSignalDecisionReportResponse.md
 docs/ProcessorSignalEvaluateRequest.md
 docs/ProcessorSignalEvaluateResponse.md
+docs/ProcessorSignalPrepareRequest.md
+docs/ProcessorSignalPrepareResponse.md
 docs/ProcessorSignalReturnReportRequest.md
 docs/ProcessorSignalReturnReportResponse.md
 docs/ProcessorStripeBankAccountTokenCreateRequest.md
@@ -888,6 +899,7 @@ docs/ProcessorTokenWebhookUpdate.md
 docs/ProcessorTokenWebhookUpdateRequest.md
 docs/ProcessorTokenWebhookUpdateResponse.md
 docs/ProcessorTransactionsGetRequest.md
+docs/ProcessorTransactionsGetRequestOptions.md
 docs/ProcessorTransactionsGetResponse.md
 docs/ProcessorTransactionsRecurringGetRequest.md
 docs/ProcessorTransactionsRecurringGetResponse.md
@@ -911,8 +923,10 @@ docs/RecipientBACSNullable.md
 docs/Recurrence.md
 docs/RecurringCancelledWebhook.md
 docs/RecurringFrequency.md
+docs/RecurringInsightsStream.md
 docs/RecurringNewTransferWebhook.md
 docs/RecurringTransactionFrequency.md
+docs/RecurringTransactions.md
 docs/RecurringTransactionsUpdateWebhook.md
 docs/RecurringTransfer.md
 docs/RecurringTransferNullable.md
@@ -952,6 +966,7 @@ docs/SandboxBankTransferSimulateRequest.md
 docs/SandboxBankTransferSimulateResponse.md
 docs/SandboxIncomeFireWebhookRequest.md
 docs/SandboxIncomeFireWebhookResponse.md
+docs/SandboxIncomeWebhookFireRequestWebhookCode.md
 docs/SandboxItemFireWebhookRequest.md
 docs/SandboxItemFireWebhookResponse.md
 docs/SandboxItemResetLoginRequest.md
@@ -1083,9 +1098,18 @@ docs/TransactionsEnrichResponse.md
 docs/TransactionsGetRequest.md
 docs/TransactionsGetRequestOptions.md
 docs/TransactionsGetResponse.md
+docs/TransactionsRecurringCreateInput.md
+docs/TransactionsRecurringCreateRequest.md
+docs/TransactionsRecurringCreateResponse.md
 docs/TransactionsRecurringGetRequest.md
 docs/TransactionsRecurringGetRequestOptions.md
 docs/TransactionsRecurringGetResponse.md
+docs/TransactionsRecurringMergeInput.md
+docs/TransactionsRecurringMergeRequest.md
+docs/TransactionsRecurringMergeResponse.md
+docs/TransactionsRecurringUpdateInput.md
+docs/TransactionsRecurringUpdateRequest.md
+docs/TransactionsRecurringUpdateResponse.md
 docs/TransactionsRefreshRequest.md
 docs/TransactionsRefreshResponse.md
 docs/TransactionsRemovedWebhook.md
@@ -1169,6 +1193,8 @@ docs/TransferIntentStatus.md
 docs/TransferLedgerBalance.md
 docs/TransferLedgerDepositRequest.md
 docs/TransferLedgerDepositResponse.md
+docs/TransferLedgerDistributeRequest.md
+docs/TransferLedgerDistributeResponse.md
 docs/TransferLedgerGetRequest.md
 docs/TransferLedgerGetResponse.md
 docs/TransferLedgerSweepSimulateEventType.md
@@ -1488,8 +1514,11 @@ lib/plaid/models/bank_transfers_events_update_webhook.rb
 lib/plaid/models/bank_transfers_events_update_webhook_for_auth.rb
 lib/plaid/models/base_report.rb
 lib/plaid/models/base_report_account.rb
+lib/plaid/models/base_report_account_balances.rb
+lib/plaid/models/base_report_account_balances_all_of.rb
 lib/plaid/models/base_report_account_insights.rb
 lib/plaid/models/base_report_average_flow_insights.rb
+lib/plaid/models/base_report_average_monthly_balances.rb
 lib/plaid/models/base_report_get_request.rb
 lib/plaid/models/base_report_get_response.rb
 lib/plaid/models/base_report_item.rb
@@ -1515,7 +1544,6 @@ lib/plaid/models/beacon_report_syndication_list_response.rb
 lib/plaid/models/beacon_report_syndication_original_report.rb
 lib/plaid/models/beacon_report_type.rb
 lib/plaid/models/beacon_user_address.rb
-lib/plaid/models/beacon_user_create_embedded_report.rb
 lib/plaid/models/beacon_user_create_request.rb
 lib/plaid/models/beacon_user_create_response.rb
 lib/plaid/models/beacon_user_data.rb
@@ -1525,7 +1553,9 @@ lib/plaid/models/beacon_user_id_number.rb
 lib/plaid/models/beacon_user_name.rb
 lib/plaid/models/beacon_user_request_address.rb
 lib/plaid/models/beacon_user_request_data.rb
+lib/plaid/models/beacon_user_review_request.rb
 lib/plaid/models/beacon_user_status.rb
+lib/plaid/models/beacon_user_status_updated_webhook.rb
 lib/plaid/models/categories_get_response.rb
 lib/plaid/models/category.rb
 lib/plaid/models/category_insight_details.rb
@@ -1864,6 +1894,7 @@ lib/plaid/models/income_verification_precheck_payroll_institution.rb
 lib/plaid/models/income_verification_precheck_request.rb
 lib/plaid/models/income_verification_precheck_response.rb
 lib/plaid/models/income_verification_precheck_user.rb
+lib/plaid/models/income_verification_refresh_reconnect_needed_webhook.rb
 lib/plaid/models/income_verification_risk_signals_status_webhook.rb
 lib/plaid/models/income_verification_source_type.rb
 lib/plaid/models/income_verification_status_webhook.rb
@@ -1924,6 +1955,8 @@ lib/plaid/models/item_application_list_response.rb
 lib/plaid/models/item_application_list_user_auth.rb
 lib/plaid/models/item_application_scopes_update_request.rb
 lib/plaid/models/item_application_scopes_update_response.rb
+lib/plaid/models/item_application_unlink_request.rb
+lib/plaid/models/item_application_unlink_response.rb
 lib/plaid/models/item_error_webhook.rb
 lib/plaid/models/item_get_request.rb
 lib/plaid/models/item_get_response.rb
@@ -2066,6 +2099,8 @@ lib/plaid/models/numbers_international_nullable.rb
 lib/plaid/models/omittable_transfer_type.rb
 lib/plaid/models/originator.rb
 lib/plaid/models/originator_expected_transfer_frequency.rb
+lib/plaid/models/other_account_subtype.rb
+lib/plaid/models/other_filter.rb
 lib/plaid/models/override_account_type.rb
 lib/plaid/models/override_accounts.rb
 lib/plaid/models/owner.rb
@@ -2226,6 +2261,8 @@ lib/plaid/models/processor_signal_decision_report_request.rb
 lib/plaid/models/processor_signal_decision_report_response.rb
 lib/plaid/models/processor_signal_evaluate_request.rb
 lib/plaid/models/processor_signal_evaluate_response.rb
+lib/plaid/models/processor_signal_prepare_request.rb
+lib/plaid/models/processor_signal_prepare_response.rb
 lib/plaid/models/processor_signal_return_report_request.rb
 lib/plaid/models/processor_signal_return_report_response.rb
 lib/plaid/models/processor_stripe_bank_account_token_create_request.rb
@@ -2241,6 +2278,7 @@ lib/plaid/models/processor_token_webhook_update.rb
 lib/plaid/models/processor_token_webhook_update_request.rb
 lib/plaid/models/processor_token_webhook_update_response.rb
 lib/plaid/models/processor_transactions_get_request.rb
+lib/plaid/models/processor_transactions_get_request_options.rb
 lib/plaid/models/processor_transactions_get_response.rb
 lib/plaid/models/processor_transactions_recurring_get_request.rb
 lib/plaid/models/processor_transactions_recurring_get_response.rb
@@ -2265,8 +2303,10 @@ lib/plaid/models/recipient_bacs_nullable.rb
 lib/plaid/models/recurrence.rb
 lib/plaid/models/recurring_cancelled_webhook.rb
 lib/plaid/models/recurring_frequency.rb
+lib/plaid/models/recurring_insights_stream.rb
 lib/plaid/models/recurring_new_transfer_webhook.rb
 lib/plaid/models/recurring_transaction_frequency.rb
+lib/plaid/models/recurring_transactions.rb
 lib/plaid/models/recurring_transactions_update_webhook.rb
 lib/plaid/models/recurring_transfer.rb
 lib/plaid/models/recurring_transfer_nullable.rb
@@ -2306,6 +2346,7 @@ lib/plaid/models/sandbox_bank_transfer_simulate_request.rb
 lib/plaid/models/sandbox_bank_transfer_simulate_response.rb
 lib/plaid/models/sandbox_income_fire_webhook_request.rb
 lib/plaid/models/sandbox_income_fire_webhook_response.rb
+lib/plaid/models/sandbox_income_webhook_fire_request_webhook_code.rb
 lib/plaid/models/sandbox_item_fire_webhook_request.rb
 lib/plaid/models/sandbox_item_fire_webhook_response.rb
 lib/plaid/models/sandbox_item_reset_login_request.rb
@@ -2437,9 +2478,18 @@ lib/plaid/models/transactions_enrich_response.rb
 lib/plaid/models/transactions_get_request.rb
 lib/plaid/models/transactions_get_request_options.rb
 lib/plaid/models/transactions_get_response.rb
+lib/plaid/models/transactions_recurring_create_input.rb
+lib/plaid/models/transactions_recurring_create_request.rb
+lib/plaid/models/transactions_recurring_create_response.rb
 lib/plaid/models/transactions_recurring_get_request.rb
 lib/plaid/models/transactions_recurring_get_request_options.rb
 lib/plaid/models/transactions_recurring_get_response.rb
+lib/plaid/models/transactions_recurring_merge_input.rb
+lib/plaid/models/transactions_recurring_merge_request.rb
+lib/plaid/models/transactions_recurring_merge_response.rb
+lib/plaid/models/transactions_recurring_update_input.rb
+lib/plaid/models/transactions_recurring_update_request.rb
+lib/plaid/models/transactions_recurring_update_response.rb
 lib/plaid/models/transactions_refresh_request.rb
 lib/plaid/models/transactions_refresh_response.rb
 lib/plaid/models/transactions_removed_webhook.rb
@@ -2523,6 +2573,8 @@ lib/plaid/models/transfer_intent_status.rb
 lib/plaid/models/transfer_ledger_balance.rb
 lib/plaid/models/transfer_ledger_deposit_request.rb
 lib/plaid/models/transfer_ledger_deposit_response.rb
+lib/plaid/models/transfer_ledger_distribute_request.rb
+lib/plaid/models/transfer_ledger_distribute_response.rb
 lib/plaid/models/transfer_ledger_get_request.rb
 lib/plaid/models/transfer_ledger_get_response.rb
 lib/plaid/models/transfer_ledger_sweep_simulate_event_type.rb
