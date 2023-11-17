@@ -1,5 +1,9 @@
 See full changelog for the OpenAPI schema (OAS) [here](https://github.com/plaid/plaid-openapi/blob/master/CHANGELOG.md).
 
+# 24.0.0
+
+- Enabled autoload for faster Ruby module loading. This is not anticipated to be a breaking change.
+
 # 23.0.0
 
 - Updating to OAS 2020-09-14_1.457.0
