@@ -17,7 +17,6 @@ module {{moduleName}}
           super(arg[:message] || arg['message'])
         else
           super arg
-          @message = arg
         end
 
         arg.each do |k, v|
@@ -25,6 +24,7 @@ module {{moduleName}}
         end
       else
         super arg
+        @message = arg
       end
     end
 
