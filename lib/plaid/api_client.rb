@@ -23,6 +23,9 @@ require 'faraday/multipart'
 
 module Plaid
   class ApiClient
+    class ApiTimeoutError < ApiError; end
+    class ApiConnectionFailedError < ApiError; end
+
     # The Configuration object holding settings to be used in the API client.
     attr_accessor :config
 
@@ -99,9 +102,9 @@ module Plaid
           end
         end
       rescue Faraday::TimeoutError
-        fail ApiError.new('Connection timed out')
+        fail ApiTimeoutError.new('Connection timed out')
       rescue Faraday::ConnectionFailed
-        fail ApiError.new('Connection failed')
+        fail ApiConnectionFailedError.new('Connection failed')
       end
 
       if opts[:return_type]

@@ -20,6 +20,11 @@ require 'faraday/multipart'
 
 module {{moduleName}}
   class ApiClient
+{{#isFaraday}}
+    class ApiTimeoutError < ApiError; end
+    class ApiConnectionFailedError < ApiError; end
+
+{{/isFaraday}}
     # The Configuration object holding settings to be used in the API client.
     attr_accessor :config
 
