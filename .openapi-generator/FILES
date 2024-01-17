@@ -153,6 +153,9 @@ docs/BaseReportsProductReadyWebhook.md
 docs/BeaconAuditTrail.md
 docs/BeaconAuditTrailSource.md
 docs/BeaconDuplicateDetectedWebhook.md
+docs/BeaconDuplicateGetRequest.md
+docs/BeaconDuplicateGetResponse.md
+docs/BeaconMatchSummaryAnalysis.md
 docs/BeaconMatchSummaryCode.md
 docs/BeaconReport.md
 docs/BeaconReportCreateRequest.md
@@ -185,6 +188,7 @@ docs/BeaconUserRequestAddress.md
 docs/BeaconUserRequestAddressNullable.md
 docs/BeaconUserRequestData.md
 docs/BeaconUserReviewRequest.md
+docs/BeaconUserRevision.md
 docs/BeaconUserStatus.md
 docs/BeaconUserStatusUpdatedWebhook.md
 docs/BeaconUserUpdateRequest.md
@@ -484,6 +488,11 @@ docs/IdentityRefreshRequest.md
 docs/IdentityRefreshResponse.md
 docs/IdentityUpdateTypes.md
 docs/IdentityVerification.md
+docs/IdentityVerificationAutofillAddress.md
+docs/IdentityVerificationAutofillCreateRequest.md
+docs/IdentityVerificationAutofillCreateResponse.md
+docs/IdentityVerificationAutofillStatus.md
+docs/IdentityVerificationAutofillUserData.md
 docs/IdentityVerificationCreateRequest.md
 docs/IdentityVerificationCreateRequestUser.md
 docs/IdentityVerificationCreateResponse.md
@@ -783,6 +792,7 @@ docs/Pay.md
 docs/PayFrequency.md
 docs/PayFrequencyValue.md
 docs/PayPeriodDetails.md
+docs/PayPeriodDetailsPayFrequency.md
 docs/PayStubDeductionsBreakdown.md
 docs/PayStubDeductionsTotal.md
 docs/PayStubDistributionBreakdown.md
@@ -862,9 +872,11 @@ docs/PaystubDeduction.md
 docs/PaystubDetails.md
 docs/PaystubEmployer.md
 docs/PaystubOverride.md
+docs/PaystubOverrideDistributionBreakdown.md
 docs/PaystubOverrideEmployee.md
 docs/PaystubOverrideEmployeeAddress.md
 docs/PaystubOverrideEmployer.md
+docs/PaystubOverridePayPeriodDetails.md
 docs/PaystubPayFrequency.md
 docs/PaystubYTDDetails.md
 docs/PendingExpirationWebhook.md
@@ -897,6 +909,8 @@ docs/ProcessorIdentityGetResponse.md
 docs/ProcessorIdentityMatchRequest.md
 docs/ProcessorIdentityMatchResponse.md
 docs/ProcessorInitialUpdateWebhook.md
+docs/ProcessorLiabilitiesGetRequest.md
+docs/ProcessorLiabilitiesGetResponse.md
 docs/ProcessorNumber.md
 docs/ProcessorRecurringTransactionsUpdateWebhook.md
 docs/ProcessorSignalDecisionReportRequest.md
@@ -972,6 +986,7 @@ docs/RiskCheckLinkedService.md
 docs/RiskCheckPhone.md
 docs/RiskCheckStolenIdentity.md
 docs/RiskCheckSyntheticIdentity.md
+docs/RiskProfile.md
 docs/RiskSignalDocumentReference.md
 docs/RiskSignalDocumentStatus.md
 docs/Role.md
@@ -1560,6 +1575,9 @@ lib/plaid/models/base_reports_product_ready_webhook.rb
 lib/plaid/models/beacon_audit_trail.rb
 lib/plaid/models/beacon_audit_trail_source.rb
 lib/plaid/models/beacon_duplicate_detected_webhook.rb
+lib/plaid/models/beacon_duplicate_get_request.rb
+lib/plaid/models/beacon_duplicate_get_response.rb
+lib/plaid/models/beacon_match_summary_analysis.rb
 lib/plaid/models/beacon_match_summary_code.rb
 lib/plaid/models/beacon_report.rb
 lib/plaid/models/beacon_report_create_request.rb
@@ -1592,6 +1610,7 @@ lib/plaid/models/beacon_user_request_address.rb
 lib/plaid/models/beacon_user_request_address_nullable.rb
 lib/plaid/models/beacon_user_request_data.rb
 lib/plaid/models/beacon_user_review_request.rb
+lib/plaid/models/beacon_user_revision.rb
 lib/plaid/models/beacon_user_status.rb
 lib/plaid/models/beacon_user_status_updated_webhook.rb
 lib/plaid/models/beacon_user_update_request.rb
@@ -1890,6 +1909,11 @@ lib/plaid/models/identity_refresh_request.rb
 lib/plaid/models/identity_refresh_response.rb
 lib/plaid/models/identity_update_types.rb
 lib/plaid/models/identity_verification.rb
+lib/plaid/models/identity_verification_autofill_address.rb
+lib/plaid/models/identity_verification_autofill_create_request.rb
+lib/plaid/models/identity_verification_autofill_create_response.rb
+lib/plaid/models/identity_verification_autofill_status.rb
+lib/plaid/models/identity_verification_autofill_user_data.rb
 lib/plaid/models/identity_verification_create_request.rb
 lib/plaid/models/identity_verification_create_request_user.rb
 lib/plaid/models/identity_verification_create_response.rb
@@ -2188,6 +2212,7 @@ lib/plaid/models/pay.rb
 lib/plaid/models/pay_frequency.rb
 lib/plaid/models/pay_frequency_value.rb
 lib/plaid/models/pay_period_details.rb
+lib/plaid/models/pay_period_details_pay_frequency.rb
 lib/plaid/models/pay_stub_deductions_breakdown.rb
 lib/plaid/models/pay_stub_deductions_total.rb
 lib/plaid/models/pay_stub_distribution_breakdown.rb
@@ -2267,9 +2292,11 @@ lib/plaid/models/paystub_deduction.rb
 lib/plaid/models/paystub_details.rb
 lib/plaid/models/paystub_employer.rb
 lib/plaid/models/paystub_override.rb
+lib/plaid/models/paystub_override_distribution_breakdown.rb
 lib/plaid/models/paystub_override_employee.rb
 lib/plaid/models/paystub_override_employee_address.rb
 lib/plaid/models/paystub_override_employer.rb
+lib/plaid/models/paystub_override_pay_period_details.rb
 lib/plaid/models/paystub_pay_frequency.rb
 lib/plaid/models/paystub_ytd_details.rb
 lib/plaid/models/pending_expiration_webhook.rb
@@ -2302,6 +2329,8 @@ lib/plaid/models/processor_identity_get_response.rb
 lib/plaid/models/processor_identity_match_request.rb
 lib/plaid/models/processor_identity_match_response.rb
 lib/plaid/models/processor_initial_update_webhook.rb
+lib/plaid/models/processor_liabilities_get_request.rb
+lib/plaid/models/processor_liabilities_get_response.rb
 lib/plaid/models/processor_number.rb
 lib/plaid/models/processor_recurring_transactions_update_webhook.rb
 lib/plaid/models/processor_signal_decision_report_request.rb
@@ -2378,6 +2407,7 @@ lib/plaid/models/risk_check_linked_service.rb
 lib/plaid/models/risk_check_phone.rb
 lib/plaid/models/risk_check_stolen_identity.rb
 lib/plaid/models/risk_check_synthetic_identity.rb
+lib/plaid/models/risk_profile.rb
 lib/plaid/models/risk_signal_document_reference.rb
 lib/plaid/models/risk_signal_document_status.rb
 lib/plaid/models/role.rb
