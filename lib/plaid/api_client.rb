@@ -20,6 +20,7 @@ require 'logger'
 require 'tempfile'
 require 'faraday'
 require 'faraday/multipart'
+require_relative 'api_error'
 
 module Plaid
   class ApiClient
