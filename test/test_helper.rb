@@ -1,13 +1,22 @@
+require 'bundler'
+
+begin
+  Bundler.setup(:default, :development)
+rescue Bundler::BundlerError => e
+  warn e.message
+  warn 'Run `bundle install` to install missing gems'
+  exit e.status_code
+end
+
+require "plaid"
 require "minitest/autorun"
 require "minitest/around/unit"
 require "json"
 
-require_relative "../lib/plaid"
-
 # Internal: Default read timeout for HTTP calls in seconds.
 NETWORK_TIMEOUT = 600
 
-class PlaidTest < MiniTest::Test
+class PlaidTest < Minitest::Test
   attr_reader :client, :item, :access_token
 
   def create_client

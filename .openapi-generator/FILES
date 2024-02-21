@@ -2,7 +2,6 @@ docs/ACHClass.md
 docs/APR.md
 docs/AccountAccess.md
 docs/AccountAssets.md
-docs/AccountAssetsAllOf.md
 docs/AccountBalance.md
 docs/AccountBase.md
 docs/AccountFilter.md
@@ -16,6 +15,10 @@ docs/AccountProductAccessNullable.md
 docs/AccountSelectionCardinality.md
 docs/AccountSubtype.md
 docs/AccountType.md
+docs/AccountVerificationInsights.md
+docs/AccountVerificationInsightsAccountNumberFormat.md
+docs/AccountVerificationInsightsNetworkStatus.md
+docs/AccountVerificationInsightsPreviousReturns.md
 docs/AccountsBalanceGetRequest.md
 docs/AccountsBalanceGetRequestOptions.md
 docs/AccountsBalanceGetRequestPaymentDetails.md
@@ -44,6 +47,7 @@ docs/AssetHolderName.md
 docs/AssetOwner.md
 docs/AssetOwners.md
 docs/AssetReport.md
+docs/AssetReportAccountBalance.md
 docs/AssetReportAddOns.md
 docs/AssetReportAuditCopyCreateRequest.md
 docs/AssetReportAuditCopyCreateResponse.md
@@ -92,6 +96,7 @@ docs/AuthGetResponse.md
 docs/AuthMetadata.md
 docs/AuthSupportedMethods.md
 docs/AutomaticallyVerifiedWebhook.md
+docs/BalancePlusAttributes.md
 docs/BankIncomeCompleteResult.md
 docs/BankIncomeCompleteWebhook.md
 docs/BankIncomeRefreshCompleteResult.md
@@ -227,6 +232,15 @@ docs/CraBankIncomeSummary.md
 docs/CraBankIncomeTransaction.md
 docs/CraBankIncomeWarning.md
 docs/CraBankIncomeWarningCode.md
+docs/CraPartnerInsights.md
+docs/CraPartnerInsightsCompleteResult.md
+docs/CraPartnerInsightsCompleteWebhook.md
+docs/CraPartnerInsightsGetRequest.md
+docs/CraPartnerInsightsGetResponse.md
+docs/CraPartnerInsightsItem.md
+docs/CraPartnerInsightsItemAccount.md
+docs/CraPartnerInsightsPrism.md
+docs/CraPredictionInterval.md
 docs/Credit1099.md
 docs/Credit1099Filer.md
 docs/Credit1099Payer.md
@@ -280,6 +294,7 @@ docs/CreditBankStatementUploadItem.md
 docs/CreditBankStatementUploadObject.md
 docs/CreditBankStatementUploadTransaction.md
 docs/CreditBankStatementsUploadsGetRequest.md
+docs/CreditBankStatementsUploadsGetRequestOptions.md
 docs/CreditBankStatementsUploadsGetResponse.md
 docs/CreditCardLiability.md
 docs/CreditCategory.md
@@ -318,6 +333,7 @@ docs/CreditPayStubEmployer.md
 docs/CreditPayStubNetPay.md
 docs/CreditPayStubPayBasisType.md
 docs/CreditPayrollIncomeGetRequest.md
+docs/CreditPayrollIncomeGetRequestOptions.md
 docs/CreditPayrollIncomeGetResponse.md
 docs/CreditPayrollIncomeParsingConfigUpdateRequest.md
 docs/CreditPayrollIncomeParsingConfigUpdateResponse.md
@@ -678,6 +694,7 @@ docs/LinkTokenCreateCardSwitch.md
 docs/LinkTokenCreateCreditFilter.md
 docs/LinkTokenCreateDepositoryFilter.md
 docs/LinkTokenCreateHostedLink.md
+docs/LinkTokenCreateIdentity.md
 docs/LinkTokenCreateInstitutionData.md
 docs/LinkTokenCreateInvestmentFilter.md
 docs/LinkTokenCreateLoanFilter.md
@@ -685,6 +702,7 @@ docs/LinkTokenCreateRequest.md
 docs/LinkTokenCreateRequestAccountSubtypes.md
 docs/LinkTokenCreateRequestAuth.md
 docs/LinkTokenCreateRequestBaseReport.md
+docs/LinkTokenCreateRequestCreditPartnerInsights.md
 docs/LinkTokenCreateRequestDepositSwitch.md
 docs/LinkTokenCreateRequestEmployment.md
 docs/LinkTokenCreateRequestEmploymentBankIncome.md
@@ -892,6 +910,11 @@ docs/PlaidApi.md
 docs/PlaidError.md
 docs/PlaidErrorType.md
 docs/PlatformIds.md
+docs/PrismCashScore.md
+docs/PrismCashScoreMetadata.md
+docs/PrismDetect.md
+docs/PrismInsights.md
+docs/PrismProduct.md
 docs/ProcessorAccountGetRequest.md
 docs/ProcessorAccountGetResponse.md
 docs/ProcessorApexProcessorTokenCreateRequest.md
@@ -949,6 +972,12 @@ docs/ProductPermissionsRequiredIdentityWebhook.md
 docs/ProductStatus.md
 docs/ProductStatusBreakdown.md
 docs/Products.md
+docs/ProfileGetRequest.md
+docs/ProfileGetResponse.md
+docs/ProfileIdentity.md
+docs/ProfileIdentityAddress.md
+docs/ProfileIdentityName.md
+docs/ProfileItem.md
 docs/ProgramNameSensitivity.md
 docs/ProjectedIncomeSummaryFieldNumber.md
 docs/ProxyType.md
@@ -987,6 +1016,7 @@ docs/RiskCheckPhone.md
 docs/RiskCheckStolenIdentity.md
 docs/RiskCheckSyntheticIdentity.md
 docs/RiskProfile.md
+docs/RiskReason.md
 docs/RiskSignalDocumentReference.md
 docs/RiskSignalDocumentStatus.md
 docs/Role.md
@@ -1299,6 +1329,7 @@ docs/TransferUserAddressInResponse.md
 docs/TransferUserInRequest.md
 docs/TransferUserInRequestDeprecated.md
 docs/TransferUserInResponse.md
+docs/TransferWireDetails.md
 docs/UpdateEntityScreeningRequestSearchTerms.md
 docs/UpdateIndividualScreeningRequestSearchTerms.md
 docs/UserAccountRevokedWebhook.md
@@ -1422,7 +1453,6 @@ lib/plaid/api_error.rb
 lib/plaid/configuration.rb
 lib/plaid/models/account_access.rb
 lib/plaid/models/account_assets.rb
-lib/plaid/models/account_assets_all_of.rb
 lib/plaid/models/account_balance.rb
 lib/plaid/models/account_base.rb
 lib/plaid/models/account_filter.rb
@@ -1436,6 +1466,10 @@ lib/plaid/models/account_product_access_nullable.rb
 lib/plaid/models/account_selection_cardinality.rb
 lib/plaid/models/account_subtype.rb
 lib/plaid/models/account_type.rb
+lib/plaid/models/account_verification_insights.rb
+lib/plaid/models/account_verification_insights_account_number_format.rb
+lib/plaid/models/account_verification_insights_network_status.rb
+lib/plaid/models/account_verification_insights_previous_returns.rb
 lib/plaid/models/accounts_balance_get_request.rb
 lib/plaid/models/accounts_balance_get_request_options.rb
 lib/plaid/models/accounts_balance_get_request_payment_details.rb
@@ -1466,6 +1500,7 @@ lib/plaid/models/asset_holder_name.rb
 lib/plaid/models/asset_owner.rb
 lib/plaid/models/asset_owners.rb
 lib/plaid/models/asset_report.rb
+lib/plaid/models/asset_report_account_balance.rb
 lib/plaid/models/asset_report_add_ons.rb
 lib/plaid/models/asset_report_audit_copy_create_request.rb
 lib/plaid/models/asset_report_audit_copy_create_response.rb
@@ -1514,6 +1549,7 @@ lib/plaid/models/auth_get_response.rb
 lib/plaid/models/auth_metadata.rb
 lib/plaid/models/auth_supported_methods.rb
 lib/plaid/models/automatically_verified_webhook.rb
+lib/plaid/models/balance_plus_attributes.rb
 lib/plaid/models/bank_income_complete_result.rb
 lib/plaid/models/bank_income_complete_webhook.rb
 lib/plaid/models/bank_income_refresh_complete_result.rb
@@ -1649,6 +1685,15 @@ lib/plaid/models/cra_bank_income_summary.rb
 lib/plaid/models/cra_bank_income_transaction.rb
 lib/plaid/models/cra_bank_income_warning.rb
 lib/plaid/models/cra_bank_income_warning_code.rb
+lib/plaid/models/cra_partner_insights.rb
+lib/plaid/models/cra_partner_insights_complete_result.rb
+lib/plaid/models/cra_partner_insights_complete_webhook.rb
+lib/plaid/models/cra_partner_insights_get_request.rb
+lib/plaid/models/cra_partner_insights_get_response.rb
+lib/plaid/models/cra_partner_insights_item.rb
+lib/plaid/models/cra_partner_insights_item_account.rb
+lib/plaid/models/cra_partner_insights_prism.rb
+lib/plaid/models/cra_prediction_interval.rb
 lib/plaid/models/credit1099.rb
 lib/plaid/models/credit1099_filer.rb
 lib/plaid/models/credit1099_payer.rb
@@ -1702,6 +1747,7 @@ lib/plaid/models/credit_bank_statement_upload_item.rb
 lib/plaid/models/credit_bank_statement_upload_object.rb
 lib/plaid/models/credit_bank_statement_upload_transaction.rb
 lib/plaid/models/credit_bank_statements_uploads_get_request.rb
+lib/plaid/models/credit_bank_statements_uploads_get_request_options.rb
 lib/plaid/models/credit_bank_statements_uploads_get_response.rb
 lib/plaid/models/credit_card_liability.rb
 lib/plaid/models/credit_category.rb
@@ -1740,6 +1786,7 @@ lib/plaid/models/credit_pay_stub_employer.rb
 lib/plaid/models/credit_pay_stub_net_pay.rb
 lib/plaid/models/credit_pay_stub_pay_basis_type.rb
 lib/plaid/models/credit_payroll_income_get_request.rb
+lib/plaid/models/credit_payroll_income_get_request_options.rb
 lib/plaid/models/credit_payroll_income_get_response.rb
 lib/plaid/models/credit_payroll_income_parsing_config_update_request.rb
 lib/plaid/models/credit_payroll_income_parsing_config_update_response.rb
@@ -2100,6 +2147,7 @@ lib/plaid/models/link_token_create_card_switch.rb
 lib/plaid/models/link_token_create_credit_filter.rb
 lib/plaid/models/link_token_create_depository_filter.rb
 lib/plaid/models/link_token_create_hosted_link.rb
+lib/plaid/models/link_token_create_identity.rb
 lib/plaid/models/link_token_create_institution_data.rb
 lib/plaid/models/link_token_create_investment_filter.rb
 lib/plaid/models/link_token_create_loan_filter.rb
@@ -2107,6 +2155,7 @@ lib/plaid/models/link_token_create_request.rb
 lib/plaid/models/link_token_create_request_account_subtypes.rb
 lib/plaid/models/link_token_create_request_auth.rb
 lib/plaid/models/link_token_create_request_base_report.rb
+lib/plaid/models/link_token_create_request_credit_partner_insights.rb
 lib/plaid/models/link_token_create_request_deposit_switch.rb
 lib/plaid/models/link_token_create_request_employment.rb
 lib/plaid/models/link_token_create_request_employment_bank_income.rb
@@ -2312,6 +2361,11 @@ lib/plaid/models/plaid_error.rb
 lib/plaid/models/plaid_error_type.rb
 lib/plaid/models/platform_ids.rb
 lib/plaid/models/po_box_status.rb
+lib/plaid/models/prism_cash_score.rb
+lib/plaid/models/prism_cash_score_metadata.rb
+lib/plaid/models/prism_detect.rb
+lib/plaid/models/prism_insights.rb
+lib/plaid/models/prism_product.rb
 lib/plaid/models/processor_account_get_request.rb
 lib/plaid/models/processor_account_get_response.rb
 lib/plaid/models/processor_apex_processor_token_create_request.rb
@@ -2369,6 +2423,12 @@ lib/plaid/models/product_permissions_required_identity_webhook.rb
 lib/plaid/models/product_status.rb
 lib/plaid/models/product_status_breakdown.rb
 lib/plaid/models/products.rb
+lib/plaid/models/profile_get_request.rb
+lib/plaid/models/profile_get_response.rb
+lib/plaid/models/profile_identity.rb
+lib/plaid/models/profile_identity_address.rb
+lib/plaid/models/profile_identity_name.rb
+lib/plaid/models/profile_item.rb
 lib/plaid/models/program_name_sensitivity.rb
 lib/plaid/models/projected_income_summary_field_number.rb
 lib/plaid/models/proxy_type.rb
@@ -2408,6 +2468,7 @@ lib/plaid/models/risk_check_phone.rb
 lib/plaid/models/risk_check_stolen_identity.rb
 lib/plaid/models/risk_check_synthetic_identity.rb
 lib/plaid/models/risk_profile.rb
+lib/plaid/models/risk_reason.rb
 lib/plaid/models/risk_signal_document_reference.rb
 lib/plaid/models/risk_signal_document_status.rb
 lib/plaid/models/role.rb
@@ -2720,6 +2781,7 @@ lib/plaid/models/transfer_user_address_in_response.rb
 lib/plaid/models/transfer_user_in_request.rb
 lib/plaid/models/transfer_user_in_request_deprecated.rb
 lib/plaid/models/transfer_user_in_response.rb
+lib/plaid/models/transfer_wire_details.rb
 lib/plaid/models/update_entity_screening_request_search_terms.rb
 lib/plaid/models/update_individual_screening_request_search_terms.rb
 lib/plaid/models/user_account_revoked_webhook.rb
