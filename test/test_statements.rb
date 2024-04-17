@@ -4,7 +4,13 @@ require "date"
 # Internal: The test for Plaid::Statements.
 class PlaidStatementsTest < PlaidTest
   def test_full_flow # rubocop:disable Metrics/MethodLength
-    create_item initial_products: [:statements]
+    create_item initial_products: [:statements],
+                        options: {
+                            statements: {
+                                start_date: "2023-11-01",
+                                end_date: "2023-12-01"
+                            }
+                        }
 
     # 1. /statements/list
     response = poll_for_statements_list(access_token)
@@ -37,8 +43,8 @@ class PlaidStatementsTest < PlaidTest
     # 3. /statements/refresh
     statements_refresh_request = Plaid::StatementsRefreshRequest.new
     statements_refresh_request.access_token = access_token
-    statements_refresh_request.start_date = Date.today.prev_year
-    statements_refresh_request.end_date = Date.today.prev_month(10)
+    statements_refresh_request.start_date = "2024-01-01"
+    statements_refresh_request.end_date = "2024-02-01"
 
     response = client.statements_refresh(statements_refresh_request)
     assert_kind_of(Plaid::StatementsRefreshResponse, response)
