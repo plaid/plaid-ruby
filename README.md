@@ -392,3 +392,4 @@ The gem is available as open source under the terms of the [MIT License](LICENSE
 [api-version-2018-05-22]: https://plaid.com/docs/api/versioning/#2018-05-22
 [api-version-2019-05-29]: https://plaid.com/docs/api/versioning/#2019-05-29
 [api-version-2020-09-14]: https://plaid.com/docs/api/versioning/#2020-09-14
+
