@@ -16,6 +16,8 @@ require 'time'
 module Plaid
   # ProcessorTokenCreateRequest defines the request schema for `/processor/token/create`
   class ProcessorTokenCreateRequest
+    VALID_PROCESSORS = ["dwolla", "galileo", "modern_treasury", "ocrolus", "vesta", "drivewealth", "vopay", "achq", "check", "checkbook", "circle", "sila_money", "rize", "svb_api", "unit", "wyre", "lithic", "alpaca", "astra", "moov", "treasury_prime", "marqeta", "checkout", "solid", "highnote", "gemini", "apex_clearing", "gusto", "adyen", "atomic", "i2c", "wepay", "riskified", "utb", "adp_roll", "fortress_trust", "bond", "bakkt", "teal", "zero_hash", "taba_pay", "knot", "sardine", "alloy", "finix"].freeze
+
     # Your Plaid API `client_id`. The `client_id` is required and may be provided either in the `PLAID-CLIENT-ID` header or as part of a request body.
     attr_accessor :client_id
 
@@ -141,24 +143,28 @@ module Plaid
       invalid_properties
     end
 
+    def valid_processor?(processor)
+      return false if processor.nil?
+      return false unless EnumAttributeValidator.new('String', VALID_PROCESSORS).valid?(processor)
+
+      true
+    end
+
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
       return false if @access_token.nil?
       return false if @account_id.nil?
-      return false if @processor.nil?
-      processor_validator = EnumAttributeValidator.new('String', ["dwolla", "galileo", "modern_treasury", "ocrolus", "vesta", "drivewealth", "vopay", "achq", "check", "checkbook", "circle", "sila_money", "rize", "svb_api", "unit", "wyre", "lithic", "alpaca", "astra", "moov", "treasury_prime", "marqeta", "checkout", "solid", "highnote", "gemini", "apex_clearing", "gusto", "adyen", "atomic", "i2c", "wepay", "riskified", "utb", "adp_roll", "fortress_trust", "bond", "bakkt", "teal", "zero_hash", "taba_pay", "knot", "sardine", "alloy", "finix"])
-      return false unless processor_validator.valid?(@processor)
+      return false unless valid_processor?(@processor)
+
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] processor Object to be assigned
     def processor=(processor)
-      validator = EnumAttributeValidator.new('String', ["dwolla", "galileo", "modern_treasury", "ocrolus", "vesta", "drivewealth", "vopay", "achq", "check", "checkbook", "circle", "sila_money", "rize", "svb_api", "unit", "wyre", "lithic", "alpaca", "astra", "moov", "treasury_prime", "marqeta", "checkout", "solid", "highnote", "gemini", "apex_clearing", "gusto", "adyen", "atomic", "i2c", "wepay", "riskified", "utb", "adp_roll", "fortress_trust", "bond", "bakkt", "teal", "zero_hash", "taba_pay", "knot", "sardine", "alloy", "finix"])
-      unless validator.valid?(processor)
-        fail ArgumentError, "invalid value for \"processor\", must be one of #{validator.allowable_values}."
-      end
+      fail ArgumentError, "invalid value for \"processor\", must be one of #{validator.allowable_values}." unless valid_processor?(processor)
+
       @processor = processor
     end
 
