@@ -4,18 +4,18 @@ The official Ruby bindings for the [Plaid API](https://plaid.com/docs). It's gen
 
 ## Table of Contents
 
-* [Installation](#installation)
-* [Versioning](#versioning)
-* [Getting Started](#getting-started)
-  + [Create a client](#create-a-client)
-  + [Tuning Faraday](#tuning-faraday)
-  + [Dates](#dates)
-* [Examples](#examples)
-* [Errors](#errors)
-* [Response objects](#response-objects)
-* [Migration Guide](#migration-guide)
-* [Contributing](#contributing)
-* [License](#license)
+- [Installation](#installation)
+- [Versioning](#versioning)
+- [Getting Started](#getting-started)
+  - [Create a client](#create-a-client)
+  - [Tuning Faraday](#tuning-faraday)
+  - [Dates](#dates)
+- [Examples](#examples)
+- [Errors](#errors)
+- [Response objects](#response-objects)
+- [Migration Guide](#migration-guide)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Installation
 
@@ -37,21 +37,20 @@ The gem supports Ruby 3.0.0+ only.
 
 ### Versioning
 
-Versions > 14 are generated from our OpenAPI schema. 
+Versions > 14 are generated from our OpenAPI schema.
 
 Each major version of `plaid-ruby` targets a specific version of the Plaid API:
 
-| API version | plaid-ruby release |
-| ----------- | ------------------ |
-| [`2020-09-14`][api-version-2020-09-14] (**latest**) | `12.x.x` and higher |
-| [`2019-05-29`][api-version-2019-05-29] | `11.x.x`, `10.x.x`, `9.x.x`, `8.x.x`, `7.x.x` |
-| [`2018-05-22`][api-version-2018-05-22] | `6.x.x` |
-| `2017-03-08` | `5.x.x` |
+| API version                                         | plaid-ruby release                            |
+| --------------------------------------------------- | --------------------------------------------- |
+| [`2020-09-14`][api-version-2020-09-14] (**latest**) | `12.x.x` and higher                           |
+| [`2019-05-29`][api-version-2019-05-29]              | `11.x.x`, `10.x.x`, `9.x.x`, `8.x.x`, `7.x.x` |
+| [`2018-05-22`][api-version-2018-05-22]              | `6.x.x`                                       |
+| `2017-03-08`                                        | `5.x.x`                                       |
 
 For information about what has changed between versions and how to update your integration, head to the [version changelog][version-changelog].
 
 The plaid-ruby client library is typically updated on a monthly basis. The canonical source for the latest version number is the [client library changelog](https://github.com/plaid/plaid-ruby/blob/master/CHANGELOG.md). New versions are published as [GitHub tags](https://github.com/plaid/plaid-ruby/tags), not as Releases. New versions are also published on [RubyGems.org](https://rubygems.org/gems/plaid/).
-
 
 All users are strongly recommended to use a recent version of the library, as older versions do not contain support for new endpoints and fields. For more details, see the [Migration Guide](#migration-guide).
 
@@ -76,11 +75,10 @@ api_client = Plaid::ApiClient.new(
 client = Plaid::PlaidApi.new(api_client)
 ```
 
-The `server_index` field is the environment which the client will be running in. Your choices for the `server_index` field include:
+The `server_index` field is the environment which the client will be running in. Your choices for the `server_index` field are:
 
-- `Plaid::Configuration::Environment["sandbox"]` allows you to do your initial integrations tests against preloaded data without being billed or making expensive API calls. More information about using the API sandbox can be found on the [API Sandbox documentation](https://plaid.com/docs/api#sandbox).
-- `Plaid::Configuration::Environment["development"]` allows you to test against both real and test accounts without being billed. More information about Plaid test accounts can be found in our [API documentation](https://plaid.com/docs/api/#sandbox).
-- `Plaid::Configuration::Environment["production"]` is the production environment where you can launch your production ready application and be charged for your Plaid usage.
+- `Plaid::Configuration::Environment["sandbox"]` allows you to do your initial integrations tests against preloaded data without being billed. More information about using the API sandbox can be found on the [API Sandbox documentation](https://plaid.com/docs/api#sandbox).
+- `Plaid::Configuration::Environment["production"]` is the production environment where you can test with real data and launch.
 
 ### Tuning Faraday
 
@@ -95,6 +93,7 @@ api_client.connection.options[:timeout] = 60*20 # 20 minutes
 ```
 
 To use custom middleware, reinitialize the Faraday::Connection object:
+
 ```
 configuration = Plaid::Configuration.new
 api_client = Plaid::ApiClient.new(configuration)
@@ -105,7 +104,7 @@ end
 
 ### Dates
 
-Dates and datetimes in requests, which are represented as strings in the API and previous versions of the client library, are represented in this version of the Ruby client library as Ruby `Date` or `DateTime` objects. 
+Dates and datetimes in requests, which are represented as strings in the API and previous versions of the client library, are represented in this version of the Ruby client library as Ruby `Date` or `DateTime` objects.
 
 Time zone information is required for request fields that accept datetimes. Failing to include time zone information (or passing in a string, instead of a `Date` or `DateTime` object) will result in an error. See the following examples for guidance on `Date` and `DateTime` usage.
 
@@ -131,7 +130,6 @@ require 'time'
 a = Time.parse("2022-05-06T22:35:49Z").to_datetime
 b = Date.parse("2022-05-06T22:35:49Z").to_datetime
 ```
-
 
 ## Examples
 
@@ -193,6 +191,7 @@ client.item_remove(item_remove_request)
 ```
 
 ### Get paginated transactions (preferred method)
+
 ```ruby
 request = Plaid::ItemPublicTokenExchangeRequest.new
 request.public_token = public_token
@@ -219,6 +218,7 @@ end
 ```
 
 ### Get paginated transactions (older method)
+
 ```ruby
 request = Plaid::ItemPublicTokenExchangeRequest.new
 request.public_token = public_token
@@ -297,7 +297,6 @@ All API calls return a response object that is accessible only with dot notation
 (i.e., `response.foo.bar`) and not with bracket notation. Expected keys for all types of responses are defined,
 and any attempt to access an unknown key will cause `NoMethodError` exception.
 
-
 ## Migration guide
 
 ### 14.0.0 or later to latest
@@ -308,9 +307,10 @@ Migrating from a version released on or after August 2021 to a recent version sh
 
 Version 14.0.0 of the client library was released in August 2021 and contains multiple interface changes, as described below.
 
-
 #### Client initialization
+
 From:
+
 ```ruby
 client = Plaid::Client.new(env: :sandbox,
                             client_id: client_id,
@@ -318,6 +318,7 @@ client = Plaid::Client.new(env: :sandbox,
 ```
 
 To:
+
 ```ruby
 configuration = Plaid::Configuration.new
 configuration.server_index = Plaid::Configuration::Environment["sandbox"]
@@ -333,14 +334,17 @@ client = Plaid::PlaidApi.new(api_client)
 ```
 
 #### Endpoints
+
 All endpoint requests now take a request model and the functions have been renamed to include `_`.
 
 From:
+
 ```ruby
 response = client.auth.get(access_token)
 ```
 
 To:
+
 ```ruby
 auth_get_request = Plaid::AuthGetRequest.new
 auth_get_request.access_token = access_token
@@ -355,6 +359,7 @@ response = client.auth_get(auth_get_request)
 #### Errors
 
 From:
+
 ```ruby
 begin
   client.auth.get(auth_get_request)
@@ -365,6 +370,7 @@ end
 ```
 
 To:
+
 ```ruby
 begin
   client.auth_get(auth_get_request)
@@ -374,11 +380,9 @@ rescue Plaid::ApiError => e
 end
 ```
 
-
 #### Date type differences
 
 See [Dates](#dates) for information on updates to date formats.
-
 
 ## Contributing
 
