@@ -174,6 +174,8 @@ docs/BeaconAccountRiskEvaluateRequestOptions.md
 docs/BeaconAccountRiskEvaluateResponse.md
 docs/BeaconAuditTrail.md
 docs/BeaconAuditTrailSource.md
+docs/BeaconBankAccountInsights.md
+docs/BeaconBankAccounts.md
 docs/BeaconDuplicateDetectedWebhook.md
 docs/BeaconDuplicateGetRequest.md
 docs/BeaconDuplicateGetResponse.md
@@ -198,6 +200,8 @@ docs/BeaconReportSyndicationOriginalReport.md
 docs/BeaconReportType.md
 docs/BeaconReportUpdatedWebhook.md
 docs/BeaconUser.md
+docs/BeaconUserAccountInsightsGetRequest.md
+docs/BeaconUserAccountInsightsGetResponse.md
 docs/BeaconUserAddress.md
 docs/BeaconUserCreateRequest.md
 docs/BeaconUserCreateResponse.md
@@ -265,10 +269,13 @@ docs/CraCheckReportCreateResponse.md
 docs/CraCheckReportFailedWebhook.md
 docs/CraCheckReportIncomeInsightsGetRequest.md
 docs/CraCheckReportIncomeInsightsGetResponse.md
+docs/CraCheckReportNetworkAttributesGetRequest.md
+docs/CraCheckReportNetworkAttributesGetResponse.md
 docs/CraCheckReportPDFGetRequest.md
 docs/CraCheckReportPartnerInsightsGetOptions.md
 docs/CraCheckReportPartnerInsightsGetRequest.md
 docs/CraCheckReportPartnerInsightsGetResponse.md
+docs/CraCheckReportProduct.md
 docs/CraCheckReportReadyWebhook.md
 docs/CraIncomeInsights.md
 docs/CraLoanApplication.md
@@ -291,6 +298,8 @@ docs/CraLoansRegisterResponse.md
 docs/CraLoansUnregisterRequest.md
 docs/CraLoansUpdateRequest.md
 docs/CraLoansUpdateResponse.md
+docs/CraNetworkAttributesItem.md
+docs/CraNetworkAttributesReport.md
 docs/CraPDFAddOns.md
 docs/CraPartnerInsights.md
 docs/CraPartnerInsightsCompleteWebhook.md
@@ -551,7 +560,6 @@ docs/HostedMMDVerificationWebhook.md
 docs/IDNumberType.md
 docs/ISOCurrencyCode.md
 docs/IdentityDefaultUpdateWebhook.md
-docs/IdentityDocument.md
 docs/IdentityDocumentMetadata.md
 docs/IdentityDocumentUpload.md
 docs/IdentityDocumentUploadMetadata.md
@@ -1168,6 +1176,8 @@ docs/SandboxTransferTestClockGetRequest.md
 docs/SandboxTransferTestClockGetResponse.md
 docs/SandboxTransferTestClockListRequest.md
 docs/SandboxTransferTestClockListResponse.md
+docs/SandboxUserResetLoginRequest.md
+docs/SandboxUserResetLoginResponse.md
 docs/Scopes.md
 docs/ScopesContext.md
 docs/ScopesNullable.md
@@ -1444,7 +1454,11 @@ docs/UserCreateResponse.md
 docs/UserCustomPassword.md
 docs/UserDataOverview.md
 docs/UserIDNumber.md
+docs/UserItemsGetRequest.md
+docs/UserItemsGetResponse.md
 docs/UserPermissionRevokedWebhook.md
+docs/UserRemoveRequest.md
+docs/UserRemoveResponse.md
 docs/UserStatedIncomeSourceCategory.md
 docs/UserStatedIncomeSourceFrequency.md
 docs/UserStatedIncomeSourcePayType.md
@@ -1735,6 +1749,8 @@ lib/plaid/models/beacon_account_risk_evaluate_request_options.rb
 lib/plaid/models/beacon_account_risk_evaluate_response.rb
 lib/plaid/models/beacon_audit_trail.rb
 lib/plaid/models/beacon_audit_trail_source.rb
+lib/plaid/models/beacon_bank_account_insights.rb
+lib/plaid/models/beacon_bank_accounts.rb
 lib/plaid/models/beacon_duplicate_detected_webhook.rb
 lib/plaid/models/beacon_duplicate_get_request.rb
 lib/plaid/models/beacon_duplicate_get_response.rb
@@ -1759,6 +1775,8 @@ lib/plaid/models/beacon_report_syndication_original_report.rb
 lib/plaid/models/beacon_report_type.rb
 lib/plaid/models/beacon_report_updated_webhook.rb
 lib/plaid/models/beacon_user.rb
+lib/plaid/models/beacon_user_account_insights_get_request.rb
+lib/plaid/models/beacon_user_account_insights_get_response.rb
 lib/plaid/models/beacon_user_address.rb
 lib/plaid/models/beacon_user_create_request.rb
 lib/plaid/models/beacon_user_create_response.rb
@@ -1825,10 +1843,13 @@ lib/plaid/models/cra_check_report_create_response.rb
 lib/plaid/models/cra_check_report_failed_webhook.rb
 lib/plaid/models/cra_check_report_income_insights_get_request.rb
 lib/plaid/models/cra_check_report_income_insights_get_response.rb
+lib/plaid/models/cra_check_report_network_attributes_get_request.rb
+lib/plaid/models/cra_check_report_network_attributes_get_response.rb
 lib/plaid/models/cra_check_report_partner_insights_get_options.rb
 lib/plaid/models/cra_check_report_partner_insights_get_request.rb
 lib/plaid/models/cra_check_report_partner_insights_get_response.rb
 lib/plaid/models/cra_check_report_pdf_get_request.rb
+lib/plaid/models/cra_check_report_product.rb
 lib/plaid/models/cra_check_report_ready_webhook.rb
 lib/plaid/models/cra_income_insights.rb
 lib/plaid/models/cra_loan_application.rb
@@ -1852,6 +1873,8 @@ lib/plaid/models/cra_loans_register_response.rb
 lib/plaid/models/cra_loans_unregister_request.rb
 lib/plaid/models/cra_loans_update_request.rb
 lib/plaid/models/cra_loans_update_response.rb
+lib/plaid/models/cra_network_attributes_item.rb
+lib/plaid/models/cra_network_attributes_report.rb
 lib/plaid/models/cra_partner_insights.rb
 lib/plaid/models/cra_partner_insights_complete_webhook.rb
 lib/plaid/models/cra_partner_insights_error_webhook.rb
@@ -2111,7 +2134,6 @@ lib/plaid/models/hosted_link_delivery_method.rb
 lib/plaid/models/hosted_mmd_verification_webhook.rb
 lib/plaid/models/id_number_type.rb
 lib/plaid/models/identity_default_update_webhook.rb
-lib/plaid/models/identity_document.rb
 lib/plaid/models/identity_document_metadata.rb
 lib/plaid/models/identity_document_upload.rb
 lib/plaid/models/identity_document_upload_metadata.rb
@@ -2728,6 +2750,8 @@ lib/plaid/models/sandbox_transfer_test_clock_get_request.rb
 lib/plaid/models/sandbox_transfer_test_clock_get_response.rb
 lib/plaid/models/sandbox_transfer_test_clock_list_request.rb
 lib/plaid/models/sandbox_transfer_test_clock_list_response.rb
+lib/plaid/models/sandbox_user_reset_login_request.rb
+lib/plaid/models/sandbox_user_reset_login_response.rb
 lib/plaid/models/scopes.rb
 lib/plaid/models/scopes_context.rb
 lib/plaid/models/scopes_nullable.rb
@@ -3004,7 +3028,11 @@ lib/plaid/models/user_create_response.rb
 lib/plaid/models/user_custom_password.rb
 lib/plaid/models/user_data_overview.rb
 lib/plaid/models/user_id_number.rb
+lib/plaid/models/user_items_get_request.rb
+lib/plaid/models/user_items_get_response.rb
 lib/plaid/models/user_permission_revoked_webhook.rb
+lib/plaid/models/user_remove_request.rb
+lib/plaid/models/user_remove_response.rb
 lib/plaid/models/user_stated_income_source_category.rb
 lib/plaid/models/user_stated_income_source_frequency.rb
 lib/plaid/models/user_stated_income_source_pay_type.rb
