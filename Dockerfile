@@ -1,4 +1,4 @@
-FROM ruby:3.0.0
+FROM 245200388354.dkr.ecr.us-east-1.amazonaws.com/docker-hub/library/ruby:3.0.0
 
 # Create app directory
 WORKDIR /usr/src/app
