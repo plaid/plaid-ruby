@@ -1,3 +1,4 @@
+# Note: This image is also built in CircleCI, so limit references to internal repositories.
 FROM ruby:3.0.0
 
 # Create app directory

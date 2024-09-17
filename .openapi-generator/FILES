@@ -237,6 +237,13 @@ docs/ClientProvidedRawTransaction.md
 docs/ClientProvidedTransaction.md
 docs/ClientProvidedTransactionLocation.md
 docs/ConnectedApplication.md
+docs/ConsentEvent.md
+docs/ConsentEventCode.md
+docs/ConsentEventInitiator.md
+docs/ConsentEventType.md
+docs/ConsentEventsGetRequest.md
+docs/ConsentEventsGetResponse.md
+docs/ConsentedAccount.md
 docs/ConsumerDispute.md
 docs/ConsumerDisputeCategory.md
 docs/ConsumerReportPDFGetRequest.md
@@ -458,6 +465,7 @@ docs/DashboardUserGetResponse.md
 docs/DashboardUserListRequest.md
 docs/DashboardUserListResponse.md
 docs/DashboardUserStatus.md
+docs/DataSources.md
 docs/DateRange.md
 docs/Deductions.md
 docs/DeductionsBreakdown.md
@@ -480,6 +488,7 @@ docs/DepositoryAccountSubtype.md
 docs/DepositoryFilter.md
 docs/DetailedOriginator.md
 docs/DetectedAccount.md
+docs/DeviceId.md
 docs/DistributionBreakdown.md
 docs/DocType.md
 docs/DocumentAnalysis.md
@@ -693,6 +702,7 @@ docs/InvestmentHoldingsGetRequestOptions.md
 docs/InvestmentTransaction.md
 docs/InvestmentTransactionSubtype.md
 docs/InvestmentTransactionType.md
+docs/InvestmentsAuthDataSources.md
 docs/InvestmentsAuthGetNumbers.md
 docs/InvestmentsAuthGetRequest.md
 docs/InvestmentsAuthGetRequestOptions.md
@@ -708,7 +718,15 @@ docs/InvestmentsTransactionsGetRequest.md
 docs/InvestmentsTransactionsGetRequestOptions.md
 docs/InvestmentsTransactionsGetResponse.md
 docs/InvestmentsTransactionsOverride.md
+docs/Issue.md
 docs/IssueResolvedWebhook.md
+docs/IssuesGetRequest.md
+docs/IssuesGetResponse.md
+docs/IssuesSearchRequest.md
+docs/IssuesSearchResponse.md
+docs/IssuesStatus.md
+docs/IssuesSubscribeRequest.md
+docs/IssuesSubscribeResponse.md
 docs/IssuingCountry.md
 docs/Item.md
 docs/ItemAccessTokenInvalidateRequest.md
@@ -723,6 +741,7 @@ docs/ItemApplicationScopesUpdateRequest.md
 docs/ItemApplicationScopesUpdateResponse.md
 docs/ItemApplicationUnlinkRequest.md
 docs/ItemApplicationUnlinkResponse.md
+docs/ItemConsentedDataScope.md
 docs/ItemErrorWebhook.md
 docs/ItemGetRequest.md
 docs/ItemGetResponse.md
@@ -1246,6 +1265,9 @@ docs/Security.md
 docs/SecurityOverride.md
 docs/SelfieAnalysis.md
 docs/SelfieAnalysisDocumentComparison.md
+docs/SelfieAnalysisFacialAnalysis.md
+docs/SelfieAnalysisFacialAnalysisOutcome.md
+docs/SelfieAnalysisLivenessCheck.md
 docs/SelfieCapture.md
 docs/SelfieCheck.md
 docs/SelfieCheckSelfie.md
@@ -1454,6 +1476,9 @@ docs/TransferOriginatorListRequest.md
 docs/TransferOriginatorListResponse.md
 docs/TransferPlatformOriginatorCreateRequest.md
 docs/TransferPlatformOriginatorCreateResponse.md
+docs/TransferPlatformRequirementSubmission.md
+docs/TransferPlatformRequirementSubmitRequest.md
+docs/TransferPlatformRequirementSubmitResponse.md
 docs/TransferPlatformTOSAcceptanceMetadata.md
 docs/TransferQuestionnaireCreateRequest.md
 docs/TransferQuestionnaireCreateResponse.md
@@ -1499,6 +1524,7 @@ docs/TransferUserInRequest.md
 docs/TransferUserInRequestDeprecated.md
 docs/TransferUserInResponse.md
 docs/TransferWireDetails.md
+docs/TrustedDeviceData.md
 docs/UpdateEntityScreeningRequestSearchTerms.md
 docs/UpdateIndividualScreeningRequestSearchTerms.md
 docs/UserAccountIdentity.md
@@ -1872,6 +1898,13 @@ lib/plaid/models/client_provided_raw_transaction.rb
 lib/plaid/models/client_provided_transaction.rb
 lib/plaid/models/client_provided_transaction_location.rb
 lib/plaid/models/connected_application.rb
+lib/plaid/models/consent_event.rb
+lib/plaid/models/consent_event_code.rb
+lib/plaid/models/consent_event_initiator.rb
+lib/plaid/models/consent_event_type.rb
+lib/plaid/models/consent_events_get_request.rb
+lib/plaid/models/consent_events_get_response.rb
+lib/plaid/models/consented_account.rb
 lib/plaid/models/consumer_dispute.rb
 lib/plaid/models/consumer_dispute_category.rb
 lib/plaid/models/consumer_report_pdf_get_request.rb
@@ -2094,6 +2127,7 @@ lib/plaid/models/dashboard_user_get_response.rb
 lib/plaid/models/dashboard_user_list_request.rb
 lib/plaid/models/dashboard_user_list_response.rb
 lib/plaid/models/dashboard_user_status.rb
+lib/plaid/models/data_sources.rb
 lib/plaid/models/date_range.rb
 lib/plaid/models/deductions.rb
 lib/plaid/models/deductions_breakdown.rb
@@ -2116,6 +2150,7 @@ lib/plaid/models/depository_account_subtype.rb
 lib/plaid/models/depository_filter.rb
 lib/plaid/models/detailed_originator.rb
 lib/plaid/models/detected_account.rb
+lib/plaid/models/device_id.rb
 lib/plaid/models/distribution_breakdown.rb
 lib/plaid/models/doc_type.rb
 lib/plaid/models/document_analysis.rb
@@ -2328,6 +2363,7 @@ lib/plaid/models/investment_holdings_get_request_options.rb
 lib/plaid/models/investment_transaction.rb
 lib/plaid/models/investment_transaction_subtype.rb
 lib/plaid/models/investment_transaction_type.rb
+lib/plaid/models/investments_auth_data_sources.rb
 lib/plaid/models/investments_auth_get_numbers.rb
 lib/plaid/models/investments_auth_get_request.rb
 lib/plaid/models/investments_auth_get_request_options.rb
@@ -2344,7 +2380,15 @@ lib/plaid/models/investments_transactions_get_request_options.rb
 lib/plaid/models/investments_transactions_get_response.rb
 lib/plaid/models/investments_transactions_override.rb
 lib/plaid/models/iso_currency_code.rb
+lib/plaid/models/issue.rb
 lib/plaid/models/issue_resolved_webhook.rb
+lib/plaid/models/issues_get_request.rb
+lib/plaid/models/issues_get_response.rb
+lib/plaid/models/issues_search_request.rb
+lib/plaid/models/issues_search_response.rb
+lib/plaid/models/issues_status.rb
+lib/plaid/models/issues_subscribe_request.rb
+lib/plaid/models/issues_subscribe_response.rb
 lib/plaid/models/issuing_country.rb
 lib/plaid/models/item.rb
 lib/plaid/models/item_access_token_invalidate_request.rb
@@ -2359,6 +2403,7 @@ lib/plaid/models/item_application_scopes_update_request.rb
 lib/plaid/models/item_application_scopes_update_response.rb
 lib/plaid/models/item_application_unlink_request.rb
 lib/plaid/models/item_application_unlink_response.rb
+lib/plaid/models/item_consented_data_scope.rb
 lib/plaid/models/item_error_webhook.rb
 lib/plaid/models/item_get_request.rb
 lib/plaid/models/item_get_response.rb
@@ -2881,6 +2926,9 @@ lib/plaid/models/security.rb
 lib/plaid/models/security_override.rb
 lib/plaid/models/selfie_analysis.rb
 lib/plaid/models/selfie_analysis_document_comparison.rb
+lib/plaid/models/selfie_analysis_facial_analysis.rb
+lib/plaid/models/selfie_analysis_facial_analysis_outcome.rb
+lib/plaid/models/selfie_analysis_liveness_check.rb
 lib/plaid/models/selfie_capture.rb
 lib/plaid/models/selfie_check.rb
 lib/plaid/models/selfie_check_selfie.rb
@@ -3089,6 +3137,9 @@ lib/plaid/models/transfer_originator_list_request.rb
 lib/plaid/models/transfer_originator_list_response.rb
 lib/plaid/models/transfer_platform_originator_create_request.rb
 lib/plaid/models/transfer_platform_originator_create_response.rb
+lib/plaid/models/transfer_platform_requirement_submission.rb
+lib/plaid/models/transfer_platform_requirement_submit_request.rb
+lib/plaid/models/transfer_platform_requirement_submit_response.rb
 lib/plaid/models/transfer_platform_tos_acceptance_metadata.rb
 lib/plaid/models/transfer_questionnaire_create_request.rb
 lib/plaid/models/transfer_questionnaire_create_response.rb
@@ -3134,6 +3185,7 @@ lib/plaid/models/transfer_user_in_request.rb
 lib/plaid/models/transfer_user_in_request_deprecated.rb
 lib/plaid/models/transfer_user_in_response.rb
 lib/plaid/models/transfer_wire_details.rb
+lib/plaid/models/trusted_device_data.rb
 lib/plaid/models/update_entity_screening_request_search_terms.rb
 lib/plaid/models/update_individual_screening_request_search_terms.rb
 lib/plaid/models/user_account_identity.rb
