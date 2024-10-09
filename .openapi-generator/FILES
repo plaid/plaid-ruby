@@ -149,6 +149,7 @@ docs/BaseReport.md
 docs/BaseReportAccount.md
 docs/BaseReportAccountBalances.md
 docs/BaseReportAccountInsights.md
+docs/BaseReportAttributes.md
 docs/BaseReportAverageFlowInsights.md
 docs/BaseReportAverageMonthlyBalances.md
 docs/BaseReportHistoricalBalance.md
@@ -291,7 +292,6 @@ docs/CraCheckReportPDFGetRequest.md
 docs/CraCheckReportPartnerInsightsGetOptions.md
 docs/CraCheckReportPartnerInsightsGetRequest.md
 docs/CraCheckReportPartnerInsightsGetResponse.md
-docs/CraCheckReportProduct.md
 docs/CraCheckReportReadyWebhook.md
 docs/CraIncomeInsights.md
 docs/CraLoanApplication.md
@@ -583,6 +583,7 @@ docs/GetRecipientResponse.md
 docs/GetRecipientsResponse.md
 docs/HealthIncident.md
 docs/HiddenMatchSummaryCode.md
+docs/HistoricalAnnualIncome.md
 docs/HistoricalBalance.md
 docs/HistoricalUpdateWebhook.md
 docs/Holding.md
@@ -848,6 +849,7 @@ docs/LinkTokenCreateRequestIdentityVerification.md
 docs/LinkTokenCreateRequestIncomeVerification.md
 docs/LinkTokenCreateRequestIncomeVerificationBankIncome.md
 docs/LinkTokenCreateRequestIncomeVerificationPayrollIncome.md
+docs/LinkTokenCreateRequestPaymentConfiguration.md
 docs/LinkTokenCreateRequestPaymentInitiation.md
 docs/LinkTokenCreateRequestStatements.md
 docs/LinkTokenCreateRequestTransfer.md
@@ -882,10 +884,12 @@ docs/MatchSummary.md
 docs/MatchSummaryCode.md
 docs/MerchantInsights.md
 docs/Meta.md
+docs/MonitoringConsumerReportPermissiblePurpose.md
 docs/MonitoringIncomeInsights.md
 docs/MonitoringIncomeSource.md
 docs/MonitoringInsights.md
 docs/MonitoringInsightsItemStatus.md
+docs/MonitoringInsightsStatus.md
 docs/MonitoringInsightsWebhook.md
 docs/MonitoringItemStatusCode.md
 docs/MonitoringLoanInsights.md
@@ -990,6 +994,7 @@ docs/PaymentInitiationConsentGetRequest.md
 docs/PaymentInitiationConsentGetResponse.md
 docs/PaymentInitiationConsentPaymentExecuteRequest.md
 docs/PaymentInitiationConsentPaymentExecuteResponse.md
+docs/PaymentInitiationConsentProcessingMode.md
 docs/PaymentInitiationConsentRevokeRequest.md
 docs/PaymentInitiationConsentRevokeResponse.md
 docs/PaymentInitiationConsentScope.md
@@ -1476,6 +1481,11 @@ docs/TransferOriginatorListRequest.md
 docs/TransferOriginatorListResponse.md
 docs/TransferPlatformOriginatorCreateRequest.md
 docs/TransferPlatformOriginatorCreateResponse.md
+docs/TransferPlatformPersonAddress.md
+docs/TransferPlatformPersonCreateRequest.md
+docs/TransferPlatformPersonCreateResponse.md
+docs/TransferPlatformPersonIDNumber.md
+docs/TransferPlatformPersonName.md
 docs/TransferPlatformRequirementSubmission.md
 docs/TransferPlatformRequirementSubmitRequest.md
 docs/TransferPlatformRequirementSubmitResponse.md
@@ -1548,6 +1558,10 @@ docs/UserRemoveResponse.md
 docs/UserStatedIncomeSourceCategory.md
 docs/UserStatedIncomeSourceFrequency.md
 docs/UserStatedIncomeSourcePayType.md
+docs/UserThirdPartyTokenCreateRequest.md
+docs/UserThirdPartyTokenCreateResponse.md
+docs/UserThirdPartyTokenRemoveRequest.md
+docs/UserThirdPartyTokenRemoveResponse.md
 docs/UserUpdateRequest.md
 docs/UserUpdateResponse.md
 docs/ValidationSource.md
@@ -1811,6 +1825,7 @@ lib/plaid/models/base_report.rb
 lib/plaid/models/base_report_account.rb
 lib/plaid/models/base_report_account_balances.rb
 lib/plaid/models/base_report_account_insights.rb
+lib/plaid/models/base_report_attributes.rb
 lib/plaid/models/base_report_average_flow_insights.rb
 lib/plaid/models/base_report_average_monthly_balances.rb
 lib/plaid/models/base_report_historical_balance.rb
@@ -1952,7 +1967,6 @@ lib/plaid/models/cra_check_report_partner_insights_get_options.rb
 lib/plaid/models/cra_check_report_partner_insights_get_request.rb
 lib/plaid/models/cra_check_report_partner_insights_get_response.rb
 lib/plaid/models/cra_check_report_pdf_get_request.rb
-lib/plaid/models/cra_check_report_product.rb
 lib/plaid/models/cra_check_report_ready_webhook.rb
 lib/plaid/models/cra_income_insights.rb
 lib/plaid/models/cra_loan_application.rb
@@ -2245,6 +2259,7 @@ lib/plaid/models/get_recipient_response.rb
 lib/plaid/models/get_recipients_response.rb
 lib/plaid/models/health_incident.rb
 lib/plaid/models/hidden_match_summary_code.rb
+lib/plaid/models/historical_annual_income.rb
 lib/plaid/models/historical_balance.rb
 lib/plaid/models/historical_update_webhook.rb
 lib/plaid/models/holding.rb
@@ -2510,6 +2525,7 @@ lib/plaid/models/link_token_create_request_identity_verification.rb
 lib/plaid/models/link_token_create_request_income_verification.rb
 lib/plaid/models/link_token_create_request_income_verification_bank_income.rb
 lib/plaid/models/link_token_create_request_income_verification_payroll_income.rb
+lib/plaid/models/link_token_create_request_payment_configuration.rb
 lib/plaid/models/link_token_create_request_payment_initiation.rb
 lib/plaid/models/link_token_create_request_statements.rb
 lib/plaid/models/link_token_create_request_transfer.rb
@@ -2544,10 +2560,12 @@ lib/plaid/models/match_summary_code.rb
 lib/plaid/models/merchant_insights.rb
 lib/plaid/models/meta.rb
 lib/plaid/models/mfa.rb
+lib/plaid/models/monitoring_consumer_report_permissible_purpose.rb
 lib/plaid/models/monitoring_income_insights.rb
 lib/plaid/models/monitoring_income_source.rb
 lib/plaid/models/monitoring_insights.rb
 lib/plaid/models/monitoring_insights_item_status.rb
+lib/plaid/models/monitoring_insights_status.rb
 lib/plaid/models/monitoring_insights_webhook.rb
 lib/plaid/models/monitoring_item_status_code.rb
 lib/plaid/models/monitoring_loan_insights.rb
@@ -2650,6 +2668,7 @@ lib/plaid/models/payment_initiation_consent_get_request.rb
 lib/plaid/models/payment_initiation_consent_get_response.rb
 lib/plaid/models/payment_initiation_consent_payment_execute_request.rb
 lib/plaid/models/payment_initiation_consent_payment_execute_response.rb
+lib/plaid/models/payment_initiation_consent_processing_mode.rb
 lib/plaid/models/payment_initiation_consent_revoke_request.rb
 lib/plaid/models/payment_initiation_consent_revoke_response.rb
 lib/plaid/models/payment_initiation_consent_scope.rb
@@ -3137,6 +3156,11 @@ lib/plaid/models/transfer_originator_list_request.rb
 lib/plaid/models/transfer_originator_list_response.rb
 lib/plaid/models/transfer_platform_originator_create_request.rb
 lib/plaid/models/transfer_platform_originator_create_response.rb
+lib/plaid/models/transfer_platform_person_address.rb
+lib/plaid/models/transfer_platform_person_create_request.rb
+lib/plaid/models/transfer_platform_person_create_response.rb
+lib/plaid/models/transfer_platform_person_id_number.rb
+lib/plaid/models/transfer_platform_person_name.rb
 lib/plaid/models/transfer_platform_requirement_submission.rb
 lib/plaid/models/transfer_platform_requirement_submit_request.rb
 lib/plaid/models/transfer_platform_requirement_submit_response.rb
@@ -3209,6 +3233,10 @@ lib/plaid/models/user_remove_response.rb
 lib/plaid/models/user_stated_income_source_category.rb
 lib/plaid/models/user_stated_income_source_frequency.rb
 lib/plaid/models/user_stated_income_source_pay_type.rb
+lib/plaid/models/user_third_party_token_create_request.rb
+lib/plaid/models/user_third_party_token_create_response.rb
+lib/plaid/models/user_third_party_token_remove_request.rb
+lib/plaid/models/user_third_party_token_remove_response.rb
 lib/plaid/models/user_update_request.rb
 lib/plaid/models/user_update_response.rb
 lib/plaid/models/validation_source.rb

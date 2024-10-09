@@ -184,6 +184,7 @@ class PlaidItemTest < PlaidTest # rubocop:disable Metrics/ClassLength
 
     sandbox_item_fire_webhook_request.access_token = exchange_token_response.access_token
     sandbox_item_fire_webhook_request.webhook_code = "DEFAULT_UPDATE"
+    sandbox_item_fire_webhook_request.webhook_type = Plaid::WebhookType.build_from_hash("TRANSACTIONS")
 
     fire_webhook_response = client.sandbox_item_fire_webhook(
       sandbox_item_fire_webhook_request
