@@ -149,6 +149,7 @@ docs/BaseReport.md
 docs/BaseReportAccount.md
 docs/BaseReportAccountBalances.md
 docs/BaseReportAccountInsights.md
+docs/BaseReportAccountMetadata.md
 docs/BaseReportAttributes.md
 docs/BaseReportAverageFlowInsights.md
 docs/BaseReportAverageMonthlyBalances.md
@@ -256,6 +257,7 @@ docs/CounterpartyType.md
 docs/CountryCode.md
 docs/CraBankIncome.md
 docs/CraBankIncomeAccount.md
+docs/CraBankIncomeAccountMetadata.md
 docs/CraBankIncomeBonusType.md
 docs/CraBankIncomeCause.md
 docs/CraBankIncomeCompleteResult.md
@@ -331,6 +333,7 @@ docs/CraPartnerInsightsGetRequest.md
 docs/CraPartnerInsightsGetResponse.md
 docs/CraPartnerInsightsItem.md
 docs/CraPartnerInsightsItemAccount.md
+docs/CraPartnerInsightsItemAccountMetadata.md
 docs/CraPartnerInsightsPrism.md
 docs/CraPredictionInterval.md
 docs/Credit1099.md
@@ -743,6 +746,7 @@ docs/ItemApplicationScopesUpdateResponse.md
 docs/ItemApplicationUnlinkRequest.md
 docs/ItemApplicationUnlinkResponse.md
 docs/ItemConsentedDataScope.md
+docs/ItemCreateAuthentication.md
 docs/ItemErrorWebhook.md
 docs/ItemGetRequest.md
 docs/ItemGetResponse.md
@@ -765,6 +769,8 @@ docs/ItemStatusNullable.md
 docs/ItemStatusTransactions.md
 docs/ItemWebhookUpdateRequest.md
 docs/ItemWebhookUpdateResponse.md
+docs/ItemWithConsentFields.md
+docs/ItemWithConsentFieldsAllOf.md
 docs/JWKPublicKey.md
 docs/JWTHeader.md
 docs/KYCCheckAddressSummary.md
@@ -992,6 +998,8 @@ docs/PaymentInitiationConsentCreateRequest.md
 docs/PaymentInitiationConsentCreateResponse.md
 docs/PaymentInitiationConsentGetRequest.md
 docs/PaymentInitiationConsentGetResponse.md
+docs/PaymentInitiationConsentPayerDetails.md
+docs/PaymentInitiationConsentPayerNumbers.md
 docs/PaymentInitiationConsentPaymentExecuteRequest.md
 docs/PaymentInitiationConsentPaymentExecuteResponse.md
 docs/PaymentInitiationConsentProcessingMode.md
@@ -999,6 +1007,7 @@ docs/PaymentInitiationConsentRevokeRequest.md
 docs/PaymentInitiationConsentRevokeResponse.md
 docs/PaymentInitiationConsentScope.md
 docs/PaymentInitiationConsentStatus.md
+docs/PaymentInitiationConsentType.md
 docs/PaymentInitiationMetadata.md
 docs/PaymentInitiationOptionalRestrictionBacs.md
 docs/PaymentInitiationPayment.md
@@ -1201,6 +1210,8 @@ docs/Role.md
 docs/RoleDetail.md
 docs/Roles.md
 docs/Ruleset.md
+docs/SMSVerification.md
+docs/SMSVerificationStatus.md
 docs/SandboxBankIncomeFireWebhookRequest.md
 docs/SandboxBankIncomeFireWebhookResponse.md
 docs/SandboxBankIncomeWebhookFireRequestWebhookCode.md
@@ -1334,7 +1345,15 @@ docs/TaxpayerIdentifierType.md
 docs/TaxpayerIdentifiers.md
 docs/Total.md
 docs/TotalCanonicalDescription.md
+docs/TotalInflowAmount.md
+docs/TotalInflowAmount30d.md
+docs/TotalInflowAmount60d.md
+docs/TotalInflowAmount90d.md
 docs/TotalMonthlyIncomeInsights.md
+docs/TotalOutflowAmount.md
+docs/TotalOutflowAmount30d.md
+docs/TotalOutflowAmount60d.md
+docs/TotalOutflowAmount90d.md
 docs/Transaction.md
 docs/TransactionAllOf.md
 docs/TransactionBase.md
@@ -1486,6 +1505,7 @@ docs/TransferPlatformPersonCreateRequest.md
 docs/TransferPlatformPersonCreateResponse.md
 docs/TransferPlatformPersonIDNumber.md
 docs/TransferPlatformPersonName.md
+docs/TransferPlatformRequirement.md
 docs/TransferPlatformRequirementSubmission.md
 docs/TransferPlatformRequirementSubmitRequest.md
 docs/TransferPlatformRequirementSubmitResponse.md
@@ -1571,6 +1591,8 @@ docs/VerificationOfAsset.md
 docs/VerificationOfAssetResponse.md
 docs/VerificationRefreshStatus.md
 docs/VerificationStatus.md
+docs/VerifySMSDetails.md
+docs/VerifySMSDetailsStatus.md
 docs/W2.md
 docs/W2Box12.md
 docs/W2Box12Override.md
@@ -1825,6 +1847,7 @@ lib/plaid/models/base_report.rb
 lib/plaid/models/base_report_account.rb
 lib/plaid/models/base_report_account_balances.rb
 lib/plaid/models/base_report_account_insights.rb
+lib/plaid/models/base_report_account_metadata.rb
 lib/plaid/models/base_report_attributes.rb
 lib/plaid/models/base_report_average_flow_insights.rb
 lib/plaid/models/base_report_average_monthly_balances.rb
@@ -1931,6 +1954,7 @@ lib/plaid/models/counterparty_type.rb
 lib/plaid/models/country_code.rb
 lib/plaid/models/cra_bank_income.rb
 lib/plaid/models/cra_bank_income_account.rb
+lib/plaid/models/cra_bank_income_account_metadata.rb
 lib/plaid/models/cra_bank_income_bonus_type.rb
 lib/plaid/models/cra_bank_income_cause.rb
 lib/plaid/models/cra_bank_income_complete_result.rb
@@ -2006,6 +2030,7 @@ lib/plaid/models/cra_partner_insights_get_request.rb
 lib/plaid/models/cra_partner_insights_get_response.rb
 lib/plaid/models/cra_partner_insights_item.rb
 lib/plaid/models/cra_partner_insights_item_account.rb
+lib/plaid/models/cra_partner_insights_item_account_metadata.rb
 lib/plaid/models/cra_partner_insights_prism.rb
 lib/plaid/models/cra_pdf_add_ons.rb
 lib/plaid/models/cra_prediction_interval.rb
@@ -2419,6 +2444,7 @@ lib/plaid/models/item_application_scopes_update_response.rb
 lib/plaid/models/item_application_unlink_request.rb
 lib/plaid/models/item_application_unlink_response.rb
 lib/plaid/models/item_consented_data_scope.rb
+lib/plaid/models/item_create_authentication.rb
 lib/plaid/models/item_error_webhook.rb
 lib/plaid/models/item_get_request.rb
 lib/plaid/models/item_get_response.rb
@@ -2441,6 +2467,8 @@ lib/plaid/models/item_status_nullable.rb
 lib/plaid/models/item_status_transactions.rb
 lib/plaid/models/item_webhook_update_request.rb
 lib/plaid/models/item_webhook_update_response.rb
+lib/plaid/models/item_with_consent_fields.rb
+lib/plaid/models/item_with_consent_fields_all_of.rb
 lib/plaid/models/jwk_public_key.rb
 lib/plaid/models/jwt_header.rb
 lib/plaid/models/kyc_check_address_summary.rb
@@ -2666,6 +2694,8 @@ lib/plaid/models/payment_initiation_consent_create_request.rb
 lib/plaid/models/payment_initiation_consent_create_response.rb
 lib/plaid/models/payment_initiation_consent_get_request.rb
 lib/plaid/models/payment_initiation_consent_get_response.rb
+lib/plaid/models/payment_initiation_consent_payer_details.rb
+lib/plaid/models/payment_initiation_consent_payer_numbers.rb
 lib/plaid/models/payment_initiation_consent_payment_execute_request.rb
 lib/plaid/models/payment_initiation_consent_payment_execute_response.rb
 lib/plaid/models/payment_initiation_consent_processing_mode.rb
@@ -2673,6 +2703,7 @@ lib/plaid/models/payment_initiation_consent_revoke_request.rb
 lib/plaid/models/payment_initiation_consent_revoke_response.rb
 lib/plaid/models/payment_initiation_consent_scope.rb
 lib/plaid/models/payment_initiation_consent_status.rb
+lib/plaid/models/payment_initiation_consent_type.rb
 lib/plaid/models/payment_initiation_metadata.rb
 lib/plaid/models/payment_initiation_optional_restriction_bacs.rb
 lib/plaid/models/payment_initiation_payment.rb
@@ -2979,6 +3010,8 @@ lib/plaid/models/signal_user.rb
 lib/plaid/models/signal_warning.rb
 lib/plaid/models/simulated_transfer_sweep.rb
 lib/plaid/models/single_document_risk_signal.rb
+lib/plaid/models/sms_verification.rb
+lib/plaid/models/sms_verification_status.rb
 lib/plaid/models/source.rb
 lib/plaid/models/standalone_account_type.rb
 lib/plaid/models/standalone_currency_code_list.rb
@@ -3009,7 +3042,15 @@ lib/plaid/models/taxpayer_identifier_type.rb
 lib/plaid/models/taxpayer_identifiers.rb
 lib/plaid/models/total.rb
 lib/plaid/models/total_canonical_description.rb
+lib/plaid/models/total_inflow_amount.rb
+lib/plaid/models/total_inflow_amount30d.rb
+lib/plaid/models/total_inflow_amount60d.rb
+lib/plaid/models/total_inflow_amount90d.rb
 lib/plaid/models/total_monthly_income_insights.rb
+lib/plaid/models/total_outflow_amount.rb
+lib/plaid/models/total_outflow_amount30d.rb
+lib/plaid/models/total_outflow_amount60d.rb
+lib/plaid/models/total_outflow_amount90d.rb
 lib/plaid/models/transaction.rb
 lib/plaid/models/transaction_all_of.rb
 lib/plaid/models/transaction_base.rb
@@ -3161,6 +3202,7 @@ lib/plaid/models/transfer_platform_person_create_request.rb
 lib/plaid/models/transfer_platform_person_create_response.rb
 lib/plaid/models/transfer_platform_person_id_number.rb
 lib/plaid/models/transfer_platform_person_name.rb
+lib/plaid/models/transfer_platform_requirement.rb
 lib/plaid/models/transfer_platform_requirement_submission.rb
 lib/plaid/models/transfer_platform_requirement_submit_request.rb
 lib/plaid/models/transfer_platform_requirement_submit_response.rb
@@ -3246,6 +3288,8 @@ lib/plaid/models/verification_of_asset.rb
 lib/plaid/models/verification_of_asset_response.rb
 lib/plaid/models/verification_refresh_status.rb
 lib/plaid/models/verification_status.rb
+lib/plaid/models/verify_sms_details.rb
+lib/plaid/models/verify_sms_details_status.rb
 lib/plaid/models/w2.rb
 lib/plaid/models/w2_box12.rb
 lib/plaid/models/w2_box12_override.rb
