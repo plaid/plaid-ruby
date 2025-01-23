@@ -33,7 +33,7 @@ Or install it yourself as:
 
     $ gem install plaid
 
-The gem supports Ruby 3.0.0+ only.
+The gem supports Ruby 3.1.0+ only.
 
 ### Versioning
 
