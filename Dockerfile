@@ -1,5 +1,5 @@
 # Note: This image is also built in CircleCI, so limit references to internal repositories.
-FROM ruby:3.0.0
+FROM ruby:3.1.0
 
 # Create app directory
 WORKDIR /usr/src/app
