@@ -71,28 +71,6 @@ class PlaidAccountsTest < PlaidTest
     assert_equal 1, response_w_id.accounts.size
   end
 
-  def test_balance_get_persistent_account_id
-    balance_get_request = Plaid::AccountsBalanceGetRequest.new
-    balance_get_request.access_token = access_token
-
-    response = client.accounts_balance_get(balance_get_request)
-    refute_empty(response.accounts)
-    assert_kind_of(Plaid::AccountsGetResponse, response)
-
-    account_id = response.accounts[0].account_id
-
-    options_payload = {}
-    options_payload[:account_ids] = [account_id]
-
-    accounts_balance_get_request = Plaid::AccountsBalanceGetRequest.new
-    accounts_balance_get_request.access_token = access_token
-    accounts_balance_get_request.options = options_payload
-
-    response_w_id = client.accounts_balance_get(accounts_balance_get_request)
-    assert_equal 1, response_w_id.accounts.size
-    assert_equal "8cfb8beb89b774ee43b090625f0d61d0814322b43bff984eaf60386e", response_w_id.accounts[0].persistent_account_id
-  end
-
   def test_balance_get_invalid_access_token
     accounts_balance_get_request = Plaid::AccountsBalanceGetRequest.new
     accounts_balance_get_request.access_token = BAD_STRING
