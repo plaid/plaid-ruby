@@ -246,6 +246,9 @@ docs/CashflowReportPaymentMeta.md
 docs/CashflowReportRefreshRequest.md
 docs/CashflowReportRefreshResponse.md
 docs/CashflowReportTransaction.md
+docs/CashflowReportTransactionsGetRequest.md
+docs/CashflowReportTransactionsGetRequestOptions.md
+docs/CashflowReportTransactionsGetResponse.md
 docs/CategoriesGetResponse.md
 docs/Category.md
 docs/CategoryInsightDetails.md
@@ -304,6 +307,7 @@ docs/CraCheckReportFailedWebhook.md
 docs/CraCheckReportFreddieMacGetRequest.md
 docs/CraCheckReportFreddieMacGetResponse.md
 docs/CraCheckReportFreddieMacVerificationOfAssetsDeal.md
+docs/CraCheckReportGSEOptions.md
 docs/CraCheckReportIncomeInsightsGetRequest.md
 docs/CraCheckReportIncomeInsightsGetResponse.md
 docs/CraCheckReportNetworkInsightsGetRequest.md
@@ -496,6 +500,7 @@ docs/CreditSessionResults.md
 docs/CreditSessionsGetRequest.md
 docs/CreditSessionsGetResponse.md
 docs/CreditW2.md
+docs/CustomSandboxTransaction.md
 docs/CustomerInitiatedReturnRisk.md
 docs/DashboardUser.md
 docs/DashboardUserGetRequest.md
@@ -607,6 +612,7 @@ docs/FraudAmount.md
 docs/FraudAnalysisDetails.md
 docs/FraudCheckOutcome.md
 docs/FraudCheckOutcomeWithNoData.md
+docs/GSEReportType.md
 docs/GenericScreeningHitLocationItems.md
 docs/GetRecipientResponse.md
 docs/GetRecipientsResponse.md
@@ -857,6 +863,7 @@ docs/LinkSessionExitMetadataInstitution.md
 docs/LinkSessionFinishedWebhook.md
 docs/LinkSessionItemAddResult.md
 docs/LinkSessionPayrollIncomeResult.md
+docs/LinkSessionProtectResult.md
 docs/LinkSessionResults.md
 docs/LinkSessionSuccess.md
 docs/LinkSessionSuccessMetadata.md
@@ -880,6 +887,7 @@ docs/LinkTokenCreateRequestAuth.md
 docs/LinkTokenCreateRequestBaseReport.md
 docs/LinkTokenCreateRequestCraOptions.md
 docs/LinkTokenCreateRequestCraOptionsBaseReport.md
+docs/LinkTokenCreateRequestCraOptionsBaseReportGSEOptions.md
 docs/LinkTokenCreateRequestCraOptionsCashflowInsights.md
 docs/LinkTokenCreateRequestCraOptionsPartnerInsights.md
 docs/LinkTokenCreateRequestCreditPartnerInsights.md
@@ -1144,6 +1152,10 @@ docs/PlatformIds.md
 docs/PrismCashScore.md
 docs/PrismCashScoreMetadata.md
 docs/PrismCashScoreVersion.md
+docs/PrismDetect.md
+docs/PrismDetectVersion.md
+docs/PrismExtend.md
+docs/PrismExtendVersion.md
 docs/PrismFirstDetect.md
 docs/PrismFirstDetectVersion.md
 docs/PrismInsights.md
@@ -1303,6 +1315,8 @@ docs/SandboxPublicTokenCreateRequestOptionsIncomeVerification.md
 docs/SandboxPublicTokenCreateRequestOptionsStatements.md
 docs/SandboxPublicTokenCreateRequestOptionsTransactions.md
 docs/SandboxPublicTokenCreateResponse.md
+docs/SandboxTransactionsCreateRequest.md
+docs/SandboxTransactionsCreateResponse.md
 docs/SandboxTransferFireWebhookRequest.md
 docs/SandboxTransferFireWebhookResponse.md
 docs/SandboxTransferLedgerDepositSimulateRequest.md
@@ -1639,6 +1653,9 @@ docs/TransferUserInRequest.md
 docs/TransferUserInRequestDeprecated.md
 docs/TransferUserInResponse.md
 docs/TransferWireDetails.md
+docs/TrustIndex.md
+docs/TrustIndexSubscore.md
+docs/TrustIndexSubscores.md
 docs/TrustedDeviceData.md
 docs/UpdateEntityScreeningRequestSearchTerms.md
 docs/UpdateIndividualScreeningRequestSearchTerms.md
@@ -2030,6 +2047,9 @@ lib/plaid/models/cashflow_report_payment_meta.rb
 lib/plaid/models/cashflow_report_refresh_request.rb
 lib/plaid/models/cashflow_report_refresh_response.rb
 lib/plaid/models/cashflow_report_transaction.rb
+lib/plaid/models/cashflow_report_transactions_get_request.rb
+lib/plaid/models/cashflow_report_transactions_get_request_options.rb
+lib/plaid/models/cashflow_report_transactions_get_response.rb
 lib/plaid/models/categories_get_response.rb
 lib/plaid/models/category.rb
 lib/plaid/models/category_insight_details.rb
@@ -2088,6 +2108,7 @@ lib/plaid/models/cra_check_report_failed_webhook.rb
 lib/plaid/models/cra_check_report_freddie_mac_get_request.rb
 lib/plaid/models/cra_check_report_freddie_mac_get_response.rb
 lib/plaid/models/cra_check_report_freddie_mac_verification_of_assets_deal.rb
+lib/plaid/models/cra_check_report_gse_options.rb
 lib/plaid/models/cra_check_report_income_insights_get_request.rb
 lib/plaid/models/cra_check_report_income_insights_get_response.rb
 lib/plaid/models/cra_check_report_network_insights_get_request.rb
@@ -2281,6 +2302,7 @@ lib/plaid/models/credit_session_results.rb
 lib/plaid/models/credit_sessions_get_request.rb
 lib/plaid/models/credit_sessions_get_response.rb
 lib/plaid/models/credit_w2.rb
+lib/plaid/models/custom_sandbox_transaction.rb
 lib/plaid/models/customer_initiated_return_risk.rb
 lib/plaid/models/dashboard_user.rb
 lib/plaid/models/dashboard_user_get_request.rb
@@ -2395,6 +2417,7 @@ lib/plaid/models/fraud_check_outcome_with_no_data.rb
 lib/plaid/models/generic_screening_hit_location_items.rb
 lib/plaid/models/get_recipient_response.rb
 lib/plaid/models/get_recipients_response.rb
+lib/plaid/models/gse_report_type.rb
 lib/plaid/models/health_incident.rb
 lib/plaid/models/hidden_match_summary_code.rb
 lib/plaid/models/historical_annual_income.rb
@@ -2642,6 +2665,7 @@ lib/plaid/models/link_session_exit_metadata_institution.rb
 lib/plaid/models/link_session_finished_webhook.rb
 lib/plaid/models/link_session_item_add_result.rb
 lib/plaid/models/link_session_payroll_income_result.rb
+lib/plaid/models/link_session_protect_result.rb
 lib/plaid/models/link_session_results.rb
 lib/plaid/models/link_session_success.rb
 lib/plaid/models/link_session_success_metadata.rb
@@ -2665,6 +2689,7 @@ lib/plaid/models/link_token_create_request_auth.rb
 lib/plaid/models/link_token_create_request_base_report.rb
 lib/plaid/models/link_token_create_request_cra_options.rb
 lib/plaid/models/link_token_create_request_cra_options_base_report.rb
+lib/plaid/models/link_token_create_request_cra_options_base_report_gse_options.rb
 lib/plaid/models/link_token_create_request_cra_options_cashflow_insights.rb
 lib/plaid/models/link_token_create_request_cra_options_partner_insights.rb
 lib/plaid/models/link_token_create_request_credit_partner_insights.rb
@@ -2927,6 +2952,10 @@ lib/plaid/models/po_box_status.rb
 lib/plaid/models/prism_cash_score.rb
 lib/plaid/models/prism_cash_score_metadata.rb
 lib/plaid/models/prism_cash_score_version.rb
+lib/plaid/models/prism_detect.rb
+lib/plaid/models/prism_detect_version.rb
+lib/plaid/models/prism_extend.rb
+lib/plaid/models/prism_extend_version.rb
 lib/plaid/models/prism_first_detect.rb
 lib/plaid/models/prism_first_detect_version.rb
 lib/plaid/models/prism_insights.rb
@@ -3085,6 +3114,8 @@ lib/plaid/models/sandbox_public_token_create_request_options_income_verification
 lib/plaid/models/sandbox_public_token_create_request_options_statements.rb
 lib/plaid/models/sandbox_public_token_create_request_options_transactions.rb
 lib/plaid/models/sandbox_public_token_create_response.rb
+lib/plaid/models/sandbox_transactions_create_request.rb
+lib/plaid/models/sandbox_transactions_create_response.rb
 lib/plaid/models/sandbox_transfer_fire_webhook_request.rb
 lib/plaid/models/sandbox_transfer_fire_webhook_response.rb
 lib/plaid/models/sandbox_transfer_ledger_deposit_simulate_request.rb
@@ -3423,6 +3454,9 @@ lib/plaid/models/transfer_user_in_request.rb
 lib/plaid/models/transfer_user_in_request_deprecated.rb
 lib/plaid/models/transfer_user_in_response.rb
 lib/plaid/models/transfer_wire_details.rb
+lib/plaid/models/trust_index.rb
+lib/plaid/models/trust_index_subscore.rb
+lib/plaid/models/trust_index_subscores.rb
 lib/plaid/models/trusted_device_data.rb
 lib/plaid/models/update_entity_screening_request_search_terms.rb
 lib/plaid/models/update_individual_screening_request_search_terms.rb
