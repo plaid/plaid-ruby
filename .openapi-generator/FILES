@@ -227,6 +227,7 @@ docs/BusinessAccount.md
 docs/BusinessAccountAllOf.md
 docs/BusinessFinanceCategory.md
 docs/CRALoansRegisterRequest.md
+docs/CashFlowUpdatesEventWebhookCodes.md
 docs/CashFlowUpdatesExpectedDepositMissedWebhook.md
 docs/CashFlowUpdatesInsightsWebhook.md
 docs/CashFlowUpdatesLargeDepositWebhook.md
@@ -288,6 +289,9 @@ docs/ConsumerReportPermissiblePurpose.md
 docs/ConsumerReportUserIdentity.md
 docs/Counterparty.md
 docs/CounterpartyInsights.md
+docs/CounterpartyNumbers.md
+docs/CounterpartyNumbersBACS.md
+docs/CounterpartyNumbersInternational.md
 docs/CounterpartyType.md
 docs/CountryCode.md
 docs/CraBankIncomeAccount.md
@@ -330,10 +334,14 @@ docs/CraCheckReportPartnerInsightsGetPartnerInsights.md
 docs/CraCheckReportPartnerInsightsGetRequest.md
 docs/CraCheckReportPartnerInsightsGetResponse.md
 docs/CraCheckReportReadyWebhook.md
+docs/CraCheckReportVerificationGetEmploymentRefreshOptions.md
 docs/CraCheckReportVerificationGetReportType.md
 docs/CraCheckReportVerificationGetRequest.md
 docs/CraCheckReportVerificationGetResponse.md
-docs/CraCheckReportVerificationGetVoeOptions.md
+docs/CraEmploymentRefreshReport.md
+docs/CraEmploymentRefreshReportAccount.md
+docs/CraEmploymentRefreshReportItem.md
+docs/CraEmploymentRefreshReportTransaction.md
 docs/CraIncomeInsights.md
 docs/CraLoanApplication.md
 docs/CraLoanApplicationDecision.md
@@ -384,10 +392,6 @@ docs/CraVoaReportAccountHistoricalBalance.md
 docs/CraVoaReportAttributes.md
 docs/CraVoaReportItem.md
 docs/CraVoaReportTransactionsInsights.md
-docs/CraVoeReport.md
-docs/CraVoeReportAccount.md
-docs/CraVoeReportItem.md
-docs/CraVoeReportTransaction.md
 docs/Credit1099.md
 docs/Credit1099Filer.md
 docs/Credit1099Payer.md
@@ -953,7 +957,6 @@ docs/MonitoringIncomeSource.md
 docs/MonitoringInsights.md
 docs/MonitoringInsightsItemStatus.md
 docs/MonitoringInsightsStatus.md
-docs/MonitoringInsightsWebhook.md
 docs/MonitoringItemStatusCode.md
 docs/MonitoringLoanInsights.md
 docs/MortgageInterestRate.md
@@ -1267,6 +1270,7 @@ docs/RecurringTransactionsUpdateWebhook.md
 docs/RecurringTransfer.md
 docs/RecurringTransferNullable.md
 docs/RecurringTransferSkippedWebhook.md
+docs/RefreshResult.md
 docs/RemovedTransaction.md
 docs/ReportType.md
 docs/ReportingInformation.md
@@ -1696,6 +1700,8 @@ docs/UserCreateRequest.md
 docs/UserCreateResponse.md
 docs/UserCustomPassword.md
 docs/UserDataOverview.md
+docs/UserFinancialDataRefreshRequest.md
+docs/UserFinancialDataRefreshResponse.md
 docs/UserIDNumber.md
 docs/UserItemsGetRequest.md
 docs/UserItemsGetResponse.md
@@ -1709,6 +1715,8 @@ docs/UserThirdPartyTokenCreateRequest.md
 docs/UserThirdPartyTokenCreateResponse.md
 docs/UserThirdPartyTokenRemoveRequest.md
 docs/UserThirdPartyTokenRemoveResponse.md
+docs/UserTransactionsRefreshRequest.md
+docs/UserTransactionsRefreshResponse.md
 docs/UserUpdateRequest.md
 docs/UserUpdateResponse.md
 docs/ValidationSource.md
@@ -2053,6 +2061,7 @@ lib/plaid/models/beacon_user_update_response.rb
 lib/plaid/models/business_account.rb
 lib/plaid/models/business_account_all_of.rb
 lib/plaid/models/business_finance_category.rb
+lib/plaid/models/cash_flow_updates_event_webhook_codes.rb
 lib/plaid/models/cash_flow_updates_expected_deposit_missed_webhook.rb
 lib/plaid/models/cash_flow_updates_insights_webhook.rb
 lib/plaid/models/cash_flow_updates_large_deposit_webhook.rb
@@ -2114,6 +2123,9 @@ lib/plaid/models/consumer_report_permissible_purpose.rb
 lib/plaid/models/consumer_report_user_identity.rb
 lib/plaid/models/counterparty.rb
 lib/plaid/models/counterparty_insights.rb
+lib/plaid/models/counterparty_numbers.rb
+lib/plaid/models/counterparty_numbers_bacs.rb
+lib/plaid/models/counterparty_numbers_international.rb
 lib/plaid/models/counterparty_type.rb
 lib/plaid/models/country_code.rb
 lib/plaid/models/cra_bank_income_account.rb
@@ -2156,10 +2168,14 @@ lib/plaid/models/cra_check_report_partner_insights_get_request.rb
 lib/plaid/models/cra_check_report_partner_insights_get_response.rb
 lib/plaid/models/cra_check_report_pdf_get_request.rb
 lib/plaid/models/cra_check_report_ready_webhook.rb
+lib/plaid/models/cra_check_report_verification_get_employment_refresh_options.rb
 lib/plaid/models/cra_check_report_verification_get_report_type.rb
 lib/plaid/models/cra_check_report_verification_get_request.rb
 lib/plaid/models/cra_check_report_verification_get_response.rb
-lib/plaid/models/cra_check_report_verification_get_voe_options.rb
+lib/plaid/models/cra_employment_refresh_report.rb
+lib/plaid/models/cra_employment_refresh_report_account.rb
+lib/plaid/models/cra_employment_refresh_report_item.rb
+lib/plaid/models/cra_employment_refresh_report_transaction.rb
 lib/plaid/models/cra_income_insights.rb
 lib/plaid/models/cra_loan_application.rb
 lib/plaid/models/cra_loan_application_decision.rb
@@ -2211,10 +2227,6 @@ lib/plaid/models/cra_voa_report_account_historical_balance.rb
 lib/plaid/models/cra_voa_report_attributes.rb
 lib/plaid/models/cra_voa_report_item.rb
 lib/plaid/models/cra_voa_report_transactions_insights.rb
-lib/plaid/models/cra_voe_report.rb
-lib/plaid/models/cra_voe_report_account.rb
-lib/plaid/models/cra_voe_report_item.rb
-lib/plaid/models/cra_voe_report_transaction.rb
 lib/plaid/models/credit1099.rb
 lib/plaid/models/credit1099_filer.rb
 lib/plaid/models/credit1099_payer.rb
@@ -2780,7 +2792,6 @@ lib/plaid/models/monitoring_income_source.rb
 lib/plaid/models/monitoring_insights.rb
 lib/plaid/models/monitoring_insights_item_status.rb
 lib/plaid/models/monitoring_insights_status.rb
-lib/plaid/models/monitoring_insights_webhook.rb
 lib/plaid/models/monitoring_item_status_code.rb
 lib/plaid/models/monitoring_loan_insights.rb
 lib/plaid/models/mortgage_interest_rate.rb
@@ -3093,6 +3104,7 @@ lib/plaid/models/recurring_transactions_update_webhook.rb
 lib/plaid/models/recurring_transfer.rb
 lib/plaid/models/recurring_transfer_nullable.rb
 lib/plaid/models/recurring_transfer_skipped_webhook.rb
+lib/plaid/models/refresh_result.rb
 lib/plaid/models/removed_transaction.rb
 lib/plaid/models/report_type.rb
 lib/plaid/models/reporting_information.rb
@@ -3522,6 +3534,8 @@ lib/plaid/models/user_create_request.rb
 lib/plaid/models/user_create_response.rb
 lib/plaid/models/user_custom_password.rb
 lib/plaid/models/user_data_overview.rb
+lib/plaid/models/user_financial_data_refresh_request.rb
+lib/plaid/models/user_financial_data_refresh_response.rb
 lib/plaid/models/user_id_number.rb
 lib/plaid/models/user_items_get_request.rb
 lib/plaid/models/user_items_get_response.rb
@@ -3535,6 +3549,8 @@ lib/plaid/models/user_third_party_token_create_request.rb
 lib/plaid/models/user_third_party_token_create_response.rb
 lib/plaid/models/user_third_party_token_remove_request.rb
 lib/plaid/models/user_third_party_token_remove_response.rb
+lib/plaid/models/user_transactions_refresh_request.rb
+lib/plaid/models/user_transactions_refresh_response.rb
 lib/plaid/models/user_update_request.rb
 lib/plaid/models/user_update_response.rb
 lib/plaid/models/validation_source.rb

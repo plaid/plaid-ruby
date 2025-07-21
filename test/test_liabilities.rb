@@ -3,7 +3,7 @@ require_relative "test_helper"
 # Internal: The test for Plaid::Liabilities.
 class PlaidLiabilitiesTest < PlaidTest
   def test_get
-    create_item initial_products: [:liabilities], institution_id: "ins_1"
+    create_item initial_products: [:liabilities], institution_id: "ins_109508"
 
     liabilities_get_request = Plaid::LiabilitiesGetRequest.new
     liabilities_get_request.access_token = access_token
