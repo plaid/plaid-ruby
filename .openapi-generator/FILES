@@ -1,3 +1,6 @@
+docs/AAMVAAnalysis.md
+docs/AAMVADetailedMatchResult.md
+docs/AAMVAMatchResult.md
 docs/ACHClass.md
 docs/APR.md
 docs/AccountAccess.md
@@ -46,6 +49,9 @@ docs/Asset.md
 docs/AssetDetail.md
 docs/AssetHolder.md
 docs/AssetHolderName.md
+docs/AssetHolding.md
+docs/AssetHoldings.md
+docs/AssetInvestmentTransactionType.md
 docs/AssetOwner.md
 docs/AssetOwners.md
 docs/AssetReport.md
@@ -101,6 +107,10 @@ docs/AuthGetResponse.md
 docs/AuthMetadata.md
 docs/AuthSupportedMethods.md
 docs/AuthUpdateTypes.md
+docs/AuthVerifyNumbersACH.md
+docs/AuthVerifyRequest.md
+docs/AuthVerifyRequestNumbers.md
+docs/AuthVerifyResponse.md
 docs/AutomaticallyVerifiedWebhook.md
 docs/BankIncomeCompleteResult.md
 docs/BankIncomeCompleteWebhook.md
@@ -269,6 +279,7 @@ docs/Cause.md
 docs/CauseAllOf.md
 docs/CheckReportWarning.md
 docs/CheckReportWarningCode.md
+docs/ClientCustomization.md
 docs/ClientProvidedEnhancedTransaction.md
 docs/ClientProvidedEnrichedTransaction.md
 docs/ClientProvidedRawTransaction.md
@@ -840,6 +851,7 @@ docs/KYCCheckPhoneSummary.md
 docs/LastDataAccessTimes.md
 docs/LatestScoredEvent.md
 docs/LayerAuthenticationPassedWebhook.md
+docs/LedgerEventSourceType.md
 docs/LiabilitiesDefaultUpdateWebhook.md
 docs/LiabilitiesGetRequest.md
 docs/LiabilitiesGetRequestOptions.md
@@ -1450,8 +1462,6 @@ docs/SweepStatus.md
 docs/SweepTrigger.md
 docs/SyncUpdatesAvailableWebhook.md
 docs/SyntheticFraud.md
-docs/TCHNotification.md
-docs/TCHNotificationResponse.md
 docs/Taxform.md
 docs/TaxpayerID.md
 docs/TaxpayerIdentifier.md
@@ -1598,6 +1608,9 @@ docs/TransferLedgerDepositRequest.md
 docs/TransferLedgerDepositResponse.md
 docs/TransferLedgerDistributeRequest.md
 docs/TransferLedgerDistributeResponse.md
+docs/TransferLedgerEvent.md
+docs/TransferLedgerEventListRequest.md
+docs/TransferLedgerEventListResponse.md
 docs/TransferLedgerGetRequest.md
 docs/TransferLedgerGetResponse.md
 docs/TransferLedgerSweepSimulateEventType.md
@@ -1705,6 +1718,8 @@ docs/UserFinancialDataRefreshResponse.md
 docs/UserIDNumber.md
 docs/UserItemsGetRequest.md
 docs/UserItemsGetResponse.md
+docs/UserItemsListRequest.md
+docs/UserItemsListResponse.md
 docs/UserPermissionRevokedWebhook.md
 docs/UserRemoveRequest.md
 docs/UserRemoveResponse.md
@@ -1833,6 +1848,9 @@ lib/plaid/api/plaid_api.rb
 lib/plaid/api_client.rb
 lib/plaid/api_error.rb
 lib/plaid/configuration.rb
+lib/plaid/models/aamva_analysis.rb
+lib/plaid/models/aamva_detailed_match_result.rb
+lib/plaid/models/aamva_match_result.rb
 lib/plaid/models/account_access.rb
 lib/plaid/models/account_assets.rb
 lib/plaid/models/account_balance.rb
@@ -1881,6 +1899,9 @@ lib/plaid/models/asset.rb
 lib/plaid/models/asset_detail.rb
 lib/plaid/models/asset_holder.rb
 lib/plaid/models/asset_holder_name.rb
+lib/plaid/models/asset_holding.rb
+lib/plaid/models/asset_holdings.rb
+lib/plaid/models/asset_investment_transaction_type.rb
 lib/plaid/models/asset_owner.rb
 lib/plaid/models/asset_owners.rb
 lib/plaid/models/asset_report.rb
@@ -1936,6 +1957,10 @@ lib/plaid/models/auth_get_response.rb
 lib/plaid/models/auth_metadata.rb
 lib/plaid/models/auth_supported_methods.rb
 lib/plaid/models/auth_update_types.rb
+lib/plaid/models/auth_verify_numbers_ach.rb
+lib/plaid/models/auth_verify_request.rb
+lib/plaid/models/auth_verify_request_numbers.rb
+lib/plaid/models/auth_verify_response.rb
 lib/plaid/models/automatically_verified_webhook.rb
 lib/plaid/models/bank_income_complete_result.rb
 lib/plaid/models/bank_income_complete_webhook.rb
@@ -2103,6 +2128,7 @@ lib/plaid/models/cause.rb
 lib/plaid/models/cause_all_of.rb
 lib/plaid/models/check_report_warning.rb
 lib/plaid/models/check_report_warning_code.rb
+lib/plaid/models/client_customization.rb
 lib/plaid/models/client_provided_enhanced_transaction.rb
 lib/plaid/models/client_provided_enriched_transaction.rb
 lib/plaid/models/client_provided_raw_transaction.rb
@@ -2675,6 +2701,7 @@ lib/plaid/models/kyc_check_phone_summary.rb
 lib/plaid/models/last_data_access_times.rb
 lib/plaid/models/latest_scored_event.rb
 lib/plaid/models/layer_authentication_passed_webhook.rb
+lib/plaid/models/ledger_event_source_type.rb
 lib/plaid/models/liabilities_default_update_webhook.rb
 lib/plaid/models/liabilities_get_request.rb
 lib/plaid/models/liabilities_get_request_options.rb
@@ -3289,8 +3316,6 @@ lib/plaid/models/taxpayer_id.rb
 lib/plaid/models/taxpayer_identifier.rb
 lib/plaid/models/taxpayer_identifier_type.rb
 lib/plaid/models/taxpayer_identifiers.rb
-lib/plaid/models/tch_notification.rb
-lib/plaid/models/tch_notification_response.rb
 lib/plaid/models/total.rb
 lib/plaid/models/total_canonical_description.rb
 lib/plaid/models/total_inflow_amount.rb
@@ -3432,6 +3457,9 @@ lib/plaid/models/transfer_ledger_deposit_request.rb
 lib/plaid/models/transfer_ledger_deposit_response.rb
 lib/plaid/models/transfer_ledger_distribute_request.rb
 lib/plaid/models/transfer_ledger_distribute_response.rb
+lib/plaid/models/transfer_ledger_event.rb
+lib/plaid/models/transfer_ledger_event_list_request.rb
+lib/plaid/models/transfer_ledger_event_list_response.rb
 lib/plaid/models/transfer_ledger_get_request.rb
 lib/plaid/models/transfer_ledger_get_response.rb
 lib/plaid/models/transfer_ledger_sweep_simulate_event_type.rb
@@ -3539,6 +3567,8 @@ lib/plaid/models/user_financial_data_refresh_response.rb
 lib/plaid/models/user_id_number.rb
 lib/plaid/models/user_items_get_request.rb
 lib/plaid/models/user_items_get_response.rb
+lib/plaid/models/user_items_list_request.rb
+lib/plaid/models/user_items_list_response.rb
 lib/plaid/models/user_permission_revoked_webhook.rb
 lib/plaid/models/user_remove_request.rb
 lib/plaid/models/user_remove_response.rb

@@ -1,4 +1,5 @@
 # Note: This image is also built in CircleCI, so limit references to internal repositories.
+# Keep this in sync with the image in plaid-ruby-release Jenkinsfile
 FROM ruby:3.2.0
 
 # Create app directory
