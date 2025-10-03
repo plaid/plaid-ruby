@@ -285,6 +285,11 @@ docs/ClientProvidedEnrichedTransaction.md
 docs/ClientProvidedRawTransaction.md
 docs/ClientProvidedTransaction.md
 docs/ClientProvidedTransactionLocation.md
+docs/ClientUserIdentity.md
+docs/ClientUserIdentityAddress.md
+docs/ClientUserIdentityEmail.md
+docs/ClientUserIdentityName.md
+docs/ClientUserIdentityPhoneNumber.md
 docs/ConnectedApplication.md
 docs/ConsentEvent.md
 docs/ConsentEventCode.md
@@ -337,6 +342,9 @@ docs/CraCheckReportFreddieMacVerificationOfAssetsDeal.md
 docs/CraCheckReportGSEOptions.md
 docs/CraCheckReportIncomeInsightsGetRequest.md
 docs/CraCheckReportIncomeInsightsGetResponse.md
+docs/CraCheckReportLendScoreGetOptions.md
+docs/CraCheckReportLendScoreGetRequest.md
+docs/CraCheckReportLendScoreGetResponse.md
 docs/CraCheckReportNetworkInsightsGetRequest.md
 docs/CraCheckReportNetworkInsightsGetResponse.md
 docs/CraCheckReportPDFGetRequest.md
@@ -344,9 +352,6 @@ docs/CraCheckReportPartnerInsightsGetOptions.md
 docs/CraCheckReportPartnerInsightsGetPartnerInsights.md
 docs/CraCheckReportPartnerInsightsGetRequest.md
 docs/CraCheckReportPartnerInsightsGetResponse.md
-docs/CraCheckReportPlaidCreditScoreGetOptions.md
-docs/CraCheckReportPlaidCreditScoreGetRequest.md
-docs/CraCheckReportPlaidCreditScoreGetResponse.md
 docs/CraCheckReportReadyWebhook.md
 docs/CraCheckReportVerificationGetEmploymentRefreshOptions.md
 docs/CraCheckReportVerificationGetReportType.md
@@ -357,6 +362,7 @@ docs/CraEmploymentRefreshReportAccount.md
 docs/CraEmploymentRefreshReportItem.md
 docs/CraEmploymentRefreshReportTransaction.md
 docs/CraIncomeInsights.md
+docs/CraLendScoreReport.md
 docs/CraLoanApplication.md
 docs/CraLoanApplicationDecision.md
 docs/CraLoanClosedStatus.md
@@ -396,7 +402,6 @@ docs/CraPartnerInsightsItem.md
 docs/CraPartnerInsightsItemAccount.md
 docs/CraPartnerInsightsItemAccountMetadata.md
 docs/CraPartnerInsightsPrism.md
-docs/CraPlaidCreditScoreReport.md
 docs/CraPredictionInterval.md
 docs/CraUpgradeFailedWebhook.md
 docs/CraVerificationReport.md
@@ -662,6 +667,8 @@ docs/HumanReview.md
 docs/HumanReviewStatus.md
 docs/IDNumberType.md
 docs/ISOCurrencyCode.md
+docs/IdentityCreationResult.md
+docs/IdentityCreationResultType.md
 docs/IdentityDefaultUpdateWebhook.md
 docs/IdentityDocumentMetadata.md
 docs/IdentityDocumentUpload.md
@@ -857,6 +864,7 @@ docs/LastDataAccessTimes.md
 docs/LatestScoredEvent.md
 docs/LayerAuthenticationPassedWebhook.md
 docs/LedgerEventSourceType.md
+docs/LendScore.md
 docs/LiabilitiesDefaultUpdateWebhook.md
 docs/LiabilitiesGetRequest.md
 docs/LiabilitiesGetRequestOptions.md
@@ -891,6 +899,7 @@ docs/LinkSessionBankEmploymentResult.md
 docs/LinkSessionBankIncomeResult.md
 docs/LinkSessionCraDocumentUploadResult.md
 docs/LinkSessionCraItemAddResult.md
+docs/LinkSessionCraUpdateResult.md
 docs/LinkSessionExit.md
 docs/LinkSessionExitDeprecated.md
 docs/LinkSessionExitMetadata.md
@@ -924,8 +933,8 @@ docs/LinkTokenCreateRequestCraOptions.md
 docs/LinkTokenCreateRequestCraOptionsBaseReport.md
 docs/LinkTokenCreateRequestCraOptionsBaseReportGSEOptions.md
 docs/LinkTokenCreateRequestCraOptionsCashflowInsights.md
+docs/LinkTokenCreateRequestCraOptionsLendScore.md
 docs/LinkTokenCreateRequestCraOptionsPartnerInsights.md
-docs/LinkTokenCreateRequestCraOptionsPlaidCreditScore.md
 docs/LinkTokenCreateRequestCreditPartnerInsights.md
 docs/LinkTokenCreateRequestDepositSwitch.md
 docs/LinkTokenCreateRequestEmployment.md
@@ -1181,7 +1190,6 @@ docs/PhysicalDocumentImages.md
 docs/PlaidApi.md
 docs/PlaidCheckScore.md
 docs/PlaidCheckScoreVersion.md
-docs/PlaidCreditScore.md
 docs/PlaidError.md
 docs/PlaidErrorType.md
 docs/PlatformIds.md
@@ -1264,11 +1272,17 @@ docs/ProfileNetworkStatusGetRequest.md
 docs/ProfileNetworkStatusGetResponse.md
 docs/ProgramNameSensitivity.md
 docs/ProjectedIncomeSummaryFieldNumber.md
+docs/ProtectBankAccount.md
 docs/ProtectEvent.md
 docs/ProtectEventGetRequest.md
 docs/ProtectEventGetResponse.md
 docs/ProtectEventSendRequest.md
 docs/ProtectEventSendResponse.md
+docs/ProtectIncidentAmount.md
+docs/ProtectIncidentEvent.md
+docs/ProtectReportConfidence.md
+docs/ProtectReportSource.md
+docs/ProtectReportType.md
 docs/ProtectUserEventWebhook.md
 docs/ProtectUserInsightsGetRequest.md
 docs/ProtectUserInsightsGetResponse.md
@@ -1722,6 +1736,8 @@ docs/UserCustomPassword.md
 docs/UserDataOverview.md
 docs/UserFinancialDataRefreshRequest.md
 docs/UserFinancialDataRefreshResponse.md
+docs/UserGetRequest.md
+docs/UserGetResponse.md
 docs/UserIDNumber.md
 docs/UserItemsAssociateRequest.md
 docs/UserItemsAssociateResponse.md
@@ -2143,6 +2159,11 @@ lib/plaid/models/client_provided_enriched_transaction.rb
 lib/plaid/models/client_provided_raw_transaction.rb
 lib/plaid/models/client_provided_transaction.rb
 lib/plaid/models/client_provided_transaction_location.rb
+lib/plaid/models/client_user_identity.rb
+lib/plaid/models/client_user_identity_address.rb
+lib/plaid/models/client_user_identity_email.rb
+lib/plaid/models/client_user_identity_name.rb
+lib/plaid/models/client_user_identity_phone_number.rb
 lib/plaid/models/connected_application.rb
 lib/plaid/models/consent_event.rb
 lib/plaid/models/consent_event_code.rb
@@ -2195,6 +2216,9 @@ lib/plaid/models/cra_check_report_freddie_mac_verification_of_assets_deal.rb
 lib/plaid/models/cra_check_report_gse_options.rb
 lib/plaid/models/cra_check_report_income_insights_get_request.rb
 lib/plaid/models/cra_check_report_income_insights_get_response.rb
+lib/plaid/models/cra_check_report_lend_score_get_options.rb
+lib/plaid/models/cra_check_report_lend_score_get_request.rb
+lib/plaid/models/cra_check_report_lend_score_get_response.rb
 lib/plaid/models/cra_check_report_network_insights_get_request.rb
 lib/plaid/models/cra_check_report_network_insights_get_response.rb
 lib/plaid/models/cra_check_report_partner_insights_get_options.rb
@@ -2202,9 +2226,6 @@ lib/plaid/models/cra_check_report_partner_insights_get_partner_insights.rb
 lib/plaid/models/cra_check_report_partner_insights_get_request.rb
 lib/plaid/models/cra_check_report_partner_insights_get_response.rb
 lib/plaid/models/cra_check_report_pdf_get_request.rb
-lib/plaid/models/cra_check_report_plaid_credit_score_get_options.rb
-lib/plaid/models/cra_check_report_plaid_credit_score_get_request.rb
-lib/plaid/models/cra_check_report_plaid_credit_score_get_response.rb
 lib/plaid/models/cra_check_report_ready_webhook.rb
 lib/plaid/models/cra_check_report_verification_get_employment_refresh_options.rb
 lib/plaid/models/cra_check_report_verification_get_report_type.rb
@@ -2215,6 +2236,7 @@ lib/plaid/models/cra_employment_refresh_report_account.rb
 lib/plaid/models/cra_employment_refresh_report_item.rb
 lib/plaid/models/cra_employment_refresh_report_transaction.rb
 lib/plaid/models/cra_income_insights.rb
+lib/plaid/models/cra_lend_score_report.rb
 lib/plaid/models/cra_loan_application.rb
 lib/plaid/models/cra_loan_application_decision.rb
 lib/plaid/models/cra_loan_closed_status.rb
@@ -2255,7 +2277,6 @@ lib/plaid/models/cra_partner_insights_item_account.rb
 lib/plaid/models/cra_partner_insights_item_account_metadata.rb
 lib/plaid/models/cra_partner_insights_prism.rb
 lib/plaid/models/cra_pdf_add_ons.rb
-lib/plaid/models/cra_plaid_credit_score_report.rb
 lib/plaid/models/cra_prediction_interval.rb
 lib/plaid/models/cra_upgrade_failed_webhook.rb
 lib/plaid/models/cra_verification_report.rb
@@ -2520,6 +2541,8 @@ lib/plaid/models/hosted_mmd_verification_webhook.rb
 lib/plaid/models/human_review.rb
 lib/plaid/models/human_review_status.rb
 lib/plaid/models/id_number_type.rb
+lib/plaid/models/identity_creation_result.rb
+lib/plaid/models/identity_creation_result_type.rb
 lib/plaid/models/identity_default_update_webhook.rb
 lib/plaid/models/identity_document_metadata.rb
 lib/plaid/models/identity_document_upload.rb
@@ -2716,6 +2739,7 @@ lib/plaid/models/last_data_access_times.rb
 lib/plaid/models/latest_scored_event.rb
 lib/plaid/models/layer_authentication_passed_webhook.rb
 lib/plaid/models/ledger_event_source_type.rb
+lib/plaid/models/lend_score.rb
 lib/plaid/models/liabilities_default_update_webhook.rb
 lib/plaid/models/liabilities_get_request.rb
 lib/plaid/models/liabilities_get_request_options.rb
@@ -2750,6 +2774,7 @@ lib/plaid/models/link_session_bank_employment_result.rb
 lib/plaid/models/link_session_bank_income_result.rb
 lib/plaid/models/link_session_cra_document_upload_result.rb
 lib/plaid/models/link_session_cra_item_add_result.rb
+lib/plaid/models/link_session_cra_update_result.rb
 lib/plaid/models/link_session_exit.rb
 lib/plaid/models/link_session_exit_deprecated.rb
 lib/plaid/models/link_session_exit_metadata.rb
@@ -2783,8 +2808,8 @@ lib/plaid/models/link_token_create_request_cra_options.rb
 lib/plaid/models/link_token_create_request_cra_options_base_report.rb
 lib/plaid/models/link_token_create_request_cra_options_base_report_gse_options.rb
 lib/plaid/models/link_token_create_request_cra_options_cashflow_insights.rb
+lib/plaid/models/link_token_create_request_cra_options_lend_score.rb
 lib/plaid/models/link_token_create_request_cra_options_partner_insights.rb
-lib/plaid/models/link_token_create_request_cra_options_plaid_credit_score.rb
 lib/plaid/models/link_token_create_request_credit_partner_insights.rb
 lib/plaid/models/link_token_create_request_deposit_switch.rb
 lib/plaid/models/link_token_create_request_employment.rb
@@ -3037,7 +3062,6 @@ lib/plaid/models/physical_document_extracted_data_analysis.rb
 lib/plaid/models/physical_document_images.rb
 lib/plaid/models/plaid_check_score.rb
 lib/plaid/models/plaid_check_score_version.rb
-lib/plaid/models/plaid_credit_score.rb
 lib/plaid/models/plaid_error.rb
 lib/plaid/models/plaid_error_type.rb
 lib/plaid/models/platform_ids.rb
@@ -3121,11 +3145,17 @@ lib/plaid/models/profile_network_status_get_request.rb
 lib/plaid/models/profile_network_status_get_response.rb
 lib/plaid/models/program_name_sensitivity.rb
 lib/plaid/models/projected_income_summary_field_number.rb
+lib/plaid/models/protect_bank_account.rb
 lib/plaid/models/protect_event.rb
 lib/plaid/models/protect_event_get_request.rb
 lib/plaid/models/protect_event_get_response.rb
 lib/plaid/models/protect_event_send_request.rb
 lib/plaid/models/protect_event_send_response.rb
+lib/plaid/models/protect_incident_amount.rb
+lib/plaid/models/protect_incident_event.rb
+lib/plaid/models/protect_report_confidence.rb
+lib/plaid/models/protect_report_source.rb
+lib/plaid/models/protect_report_type.rb
 lib/plaid/models/protect_user_event_webhook.rb
 lib/plaid/models/protect_user_insights_get_request.rb
 lib/plaid/models/protect_user_insights_get_response.rb
@@ -3580,6 +3610,8 @@ lib/plaid/models/user_custom_password.rb
 lib/plaid/models/user_data_overview.rb
 lib/plaid/models/user_financial_data_refresh_request.rb
 lib/plaid/models/user_financial_data_refresh_response.rb
+lib/plaid/models/user_get_request.rb
+lib/plaid/models/user_get_response.rb
 lib/plaid/models/user_id_number.rb
 lib/plaid/models/user_items_associate_request.rb
 lib/plaid/models/user_items_associate_response.rb
