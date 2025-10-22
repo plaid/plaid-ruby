@@ -1,6 +1,6 @@
 # Note: This image is also built in CircleCI, so limit references to internal repositories.
 # Keep this in sync with the image in plaid-ruby-release Jenkinsfile
-FROM ruby:3.2.0
+FROM 345594567237.dkr.ecr.us-east-1.amazonaws.com/docker-hub/library/ruby:3.2.0
 
 # Create app directory
 WORKDIR /usr/src/app
