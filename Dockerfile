@@ -8,9 +8,9 @@ WORKDIR /usr/src/app
 # Copy app to directory
 COPY . /usr/src/app
 
-ENV BUNDLER_VERSION 2.2.9
+ENV BUNDLER_VERSION 2.4.22
 RUN gem update --system
-RUN gem install bundler:2.2.9
+RUN gem install bundler:2.4.22
 RUN bundle install
 
 CMD ["bundle", "exec", "rake", "test"]
