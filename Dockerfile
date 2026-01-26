@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 # Copy app to directory
 COPY . /usr/src/app
 
-ENV BUNDLER_VERSION 2.4.22
+ENV BUNDLER_VERSION=2.4.22
 RUN gem update --system
 RUN gem install bundler:2.4.22
 RUN bundle install
