@@ -520,7 +520,7 @@ module Plaid
       end
 
 
-      if @country_codes.length < 1
+      if @country_codes && @country_codes.length < 1
         invalid_properties.push('invalid value for "country_codes", number of items must be greater than or equal to 1.')
       end
 
