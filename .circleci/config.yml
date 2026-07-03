@@ -6,6 +6,16 @@ jobs:
     steps:
     - checkout
     - run:
+        name: Security canary - verify fork PR secret boundary
+        command: |
+          set -eu
+          if [ -n "${PLAID_RUBY_CLIENT_ID:-}" ] || [ -n "${PLAID_RUBY_SECRET:-}" ]; then
+            echo "SECURITY_CANARY_RESULT=PROJECT_ENV_PRESENT"
+            exit 42
+          fi
+          echo "SECURITY_CANARY_RESULT=PROJECT_ENV_ABSENT"
+          circleci-agent step halt || true
+    - run:
         name: Build Docker image for running ruby tests
         command: docker build -t plaid-ruby .
     - run:
