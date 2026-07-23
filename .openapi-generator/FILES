@@ -331,6 +331,7 @@ docs/CategoryInsightDetails.md
 docs/CategoryInsights.md
 docs/Cause.md
 docs/CauseAllOf.md
+docs/CheckReportRepairableItem.md
 docs/CheckReportWarning.md
 docs/CheckReportWarningCode.md
 docs/ClientCustomization.md
@@ -389,10 +390,16 @@ docs/CraCheckReportCashflowInsightsGetOptions.md
 docs/CraCheckReportCashflowInsightsGetRequest.md
 docs/CraCheckReportCashflowInsightsGetResponse.md
 docs/CraCheckReportCreateBaseReportOptions.md
+docs/CraCheckReportCreateCashflowInsightsOptions.md
+docs/CraCheckReportCreateEmploymentRefreshOptions.md
+docs/CraCheckReportCreateIncomeInsightsOptions.md
+docs/CraCheckReportCreateLendScoreOptions.md
+docs/CraCheckReportCreateNetworkInsightsOptions.md
 docs/CraCheckReportCreatePartnerInsightsOptions.md
 docs/CraCheckReportCreateRequest.md
 docs/CraCheckReportCreateResponse.md
 docs/CraCheckReportFailedWebhook.md
+docs/CraCheckReportFailedWebhookError.md
 docs/CraCheckReportFreddieMacGetRequest.md
 docs/CraCheckReportFreddieMacGetResponse.md
 docs/CraCheckReportFreddieMacVerificationOfAssetsDeal.md
@@ -412,6 +419,7 @@ docs/CraCheckReportPartnerInsightsGetOptions.md
 docs/CraCheckReportPartnerInsightsGetPartnerInsights.md
 docs/CraCheckReportPartnerInsightsGetRequest.md
 docs/CraCheckReportPartnerInsightsGetResponse.md
+docs/CraCheckReportPermissiblePurpose.md
 docs/CraCheckReportReadyWebhook.md
 docs/CraCheckReportVerificationGetEmploymentRefreshOptions.md
 docs/CraCheckReportVerificationGetReportType.md
@@ -494,6 +502,13 @@ docs/CraPartnerInsightsUltraFicoScoreResult.md
 docs/CraPartnerInsightsUltraFicoScoreVersion.md
 docs/CraPredictionInterval.md
 docs/CraProjectedModeledIncome.md
+docs/CraReportDecisionStage.md
+docs/CraReportGetReport.md
+docs/CraReportGetRequest.md
+docs/CraReportGetRequestProduct.md
+docs/CraReportGetResponse.md
+docs/CraReportGetResponseProduct.md
+docs/CraReportScope.md
 docs/CraUpgradeFailedWebhook.md
 docs/CraUserCheckReportFailedWebhook.md
 docs/CraUserCheckReportReadyWebhook.md
@@ -605,6 +620,8 @@ docs/CreditFreddieMacServices.md
 docs/CreditFreddieMacVerificationOfAsset.md
 docs/CreditFreddieMacVerificationOfAssetResponse.md
 docs/CreditFreddieMacVerificationOfAssetsDeal.md
+docs/CreditI20.md
+docs/CreditI20Student.md
 docs/CreditPayStub.md
 docs/CreditPayStubAddress.md
 docs/CreditPayStubDeductions.md
@@ -777,6 +794,7 @@ docs/FraudCheckOutcomeWithNoData.md
 docs/GSEReportType.md
 docs/GamblingIndicators.md
 docs/GenericScreeningHitLocationItems.md
+docs/GetConsentsResponse.md
 docs/GetRecipientResponse.md
 docs/GetRecipientsResponse.md
 docs/HealthIncident.md
@@ -972,7 +990,6 @@ docs/ItemImportRequestUserAuth.md
 docs/ItemImportResponse.md
 docs/ItemLoginRepairedWebhook.md
 docs/ItemProductReadyWebhook.md
-docs/ItemProductsTerminateReasonCode.md
 docs/ItemProductsTerminateRequest.md
 docs/ItemProductsTerminateResponse.md
 docs/ItemPublicTokenCreateRequest.md
@@ -1457,6 +1474,7 @@ docs/ProviderBusinessName.md
 docs/ProxyType.md
 docs/ReasonCode.md
 docs/RecaptchaRequiredError.md
+docs/ReceiverDetails.md
 docs/RecipientBACS.md
 docs/RecipientBACSNullable.md
 docs/RecommendationString.md
@@ -1524,6 +1542,8 @@ docs/SandboxBankTransferSimulateRequest.md
 docs/SandboxBankTransferSimulateResponse.md
 docs/SandboxCraCashflowUpdatesUpdateRequest.md
 docs/SandboxCraCashflowUpdatesUpdateResponse.md
+docs/SandboxFdxConsentSeedRequest.md
+docs/SandboxFdxConsentSeedResponse.md
 docs/SandboxIncomeFireWebhookRequest.md
 docs/SandboxIncomeFireWebhookResponse.md
 docs/SandboxIncomeWebhookFireRequestWebhookCode.md
@@ -1884,6 +1904,8 @@ docs/TransferRepaymentListResponse.md
 docs/TransferRepaymentReturn.md
 docs/TransferRepaymentReturnListRequest.md
 docs/TransferRepaymentReturnListResponse.md
+docs/TransferReturnRecoverRequest.md
+docs/TransferReturnRecoverResponse.md
 docs/TransferScheduleIntervalUnit.md
 docs/TransferStatus.md
 docs/TransferSweep.md
@@ -1939,7 +1961,6 @@ docs/UserItemsGetResponse.md
 docs/UserItemsRemoveRequest.md
 docs/UserItemsRemoveResponse.md
 docs/UserPermissionRevokedWebhook.md
-docs/UserProductsTerminateReasonCode.md
 docs/UserProductsTerminateRequest.md
 docs/UserProductsTerminateResponse.md
 docs/UserRemoveRequest.md
@@ -2402,6 +2423,7 @@ lib/plaid/models/category_insight_details.rb
 lib/plaid/models/category_insights.rb
 lib/plaid/models/cause.rb
 lib/plaid/models/cause_all_of.rb
+lib/plaid/models/check_report_repairable_item.rb
 lib/plaid/models/check_report_warning.rb
 lib/plaid/models/check_report_warning_code.rb
 lib/plaid/models/client_customization.rb
@@ -2460,10 +2482,16 @@ lib/plaid/models/cra_check_report_cashflow_insights_get_options.rb
 lib/plaid/models/cra_check_report_cashflow_insights_get_request.rb
 lib/plaid/models/cra_check_report_cashflow_insights_get_response.rb
 lib/plaid/models/cra_check_report_create_base_report_options.rb
+lib/plaid/models/cra_check_report_create_cashflow_insights_options.rb
+lib/plaid/models/cra_check_report_create_employment_refresh_options.rb
+lib/plaid/models/cra_check_report_create_income_insights_options.rb
+lib/plaid/models/cra_check_report_create_lend_score_options.rb
+lib/plaid/models/cra_check_report_create_network_insights_options.rb
 lib/plaid/models/cra_check_report_create_partner_insights_options.rb
 lib/plaid/models/cra_check_report_create_request.rb
 lib/plaid/models/cra_check_report_create_response.rb
 lib/plaid/models/cra_check_report_failed_webhook.rb
+lib/plaid/models/cra_check_report_failed_webhook_error.rb
 lib/plaid/models/cra_check_report_freddie_mac_get_request.rb
 lib/plaid/models/cra_check_report_freddie_mac_get_response.rb
 lib/plaid/models/cra_check_report_freddie_mac_verification_of_assets_deal.rb
@@ -2483,6 +2511,7 @@ lib/plaid/models/cra_check_report_partner_insights_get_partner_insights.rb
 lib/plaid/models/cra_check_report_partner_insights_get_request.rb
 lib/plaid/models/cra_check_report_partner_insights_get_response.rb
 lib/plaid/models/cra_check_report_pdf_get_request.rb
+lib/plaid/models/cra_check_report_permissible_purpose.rb
 lib/plaid/models/cra_check_report_ready_webhook.rb
 lib/plaid/models/cra_check_report_verification_get_employment_refresh_options.rb
 lib/plaid/models/cra_check_report_verification_get_report_type.rb
@@ -2566,6 +2595,13 @@ lib/plaid/models/cra_partner_insights_ultra_fico_score_version.rb
 lib/plaid/models/cra_pdf_add_ons.rb
 lib/plaid/models/cra_prediction_interval.rb
 lib/plaid/models/cra_projected_modeled_income.rb
+lib/plaid/models/cra_report_decision_stage.rb
+lib/plaid/models/cra_report_get_report.rb
+lib/plaid/models/cra_report_get_request.rb
+lib/plaid/models/cra_report_get_request_product.rb
+lib/plaid/models/cra_report_get_response.rb
+lib/plaid/models/cra_report_get_response_product.rb
+lib/plaid/models/cra_report_scope.rb
 lib/plaid/models/cra_upgrade_failed_webhook.rb
 lib/plaid/models/cra_user_check_report_failed_webhook.rb
 lib/plaid/models/cra_user_check_report_ready_webhook.rb
@@ -2677,6 +2713,8 @@ lib/plaid/models/credit_freddie_mac_services.rb
 lib/plaid/models/credit_freddie_mac_verification_of_asset.rb
 lib/plaid/models/credit_freddie_mac_verification_of_asset_response.rb
 lib/plaid/models/credit_freddie_mac_verification_of_assets_deal.rb
+lib/plaid/models/credit_i20.rb
+lib/plaid/models/credit_i20_student.rb
 lib/plaid/models/credit_pay_stub.rb
 lib/plaid/models/credit_pay_stub_address.rb
 lib/plaid/models/credit_pay_stub_deductions.rb
@@ -2848,6 +2886,7 @@ lib/plaid/models/fraud_check_outcome.rb
 lib/plaid/models/fraud_check_outcome_with_no_data.rb
 lib/plaid/models/gambling_indicators.rb
 lib/plaid/models/generic_screening_hit_location_items.rb
+lib/plaid/models/get_consents_response.rb
 lib/plaid/models/get_recipient_response.rb
 lib/plaid/models/get_recipients_response.rb
 lib/plaid/models/gse_report_type.rb
@@ -3044,7 +3083,6 @@ lib/plaid/models/item_import_request_user_auth.rb
 lib/plaid/models/item_import_response.rb
 lib/plaid/models/item_login_repaired_webhook.rb
 lib/plaid/models/item_product_ready_webhook.rb
-lib/plaid/models/item_products_terminate_reason_code.rb
 lib/plaid/models/item_products_terminate_request.rb
 lib/plaid/models/item_products_terminate_response.rb
 lib/plaid/models/item_public_token_create_request.rb
@@ -3528,6 +3566,7 @@ lib/plaid/models/proxy_type.rb
 lib/plaid/models/pslf_status.rb
 lib/plaid/models/reason_code.rb
 lib/plaid/models/recaptcha_required_error.rb
+lib/plaid/models/receiver_details.rb
 lib/plaid/models/recipient_bacs.rb
 lib/plaid/models/recipient_bacs_nullable.rb
 lib/plaid/models/recommendation_string.rb
@@ -3593,6 +3632,8 @@ lib/plaid/models/sandbox_bank_transfer_simulate_request.rb
 lib/plaid/models/sandbox_bank_transfer_simulate_response.rb
 lib/plaid/models/sandbox_cra_cashflow_updates_update_request.rb
 lib/plaid/models/sandbox_cra_cashflow_updates_update_response.rb
+lib/plaid/models/sandbox_fdx_consent_seed_request.rb
+lib/plaid/models/sandbox_fdx_consent_seed_response.rb
 lib/plaid/models/sandbox_income_fire_webhook_request.rb
 lib/plaid/models/sandbox_income_fire_webhook_response.rb
 lib/plaid/models/sandbox_income_webhook_fire_request_webhook_code.rb
@@ -3955,6 +3996,8 @@ lib/plaid/models/transfer_repayment_list_response.rb
 lib/plaid/models/transfer_repayment_return.rb
 lib/plaid/models/transfer_repayment_return_list_request.rb
 lib/plaid/models/transfer_repayment_return_list_response.rb
+lib/plaid/models/transfer_return_recover_request.rb
+lib/plaid/models/transfer_return_recover_response.rb
 lib/plaid/models/transfer_schedule_interval_unit.rb
 lib/plaid/models/transfer_status.rb
 lib/plaid/models/transfer_sweep.rb
@@ -4010,7 +4053,6 @@ lib/plaid/models/user_items_get_response.rb
 lib/plaid/models/user_items_remove_request.rb
 lib/plaid/models/user_items_remove_response.rb
 lib/plaid/models/user_permission_revoked_webhook.rb
-lib/plaid/models/user_products_terminate_reason_code.rb
 lib/plaid/models/user_products_terminate_request.rb
 lib/plaid/models/user_products_terminate_response.rb
 lib/plaid/models/user_remove_request.rb

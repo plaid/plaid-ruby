@@ -108,7 +108,7 @@ Dates and datetimes in requests, which are represented as strings in the API and
 
 Time zone information is required for request fields that accept datetimes. Failing to include time zone information (or passing in a string, instead of a `Date` or `DateTime` object) will result in an error. See the following examples for guidance on `Date` and `DateTime` usage.
 
-If the API reference documentation for a field specifies `format: date`, any of following are acceptable:
+If the API reference documentation for a field specifies `format: date`, any of the following are acceptable:
 
 ```rb
 require 'date'
