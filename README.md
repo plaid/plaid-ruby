@@ -1,5 +1,9 @@
 # plaid-ruby [![Gem Version](https://badge.fury.io/rb/plaid.svg)](http://badge.fury.io/rb/plaid)
 
+> **Help shape Plaid’s next-generation SDKs**
+>
+> We’re modernizing Plaid’s SDKs and looking for developers to try early releases and share feedback. [Register your interest](https://docs.google.com/forms/d/e/1FAIpQLScuhIBKCGcxrDQXLZA0nyTdJEW83J-VEr8E08KMKkT0EjmxBQ/viewform) and we’ll follow up when an early release is available for your language. No migration is required today.
+
 The official Ruby bindings for the [Plaid API](https://plaid.com/docs). It's generated from our [OpenAPI schema](https://github.com/plaid/plaid-openapi).
 
 ## Table of Contents
