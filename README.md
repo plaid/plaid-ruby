@@ -79,6 +79,8 @@ api_client = Plaid::ApiClient.new(
 client = Plaid::PlaidApi.new(api_client)
 ```
 
+Concurrent file downloads use a separate temporary file for each response. This does not make changes to shared client configuration or Faraday middleware thread-safe; finish configuring them before issuing concurrent requests.
+
 The `server_index` field is the environment which the client will be running in. Your choices for the `server_index` field are:
 
 - `Plaid::Configuration::Environment["sandbox"]` allows you to do your initial integrations tests against preloaded data without being billed. More information about using the API sandbox can be found on the [API Sandbox documentation](https://plaid.com/docs/api#sandbox).
