@@ -92,8 +92,9 @@ jobs:
           } >> "$GITHUB_OUTPUT"
 
       # Install the gem as a user would, with only its declared dependencies, and load it from
-      # outside the checkout. This fails on a file left out of the gem or an undeclared runtime
-      # dependency, for the Fern client and for the previous client at plaid/legacy.
+      # outside the checkout. Both clients register most constants with autoload, so resolve
+      # every constant under Plaid: a file left out of the gem or an undeclared runtime
+      # dependency fails here instead of when a caller first uses that class.
       - name: Install and load the built gem
         env:
           GEM_FILE: ${{ steps.build.outputs.gem }}
@@ -104,15 +105,21 @@ jobs:
           cd "$(mktemp -d)"
           GEM_HOME="$gem_home" GEM_PATH="$gem_home" ruby -e '
             require "plaid"
-            Plaid::PlaidApi
             spec = Gem.loaded_specs.fetch("plaid")
             abort "Loaded plaid #{spec.version}, expected #{ENV["VERSION"]}" unless spec.version.to_s == ENV["VERSION"]
-            if File.exist?(File.join(spec.full_gem_path, "lib/plaid/legacy.rb"))
-              require "plaid/legacy"
-              Plaid::Legacy.constants.each { |name| Plaid::Legacy.const_get(name) }
-              puts "Loaded plaid/legacy"
+            require "plaid/legacy" if File.exist?(File.join(spec.full_gem_path, "lib/plaid/legacy.rb"))
+            seen = {}
+            walk = lambda do |mod|
+              next if seen[mod]
+              seen[mod] = true
+              mod.constants.each do |name|
+                value = mod.const_get(name)
+                walk.call(value) if value.is_a?(Module) && value.name.to_s.start_with?("Plaid::")
+              end
             end
-            puts "Loaded plaid #{spec.version} from #{spec.full_gem_path}"
+            walk.call(Plaid)
+            Plaid::PlaidApi
+            puts "Loaded #{seen.size} modules from plaid #{spec.version}#{" and plaid/legacy" if defined?(Plaid::Legacy)}"
           '
 
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
