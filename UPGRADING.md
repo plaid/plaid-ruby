@@ -1,3 +1,7 @@
+## Upgrading to 54.0.0
+
+Version 54 introduces a new SDK and keeps the previous one as `Plaid::Legacy`. See the [migration guide](MIGRATION.md).
+
 ## Upgrading from 13.0.0 to 14.0.0
 
 See the [CHANGELOG](CHANGELOG.md) for what needs to be updated.

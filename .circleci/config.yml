@@ -1,13 +1,41 @@
 version: 2.1
+
 jobs:
   build:
-    machine:
-      image: ubuntu-2204:edge
+    docker:
+      # cimg/ruby:3.3.13; build and load the SDK on its minimum supported Ruby version.
+      - image: cimg/ruby@sha256:1fc420896fee9d03815955af098fe8a55af03bc0c798746d23e6c0ed70e4518f
     steps:
-    - checkout
-    - run:
-        name: Build Docker image for running ruby tests
-        command: docker build -t plaid-ruby .
-    - run:
-        name: Run ruby tests in Docker
-        command: docker run -e PLAID_RUBY_CLIENT_ID=$PLAID_RUBY_CLIENT_ID -e PLAID_RUBY_SECRET=$PLAID_RUBY_SECRET plaid-ruby
+      - run:
+          name: Check out the public SDK at the exact commit
+          command: |
+            [[ "$CIRCLE_SHA1" =~ ^[0-9a-f]{40}$ ]]
+            git init .
+            git remote add origin https://github.com/plaid/plaid-ruby.git
+            GIT_TERMINAL_PROMPT=0 git -c credential.helper= fetch --no-tags --depth=1 origin "$CIRCLE_SHA1"
+            git checkout --detach FETCH_HEAD
+            test "$(git rev-parse HEAD)" = "$CIRCLE_SHA1"
+      - run:
+          name: Install dependencies
+          command: bundle install
+      - run:
+          name: Run the offline tests
+          command: bundle exec rake test
+      - run:
+          name: Load plaid and plaid/legacy
+          command: |
+            bundle exec ruby -Ilib -e 'require "plaid"; Plaid::PlaidApi'
+            bundle exec ruby -Ilib -e 'require "plaid/legacy"; Plaid::Legacy::PlaidApi'
+      - run:
+          name: Run the legacy Sandbox tests
+          command: |
+            if [ -z "$PLAID_RUBY_CLIENT_ID" ] || [ -z "$PLAID_RUBY_SECRET" ]; then
+              echo "Sandbox credentials aren't available to this build; skipping."
+              exit 0
+            fi
+            bundle exec ruby -Ilib -e 'ARGV.each { |file| require File.expand_path(file) }' test/legacy/*_integration.rb
+
+workflows:
+  build:
+    jobs:
+      - build

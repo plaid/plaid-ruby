@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+module Plaid
+  module PaymentInitiation
+    module Types
+      class PaymentInitiationConsentRevokeRequest < Internal::Types::Model
+        field :consent_id, -> { String }, optional: false, nullable: false
+      end
+    end
+  end
+end
