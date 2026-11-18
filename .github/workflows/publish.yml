@@ -11,8 +11,10 @@ on:
 
 permissions: {}
 
+# One group per tag: a shared group keeps only one pending run and cancels the rest, which would
+# drop a release tagged while another waits for approval.
 concurrency:
-  group: rubygems-publish
+  group: rubygems-publish-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
