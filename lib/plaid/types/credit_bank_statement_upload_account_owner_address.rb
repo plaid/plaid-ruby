@@ -1,0 +1,20 @@
+# frozen_string_literal: true
+
+require_relative "../../plaid"
+
+module Plaid
+  module Types
+    # Address on the uploaded bank statement
+    class CreditBankStatementUploadAccountOwnerAddress < Internal::Types::Model
+      field :city, -> { String }, optional: false, nullable: true
+
+      field :country, -> { String }, optional: false, nullable: true
+
+      field :postal_code, -> { String }, optional: false, nullable: true
+
+      field :region, -> { String }, optional: false, nullable: true
+
+      field :street, -> { String }, optional: false, nullable: true
+    end
+  end
+end

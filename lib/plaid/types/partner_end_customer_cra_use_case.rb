@@ -1,0 +1,19 @@
+# frozen_string_literal: true
+
+require_relative "../../plaid"
+
+module Plaid
+  module Types
+    module PartnerEndCustomerCraUseCase
+      extend Plaid::Internal::Types::Enum
+
+      CREDIT_UNDERWRITING = "CREDIT_UNDERWRITING"
+      TENANT_SCREENING = "TENANT_SCREENING"
+      INVESTOR_OR_SERVICER_OF_CREDIT = "INVESTOR_OR_SERVICER_OF_CREDIT"
+      UTILITIES = "UTILITIES"
+      BANK_ACCOUNT_OPENING = "BANK_ACCOUNT_OPENING"
+      IDENTITY_VERIFICATION_FRAUD_PREVENTION = "IDENTITY_VERIFICATION_FRAUD_PREVENTION"
+      COLLECTIONS_DEBT_RECOVERY = "COLLECTIONS_DEBT_RECOVERY"
+    end
+  end
+end

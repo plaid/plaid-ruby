@@ -1,0 +1,12 @@
+# frozen_string_literal: true
+
+require_relative "../../plaid"
+
+module Plaid
+  module Types
+    # Documentation not found in the MISMO model viewer and not provided by Freddie Mac.
+    class CreditFreddieMacPartyIndividual < Internal::Types::Model
+      field :name, -> { Plaid::Types::CreditFreddieMacIndividualName }, optional: false, nullable: false, api_name: "NAME"
+    end
+  end
+end

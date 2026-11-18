@@ -1,21 +1,21 @@
 # Contributing
 
-Instructions for contributing to [plaid-ruby][1]. A ruby client library for the [Plaid API][2]. This library is fully generated from the [Plaid OpenAPI spec](3).
+Instructions for contributing to [plaid-ruby][1]. A ruby client library for the [Plaid API][2]. This library is fully generated from the [Plaid OpenAPI spec][3].
 
 This library cannot directly accept PRs from the public as it is generated from internal Plaid sources on the internal Plaid GitHub instance and any changes made directly to this repo will be overwritten. If you submit a PR and it is accepted, a member of Plaid engineering will copy and paste your change into the upstream, internal version of this repo rather than merging your PR. 
 
 Plaid employees should make any changes on the internal Plaid GitHub and not on the public repo. 
 ## Setup
 
-If you find an issue, please investigate whether it is a type problem with [OpenAPI](3) or a problem with the [ruby faraday](https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/ruby.md) generator. Then open an issue and Plaid will investigate further.
+If you find an issue, please investigate whether it is a type problem with [OpenAPI][3] or a problem with the generated SDK. Then open an issue and Plaid will investigate further.
 
 ## Running Tests
 
-1. To build the docker image for the client tests, run `docker build -t plaid-ruby .`.
-2. Go to the [Plaid Dashboard](https://dashboard.plaid.com/) and copy and paste your `client_id` and sandbox `secret` into the following command.
-3. Run `docker run --rm -e PLAID_RUBY_CLIENT_ID=$CLIENT_ID -e PLAID_RUBY_SECRET=$SECRET plaid-ruby`.
+The gem supports Ruby 3.3 and later. Install dependencies with `bundle install`, then:
 
-If you wish to run a single test, edit the `Rakefile` and rebuild the docker image using the command from step 1.
+- Run the offline tests with `bundle exec rake test`.
+- Run the WireMock-backed tests as well with `RUN_WIRE_TESTS=true bundle exec rake test`. They start a WireMock container, so Docker must be running.
+- Run the previous SDK's Sandbox tests (`Plaid::Legacy`) by copying your `client_id` and Sandbox `secret` from the [Plaid Dashboard](https://dashboard.plaid.com/) into `PLAID_RUBY_CLIENT_ID` and `PLAID_RUBY_SECRET`, then running `bundle exec ruby -Ilib -e 'ARGV.each { |file| require File.expand_path(file) }' test/legacy/*_integration.rb`.
 
 [1]: https://github.com/plaid/plaid-ruby
 [2]: https://plaid.com

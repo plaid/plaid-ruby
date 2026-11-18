@@ -1,0 +1,27 @@
+# frozen_string_literal: true
+
+require_relative "../../../plaid"
+
+module Plaid
+  module Sandbox
+    module Types
+      module SandboxItemFireWebhookRequestWebhookCode
+        extend Plaid::Internal::Types::Enum
+
+        DEFAULT_UPDATE = "DEFAULT_UPDATE"
+        NEW_ACCOUNTS_AVAILABLE = "NEW_ACCOUNTS_AVAILABLE"
+        SMS_MICRODEPOSITS_VERIFICATION = "SMS_MICRODEPOSITS_VERIFICATION"
+        AUTHORIZATION_GRANTED = "AUTHORIZATION_GRANTED"
+        USER_PERMISSION_REVOKED = "USER_PERMISSION_REVOKED"
+        USER_ACCOUNT_REVOKED = "USER_ACCOUNT_REVOKED"
+        PENDING_DISCONNECT = "PENDING_DISCONNECT"
+        CONSENT_UPDATED = "CONSENT_UPDATED"
+        RECURRING_TRANSACTIONS_UPDATE = "RECURRING_TRANSACTIONS_UPDATE"
+        LOGIN_REPAIRED = "LOGIN_REPAIRED"
+        SYNC_UPDATES_AVAILABLE = "SYNC_UPDATES_AVAILABLE"
+        PRODUCT_READY = "PRODUCT_READY"
+        ERROR = "ERROR"
+      end
+    end
+  end
+end

@@ -1,10 +1,8 @@
 # plaid-ruby [![Gem Version](https://badge.fury.io/rb/plaid.svg)](http://badge.fury.io/rb/plaid)
 
-> **Help shape Plaid’s next-generation SDKs**
->
-> We’re modernizing Plaid’s SDKs and looking for developers to try early releases and share feedback. [Register your interest](https://docs.google.com/forms/d/e/1FAIpQLScuhIBKCGcxrDQXLZA0nyTdJEW83J-VEr8E08KMKkT0EjmxBQ/viewform) and we’ll follow up when an early release is available for your language. No migration is required today.
-
 The official Ruby bindings for the [Plaid API](https://plaid.com/docs). It's generated from our [OpenAPI schema](https://github.com/plaid/plaid-openapi).
+
+Version 54 introduces a new SDK with endpoints grouped by product, keyword arguments instead of request models, typed errors, and iterators for many paginated endpoints. The previous SDK remains available as `Plaid::Legacy` (`require 'plaid/legacy'`), so you can migrate one endpoint at a time. See the [Ruby SDK Migration Guide](MIGRATION.md) for upgrade instructions.
 
 ## Table of Contents
 
@@ -37,7 +35,7 @@ Or install it yourself as:
 
     $ gem install plaid
 
-The gem supports Ruby 3.2.0+ only.
+The gem supports Ruby 3.3.0+ only.
 
 ### Versioning
 
@@ -60,39 +58,41 @@ All users are strongly recommended to use a recent version of the library, as ol
 
 ## Getting started
 
+The examples in this README use the bundled previous SDK. Require it with `require 'plaid/legacy'` and use the `Plaid::Legacy` namespace. For the new SDK, see the [migration guide](MIGRATION.md).
+
 ### Create a client
 
 Create an instance of the client using the `client_id` and `secret` from your Plaid dashboard along with your environment of choice:
 
 ```ruby
-require 'plaid'
+require 'plaid/legacy'
 
-configuration = Plaid::Configuration.new
-configuration.server_index = Plaid::Configuration::Environment["sandbox"]
+configuration = Plaid::Legacy::Configuration.new
+configuration.server_index = Plaid::Legacy::Configuration::Environment["sandbox"]
 configuration.api_key["PLAID-CLIENT-ID"] = "***"
 configuration.api_key["PLAID-SECRET"] = "***"
 
-api_client = Plaid::ApiClient.new(
+api_client = Plaid::Legacy::ApiClient.new(
   configuration
 )
 
-client = Plaid::PlaidApi.new(api_client)
+client = Plaid::Legacy::PlaidApi.new(api_client)
 ```
 
 Concurrent file downloads use a separate temporary file for each response. This does not make changes to shared client configuration or Faraday middleware thread-safe; finish configuring them before issuing concurrent requests.
 
 The `server_index` field is the environment which the client will be running in. Your choices for the `server_index` field are:
 
-- `Plaid::Configuration::Environment["sandbox"]` allows you to do your initial integrations tests against preloaded data without being billed. More information about using the API sandbox can be found on the [API Sandbox documentation](https://plaid.com/docs/api#sandbox).
-- `Plaid::Configuration::Environment["production"]` is the production environment where you can test with real data and launch.
+- `Plaid::Legacy::Configuration::Environment["sandbox"]` allows you to do your initial integrations tests against preloaded data without being billed. More information about using the API sandbox can be found on the [API Sandbox documentation](https://plaid.com/docs/sandbox/).
+- `Plaid::Legacy::Configuration::Environment["production"]` is the production environment where you can test with real data and launch.
 
 ### Tuning Faraday
 
 The gem uses Faraday to wrap HTTPS connections, which allows you to tune certain params:
 
 ```ruby
-configuration = Plaid::Configuration.new
-api_client = Plaid::ApiClient.new(
+configuration = Plaid::Legacy::Configuration.new
+api_client = Plaid::Legacy::ApiClient.new(
   configuration
 )
 api_client.connection.options[:timeout] = 60*20 # 20 minutes
@@ -101,8 +101,8 @@ api_client.connection.options[:timeout] = 60*20 # 20 minutes
 To use custom middleware, reinitialize the Faraday::Connection object:
 
 ```
-configuration = Plaid::Configuration.new
-api_client = Plaid::ApiClient.new(configuration)
+configuration = Plaid::Legacy::Configuration.new
+api_client = Plaid::Legacy::ApiClient.new(configuration)
 api_client.create_connection do |builder|
   builder.use Faraday::Response::Logger
 end
@@ -149,7 +149,7 @@ user = User.find_by!(email: '***')
 client_user_id = user.id
 
 # Create the link_token with all of your configurations
-link_token_create_request = Plaid::LinkTokenCreateRequest.new({
+link_token_create_request = Plaid::Legacy::LinkTokenCreateRequest.new({
   :user => { :client_user_id => client_user_id.to_s },
   :client_name => 'My app',
   :products => %w[auth transactions],
@@ -173,7 +173,7 @@ If you have a [Link](https://plaid.com/docs/link/) `public token`, use this func
 An example of the function's usage if you have a `public_token` in hand:
 
 ```ruby
-request = Plaid::ItemPublicTokenExchangeRequest.new
+request = Plaid::Legacy::ItemPublicTokenExchangeRequest.new
 request.public_token = public_token
 
 response = client.item_public_token_exchange(request)
@@ -183,14 +183,14 @@ access_token = response.access_token
 ### Deleting an item
 
 ```ruby
-request = Plaid::ItemPublicTokenExchangeRequest.new
+request = Plaid::Legacy::ItemPublicTokenExchangeRequest.new
 request.public_token = public_token
 
 response = client.item_public_token_exchange(request)
 access_token = response.access_token
 
 # Provide the access_token for the Item you want to remove
-item_remove_request = Plaid::ItemRemoveRequest.new
+item_remove_request = Plaid::Legacy::ItemRemoveRequest.new
 item_remove_request.access_token = access_token
 
 client.item_remove(item_remove_request)
@@ -199,13 +199,13 @@ client.item_remove(item_remove_request)
 ### Get paginated transactions (preferred method)
 
 ```ruby
-request = Plaid::ItemPublicTokenExchangeRequest.new
+request = Plaid::Legacy::ItemPublicTokenExchangeRequest.new
 request.public_token = public_token
 
 response = client.item_public_token_exchange(request)
 access_token = response.access_token
 
-transactions_sync_request = Plaid::TransactionsSyncRequest.new
+transactions_sync_request = Plaid::Legacy::TransactionsSyncRequest.new
 transactions_sync_request.access_token = access_token
 
 transaction_response = client.transactions_sync(transactions_sync_request)
@@ -214,7 +214,7 @@ transactions = transaction_response.added
 # the transactions in the response are paginated, so make multiple calls while
 # updating the cursor to retrieve all transactions
 while transaction_response.has_more
-  transactions_sync_request = Plaid::TransactionsSyncRequest.new
+  transactions_sync_request = Plaid::Legacy::TransactionsSyncRequest.new
   transactions_sync_request.access_token = access_token
   transactions_sync_request.cursor = transaction_response.next_cursor
 
@@ -226,13 +226,13 @@ end
 ### Get paginated transactions (older method)
 
 ```ruby
-request = Plaid::ItemPublicTokenExchangeRequest.new
+request = Plaid::Legacy::ItemPublicTokenExchangeRequest.new
 request.public_token = public_token
 
 response = client.item_public_token_exchange(request)
 access_token = response.access_token
 
-transactions_get_request = Plaid::TransactionsGetRequest.new
+transactions_get_request = Plaid::Legacy::TransactionsGetRequest.new
 transactions_get_request.access_token = access_token
 transactions_get_request.start_date = "2020-01-01"
 transactions_get_request.end_date = "2021-01-01"
@@ -246,7 +246,7 @@ while transactions.length < transaction_response.total_transactions
   options_payload = {}
   options_payload[:offset] = transactions.length
 
-  transactions_get_request = Plaid::TransactionsGetRequest.new
+  transactions_get_request = Plaid::Legacy::TransactionsGetRequest.new
   transactions_get_request.access_token = access_token
   transactions_get_request.start_date = "2020-01-01"
   transactions_get_request.end_date = "2021-01-01"
@@ -260,13 +260,13 @@ end
 ### Get Auth data
 
 ```ruby
-request = Plaid::ItemPublicTokenExchangeRequest.new
+request = Plaid::Legacy::ItemPublicTokenExchangeRequest.new
 request.public_token = public_token
 
 response = client.item_public_token_exchange(request)
 access_token = response.access_token
 
-auth_get_request = Plaid::AuthGetRequest.new
+auth_get_request = Plaid::Legacy::AuthGetRequest.new
 auth_get_request.access_token = access_token
 
 auth_response = client.auth_get(auth_get_request)
@@ -278,7 +278,7 @@ auth = auth_response.auth
 Financial institution information is available as shown below where the function arguments represent count and offset:
 
 ```ruby
-institutions_get_request = Plaid::InstitutionsGetRequest.new({
+institutions_get_request = Plaid::Legacy::InstitutionsGetRequest.new({
   :count => 3,
   :offset => 1,
   :country_codes => ["US"],
@@ -289,10 +289,7 @@ response = client.institutions_get(institutions_get_request)
 
 ## Errors
 
-Any methods making API calls will result in an exception raised unless the response code is "200: Success" or
-"210: MFA Required".
-
-`Plaid::ApiError` is returned in response to API internal server errors.
+Any method making an API call raises `Plaid::Legacy::ApiError` for any non-2xx response. Parse `e.response_body` for the Plaid error object.
 
 Read more about response codes and their meaning in the
 [Plaid documentation](https://plaid.com/docs/api).
@@ -326,17 +323,17 @@ client = Plaid::Client.new(env: :sandbox,
 To:
 
 ```ruby
-configuration = Plaid::Configuration.new
-configuration.server_index = Plaid::Configuration::Environment["sandbox"]
+configuration = Plaid::Legacy::Configuration.new
+configuration.server_index = Plaid::Legacy::Configuration::Environment["sandbox"]
 configuration.api_key["PLAID-CLIENT-ID"] = ENV["PLAID_RUBY_CLIENT_ID"]
 configuration.api_key["PLAID-SECRET"] = ENV["PLAID_RUBY_SECRET"]
 configuration.api_key["Plaid-Version"] = "2020-09-14"
 
-api_client = Plaid::ApiClient.new(
+api_client = Plaid::Legacy::ApiClient.new(
   configuration
 )
 
-client = Plaid::PlaidApi.new(api_client)
+client = Plaid::Legacy::PlaidApi.new(api_client)
 ```
 
 #### Endpoints
@@ -352,12 +349,12 @@ response = client.auth.get(access_token)
 To:
 
 ```ruby
-auth_get_request = Plaid::AuthGetRequest.new
+auth_get_request = Plaid::Legacy::AuthGetRequest.new
 auth_get_request.access_token = access_token
 
 or
 
-auth_get_request = Plaid::AuthGetRequest.new({:access_token => access_token})
+auth_get_request = Plaid::Legacy::AuthGetRequest.new({:access_token => access_token})
 
 response = client.auth_get(auth_get_request)
 ```
@@ -380,7 +377,7 @@ To:
 ```ruby
 begin
   client.auth_get(auth_get_request)
-rescue Plaid::ApiError => e
+rescue Plaid::Legacy::ApiError => e
   json_response = JSON.parse(e.response_body)
   if json_response["error_code"] != "PRODUCT_NOT_READY"
 end
@@ -399,6 +396,6 @@ Bug reports are welcome on GitHub. See also [contributing guidelines](CONTRIBUTI
 The gem is available as open source under the terms of the [MIT License](LICENSE.txt).
 
 [version-changelog]: https://plaid.com/docs/api/versioning/
-[api-version-2018-05-22]: https://plaid.com/docs/api/versioning/#2018-05-22
-[api-version-2019-05-29]: https://plaid.com/docs/api/versioning/#2019-05-29
-[api-version-2020-09-14]: https://plaid.com/docs/api/versioning/#2020-09-14
+[api-version-2018-05-22]: https://plaid.com/docs/api/versioning/#version-2018-05-22
+[api-version-2019-05-29]: https://plaid.com/docs/api/versioning/#version-2019-05-29
+[api-version-2020-09-14]: https://plaid.com/docs/api/versioning/#version-2020-09-14

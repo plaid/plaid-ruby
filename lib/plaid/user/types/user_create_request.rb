@@ -1,0 +1,21 @@
+# frozen_string_literal: true
+
+module Plaid
+  module User
+    module Types
+      class UserCreateRequest < Internal::Types::Model
+        field :plaid_new_user_api_enabled, -> { Internal::Types::Boolean }, optional: true, nullable: false, api_name: "Plaid-New-User-API-Enabled"
+
+        field :client_user_id, -> { String }, optional: false, nullable: false
+
+        field :identity, -> { Plaid::Types::ClientUserIdentity }, optional: true, nullable: true
+
+        field :end_customer, -> { String }, optional: true, nullable: false
+
+        field :consumer_report_user_identity, -> { Plaid::Types::ConsumerReportUserIdentity }, optional: true, nullable: true
+
+        field :with_upgraded_user, -> { Internal::Types::Boolean }, optional: true, nullable: false
+      end
+    end
+  end
+end

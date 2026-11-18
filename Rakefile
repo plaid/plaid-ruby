@@ -1,12 +1,20 @@
-require "bundler/gem_tasks"
-require "rake/testtask"
-require "dotenv/load"
-require "fileutils"
+# frozen_string_literal: true
 
-Rake::TestTask.new do |t|
+require "bundler/gem_tasks"
+require "minitest/test_task"
+
+Minitest::TestTask.create
+
+require "rubocop/rake_task"
+
+RuboCop::RakeTask.new
+
+task default: %i[test]
+
+task lint: %i[rubocop]
+
+# Run only the custom test file
+Minitest::TestTask.create(:customtest) do |t|
   t.libs << "test"
-  t.test_files = FileList['test/*.rb']
-  t.verbose = true
-  t.ruby_opts << "-rminitest/pride"
-  t.warning = false
+  t.test_globs = ["test/custom.test.rb"]
 end
