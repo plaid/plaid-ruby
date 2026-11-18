@@ -105,7 +105,7 @@ class PlaidAssetReportTest < PlaidTest
     assert_kind_of(Plaid::Legacy::AssetReportAuditCopyCreateResponse, response)
 
     # Get the audit copy.
-    asset_report_audit_copy_get_request = Plaid:: AssetReportAuditCopyGetRequest.new
+    asset_report_audit_copy_get_request = Plaid::Legacy::AssetReportAuditCopyGetRequest.new
     asset_report_audit_copy_get_request.audit_copy_token = audit_copy_token
 
     response = @client.asset_report_audit_copy_get(asset_report_audit_copy_get_request)
