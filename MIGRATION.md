@@ -181,7 +181,7 @@ Field names generally remain `snake_case`, but model names, acronym casing, and 
 
 ### Enums
 
-Enums are string values. For example, use `'transactions'` or `Plaid::Types::Products::TRANSACTIONS`. Handle values you have not seen before instead of raising, because Plaid can add enum values.
+Enums are string values. For example, use `'transactions'` or `Plaid::Types::Products::TRANSACTIONS`. Every enum is a module under `Plaid::Types`, such as `Plaid::Types::CountryCode::US`. Handle values you have not seen before instead of raising, because Plaid can add enum values.
 
 ### Default values
 
@@ -313,7 +313,7 @@ end
 
 ### Sync transactions
 
-`transactions.sync` returns `added`, `modified`, and `removed` arrays rather than an iterator, so keep your cursor loop. Save the final cursor only after you have applied the complete update:
+`transactions.sync` returns `added`, `modified`, and `removed` arrays rather than an iterator, so keep your cursor loop. A `nil` cursor is left out of the request, the same as starting from the beginning. Save the final cursor only after you have applied the complete update:
 
 ```ruby
 cursor = saved_cursor || ''
@@ -367,10 +367,10 @@ end
 
 `ServiceUnavailableError` is not a subclass of `ServerError`, so `rescue Plaid::Errors::ServerError` doesn't catch a 503. Rescue both, or rescue `ResponseError` and check `code`. To catch every SDK error in one clause, rescue `Plaid::Errors::ApiError`.
 
-- `body` is `nil` when the error response is empty, malformed, or not a Plaid error.
+- `body` is a `Plaid::Types::PlaidError`, or `nil` when the error response is empty, malformed, or not a Plaid error. Replace `JSON.parse(e.response_body)['error_code']` with `error.body&.error_code`.
 - A successful response with malformed JSON raises `ResponseError` with a 2xx `code`. A successful empty response returns `nil`.
 - `message` contains the raw response body, not the previous SDK's formatted message.
-- Header names are lowercase and values are arrays. For a single-value header, use `.first`.
+- Header lookups ignore capitalization, and values are arrays. `error.header('Retry-After')` returns the first value as a string.
 
 ## Remove the legacy namespace
 
